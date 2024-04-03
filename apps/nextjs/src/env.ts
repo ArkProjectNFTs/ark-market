@@ -1,10 +1,8 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-import { env as authEnv } from "@acme/auth/env";
-
 export const env = createEnv({
-  extends: [authEnv],
+  extends: [],
   shared: {
     NODE_ENV: z
       .enum(["development", "production", "test"])
@@ -14,12 +12,7 @@ export const env = createEnv({
    * Specify your server-side environment variables schema here.
    * This way you can ensure the app isn't built with invalid env vars.
    */
-  server: {
-    DB_HOST: z.string(),
-    DB_NAME: z.string(),
-    DB_PASSWORD: z.string(),
-    DB_USERNAME: z.string(),
-  },
+  server: {},
 
   /**
    * Specify your client-side environment variables schema here.

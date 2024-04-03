@@ -2,32 +2,30 @@ import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { cn } from "@acme/ui";
-import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
-import { Toaster } from "@acme/ui/toast";
+import { ThemeProvider, ThemeToggle } from "@ark-market/ui/components/theme";
+import { Toaster } from "@ark-market/ui/components/toast";
+import { cn } from "@ark-market/ui/lib/utils";
 
-import { TRPCReactProvider } from "~/trpc/react";
-
-import "~/app/globals.css";
+import "@ark-market/ui/globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.VERCEL_ENV === "production"
-      ? "https://turbo.t3.gg"
+      ? "https://market.arkproject.dev"
       : "http://localhost:3000",
   ),
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
+  title: "Ark Market",
+  description: "Simple monorepo with starknet marketplace",
   openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
+    title: "Ark Market",
+    description: "Simple monorepo with starknet marketplace",
+    url: "https://market.arkproject.dev",
+    siteName: "Ark Market",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
+    site: "@ArkProjectNFTs",
+    creator: "@ArkProjectNFTs",
   },
 };
 
@@ -49,7 +47,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          {props.children}
+
           <div className="absolute bottom-4 right-4">
             <ThemeToggle />
           </div>
