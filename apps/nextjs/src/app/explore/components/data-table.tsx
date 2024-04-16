@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
                   <TableRow
                     onClick={() =>
                       router.push(
-                        `/marketplace/assets/${token?.contract_address}/${token?.token_id}`,
+                        `/assets/${token?.contract_address}/${token?.token_id}`,
                       )
                     }
                     key={token.token_id}

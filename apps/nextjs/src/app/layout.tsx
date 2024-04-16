@@ -10,7 +10,6 @@ import "@ark-market/ui/globals.css";
 
 import type { PropsWithChildren } from "react";
 
-import AuthSwitcher from "~/components/auth-switcher";
 import { MainNav } from "~/components/main-nav";
 import Providers from "~/components/providers";
 import { UserNav } from "~/components/user-nav";
@@ -66,9 +65,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 </div>
               </div>
             </div>
-            <div className="container mx-auto flex-1 p-8 pt-16">
-              <AuthSwitcher>{children}</AuthSwitcher>
-            </div>
+            <div className="container mx-auto flex-1 p-8 pt-16">{children}</div>
           </div>
           <Toaster />
         </Providers>

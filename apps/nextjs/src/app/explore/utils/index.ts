@@ -1,8 +1,8 @@
-import { Token, TokenWithMarketData } from "../../../../types/schema";
+import type { Token, TokenWithMarketData } from "~/types/schema";
 
 export function mergeTokenData(
   tokensWithMetadata: Token[],
-  tokensWithMarketData: TokenWithMarketData[]
+  tokensWithMarketData: TokenWithMarketData[],
 ): Token[] {
   const tokenMap = new Map<string, TokenWithMarketData>();
 
@@ -20,7 +20,7 @@ export function mergeTokenData(
         ...existingToken,
         ...marketDataWithoutTokenId,
         start_date: start_date,
-        end_date: end_date
+        end_date: end_date,
       });
     }
   });
