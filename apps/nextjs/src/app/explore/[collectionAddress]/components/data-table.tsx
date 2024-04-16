@@ -28,9 +28,9 @@ import {
   TableRow,
 } from "@ark-market/ui/components/table";
 
-import type { Token } from "../../../types/schema";
-import { DataTablePagination } from "../components/data-table-pagination";
-import { DataTableToolbar } from "../components/data-table-toolbar";
+import type { Token } from "../../../../types/schema";
+import { DataTablePagination } from "./data-table-pagination";
+import { DataTableToolbar } from "./data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

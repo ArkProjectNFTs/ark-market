@@ -9,18 +9,42 @@ import { mergeTokenData } from "../utils";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
-export default function Explore() {
+interface ExploreProps {
+  initialCollectionData: any;
+  initialCollectionMarketData: any;
+  collectionAddress: string;
+}
+
+export default function Explore({
+  initialCollectionData,
+  initialCollectionMarketData,
+  collectionAddress,
+}: ExploreProps) {
   const {
     data: collectionData,
     error: collectionDataError,
     isLoading: collectionDataIsLoading,
-  }: any = useQuery("tokens", fetchCollection);
+  }: any = useQuery(
+    "tokens",
+    async () => await fetchCollection(collectionAddress),
+    {
+      initialData: initialCollectionData,
+      refetchInterval: 10_000,
+    },
+  );
 
   const {
     data: collectionMarketData,
     error: collectionMarketError,
     isLoading: collectionMarketIsLoading,
-  }: any = useQuery("collectionMarket", fetchCollectionMarket);
+  }: any = useQuery(
+    "collectionMarket",
+    async () => await fetchCollectionMarket(collectionAddress),
+    {
+      initialData: initialCollectionMarketData,
+      refetchInterval: 10_000,
+    },
+  );
 
   if (collectionDataIsLoading || collectionMarketIsLoading) {
     return <div>Loading...</div>;
@@ -32,7 +56,7 @@ export default function Explore() {
         Error missing data:{" "}
         {collectionDataError
           ? collectionDataError.message
-          : collectionMarketError}
+          : collectionMarketError.message}
       </div>
     );
   }
@@ -41,5 +65,6 @@ export default function Explore() {
     collectionData.result,
     collectionMarketData,
   );
-  return <DataTable data={tokenWithMarketData} columns={columns} />;
+  // return <DataTable data={tokenWithMarketData} columns={columns} />;
+  return <div></div>;
 }

@@ -13,7 +13,7 @@ import {
 } from "@ark-market/ui/lib/utils";
 
 // import { statuses } from "../data/data";
-import type { Token } from "../../../types/schema";
+import type { Token } from "../../../../types/schema";
 import { DataTableColumnHeader } from "./data-table-column-header";
 
 export const columns: ColumnDef<Token>[] = [

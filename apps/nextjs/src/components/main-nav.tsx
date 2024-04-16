@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 import { cn } from "@ark-market/ui/lib/utils";
 
 const mainNavLinks = [
-  { name: "Explore", href: "/" },
-  { name: "Mint", href: "/mint" },
+  { name: "Home", href: "/" },
+  { name: "Explore", href: "/explore" },
   { name: "Portfolio", href: "/portfolio" },
-  { name: "Activity", href: "/activity" },
+  // { name: "Activity", href: "/activity" },
 ];
 
 export function MainNav({

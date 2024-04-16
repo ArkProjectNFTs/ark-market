@@ -1,19 +1,18 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-// import { networks } from "@ark-project/core";
-// import { ArkProvider } from "@ark-project/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import { ThemeProvider } from "@ark-market/ui/components/theme";
 
 import { StarknetProvider } from "./starknet-provider";
 
+// const config = {
+//   arkchainNetwork: "mainnet" as const,
+// };
+
 export default function Providers({ children }: PropsWithChildren) {
   const queryClient = new QueryClient();
-  // const config = {
-  //   arkchainNetwork: networks.mainnet,
-  // };
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
