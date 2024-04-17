@@ -74,7 +74,7 @@ const Asset: React.FC<AssetProps> = ({ params, collection }) => {
               {collection.name} #{token.token_id}
             </h1>
             <div className="flex justify-between">
-              <Link href="/explore" target="_blank">
+              <Link href="/collection" target="_blank">
                 <div className="flex items-center space-x-2">
                   <Image
                     src="/everai.jpg"

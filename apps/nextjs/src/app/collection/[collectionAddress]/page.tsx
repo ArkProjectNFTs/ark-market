@@ -1,14 +1,14 @@
-import Explore from "./components/explore";
+import Collection from "./components/collection";
 import { fetchCollection } from "./queries/fetchCollection";
 import { fetchCollectionMarket } from "./queries/fetchCollectionMarket";
 
-interface ExplorePageProps {
+interface CollectionPageProps {
   params: {
     collectionAddress: string;
   };
 }
 
-export default async function ExplorePage({ params }: ExplorePageProps) {
+export default async function CollectionPage({ params }: CollectionPageProps) {
   const { collectionAddress } = params;
 
   const initialCollectionData: unknown =
@@ -18,7 +18,7 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
 
   return (
     <main className="container py-16">
-      <Explore
+      <Collection
         initialCollectionData={initialCollectionData}
         initialCollectionMarketData={initialCollectionMarketData}
         collectionAddress={collectionAddress}

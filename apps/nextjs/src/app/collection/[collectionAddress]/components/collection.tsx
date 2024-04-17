@@ -6,20 +6,18 @@ import { useQuery } from "react-query";
 import { fetchCollection } from "../queries/fetchCollection";
 import { fetchCollectionMarket } from "../queries/fetchCollectionMarket";
 import { mergeTokenData } from "../utils";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
 
-interface ExploreProps {
+interface CollectionProps {
   initialCollectionData: any;
   initialCollectionMarketData: any;
   collectionAddress: string;
 }
 
-export default function Explore({
+export default function Collection({
   initialCollectionData,
   initialCollectionMarketData,
   collectionAddress,
-}: ExploreProps) {
+}: CollectionProps) {
   const {
     data: collectionData,
     error: collectionDataError,

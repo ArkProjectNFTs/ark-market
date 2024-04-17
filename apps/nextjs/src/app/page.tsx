@@ -1,6 +1,6 @@
-import Explore from "./explore/[collectionAddress]/components/explore";
-import { fetchCollection } from "./explore/[collectionAddress]/queries/fetchCollection";
-import { fetchCollectionMarket } from "./explore/[collectionAddress]/queries/fetchCollectionMarket";
+import Collection from "./collection/[collectionAddress]/components/collection";
+import { fetchCollection } from "./collection/[collectionAddress]/queries/fetchCollection";
+import { fetchCollectionMarket } from "./collection/[collectionAddress]/queries/fetchCollectionMarket";
 
 export default async function HomePage() {
   const initialCollectionData: unknown = await fetchCollection(
@@ -12,7 +12,7 @@ export default async function HomePage() {
 
   return (
     <main className="container py-16">
-      <Explore
+      <Collection
         initialCollectionData={initialCollectionData}
         initialCollectionMarketData={initialCollectionMarketData}
         collectionAddress="0x32d99485b22f2e58c8a0206d3b3bb259997ff0db70cffd25585d7dd9a5b0546"
