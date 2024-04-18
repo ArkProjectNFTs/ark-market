@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
@@ -54,7 +55,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <Providers>
           <div className="flex-col md:flex">
             <Header />
-            <div className="flex-1 pt-16">{children}</div>
+            <div className="flex-1 pt-16">
+              {children}
+              <SpeedInsights />
+            </div>
           </div>
           <Toaster />
         </Providers>
