@@ -41,8 +41,8 @@ const Portfolio: React.FC = () => {
   }, [address]);
 
   return (
-    <ScrollArea className="-mr-4 h-[700px] pr-4">
-      <div className="grid h-[700px] grid-cols-6 gap-4">
+    <ScrollArea className="pr-4">
+      <div className="grid grid-cols-6 gap-4">
         {tokens.map((token: any, index) => (
           <Link
             href={`/assets/${token.contract_address}/${token.token_id}`}

@@ -8,9 +8,8 @@ import { cn } from "@ark-market/ui/lib/utils";
 
 const mainNavLinks = [
   { name: "Home", href: "/" },
-  { name: "Collection", href: "/collection" },
+  { name: "Collections", href: "/collections" },
   { name: "Portfolio", href: "/portfolio" },
-  // { name: "Activity", href: "/activity" },
 ];
 
 export function MainNav({

@@ -67,7 +67,7 @@ const Asset: React.FC<AssetProps> = ({ params, collection }) => {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="grid min-h-[700px] grid-cols-3 grid-rows-3 gap-6">
+      <div className="grid grid-cols-3 grid-rows-3 gap-6">
         <div className="col-span-1 row-span-3 flex flex-col space-y-5">
           <div className="flex flex-col space-y-2">
             <h1 className="text-2xl font-bold uppercase">

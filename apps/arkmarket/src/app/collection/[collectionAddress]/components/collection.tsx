@@ -6,6 +6,8 @@ import { useQuery } from "react-query";
 import { fetchCollection } from "../queries/fetchCollection";
 import { fetchCollectionMarket } from "../queries/fetchCollectionMarket";
 import { mergeTokenData } from "../utils";
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
 
 interface CollectionProps {
   initialCollectionData: any;
@@ -63,6 +65,5 @@ export default function Collection({
     collectionData.result,
     collectionMarketData,
   );
-  // return <DataTable data={tokenWithMarketData} columns={columns} />;
-  return <div></div>;
+  return <DataTable data={tokenWithMarketData} columns={columns} />;
 }

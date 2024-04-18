@@ -2,17 +2,16 @@ import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { ThemeToggle } from "@ark-market/ui/components/theme";
 import { Toaster } from "@ark-market/ui/components/toast";
 import { cn } from "@ark-market/ui/lib/utils";
+
+import { Header } from "~/components/header";
 
 import "@ark-market/ui/globals.css";
 
 import type { PropsWithChildren } from "react";
 
-import { MainNav } from "~/components/main-nav";
 import Providers from "~/components/providers";
-import { UserNav } from "~/components/user-nav";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -53,19 +52,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         )}
       >
         <Providers>
-          <div className="hidden flex-col md:flex">
-            <div className="absolute top-0 z-20 w-full border-b">
-              <div className="container mx-auto">
-                <div className="flex h-16 items-center">
-                  <MainNav />
-                  <div className="ml-auto flex items-center space-x-4">
-                    <UserNav />
-                    <ThemeToggle />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="container mx-auto flex-1 p-8 pt-16">{children}</div>
+          <div className="flex-col md:flex">
+            <Header />
+            <div className="flex-1 pt-16">{children}</div>
           </div>
           <Toaster />
         </Providers>
