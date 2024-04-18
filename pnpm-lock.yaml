@@ -24,7 +24,7 @@ importers:
         specifier: ^5.4.3
         version: 5.4.5
 
-  apps/nextjs:
+  apps/arkmarket:
     dependencies:
       '@ark-market/ui':
         specifier: workspace:*
