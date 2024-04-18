@@ -7,7 +7,7 @@ export async function getTokenData(contract_address: string, token_id: string) {
     `${env.NEXT_PUBLIC_NFT_API_URL}/v1/tokens/${contract_address}/${token_id}`,
     {
       headers: {
-        "x-api-key": env.NEXT_PUBLIC_NFT_API_KEY,
+        "x-api-key": env.NFT_API_KEY,
       },
     },
   );
@@ -54,7 +54,7 @@ export async function getCollectionMetadata(contract_address: string) {
     `${env.NEXT_PUBLIC_NFT_API_URL}/v1/contracts/${contract_address}`,
     {
       headers: {
-        "x-api-key": env.NEXT_PUBLIC_NFT_API_KEY,
+        "x-api-key": env.NFT_API_KEY,
       },
     },
   );

@@ -21,7 +21,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_ORDERBOOK_API_URL: z.string(),
     NEXT_PUBLIC_NFT_API_URL: z.string(),
-    NEXT_PUBLIC_NFT_API_KEY: z.string(),
+    NFT_API_KEY: z.string(),
     NEXT_PUBLIC_BROKER_ID: z.string(),
   },
   /**
@@ -29,7 +29,7 @@ export const env = createEnv({
    */
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_NFT_API_KEY: process.env.NEXT_PUBLIC_NFT_API_KEY,
+    NFT_API_KEY: process.env.NFT_API_KEY,
     NEXT_PUBLIC_ORDERBOOK_API_URL: process.env.NEXT_PUBLIC_ORDERBOOK_API_URL,
     NEXT_PUBLIC_NFT_API_URL: process.env.NEXT_PUBLIC_NFT_API_URL,
     NEXT_PUBLIC_BROKER_ID: process.env.NEXT_PUBLIC_BROKER_ID,
