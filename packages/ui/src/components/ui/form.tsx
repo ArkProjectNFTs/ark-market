@@ -18,7 +18,8 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-import { cn } from ".";
+import { cn } from "@ark-market/ui/lib/utils";
+
 import { Label } from "./label";
 
 const useForm = <TSchema extends ZodType>(

@@ -1,12 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { ThemeProvider, ThemeToggle } from "@ark-market/ui/components/theme";
 import { Toaster } from "@ark-market/ui/components/toast";
 import { cn } from "@ark-market/ui/lib/utils";
 
+import { Header } from "~/components/header";
+
 import "@ark-market/ui/globals.css";
+
+import type { PropsWithChildren } from "react";
+
+import Providers from "~/components/providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -36,7 +42,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout(props: { children: React.ReactNode }) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -46,14 +52,16 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           GeistMono.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {props.children}
-
-          <div className="absolute bottom-4 right-4">
-            <ThemeToggle />
+        <Providers>
+          <div className="flex-col md:flex">
+            <Header />
+            <div className="flex-1 pt-16">
+              {children}
+              <SpeedInsights />
+            </div>
           </div>
           <Toaster />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
