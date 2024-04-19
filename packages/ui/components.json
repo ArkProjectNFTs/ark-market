@@ -11,7 +11,8 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@ark-market/ui/lib/utils"
+    "components": "@ark-market/ui/components",
+    "utils": "@ark-market/ui/lib/utils",
+    "ui": "@ark-market/ui/components"
   }
 }
