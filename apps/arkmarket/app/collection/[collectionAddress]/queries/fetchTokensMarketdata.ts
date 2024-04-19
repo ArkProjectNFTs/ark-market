@@ -2,7 +2,7 @@ import { validateAndParseAddress } from "starknet";
 
 import { env } from "~/env";
 
-export async function fetchCollectionMarket(collectionAddress: string) {
+export async function fetchTokensMarketdata(collectionAddress: string) {
   const response = await fetch(
     `${env.NEXT_PUBLIC_ORDERBOOK_API_URL}/tokens/collection/${validateAndParseAddress(collectionAddress)}`,
   );

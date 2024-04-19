@@ -2,7 +2,7 @@ import { validateAndParseAddress } from "starknet";
 
 import { env } from "~/env";
 
-export const fetchCollection = async (collectionAddress: string) => {
+export const fetchTokensMetadata = async (collectionAddress: string) => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_NFT_API_URL}/v1/tokens/${validateAndParseAddress(collectionAddress)}`,
     {
