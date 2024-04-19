@@ -6,7 +6,7 @@ import { GeistSans } from "geist/font/sans";
 import { Toaster } from "@ark-market/ui/components/toast";
 import { cn } from "@ark-market/ui/lib/utils";
 
-import { Header } from "~/components/header";
+import { SiteHeader } from "~/components/site-header";
 
 import "@ark-market/ui/globals.css";
 
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       >
         <Providers>
           <div className="flex-col md:flex">
-            <Header />
+            <SiteHeader />
             <div className="flex-1 pt-16">
               {children}
               <SpeedInsights />
