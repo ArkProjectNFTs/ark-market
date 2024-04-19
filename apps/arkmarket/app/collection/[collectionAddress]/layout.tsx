@@ -13,7 +13,7 @@ export default async function CollectionLayout({
   params,
 }: CollectionLayoutProps) {
   const { collectionAddress } = params;
-  const collectionMetadata: unknown =
+  const { result: collectionMetadata } =
     await fetchCollectionMetadata(collectionAddress);
 
   return (

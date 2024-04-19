@@ -1,4 +1,4 @@
-export type TokenMarketData = {
+export interface TokenMarketData {
   token_chain_id: string;
   token_address: string;
   token_id: string;
@@ -20,12 +20,12 @@ export type TokenMarketData = {
     amount: string;
     order_hash: string;
   };
-};
+}
 
-export type ContractInfo = {
+export interface ContractInfo {
   contract_address: string;
   contract_type: string;
   image: string;
   name: string;
   symbol: string;
-};
+}
