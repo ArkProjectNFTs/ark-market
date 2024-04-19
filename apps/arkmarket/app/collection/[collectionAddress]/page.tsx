@@ -1,6 +1,6 @@
 import Collection from "./components/collection";
-import { fetchCollection } from "./queries/fetchCollection";
-import { fetchCollectionMarket } from "./queries/fetchCollectionMarket";
+import { fetchTokensMarketdata } from "./queries/fetchTokensMarketdata";
+import { fetchTokensMetadata } from "./queries/fetchTokensMetadata";
 
 interface CollectionPageProps {
   params: {
@@ -12,9 +12,9 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   const { collectionAddress } = params;
 
   const initialCollectionData: unknown =
-    await fetchCollection(collectionAddress);
+    await fetchTokensMetadata(collectionAddress);
   const initialCollectionMarketData: unknown =
-    await fetchCollectionMarket(collectionAddress);
+    await fetchTokensMarketdata(collectionAddress);
 
   return (
     <main className="container py-16">

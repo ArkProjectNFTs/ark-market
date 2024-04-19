@@ -3,8 +3,8 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { fetchCollection } from "../queries/fetchCollection";
-import { fetchCollectionMarket } from "../queries/fetchCollectionMarket";
+import { fetchTokensMarketdata } from "../queries/fetchTokensMarketdata";
+import { fetchTokensMetadata } from "../queries/fetchTokensMetadata";
 import { mergeTokenData } from "../utils";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
@@ -26,7 +26,7 @@ export default function Collection({
     isLoading: collectionDataIsLoading,
   }: any = useQuery(
     "tokens",
-    async () => await fetchCollection(collectionAddress),
+    async () => await fetchTokensMetadata(collectionAddress),
     {
       initialData: initialCollectionData,
       refetchInterval: 10_000,
@@ -39,7 +39,7 @@ export default function Collection({
     isLoading: collectionMarketIsLoading,
   }: any = useQuery(
     "collectionMarket",
-    async () => await fetchCollectionMarket(collectionAddress),
+    async () => await fetchTokensMarketdata(collectionAddress),
     {
       initialData: initialCollectionMarketData,
       refetchInterval: 10_000,

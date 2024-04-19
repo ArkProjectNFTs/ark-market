@@ -46,7 +46,7 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
   const { address, account } = useAccount();
   const isOwner = address && areAddressesEqual(token.owner, address);
   const { fulfillOffer } = useFulfillOffer();
-  if (account === undefined) return null;
+  const isConnected = account !== undefined;
 
   return (
     <div className="space-y-2">
@@ -100,7 +100,7 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
                       <TableCell>
                         {truncateString(offer.offer_maker, 8)}
                       </TableCell>
-                      {isOwner && (
+                      {isConnected && isOwner && (
                         <TableCell>
                           <Button
                             className="opacity-0 transition-opacity group-hover:opacity-100"

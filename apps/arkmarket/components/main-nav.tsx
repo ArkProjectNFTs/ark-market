@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
+import { Icons } from "~/components/icons";
+import { siteConfig } from "~/config/site";
+
 const mainNavLinks = [
   { name: "Home", href: "/" },
   { name: "Collections", href: "/collections" },
@@ -23,6 +26,12 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
+      <Link href="/" className="flex items-center space-x-2">
+        <Icons.logo className="h-6 w-6" />
+        <span className="hidden font-bold sm:inline-block">
+          {siteConfig.name}
+        </span>
+      </Link>
       {mainNavLinks.map((mainNavLink) => {
         const isActiveLink = mainNavLink.href === pathname;
 
