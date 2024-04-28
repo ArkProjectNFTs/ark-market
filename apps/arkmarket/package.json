@@ -33,6 +33,7 @@
     "react-query": "^3.39.3",
     "starknet": "^5.27.0",
     "superjson": "2.2.1",
+    "usehooks-ts": "^3.1.0",
     "web3": "^4.7.0",
     "zod": "^3.22.4"
   },
