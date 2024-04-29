@@ -2,34 +2,16 @@
 
 import { useMemo } from "react";
 import Image from "next/image";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useStarkName,
-} from "@starknet-react/core";
+import { useAccount, useStarkName } from "@starknet-react/core";
 
 import { Button } from "@ark-market/ui/components/button";
 
-function ConnectWallet() {
-  const { connectors, connect } = useConnect();
-  return (
-    <div className="inline-flex flex-row gap-2">
-      {connectors.map((connector) => {
-        return (
-          <Button key={connector.id} onClick={() => connect({ connector })}>
-            {connector.name}
-          </Button>
-        );
-      })}
-    </div>
-  );
-}
+import ConnectWalletModal from "./connect-wallet-modal";
+import WalletAccountModal from "./wallet-account-modal";
 
 export function UserNav() {
   const { address } = useAccount();
   const { data: starkName } = useStarkName({ address });
-  const { disconnect } = useDisconnect();
 
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
@@ -37,26 +19,25 @@ export function UserNav() {
   }, [address]);
 
   if (address === undefined) {
-    return <ConnectWallet />;
+    return (
+      <ConnectWalletModal>
+        <Button>Connect wallet</Button>
+      </ConnectWalletModal>
+    );
   }
 
   return (
-    <div className="flex items-center space-x-3">
-      <span className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full">
+    <WalletAccountModal>
+      <Button className="gap-3">
         <Image
-          className="aspect-square h-full w-full"
+          className="aspect-square"
           src="/01.png"
-          width={36}
-          height={36}
+          width={24}
+          height={24}
           alt="avatar"
         />
-      </span>
-      <div>
-        <p className="text-sm text-muted-foreground">
-          {starkName ?? shortenedAddress}
-        </p>
-      </div>
-      <Button onClick={() => disconnect()}>Disconnect</Button>
-    </div>
+        {starkName ?? shortenedAddress}
+      </Button>
+    </WalletAccountModal>
   );
 }
