@@ -1,32 +1,29 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import { mainnet } from "@starknet-react/chains";
+import { mainnet, sepolia } from "@starknet-react/chains";
 import {
+  alchemyProvider,
   argent,
   braavos,
-  jsonRpcProvider,
   StarknetConfig,
   useInjectedConnectors,
   voyager,
 } from "@starknet-react/core";
 
-function rpc() {
-  return {
-    nodeUrl: `https://starknet-mainnet.public.blastapi.io/rpc/v0.5`,
-  };
-}
-
 export function StarknetProvider({ children }: PropsWithChildren) {
-  const provider = jsonRpcProvider({ rpc });
+  const provider = alchemyProvider({
+    apiKey: "ssydbI7745ocbNd_c-xULVsq9xXF947b",
+  });
   const { connectors } = useInjectedConnectors({
     recommended: [argent(), braavos()],
-    order: "alphabetical",
+    includeRecommended: "onlyIfNoConnectors",
+    order: "random",
   });
 
   return (
     <StarknetConfig
-      chains={[mainnet]}
+      chains={[mainnet, sepolia]}
       provider={provider}
       connectors={connectors}
       explorer={voyager}

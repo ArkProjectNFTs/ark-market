@@ -9,7 +9,6 @@ export default async function Token({
   const { result: collection } = await getCollectionMetadata(
     params.contract_address,
   );
-
   return (
     <div className="container pt-12">
       <Asset params={params} collection={collection} />
