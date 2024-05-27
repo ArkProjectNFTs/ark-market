@@ -6,9 +6,14 @@ import { CommandMenu } from "~/components/command-menu";
 import { MainNav } from "~/components/main-nav";
 import { UserNav } from "~/components/user-nav";
 
-const SiteHeader = () => {
+export const siteHeaderRemHeight = 5.5;
+
+export default function SiteHeader() {
   return (
-    <div className="absolute top-0 z-20 flex h-16 w-full items-center justify-between border-b px-5">
+    <div
+      className="sticky top-0 z-20 flex h-[5.5rem] w-full items-center justify-between border-b bg-background px-5"
+      style={{ height: `${siteHeaderRemHeight}rem` }}
+    >
       <MainNav />
       <div className="w-full flex-1 md:w-auto md:flex-none">
         <CommandMenu />
@@ -19,6 +24,4 @@ const SiteHeader = () => {
       </div>
     </div>
   );
-};
-
-export { SiteHeader };
+}

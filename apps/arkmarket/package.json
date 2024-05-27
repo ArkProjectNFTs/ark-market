@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@ark-market/ui": "workspace:*",
-    "@ark-project/core": "^1.1.3",
-    "@ark-project/react": "^0.6.3",
+    "@ark-project/core": "^1.1.4",
+    "@ark-project/react": "^0.6.4",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.6.1",
     "@t3-oss/env-nextjs": "^0.9.2",
@@ -24,6 +24,7 @@
     "@tanstack/react-table": "^8.15.3",
     "@vercel/speed-insights": "^1.0.10",
     "dotenv": "^16.4.5",
+    "framer-motion": "^11.2.6",
     "geist": "^1.2.2",
     "get-starknet-core": "^3.2.0",
     "next": "^14.1.4",

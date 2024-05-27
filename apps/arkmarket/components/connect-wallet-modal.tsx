@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@ark-market/ui/components/dialog";
+import WalletIcon from "@ark-market/ui/components/icons/wallet-icon";
 
 export default function ConnectWalletModal({ children }: PropsWithChildren) {
   const { connectors, connectAsync } = useConnect();

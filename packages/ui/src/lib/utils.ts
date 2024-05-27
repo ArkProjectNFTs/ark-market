@@ -2,6 +2,8 @@ import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+export type PropsWithClassName<P = unknown> = P & { className?: string };
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

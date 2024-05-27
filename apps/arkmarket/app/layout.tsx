@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 
 import { Toaster } from "@ark-market/ui/components/toast";
 import { cn } from "@ark-market/ui/lib/utils";
 
-import { SiteHeader } from "~/components/site-header";
+import SiteHeader from "~/components/site-header";
 
 import "@ark-market/ui/globals.css";
 
@@ -42,23 +41,26 @@ export const viewport: Viewport = {
   ],
 };
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-sans",
+});
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",
-          GeistSans.variable,
-          GeistMono.variable,
+          inter.variable,
         )}
       >
         <Providers>
           <div className="flex-col md:flex">
             <SiteHeader />
-            <div className="flex-1 pt-16">
-              {children}
-              <SpeedInsights />
-            </div>
+            {children}
+            <SpeedInsights />
           </div>
           <Toaster />
         </Providers>

@@ -18,11 +18,11 @@ export default function Providers({ children }: PropsWithChildren) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <StarknetProvider>
-        <ArkProvider config={config}>
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-        </ArkProvider>
+        {/* <ArkProvider config={config}> */}
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+        {/* </ArkProvider> */}
       </StarknetProvider>
     </ThemeProvider>
   );
