@@ -13,6 +13,10 @@ import type { PropsWithChildren } from "react";
 
 import Providers from "~/components/providers";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.VERCEL_ENV === "production"
