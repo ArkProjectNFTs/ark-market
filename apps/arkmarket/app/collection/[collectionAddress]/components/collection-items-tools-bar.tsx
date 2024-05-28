@@ -2,6 +2,15 @@ import type { HTMLAttributes } from "react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Button } from "@ark-market/ui/components/button";
+import BigGridIcon from "@ark-market/ui/components/icons/big-grid-icon";
+import FiltersIcon from "@ark-market/ui/components/icons/filters-icon";
+import ListIcon from "@ark-market/ui/components/icons/list-icon";
+import SmallGridIcon from "@ark-market/ui/components/icons/small-grid-icon";
+import { Input } from "@ark-market/ui/components/input";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@ark-market/ui/components/toggle-group";
 import { cn } from "@ark-market/ui/lib/utils";
 
 function LiveDataIndicator() {
@@ -49,20 +58,40 @@ interface ToolsBarProps {
   toggleFiltersOpen: () => void;
 }
 
-export default function ToolsBar({
+export default function CollectionItemsToolsBar({
   className,
   style,
   toggleFiltersOpen,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
-    <div className={cn("bg-background p-6", className)} style={style}>
+    <div className={cn("bg-background", className)} style={style}>
       <div className="flex items-center gap-6">
-        <Button onClick={toggleFiltersOpen}>Filters</Button>
+        <Button onClick={toggleFiltersOpen} variant="secondary">
+          <FiltersIcon />
+          Filters
+        </Button>
+
         <div className="flex items-center font-medium">
           <LiveDataIndicator />
           <p>7777 results</p>
         </div>
-        <div className="h-4 flex-1 bg-muted" />
+
+        <Input className="flex-1" placeholder="Search item" />
+
+        <ToggleGroup type="single" defaultValue="big-grid">
+          <ToggleGroupItem value="big-grid" aria-label="Toggle bold">
+            <BigGridIcon />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="small-grid" aria-label="Toggle italic">
+            <SmallGridIcon />
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="strikethrough"
+            aria-label="Toggle strikethrough"
+          >
+            <ListIcon />
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
     </div>
   );

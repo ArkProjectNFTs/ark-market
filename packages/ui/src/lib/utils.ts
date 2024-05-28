@@ -4,6 +4,9 @@ import { twMerge } from "tailwind-merge";
 
 export type PropsWithClassName<P = unknown> = P & { className?: string };
 
+export const focusableStyles =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
