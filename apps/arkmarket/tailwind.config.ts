@@ -12,7 +12,6 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter-sans)", ...fontFamily.sans],
-        // mono: ["var(--font-geist-mono)", ...fontFamily.mono],
       },
     },
   },
