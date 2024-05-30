@@ -4,6 +4,7 @@ import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
 
 import ExternalLink from "~/components/external-link";
+import { siteConfig } from "~/config/site";
 
 export const collectionFooterRemHeight = 2.5;
 
@@ -17,7 +18,7 @@ export default function CollectionFooter({ className }: PropsWithClassName) {
       style={{ height: `${collectionFooterRemHeight}rem` }}
     >
       <div className="flex items-center gap-4">
-        <ExternalLink href="/">
+        <ExternalLink href={siteConfig.links.twitter}>
           <XIcon />
         </ExternalLink>
         <ExternalLink href="/">

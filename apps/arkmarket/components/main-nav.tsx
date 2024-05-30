@@ -9,11 +9,7 @@ import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 import { Icons } from "~/components/icons";
 import { siteConfig } from "~/config/site";
 
-const mainNavLinks = [
-  { name: "Home", href: "/" },
-  { name: "Collections", href: "/collections" },
-  { name: "Portfolio", href: "/portfolio" },
-];
+const mainNavLinks = [{ name: "Explore collections", href: "/collections" }];
 
 export function MainNav({
   className,
@@ -30,10 +26,8 @@ export function MainNav({
         href="/"
         className={cn("flex items-center space-x-2", focusableStyles)}
       >
-        <Icons.logo className="h-6 w-6" />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
+        <Icons.logo className="h-8 w-auto" />
+        <span className="sr-only font-bold">{siteConfig.name}</span>
       </Link>
       {mainNavLinks.map((mainNavLink) => {
         const isActiveLink = mainNavLink.href === pathname;
