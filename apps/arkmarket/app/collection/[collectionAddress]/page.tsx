@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { siteHeaderRemHeight } from "~/components/site-header";
+import { collectionPageSearchParamsCache } from "../search-params";
 import CollectionBanner from "./components/collection-banner";
 import CollectionFooter from "./components/collection-footer";
 import CollectionHeader from "./components/collection-header";
@@ -11,16 +12,24 @@ interface CollectionPageProps {
   params: {
     collectionAddress: string;
   };
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
-export default async function CollectionPage({ params }: CollectionPageProps) {
+export default async function CollectionPage({
+  params,
+  searchParams,
+}: CollectionPageProps) {
   const { collectionAddress } = params;
+  const { direction, sort } =
+    collectionPageSearchParamsCache.parse(searchParams);
   // TODO: fetch collection infos
   const collectionTokensInitialData = await getCollectionTokens({
     collectionAddress,
+    sortDirection: direction,
+    sortBy: sort,
   });
   // TODO: Implement properly
-  if (collectionTokensInitialData === undefined) {
+  if (collectionTokensInitialData.data.length === 0) {
     notFound();
   }
 

@@ -1,9 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import { siteHeaderRemHeight } from "~/components/site-header";
+import {
+  collectionSortByKey,
+  collectionSortByParser,
+  collectionSortDirectionKey,
+  collectionSortDirectionsParser,
+} from "../../search-params";
 import { collectionFooterRemHeight } from "./collection-footer";
 import { collectionHeaderRemHeight } from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
@@ -23,6 +30,15 @@ export default function CollectionItemsActivity({
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Get State from URL query params
   const [activeTab, setActiveTab] = useState("items");
+
+  const [sortDirection, setSortDirection] = useQueryState(
+    collectionSortDirectionKey,
+    collectionSortDirectionsParser,
+  );
+  const [sortBy, setSortBy] = useQueryState(
+    collectionSortByKey,
+    collectionSortByParser,
+  );
 
   const canShowItemsFilter = activeTab === "items";
 
@@ -52,9 +68,13 @@ export default function CollectionItemsActivity({
               toggleFiltersOpen={() =>
                 setItemsFiltersOpen((previous) => !previous)
               }
+              sortDirection={sortDirection}
+              setSortDirection={setSortDirection}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
             />
           )}
-          {activeTab === "activity" && <p>Coming soon...</p>}
+          {activeTab === "activity" && <p>Coming</p>}
         </CollectionItemsActivityHeader>
 
         <div
@@ -66,6 +86,8 @@ export default function CollectionItemsActivity({
             <CollectionItemsData
               collectionTokensInitialData={collectionTokensInitialData}
               collectionAddress={collectionAddress}
+              sortDirection={sortDirection}
+              sortBy={sortBy}
             />
           )}
         </div>

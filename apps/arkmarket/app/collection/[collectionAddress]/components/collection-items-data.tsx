@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { useInfiniteQuery } from "react-query";
 
@@ -14,17 +13,27 @@ import {
   TableRow,
 } from "@ark-market/ui/components/table";
 
+import type {
+  CollectionSortBy,
+  CollectionSortDirection,
+} from "../../search-params";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import { getCollectionTokens } from "../queries/getCollectionData";
 
 interface CollectionItemsDataProps {
   collectionAddress: string;
   collectionTokensInitialData: CollectionTokensApiResponse;
+  sortDirection: CollectionSortDirection;
+  sortBy: CollectionSortBy;
 }
 export default function CollectionItemsData({
   collectionAddress,
   collectionTokensInitialData,
+  sortDirection,
+  sortBy,
 }: CollectionItemsDataProps) {
+  const tableRef = useRef<HTMLTableElement | null>(null);
+
   const {
     data: infiniteData,
     fetchNextPage,
@@ -43,6 +52,8 @@ export default function CollectionItemsData({
       getCollectionTokens({
         collectionAddress,
         page: pageParam,
+        sortDirection,
+        sortBy,
       }),
   });
 
@@ -50,6 +61,8 @@ export default function CollectionItemsData({
     () => infiniteData?.pages.flatMap((page) => page.data),
     [infiniteData],
   );
+
+  console.log(flatData);
 
   const fetchMoreOnBottomReached = useCallback(() => {
     if (document.body) {
@@ -77,7 +90,7 @@ export default function CollectionItemsData({
   }, [fetchMoreOnBottomReached]);
 
   const rowVirtualizer = useWindowVirtualizer({
-    // Approcimage initial rect for SSR
+    // Approximate initial rect for SSR
     initialRect: { height: 1080, width: 1920 },
     count: flatData?.length ?? 0,
     estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
@@ -88,6 +101,7 @@ export default function CollectionItemsData({
         ? (element) => element?.getBoundingClientRect().height
         : undefined,
     overscan: 5,
+    scrollMargin: tableRef.current?.offsetTop ?? 0,
   });
 
   if (flatData === undefined) {
@@ -96,25 +110,25 @@ export default function CollectionItemsData({
   }
 
   return (
-    <Table>
+    <Table ref={tableRef}>
       <TableHeader>
         <TableRow className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center">
-          <TableHead className="flex items-center bg-background pl-5">
+          <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Item
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="sticky top-0 flex items-center bg-background">
             Current price
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="sticky top-0 flex items-center bg-background">
             Last sold
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="sticky top-0 flex items-center bg-background">
             Floor difference
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="sticky top-0 flex items-center bg-background">
             Owner
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="sticky top-0 flex items-center bg-background">
             Time listed
           </TableHead>
         </TableRow>
@@ -147,7 +161,7 @@ export default function CollectionItemsData({
                   <p>#{token.token_id}</p>
                 </div>
               </TableCell>
-              <TableCell>_</TableCell>
+              <TableCell>{token.price ?? "_"}</TableCell>
               <TableCell>_</TableCell>
               <TableCell>_</TableCell>
               <TableCell>{token.owner.slice(0, 6)}...</TableCell>

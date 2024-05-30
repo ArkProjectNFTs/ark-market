@@ -83,7 +83,7 @@ export default function CollectionHeader({
           }}
         >
           <div className="flex h-full flex-shrink-0 items-center gap-4">
-            <div className="aspect-square h-full flex-shrink-0 rounded-xl bg-secondary" />
+            <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <p className="text-lg font-semibold">Collection name</p>
