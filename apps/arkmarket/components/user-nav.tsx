@@ -1,8 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import Image from "next/image";
-import { useAccount, useBalance, useStarkName } from "@starknet-react/core";
+import { useAccount, useBalance, useStarkProfile } from "@starknet-react/core";
 
 import { Button } from "@ark-market/ui/components/button";
 import WalletIcon from "@ark-market/ui/components/icons/wallet-icon";
@@ -12,7 +11,7 @@ import WalletAccountPopover from "./wallet-account-popover";
 
 export function UserNav() {
   const { address } = useAccount();
-  const { data: starkName } = useStarkName({ address });
+  const { data: starkProfile } = useStarkProfile({ address });
 
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
@@ -48,8 +47,19 @@ export function UserNav() {
     //   )}
     <WalletAccountPopover>
       <Button className="gap-3" variant="secondary">
-        <div className="size-8 rounded-full bg-black" />
-        {starkName ?? shortenedAddress}
+        {starkProfile?.name ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            className="rounded-full"
+            alt="Starknet Id profile"
+            height={32}
+            width={32}
+            src={starkProfile?.profilePicture}
+          />
+        ) : (
+          <div className="size-8 rounded-full bg-black" />
+        )}
+        {starkProfile?.name ?? shortenedAddress}
       </Button>
     </WalletAccountPopover>
     // </div>

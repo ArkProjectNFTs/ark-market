@@ -80,7 +80,18 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
         <div className="flex h-14 items-center gap-4">
-          <div className="size-12 rounded-md bg-secondary" />
+          {starkProfile?.name ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              className="size-12 rounded-md"
+              alt="Starknet Id profile"
+              height={48}
+              width={48}
+              src={starkProfile?.profilePicture}
+            />
+          ) : (
+            <div className="size-12 rounded-md bg-secondary" />
+          )}
           <div className="flex h-full flex-col justify-between">
             <p className="text-xl font-semibold">
               {starkProfile?.name ?? shortenedAddress}
