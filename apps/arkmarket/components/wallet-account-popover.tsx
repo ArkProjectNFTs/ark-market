@@ -138,7 +138,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <div className="size-8 rounded-full bg-black" />
             <span className="font-bold">ETH</span>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedEthBalance}</p>
             <p className="text-xs text-secondary-foreground">Unknown</p>
           </div>
@@ -148,7 +148,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <div className="size-8 rounded-full bg-black" />
             <span className="font-bold">STRK</span>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedStrkBalance}</p>
             <p className="text-xs text-secondary-foreground">Unknown</p>
           </div>
