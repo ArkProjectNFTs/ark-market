@@ -71,7 +71,7 @@ export async function getCollectionTokens({
 
   const response = await fetch(url);
   if (!response.ok) {
-    return undefined;
+    return { data: [], next_page: 0 } as CollectionTokensApiResponse;
   }
 
   return response.json() as Promise<CollectionTokensApiResponse>;

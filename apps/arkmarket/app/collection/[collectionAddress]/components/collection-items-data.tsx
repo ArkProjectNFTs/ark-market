@@ -41,7 +41,7 @@ export default function CollectionItemsData({
     isFetchingNextPage,
   } = useInfiniteQuery({
     // TODO @YohanTz: add sorting states to query key
-    queryKey: ["collectionTokens"],
+    queryKey: ["collectionTokens", sortDirection],
     refetchInterval: 10_000,
     getNextPageParam: (lastPage) => lastPage.next_page,
     initialData: {

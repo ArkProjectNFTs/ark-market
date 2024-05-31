@@ -36,7 +36,7 @@ export default async function CollectionPage({
   });
   // TODO: Implement properly
   if (
-    collectionTokensInitialData === undefined ||
+    collectionTokensInitialData.data.length === 0 ||
     collectionInfos === undefined
   ) {
     notFound();
