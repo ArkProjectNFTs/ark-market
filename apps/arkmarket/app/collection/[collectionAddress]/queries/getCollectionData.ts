@@ -6,21 +6,20 @@ import { env } from "~/env";
 
 export interface CollectionInfosApiResponse {
   collection_name: string;
+  contract_symbol: string;
   floor: null | number;
   floor_7d_percentage: number;
   image: string;
   listed_items: number;
   listed_percentage: number;
   marketcap: number;
-  sales_7d: number;
-  top_offer: null | number;
-  volume_7d_eth: number;
-
-  contract_symbol: string;
-  token_count: number;
   owner_count: number;
-  total_volume: number;
+  sales_7d: number;
+  token_count: number;
+  top_offer: null | number;
   total_sales: number;
+  total_volume: number;
+  volume_7d_eth: number;
 }
 interface GetCollectionInfosParams {
   collectionAddress: string;
