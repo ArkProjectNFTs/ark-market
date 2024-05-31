@@ -1,8 +1,9 @@
 import React from "react";
 
+import { Input } from "@ark-market/ui/components/input";
 import { ThemeToggle } from "@ark-market/ui/components/theme";
 
-import { CommandMenu } from "~/components/command-menu";
+// import { CommandMenu } from "~/components/command-menu";
 import { MainNav } from "~/components/main-nav";
 import { UserNav } from "~/components/user-nav";
 
@@ -16,7 +17,11 @@ export default function SiteHeader() {
     >
       <MainNav />
       <div className="w-full flex-1 md:w-auto md:flex-none">
-        <CommandMenu />
+        {/* <CommandMenu /> */}
+        <Input
+          placeholder="Search Nft, collections and account"
+          className="w-80"
+        />
       </div>
       <div className="flex items-center space-x-4">
         <UserNav />
