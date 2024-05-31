@@ -15,6 +15,12 @@ export interface CollectionInfosApiResponse {
   sales_7d: number;
   top_offer: null | number;
   volume_7d_eth: number;
+
+  contract_symbol: string;
+  token_count: number;
+  owner_count: number;
+  total_volume: number;
+  total_sales: number;
 }
 interface GetCollectionInfosParams {
   collectionAddress: string;

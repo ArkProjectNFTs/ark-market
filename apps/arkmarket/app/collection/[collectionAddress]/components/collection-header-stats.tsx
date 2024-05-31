@@ -38,7 +38,7 @@ export default function CollectionHeaderStats({
         <p className="text-sm font-medium text-muted-foreground">
           Total Volume
         </p>
-        <p className="font-medium">Unknown</p>
+        <p className="font-medium">{collectionInfos.total_volume ?? "_"} ETH</p>
       </div>
       <Separator orientation="vertical" />
 
@@ -52,19 +52,19 @@ export default function CollectionHeaderStats({
 
       <div>
         <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
-        <p className="font-medium">Unknown</p>
+        <p className="font-medium">{collectionInfos.total_sales}</p>
       </div>
       <Separator orientation="vertical" />
 
       <div>
         <p className="text-sm font-medium text-muted-foreground">Items</p>
-        <p className="font-medium">Unknown</p>
+        <p className="font-medium">{collectionInfos.token_count}</p>
       </div>
       <Separator orientation="vertical" />
 
       <div>
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
-        <p className="font-medium">Unknown</p>
+        <p className="font-medium">{collectionInfos.owner_count}</p>
       </div>
     </div>
   );
