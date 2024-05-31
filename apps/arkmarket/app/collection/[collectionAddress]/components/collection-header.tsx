@@ -18,7 +18,6 @@ import {
 } from "@ark-market/ui/components/collapsible";
 import CopyIcon from "@ark-market/ui/components/icons/copy-icon";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
-import EtherscanIcon from "@ark-market/ui/components/icons/etherscan-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
@@ -89,7 +88,7 @@ export default function CollectionHeader({
             <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
-                <p className="text-lg font-semibold">
+                <p className="text-2xl font-semibold">
                   {collectionInfos.collection_name}
                 </p>
                 <AnimatePresence>
@@ -127,9 +126,6 @@ export default function CollectionHeader({
                 </ExternalLink>
                 <ExternalLink href="/">
                   <WebsiteIcon />
-                </ExternalLink>
-                <ExternalLink href="/">
-                  <EtherscanIcon />
                 </ExternalLink>
                 <AnimatePresence>
                   {!hasPassedBanner && (
