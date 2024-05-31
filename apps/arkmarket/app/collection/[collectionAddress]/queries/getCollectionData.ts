@@ -4,8 +4,32 @@ import type {
 } from "../../search-params";
 import { env } from "~/env";
 
-export async function getCollectionInfos() {
-  return null;
+export interface CollectionInfosApiResponse {
+  collection_name: string;
+  floor: null | number;
+  floor_7d_percentage: number;
+  image: string;
+  listed_items: number;
+  listed_percentage: number;
+  marketcap: number;
+  sales_7d: number;
+  top_offer: null | number;
+  volume_7d_eth: number;
+}
+interface GetCollectionInfosParams {
+  collectionAddress: string;
+}
+export async function getCollectionInfos({
+  collectionAddress,
+}: GetCollectionInfosParams) {
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/SN_MAIN`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    return undefined;
+  }
+
+  return response.json() as Promise<CollectionInfosApiResponse>;
 }
 
 const itemsPerPage = 50;
@@ -43,11 +67,11 @@ export async function getCollectionTokens({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collection/${collectionAddress}/tokens?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/SN_MAIN/tokens?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
-    return { data: [], next_page: 0 } as CollectionTokensApiResponse;
+    return undefined;
   }
 
   return response.json() as Promise<CollectionTokensApiResponse>;

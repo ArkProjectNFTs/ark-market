@@ -135,22 +135,22 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
         {/* TODO @YohanTz: Change slate-900 by semantic colors when defined */}
         <div className="flex h-16 items-center justify-between rounded-t-lg bg-slate-900 p-4">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-full bg-black" />
+            <div className="size-8 rounded-full bg-secondary" />
             <span className="font-bold">ETH</span>
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedEthBalance}</p>
-            <p className="text-xs text-secondary-foreground">Unknown</p>
+            <p className="text-xs text-muted">0.00$</p>
           </div>
         </div>
         <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-slate-900 p-4">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-full bg-black" />
+            <div className="size-8 rounded-full bg-secondary" />
             <span className="font-bold">STRK</span>
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedStrkBalance}</p>
-            <p className="text-xs text-secondary-foreground">Unknown</p>
+            <p className="text-xs text-muted">0.00$</p>
           </div>
         </div>
       </PopoverContent>

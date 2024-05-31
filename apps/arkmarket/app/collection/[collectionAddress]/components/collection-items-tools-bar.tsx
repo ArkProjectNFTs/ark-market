@@ -87,7 +87,8 @@ export default function CollectionItemsToolsBar({
 
         <div className="flex items-center font-medium">
           <LiveDataIndicator />
-          <p>7777 results</p>
+          {/* TODO @YohanTz: Number of tokens */}
+          <p>Unknown results</p>
         </div>
 
         <Input className="flex-1" placeholder="Search item" />

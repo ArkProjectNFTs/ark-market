@@ -23,6 +23,7 @@ import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import ExternalLink from "~/components/external-link";
 import { collectionBannerRemHeight } from "./collection-banner";
 import CollectionHeaderStats from "./collection-header-stats";
@@ -37,11 +38,13 @@ export const collectionHeaderRemHeight =
   smallCollectionHeaderRemHeight + 2 * yCollectionHeaderRemPadding;
 
 interface CollectionHeaderProps {
+  collectionInfos: CollectionInfosApiResponse;
   style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function CollectionHeader({
   className,
+  collectionInfos,
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
   const [hasPassedBanner, setHasPassedBanner] = useState(false);
@@ -86,7 +89,9 @@ export default function CollectionHeader({
             <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
-                <p className="text-lg font-semibold">Collection name</p>
+                <p className="text-lg font-semibold">
+                  {collectionInfos.collection_name}
+                </p>
                 <AnimatePresence>
                   {!hasPassedBanner && (
                     <motion.div
@@ -98,12 +103,12 @@ export default function CollectionHeader({
                     >
                       <p className="flex items-center gap-2 pt-2">
                         Created
-                        <span className="text-muted-foreground"> Mar 2022</span>
+                        <span className="text-muted-foreground"> Unknown</span>
                         <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
                           <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
                         </svg>
                         Creator earnings
-                        <span className="text-muted-foreground"> 5%</span>
+                        <span className="text-muted-foreground"> Unknown%</span>
                       </p>
                     </motion.div>
                   )}
@@ -146,7 +151,7 @@ export default function CollectionHeader({
             </div>
           </div>
 
-          <CollectionHeaderStats />
+          <CollectionHeaderStats collectionInfos={collectionInfos} />
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
           <p className="max-w-lg pt-5 text-sm">

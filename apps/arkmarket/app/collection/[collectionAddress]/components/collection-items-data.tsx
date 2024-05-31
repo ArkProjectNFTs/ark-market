@@ -62,8 +62,6 @@ export default function CollectionItemsData({
     [infiniteData],
   );
 
-  console.log(flatData);
-
   const fetchMoreOnBottomReached = useCallback(() => {
     if (document.body) {
       const { scrollHeight } = window.document.body;

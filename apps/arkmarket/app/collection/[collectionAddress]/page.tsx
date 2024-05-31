@@ -6,7 +6,10 @@ import CollectionBanner from "./components/collection-banner";
 import CollectionFooter from "./components/collection-footer";
 import CollectionHeader from "./components/collection-header";
 import CollectionItemsActivity from "./components/collection-items-activity";
-import { getCollectionTokens } from "./queries/getCollectionData";
+import {
+  getCollectionInfos,
+  getCollectionTokens,
+} from "./queries/getCollectionData";
 
 interface CollectionPageProps {
   params: {
@@ -22,14 +25,20 @@ export default async function CollectionPage({
   const { collectionAddress } = params;
   const { direction, sort } =
     collectionPageSearchParamsCache.parse(searchParams);
-  // TODO: fetch collection infos
+  const collectionInfos = await getCollectionInfos({
+    collectionAddress,
+  });
+
   const collectionTokensInitialData = await getCollectionTokens({
     collectionAddress,
     sortDirection: direction,
     sortBy: sort,
   });
   // TODO: Implement properly
-  if (collectionTokensInitialData.data.length === 0) {
+  if (
+    collectionTokensInitialData === undefined ||
+    collectionInfos === undefined
+  ) {
     notFound();
   }
 
@@ -40,6 +49,7 @@ export default async function CollectionPage({
       <CollectionHeader
         className="sticky z-20"
         style={{ top: `${siteHeaderRemHeight}rem` }}
+        collectionInfos={collectionInfos}
       />
 
       <CollectionItemsActivity
