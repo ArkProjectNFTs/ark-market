@@ -98,7 +98,7 @@ export default function CollectionHeader({
                       animate={{ height: "auto", opacity: 1 }}
                       transition={{ ease: "easeInOut", duration: 0.15 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
+                      className="overflow-hidden text-sm"
                     >
                       <p className="flex items-center gap-2 pt-2">
                         Created
