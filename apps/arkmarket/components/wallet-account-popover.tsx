@@ -18,15 +18,18 @@ import {
 } from "@ark-market/ui/components/popover";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
+import ExternalLink from "./external-link";
+
 const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
 
 export default function WalletAccountPopover({ children }: PropsWithChildren) {
-  const { address } = useAccount();
+  const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: starkProfile } = useStarkProfile({
     address,
   });
+  const isWebWallet = connector?.id === "argentWebWallet";
 
   const { data: ethBalance } = useBalance({ address });
   const roundedEthBalance =
@@ -111,10 +114,15 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <User size={24} />
             <p className="font-bold">My items</p>
           </div>
-          <div className="flex items-center gap-2">
-            <Wallet size={24} />
-            <p className="font-bold">Web Wallet</p>
-          </div>
+          {isWebWallet && (
+            <ExternalLink
+              className="flex items-center gap-2"
+              href="https://web.argent.xyz"
+            >
+              <Wallet size={24} />
+              <p className="font-bold">Web Wallet</p>
+            </ExternalLink>
+          )}
           <div className="flex items-center gap-2">
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
