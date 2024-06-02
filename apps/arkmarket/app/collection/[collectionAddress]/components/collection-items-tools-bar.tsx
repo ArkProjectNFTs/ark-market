@@ -2,22 +2,20 @@ import type { HTMLAttributes } from "react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Button } from "@ark-market/ui/components/button";
-import BigGridIcon from "@ark-market/ui/components/icons/big-grid-icon";
 import FiltersIcon from "@ark-market/ui/components/icons/filters-icon";
-import ListIcon from "@ark-market/ui/components/icons/list-icon";
-import SmallGridIcon from "@ark-market/ui/components/icons/small-grid-icon";
 import { Input } from "@ark-market/ui/components/input";
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@ark-market/ui/components/toggle-group";
+
+import "@ark-market/ui/components/toggle-group";
+
 import { cn } from "@ark-market/ui/lib/utils";
 
 import type {
   CollectionSortBy,
   CollectionSortDirection,
 } from "../../search-params";
+import type { ViewType } from "./collection-items-grid-list-view-toggle";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
+import CollectionItemsGridListViewToggle from "./collection-items-grid-list-view-toggle";
 
 function LiveDataIndicator() {
   return (
@@ -66,6 +64,8 @@ interface ToolsBarProps {
   sortDirection: CollectionSortDirection;
   style?: HTMLAttributes<HTMLDivElement>["style"];
   toggleFiltersOpen: () => void;
+  viewType: ViewType;
+  setViewType: (viewType: ViewType) => void;
 }
 
 export default function CollectionItemsToolsBar({
@@ -76,6 +76,8 @@ export default function CollectionItemsToolsBar({
   sortDirection,
   style,
   toggleFiltersOpen,
+  viewType,
+  setViewType,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)} style={style}>
@@ -100,20 +102,10 @@ export default function CollectionItemsToolsBar({
           sortDirection={sortDirection}
         />
 
-        <ToggleGroup type="single" defaultValue="big-grid">
-          <ToggleGroupItem value="big-grid" aria-label="Toggle bold">
-            <BigGridIcon />
-          </ToggleGroupItem>
-          <ToggleGroupItem value="small-grid" aria-label="Toggle italic">
-            <SmallGridIcon />
-          </ToggleGroupItem>
-          <ToggleGroupItem
-            value="strikethrough"
-            aria-label="Toggle strikethrough"
-          >
-            <ListIcon />
-          </ToggleGroupItem>
-        </ToggleGroup>
+        <CollectionItemsGridListViewToggle
+          viewType={viewType}
+          setViewType={setViewType}
+        />
       </div>
     </div>
   );

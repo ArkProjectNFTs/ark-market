@@ -35,6 +35,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^5.0.1",
     "react-query": "^3.39.3",
+    "react-virtuoso": "^4.7.11",
     "starknet": "^5.27.0",
     "starknetkit": "^1.1.9",
     "superjson": "2.2.1",

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
+import type { ViewType } from "./collection-items-grid-list-view-toggle";
 import { siteHeaderRemHeight } from "~/components/site-header";
 import {
   collectionSortByKey,
@@ -40,6 +41,9 @@ export default function CollectionItemsActivity({
     collectionSortByParser,
   );
 
+  // TODO @YohanTz: Choose between local storage and URL query param
+  const [viewType, setViewType] = useState<ViewType>("large-grid");
+
   const canShowItemsFilter = activeTab === "items";
 
   return (
@@ -72,6 +76,8 @@ export default function CollectionItemsActivity({
               setSortDirection={setSortDirection}
               sortBy={sortBy}
               setSortBy={setSortBy}
+              viewType={viewType}
+              setViewType={setViewType}
             />
           )}
           {activeTab === "activity" && <p>Coming</p>}
@@ -88,6 +94,7 @@ export default function CollectionItemsActivity({
               collectionAddress={collectionAddress}
               sortDirection={sortDirection}
               sortBy={sortBy}
+              viewType={viewType}
             />
           )}
         </div>

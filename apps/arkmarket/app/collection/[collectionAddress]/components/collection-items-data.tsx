@@ -8,7 +8,9 @@ import type {
   CollectionSortDirection,
 } from "../../search-params";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
+import type { ViewType } from "./collection-items-grid-list-view-toggle";
 import { getCollectionTokens } from "../queries/getCollectionData";
+import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
 
 interface CollectionItemsDataProps {
@@ -16,12 +18,14 @@ interface CollectionItemsDataProps {
   collectionTokensInitialData: CollectionTokensApiResponse;
   sortDirection: CollectionSortDirection;
   sortBy: CollectionSortBy;
+  viewType: ViewType;
 }
 export default function CollectionItemsData({
   collectionAddress,
   collectionTokensInitialData,
   sortDirection,
   sortBy,
+  viewType,
 }: CollectionItemsDataProps) {
   const {
     data: infiniteData,
@@ -56,12 +60,24 @@ export default function CollectionItemsData({
     return null;
   }
 
+  if (viewType === "list") {
+    return (
+      <CollectionItemsDataListView
+        collectionTokens={collectionTokens}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+      />
+    );
+  }
+
   return (
-    <CollectionItemsDataListView
+    <CollectionItemsDataGridView
       collectionTokens={collectionTokens}
       hasNextPage={hasNextPage}
       fetchNextPage={fetchNextPage}
       isFetchingNextPage={isFetchingNextPage}
+      viewType={viewType}
     />
   );
 }

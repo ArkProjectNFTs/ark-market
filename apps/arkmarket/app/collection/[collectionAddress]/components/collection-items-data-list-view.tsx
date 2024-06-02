@@ -33,9 +33,9 @@ export default function CollectionItemsDataListView({
   const fetchMoreOnBottomReached = useCallback(() => {
     if (document.body) {
       const { scrollHeight } = window.document.body;
-      // Once the user has scrolled within 500px of the bottom of the window, fetch more data if possible
+      // Once the user has scrolled within 400px of the bottom of the window, fetch more data if possible
       if (
-        scrollHeight - window.scrollY - window.innerHeight < 500 &&
+        scrollHeight - window.scrollY - window.innerHeight < 400 &&
         !isFetchingNextPage &&
         hasNextPage
       ) {
