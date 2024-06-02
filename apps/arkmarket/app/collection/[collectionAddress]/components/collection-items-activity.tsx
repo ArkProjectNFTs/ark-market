@@ -4,7 +4,7 @@ import { useState } from "react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
-import type { ViewType } from "./collection-items-grid-list-view-toggle";
+import type { ViewType } from "./view-type-toggle-group";
 import { siteHeaderRemHeight } from "~/components/site-header";
 import {
   collectionSortByKey,

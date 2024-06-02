@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useEffect } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import type { CollectionToken } from "../queries/getCollectionData";
-import type { ViewType } from "./collection-items-grid-list-view-toggle";
+import type { ViewType } from "./view-type-toggle-group";
 
 const LargeGridContainer = forwardRef<
   HTMLDivElement,

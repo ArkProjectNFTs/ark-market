@@ -13,9 +13,9 @@ import type {
   CollectionSortBy,
   CollectionSortDirection,
 } from "../../search-params";
-import type { ViewType } from "./collection-items-grid-list-view-toggle";
+import type { ViewType } from "./view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
-import CollectionItemsGridListViewToggle from "./collection-items-grid-list-view-toggle";
+import ViewTypeToggleGroup from "./view-type-toggle-group";
 
 function LiveDataIndicator() {
   return (
@@ -102,10 +102,7 @@ export default function CollectionItemsToolsBar({
           sortDirection={sortDirection}
         />
 
-        <CollectionItemsGridListViewToggle
-          viewType={viewType}
-          setViewType={setViewType}
-        />
+        <ViewTypeToggleGroup viewType={viewType} setViewType={setViewType} />
       </div>
     </div>
   );

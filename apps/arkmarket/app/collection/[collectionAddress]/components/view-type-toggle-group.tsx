@@ -8,15 +8,15 @@ import {
 
 export type ViewType = "large-grid" | "small-grid" | "list";
 
-interface CollectionItemsGridListViewToggleProps {
+interface ViewTypeToggleGroupProps {
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
 }
 
-export default function CollectionItemsGridListViewToggle({
+export default function ViewTypeToggleGroup({
   viewType,
   setViewType,
-}: CollectionItemsGridListViewToggleProps) {
+}: ViewTypeToggleGroupProps) {
   return (
     <ToggleGroup type="single" value={viewType} onValueChange={setViewType}>
       <ToggleGroupItem value="large-grid" aria-label="Toggle large grid view">
