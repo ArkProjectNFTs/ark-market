@@ -31,6 +31,7 @@ export async function getCollectionInfos({
 
   const response = await fetch(url);
   if (!response.ok) {
+    console.error(response.status, response.body);
     return undefined;
   }
 
@@ -76,6 +77,7 @@ export async function getCollectionTokens({
 
   const response = await fetch(url);
   if (!response.ok) {
+    console.error(response.status, response.body);
     return { data: [], next_page: 0 } as CollectionTokensApiResponse;
   }
 

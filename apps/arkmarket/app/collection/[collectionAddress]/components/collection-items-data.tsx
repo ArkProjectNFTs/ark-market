@@ -50,6 +50,7 @@ export default function CollectionItemsData({
       }),
   });
 
+  console.log(infiniteData);
   const collectionTokens = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data),
     [infiniteData],

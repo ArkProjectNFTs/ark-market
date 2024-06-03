@@ -20,7 +20,7 @@ export default function SiteHeader() {
         {/* <CommandMenu /> */}
         <Input
           placeholder="Search Nft, collections and account"
-          className="w-80"
+          className="hidden w-80 lg:block"
         />
       </div>
       <div className="flex items-center space-x-4">

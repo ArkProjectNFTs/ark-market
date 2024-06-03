@@ -44,7 +44,7 @@ export default async function CollectionPage({
 
   return (
     <main>
-      <CollectionBanner />
+      <CollectionBanner className="hidden lg:block" />
 
       <CollectionHeader
         className="sticky z-20"
