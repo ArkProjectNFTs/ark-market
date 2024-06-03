@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAccount, useBalance, useStarkName } from "@starknet-react/core";
 
 import { Button } from "@ark-market/ui/components/button";
+import WalletIcon from "@ark-market/ui/components/icons/wallet-icon";
 
 import ConnectWalletModal from "./connect-wallet-modal";
 import WalletAccountDropdown from "./wallet-account-dropdown";
@@ -39,7 +40,10 @@ export function UserNav() {
   if (address === undefined) {
     return (
       <ConnectWalletModal>
-        <Button>Connect wallet</Button>
+        <Button>
+          <WalletIcon />
+          Connect wallet
+        </Button>
       </ConnectWalletModal>
     );
   }
