@@ -119,7 +119,7 @@ export default function CollectionItemsDataListView({
               <TableCell className="pl-5">
                 <div className="flex items-center gap-4">
                   <div className="h-[2.625rem] w-[2.625rem] rounded-md bg-secondary" />
-                  <p>#{token.token_id}</p>
+                  <p className="font-semibold">#{token.token_id}</p>
                 </div>
               </TableCell>
               <TableCell>{token.price ?? "_"}</TableCell>

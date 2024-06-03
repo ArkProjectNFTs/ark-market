@@ -31,6 +31,7 @@ const MotionButton = motion(Button);
 
 export const smallCollectionHeaderRemHeight = 3.875;
 export const bigCollectionHeaderRemHeight = 6.375;
+const bigCollectionHeaderHeightClassName = "lg:h-[6.375rem]";
 export const yCollectionHeaderRemPadding = 1.25;
 
 export const collectionHeaderRemHeight =
