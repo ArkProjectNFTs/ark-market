@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { useQueryState } from "nuqs";
 
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import { siteHeaderRemHeight } from "~/components/site-header";

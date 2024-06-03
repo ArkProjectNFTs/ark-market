@@ -50,9 +50,7 @@ export default function CollectionItemsSortingSelect({
       <SelectContent>
         <SelectGroup>
           <SelectItem value="price-asc">Price: Low to high</SelectItem>
-          <SelectItem value="price-desc" onChange={() => console.log("CHANGE")}>
-            Price: High to low
-          </SelectItem>
+          <SelectItem value="price-desc">Price: High to low</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
