@@ -43,7 +43,7 @@ export async function getCollectionTokens({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collection/${collectionAddress}/tokens?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collection/${collectionAddress}/SN_MAIN/tokens?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
