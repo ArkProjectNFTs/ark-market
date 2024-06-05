@@ -39,6 +39,12 @@ export async function getCollectionInfos({
 }
 
 const itemsPerPage = 50;
+
+export interface Metadata {
+  image: string;
+  name: string;
+}
+
 export interface CollectionToken {
   contract: string;
   token_id: string;
@@ -46,6 +52,7 @@ export interface CollectionToken {
   minted_at: number;
   updated_at: number;
   price: null | number;
+  metadata: Metadata;
 }
 export interface CollectionTokensApiResponse {
   data: CollectionToken[];

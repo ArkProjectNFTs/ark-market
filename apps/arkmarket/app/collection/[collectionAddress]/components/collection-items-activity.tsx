@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 
+import { cn } from "@ark-market/ui/lib/utils";
+
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import type { ViewType } from "./view-type-toggle-group";
 import { siteHeaderRemHeight } from "~/components/site-header";

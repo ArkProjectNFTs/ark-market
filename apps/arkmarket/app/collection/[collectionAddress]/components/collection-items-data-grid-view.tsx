@@ -3,6 +3,7 @@ import { VirtuosoGrid } from "react-virtuoso";
 
 import type { CollectionToken } from "../queries/getCollectionData";
 import type { ViewType } from "./view-type-toggle-group";
+import Media from "~/components/media";
 
 const LargeGridContainer = forwardRef<
   HTMLDivElement,
@@ -91,12 +92,18 @@ export default function CollectionItemsDataGridView({
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <div className="w-full overflow-hidden rounded-[0.375rem] bg-card text-card-foreground">
-            <div className="aspect-square bg-secondary" />
+            {collectionToken.metadata !== null && (
+              <Media
+                src={collectionToken.metadata.image}
+                alt={collectionToken.metadata.image}
+                className="aspect-square w-full"
+              />
+            )}
             <div className="p-3">
               <div className="flex w-full justify-between">
                 <div>
                   <p className="text-xl font-semibold">
-                    #{collectionToken.token_id}
+                    {collectionToken.metadata?.name ?? collectionToken.token_id}
                   </p>
                   {collectionToken.price ? (
                     <p className="mt-1 text-sm">{collectionToken.price} ETH</p>

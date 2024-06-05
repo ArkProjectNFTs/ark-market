@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type { PropsWithChildren } from "react";
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   useAccount,
   useBalance,
@@ -18,10 +20,13 @@ import {
 } from "@ark-market/ui/components/popover";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
+import useBlockies from "~/hooks/useBlockies";
 import ExternalLink from "./external-link";
 
 const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
+
+const popoverItemCommonClassName = "flex items-center gap-2";
 
 export default function WalletAccountPopover({ children }: PropsWithChildren) {
   const { address, connector } = useAccount();
@@ -48,6 +53,8 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
 
   const [, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
+
+  const { blockiesImageSrc } = useBlockies({ address });
 
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
@@ -84,7 +91,6 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
         <div className="flex h-14 items-center gap-4">
           {starkProfile?.name ? (
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               className="size-12 rounded-md"
               alt="Starknet Id profile"
@@ -93,7 +99,13 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
               src={starkProfile?.profilePicture}
             />
           ) : (
-            <div className="size-12 rounded-md bg-secondary" />
+            <img
+              className="size-12 rounded-md"
+              alt="Blockies"
+              height={48}
+              width={48}
+              src={blockiesImageSrc}
+            />
           )}
           <div className="flex h-full flex-col justify-between">
             <p className="text-xl font-semibold">
@@ -110,27 +122,24 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
         </div>
 
         <div className="my-5 flex flex-col gap-6">
-          <div className="flex items-center gap-2">
+          <Link className="flex items-center gap-2" href="/">
             <User size={24} />
             <p className="font-bold">My items</p>
-          </div>
+          </Link>
           {isWebWallet && (
-            <ExternalLink
-              className="flex items-center gap-2"
-              href="https://web.argent.xyz"
-            >
+            <ExternalLink className={cn("")} href="https://web.argent.xyz">
               <Wallet size={24} />
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <div className="flex items-center gap-2">
+          <Link className="flex items-center gap-2" href="/">
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
-          </div>
-          <div className="flex items-center gap-2">
+          </Link>
+          <Link className="flex items-center gap-2" href="/">
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
-          </div>
+          </Link>
           <button
             className={cn("flex items-center gap-2", focusableStyles)}
             onClick={() => disconnect()}

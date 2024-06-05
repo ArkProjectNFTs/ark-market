@@ -13,6 +13,7 @@ import {
 } from "@ark-market/ui/components/table";
 
 import type { CollectionToken } from "../queries/getCollectionData";
+import Media from "~/components/media";
 
 interface CollectionItemsDataListViewProps {
   collectionTokens: CollectionToken[];
@@ -118,8 +119,16 @@ export default function CollectionItemsDataListView({
             >
               <TableCell className="pl-5">
                 <div className="flex items-center gap-4">
-                  <div className="h-[2.625rem] w-[2.625rem] rounded-md bg-secondary" />
-                  <p className="font-semibold">#{token.token_id}</p>
+                  {token.metadata !== null && (
+                    <Media
+                      src={token.metadata.image}
+                      alt={token.metadata.image}
+                      className="h-[2.625rem] w-[2.625rem] rounded-md"
+                    />
+                  )}
+                  <p className="font-semibold">
+                    {token.metadata?.name ?? token.token_id}
+                  </p>
                 </div>
               </TableCell>
               <TableCell>{token.price ?? "_"}</TableCell>

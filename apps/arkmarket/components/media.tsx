@@ -1,34 +1,52 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
+
+import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
+
+import { env } from "~/env";
 
 interface MediaProps {
-  url: string;
-  name: string;
+  src: string;
+  alt: string;
 }
 
-const Media = ({ url, name }: MediaProps) => {
-  const extension = url.split(".").pop();
-  const imageUrl = url.replace(/\.mp4$/, ".jpg"); // Replace .mp4 with .jpg
+export default function Media({
+  className,
+  src,
+  alt,
+}: PropsWithClassName<MediaProps>) {
+  const [hasFailedToLoad, setHasFailedToLoad] = useState(false);
 
-  return extension === "mp4" ? (
-    <video
-      width={350}
-      height={350}
-      autoPlay
-      loop
-      muted
-      poster={imageUrl}
-      className="w-full"
-    >
-      <source src={url} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  ) : (
-    <img
-      src={url ? url : "https://via.placeholder.com/350"}
-      alt={name ? name : "Image"}
-      className="h-full w-full object-cover"
-    />
-  );
-};
+  const mediaSrc = src.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
+  const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
-export default Media;
+  console.log(src, mediaSrc);
+  if (mediaSrc === undefined || mediaSrc.length === 0 || hasFailedToLoad) {
+    return (
+      <div className={className}>Loading...</div>
+      // <Image
+      //   alt={alt}
+      //   className={className}
+      //   src={`/medias/${resolvedTheme === "dark" ? "dark/" : ""}empty_nft.png`}
+      // />
+    );
+  }
+
+  if (mediaFormat === "video") {
+    return (
+      <video autoPlay className={className} loop muted>
+        <source src={mediaSrc} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    );
+  } else {
+    return (
+      <img
+        alt={alt}
+        className={className}
+        // onError={() => setHasFailedToLoad(true)}
+        src={mediaSrc}
+      />
+    );
+  }
+}

@@ -104,14 +104,11 @@ const Asset: React.FC<AssetProps> = ({ params, collection }) => {
           <div className="relative overflow-hidden rounded-md">
             {token.metadata?.normalized?.image ? (
               <Media
-                url={token.metadata.normalized.image}
-                name={token.token_id || "Token Image"}
+                src={token.metadata.normalized.image}
+                alt={token.token_id || "Token Image"}
               />
             ) : (
-              <Media
-                url="/missing.jpg"
-                name={token.token_id || "Token Image"}
-              />
+              <Media src="/missing.jpg" alt={token.token_id || "Token Image"} />
             )}
           </div>
           <FulfillListing token={token} tokenMarketData={tokenMarketData} />
