@@ -1,3 +1,4 @@
+import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import {
   Select,
   SelectContent,
@@ -21,11 +22,12 @@ interface CollectionItemsSortingSelectProps {
 }
 
 export default function CollectionItemsSortingSelect({
+  className,
   setSortBy,
   setSortDirection,
   sortBy,
   sortDirection,
-}: CollectionItemsSortingSelectProps) {
+}: PropsWithClassName<CollectionItemsSortingSelectProps>) {
   const sortValue = `${sortBy}-${sortDirection}`;
 
   function onValueChange(value: string) {
@@ -43,16 +45,18 @@ export default function CollectionItemsSortingSelect({
   }
 
   return (
-    <Select value={sortValue} onValueChange={onValueChange}>
-      <SelectTrigger className="w-52">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem value="price-asc">Price: Low to high</SelectItem>
-          <SelectItem value="price-desc">Price: High to low</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className={className}>
+      <Select value={sortValue} onValueChange={onValueChange}>
+        <SelectTrigger className="w-52">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value="price-asc">Price: Low to high</SelectItem>
+            <SelectItem value="price-desc">Price: High to low</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

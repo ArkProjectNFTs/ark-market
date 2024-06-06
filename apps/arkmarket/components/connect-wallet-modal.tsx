@@ -55,7 +55,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[26.25rem]">
+      <DialogContent className="my-auto sm:max-w-[26.25rem]">
         <DialogHeader>
           <div className="mx-auto mb-3 mt-3 size-20 rounded-full bg-secondary" />
           <DialogTitle className="mx-auto text-xl font-semibold">
@@ -71,7 +71,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 variant="secondary"
                 className="relative"
               >
-                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-[0.375rem] bg-background">
+                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
                   <img
                     src={connector.icon.dark}
                     className="size-5"
@@ -100,7 +100,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 variant="secondary"
                 className="relative h-14"
               >
-                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-[0.375rem] bg-background">
+                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
                   <Mail size={20} />
                 </div>
                 <div>

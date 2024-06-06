@@ -91,7 +91,7 @@ export default function CollectionItemsDataGridView({
 
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
-          <div className="w-full overflow-hidden rounded-[0.375rem] bg-card text-card-foreground">
+          <div className="rounded-xs w-full overflow-hidden bg-card text-card-foreground">
             {collectionToken.metadata !== null && (
               <Media
                 src={collectionToken.metadata.image}

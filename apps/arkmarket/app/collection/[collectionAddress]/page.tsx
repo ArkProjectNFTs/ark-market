@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { siteHeaderRemHeight } from "~/components/site-header";
 import { collectionPageSearchParamsCache } from "../search-params";
 import CollectionBanner from "./components/collection-banner";
 import CollectionFooter from "./components/collection-footer";
 import CollectionHeader from "./components/collection-header";
 import CollectionItemsActivity from "./components/collection-items-activity";
+import MobileCollectionHeader from "./components/mobile-collection-header";
 import {
   getCollectionInfos,
   getCollectionTokens,
@@ -34,21 +34,24 @@ export default async function CollectionPage({
     sortDirection: direction,
     sortBy: sort,
   });
-  // TODO: Implement properly
-  if (
-    collectionTokensInitialData.data.length === 0 ||
-    collectionInfos === undefined
-  ) {
-    notFound();
-  }
+  // TODO: Uncomment
+  // if (
+  //   collectionTokensInitialData.data.length === 0 ||
+  //   collectionInfos === undefined
+  // ) {
+  //   notFound();
+  // }
 
   return (
     <main>
-      <CollectionBanner className="hidden lg:block" />
+      <CollectionBanner className="hidden md:block" />
 
       <CollectionHeader
-        className="sticky z-20"
-        style={{ top: `${siteHeaderRemHeight}rem` }}
+        className="sticky top-[var(--site-header-height)] z-20 hidden md:block"
+        collectionInfos={collectionInfos}
+      />
+      <MobileCollectionHeader
+        className="md:hidden"
         collectionInfos={collectionInfos}
       />
 

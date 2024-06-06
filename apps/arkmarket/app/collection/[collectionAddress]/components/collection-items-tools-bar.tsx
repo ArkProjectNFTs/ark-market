@@ -15,45 +15,27 @@ import type {
 } from "../../search-params";
 import type { ViewType } from "./view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
+import ViewTypeToggleButton from "./view-type-toggle-button";
 import ViewTypeToggleGroup from "./view-type-toggle-group";
 
-function LiveDataIndicator() {
+interface ResultsNumberProps {
+  totalCount: number;
+}
+
+function ResultsNumber({
+  className,
+  totalCount,
+}: PropsWithClassName<ResultsNumberProps>) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="54"
-      height="48"
-      viewBox="0 0 54 48"
-      fill="none"
-    >
-      <g filter="url(#filter0_f_479_6095)">
-        <circle cx="24" cy="24" r="10" fill="#63D056" />
-      </g>
-      <circle cx="23" cy="22" r="8" fill="#63D056" />
-      <defs>
-        <filter
-          id="filter0_f_479_6095"
-          x="-6"
-          y="-6"
-          width="60"
-          height="60"
-          filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
-        >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="BackgroundImageFix"
-            result="shape"
-          />
-          <feGaussianBlur
-            stdDeviation="10"
-            result="effect1_foregroundBlur_479_6095"
-          />
-        </filter>
-      </defs>
-    </svg>
+    <div className={cn("flex items-center gap-3 font-medium", className)}>
+      <span className="relative flex h-4 w-4">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+        <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500" />
+      </span>
+
+      {/* TODO @YohanTz: Number of tokens */}
+      <p>{totalCount} results</p>
+    </div>
   );
 }
 
@@ -81,29 +63,36 @@ export default function CollectionItemsToolsBar({
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)} style={style}>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-2 md:gap-6">
         <Button onClick={toggleFiltersOpen} variant="secondary" size="lg">
           <FiltersIcon />
-          Filters
+          <span className="hidden sm:block">Filters</span>
         </Button>
 
-        <div className="flex items-center font-medium">
-          <LiveDataIndicator />
-          {/* TODO @YohanTz: Number of tokens */}
-          <p>Unknown results</p>
-        </div>
+        <ResultsNumber totalCount={0} className="hidden lg:flex" />
 
         <Input className="flex-1" placeholder="Search item" />
 
         <CollectionItemsSortingSelect
+          className="hidden lg:block"
           sortBy={sortBy}
           setSortBy={setSortBy}
           setSortDirection={setSortDirection}
           sortDirection={sortDirection}
         />
 
-        <ViewTypeToggleGroup viewType={viewType} setViewType={setViewType} />
+        <ViewTypeToggleGroup
+          viewType={viewType}
+          setViewType={setViewType}
+          className="hidden md:block"
+        />
+        <ViewTypeToggleButton
+          className="md:hidden"
+          viewType={viewType}
+          setViewType={setViewType}
+        />
       </div>
+      <ResultsNumber className="mt-6 lg:hidden" totalCount={0} />
     </div>
   );
 }

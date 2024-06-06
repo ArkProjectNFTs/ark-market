@@ -1,3 +1,4 @@
+import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import EtherIcon from "@ark-market/ui/components/icons/ether-icon";
 import { Separator } from "@ark-market/ui/components/separator";
 import { cn } from "@ark-market/ui/lib/utils";
@@ -7,13 +8,20 @@ import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 interface CollectionHeaderStatsProps {
   collectionInfos: CollectionInfosApiResponse;
 }
+const separatorCommonClassNames = "hidden md:block";
 
 export default function CollectionHeaderStats({
+  className,
   collectionInfos,
-}: CollectionHeaderStatsProps) {
+}: PropsWithClassName<CollectionHeaderStatsProps>) {
   return (
-    <div className="flex h-12 items-center gap-6 pr-5">
-      <div>
+    <div
+      className={cn(
+        "grid grid-cols-2 items-center justify-between gap-2 md:flex md:h-12 md:gap-6 md:pr-5",
+        className,
+      )}
+    >
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="flex items-center gap-1 font-medium">
           <EtherIcon />
@@ -32,39 +40,39 @@ export default function CollectionHeaderStats({
           </p>
         </div>
       </div>
-      <Separator orientation="vertical" />
+      <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div>
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">
           Total Volume
         </p>
         <p className="font-medium">{collectionInfos.total_volume ?? "_"} ETH</p>
       </div>
-      <Separator orientation="vertical" />
+      <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div>
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
         <p className="font-medium">
           {collectionInfos.volume_7d_eth ?? "_"} ETH
         </p>
       </div>
-      <Separator orientation="vertical" />
+      <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div>
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
-        <p className="font-medium">{collectionInfos.total_sales}</p>
+        <p className="font-medium">{collectionInfos.total_sales ?? 0}</p>
       </div>
-      <Separator orientation="vertical" />
+      <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div>
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Items</p>
-        <p className="font-medium">{collectionInfos.token_count}</p>
+        <p className="font-medium">{collectionInfos.token_count ?? 0}</p>
       </div>
-      <Separator orientation="vertical" />
+      <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div>
+      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
-        <p className="font-medium">{collectionInfos.owner_count}</p>
+        <p className="font-medium">{collectionInfos.owner_count ?? 0}</p>
       </div>
     </div>
   );

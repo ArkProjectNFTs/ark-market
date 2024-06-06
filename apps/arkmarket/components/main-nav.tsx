@@ -26,26 +26,28 @@ export function MainNav({
         href="/"
         className={cn("flex items-center space-x-2", focusableStyles)}
       >
-        <Icons.logo className="h-8 w-auto" />
+        <Icons.logo className="h-5 w-auto md:h-8" />
         <span className="sr-only font-bold">{siteConfig.name}</span>
       </Link>
-      {mainNavLinks.map((mainNavLink) => {
-        const isActiveLink = mainNavLink.href === pathname;
+      <div className="hidden items-center gap-2 lg:flex">
+        {mainNavLinks.map((mainNavLink) => {
+          const isActiveLink = mainNavLink.href === pathname;
 
-        return (
-          <Link
-            href={mainNavLink.href}
-            key={mainNavLink.name}
-            className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              isActiveLink ? "text-primary" : "text-muted-foreground",
-              focusableStyles,
-            )}
-          >
-            {mainNavLink.name}
-          </Link>
-        );
-      })}
+          return (
+            <Link
+              href={mainNavLink.href}
+              key={mainNavLink.name}
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                isActiveLink ? "text-primary" : "text-muted-foreground",
+                focusableStyles,
+              )}
+            >
+              {mainNavLink.name}
+            </Link>
+          );
+        })}
+      </div>
     </nav>
   );
 }

@@ -13,6 +13,8 @@ import {
 import { Copy, HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
 import { useCopyToClipboard } from "usehooks-ts";
 
+import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
+import StarknetLogo from "@ark-market/ui/components/icons/starknet-logo";
 import {
   Popover,
   PopoverContent,
@@ -26,7 +28,10 @@ import ExternalLink from "./external-link";
 const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
 
-const popoverItemCommonClassName = "flex items-center gap-2";
+const popoverItemCommonClassName = cn(
+  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
+  focusableStyles,
+);
 
 export default function WalletAccountPopover({ children }: PropsWithChildren) {
   const { address, connector } = useAccount();
@@ -112,7 +117,6 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
               {starkProfile?.name ?? shortenedAddress}
             </p>
             <div className="text- flex items-center gap-2">
-              {/* TODO @YohanTz: Wallet logo */}
               <p className="text-sm">{shortenedAddress}</p>
               <button onClick={handleCopyAddress} className={focusableStyles}>
                 <Copy size={16} className="text-muted-foreground" />
@@ -121,27 +125,30 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
           </div>
         </div>
 
-        <div className="my-5 flex flex-col gap-6">
-          <Link className="flex items-center gap-2" href="/">
+        <div className="my-5 flex flex-col gap-2">
+          <Link href="/" className={popoverItemCommonClassName}>
             <User size={24} />
             <p className="font-bold">My items</p>
           </Link>
           {isWebWallet && (
-            <ExternalLink className={cn("")} href="https://web.argent.xyz">
+            <ExternalLink
+              className={popoverItemCommonClassName}
+              href="https://web.argent.xyz"
+            >
               <Wallet size={24} />
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <Link className="flex items-center gap-2" href="/">
+          <Link href="/" className={popoverItemCommonClassName}>
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
           </Link>
-          <Link className="flex items-center gap-2" href="/">
+          <Link href="/" className={popoverItemCommonClassName}>
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
           </Link>
           <button
-            className={cn("flex items-center gap-2", focusableStyles)}
+            className={cn(popoverItemCommonClassName)}
             onClick={() => disconnect()}
           >
             <Power size={24} />
@@ -149,25 +156,24 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
           </button>
         </div>
 
-        {/* TODO @YohanTz: Change slate-900 by semantic colors when defined */}
-        <div className="flex h-16 items-center justify-between rounded-t-lg bg-slate-900 p-4">
+        <div className="flex h-16 items-center justify-between rounded-t-lg bg-card p-4">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-full bg-secondary" />
+            <EthereumLogo />
             <span className="font-bold">ETH</span>
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedEthBalance}</p>
-            <p className="text-xs text-muted">0.00$</p>
+            <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>
-        <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-slate-900 p-4">
+        <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-card p-4">
           <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-full bg-secondary" />
+            <StarknetLogo />
             <span className="font-bold">STRK</span>
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{roundedStrkBalance}</p>
-            <p className="text-xs text-muted">0.00$</p>
+            <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>
       </PopoverContent>

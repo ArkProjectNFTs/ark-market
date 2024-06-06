@@ -1,21 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { useQueryState } from "nuqs";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import type { ViewType } from "./view-type-toggle-group";
-import { siteHeaderRemHeight } from "~/components/site-header";
 import {
   collectionSortByKey,
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
 } from "../../search-params";
-import { collectionFooterRemHeight } from "./collection-footer";
-import { collectionHeaderRemHeight } from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
@@ -51,22 +48,25 @@ export default function CollectionItemsActivity({
   return (
     <div className="flex">
       <CollectionItemsFiltersPanel
-        className="sticky z-10"
+        className={cn(
+          "sticky z-10",
+          "h-[calc(100vh-var(--site-header-height)-var(--collection-footer-height))]",
+          "md:h-[calc(100vh-var(--site-header-height)-var(--collection-header-folded-height)-var(--collection-footer-height))]",
+          "top-[var(--site-header-height)]",
+          "md:top-[calc(var(--site-header-height)+var(--collection-header-folded-height))]",
+        )}
         filtersOpen={itemsFiltersOpen && canShowItemsFilter}
-        style={{
-          top: `${siteHeaderRemHeight + collectionHeaderRemHeight}rem`,
-          height: `calc(100vh - ${siteHeaderRemHeight + collectionHeaderRemHeight + collectionFooterRemHeight}rem)`,
-        }}
       />
 
       <div className="w-full">
         <CollectionItemsActivityHeader
           activeTab={activeTab}
-          className="sticky z-10 bg-background p-6"
+          className={cn(
+            "sticky z-10 bg-background p-6",
+            "top-[var(--site-header-height)]",
+            "md:top-[calc(var(--site-header-height)+var(--collection-header-folded-height))]",
+          )}
           onTabChange={setActiveTab}
-          style={{
-            top: `${siteHeaderRemHeight + collectionHeaderRemHeight}rem`,
-          }}
         >
           {activeTab === "items" && (
             <CollectionItemsToolsBar
@@ -86,9 +86,9 @@ export default function CollectionItemsActivity({
         </CollectionItemsActivityHeader>
 
         <div
-          style={{
-            minHeight: `calc(100vh - ${siteHeaderRemHeight + collectionHeaderRemHeight + collectionFooterRemHeight}rem)`,
-          }}
+          className={cn(
+            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-folded-height)+var(--collection-footer-height))]",
+          )}
         >
           {activeTab === "items" && (
             <CollectionItemsData

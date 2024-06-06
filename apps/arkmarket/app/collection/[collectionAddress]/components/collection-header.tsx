@@ -29,14 +29,6 @@ import CollectionHeaderStats from "./collection-header-stats";
 
 const MotionButton = motion(Button);
 
-export const smallCollectionHeaderRemHeight = 3.875;
-export const bigCollectionHeaderRemHeight = 6.375;
-const bigCollectionHeaderHeightClassName = "lg:h-[6.375rem]";
-export const yCollectionHeaderRemPadding = 1.25;
-
-export const collectionHeaderRemHeight =
-  smallCollectionHeaderRemHeight + 2 * yCollectionHeaderRemPadding;
-
 interface CollectionHeaderProps {
   collectionInfos: CollectionInfosApiResponse;
   style?: HTMLAttributes<HTMLDivElement>["style"];
@@ -67,30 +59,27 @@ export default function CollectionHeader({
   return (
     <div className={cn("bg-background", className)} style={style}>
       <Collapsible
-        className="w-full border-b border-border px-5"
-        style={{
-          paddingTop: `${yCollectionHeaderRemPadding}rem`,
-          paddingBottom: `${yCollectionHeaderRemPadding}rem`,
-        }}
+        className={cn(
+          "w-full border-b border-border p-5 transition-[height]",
+          hasPassedBanner
+            ? "min-h-[var(--collection-header-folded-height)]"
+            : "min-h-[var(--collection-header-height)]",
+        )}
         open={shouldShowCollapsibleContent}
         onOpenChange={setCollapsibleOpen}
       >
-        <div
-          className={cn(
-            "flex items-center justify-between transition-[height]",
-          )}
-          style={{
-            height: hasPassedBanner
-              ? `${smallCollectionHeaderRemHeight}rem`
-              : `${bigCollectionHeaderRemHeight}rem`,
-          }}
-        >
-          <div className="flex h-full flex-shrink-0 items-center gap-4">
+        <div className="flex h-full items-center justify-between gap-0">
+          <div
+            className={cn(
+              "flex flex-shrink-0 items-center gap-4 transition-[height]",
+              hasPassedBanner ? "h-[3.875rem]" : "h-[6.375rem]",
+            )}
+          >
             <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <p className="text-2xl font-semibold">
-                  {collectionInfos.collection_name}
+                  {collectionInfos.collection_name ?? "Unknown collection"}
                 </p>
                 <AnimatePresence>
                   {!hasPassedBanner && (
@@ -103,12 +92,12 @@ export default function CollectionHeader({
                     >
                       <p className="flex items-center gap-2 pt-2">
                         Created
-                        <span className="text-muted-foreground"> Unknown</span>
+                        <span className="text-muted-foreground"> Feb 2000</span>
                         <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
                           <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
                         </svg>
                         Creator earnings
-                        <span className="text-muted-foreground"> Unknown%</span>
+                        <span className="text-muted-foreground"> 1000%</span>
                       </p>
                     </motion.div>
                   )}
@@ -148,7 +137,10 @@ export default function CollectionHeader({
             </div>
           </div>
 
-          <CollectionHeaderStats collectionInfos={collectionInfos} />
+          <CollectionHeaderStats
+            collectionInfos={collectionInfos}
+            className="hidden md:hidden xl:flex"
+          />
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
           <p className="max-w-lg pt-5 text-sm">
@@ -158,6 +150,10 @@ export default function CollectionHeader({
             mightiest heroes of Shodai&apos;s civilization… Get yours now to
             join us in this collaborative journey to shape the Everai Universe!
           </p>
+          <CollectionHeaderStats
+            collectionInfos={collectionInfos}
+            className="mt-8 xl:hidden"
+          />
         </CollapsibleContent>
       </Collapsible>
     </div>

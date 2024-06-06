@@ -1,4 +1,3 @@
-import type { HTMLAttributes } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
@@ -11,22 +10,18 @@ import { cn } from "@ark-market/ui/lib/utils";
 
 interface FiltersProps {
   filtersOpen: boolean;
-  style?: HTMLAttributes<HTMLDivElement>["style"];
 }
-
-const filtersRemWidth = 16;
 
 export default function CollectionItemsFiltersPanel({
   className,
   filtersOpen,
-  style,
 }: PropsWithClassName<FiltersProps>) {
   return (
     <AnimatePresence>
       {filtersOpen && (
         <motion.div
           initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: `${filtersRemWidth}rem` }}
+          animate={{ opacity: 1, width: "16rem" }}
           transition={{ ease: "easeInOut", duration: 0.15 }}
           exit={{ opacity: 0, width: 0 }}
           className={cn(
@@ -34,7 +29,6 @@ export default function CollectionItemsFiltersPanel({
             filtersOpen && "border-r border-border",
             className,
           )}
-          style={style}
         >
           <p className="px-5 pt-6 font-bold">Status</p>
 

@@ -4,6 +4,11 @@
 
 @layer base {
   :root {
+    --site-header-height: 5.5rem;
+    --collection-header-height: 8.875rem;
+    --collection-header-folded-height: 6.375rem;
+    --collection-footer-height: 2.5rem;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;

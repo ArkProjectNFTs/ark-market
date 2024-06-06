@@ -2,10 +2,17 @@
 "use client";
 
 import { useMemo } from "react";
-import { useAccount, useNetwork, useStarkProfile } from "@starknet-react/core";
+import {
+  useAccount,
+  useBalance,
+  useNetwork,
+  useStarkProfile,
+} from "@starknet-react/core";
 
 import { Button } from "@ark-market/ui/components/button";
+import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
 import WalletIcon from "@ark-market/ui/components/icons/wallet-icon";
+import { Separator } from "@ark-market/ui/components/separator";
 
 import useBlockies from "~/hooks/useBlockies";
 import ConnectWalletModal from "./connect-wallet-modal";
@@ -17,6 +24,8 @@ export function UserNav() {
   const { chain } = useNetwork();
   const { data: starkProfile } = useStarkProfile({ address });
 
+  const { data: ethBalance } = useBalance({ address });
+
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -24,6 +33,11 @@ export function UserNav() {
 
   const { blockiesImageSrc } = useBlockies({ address });
   const isWrongNetwork = chainId !== chain.id && chainId !== undefined;
+
+  const roundedEthBalance =
+    ethBalance !== undefined
+      ? parseFloat(ethBalance.formatted).toFixed(4)
+      : undefined;
 
   if (address === undefined) {
     return (
@@ -49,7 +63,16 @@ export function UserNav() {
 
   return (
     <WalletAccountPopover>
-      <Button className="gap-3" variant="secondary">
+      <Button className="gap-3 pl-2" variant="secondary">
+        <EthereumLogo className="hidden sm:block" />
+        <p className="hidden sm:block">
+          {roundedEthBalance}
+          <span className="text-muted-foreground"> ETH</span>
+        </p>
+        <Separator
+          orientation="vertical"
+          className="hidden bg-background sm:block"
+        />
         {starkProfile?.name ? (
           <img
             className="size-8 rounded-full"

@@ -20,10 +20,9 @@ export default function Media({
   const mediaSrc = src.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
   const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
-  console.log(src, mediaSrc);
   if (mediaSrc === undefined || mediaSrc.length === 0 || hasFailedToLoad) {
     return (
-      <div className={className}>Loading...</div>
+      <div className={className}>Empty</div>
       // <Image
       //   alt={alt}
       //   className={className}
@@ -44,7 +43,7 @@ export default function Media({
       <img
         alt={alt}
         className={className}
-        // onError={() => setHasFailedToLoad(true)}
+        onError={() => setHasFailedToLoad(true)}
         src={mediaSrc}
       />
     );
