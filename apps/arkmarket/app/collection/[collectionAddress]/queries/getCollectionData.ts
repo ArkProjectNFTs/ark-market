@@ -27,7 +27,7 @@ interface GetCollectionInfosParams {
 export async function getCollectionInfos({
   collectionAddress,
 }: GetCollectionInfosParams) {
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/SN_MAIN`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -81,7 +81,7 @@ export async function getCollectionTokens({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/SN_MAIN/tokens?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
