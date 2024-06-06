@@ -53,7 +53,7 @@ export interface CollectionToken {
   minted_at: number;
   updated_at: number;
   price: null | number;
-  metadata: Metadata;
+  metadata: Metadata | null;
 }
 export interface CollectionTokensApiResponse {
   data: CollectionToken[];
