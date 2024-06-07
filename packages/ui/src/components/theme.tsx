@@ -1,9 +1,11 @@
 "use client";
 
+import type { PropsWithClassName } from "@/lib/utils";
 import * as React from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { ThemeProvider, useTheme } from "next-themes";
 
+import { cn } from "../lib/utils";
 import { Button } from "./button";
 import {
   DropdownMenu,
@@ -40,12 +42,12 @@ function ThemeToggle() {
   );
 }
 
-function ThemeTabs() {
+function ThemeTabs({ className }: PropsWithClassName) {
   const { setTheme, theme } = useTheme();
 
   return (
     <Tabs className="w-full" onValueChange={setTheme} value={theme}>
-      <TabsList className="mt-5 grid w-full grid-cols-3">
+      <TabsList className={cn("grid w-full grid-cols-3", className)}>
         <TabsTrigger value="dark" className="flex items-center gap-2">
           <MoonIcon />
           Dark

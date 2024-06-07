@@ -114,7 +114,12 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             />
           )}
           <div className="flex h-full flex-col justify-between">
-            <p className="text-xl font-semibold">
+            <p
+              className={cn(
+                "text-xl font-semibold",
+                starkProfile?.name === undefined && "my-auto",
+              )}
+            >
               {starkProfile?.name ?? shortenedAddress}
             </p>
             {starkProfile?.name !== undefined && (
@@ -180,7 +185,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
           </div>
         </div>
 
-        <ThemeTabs />
+        <ThemeTabs className="mt-5" />
       </PopoverContent>
     </Popover>
   );
