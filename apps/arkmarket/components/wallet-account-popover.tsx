@@ -20,6 +20,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@ark-market/ui/components/popover";
+import { ThemeTabs } from "@ark-market/ui/components/theme";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import useBlockies from "~/hooks/useBlockies";
@@ -116,12 +117,14 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <p className="text-xl font-semibold">
               {starkProfile?.name ?? shortenedAddress}
             </p>
-            <div className="text- flex items-center gap-2">
-              <p className="text-sm">{shortenedAddress}</p>
-              <button onClick={handleCopyAddress} className={focusableStyles}>
-                <Copy size={16} className="text-muted-foreground" />
-              </button>
-            </div>
+            {starkProfile?.name !== undefined && (
+              <div className="text- flex items-center gap-2">
+                <p className="text-sm">{shortenedAddress}</p>
+                <button onClick={handleCopyAddress} className={focusableStyles}>
+                  <Copy size={16} className="text-muted-foreground" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -176,6 +179,8 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>
+
+        <ThemeTabs />
       </PopoverContent>
     </Popover>
   );

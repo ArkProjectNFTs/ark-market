@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { Tabs, TabsList, TabsTrigger } from "./tabs";
 
 function ThemeToggle() {
   const { setTheme } = useTheme();
@@ -39,4 +40,24 @@ function ThemeToggle() {
   );
 }
 
-export { ThemeProvider, ThemeToggle };
+function ThemeTabs() {
+  const { setTheme, theme } = useTheme();
+
+  return (
+    <Tabs className="w-full" onValueChange={setTheme} value={theme}>
+      <TabsList className="mt-5 grid w-full grid-cols-3">
+        <TabsTrigger value="dark" className="flex items-center gap-2">
+          <MoonIcon />
+          Dark
+        </TabsTrigger>
+        <TabsTrigger value="light" className="flex items-center gap-2">
+          <SunIcon />
+          Light
+        </TabsTrigger>
+        <TabsTrigger value="system">System</TabsTrigger>
+      </TabsList>
+    </Tabs>
+  );
+}
+
+export { ThemeProvider, ThemeToggle, ThemeTabs };
