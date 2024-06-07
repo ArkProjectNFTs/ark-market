@@ -13,6 +13,12 @@ import {
 } from "@ark-market/ui/components/toggle-group";
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type {
+  CollectionSortBy,
+  CollectionSortDirection,
+} from "../../search-params";
+import CollectionItemsSortingSelect from "./collection-item-sorting-select";
+
 function LiveDataIndicator() {
   return (
     <svg
@@ -54,19 +60,27 @@ function LiveDataIndicator() {
 }
 
 interface ToolsBarProps {
+  setSortBy: (sortBy: CollectionSortBy) => void;
+  setSortDirection: (sortDirection: CollectionSortDirection) => void;
+  sortBy: CollectionSortBy;
+  sortDirection: CollectionSortDirection;
   style?: HTMLAttributes<HTMLDivElement>["style"];
   toggleFiltersOpen: () => void;
 }
 
 export default function CollectionItemsToolsBar({
   className,
+  setSortBy,
+  setSortDirection,
+  sortBy,
+  sortDirection,
   style,
   toggleFiltersOpen,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)} style={style}>
       <div className="flex items-center gap-6">
-        <Button onClick={toggleFiltersOpen} variant="secondary">
+        <Button onClick={toggleFiltersOpen} variant="secondary" size="lg">
           <FiltersIcon />
           Filters
         </Button>
@@ -77,6 +91,13 @@ export default function CollectionItemsToolsBar({
         </div>
 
         <Input className="flex-1" placeholder="Search item" />
+
+        <CollectionItemsSortingSelect
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          setSortDirection={setSortDirection}
+          sortDirection={sortDirection}
+        />
 
         <ToggleGroup type="single" defaultValue="big-grid">
           <ToggleGroupItem value="big-grid" aria-label="Toggle bold">
