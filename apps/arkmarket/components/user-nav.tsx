@@ -42,7 +42,7 @@ export function UserNav() {
   if (address === undefined) {
     return (
       <ConnectWalletModal>
-        <Button variant="secondary">
+        <Button variant="default">
           <WalletIcon />
           Connect wallet
         </Button>

@@ -2,13 +2,7 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
-import { ChevronDown, Copy, Globe, Globe2 } from "lucide-react";
+import { ChevronDown, Copy } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Button } from "@ark-market/ui/components/button";
@@ -17,7 +11,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/components/collapsible";
-import CopyIcon from "@ark-market/ui/components/icons/copy-icon";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
@@ -25,10 +18,7 @@ import { cn } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import ExternalLink from "~/components/external-link";
-import { collectionBannerRemHeight } from "./collection-banner";
 import CollectionHeaderStats from "./collection-header-stats";
-
-const MotionButton = motion(Button);
 
 interface MobileCollectionHeaderProps {
   collectionInfos: CollectionInfosApiResponse;

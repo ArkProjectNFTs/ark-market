@@ -1,8 +1,7 @@
 import React from "react";
 
 import { Input } from "@ark-market/ui/components/input";
-
-// import { ThemeToggle } from "@ark-market/ui/components/theme";
+import { ThemeToggle } from "@ark-market/ui/components/theme";
 
 // import { CommandMenu } from "~/components/command-menu";
 import { MainNav } from "~/components/main-nav";
@@ -21,7 +20,7 @@ export default function SiteHeader() {
       </div>
       <div className="flex items-center space-x-4">
         <UserNav />
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </div>
     </div>
   );

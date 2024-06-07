@@ -1,6 +1,8 @@
 import { forwardRef, useCallback, useEffect } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
+import { cn } from "@ark-market/ui/lib/utils";
+
 import type { CollectionToken } from "../queries/getCollectionData";
 import type { ViewType } from "./view-type-toggle-group";
 import Media from "~/components/media";
@@ -12,7 +14,7 @@ const LargeGridContainer = forwardRef<
   <div
     ref={ref}
     {...props}
-    className="mb-2 grid w-full grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))] gap-2 p-6"
+    className="mb-2 grid w-full grid-cols-2 gap-2 p-6 sm:grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))]"
   >
     {children}
   </div>
@@ -26,7 +28,7 @@ const SmallGridContainer = forwardRef<
   <div
     ref={ref}
     {...props}
-    className="mb-2 grid w-full grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))] gap-2 p-6"
+    className="mb-2 grid w-full grid-cols-2 gap-2 p-6 sm:grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))]"
   >
     {children}
   </div>
@@ -100,20 +102,25 @@ export default function CollectionItemsDataGridView({
             <div className="p-3">
               <div className="flex w-full justify-between">
                 <div>
-                  <p className="text-xl font-semibold">
+                  <p
+                    className={cn(
+                      "font-semibold",
+                      viewType === "large-grid" ? "text-xl" : "text-sm",
+                    )}
+                  >
                     {collectionToken.metadata?.name ?? collectionToken.token_id}
                   </p>
                   {collectionToken.price ? (
                     <p className="mt-1 text-sm">{collectionToken.price} ETH</p>
                   ) : (
-                    <p className="mt-1 text-sm">Not for sale</p>
+                    <p className="mt-1 text-sm font-medium">Not for sale</p>
                   )}
                 </div>
                 {/* <div className="flex h-5 items-center justify-center rounded-[0.25rem] border border-border px-2">
                   <span className="text-xs">{collectionToken.token_id}</span>
                 </div> */}
               </div>
-              <p className="mt-5 text-sm text-secondary-foreground">
+              <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
             </div>

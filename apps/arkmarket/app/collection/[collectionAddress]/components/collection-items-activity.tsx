@@ -15,6 +15,7 @@ import {
 } from "../../search-params";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
+import CollectionItemsFiltersModal from "./collection-items-filters-modal";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsToolsBar from "./collection-items-tools-bar";
 
@@ -49,7 +50,7 @@ export default function CollectionItemsActivity({
     <div className="flex">
       <CollectionItemsFiltersPanel
         className={cn(
-          "sticky z-10",
+          "sticky z-10 hidden sm:block",
           "h-[calc(100vh-var(--site-header-height)-var(--collection-footer-height))]",
           "md:h-[calc(100vh-var(--site-header-height)-var(--collection-header-folded-height)-var(--collection-footer-height))]",
           "top-[var(--site-header-height)]",
@@ -57,6 +58,9 @@ export default function CollectionItemsActivity({
         )}
         filtersOpen={itemsFiltersOpen && canShowItemsFilter}
       />
+      {/* <CollectionItemsFiltersModal
+        filtersOpen={itemsFiltersOpen && canShowItemsFilter}
+      /> */}
 
       <div className="w-full">
         <CollectionItemsActivityHeader

@@ -32,8 +32,7 @@ export async function getCollectionInfos({
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
-    // return undefined;
-    return {};
+    return undefined;
   }
 
   return response.json() as Promise<CollectionInfosApiResponse>;

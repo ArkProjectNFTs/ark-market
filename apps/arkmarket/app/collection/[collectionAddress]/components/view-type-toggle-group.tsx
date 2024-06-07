@@ -25,7 +25,9 @@ export default function ViewTypeToggleGroup({
       <ToggleGroup
         type="single"
         value={viewType}
-        onValueChange={setViewType}
+        onValueChange={(value) =>
+          value !== "" && setViewType(value as ViewType)
+        }
         className={className}
       >
         <ToggleGroupItem value="large-grid" aria-label="Toggle large grid view">

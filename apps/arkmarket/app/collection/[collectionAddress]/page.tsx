@@ -34,17 +34,20 @@ export default async function CollectionPage({
     sortDirection: direction,
     sortBy: sort,
   });
-  // TODO: Uncomment
-  // if (
-  //   collectionTokensInitialData.data.length === 0 ||
-  //   collectionInfos === undefined
-  // ) {
-  //   notFound();
-  // }
+
+  if (
+    collectionTokensInitialData.data.length === 0 ||
+    collectionInfos === undefined
+  ) {
+    notFound();
+  }
 
   return (
     <main>
-      <CollectionBanner className="hidden md:block" />
+      <CollectionBanner
+        className="hidden md:block"
+        collectionAddress={collectionAddress}
+      />
 
       <CollectionHeader
         className="sticky top-[var(--site-header-height)] z-20 hidden md:block"
@@ -59,7 +62,7 @@ export default async function CollectionPage({
         collectionAddress={collectionAddress}
         collectionTokensInitialData={collectionTokensInitialData}
       />
-      <CollectionFooter className="sticky bottom-0 z-10" />
+      <CollectionFooter className="sticky bottom-0 z-10 hidden md:flex" />
     </main>
   );
 }

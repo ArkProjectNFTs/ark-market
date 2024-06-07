@@ -15,6 +15,7 @@ import type {
 } from "../../search-params";
 import type { ViewType } from "./view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
+import CollectionItemsFiltersModal from "./collection-items-filters-modal";
 import ViewTypeToggleButton from "./view-type-toggle-button";
 import ViewTypeToggleGroup from "./view-type-toggle-group";
 
@@ -64,9 +65,24 @@ export default function CollectionItemsToolsBar({
   return (
     <div className={cn("bg-background", className)} style={style}>
       <div className="flex items-center gap-2 md:gap-6">
-        <Button onClick={toggleFiltersOpen} variant="secondary" size="lg">
+        <CollectionItemsFiltersModal>
+          <Button
+            // onClick={toggleFiltersOpen}
+            variant="secondary"
+            size="icon"
+            className="sm:hidden"
+          >
+            <FiltersIcon />
+          </Button>
+        </CollectionItemsFiltersModal>
+        <Button
+          onClick={toggleFiltersOpen}
+          variant="secondary"
+          size="lg"
+          className="hidden sm:flex"
+        >
           <FiltersIcon />
-          <span className="hidden sm:block">Filters</span>
+          <span>Filters</span>
         </Button>
 
         <ResultsNumber totalCount={0} className="hidden lg:flex" />
@@ -82,14 +98,14 @@ export default function CollectionItemsToolsBar({
         />
 
         <ViewTypeToggleGroup
-          viewType={viewType}
+          className="hidden md:flex"
           setViewType={setViewType}
-          className="hidden md:block"
+          viewType={viewType}
         />
         <ViewTypeToggleButton
           className="md:hidden"
-          viewType={viewType}
           setViewType={setViewType}
+          viewType={viewType}
         />
       </div>
       <ResultsNumber className="mt-6 lg:hidden" totalCount={0} />
