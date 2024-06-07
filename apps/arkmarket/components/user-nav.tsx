@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useMemo } from "react";
@@ -16,6 +15,7 @@ import { Separator } from "@ark-market/ui/components/separator";
 
 import useBlockies from "~/hooks/useBlockies";
 import ConnectWalletModal from "./connect-wallet-modal";
+import ProfilePicture from "./profile-picture";
 import WalletAccountPopover from "./wallet-account-popover";
 import WrongNetworkModal from "./wrong-network-modal";
 
@@ -53,7 +53,7 @@ export function UserNav() {
   if (isWrongNetwork) {
     return (
       <WrongNetworkModal>
-        <Button variant="secondary">
+        <Button variant="default">
           <WalletIcon />
           Wrong network
         </Button>
@@ -73,19 +73,7 @@ export function UserNav() {
           orientation="vertical"
           className="hidden bg-background sm:block"
         />
-        {starkProfile?.name ? (
-          <img
-            className="size-8 rounded-full"
-            alt="Starknet Id profile"
-            src={starkProfile?.profilePicture}
-          />
-        ) : (
-          <img
-            className="size-8 rounded-full"
-            src={blockiesImageSrc}
-            alt="Blockies"
-          />
-        )}
+        <ProfilePicture className="size-8 rounded-full" address={address} />
         {starkProfile?.name ?? shortenedAddress}
       </Button>
     </WalletAccountPopover>

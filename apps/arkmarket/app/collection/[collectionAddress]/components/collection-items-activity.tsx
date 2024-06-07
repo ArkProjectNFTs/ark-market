@@ -91,7 +91,7 @@ export default function CollectionItemsActivity({
 
         <div
           className={cn(
-            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-folded-height)+var(--collection-footer-height))]",
+            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-folded-height)+var(--collection-footer-height))] pb-6",
           )}
         >
           {activeTab === "items" && (

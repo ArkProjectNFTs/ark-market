@@ -103,7 +103,7 @@ export default function CollectionHeader({
                   )}
                 </AnimatePresence>
               </div>
-              <div className="flex items-center gap-4 text-muted-foreground">
+              <div className="mb-1 flex items-center gap-4 text-muted-foreground">
                 <ExternalLink href="/">
                   {/* TODO @YohanTz: Copy collection address */}
                   <CopyIcon />
