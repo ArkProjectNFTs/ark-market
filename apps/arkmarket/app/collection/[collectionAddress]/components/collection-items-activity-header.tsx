@@ -19,7 +19,10 @@ export default function CollectionItemsActivityHeader({
   style,
 }: PropsWithChildren<PropsWithClassName<CollectionItemsActivityHeaderProps>>) {
   return (
-    <div className={cn("border-b border-border", className)} style={style}>
+    <div
+      className={cn("border-b border-border lg:border-none", className)}
+      style={style}
+    >
       <Tabs value={activeTab} className="w-36" onValueChange={onTabChange}>
         <TabsList className="mb-6 grid w-full grid-cols-2">
           <TabsTrigger value="items">Items</TabsTrigger>
