@@ -75,7 +75,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                   <img
                     src={connector.icon.dark}
                     className="size-5"
-                    alt={`${connector.name} icon`}
+                    alt={`${connector.name}`}
                   />
                 </div>
                 {walletIdToName.get(connector.id) ?? connector.name}

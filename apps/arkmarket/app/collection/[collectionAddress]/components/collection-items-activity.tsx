@@ -18,6 +18,7 @@ import CollectionItemsData from "./collection-items-data";
 import CollectionItemsFiltersModal from "./collection-items-filters-modal";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsToolsBar from "./collection-items-tools-bar";
+import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsActivityProps {
   collectionAddress: string;
@@ -88,6 +89,7 @@ export default function CollectionItemsActivity({
           )}
           {activeTab === "activity" && <p>Coming</p>}
         </CollectionItemsActivityHeader>
+        <LiveResultsIndicator className="p-6 lg:hidden" totalCount={0} />
 
         <div
           className={cn(

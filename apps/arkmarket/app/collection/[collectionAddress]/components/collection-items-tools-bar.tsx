@@ -16,29 +16,9 @@ import type {
 import type { ViewType } from "./view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
 import CollectionItemsFiltersModal from "./collection-items-filters-modal";
+import LiveResultsIndicator from "./live-results-indicator";
 import ViewTypeToggleButton from "./view-type-toggle-button";
 import ViewTypeToggleGroup from "./view-type-toggle-group";
-
-interface ResultsNumberProps {
-  totalCount: number;
-}
-
-function ResultsNumber({
-  className,
-  totalCount,
-}: PropsWithClassName<ResultsNumberProps>) {
-  return (
-    <div className={cn("flex items-center gap-3 font-medium", className)}>
-      <span className="relative flex h-4 w-4">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-        <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500" />
-      </span>
-
-      {/* TODO @YohanTz: Number of tokens */}
-      <p>{totalCount} results</p>
-    </div>
-  );
-}
 
 interface ToolsBarProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
@@ -63,52 +43,53 @@ export default function CollectionItemsToolsBar({
   setViewType,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
-    <div className={cn("bg-background", className)} style={style}>
-      <div className="flex items-center gap-2 md:gap-6">
-        <CollectionItemsFiltersModal>
+    <>
+      <div className={cn("bg-background", className)} style={style}>
+        <div className="flex items-center gap-2 md:gap-6">
+          <CollectionItemsFiltersModal>
+            <Button
+              // onClick={toggleFiltersOpen}
+              variant="secondary"
+              size="icon"
+              className="sm:hidden"
+            >
+              <FiltersIcon />
+            </Button>
+          </CollectionItemsFiltersModal>
           <Button
-            // onClick={toggleFiltersOpen}
+            onClick={toggleFiltersOpen}
             variant="secondary"
-            size="icon"
-            className="sm:hidden"
+            size="lg"
+            className="hidden sm:flex"
           >
             <FiltersIcon />
+            <span>Filters</span>
           </Button>
-        </CollectionItemsFiltersModal>
-        <Button
-          onClick={toggleFiltersOpen}
-          variant="secondary"
-          size="lg"
-          className="hidden sm:flex"
-        >
-          <FiltersIcon />
-          <span>Filters</span>
-        </Button>
 
-        <ResultsNumber totalCount={0} className="hidden lg:flex" />
+          <LiveResultsIndicator totalCount={0} className="hidden lg:flex" />
 
-        <Input className="flex-1" placeholder="Search item" />
+          <Input className="flex-1" placeholder="Search item" />
 
-        <CollectionItemsSortingSelect
-          className="hidden lg:block"
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          setSortDirection={setSortDirection}
-          sortDirection={sortDirection}
-        />
+          <CollectionItemsSortingSelect
+            className="hidden lg:block"
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            setSortDirection={setSortDirection}
+            sortDirection={sortDirection}
+          />
 
-        <ViewTypeToggleGroup
-          className="hidden md:flex"
-          setViewType={setViewType}
-          viewType={viewType}
-        />
-        <ViewTypeToggleButton
-          className="md:hidden"
-          setViewType={setViewType}
-          viewType={viewType}
-        />
+          <ViewTypeToggleGroup
+            className="hidden md:flex"
+            setViewType={setViewType}
+            viewType={viewType}
+          />
+          <ViewTypeToggleButton
+            className="md:hidden"
+            setViewType={setViewType}
+            viewType={viewType}
+          />
+        </div>
       </div>
-      <ResultsNumber className="mt-6 lg:hidden" totalCount={0} />
-    </div>
+    </>
   );
 }

@@ -1,5 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
+import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
+import StarknetLogo2 from "@ark-market/ui/components/icons/starknet-logo-2";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { Separator } from "@ark-market/ui/components/separator";
 import { cn } from "@ark-market/ui/lib/utils";
@@ -32,9 +34,16 @@ export default function CollectionFooter({ className }: PropsWithClassName) {
         </ExternalLink>
         <Separator orientation="vertical" />
       </div>
-      <div className="flex items-center gap-7">
-        <div>ETH Price: Unknown</div>
-        <div>STRK Price: Unknown</div>
+      <div className="flex h-full items-center gap-4">
+        <div className="flex items-center gap-0.5">
+          <EthereumLogo2 />
+          <p>ETH Price: Unknown</p>
+        </div>
+        <Separator orientation="vertical" />
+        <div className="flex items-center gap-2">
+          <StarknetLogo2 />
+          <p>STRK Price: Unknown</p>
+        </div>
       </div>
     </footer>
   );

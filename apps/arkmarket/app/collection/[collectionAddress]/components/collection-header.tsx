@@ -18,6 +18,7 @@ import {
 } from "@ark-market/ui/components/collapsible";
 import CopyIcon from "@ark-market/ui/components/icons/copy-icon";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
+import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
@@ -78,9 +79,12 @@ export default function CollectionHeader({
             <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
-                <p className="text-2xl font-semibold">
-                  {collectionInfos.collection_name ?? "Unknown collection"}
-                </p>
+                <div className="flex items-center gap-1">
+                  <p className="text-2xl font-semibold">
+                    {collectionInfos.collection_name ?? "Unknown collection"}
+                  </p>
+                  <VerifiedIcon />
+                </div>
                 <AnimatePresence>
                   {!hasPassedBanner && (
                     <motion.div

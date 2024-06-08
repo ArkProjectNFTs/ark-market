@@ -19,6 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@ark-market/ui/components/popover";
+import { ThemeTabs } from "@ark-market/ui/components/theme";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import useBlockies from "~/hooks/useBlockies";
@@ -99,19 +100,35 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
-        <div className="flex h-14 items-center gap-4">
+        <div className="flex h-12 items-center gap-4">
           <ProfilePicture address={address} className="size-12 rounded-md" />
 
           <div className="flex h-full flex-col justify-between">
-            <p className="text-xl font-semibold">
+            <p
+              className={cn(
+                "text-xl font-semibold",
+                starkProfile?.name === undefined && "my-auto",
+              )}
+            >
               {starkProfile?.name ?? shortenedAddress}
             </p>
-            <div className="text- flex items-center gap-2">
-              <p className="text-sm">{shortenedAddress}</p>
-              <button onClick={handleCopyAddress} className={focusableStyles}>
-                <Copy size={16} className="text-muted-foreground" />
-              </button>
-            </div>
+            {starkProfile?.name !== undefined && (
+              <div className="text- flex items-center gap-2">
+                {connector !== undefined && (
+                  <div className="flex size-5 items-center justify-center rounded-full bg-white">
+                    <img
+                      src={connector.icon.dark}
+                      alt={`${connector.name}`}
+                      className="size-3 rounded-full"
+                    />
+                  </div>
+                )}
+                <p className="text-sm">{shortenedAddress}</p>
+                <button onClick={handleCopyAddress} className={focusableStyles}>
+                  <Copy size={16} className="text-muted-foreground" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -169,6 +186,8 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>
+
+        <ThemeTabs className="mt-5" />
       </PopoverContent>
     </Popover>
   );

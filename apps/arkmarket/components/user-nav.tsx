@@ -31,7 +31,6 @@ export function UserNav() {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }, [address]);
 
-  const { blockiesImageSrc } = useBlockies({ address });
   const isWrongNetwork = chainId !== chain.id && chainId !== undefined;
 
   const roundedEthBalance =
@@ -42,9 +41,12 @@ export function UserNav() {
   if (address === undefined) {
     return (
       <ConnectWalletModal>
-        <Button variant="default">
-          <WalletIcon />
-          Connect wallet
+        <Button variant="default" size="sm">
+          <div className="hidden items-center gap-2.5 md:flex">
+            <WalletIcon />
+            Connect wallet
+          </div>
+          <p className="md:hidden">Connect</p>
         </Button>
       </ConnectWalletModal>
     );
@@ -53,9 +55,12 @@ export function UserNav() {
   if (isWrongNetwork) {
     return (
       <WrongNetworkModal>
-        <Button variant="default">
-          <WalletIcon />
-          Wrong network
+        <Button variant="default" size="sm">
+          <div className="hidden items-center gap-2.5 md:flex">
+            <WalletIcon />
+            Wrong network
+          </div>
+          <p className="md:hidden">Wrong network</p>
         </Button>
       </WrongNetworkModal>
     );
@@ -63,7 +68,7 @@ export function UserNav() {
 
   return (
     <WalletAccountPopover>
-      <Button className="gap-3 pl-2" variant="secondary">
+      <Button className="gap-1.5 pl-2 md:gap-3" variant="secondary" size="sm">
         <EthereumLogo className="hidden sm:block" />
         <p className="hidden sm:block">
           {roundedEthBalance}
@@ -73,10 +78,12 @@ export function UserNav() {
           orientation="vertical"
           className="hidden bg-background sm:block"
         />
-        <ProfilePicture className="size-8 rounded-full" address={address} />
+        <ProfilePicture
+          className="size-6 rounded-full md:size-8"
+          address={address}
+        />
         {starkProfile?.name ?? shortenedAddress}
       </Button>
     </WalletAccountPopover>
-    // </div>
   );
 }
