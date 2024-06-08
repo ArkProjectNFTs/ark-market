@@ -95,7 +95,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
-        <div className="flex h-14 items-center gap-4">
+        <div className="flex h-12 items-center gap-4">
           {starkProfile?.name ? (
             <img
               className="size-12 rounded-md"
@@ -124,6 +124,15 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             </p>
             {starkProfile?.name !== undefined && (
               <div className="text- flex items-center gap-2">
+                {connector !== undefined && (
+                  <div className="flex size-5 items-center justify-center rounded-full bg-white">
+                    <img
+                      src={connector.icon.dark}
+                      alt={`${connector.name}`}
+                      className="size-3 rounded-full"
+                    />
+                  </div>
+                )}
                 <p className="text-sm">{shortenedAddress}</p>
                 <button onClick={handleCopyAddress} className={focusableStyles}>
                   <Copy size={16} className="text-muted-foreground" />
