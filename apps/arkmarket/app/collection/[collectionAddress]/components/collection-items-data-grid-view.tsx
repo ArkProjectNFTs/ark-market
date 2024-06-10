@@ -3,8 +3,8 @@ import { VirtuosoGrid } from "react-virtuoso";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "../queries/getCollectionData";
-import type { ViewType } from "./view-type-toggle-group";
 import Media from "~/components/media";
 
 const LargeGridContainer = forwardRef<

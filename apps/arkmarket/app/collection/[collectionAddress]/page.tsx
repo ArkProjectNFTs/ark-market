@@ -39,6 +39,7 @@ export default async function CollectionPage({
     collectionTokensInitialData.data.length === 0 ||
     collectionInfos === undefined
   ) {
+    // TODO @YohanTz: Handle case when a collection contract is deployed but no tokens in it
     notFound();
   }
 

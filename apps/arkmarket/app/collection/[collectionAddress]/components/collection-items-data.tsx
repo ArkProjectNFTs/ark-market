@@ -3,12 +3,12 @@
 import { useMemo } from "react";
 import { useInfiniteQuery } from "react-query";
 
+import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
 } from "../../search-params";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
-import type { ViewType } from "./view-type-toggle-group";
 import { getCollectionTokens } from "../queries/getCollectionData";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";

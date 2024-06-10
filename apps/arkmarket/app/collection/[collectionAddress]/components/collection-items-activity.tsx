@@ -5,8 +5,8 @@ import { useQueryState } from "nuqs";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
-import type { ViewType } from "./view-type-toggle-group";
 import {
   collectionSortByKey,
   collectionSortByParser,
@@ -15,7 +15,6 @@ import {
 } from "../../search-params";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
-import CollectionItemsFiltersModal from "./collection-items-filters-modal";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsToolsBar from "./collection-items-tools-bar";
 import LiveResultsIndicator from "./live-results-indicator";
