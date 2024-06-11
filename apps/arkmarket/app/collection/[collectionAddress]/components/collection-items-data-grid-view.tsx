@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect } from "react";
+import { forwardRef } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { cn } from "@ark-market/ui/lib/utils";
@@ -37,44 +37,13 @@ SmallGridContainer.displayName = "SmallGridContainer";
 
 interface CollectionItemsDataGridViewProps {
   collectionTokens: CollectionToken[];
-  fetchNextPage: () => void;
-  hasNextPage?: boolean;
-  isFetchingNextPage: boolean;
   viewType: ViewType;
 }
 
 export default function CollectionItemsDataGridView({
   collectionTokens,
-  fetchNextPage,
-  hasNextPage,
-  isFetchingNextPage,
   viewType,
 }: CollectionItemsDataGridViewProps) {
-  const fetchMoreOnBottomReached = useCallback(() => {
-    if (document.body) {
-      const { scrollHeight } = window.document.body;
-      // Once the user has scrolled within 400px of the bottom of the window, fetch more data if possible
-      if (
-        scrollHeight - window.scrollY - window.innerHeight < 400 &&
-        !isFetchingNextPage &&
-        hasNextPage
-      ) {
-        void fetchNextPage();
-      }
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
-  // TODO @YohanTz: Replace with framer-motion
-  // A check on mount and after a fetch to see if the table is already scrolled to the bottom and immediately needs to fetch more data
-  useEffect(() => {
-    fetchMoreOnBottomReached();
-
-    window.addEventListener("scroll", fetchMoreOnBottomReached);
-    return () => {
-      window.removeEventListener("scroll", fetchMoreOnBottomReached);
-    };
-  }, [fetchMoreOnBottomReached]);
-
   return (
     <VirtuosoGrid
       // initialItemCount same as totalCount but needed for SSR

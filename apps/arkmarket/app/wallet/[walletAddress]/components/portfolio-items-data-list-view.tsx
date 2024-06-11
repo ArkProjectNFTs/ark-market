@@ -1,8 +1,7 @@
-"use client";
-
 import { useRef } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
+import { Button } from "@ark-market/ui/components/button";
 import {
   Table,
   TableBody,
@@ -12,22 +11,22 @@ import {
   TableRow,
 } from "@ark-market/ui/components/table";
 
-import type { CollectionToken } from "../queries/getCollectionData";
+import type { WalletToken } from "../queries/getWalletData";
 import Media from "~/components/media";
 
-interface CollectionItemsDataListViewProps {
-  collectionTokens: CollectionToken[];
+interface PortfolioItemsDataListViewProps {
+  walletTokens: WalletToken[];
 }
 
-export default function CollectionItemsDataListView({
-  collectionTokens,
-}: CollectionItemsDataListViewProps) {
+export default function PortfolioItemsDataListView({
+  walletTokens,
+}: PortfolioItemsDataListViewProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
 
   const rowVirtualizer = useWindowVirtualizer({
     // Approximate initial rect for SSR
     initialRect: { height: 1080, width: 1920 },
-    count: collectionTokens?.length ?? 0,
+    count: walletTokens?.length ?? 0,
     estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
     // Measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
@@ -47,20 +46,18 @@ export default function CollectionItemsDataListView({
             Item
           </TableHead>
           <TableHead className="sticky top-0 flex items-center bg-background">
-            Current price
+            List price
           </TableHead>
           <TableHead className="sticky top-0 flex items-center bg-background">
-            Last sold
+            Best offer
           </TableHead>
           <TableHead className="sticky top-0 flex items-center bg-background">
-            Floor difference
+            Floor
           </TableHead>
           <TableHead className="sticky top-0 flex items-center bg-background">
-            Owner
+            Received date
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Time listed
-          </TableHead>
+          <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody
@@ -70,7 +67,7 @@ export default function CollectionItemsDataListView({
         }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const token = collectionTokens[virtualRow.index];
+          const token = walletTokens[virtualRow.index];
           if (token === undefined) {
             return null;
           }
@@ -80,7 +77,7 @@ export default function CollectionItemsDataListView({
               key={`${token.contract}-${token.token_id}`}
               data-index={virtualRow.index} // Needed for dynamic row height measurement
               ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
-              className="absolute grid h-[4.6875rem] w-full grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center"
+              className="group absolute grid h-[4.6875rem] w-full grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center"
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}
@@ -97,11 +94,16 @@ export default function CollectionItemsDataListView({
                   </p>
                 </div>
               </TableCell>
-              <TableCell>{token.price ?? "_"}</TableCell>
-              <TableCell>_</TableCell>
-              <TableCell>_</TableCell>
-              <TableCell>{token.owner.slice(0, 6)}...</TableCell>
-              <TableCell>_</TableCell>
+              <TableCell>{token.list_price ?? "_"}</TableCell>
+              <TableCell>{token.best_offer ?? "_"}</TableCell>
+              <TableCell>{token.floor ?? "_"}</TableCell>
+              <TableCell>{token.received_at ?? "_"}</TableCell>
+              <TableCell>
+                {/* TODO @YohanTz: List button only if owner is connected */}
+                <Button className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100">
+                  List for sale
+                </Button>
+              </TableCell>
             </TableRow>
           );
         })}

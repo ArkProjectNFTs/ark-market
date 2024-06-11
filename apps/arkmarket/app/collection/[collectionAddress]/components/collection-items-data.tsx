@@ -9,6 +9,7 @@ import type {
   CollectionSortDirection,
 } from "../../search-params";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
+import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionTokens } from "../queries/getCollectionData";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
@@ -51,28 +52,24 @@ export default function CollectionItemsData({
       }),
   });
 
+  useInfiniteWindowScroll({
+    fetchNextPage,
+    hasNextPage: !!hasNextPage,
+    isFetchingNextPage,
+  });
+
   const collectionTokens = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data),
     [infiniteData],
   );
 
   if (viewType === "list") {
-    return (
-      <CollectionItemsDataListView
-        collectionTokens={collectionTokens}
-        hasNextPage={hasNextPage}
-        fetchNextPage={fetchNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-      />
-    );
+    return <CollectionItemsDataListView collectionTokens={collectionTokens} />;
   }
 
   return (
     <CollectionItemsDataGridView
       collectionTokens={collectionTokens}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-      isFetchingNextPage={isFetchingNextPage}
       viewType={viewType}
     />
   );

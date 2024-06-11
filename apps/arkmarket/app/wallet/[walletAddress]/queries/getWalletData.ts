@@ -1,5 +1,3 @@
-import { validateAndParseAddress } from "starknet";
-
 import { env } from "~/env";
 
 const itemsPerPage = 50;
@@ -8,7 +6,7 @@ export interface Metadata {
   image: string;
   name: string;
 }
-interface WalletToken {
+export interface WalletToken {
   best_offer: number | null;
   contract: string;
   floor: number | null;
@@ -36,7 +34,7 @@ export async function getWalletTokens({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${validateAndParseAddress(walletAddress)}?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${walletAddress}?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -65,7 +63,7 @@ export async function getWalletCollections({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${validateAndParseAddress(walletAddress)}/collections?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${walletAddress}/collections?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
