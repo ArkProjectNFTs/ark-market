@@ -52,9 +52,9 @@ export default function CollectionItemsActivity({
         className={cn(
           "sticky z-10 hidden sm:block",
           "h-[calc(100vh-var(--site-header-height)-var(--collection-footer-height))]",
-          "md:h-[calc(100vh-var(--site-header-height)-var(--collection-header-folded-height)-var(--collection-footer-height))]",
+          "md:h-[calc(100vh-var(--site-header-height)-var(--collection-header-height)-var(--collection-footer-height))]",
           "top-[var(--site-header-height)]",
-          "md:top-[calc(var(--site-header-height)+var(--collection-header-folded-height))]",
+          "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
         )}
         filtersOpen={itemsFiltersOpen && canShowItemsFilter}
       />
@@ -68,7 +68,7 @@ export default function CollectionItemsActivity({
           className={cn(
             "sticky z-10 bg-background p-6",
             "top-[var(--site-header-height)]",
-            "md:top-[calc(var(--site-header-height)+var(--collection-header-folded-height))]",
+            "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
           )}
           onTabChange={setActiveTab}
         >
@@ -92,7 +92,7 @@ export default function CollectionItemsActivity({
 
         <div
           className={cn(
-            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-folded-height)+var(--collection-footer-height))] pb-6",
+            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-height)+var(--collection-footer-height))] pb-6",
           )}
         >
           {activeTab === "items" && (

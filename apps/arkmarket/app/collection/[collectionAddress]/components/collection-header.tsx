@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Button } from "@ark-market/ui/components/button";
@@ -61,21 +62,13 @@ export default function CollectionHeader({
     <div className={cn("bg-background", className)} style={style}>
       <Collapsible
         className={cn(
-          "w-full border-b border-border p-5 transition-[height]",
-          hasPassedBanner
-            ? "min-h-[var(--collection-header-folded-height)]"
-            : "min-h-[var(--collection-header-height)]",
+          "min-h-[var(--collection-header-height)] w-full border-b border-border p-5 transition-[height]",
         )}
         open={shouldShowCollapsibleContent}
         onOpenChange={setCollapsibleOpen}
       >
         <div className="flex h-full items-center justify-between gap-0">
-          <div
-            className={cn(
-              "flex flex-shrink-0 items-center gap-4 transition-[height]",
-              hasPassedBanner ? "h-[3.875rem]" : "h-[6.375rem]",
-            )}
-          >
+          <div className="flex h-[3.875rem] flex-shrink-0 items-center gap-4 transition-[height]">
             <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
@@ -85,29 +78,8 @@ export default function CollectionHeader({
                   </p>
                   <VerifiedIcon />
                 </div>
-                <AnimatePresence>
-                  {!hasPassedBanner && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      transition={{ ease: "easeInOut", duration: 0.15 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden text-sm"
-                    >
-                      <p className="flex items-center gap-2 pt-2">
-                        Created
-                        <span className="text-muted-foreground"> Feb 2000</span>
-                        <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
-                          <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
-                        </svg>
-                        Creator earnings
-                        <span className="text-muted-foreground"> 1000%</span>
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-              <div className="mb-1 flex items-center gap-4 text-muted-foreground">
+              <div className="mb-1 flex h-6 items-center gap-4 text-muted-foreground">
                 <ExternalLink href="/">
                   {/* TODO @YohanTz: Copy collection address */}
                   <CopyIcon />
@@ -124,16 +96,16 @@ export default function CollectionHeader({
                 <AnimatePresence>
                   {!hasPassedBanner && (
                     <CollapsibleTrigger asChild>
-                      <MotionButton
-                        variant="link"
-                        size="sm"
+                      <motion.button
+                        className="ml-1 flex items-center gap-1"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         transition={{ ease: "easeInOut", duration: 0.15 }}
                         exit={{ height: 0, opacity: 0 }}
                       >
                         More Info
-                      </MotionButton>
+                        <ChevronDown size={16} />
+                      </motion.button>
                     </CollapsibleTrigger>
                   )}
                 </AnimatePresence>
@@ -147,7 +119,17 @@ export default function CollectionHeader({
           />
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-          <p className="max-w-lg pt-5 text-sm">
+          <p className="flex items-center gap-2 pt-8">
+            Created
+            <span className="text-muted-foreground"> Feb 2000</span>
+            <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
+              <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+            </svg>
+            Creator earnings
+            <span className="text-muted-foreground"> 1000%</span>
+          </p>
+
+          <p className="max-w-lg pt-4 text-sm">
             Everai is a pioneering web3 brand set to expand its universe powered
             by the collective creativity of its artistic partners and vibrant
             community. In the Everai Universe, the Everais stand as the
