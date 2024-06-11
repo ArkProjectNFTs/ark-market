@@ -98,7 +98,7 @@ export default function CollectionItemsDataListView({
       <TableBody
         className="relative"
         style={{
-          height: `${rowVirtualizer.getTotalSize()}px`, // Tells scrollbar how big the table is
+          height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
         }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
