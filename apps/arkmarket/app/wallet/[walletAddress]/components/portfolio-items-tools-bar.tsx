@@ -4,23 +4,28 @@ import FiltersIcon from "@ark-market/ui/components/icons/filters-icon";
 import { Input } from "@ark-market/ui/components/input";
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { ViewType } from "~/components/view-type-toggle-group";
 import ViewTypeToggleButton from "~/components/view-type-toggle-button";
 import ViewTypeToggleGroup from "~/components/view-type-toggle-group";
 import PortfolioItemsSortingSelect from "./portfolio-items-sorting-select";
 
 interface PortfolioItemsToolsBarProps {
   toggleFiltersOpen: () => void;
+  viewType: ViewType;
+  setViewType: (viewType: ViewType) => void;
 }
 export default function PortfolioItemsToolsBar({
   className,
   toggleFiltersOpen,
+  viewType,
+  setViewType,
 }: PropsWithClassName<PortfolioItemsToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)}>
       <div className="flex items-center gap-2 md:gap-6">
         {/* <PortfolioItemsFiltersModal> */}
         <Button
-          // onClick={toggleFiltersOpen}
+          onClick={toggleFiltersOpen}
           variant="secondary"
           size="icon"
           className="sm:hidden"
@@ -40,13 +45,13 @@ export default function PortfolioItemsToolsBar({
 
         <Input className="flex-1" placeholder="Search item" />
 
-        <PortfolioItemsSortingSelect
+        {/* <PortfolioItemsSortingSelect
           className="hidden lg:block"
           sortBy={sortBy}
           setSortBy={setSortBy}
           setSortDirection={setSortDirection}
           sortDirection={sortDirection}
-        />
+        /> */}
 
         <ViewTypeToggleGroup
           className="hidden md:flex"

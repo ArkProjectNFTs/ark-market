@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
@@ -41,6 +41,7 @@ export default function CollectionItemsData({
       pages: [collectionTokensInitialData],
       pageParams: [],
     },
+    initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
       getCollectionTokens({
         collectionAddress,
@@ -50,16 +51,10 @@ export default function CollectionItemsData({
       }),
   });
 
-  console.log(infiniteData);
   const collectionTokens = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data),
     [infiniteData],
   );
-
-  if (collectionTokens === undefined) {
-    // no-op
-    return null;
-  }
 
   if (viewType === "list") {
     return (

@@ -116,9 +116,6 @@ export default function CollectionItemsDataGridView({
                     <p className="mt-1 text-sm font-medium">Not for sale</p>
                   )}
                 </div>
-                {/* <div className="flex h-5 items-center justify-center rounded-[0.25rem] border border-border px-2">
-                  <span className="text-xs">{collectionToken.token_id}</span>
-                </div> */}
               </div>
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH

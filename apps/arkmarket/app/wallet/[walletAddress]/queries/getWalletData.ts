@@ -37,7 +37,35 @@ export async function getWalletTokens({
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${validateAndParseAddress(walletAddress)}?${queryParams.join("&")}`;
-  console.log(url);
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.error(url, response.status);
+    return { data: [], next_page: null } as WalletTokensApiResponse;
+  }
+
+  return response.json() as Promise<WalletTokensApiResponse>;
+}
+
+export interface WalletCollectionsApiResponse {
+  data: WalletToken[];
+  next_page: number | null;
+}
+interface GetWalletCollectionsParams {
+  page?: number;
+  walletAddress: string;
+}
+export async function getWalletCollections({
+  page,
+  walletAddress,
+}: GetWalletCollectionsParams) {
+  const queryParams = [`items_per_page=${itemsPerPage}`];
+
+  if (page !== undefined) {
+    queryParams.push(`page=${page}`);
+  }
+
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${validateAndParseAddress(walletAddress)}/collections?${queryParams.join("&")}`;
 
   const response = await fetch(url);
   if (!response.ok) {
