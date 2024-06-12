@@ -7,6 +7,7 @@ import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getWalletTokens } from "../queries/getWalletData";
+import PortfolioItemsDataGridView from "./portfolio-items-data-grid-view";
 import PortfolioItemsDataListView from "./portfolio-items-data-list-view";
 
 interface PortfolioItemsDataProps {
@@ -49,5 +50,10 @@ export default function PortfolioItemsData({
     return <PortfolioItemsDataListView walletTokens={walletTokens} />;
   }
 
-  return <div></div>;
+  return (
+    <PortfolioItemsDataGridView
+      walletTokens={walletTokens}
+      viewType={viewType}
+    />
+  );
 }
