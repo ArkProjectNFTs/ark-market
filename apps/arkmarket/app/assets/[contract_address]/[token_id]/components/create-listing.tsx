@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
 
-import { Button } from "@ark-market/ui/components/Button";
+import { Button } from "@ark-market/ui/components/button";
 import {
   Form,
   FormControl,
