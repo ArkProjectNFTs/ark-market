@@ -28,6 +28,7 @@ export default function CollectionItemsActivity({
   collectionAddress,
   collectionTokensInitialData,
 }: CollectionItemsActivityProps) {
+  console.log(collectionTokensInitialData);
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Get State from URL query params
   const [activeTab, setActiveTab] = useState("items");
@@ -84,11 +85,15 @@ export default function CollectionItemsActivity({
               setSortBy={setSortBy}
               viewType={viewType}
               setViewType={setViewType}
+              totalTokensCount={collectionTokensInitialData.token_count}
             />
           )}
           {activeTab === "activity" && <p>Coming</p>}
         </CollectionItemsActivityHeader>
-        <LiveResultsIndicator className="p-6 lg:hidden" totalCount={0} />
+        <LiveResultsIndicator
+          className="p-6 lg:hidden"
+          totalCount={collectionTokensInitialData.token_count}
+        />
 
         <div
           className={cn(

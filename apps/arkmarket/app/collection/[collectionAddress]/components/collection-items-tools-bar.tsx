@@ -29,6 +29,7 @@ interface ToolsBarProps {
   toggleFiltersOpen: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
+  totalTokensCount: number;
 }
 
 export default function CollectionItemsToolsBar({
@@ -41,6 +42,7 @@ export default function CollectionItemsToolsBar({
   toggleFiltersOpen,
   viewType,
   setViewType,
+  totalTokensCount,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <>
@@ -66,7 +68,10 @@ export default function CollectionItemsToolsBar({
             <span>Filters</span>
           </Button>
 
-          <LiveResultsIndicator totalCount={0} className="hidden lg:flex" />
+          <LiveResultsIndicator
+            totalCount={totalTokensCount}
+            className="hidden lg:flex"
+          />
 
           <Input className="flex-1" placeholder="Search item" />
 

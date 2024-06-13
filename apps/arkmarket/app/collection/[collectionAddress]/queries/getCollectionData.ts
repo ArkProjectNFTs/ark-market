@@ -56,7 +56,8 @@ export interface CollectionToken {
 }
 export interface CollectionTokensApiResponse {
   data: CollectionToken[];
-  next_page: number;
+  next_page: number | null;
+  token_count: number;
 }
 interface GetCollectionTokensParams {
   collectionAddress: string;
@@ -85,7 +86,11 @@ export async function getCollectionTokens({
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
-    return { data: [], next_page: 0 } as CollectionTokensApiResponse;
+    return {
+      data: [],
+      next_page: null,
+      token_count: 0,
+    } as CollectionTokensApiResponse;
   }
 
   return response.json() as Promise<CollectionTokensApiResponse>;

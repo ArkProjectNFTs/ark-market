@@ -1,7 +1,11 @@
 import type { HTMLAttributes, PropsWithChildren } from "react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { Tabs, TabsList, TabsTrigger } from "@ark-market/ui/components/tabs";
+import {
+  TabsListV2,
+  TabsTriggerV2,
+  TabsV2,
+} from "@ark-market/ui/components/tabs-v2";
 import { cn } from "@ark-market/ui/lib/utils";
 
 interface CollectionItemsActivityHeaderProps {
@@ -23,12 +27,12 @@ export default function CollectionItemsActivityHeader({
       className={cn("border-b border-border lg:border-none", className)}
       style={style}
     >
-      <Tabs value={activeTab} className="w-36" onValueChange={onTabChange}>
-        <TabsList className="mb-6 grid w-full grid-cols-2">
-          <TabsTrigger value="items">Items</TabsTrigger>
-          <TabsTrigger value="activity">Activity</TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <TabsV2 value={activeTab} onValueChange={onTabChange}>
+        <TabsListV2 className="mb-6 flex gap-8">
+          <TabsTriggerV2 value="items">Items</TabsTriggerV2>
+          <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
+        </TabsListV2>
+      </TabsV2>
       {children}
     </div>
   );
