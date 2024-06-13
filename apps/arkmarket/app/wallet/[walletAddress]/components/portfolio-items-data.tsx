@@ -52,7 +52,6 @@ export default function PortfolioItemsData({
         collectionAddress: collectionFilter,
       }),
   });
-  console.log(infiniteData);
 
   useInfiniteWindowScroll({ fetchNextPage, hasNextPage, isFetchingNextPage });
 

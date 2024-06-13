@@ -29,7 +29,6 @@ export default async function WalletPage({
     // TODO @YohanTz: Empty state
     return;
   }
-  console.log(walletCollectionsInitialData);
 
   return (
     <main>

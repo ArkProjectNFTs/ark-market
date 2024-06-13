@@ -25,7 +25,7 @@ export default function PortfolioHeader({
   });
 
   return (
-    <div className="flex flex-col gap-5 border-b border-border bg-background px-5 py-6 sm:flex-row sm:items-center sm:justify-between md:justify-start md:gap-28">
+    <div className="flex flex-col gap-4 border-b border-border bg-background px-5 py-6 sm:flex-row sm:items-center sm:justify-between md:justify-start md:gap-28">
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}

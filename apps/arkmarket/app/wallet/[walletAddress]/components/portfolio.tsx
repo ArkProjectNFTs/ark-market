@@ -36,7 +36,7 @@ export default function Portfolio({
       />
 
       <div className="w-full">
-        <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 py-6">
+        <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 py-4">
           <PortfolioItemsToolsBar
             walletCollectionsInitialData={walletCollectionsInitialData}
             // className="mt-6"

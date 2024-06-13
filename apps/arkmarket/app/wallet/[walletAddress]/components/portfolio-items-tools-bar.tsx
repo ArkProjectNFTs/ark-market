@@ -9,7 +9,6 @@ import type { ViewType } from "~/components/view-type-toggle-group";
 import ViewTypeToggleButton from "~/components/view-type-toggle-button";
 import ViewTypeToggleGroup from "~/components/view-type-toggle-group";
 import PortfolioItemsFiltersModal from "./portfolio-items-filters-modal";
-import PortfolioItemsSortingSelect from "./portfolio-items-sorting-select";
 
 interface PortfolioItemsToolsBarProps {
   toggleFiltersOpen: () => void;
