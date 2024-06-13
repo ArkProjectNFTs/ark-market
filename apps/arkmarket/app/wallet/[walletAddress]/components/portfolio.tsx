@@ -31,12 +31,12 @@ export default function Portfolio({
     <div className="flex">
       <PortfolioItemsFiltersPanel
         filtersOpen={itemsFiltersOpen}
-        className="sticky top-[var(--site-header-height)] h-[calc(100vh-var(--site-header-height))]"
+        className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
         walletCollectionsInitialData={walletCollectionsInitialData}
       />
 
       <div className="w-full">
-        <div className="sticky top-[var(--site-header-height)] z-10 bg-background p-6">
+        <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 py-6">
           <PortfolioItemsToolsBar
             walletCollectionsInitialData={walletCollectionsInitialData}
             // className="mt-6"

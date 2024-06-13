@@ -1,8 +1,10 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
+import { Button } from "@ark-market/ui/components/button";
 import {
   Table,
   TableBody,
@@ -100,7 +102,13 @@ export default function CollectionItemsDataListView({
               <TableCell>{token.price ?? "_"}</TableCell>
               <TableCell>_</TableCell>
               <TableCell>_</TableCell>
-              <TableCell>{token.owner.slice(0, 6)}...</TableCell>
+              <TableCell>
+                <Button asChild variant="link">
+                  <Link href={`/wallet/${token.owner}`}>
+                    {token.owner.slice(0, 6)}...
+                  </Link>
+                </Button>
+              </TableCell>
               <TableCell>_</TableCell>
             </TableRow>
           );

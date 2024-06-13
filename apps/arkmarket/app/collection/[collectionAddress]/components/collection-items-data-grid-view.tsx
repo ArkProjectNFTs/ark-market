@@ -20,7 +20,7 @@ const LargeGridContainer = forwardRef<
   <div
     ref={ref}
     {...props}
-    className="mb-2 grid w-full grid-cols-2 gap-2 p-6 sm:grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))]"
+    className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))] sm:gap-2"
   >
     {children}
   </div>
@@ -34,7 +34,7 @@ const SmallGridContainer = forwardRef<
   <div
     ref={ref}
     {...props}
-    className="mb-2 grid w-full grid-cols-2 gap-2 p-6 sm:grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))]"
+    className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))] sm:gap-2"
   >
     {children}
   </div>
