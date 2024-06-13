@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { formatEther } from "viem";
 import { Web3 } from "web3";
 
 import {
@@ -10,7 +11,11 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/components/table";
-import { timeSince, truncateString } from "@ark-market/ui/lib/utils";
+import {
+  shortAddress,
+  timeSince,
+  truncateString,
+} from "@ark-market/ui/lib/utils";
 
 import { env } from "~/env";
 
@@ -88,14 +93,14 @@ const Activity: React.FC<ActivityProps> = ({ params }) => {
                   <TableCell>{activity.event_type}</TableCell>
                   <TableCell>
                     {activity.amount
-                      ? `${Web3.utils.fromWei(activity.amount, "ether")} ETH`
+                      ? `${formatEther(BigInt(activity.amount))} ETH`
                       : "-"}
                   </TableCell>
                   <TableCell>
-                    {truncateString(activity.previous_owner, 8) || "-"}
+                    {shortAddress(activity.previous_owner) || "-"}
                   </TableCell>
                   <TableCell>
-                    {truncateString(activity.new_owner, 8) || "-"}
+                    {shortAddress(activity.new_owner) || "-"}
                   </TableCell>
                   <TableCell>{timeSince(activity.event_timestamp)}</TableCell>
                 </TableRow>

@@ -1,10 +1,8 @@
 import React from "react";
-import { useFulfillOffer } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { useQuery } from "react-query";
-import { Web3 } from "web3";
+import { formatEther, hexToNumber } from "viem";
 
-import { Button } from "@ark-market/ui/components/button";
 import {
   Table,
   TableBody,
@@ -16,14 +14,16 @@ import {
 import {
   areAddressesEqual,
   getRoundedRemainingTime,
-  truncateString,
+  shortAddress,
 } from "@ark-market/ui/lib/utils";
 
-import { env } from "~/env";
+import type { Token, TokenMarketData } from "~/types/schema";
 import { getTokenOffers } from "../data";
+import AcceptOffer from "./accept-offer";
+import CancelOffer from "./cancel-offer";
 
 interface TokenOffersProps {
-  token: any;
+  token: Token;
 }
 
 const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
@@ -42,11 +42,12 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
       refetchInterval: 10000,
     },
   );
-
   const { address, account } = useAccount();
   const isOwner = address && areAddressesEqual(token.owner, address);
-  const { fulfillOffer } = useFulfillOffer();
-  const isConnected = account !== undefined;
+
+  if (!account) {
+    return null;
+  }
 
   return (
     <div className="space-y-2">
@@ -77,47 +78,34 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
                     <TableHead>Quantity</TableHead>
                     <TableHead>Expiration</TableHead>
                     <TableHead>From</TableHead>
-                    {isOwner && <TableHead />}
+                    <TableHead />
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {tokenOffers.offers.map((offer: any) => (
                     <TableRow className="group" key={offer.order_hash}>
                       <TableCell>
-                        {`${Web3.utils.fromWei(
-                          offer.offer_amount,
-                          "ether",
-                        )} ETH`}
+                        {`${formatEther(BigInt(offer.offer_amount))} ETH`}
                       </TableCell>
-                      <TableCell>
-                        {Web3.utils
-                          .hexToNumber(offer.offer_quantity)
-                          .toString()}
-                      </TableCell>
+                      <TableCell>{hexToNumber(offer.offer_quantity)}</TableCell>
                       <TableCell>
                         in {getRoundedRemainingTime(offer.end_date)}
                       </TableCell>
                       <TableCell>
-                        {truncateString(offer.offer_maker, 8)}
+                        {areAddressesEqual(address, offer.offer_maker)
+                          ? "You"
+                          : shortAddress(offer.offer_maker)}
                       </TableCell>
-                      {isConnected && isOwner && (
-                        <TableCell>
-                          <Button
-                            className="opacity-0 transition-opacity group-hover:opacity-100"
-                            onClick={() => {
-                              fulfillOffer({
-                                starknetAccount: account,
-                                brokerId: env.NEXT_PUBLIC_BROKER_ID,
-                                tokenAddress: token.contract_address,
-                                tokenId: token.token_id,
-                                orderHash: offer.order_hash,
-                              });
-                            }}
-                          >
-                            Accept Offer
-                          </Button>
-                        </TableCell>
-                      )}
+                      <TableCell className="flex justify-end">
+                        <div className="flex space-x-2">
+                          {isOwner && (
+                            <AcceptOffer token={token} offer={offer} />
+                          )}
+                          {areAddressesEqual(offer.offer_maker, address) && (
+                            <CancelOffer token={token} offer={offer} />
+                          )}
+                        </div>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

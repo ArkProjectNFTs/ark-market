@@ -21,17 +21,12 @@ const BuyOrder: React.FC<BuyOrderProps> = ({ token, tokenMarketData }) => {
 
   const isOwner = address && areAddressesEqual(token.owner, address);
 
-  if (
-    account === undefined ||
-    !isOwner ||
-    !tokenMarketData ||
-    !tokenMarketData.has_offer
-  )
+  if (account === undefined || !isOwner || !tokenMarketData?.has_offer)
     return null;
 
   return (
     <div className="flex w-full flex-col space-y-4 rounded border p-4">
-      <h1>Accept best offer</h1>
+      <h1>Accept best offers</h1>
       <Button
         onClick={() =>
           fulfillOffer({
