@@ -1,7 +1,14 @@
 import { forwardRef } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
-import { cn } from "@ark-market/ui/lib/utils";
+import { Button } from "@ark-market/ui/components/button";
+import {
+  NftCard,
+  NftCardAction,
+  NftCardContent,
+  NftCardMedia,
+} from "@ark-market/ui/components/nft-card";
+import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { WalletToken } from "../queries/getWalletData";
@@ -62,19 +69,23 @@ export default function CollectionItemsDataGridView({
 
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
-          <div className="rounded-xs w-full overflow-hidden bg-card text-card-foreground">
-            <Media
-              src={token.metadata?.image}
-              alt={token.metadata?.name ?? "Empty"}
-              className="aspect-square w-full"
-            />
-            <div className="p-3">
+          <NftCard>
+            <NftCardMedia>
+              {/* TODO: Media part of NftCardMedia */}
+              <Media
+                src={token.metadata?.image}
+                alt={token.metadata?.name ?? "Empty"}
+                className="aspect-square w-full transition-transform group-hover:scale-110"
+              />
+            </NftCardMedia>
+            <NftCardContent>
               <div className="flex w-full justify-between">
-                <div>
+                <div className="overflow-hidden">
                   <p
                     className={cn(
-                      "font-semibold",
-                      viewType === "large-grid" ? "text-xl" : "text-sm",
+                      "text-sm font-semibold",
+                      viewType === "large-grid" && "sm:text-xl",
+                      ellipsableStyles,
                     )}
                   >
                     {token.metadata?.name ?? token.token_id}
@@ -89,8 +100,9 @@ export default function CollectionItemsDataGridView({
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
-            </div>
-          </div>
+              <NftCardAction>List</NftCardAction>
+            </NftCardContent>
+          </NftCard>
         );
       }}
     />

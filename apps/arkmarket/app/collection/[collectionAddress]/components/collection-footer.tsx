@@ -36,7 +36,7 @@ export default function CollectionFooter({ className }: PropsWithClassName) {
       </div>
       <div className="flex h-full items-center gap-4">
         <div className="flex items-center gap-0.5">
-          <EthereumLogo2 />
+          <EthereumLogo2 className="size-6" />
           <p>ETH Price: Unknown</p>
         </div>
         <Separator orientation="vertical" />

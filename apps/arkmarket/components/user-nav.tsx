@@ -69,7 +69,7 @@ export function UserNav() {
   return (
     <WalletAccountPopover>
       <Button className="gap-1.5 pl-2 md:gap-3" variant="secondary" size="sm">
-        <EthereumLogo className="hidden sm:block" />
+        <EthereumLogo className="hidden size-6 sm:block md:size-8" />
         <p className="hidden sm:block">
           {roundedEthBalance}
           <span className="text-muted-foreground"> ETH</span>

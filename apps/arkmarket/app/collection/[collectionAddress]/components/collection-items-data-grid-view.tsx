@@ -1,6 +1,12 @@
 import { forwardRef } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
+import {
+  NftCard,
+  NftCardAction,
+  NftCardContent,
+  NftCardMedia,
+} from "@ark-market/ui/components/nft-card";
 import { cn } from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
@@ -62,13 +68,15 @@ export default function CollectionItemsDataGridView({
 
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
-          <div className="rounded-xs w-full overflow-hidden bg-card text-card-foreground">
-            <Media
-              src={collectionToken.metadata?.image}
-              alt={collectionToken.metadata?.name ?? "Empty"}
-              className="aspect-square w-full"
-            />
-            <div className="p-3">
+          <NftCard>
+            <NftCardMedia>
+              <Media
+                src={collectionToken.metadata?.image}
+                alt={collectionToken.metadata?.name ?? "Empty"}
+                className="aspect-square w-full"
+              />
+            </NftCardMedia>
+            <NftCardContent>
               <div className="flex w-full justify-between">
                 <div>
                   <p
@@ -89,8 +97,9 @@ export default function CollectionItemsDataGridView({
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
-            </div>
-          </div>
+              <NftCardAction>Details</NftCardAction>
+            </NftCardContent>
+          </NftCard>
         );
       }}
     />

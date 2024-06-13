@@ -23,15 +23,20 @@ export interface WalletTokensApiResponse {
 interface GetWalletTokensParams {
   page?: number;
   walletAddress: string;
+  collectionAddress?: string | null;
 }
 export async function getWalletTokens({
   page,
   walletAddress,
+  collectionAddress,
 }: GetWalletTokensParams) {
   const queryParams = [`items_per_page=${itemsPerPage}`];
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+  if (collectionAddress) {
+    queryParams.push(`collection=${collectionAddress}`);
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${walletAddress}?${queryParams.join("&")}`;
@@ -45,9 +50,18 @@ export async function getWalletTokens({
   return response.json() as Promise<WalletTokensApiResponse>;
 }
 
+export interface WalletCollection {
+  address: string;
+  image: string | null;
+  collection_name: string;
+  floor: number;
+  user_listed_tokens: number;
+}
 export interface WalletCollectionsApiResponse {
-  data: WalletToken[];
+  data: WalletCollection[];
   next_page: number | null;
+  collection_count: number;
+  token_count: number;
 }
 interface GetWalletCollectionsParams {
   page?: number;
@@ -68,8 +82,14 @@ export async function getWalletCollections({
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
-    return { data: [], next_page: null } as WalletTokensApiResponse;
+    return {
+      data: [],
+      next_page: null,
+      collection_count: 0,
+      token_count: 0,
+    } as WalletCollectionsApiResponse;
   }
 
-  return response.json() as Promise<WalletTokensApiResponse>;
+  // return response.json() as Promise<WalletCollectionsApiResponse>;
+  return response.json() as Promise<WalletCollectionsApiResponse>;
 }

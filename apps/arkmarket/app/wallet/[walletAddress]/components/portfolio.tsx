@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 
-import type { WalletTokensApiResponse } from "../queries/getWalletData";
+import type {
+  WalletCollection,
+  WalletCollectionsApiResponse,
+  WalletTokensApiResponse,
+} from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
@@ -10,28 +14,31 @@ import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
 
 interface PortfolioProps {
   walletAddress: string;
+  walletCollectionsInitialData: WalletCollectionsApiResponse;
   walletTokensInitialData: WalletTokensApiResponse;
 }
 
 export default function Portfolio({
   walletAddress,
+  walletCollectionsInitialData,
   walletTokensInitialData,
 }: PortfolioProps) {
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
-  console.log(walletTokensInitialData);
 
   return (
     <div className="flex">
       <PortfolioItemsFiltersPanel
         filtersOpen={itemsFiltersOpen}
         className="sticky top-[var(--site-header-height)] h-[calc(100vh-var(--site-header-height))]"
+        walletCollectionsInitialData={walletCollectionsInitialData}
       />
 
       <div className="w-full">
         <div className="sticky top-[var(--site-header-height)] z-10 bg-background p-6">
           <PortfolioItemsToolsBar
+            walletCollectionsInitialData={walletCollectionsInitialData}
             // className="mt-6"
             toggleFiltersOpen={() =>
               setItemsFiltersOpen((previous) => !previous)
