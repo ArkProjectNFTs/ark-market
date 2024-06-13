@@ -1,34 +1,82 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
+
+import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
+import { cn } from "@ark-market/ui/lib/utils";
+
+import { env } from "~/env";
 
 interface MediaProps {
-  url: string;
-  name: string;
+  src?: string;
+  alt: string;
 }
 
-const Media = ({ url, name }: MediaProps) => {
-  const extension = url.split(".").pop();
-  const imageUrl = url.replace(/\.mp4$/, ".jpg"); // Replace .mp4 with .jpg
+export default function Media({
+  className,
+  src,
+  alt,
+}: PropsWithClassName<MediaProps>) {
+  const [hasFailedToLoad, setHasFailedToLoad] = useState(false);
 
-  return extension === "mp4" ? (
-    <video
-      width={350}
-      height={350}
-      autoPlay
-      loop
-      muted
-      poster={imageUrl}
-      className="w-full"
-    >
-      <source src={url} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  ) : (
-    <img
-      src={url ? url : "https://via.placeholder.com/350"}
-      alt={name ? name : "Image"}
-      className="h-full w-full object-cover"
-    />
-  );
-};
+  if (src === undefined || src.length === 0 || hasFailedToLoad) {
+    return (
+      <div
+        className={cn(
+          "flex items-center justify-center bg-secondary",
+          className,
+        )}
+      >
+        <svg
+          width="79"
+          height="79"
+          viewBox="0 0 79 79"
+          fill="none"
+          className="text-background"
+        >
+          <path
+            d="M62.3462 10.2844H16.7915C13.1973 10.2844 10.2837 13.1981 10.2837 16.7922V62.3469C10.2837 65.9411 13.1973 68.8547 16.7915 68.8547H62.3462C65.9403 68.8547 68.854 65.9411 68.854 62.3469V16.7922C68.854 13.1981 65.9403 10.2844 62.3462 10.2844Z"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M29.8076 36.3159C33.4018 36.3159 36.3154 33.4023 36.3154 29.8081C36.3154 26.2139 33.4018 23.3003 29.8076 23.3003C26.2134 23.3003 23.2998 26.2139 23.2998 29.8081C23.2998 33.4023 26.2134 36.3159 29.8076 36.3159Z"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M68.854 49.3312L58.8124 39.2897C57.592 38.0696 55.9371 37.3843 54.2114 37.3843C52.4858 37.3843 50.8308 38.0696 49.6104 39.2897L20.0454 68.8547"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    );
+  }
 
-export default Media;
+  const mediaSrc = src.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
+  const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
+
+  if (mediaFormat === "video") {
+    return (
+      <video autoPlay className={className} loop muted>
+        <source src={mediaSrc} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    );
+  } else {
+    return (
+      <img
+        alt={alt}
+        className={className}
+        onError={() => setHasFailedToLoad(true)}
+        src={mediaSrc}
+      />
+    );
+  }
+}

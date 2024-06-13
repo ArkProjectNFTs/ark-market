@@ -11,7 +11,11 @@ export default function ExternalLink({
 }: PropsWithChildren<AnchorProps>) {
   return (
     <a
-      className={cn(focusableStyles, className)}
+      className={cn(
+        "transition-colors hover:text-accent-foreground",
+        focusableStyles,
+        className,
+      )}
       rel="noreferrer"
       target="_blank"
       {...props}
