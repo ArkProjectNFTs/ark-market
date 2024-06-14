@@ -67,7 +67,7 @@ export default function CollectionItemsActivity({
         <CollectionItemsActivityHeader
           activeTab={activeTab}
           className={cn(
-            "sticky z-10 bg-background px-5 py-6",
+            "sticky z-10 bg-background px-5 py-4 sm:py-6",
             "top-[var(--site-header-height)]",
             "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
           )}
