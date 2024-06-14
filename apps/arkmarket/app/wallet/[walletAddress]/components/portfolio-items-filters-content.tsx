@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
@@ -12,12 +14,14 @@ import {
 
 import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import Media from "~/components/media";
+import { getWalletCollections } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
 } from "../search-params";
 
 interface PortfolioItemsFiltersContentProps {
+  walletAddress: string;
   walletCollectionsInitialData: WalletCollectionsApiResponse;
   onFilterChange?: () => void;
 }
@@ -25,6 +29,7 @@ interface PortfolioItemsFiltersContentProps {
 export default function PortfolioItemsFiltersContent({
   className,
   walletCollectionsInitialData,
+  walletAddress,
   onFilterChange,
 }: PropsWithClassName<PortfolioItemsFiltersContentProps>) {
   const [collectionFilter, setCollectionFilter] = useQueryState(
@@ -32,12 +37,42 @@ export default function PortfolioItemsFiltersContent({
     walletCollectionFilterParser,
   );
 
+  const {
+    data: infiniteData,
+    // fetchNextPage,
+    // hasNextPage,
+    // isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["walletCollections"],
+    refetchInterval: 10_000,
+    getNextPageParam: (lastPage) => lastPage.next_page,
+    initialData: {
+      pages: [walletCollectionsInitialData],
+      pageParams: [],
+    },
+    initialPageParam: undefined,
+    queryFn: ({ pageParam }) =>
+      getWalletCollections({
+        page: pageParam,
+        walletAddress,
+      }),
+  });
+
+  const walletCollections = useMemo(
+    () => infiniteData?.pages.flatMap((page) => page.data),
+    [infiniteData],
+  );
+
   return (
     <div className={className}>
-      <div className="sticky top-0 bg-background">
-        <div className="flex items-center">
+      <div className="sticky top-0 mx-[1px] bg-background">
+        <div className="flex items-center gap-2">
           <h3 className="font-bold">All Collections </h3>
-          <span>i</span>
+          {infiniteData.pages[0]?.collection_count !== undefined && (
+            <span className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs text-secondary-foreground">
+              {infiniteData.pages[0]?.collection_count}
+            </span>
+          )}
         </div>
         <Input className="mt-5" placeholder="Search collection" />
 
@@ -48,7 +83,7 @@ export default function PortfolioItemsFiltersContent({
       </div>
 
       <div className="mt-4 flex flex-col gap-4">
-        {walletCollectionsInitialData.data.map((collection) => {
+        {walletCollections.map((collection) => {
           return (
             <button
               key={collection.address}

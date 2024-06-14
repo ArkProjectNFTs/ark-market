@@ -67,7 +67,7 @@ export default function CollectionItemsActivity({
         <CollectionItemsActivityHeader
           activeTab={activeTab}
           className={cn(
-            "sticky z-10 bg-background px-5 py-4 sm:py-6",
+            "sticky z-10 bg-background px-5 pb-4 sm:py-6 sm:pt-4",
             "top-[var(--site-header-height)]",
             "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
           )}
@@ -75,7 +75,6 @@ export default function CollectionItemsActivity({
         >
           {activeTab === "items" && (
             <CollectionItemsToolsBar
-              className="mt-6"
               toggleFiltersOpen={() =>
                 setItemsFiltersOpen((previous) => !previous)
               }

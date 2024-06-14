@@ -30,6 +30,7 @@ export default function Portfolio({
   return (
     <div className="flex">
       <PortfolioItemsFiltersPanel
+        walletAddress={walletAddress}
         filtersOpen={itemsFiltersOpen}
         className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
         walletCollectionsInitialData={walletCollectionsInitialData}
@@ -38,8 +39,8 @@ export default function Portfolio({
       <div className="w-full">
         <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 py-4">
           <PortfolioItemsToolsBar
+            walletAddress={walletAddress}
             walletCollectionsInitialData={walletCollectionsInitialData}
-            // className="mt-6"
             toggleFiltersOpen={() =>
               setItemsFiltersOpen((previous) => !previous)
             }

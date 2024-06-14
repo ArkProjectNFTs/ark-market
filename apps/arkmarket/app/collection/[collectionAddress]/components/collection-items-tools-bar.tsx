@@ -25,7 +25,6 @@ interface ToolsBarProps {
   setSortDirection: (sortDirection: CollectionSortDirection) => void;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
-  style?: HTMLAttributes<HTMLDivElement>["style"];
   toggleFiltersOpen: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
@@ -38,7 +37,6 @@ export default function CollectionItemsToolsBar({
   setSortDirection,
   sortBy,
   sortDirection,
-  style,
   toggleFiltersOpen,
   viewType,
   setViewType,
@@ -46,7 +44,7 @@ export default function CollectionItemsToolsBar({
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <>
-      <div className={cn("bg-background", className)} style={style}>
+      <div className={cn("bg-background", className)}>
         <div className="flex items-center gap-2 md:gap-6">
           <CollectionItemsFiltersModal>
             <Button variant="secondary" size="icon" className="sm:hidden">

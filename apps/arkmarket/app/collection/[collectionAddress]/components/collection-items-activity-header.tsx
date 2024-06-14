@@ -28,7 +28,7 @@ export default function CollectionItemsActivityHeader({
       style={style}
     >
       <TabsV2 value={activeTab} onValueChange={onTabChange}>
-        <TabsListV2 className="mb-6 flex gap-8">
+        <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
           <TabsTriggerV2 value="items">Items</TabsTriggerV2>
           <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
         </TabsListV2>

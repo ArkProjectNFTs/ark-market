@@ -13,7 +13,6 @@ import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
 import WalletIcon from "@ark-market/ui/components/icons/wallet-icon";
 import { Separator } from "@ark-market/ui/components/separator";
 
-import useBlockies from "~/hooks/useBlockies";
 import ConnectWalletModal from "./connect-wallet-modal";
 import ProfilePicture from "./profile-picture";
 import WalletAccountPopover from "./wallet-account-popover";
@@ -68,7 +67,7 @@ export function UserNav() {
 
   return (
     <WalletAccountPopover>
-      <Button className="gap-1.5 pl-2 md:gap-3" variant="secondary" size="sm">
+      <Button className="gap-1.5 !pl-2 md:gap-3" variant="secondary" size="sm">
         <EthereumLogo className="hidden size-6 sm:block md:size-8" />
         <p className="hidden sm:block">
           {roundedEthBalance}
