@@ -9,16 +9,16 @@ import "@ark-market/ui/components/toggle-group";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
 } from "../../search-params";
-import type { ViewType } from "./view-type-toggle-group";
+import ViewTypeToggleButton from "../../../../components/view-type-toggle-button";
+import ViewTypeToggleGroup from "../../../../components/view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
 import CollectionItemsFiltersModal from "./collection-items-filters-modal";
 import LiveResultsIndicator from "./live-results-indicator";
-import ViewTypeToggleButton from "./view-type-toggle-button";
-import ViewTypeToggleGroup from "./view-type-toggle-group";
 
 interface ToolsBarProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
@@ -49,12 +49,7 @@ export default function CollectionItemsToolsBar({
       <div className={cn("bg-background", className)} style={style}>
         <div className="flex items-center gap-2 md:gap-6">
           <CollectionItemsFiltersModal>
-            <Button
-              // onClick={toggleFiltersOpen}
-              variant="secondary"
-              size="icon"
-              className="sm:hidden"
-            >
+            <Button variant="secondary" size="icon" className="sm:hidden">
               <FiltersIcon />
             </Button>
           </CollectionItemsFiltersModal>

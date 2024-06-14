@@ -20,7 +20,7 @@ export default function ViewTypeToggleButton({
       setViewType("list");
       return;
     }
-    setViewType("large-grid");
+    setViewType("small-grid");
   };
 
   return (

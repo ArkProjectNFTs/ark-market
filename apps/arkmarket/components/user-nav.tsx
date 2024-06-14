@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useMemo } from "react";
@@ -16,6 +15,7 @@ import { Separator } from "@ark-market/ui/components/separator";
 
 import useBlockies from "~/hooks/useBlockies";
 import ConnectWalletModal from "./connect-wallet-modal";
+import ProfilePicture from "./profile-picture";
 import WalletAccountPopover from "./wallet-account-popover";
 import WrongNetworkModal from "./wrong-network-modal";
 
@@ -31,7 +31,6 @@ export function UserNav() {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }, [address]);
 
-  const { blockiesImageSrc } = useBlockies({ address });
   const isWrongNetwork = chainId !== chain.id && chainId !== undefined;
 
   const roundedEthBalance =
@@ -56,7 +55,7 @@ export function UserNav() {
   if (isWrongNetwork) {
     return (
       <WrongNetworkModal>
-        <Button variant="secondary" size="sm">
+        <Button variant="default" size="sm">
           <div className="hidden items-center gap-2.5 md:flex">
             <WalletIcon />
             Wrong network
@@ -70,7 +69,7 @@ export function UserNav() {
   return (
     <WalletAccountPopover>
       <Button className="gap-1.5 pl-2 md:gap-3" variant="secondary" size="sm">
-        <EthereumLogo className="hidden sm:block" />
+        <EthereumLogo className="hidden size-6 sm:block md:size-8" />
         <p className="hidden sm:block">
           {roundedEthBalance}
           <span className="text-muted-foreground"> ETH</span>
@@ -79,22 +78,12 @@ export function UserNav() {
           orientation="vertical"
           className="hidden bg-background sm:block"
         />
-        {starkProfile?.name ? (
-          <img
-            className="size-6 rounded-full md:size-8"
-            alt="Starknet Id profile"
-            src={starkProfile?.profilePicture}
-          />
-        ) : (
-          <img
-            className="size-6 rounded-full md:size-8"
-            src={blockiesImageSrc}
-            alt="Blockies"
-          />
-        )}
+        <ProfilePicture
+          className="size-6 rounded-full md:size-8"
+          address={address}
+        />
         {starkProfile?.name ?? shortenedAddress}
       </Button>
     </WalletAccountPopover>
-    // </div>
   );
 }

@@ -5,8 +5,8 @@ import { useQueryState } from "nuqs";
 
 import { cn } from "@ark-market/ui/lib/utils";
 
+import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
-import type { ViewType } from "./view-type-toggle-group";
 import {
   collectionSortByKey,
   collectionSortByParser,
@@ -97,7 +97,7 @@ export default function CollectionItemsActivity({
 
         <div
           className={cn(
-            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-height)+var(--collection-footer-height))]",
+            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-height)+var(--collection-footer-height))] pb-6",
           )}
         >
           {activeTab === "items" && (
