@@ -56,6 +56,7 @@ export interface WalletCollection {
   collection_name: string;
   floor: number;
   user_listed_tokens: number;
+  user_token_count: number;
 }
 export interface WalletCollectionsApiResponse {
   data: WalletCollection[];

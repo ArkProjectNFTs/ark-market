@@ -35,7 +35,10 @@ export default function PortfolioItemsFiltersContent({
   return (
     <div className={className}>
       <div className="sticky top-0 bg-background">
-        <h3 className="font-bold">All Collections</h3>
+        <div className="flex items-center">
+          <h3 className="font-bold">All Collections </h3>
+          <span>i</span>
+        </div>
         <Input className="mt-5" placeholder="Search collection" />
 
         <div className="mt-4 flex justify-between text-xs text-muted-foreground">
@@ -65,7 +68,10 @@ export default function PortfolioItemsFiltersContent({
                   <p className={cn("w-full text-sm", ellipsableStyles)}>
                     {collection.collection_name}
                   </p>
-                  <p className="text-xs text-muted-foreground">Listed: 0/0</p>
+                  <p className="text-xs text-muted-foreground">
+                    Listed: {collection.user_listed_tokens}/
+                    {collection.user_token_count}
+                  </p>
                 </div>
               </div>
               <div className="flex h-full flex-col items-end justify-between">
