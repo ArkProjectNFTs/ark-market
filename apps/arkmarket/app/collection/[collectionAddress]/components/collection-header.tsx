@@ -76,7 +76,7 @@ export default function CollectionHeader({
                   <p className="text-2xl font-semibold">
                     {collectionInfos.collection_name ?? "Unknown collection"}
                   </p>
-                  <VerifiedIcon />
+                  <VerifiedIcon className="text-background" />
                 </div>
               </div>
               <div className="mb-1 flex h-6 items-center gap-4 text-muted-foreground">

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type { PropsWithChildren } from "react";
@@ -25,6 +24,7 @@ import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import useBlockies from "~/hooks/useBlockies";
 import ExternalLink from "./external-link";
+import ProfilePicture from "./profile-picture";
 
 const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
@@ -91,28 +91,18 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
     }
   }, [copied]);
 
+  if (address === undefined) {
+    // should not happen
+    return null;
+  }
+
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
         <div className="flex h-12 items-center gap-4">
-          {starkProfile?.name ? (
-            <img
-              className="size-12 rounded-md"
-              alt="Starknet Id profile"
-              height={48}
-              width={48}
-              src={starkProfile?.profilePicture}
-            />
-          ) : (
-            <img
-              className="size-12 rounded-md"
-              alt="Blockies"
-              height={48}
-              width={48}
-              src={blockiesImageSrc}
-            />
-          )}
+          <ProfilePicture address={address} className="size-12 rounded-md" />
+
           <div className="flex h-full flex-col justify-between">
             <p
               className={cn(
@@ -143,7 +133,10 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
         </div>
 
         <div className="my-5 flex flex-col gap-2">
-          <Link href="/" className={popoverItemCommonClassName}>
+          <Link
+            href={`/wallet/${address}`}
+            className={popoverItemCommonClassName}
+          >
             <User size={24} />
             <p className="font-bold">My items</p>
           </Link>

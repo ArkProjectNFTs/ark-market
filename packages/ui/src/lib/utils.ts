@@ -6,6 +6,8 @@ export type PropsWithClassName<P = unknown> = P & { className?: string };
 
 export const focusableStyles =
   "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
+export const ellipsableStyles =
+  "whitespace-nowrap text-ellipsis overflow-hidden";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

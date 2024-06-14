@@ -13,20 +13,20 @@ import type {
   CollectionSortDirection,
 } from "../../search-params";
 
-interface CollectionItemsSortingSelectProps {
+interface PortfolioItemsSortingSelectProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
   setSortDirection: (sortDirection: CollectionSortDirection) => void;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
 }
 
-export default function CollectionItemsSortingSelect({
+export default function PortfolioItemsSortingSelect({
   className,
   setSortBy,
   setSortDirection,
   sortBy,
   sortDirection,
-}: PropsWithClassName<CollectionItemsSortingSelectProps>) {
+}: PropsWithClassName<PortfolioItemsSortingSelectProps>) {
   const sortValue = `${sortBy}-${sortDirection}`;
 
   function onValueChange(value: string) {

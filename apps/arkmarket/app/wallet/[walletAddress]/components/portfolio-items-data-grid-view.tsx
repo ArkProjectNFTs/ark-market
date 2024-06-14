@@ -1,16 +1,17 @@
 import { forwardRef } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
+import { Button } from "@ark-market/ui/components/button";
 import {
   NftCard,
   NftCardAction,
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/components/nft-card";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
-import type { CollectionToken } from "../queries/getCollectionData";
+import type { WalletToken } from "../queries/getWalletData";
 import Media from "~/components/media";
 
 const LargeGridContainer = forwardRef<
@@ -42,27 +43,27 @@ const SmallGridContainer = forwardRef<
 SmallGridContainer.displayName = "SmallGridContainer";
 
 interface CollectionItemsDataGridViewProps {
-  collectionTokens: CollectionToken[];
+  walletTokens: WalletToken[];
   viewType: ViewType;
 }
 
 export default function CollectionItemsDataGridView({
-  collectionTokens,
+  walletTokens,
   viewType,
 }: CollectionItemsDataGridViewProps) {
   return (
     <VirtuosoGrid
       // initialItemCount same as totalCount but needed for SSR
-      initialItemCount={collectionTokens.length}
-      totalCount={collectionTokens.length}
+      initialItemCount={walletTokens.length}
+      totalCount={walletTokens.length}
       useWindowScroll
       components={{
         List:
           viewType === "large-grid" ? LargeGridContainer : SmallGridContainer,
       }}
       itemContent={(index) => {
-        const collectionToken = collectionTokens[index];
-        if (collectionToken === undefined) {
+        const token = walletTokens[index];
+        if (token === undefined) {
           return null;
         }
 
@@ -70,25 +71,27 @@ export default function CollectionItemsDataGridView({
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <NftCard>
             <NftCardMedia>
+              {/* TODO: Media part of NftCardMedia */}
               <Media
-                src={collectionToken.metadata?.image}
-                alt={collectionToken.metadata?.name ?? "Empty"}
-                className="aspect-square w-full"
+                src={token.metadata?.image}
+                alt={token.metadata?.name ?? "Empty"}
+                className="aspect-square w-full transition-transform group-hover:scale-110"
               />
             </NftCardMedia>
             <NftCardContent>
               <div className="flex w-full justify-between">
-                <div>
+                <div className="overflow-hidden">
                   <p
                     className={cn(
-                      "font-semibold",
-                      viewType === "large-grid" ? "text-xl" : "text-sm",
+                      "text-sm font-semibold",
+                      viewType === "large-grid" && "sm:text-xl",
+                      ellipsableStyles,
                     )}
                   >
-                    {collectionToken.metadata?.name ?? collectionToken.token_id}
+                    {token.metadata?.name ?? token.token_id}
                   </p>
-                  {collectionToken.price ? (
-                    <p className="mt-1 text-sm">{collectionToken.price} ETH</p>
+                  {token.list_price ? (
+                    <p className="mt-1 text-sm">{token.list_price} ETH</p>
                   ) : (
                     <p className="mt-1 text-sm font-medium">Not for sale</p>
                   )}
@@ -97,7 +100,7 @@ export default function CollectionItemsDataGridView({
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
-              <NftCardAction>Details</NftCardAction>
+              <NftCardAction>List</NftCardAction>
             </NftCardContent>
           </NftCard>
         );
