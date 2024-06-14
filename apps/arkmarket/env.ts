@@ -25,6 +25,7 @@ export const env = createEnv({
     NEXT_PUBLIC_NFT_API_KEY: z.string(),
     NEXT_PUBLIC_BROKER_ID: z.string(),
     NEXT_PUBLIC_IPFS_GATEWAY: z.string().url(),
+    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -38,6 +39,8 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_MARKETPLACE_API_URL,
     NEXT_PUBLIC_BROKER_ID: process.env.NEXT_PUBLIC_BROKER_ID,
     NEXT_PUBLIC_IPFS_GATEWAY: process.env.NEXT_PUBLIC_IPFS_GATEWAY,
+    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID:
+      process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
 
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },

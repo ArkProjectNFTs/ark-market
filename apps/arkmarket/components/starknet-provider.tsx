@@ -13,6 +13,8 @@ import {
 import { ArgentMobileConnector } from "starknetkit/argentMobile";
 import { WebWalletConnector } from "starknetkit/webwallet";
 
+import { env } from "~/env";
+
 export function StarknetProvider({ children }: PropsWithChildren) {
   const provider = alchemyProvider({
     apiKey: "ssydbI7745ocbNd_c-xULVsq9xXF947b",
@@ -26,7 +28,10 @@ export function StarknetProvider({ children }: PropsWithChildren) {
   const connectors = [
     ...injectedConnectors,
     new WebWalletConnector({ url: "https://web.argent.xyz" }),
-    new ArgentMobileConnector(),
+    new ArgentMobileConnector({
+      projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+      dappName: "Ark Market",
+    }),
   ];
 
   return (
