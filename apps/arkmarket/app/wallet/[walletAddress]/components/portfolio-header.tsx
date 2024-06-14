@@ -4,8 +4,9 @@ import { useMemo } from "react";
 import { useStarkProfile } from "@starknet-react/core";
 import { CopyIcon } from "lucide-react";
 
+import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
-import { focusableStyles } from "@ark-market/ui/lib/utils";
+import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import ProfilePicture from "~/components/profile-picture";
 
@@ -14,8 +15,9 @@ interface PortfolioHeaderProps {
 }
 
 export default function PortfolioHeader({
+  className,
   walletAddress,
-}: PortfolioHeaderProps) {
+}: PropsWithClassName<PortfolioHeaderProps>) {
   const shortenedAddress = useMemo(() => {
     return `${walletAddress.slice(0, 7)}...${walletAddress.slice(-10)}`;
   }, [walletAddress]);
@@ -25,7 +27,12 @@ export default function PortfolioHeader({
   });
 
   return (
-    <div className="flex flex-col gap-4 border-b border-border bg-background px-5 py-6 sm:flex-row sm:items-center sm:justify-between md:justify-start md:gap-28">
+    <div
+      className={cn(
+        "flex flex-col gap-4 border-border bg-background px-5 pb-5 pt-3.5 sm:flex-row sm:items-center sm:justify-between sm:border-b sm:pb-6 sm:pt-6 md:justify-start md:gap-28",
+        className,
+      )}
+    >
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}
@@ -38,7 +45,7 @@ export default function PortfolioHeader({
             </p>
             <div className="ml-2.5 flex items-center gap-4 text-secondary-foreground">
               <button className={focusableStyles}>
-                <CopyIcon size={16} />
+                <CopyIcon className="h-6 sm:h-4" />
               </button>
             </div>
           </div>
