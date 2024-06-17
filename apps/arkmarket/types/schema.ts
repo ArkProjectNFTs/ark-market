@@ -3,7 +3,7 @@ import { z } from "zod";
 const mintInfoSchema = z.object({
   address: z.string(),
   timestamp: z.number(),
-  transaction_hash: z.string()
+  transaction_hash: z.string(),
 });
 
 const normalizedSchema = z.object({
@@ -20,14 +20,14 @@ const normalizedSchema = z.object({
   animation_url: z.string().optional().or(z.literal("")),
   animation_key: z.string().optional().or(z.literal("")),
   animation_mime_type: z.string().optional().or(z.literal("")),
-  youtube_url: z.string().optional().or(z.literal(""))
+  youtube_url: z.string().optional().or(z.literal("")),
 });
 
 const metadataSchema = z
   .object({
     normalized: normalizedSchema.optional(),
     raw: z.string().optional(),
-    metadata_updated_at: z.number().optional()
+    metadata_updated_at: z.number().optional(),
   })
   .nullable();
 
@@ -38,15 +38,17 @@ export const tokenSchema = z.object({
   owner: z.string(),
   mint_info: mintInfoSchema,
   metadata: metadataSchema,
-  is_listed: z.boolean().optional()
+  is_listed: z.boolean().optional(),
 });
 
 export const tokenMarketDataSchema = z.object({
+  order_hash: z.string(),
   contract_address: z.string(),
   token_id: z.string(),
   token_id_hex: z.string(),
   owner: z.string(),
   num_sales: z.number(),
+  has_offer: z.boolean(),
   last_sale: z.any().optional(),
   sell_orders: z.any().optional(),
   creator: z.any().optional(),
@@ -55,10 +57,15 @@ export const tokenMarketDataSchema = z.object({
   top_bid: z.any().optional(),
   listing_date: z.any().optional(),
   is_presale: z.boolean().optional(),
+  is_listed: z.boolean().optional(),
+  start_amount: z.any().optional(),
+  end_amount: z.any().optional(),
+  last_price: z.any().optional(),
   transfer_fee_payment_token: z.any().optional(),
   transfer_fee: z.any().optional(),
-  start_date: z.number().optional(),
-  end_date: z.number().optional()
+  start_date: z.number(),
+  end_date: z.number(),
+  status: z.string().optional(),
 });
 
 const TokenWithMarketDataSchema = z.object({
@@ -80,8 +87,23 @@ const TokenWithMarketDataSchema = z.object({
   quantity: z.string().optional(),
   start_amount: z.string().optional(),
   start_date: z.number().optional(),
-  updated_timestamp: z.number().optional()
+  updated_timestamp: z.number().optional(),
 });
+
+const offerSchema = z.object({
+  currency_address: z.string(),
+  currency_chain_id: z.string(),
+  end_date: z.number(),
+  offer_amount: z.string(),
+  offer_maker: z.string(),
+  offer_quantity: z.string(),
+  offer_timestamp: z.number(),
+  order_hash: z.string(),
+  start_date: z.number(),
+  status: z.string(),
+});
+
+export type Offer = z.infer<typeof offerSchema>;
 
 export type Token = z.infer<typeof tokenSchema>;
 

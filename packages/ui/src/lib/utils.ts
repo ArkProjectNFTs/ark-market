@@ -25,7 +25,14 @@ export function truncateString(str: string, num: number): string {
   return str.slice(0, num);
 }
 
-export function areAddressesEqual(addr1: string, addr2: string): boolean {
+export function areAddressesEqual(
+  addr1: string | undefined,
+  addr2: string | undefined,
+): boolean {
+  if (!addr1 || !addr2) {
+    return false;
+  }
+
   const normalizeAddress = (address: string) => {
     address =
       address.startsWith("0x") || address.startsWith("0X")
@@ -35,6 +42,10 @@ export function areAddressesEqual(addr1: string, addr2: string): boolean {
   };
 
   return normalizeAddress(addr1) === normalizeAddress(addr2);
+}
+
+export function shortAddress(address: string): string {
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
 export function timeSince(timestamp: number): string {
