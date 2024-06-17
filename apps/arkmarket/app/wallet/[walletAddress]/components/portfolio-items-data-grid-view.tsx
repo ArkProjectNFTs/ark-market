@@ -80,7 +80,7 @@ export default function CollectionItemsDataGridView({
             </NftCardMedia>
             <NftCardContent>
               <div className="flex w-full justify-between">
-                <div className="overflow-hidden">
+                <div className="w-full overflow-hidden">
                   <p
                     className={cn(
                       "text-sm font-semibold",
@@ -91,7 +91,9 @@ export default function CollectionItemsDataGridView({
                     {token.metadata?.name ?? token.token_id}
                   </p>
                   {token.list_price ? (
-                    <p className="mt-1 text-sm">{token.list_price} ETH</p>
+                    <p className={cn("mt-1 text-sm", ellipsableStyles)}>
+                      {token.list_price} ETH
+                    </p>
                   ) : (
                     <p className="mt-1 text-sm font-medium">Not for sale</p>
                   )}

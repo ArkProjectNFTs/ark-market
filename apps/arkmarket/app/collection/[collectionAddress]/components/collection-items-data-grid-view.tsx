@@ -7,7 +7,7 @@ import {
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/components/nft-card";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "../queries/getCollectionData";
@@ -78,7 +78,7 @@ export default function CollectionItemsDataGridView({
             </NftCardMedia>
             <NftCardContent>
               <div className="flex w-full justify-between">
-                <div>
+                <div className="w-full">
                   <p
                     className={cn(
                       "font-semibold",
@@ -88,7 +88,9 @@ export default function CollectionItemsDataGridView({
                     {collectionToken.metadata?.name ?? collectionToken.token_id}
                   </p>
                   {collectionToken.price ? (
-                    <p className="mt-1 text-sm">{collectionToken.price} ETH</p>
+                    <p className={cn("mt-1 text-sm", ellipsableStyles)}>
+                      {collectionToken.price} ETH
+                    </p>
                   ) : (
                     <p className="mt-1 text-sm font-medium">Not for sale</p>
                   )}
