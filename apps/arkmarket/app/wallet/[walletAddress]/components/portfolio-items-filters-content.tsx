@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
+import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Input } from "@ark-market/ui/components/input";
@@ -10,6 +11,7 @@ import {
   cn,
   ellipsableStyles,
   focusableStyles,
+  formatUnits,
 } from "@ark-market/ui/lib/utils";
 
 import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
@@ -84,10 +86,17 @@ export default function PortfolioItemsFiltersContent({
 
       <div className="mt-4 flex flex-col gap-4">
         {walletCollections.map((collection) => {
+          const isSelected =
+            validateAndParseAddress(collection.address) ===
+            validateAndParseAddress(collectionFilter ?? 0);
           return (
             <button
               key={collection.address}
-              className={cn("flex h-9 justify-between gap-1", focusableStyles)}
+              className={cn(
+                "flex h-11 justify-between gap-1 rounded-xs px-2 py-1 transition-colors hover:bg-card",
+                isSelected && "bg-card",
+                focusableStyles,
+              )}
               onClick={() => {
                 void setCollectionFilter(collection.address);
                 onFilterChange?.();
@@ -97,7 +106,7 @@ export default function PortfolioItemsFiltersContent({
                 <Media
                   src={collection.image ?? undefined}
                   alt={collection.collection_name}
-                  className="rounded-xs h-8 w-8"
+                  className="h-8 w-8 rounded-xs"
                 />
                 <div className="flex h-full flex-col items-start justify-between overflow-hidden">
                   <p className={cn("w-full text-sm", ellipsableStyles)}>
@@ -110,14 +119,19 @@ export default function PortfolioItemsFiltersContent({
                 </div>
               </div>
               <div className="flex h-full flex-col items-end justify-between">
-                <p className="text-sm">{collection.floor}</p>
+                <p className="text-sm">
+                  {formatUnits(
+                    collection.user_token_count * collection.floor,
+                    18,
+                  )}
+                </p>
                 <p
                   className={cn(
                     "text-xs text-muted-foreground",
                     ellipsableStyles,
                   )}
                 >
-                  Floor: {collection.floor}
+                  Floor: {formatUnits(collection.floor, 18)}
                 </p>
               </div>
             </button>
