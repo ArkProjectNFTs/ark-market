@@ -84,7 +84,7 @@ export default function PortfolioItemsFiltersContent({
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-4">
+      <div className="mt-4 flex flex-col gap-2.5">
         {walletCollections.map((collection) => {
           const isSelected =
             validateAndParseAddress(collection.address) ===
