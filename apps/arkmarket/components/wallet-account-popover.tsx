@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type { PropsWithChildren } from "react";
@@ -64,6 +65,10 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
     if (!address) return "";
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }, [address]);
+
+  function closePopover() {
+    setOpen(false);
+  }
 
   function handleCopyAddress() {
     if (address === undefined) {
@@ -134,6 +139,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
           <Link
             href={`/wallet/${address}`}
             className={popoverItemCommonClassName}
+            onClick={closePopover}
           >
             <User size={24} />
             <p className="font-bold">My items</p>
@@ -142,16 +148,25 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <ExternalLink
               className={popoverItemCommonClassName}
               href="https://web.argent.xyz"
+              onClick={closePopover}
             >
               <Wallet size={24} />
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <Link href="/" className={popoverItemCommonClassName}>
+          <Link
+            href="/"
+            className={popoverItemCommonClassName}
+            onClick={closePopover}
+          >
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
           </Link>
-          <Link href="/" className={popoverItemCommonClassName}>
+          <Link
+            href="/"
+            className={popoverItemCommonClassName}
+            onClick={closePopover}
+          >
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
           </Link>
