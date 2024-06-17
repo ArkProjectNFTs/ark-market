@@ -33,7 +33,7 @@ export default async function WalletPage({
   return (
     <main>
       <div className="sticky top-[var(--site-header-height)]">
-        <PortfolioHeader walletAddress={walletAddress} className="sm:mb-4" />
+        <PortfolioHeader walletAddress={walletAddress} />
 
         <Portfolio
           walletTokensInitialData={walletTokensInitialData}
