@@ -31,6 +31,8 @@ export function StarknetProvider({ children }: PropsWithChildren) {
     new ArgentMobileConnector({
       projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
       dappName: "Ark Market",
+      icons: [],
+      description: "Ark Market, Starknet NFT Marketplace",
     }),
   ];
 
