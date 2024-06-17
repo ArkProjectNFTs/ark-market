@@ -73,7 +73,7 @@ export default function CollectionItemsDataGridView({
               <Media
                 src={collectionToken.metadata?.image}
                 alt={collectionToken.metadata?.name ?? "Empty"}
-                className="aspect-square w-full"
+                className="aspect-square w-full transition-transform group-hover:scale-110"
               />
             </NftCardMedia>
             <NftCardContent>
