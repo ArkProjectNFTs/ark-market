@@ -24,7 +24,7 @@ import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import ExternalLink from "~/components/external-link";
@@ -113,7 +113,10 @@ export default function CollectionHeader({
                   {!hasPassedBanner && (
                     <CollapsibleTrigger asChild>
                       <motion.button
-                        className="ml-1 flex items-center gap-1"
+                        className={cn(
+                          "ml-1 flex items-center gap-1",
+                          focusableStyles,
+                        )}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         transition={{ ease: "easeInOut", duration: 0.15 }}
