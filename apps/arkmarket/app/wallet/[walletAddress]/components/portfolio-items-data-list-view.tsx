@@ -10,9 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/components/table";
+import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
 
 import type { WalletToken } from "../queries/getWalletData";
 import Media from "~/components/media";
+
+const gridTemplateColumnValue =
+  "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(6.5rem,1fr))_minmax(6.5rem,8rem)]";
 
 interface PortfolioItemsDataListViewProps {
   walletTokens: WalletToken[];
@@ -41,7 +45,7 @@ export default function PortfolioItemsDataListView({
   return (
     <Table ref={tableRef}>
       <TableHeader>
-        <TableRow className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center">
+        <TableRow className={cn("grid items-center", gridTemplateColumnValue)}>
           <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Item
           </TableHead>
@@ -77,7 +81,10 @@ export default function PortfolioItemsDataListView({
               key={`${token.contract}-${token.token_id}`}
               data-index={virtualRow.index} // Needed for dynamic row height measurement
               ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
-              className="group absolute grid h-[4.6875rem] w-full grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center"
+              className={cn(
+                "group absolute grid h-[4.6875rem] w-full items-center",
+                gridTemplateColumnValue,
+              )}
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}
@@ -89,7 +96,7 @@ export default function PortfolioItemsDataListView({
                     alt={token.metadata?.name ?? "Empty NFT"}
                     className="h-[2.625rem] w-[2.625rem] rounded-md"
                   />
-                  <p className="font-semibold">
+                  <p className={cn("w-full font-semibold", ellipsableStyles)}>
                     {token.metadata?.name ?? token.token_id}
                   </p>
                 </div>

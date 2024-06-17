@@ -3,6 +3,7 @@
 import type { PropsWithClassName } from "@/lib/utils";
 import * as React from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { Moon, Sun } from "lucide-react";
 import { ThemeProvider, useTheme } from "next-themes";
 
 import { cn } from "../lib/utils";
@@ -49,11 +50,11 @@ function ThemeTabs({ className }: PropsWithClassName) {
     <Tabs className="w-full" onValueChange={setTheme} value={theme}>
       <TabsList className={cn("grid w-full grid-cols-3", className)}>
         <TabsTrigger value="dark" className="flex items-center gap-2">
-          <MoonIcon />
+          <Moon size={20} />
           Dark
         </TabsTrigger>
         <TabsTrigger value="light" className="flex items-center gap-2">
-          <SunIcon />
+          <Sun size={20} />
           Light
         </TabsTrigger>
         <TabsTrigger value="system">System</TabsTrigger>

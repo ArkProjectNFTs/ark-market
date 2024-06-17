@@ -28,7 +28,6 @@ export default function CollectionItemsActivity({
   collectionAddress,
   collectionTokensInitialData,
 }: CollectionItemsActivityProps) {
-  console.log(collectionTokensInitialData);
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Get State from URL query params
   const [activeTab, setActiveTab] = useState("items");
