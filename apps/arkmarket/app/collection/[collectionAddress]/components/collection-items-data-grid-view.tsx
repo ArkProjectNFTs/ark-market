@@ -7,7 +7,7 @@ import {
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/components/nft-card";
-import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
+import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "../queries/getCollectionData";
@@ -89,7 +89,7 @@ export default function CollectionItemsDataGridView({
                   </p>
                   {collectionToken.price ? (
                     <p className={cn("mt-1 text-sm", ellipsableStyles)}>
-                      {collectionToken.price} ETH
+                      {formatUnits(collectionToken.price, 18)} ETH
                     </p>
                   ) : (
                     <p className="mt-1 text-sm font-medium">Not for sale</p>

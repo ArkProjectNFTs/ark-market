@@ -22,7 +22,6 @@ import {
 import { ThemeTabs } from "@ark-market/ui/components/theme";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
-import useBlockies from "~/hooks/useBlockies";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
@@ -30,11 +29,12 @@ const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
 
 const popoverItemCommonClassName = cn(
-  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
+  "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
   focusableStyles,
 );
 
 export default function WalletAccountPopover({ children }: PropsWithChildren) {
+  const [open, setOpen] = useState(false);
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: starkProfile } = useStarkProfile({
@@ -59,8 +59,6 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
 
   const [, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
-
-  const { blockiesImageSrc } = useBlockies({ address });
 
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
@@ -97,7 +95,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
   }
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
         <div className="flex h-12 items-center gap-4">

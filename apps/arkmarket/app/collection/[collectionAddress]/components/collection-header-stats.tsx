@@ -1,7 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/components/separator";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 
@@ -25,7 +25,7 @@ export default function CollectionHeaderStats({
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="flex items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
-          <p>{collectionInfos.floor ?? "_"} ETH</p>
+          <p>{formatUnits(collectionInfos.floor ?? 0, 18)} ETH</p>
           {/* TODO @YohanTz: Proper color */}
           <p
             className={cn(
