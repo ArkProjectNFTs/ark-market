@@ -1,6 +1,10 @@
 {
   "name": "create-t3-turbo",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.1.4",
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
