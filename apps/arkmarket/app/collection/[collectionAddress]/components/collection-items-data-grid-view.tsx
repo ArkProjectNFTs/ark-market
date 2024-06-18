@@ -83,6 +83,7 @@ export default function CollectionItemsDataGridView({
                     className={cn(
                       "font-semibold",
                       viewType === "large-grid" ? "text-xl" : "text-sm",
+                      ellipsableStyles,
                     )}
                   >
                     {collectionToken.metadata?.name ?? collectionToken.token_id}
