@@ -45,7 +45,7 @@ export default function PortfolioItemsFiltersContent({
     // hasNextPage,
     // isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["walletCollections"],
+    queryKey: ["walletCollections", walletAddress],
     refetchInterval: 10_000,
     getNextPageParam: (lastPage) => lastPage.next_page,
     initialData: {

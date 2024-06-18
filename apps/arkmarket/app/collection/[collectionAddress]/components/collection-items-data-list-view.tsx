@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/components/table";
-import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
+import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { CollectionToken } from "../queries/getCollectionData";
 import Media from "~/components/media";
@@ -106,7 +106,11 @@ export default function CollectionItemsDataListView({
                   </p>
                 </div>
               </TableCell>
-              <TableCell>{token.price ?? "_"}</TableCell>
+              <TableCell>
+                {token.price === null
+                  ? "_"
+                  : `${formatUnits(token.price, 18)} ETH`}
+              </TableCell>
               <TableCell>_</TableCell>
               <TableCell>_</TableCell>
               <TableCell>
