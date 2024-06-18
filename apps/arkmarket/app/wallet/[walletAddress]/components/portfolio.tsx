@@ -46,7 +46,12 @@ export default function Portfolio({
         <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 pb-4 sm:pt-4">
           <TabsV2 defaultValue="items">
             <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
-              <TabsTriggerV2 value="items">My Items</TabsTriggerV2>
+              <TabsTriggerV2 value="items" className="flex items-center gap-2">
+                My Items{" "}
+                <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs text-secondary-foreground">
+                  {walletTokensInitialData.token_count}
+                </p>
+              </TabsTriggerV2>
               <TabsTriggerV2 value="orders">Orders</TabsTriggerV2>
               <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
             </TabsListV2>
