@@ -1,7 +1,9 @@
 import { forwardRef } from "react";
+import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { Button } from "@ark-market/ui/components/button";
+import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import {
   NftCard,
   NftCardAction,
@@ -90,6 +92,22 @@ export default function CollectionItemsDataGridView({
                   >
                     {token.metadata?.name ?? token.token_id}
                   </p>
+                  <Link
+                    href={`/collection/${token.contract}`}
+                    className="flex items-center gap-1"
+                  >
+                    <p
+                      className={cn(
+                        "text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
+                        viewType === "large-grid" && "sm:text-lg",
+                        ellipsableStyles,
+                      )}
+                    >
+                      {token.contract}
+                    </p>
+                    <VerifiedIcon className="size-6 flex-shrink-0 text-background" />
+                  </Link>
+
                   {token.list_price ? (
                     <p className={cn("mt-1 text-sm", ellipsableStyles)}>
                       {formatUnits(token.list_price, 18)} ETH

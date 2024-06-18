@@ -43,16 +43,18 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
   });
   const isWebWallet = connector?.id === "argentWebWallet";
 
-  const { data: ethBalance } = useBalance({ address });
+  // const { data: ethBalance } = useBalance({ address });
+  const ethBalance = { formatted: "0.00" };
   const roundedEthBalance =
     ethBalance !== undefined
       ? parseFloat(ethBalance.formatted).toFixed(4)
       : undefined;
 
-  const { data: strkBalance } = useBalance({
-    address,
-    token: STRK_CONTRACT_ADDRESS,
-  });
+  // const { data: strkBalance } = useBalance({
+  //   address,
+  //   token: STRK_CONTRACT_ADDRESS,
+  // });
+  const strkBalance = { formatted: "0.00" };
   const roundedStrkBalance =
     strkBalance !== undefined
       ? parseFloat(strkBalance.formatted).toFixed(4)

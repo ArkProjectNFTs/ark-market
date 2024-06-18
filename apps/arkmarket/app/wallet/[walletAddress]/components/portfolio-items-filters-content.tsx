@@ -6,6 +6,7 @@ import { useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
+import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import { Input } from "@ark-market/ui/components/input";
 import {
   cn,
@@ -93,12 +94,19 @@ export default function PortfolioItemsFiltersContent({
             <button
               key={collection.address}
               className={cn(
-                "flex h-11 justify-between gap-1 rounded-xs px-2 py-1 transition-colors hover:bg-card",
+                "flex h-11 justify-between gap-1 rounded-xs px-2 py-1 font-medium transition-colors hover:bg-card",
                 isSelected && "bg-card",
                 focusableStyles,
               )}
               onClick={() => {
-                void setCollectionFilter(collection.address);
+                if (
+                  validateAndParseAddress(collection.address) ===
+                  validateAndParseAddress(collectionFilter ?? "")
+                ) {
+                  void setCollectionFilter(null);
+                } else {
+                  void setCollectionFilter(collection.address);
+                }
                 onFilterChange?.();
               }}
             >
@@ -109,10 +117,23 @@ export default function PortfolioItemsFiltersContent({
                   className="h-8 w-8 rounded-xs"
                 />
                 <div className="flex h-full flex-col items-start justify-between overflow-hidden">
-                  <p className={cn("w-full text-sm", ellipsableStyles)}>
-                    {collection.collection_name}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="flex w-full items-center gap-1">
+                    <p
+                      className={cn(
+                        "w-full text-left text-sm",
+                        ellipsableStyles,
+                      )}
+                    >
+                      {collection.collection_name}
+                    </p>
+                    <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+                  </div>
+                  <p
+                    className={cn(
+                      "text-xs text-muted-foreground",
+                      ellipsableStyles,
+                    )}
+                  >
                     Listed: {collection.user_listed_tokens}/
                     {collection.user_token_count}
                   </p>
