@@ -2,7 +2,7 @@
 import type { Connector } from "@starknet-react/core";
 import type { PropsWithChildren } from "react";
 import { useMemo, useState } from "react";
-import { useConnect } from "@starknet-react/core";
+import { argent, useConnect } from "@starknet-react/core";
 import { Loader2, Mail } from "lucide-react";
 
 import { Button } from "@ark-market/ui/components/button";
@@ -64,6 +64,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
         </DialogHeader>
         <div className="mt-4 flex flex-col gap-3.5">
           {regularConnectors.map((connector) => {
+            const isArgentMobile = connector.id === "argentMobile";
             return (
               <Button
                 key={connector.id}
@@ -71,9 +72,11 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 variant="secondary"
                 className="relative"
               >
-                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
+                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
                   <img
-                    src={connector.icon.dark}
+                    src={
+                      isArgentMobile ? argent().icon.dark : connector.icon.dark
+                    }
                     className="size-5"
                     alt={`${connector.name}`}
                   />
@@ -100,7 +103,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 variant="secondary"
                 className="relative h-14"
               >
-                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
+                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
                   <Mail size={20} />
                 </div>
                 <div>
