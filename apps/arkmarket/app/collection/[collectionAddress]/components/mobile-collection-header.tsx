@@ -53,11 +53,17 @@ export default function MobileCollectionHeader({
               ) ? (
                 <img
                   src="/medias/everai_profile_picture.png"
-                  className="rounded-xs aspect-square h-full flex-shrink-0"
+                  className="aspect-square h-full flex-shrink-0 rounded-xs"
                   alt="Everai profile"
                 />
+              ) : collectionInfos.image !== null ? (
+                <img
+                  src={collectionInfos.image}
+                  className="aspect-square h-full flex-shrink-0 rounded-xs"
+                  alt={collectionInfos.collection_name}
+                />
               ) : (
-                <div className="rounded-xs aspect-square h-full flex-shrink-0 bg-secondary" />
+                <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
                 <p className="text-lg font-semibold">

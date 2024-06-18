@@ -13,7 +13,6 @@ import { ChevronDown } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { Button } from "@ark-market/ui/components/button";
 import {
   Collapsible,
   CollapsibleContent,
@@ -30,8 +29,6 @@ import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import ExternalLink from "~/components/external-link";
 import { collectionBannerRemHeight } from "./collection-banner";
 import CollectionHeaderStats from "./collection-header-stats";
-
-const MotionButton = motion(Button);
 
 interface CollectionHeaderProps {
   collectionAddress: string;
@@ -81,6 +78,12 @@ export default function CollectionHeader({
                 src="/medias/everai_profile_picture.png"
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
                 alt="Everai profile"
+              />
+            ) : collectionInfos.image !== null ? (
+              <img
+                src={collectionInfos.image}
+                className="aspect-square h-full flex-shrink-0 rounded-lg"
+                alt={collectionInfos.collection_name}
               />
             ) : (
               <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
