@@ -82,46 +82,50 @@ export default function CollectionItemsDataListView({
           }
 
           return (
-            <TableRow
+            <Link
+              href={`/assets/${token.contract}/${token.token_id}`}
               key={`${token.contract}-${token.token_id}`}
-              data-index={virtualRow.index} // Needed for dynamic row height measurement
-              ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
-              className={cn(
-                "absolute grid h-[4.6875rem] w-full items-center",
-                gridTemplateColumnValue,
-              )}
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
             >
-              <TableCell className="pl-5">
-                <div className="flex items-center gap-4">
-                  <Media
-                    src={token.metadata?.image}
-                    alt={token.metadata?.name ?? "Empty NFT"}
-                    className="h-[2.625rem] w-[2.625rem] rounded-md"
-                  />
-                  <p className={cn("w-full font-semibold", ellipsableStyles)}>
-                    {token.metadata?.name ?? token.token_id}
-                  </p>
-                </div>
-              </TableCell>
-              <TableCell>
-                {token.price === null
-                  ? "_"
-                  : `${formatUnits(token.price, 18)} ETH`}
-              </TableCell>
-              <TableCell>_</TableCell>
-              <TableCell>_</TableCell>
-              <TableCell>
-                <Button asChild variant="link" className="px-0">
-                  <Link href={`/wallet/${token.owner}`}>
-                    {token.owner.slice(0, 6)}...
-                  </Link>
-                </Button>
-              </TableCell>
-              <TableCell>_</TableCell>
-            </TableRow>
+              <TableRow
+                data-index={virtualRow.index} // Needed for dynamic row height measurement
+                ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
+                className={cn(
+                  "absolute grid h-[4.6875rem] w-full items-center",
+                  gridTemplateColumnValue,
+                )}
+                style={{
+                  transform: `translateY(${virtualRow.start}px)`,
+                }}
+              >
+                <TableCell className="pl-5">
+                  <div className="flex items-center gap-4">
+                    <Media
+                      src={token.metadata?.image}
+                      alt={token.metadata?.name ?? "Empty NFT"}
+                      className="h-[2.625rem] w-[2.625rem] rounded-md"
+                    />
+                    <p className={cn("w-full font-semibold", ellipsableStyles)}>
+                      {token.metadata?.name ?? token.token_id}
+                    </p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  {token.price === null
+                    ? "_"
+                    : `${formatUnits(token.price, 18)} ETH`}
+                </TableCell>
+                <TableCell>_</TableCell>
+                <TableCell>_</TableCell>
+                <TableCell>
+                  <Button asChild variant="link" className="px-0">
+                    <Link href={`/wallet/${token.owner}`}>
+                      {token.owner.slice(0, 6)}...
+                    </Link>
+                  </Button>
+                </TableCell>
+                <TableCell>_</TableCell>
+              </TableRow>
+            </Link>
           );
         })}
       </TableBody>

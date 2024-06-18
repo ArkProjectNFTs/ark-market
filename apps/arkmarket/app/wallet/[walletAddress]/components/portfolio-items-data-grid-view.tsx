@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
 
-import { Button } from "@ark-market/ui/components/button";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import {
   NftCard,
@@ -73,30 +72,39 @@ export default function CollectionItemsDataGridView({
         if (token === undefined) {
           return null;
         }
-
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <NftCard>
-            <NftCardMedia>
-              {/* TODO: Media part of NftCardMedia */}
-              <Media
-                src={token.metadata?.image}
-                alt={token.metadata?.name ?? "Empty"}
-                className="aspect-square w-full transition-transform group-hover:scale-110"
-              />
-            </NftCardMedia>
+            <Link
+              href={`/assets/${token.contract}/${token.token_id}`}
+              className={cn("flex items-center gap-1", focusableStyles)}
+            >
+              <NftCardMedia>
+                {/* TODO: Media part of NftCardMedia */}
+                <Media
+                  src={token.metadata?.image}
+                  alt={token.metadata?.name ?? "Empty"}
+                  className="aspect-square w-full transition-transform group-hover:scale-110"
+                />
+              </NftCardMedia>
+            </Link>
             <NftCardContent>
               <div className="flex w-full justify-between">
-                <div className="w-full overflow-hidden">
-                  <p
-                    className={cn(
-                      "text-sm font-semibold",
-                      viewType === "large-grid" && "sm:text-xl",
-                      ellipsableStyles,
-                    )}
+                <div className="w-full space-y-1 overflow-hidden">
+                  <Link
+                    href={`/assets/${token.contract}/${token.token_id}`}
+                    className={cn("flex items-center gap-1", focusableStyles)}
                   >
-                    {token.metadata?.name ?? token.token_id}
-                  </p>
+                    <p
+                      className={cn(
+                        "text-sm font-semibold",
+                        viewType === "large-grid" && "sm:text-xl",
+                        ellipsableStyles,
+                      )}
+                    >
+                      {token.metadata?.name ?? token.token_id}
+                    </p>
+                  </Link>
                   <Link
                     href={`/collection/${token.contract}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
@@ -108,7 +116,7 @@ export default function CollectionItemsDataGridView({
                         ellipsableStyles,
                       )}
                     >
-                      {token.contract}
+                      {token.collection_name}
                     </p>
                     <VerifiedIcon className="size-6 flex-shrink-0 text-background" />
                   </Link>

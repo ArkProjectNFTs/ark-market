@@ -7,6 +7,7 @@ export interface Metadata {
   name: string;
 }
 export interface WalletToken {
+  collection_name: string;
   best_offer: number | null;
   contract: string;
   floor: number | null;

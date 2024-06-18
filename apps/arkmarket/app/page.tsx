@@ -9,13 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@ark-market/ui/components/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@ark-market/ui/components/carousel";
 
 import { collections } from "~/config/homepage"; // Update with the correct path to your JSON file
 
@@ -35,42 +28,39 @@ export default function HomePage() {
         </Link>
       </div>
       <div className="flex flex-col space-y-4">
-        <Carousel
-          opts={{
-            align: "start",
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {collections.map((collection, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <Link href={`/collection/${collection.address}`}>
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{collection.name}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription>
-                          <Image
-                            src={collection.image}
-                            alt={collection.name}
-                            width={300}
-                            height={300}
-                            objectFit="cover"
-                          />
-                        </CardDescription>
-                      </CardContent>
-                      <CardFooter>Floor price 0.2 eth</CardFooter>
-                    </Card>
-                  </Link>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className="grid grid-cols-4 gap-4">
+          {collections.map((collection, index) => (
+            <Link href={`/collection/${collection.address}`} key={index}>
+              <Card className="overflow-hidden">
+                <CardContent
+                  className="relative w-full"
+                  style={{ paddingBottom: "100%" }}
+                >
+                  <Image
+                    src={collection.image}
+                    alt={collection.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="absolute left-0 top-0 h-full w-full"
+                  />
+                </CardContent>
+                <CardFooter className="flex flex-col items-start p-4">
+                  <div className="mb-2 font-bold">{collection.name}</div>
+                  <div className="flex w-full justify-between">
+                    <div>
+                      <div className="text-xs">Floor</div>
+                      <div className="text-sm font-bold">2 ETH</div>
+                    </div>
+                    <div className="min-w-20">
+                      <div className="text-xs">Volume</div>
+                      <div className="text-sm font-bold">10 ETH</div>
+                    </div>
+                  </div>
+                </CardFooter>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </div>
     </main>
   );

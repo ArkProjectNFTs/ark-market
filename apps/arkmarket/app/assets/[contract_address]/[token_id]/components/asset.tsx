@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
-import { RiTwitterXLine } from "react-icons/ri";
-import { SiOpensea } from "react-icons/si";
+import { MoveLeft } from "lucide-react";
 import { useQuery } from "react-query";
 
+import { Button } from "@ark-market/ui/components/button";
 import { areAddressesEqual } from "@ark-market/ui/lib/utils";
 
 import { getTokenData, getTokenMarketData } from "../data";
@@ -65,33 +64,13 @@ const Asset: React.FC<AssetProps> = ({ params }) => {
     <div className="grid min-h-[700px] grid-cols-3 grid-rows-3 gap-6">
       <div className="col-span-1 row-span-3 flex flex-col space-y-5">
         <div className="flex flex-col space-y-2">
-          <div className="text-xl font-bold">Duo #{token.token_id}</div>
-          <div className="flex justify-between">
-            <Link href="/marketplace/explore" target="_blank">
-              <div className="flex items-center space-x-2">
-                <Image
-                  src="/everai.jpg"
-                  width="24"
-                  height="24"
-                  alt="everai"
-                  className="rounded-full"
-                />
-                <h1 className="text-sm">EveraiDuo</h1>
-              </div>
-            </Link>
-            <div className="flex space-x-2">
-              <Link href="https://twitter.com/Everai" target="_blank">
-                <SiOpensea className="h-6 w-6" />
-              </Link>
-              <Link
-                href="https://twitter.com/Everai"
-                target="_blank"
-                className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background"
-              >
-                <RiTwitterXLine className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
+          <Link href={`/collection/${params.contract_address}`}>
+            <Button>
+              <MoveLeft className="mr-2 h-4 w-4" />
+              Back to collection
+            </Button>
+          </Link>
+          <div className="text-xl font-bold">#{token.token_id}</div>
         </div>
         <div className="overflow-hidden rounded-md">
           <TokenMedia token={token} />
