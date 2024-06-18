@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import {
@@ -68,41 +69,47 @@ export default function CollectionItemsDataGridView({
 
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
-          <NftCard>
-            <NftCardMedia>
-              <Media
-                src={collectionToken.metadata?.image}
-                alt={collectionToken.metadata?.name ?? "Empty"}
-                className="aspect-square w-full transition-transform group-hover:scale-110"
-              />
-            </NftCardMedia>
-            <NftCardContent>
-              <div className="flex w-full justify-between">
-                <div className="w-full">
-                  <p
-                    className={cn(
-                      "font-semibold",
-                      viewType === "large-grid" ? "text-xl" : "text-sm",
-                      ellipsableStyles,
-                    )}
-                  >
-                    {collectionToken.metadata?.name ?? collectionToken.token_id}
-                  </p>
-                  {collectionToken.price ? (
-                    <p className={cn("mt-1 text-sm", ellipsableStyles)}>
-                      {formatUnits(collectionToken.price, 18)} ETH
+          <Link
+            href={`/assets/${collectionToken.contract}/${collectionToken.token_id}`}
+            key={`${collectionToken.contract}-${collectionToken.token_id}`}
+          >
+            <NftCard>
+              <NftCardMedia>
+                <Media
+                  src={collectionToken.metadata?.image}
+                  alt={collectionToken.metadata?.name ?? "Empty"}
+                  className="aspect-square w-full transition-transform group-hover:scale-110"
+                />
+              </NftCardMedia>
+              <NftCardContent>
+                <div className="flex w-full justify-between">
+                  <div className="w-full">
+                    <p
+                      className={cn(
+                        "font-semibold",
+                        viewType === "large-grid" ? "text-xl" : "text-sm",
+                        ellipsableStyles,
+                      )}
+                    >
+                      {collectionToken.metadata?.name ??
+                        collectionToken.token_id}
                     </p>
-                  ) : (
-                    <p className="mt-1 text-sm font-medium">Not for sale</p>
-                  )}
+                    {collectionToken.price ? (
+                      <p className={cn("mt-1 text-sm", ellipsableStyles)}>
+                        {formatUnits(collectionToken.price, 18)} ETH
+                      </p>
+                    ) : (
+                      <p className="mt-1 text-sm font-medium">Not for sale</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                Last sale _ ETH
-              </p>
-              <NftCardAction>Details</NftCardAction>
-            </NftCardContent>
-          </NftCard>
+                <p className="mt-5 text-sm font-medium text-secondary-foreground">
+                  Last sale _ ETH
+                </p>
+                <NftCardAction>Details</NftCardAction>
+              </NftCardContent>
+            </NftCard>
+          </Link>
         );
       }}
     />
