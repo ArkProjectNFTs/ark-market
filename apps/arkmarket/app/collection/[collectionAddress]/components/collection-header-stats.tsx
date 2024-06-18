@@ -1,7 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import EtherIcon from "@ark-market/ui/components/icons/ether-icon";
+import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/components/separator";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 
@@ -24,8 +24,8 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="flex items-center gap-1 font-medium">
-          <EtherIcon />
-          <p>{collectionInfos.floor ?? "_"} ETH</p>
+          <EthereumLogo2 className="size-5" />
+          <p>{formatUnits(collectionInfos.floor ?? 0, 18)} ETH</p>
           {/* TODO @YohanTz: Proper color */}
           <p
             className={cn(
@@ -46,15 +46,23 @@ export default function CollectionHeaderStats({
         <p className="text-sm font-medium text-muted-foreground">
           Total Volume
         </p>
-        <p className="font-medium">{collectionInfos.total_volume ?? "_"} ETH</p>
+        <div className="flex items-center ">
+          <EthereumLogo2 className="size-5" />
+          <p className="font-medium">
+            {collectionInfos.total_volume ?? "_"} ETH
+          </p>
+        </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
-        <p className="font-medium">
-          {collectionInfos.volume_7d_eth ?? "_"} ETH
-        </p>
+        <div className="flex items-center gap-1">
+          <EthereumLogo2 className="size-5" />
+          <p className="font-medium">
+            {collectionInfos.volume_7d_eth ?? "_"} ETH
+          </p>
+        </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 

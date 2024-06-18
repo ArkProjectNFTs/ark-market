@@ -25,10 +25,10 @@ interface ToolsBarProps {
   setSortDirection: (sortDirection: CollectionSortDirection) => void;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
-  style?: HTMLAttributes<HTMLDivElement>["style"];
   toggleFiltersOpen: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
+  totalTokensCount: number;
 }
 
 export default function CollectionItemsToolsBar({
@@ -37,14 +37,14 @@ export default function CollectionItemsToolsBar({
   setSortDirection,
   sortBy,
   sortDirection,
-  style,
   toggleFiltersOpen,
   viewType,
   setViewType,
+  totalTokensCount,
 }: PropsWithClassName<ToolsBarProps>) {
   return (
     <>
-      <div className={cn("bg-background", className)} style={style}>
+      <div className={cn("bg-background", className)}>
         <div className="flex items-center gap-2 md:gap-6">
           <CollectionItemsFiltersModal>
             <Button variant="secondary" size="icon" className="sm:hidden">
@@ -61,7 +61,10 @@ export default function CollectionItemsToolsBar({
             <span>Filters</span>
           </Button>
 
-          <LiveResultsIndicator totalCount={0} className="hidden lg:flex" />
+          <LiveResultsIndicator
+            totalCount={totalTokensCount}
+            className="hidden lg:flex"
+          />
 
           <Input className="flex-1" placeholder="Search item" />
 

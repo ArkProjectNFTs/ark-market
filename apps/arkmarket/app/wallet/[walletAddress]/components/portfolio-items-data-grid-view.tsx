@@ -1,14 +1,21 @@
 import { forwardRef } from "react";
+import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { Button } from "@ark-market/ui/components/button";
+import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import {
   NftCard,
   NftCardAction,
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/components/nft-card";
-import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
+import {
+  cn,
+  ellipsableStyles,
+  focusableStyles,
+  formatUnits,
+} from "@ark-market/ui/lib/utils";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { WalletToken } from "../queries/getWalletData";
@@ -90,9 +97,25 @@ export default function CollectionItemsDataGridView({
                   >
                     {token.metadata?.name ?? token.token_id}
                   </p>
+                  <Link
+                    href={`/collection/${token.contract}`}
+                    className={cn("flex items-center gap-1", focusableStyles)}
+                  >
+                    <p
+                      className={cn(
+                        "text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
+                        viewType === "large-grid" && "sm:text-lg",
+                        ellipsableStyles,
+                      )}
+                    >
+                      {token.contract}
+                    </p>
+                    <VerifiedIcon className="size-6 flex-shrink-0 text-background" />
+                  </Link>
+
                   {token.list_price ? (
                     <p className={cn("mt-1 text-sm", ellipsableStyles)}>
-                      {token.list_price} ETH
+                      {formatUnits(token.list_price, 18)} ETH
                     </p>
                   ) : (
                     <p className="mt-1 text-sm font-medium">Not for sale</p>

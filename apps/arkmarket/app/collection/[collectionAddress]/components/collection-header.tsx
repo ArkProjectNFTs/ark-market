@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type { HTMLAttributes } from "react";
@@ -9,6 +10,7 @@ import {
   useScroll,
 } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import { Button } from "@ark-market/ui/components/button";
@@ -22,7 +24,7 @@ import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import ExternalLink from "~/components/external-link";
@@ -32,12 +34,14 @@ import CollectionHeaderStats from "./collection-header-stats";
 const MotionButton = motion(Button);
 
 interface CollectionHeaderProps {
+  collectionAddress: string;
   collectionInfos: CollectionInfosApiResponse;
   style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function CollectionHeader({
   className,
+  collectionAddress,
   collectionInfos,
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
@@ -69,7 +73,19 @@ export default function CollectionHeader({
       >
         <div className="flex h-full items-center justify-between gap-0">
           <div className="flex h-[3.875rem] flex-shrink-0 items-center gap-4 transition-[height]">
-            <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
+            {validateAndParseAddress(collectionAddress) ===
+            validateAndParseAddress(
+              "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+            ) ? (
+              <img
+                src="/medias/everai_profile_picture.png"
+                className="aspect-square h-full flex-shrink-0 rounded-lg"
+                alt="Everai profile"
+              />
+            ) : (
+              <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
+            )}
+
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <div className="flex items-center gap-1">
@@ -97,7 +113,10 @@ export default function CollectionHeader({
                   {!hasPassedBanner && (
                     <CollapsibleTrigger asChild>
                       <motion.button
-                        className="ml-1 flex items-center gap-1"
+                        className={cn(
+                          "ml-1 flex items-center gap-1",
+                          focusableStyles,
+                        )}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         transition={{ ease: "easeInOut", duration: 0.15 }}

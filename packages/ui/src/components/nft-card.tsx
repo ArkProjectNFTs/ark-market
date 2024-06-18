@@ -10,7 +10,7 @@ const NftCard = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xs group relative w-full overflow-hidden bg-card text-card-foreground",
+      "group relative w-full overflow-hidden rounded-xs bg-card text-card-foreground",
       className,
     )}
     {...props}
@@ -42,14 +42,17 @@ const NftCardAction = React.forwardRef<
   HTMLButtonElement,
   React.HTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => (
-  <Button
-    ref={ref}
-    className={cn(
-      "absolute bottom-0 left-0 h-10 w-full rounded-none opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100",
-      className,
-    )}
-    {...props}
-  />
+  // TODO @YohanTz: Handle focus-visible properly
+  <div className="absolute bottom-0 left-0 w-full bg-card opacity-0 transition-opacity group-hover:opacity-100">
+    <Button
+      ref={ref}
+      className={cn(
+        "h-10 w-full rounded-none opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100",
+        className,
+      )}
+      {...props}
+    />
+  </div>
 ));
 NftCardAction.displayName = "NftCardAction";
 

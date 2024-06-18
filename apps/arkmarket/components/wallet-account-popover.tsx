@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type { PropsWithChildren } from "react";
@@ -22,7 +23,6 @@ import {
 import { ThemeTabs } from "@ark-market/ui/components/theme";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
-import useBlockies from "~/hooks/useBlockies";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
@@ -30,11 +30,12 @@ const STRK_CONTRACT_ADDRESS =
   "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
 
 const popoverItemCommonClassName = cn(
-  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
+  "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
   focusableStyles,
 );
 
 export default function WalletAccountPopover({ children }: PropsWithChildren) {
+  const [open, setOpen] = useState(false);
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: starkProfile } = useStarkProfile({
@@ -42,16 +43,18 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
   });
   const isWebWallet = connector?.id === "argentWebWallet";
 
-  const { data: ethBalance } = useBalance({ address });
+  // const { data: ethBalance } = useBalance({ address });
+  const ethBalance = { formatted: "0.00" };
   const roundedEthBalance =
     ethBalance !== undefined
       ? parseFloat(ethBalance.formatted).toFixed(4)
       : undefined;
 
-  const { data: strkBalance } = useBalance({
-    address,
-    token: STRK_CONTRACT_ADDRESS,
-  });
+  // const { data: strkBalance } = useBalance({
+  //   address,
+  //   token: STRK_CONTRACT_ADDRESS,
+  // });
+  const strkBalance = { formatted: "0.00" };
   const roundedStrkBalance =
     strkBalance !== undefined
       ? parseFloat(strkBalance.formatted).toFixed(4)
@@ -60,12 +63,14 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
   const [, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
 
-  const { blockiesImageSrc } = useBlockies({ address });
-
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   }, [address]);
+
+  function closePopover() {
+    setOpen(false);
+  }
 
   function handleCopyAddress() {
     if (address === undefined) {
@@ -97,7 +102,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
   }
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="mt-3 w-80">
         <div className="flex h-12 items-center gap-4">
@@ -136,6 +141,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
           <Link
             href={`/wallet/${address}`}
             className={popoverItemCommonClassName}
+            onClick={closePopover}
           >
             <User size={24} />
             <p className="font-bold">My items</p>
@@ -144,16 +150,25 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
             <ExternalLink
               className={popoverItemCommonClassName}
               href="https://web.argent.xyz"
+              onClick={closePopover}
             >
               <Wallet size={24} />
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <Link href="/" className={popoverItemCommonClassName}>
+          <Link
+            href="/"
+            className={popoverItemCommonClassName}
+            onClick={closePopover}
+          >
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
           </Link>
-          <Link href="/" className={popoverItemCommonClassName}>
+          <Link
+            href="/"
+            className={popoverItemCommonClassName}
+            onClick={closePopover}
+          >
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
           </Link>

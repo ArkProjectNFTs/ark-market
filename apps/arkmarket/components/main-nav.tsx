@@ -9,7 +9,9 @@ import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 import { Icons } from "~/components/icons";
 import { siteConfig } from "~/config/site";
 
-const mainNavLinks = [{ name: "Explore collections", href: "/collections" }];
+const mainNavLinks = [
+  // { name: "Explore collections", href: "/collections" }
+] as { name: string; href: string }[];
 
 export function MainNav({
   className,

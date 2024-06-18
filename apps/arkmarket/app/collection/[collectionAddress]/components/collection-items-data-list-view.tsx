@@ -13,9 +13,13 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/components/table";
+import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { CollectionToken } from "../queries/getCollectionData";
 import Media from "~/components/media";
+
+const gridTemplateColumnValue =
+  "grid-cols-[minmax(10rem,2fr)_repeat(5,minmax(7.25rem,1fr))]";
 
 interface CollectionItemsDataListViewProps {
   collectionTokens: CollectionToken[];
@@ -44,7 +48,7 @@ export default function CollectionItemsDataListView({
   return (
     <Table ref={tableRef}>
       <TableHeader>
-        <TableRow className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center">
+        <TableRow className={cn("grid items-center", gridTemplateColumnValue)}>
           <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Item
           </TableHead>
@@ -82,7 +86,10 @@ export default function CollectionItemsDataListView({
               key={`${token.contract}-${token.token_id}`}
               data-index={virtualRow.index} // Needed for dynamic row height measurement
               ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
-              className="absolute grid h-[4.6875rem] w-full grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] items-center"
+              className={cn(
+                "absolute grid h-[4.6875rem] w-full items-center",
+                gridTemplateColumnValue,
+              )}
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}
@@ -94,16 +101,20 @@ export default function CollectionItemsDataListView({
                     alt={token.metadata?.name ?? "Empty NFT"}
                     className="h-[2.625rem] w-[2.625rem] rounded-md"
                   />
-                  <p className="font-semibold">
+                  <p className={cn("w-full font-semibold", ellipsableStyles)}>
                     {token.metadata?.name ?? token.token_id}
                   </p>
                 </div>
               </TableCell>
-              <TableCell>{token.price ?? "_"}</TableCell>
+              <TableCell>
+                {token.price === null
+                  ? "_"
+                  : `${formatUnits(token.price, 18)} ETH`}
+              </TableCell>
               <TableCell>_</TableCell>
               <TableCell>_</TableCell>
               <TableCell>
-                <Button asChild variant="link">
+                <Button asChild variant="link" className="px-0">
                   <Link href={`/wallet/${token.owner}`}>
                     {token.owner.slice(0, 6)}...
                   </Link>

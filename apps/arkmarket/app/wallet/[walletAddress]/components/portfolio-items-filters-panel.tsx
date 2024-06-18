@@ -10,12 +10,14 @@ import PortfolioItemsFiltersContent from "./portfolio-items-filters-content";
 
 interface PortfolioItemsFitlersPanelProps {
   filtersOpen: boolean;
+  walletAddress: string;
   walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 
 export default function PortfolioItemsFitlersPanel({
   className,
   filtersOpen,
+  walletAddress,
   walletCollectionsInitialData,
 }: PropsWithClassName<PortfolioItemsFitlersPanelProps>) {
   return (
@@ -33,6 +35,7 @@ export default function PortfolioItemsFitlersPanel({
           )}
         >
           <PortfolioItemsFiltersContent
+            walletAddress={walletAddress}
             className="h-full w-64 overflow-x-visible px-5 py-6"
             walletCollectionsInitialData={walletCollectionsInitialData}
           />

@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { useState } from "react";
 import { useStarkProfile } from "@starknet-react/core";
+import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 
@@ -18,17 +20,22 @@ export default function ProfilePicture({
   const { data: starkProfile } = useStarkProfile({
     address,
   });
-  const { blockiesImageSrc } = useBlockies({ address });
+  const { blockiesImageSrc } = useBlockies({
+    address: validateAndParseAddress(address),
+  });
+  const [hasImageFailed, setHasImageFailed] = useState(false);
 
   if (
     starkProfile?.name !== undefined &&
-    starkProfile?.profilePicture !== undefined
+    starkProfile?.profilePicture !== undefined &&
+    !hasImageFailed
   ) {
     return (
       <img
         className={className}
         alt="Starknet Id profile"
         src={starkProfile?.profilePicture}
+        onError={() => setHasImageFailed(true)}
       />
     );
   }

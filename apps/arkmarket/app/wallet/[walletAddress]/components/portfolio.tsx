@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+import {
+  TabsListV2,
+  TabsTriggerV2,
+  TabsV2,
+} from "@ark-market/ui/components/tabs-v2";
+
 import type {
   WalletCollection,
   WalletCollectionsApiResponse,
@@ -30,16 +36,29 @@ export default function Portfolio({
   return (
     <div className="flex">
       <PortfolioItemsFiltersPanel
+        walletAddress={walletAddress}
         filtersOpen={itemsFiltersOpen}
         className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
         walletCollectionsInitialData={walletCollectionsInitialData}
       />
 
       <div className="w-full">
-        <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 py-4">
+        <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 pb-4 sm:pt-4">
+          <TabsV2 defaultValue="items">
+            <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
+              <TabsTriggerV2 value="items" className="flex items-center gap-2">
+                My Items{" "}
+                <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs text-secondary-foreground">
+                  {walletTokensInitialData.token_count}
+                </p>
+              </TabsTriggerV2>
+              <TabsTriggerV2 value="orders">Orders</TabsTriggerV2>
+              <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
+            </TabsListV2>
+          </TabsV2>
           <PortfolioItemsToolsBar
+            walletAddress={walletAddress}
             walletCollectionsInitialData={walletCollectionsInitialData}
-            // className="mt-6"
             toggleFiltersOpen={() =>
               setItemsFiltersOpen((previous) => !previous)
             }

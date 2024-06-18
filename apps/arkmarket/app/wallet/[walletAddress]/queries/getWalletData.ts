@@ -19,6 +19,7 @@ export interface WalletToken {
 export interface WalletTokensApiResponse {
   data: WalletToken[];
   next_page: number | null;
+  token_count: number;
 }
 interface GetWalletTokensParams {
   page?: number;
@@ -44,7 +45,11 @@ export async function getWalletTokens({
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
-    return { data: [], next_page: null } as WalletTokensApiResponse;
+    return {
+      data: [],
+      next_page: null,
+      token_count: 0,
+    } as WalletTokensApiResponse;
   }
 
   return response.json() as Promise<WalletTokensApiResponse>;
@@ -56,6 +61,7 @@ export interface WalletCollection {
   collection_name: string;
   floor: number;
   user_listed_tokens: number;
+  user_token_count: number;
 }
 export interface WalletCollectionsApiResponse {
   data: WalletCollection[];

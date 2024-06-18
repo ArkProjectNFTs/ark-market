@@ -17,10 +17,12 @@ import {
 import PortfolioItemsFiltersContent from "./portfolio-items-filters-content";
 
 interface PortfolioItemsFiltersModal {
+  walletAddress: string;
   walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 
 export default function PortfolioItemsFiltersModal({
+  walletAddress,
   walletCollectionsInitialData,
   children,
 }: PropsWithChildren<PortfolioItemsFiltersModal>) {
@@ -36,6 +38,7 @@ export default function PortfolioItemsFiltersModal({
       <DialogContent>
         <div className="flex h-full flex-col justify-between overflow-auto">
           <PortfolioItemsFiltersContent
+            walletAddress={walletAddress}
             walletCollectionsInitialData={walletCollectionsInitialData}
             onFilterChange={() => setOpen(false)}
             className="mt-5 pb-5"

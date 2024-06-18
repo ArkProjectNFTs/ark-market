@@ -14,6 +14,7 @@ interface PortfolioItemsToolsBarProps {
   toggleFiltersOpen: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
+  walletAddress: string;
   walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 export default function PortfolioItemsToolsBar({
@@ -21,12 +22,14 @@ export default function PortfolioItemsToolsBar({
   toggleFiltersOpen,
   viewType,
   setViewType,
+  walletAddress,
   walletCollectionsInitialData,
 }: PropsWithClassName<PortfolioItemsToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)}>
       <div className="flex items-center gap-2 md:gap-6">
         <PortfolioItemsFiltersModal
+          walletAddress={walletAddress}
           walletCollectionsInitialData={walletCollectionsInitialData}
         >
           <Button variant="secondary" size="icon" className="sm:hidden">

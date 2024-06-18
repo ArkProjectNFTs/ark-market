@@ -8,7 +8,7 @@ interface UseBlockiesParams {
 export default function useBlockies({ address }: UseBlockiesParams) {
   const blockiesImageSrc = useMemo(() => {
     if (!address) return "";
-    return blockies.create({ seed: address, scale: 64 }).toDataURL();
+    return blockies.create({ seed: address, scale: 16 }).toDataURL();
   }, [address]);
 
   return { blockiesImageSrc };

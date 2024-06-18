@@ -66,7 +66,7 @@ export default function CollectionItemsActivity({
         <CollectionItemsActivityHeader
           activeTab={activeTab}
           className={cn(
-            "sticky z-10 bg-background p-6",
+            "sticky z-10 bg-background px-5 pb-4 sm:py-6 sm:pt-4",
             "top-[var(--site-header-height)]",
             "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
           )}
@@ -74,7 +74,6 @@ export default function CollectionItemsActivity({
         >
           {activeTab === "items" && (
             <CollectionItemsToolsBar
-              className="mt-6"
               toggleFiltersOpen={() =>
                 setItemsFiltersOpen((previous) => !previous)
               }
@@ -84,15 +83,19 @@ export default function CollectionItemsActivity({
               setSortBy={setSortBy}
               viewType={viewType}
               setViewType={setViewType}
+              totalTokensCount={collectionTokensInitialData.token_count}
             />
           )}
           {activeTab === "activity" && <p>Coming</p>}
         </CollectionItemsActivityHeader>
-        <LiveResultsIndicator className="p-6 lg:hidden" totalCount={0} />
+        <LiveResultsIndicator
+          className="p-6 lg:hidden"
+          totalCount={collectionTokensInitialData.token_count}
+        />
 
         <div
           className={cn(
-            "min-h-[calc(100vh-var(--site-header-height)+var(--collection-header-height)+var(--collection-footer-height))] pb-6",
+            "min-h-[calc(100vh-var(--site-header-height)-var(--collection-header-height)-var(--collection-footer-height))] pb-6",
           )}
         >
           {activeTab === "items" && (

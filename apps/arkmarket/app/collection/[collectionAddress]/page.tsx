@@ -51,11 +51,13 @@ export default async function CollectionPage({
       />
 
       <CollectionHeader
+        collectionAddress={collectionAddress}
         className="sticky top-[var(--site-header-height)] z-20 hidden md:block"
         collectionInfos={collectionInfos}
       />
       <MobileCollectionHeader
         className="md:hidden"
+        collectionAddress={collectionAddress}
         collectionInfos={collectionInfos}
       />
 
