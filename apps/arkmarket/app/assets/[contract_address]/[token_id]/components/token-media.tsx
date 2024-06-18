@@ -4,12 +4,12 @@ import Media from "~/components/media";
 export function TokenMedia({ token }: { token: Token }) {
   return (
     <Media
-      url={
+      src={
         token.metadata?.normalized?.image
           ? token.metadata.normalized.image
           : "/missing.jpg"
       }
-      name={token.token_id || "Token Image"}
+      alt={token.token_id || "Token Image"}
     />
   );
 }
