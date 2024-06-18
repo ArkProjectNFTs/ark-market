@@ -23,8 +23,9 @@ export function UserNav() {
   const { chain } = useNetwork();
   const { data: starkProfile } = useStarkProfile({ address });
 
-  // const { data: ethBalance } = useBalance({ address });
-
+  const { data: ethBalance } = useBalance({ address });
+  // const ethBalance = { formatted: '0.00" };
+'
   const shortenedAddress = useMemo(() => {
     if (!address) return "";
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
