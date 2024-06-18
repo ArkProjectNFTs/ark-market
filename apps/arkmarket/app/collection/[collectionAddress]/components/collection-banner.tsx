@@ -15,25 +15,21 @@ export default function CollectionBanner({
   collectionAddress,
 }: PropsWithClassName<CollectionBannerProps>) {
   if (
-    validateAndParseAddress(collectionAddress) ===
+    // If not Everai
+    validateAndParseAddress(collectionAddress) !==
     validateAndParseAddress(
       "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
     )
   ) {
-    return (
-      <img
-        alt="Everai banner"
-        src="/medias/everai_banner.png"
-        style={{ height: collectionBannerRemHeight * 16, width: "100%" }}
-        className={cn("object-cover", className)}
-      />
-    );
+    return null;
   }
 
   return (
-    <div
-      className={cn("bg-secondary", className)}
-      style={{ height: `${collectionBannerRemHeight}rem` }}
+    <img
+      alt="Everai banner"
+      src="/medias/everai_banner.png"
+      style={{ height: collectionBannerRemHeight * 16, width: "100%" }}
+      className={cn("object-cover", className)}
     />
   );
 }

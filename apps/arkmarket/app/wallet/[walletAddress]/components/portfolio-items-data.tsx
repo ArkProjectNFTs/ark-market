@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";

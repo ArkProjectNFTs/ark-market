@@ -9,7 +9,6 @@ import {
 } from "@ark-market/ui/components/tabs-v2";
 
 import type {
-  WalletCollection,
   WalletCollectionsApiResponse,
   WalletTokensApiResponse,
 } from "../queries/getWalletData";
