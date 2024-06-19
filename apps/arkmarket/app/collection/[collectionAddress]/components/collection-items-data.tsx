@@ -67,7 +67,7 @@ export default function CollectionItemsData({
   );
 
   return (
-    <div>
+    <>
       <LiveResultsIndicator
         className="p-6 lg:hidden"
         totalCount={totalTokensCount}
@@ -76,10 +76,11 @@ export default function CollectionItemsData({
         <CollectionItemsDataListView collectionTokens={collectionTokens} />
       ) : (
         <CollectionItemsDataGridView
+          className="mb-6"
           collectionTokens={collectionTokens}
           viewType={viewType}
         />
       )}
-    </div>
+    </>
   );
 }

@@ -54,7 +54,7 @@ export default function Portfolio({
                   className="flex items-center gap-2"
                 >
                   My Items{" "}
-                  <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs text-secondary-foreground">
+                  <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs font-medium text-secondary-foreground">
                     {formatNumber(walletTokensInitialData.token_count)}
                   </p>
                 </TabsTriggerV2>
