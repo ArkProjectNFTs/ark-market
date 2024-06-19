@@ -38,3 +38,7 @@ export interface PricesResult {
     price: number;
   };
 }
+
+export interface SystemStatus {
+  status: string;
+}
