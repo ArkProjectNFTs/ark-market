@@ -7,7 +7,7 @@ import { cn } from "@ark-market/ui/lib/utils";
 import { env } from "~/env";
 
 interface MediaProps {
-  src?: string;
+  src?: string | null;
   alt: string;
 }
 
@@ -18,7 +18,7 @@ export default function Media({
 }: PropsWithClassName<MediaProps>) {
   const [hasFailedToLoad, setHasFailedToLoad] = useState(false);
 
-  if (src === undefined || src.length === 0 || hasFailedToLoad) {
+  if (!src || src.length === 0 || hasFailedToLoad) {
     return (
       <div
         className={cn(

@@ -5,8 +5,6 @@
 @layer base {
   :root {
     --site-header-height: 3.75rem;
-    --collection-header-height: 6.625rem;
-    --collection-footer-height: 2.5rem;
     --radius: 0.75rem;
 
     --background: 0 0% 100%;

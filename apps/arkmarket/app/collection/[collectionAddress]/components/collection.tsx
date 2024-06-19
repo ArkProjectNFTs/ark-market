@@ -108,7 +108,7 @@ export default function Collection({
           </CollectionItemsActivityHeader>
         </div>
 
-        <div>
+        <div className="flex-1">
           {activeTab === "items" && (
             <CollectionItemsData
               collectionAddress={collectionAddress}

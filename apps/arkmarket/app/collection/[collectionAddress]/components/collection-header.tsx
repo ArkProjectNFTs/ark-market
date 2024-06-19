@@ -3,7 +3,7 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import { ChevronDown, Copy } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
@@ -16,18 +16,11 @@ import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@ark-market/ui/components/tooltip";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
-import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
@@ -43,13 +36,12 @@ export default function CollectionHeader({
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
-  const [copiedText, copy] = useCopyToClipboard();
 
   return (
     <div className={className} style={style}>
       <Collapsible
         className={cn(
-          "min-h-[var(--collection-header-height)] w-full border-b border-border p-5 transition-[height]",
+          "min-h-[6.875rem] w-full border-b border-border p-5 transition-[height]",
         )}
         open={collapsibleOpen}
         onOpenChange={setCollapsibleOpen}
