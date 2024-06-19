@@ -72,9 +72,11 @@ export default function PortfolioItemsData({
   }
 
   return (
-    <PortfolioItemsDataGridView
-      walletTokens={walletTokens}
-      viewType={viewType}
-    />
+    <div className="mb-6">
+      <PortfolioItemsDataGridView
+        walletTokens={walletTokens}
+        viewType={viewType}
+      />
+    </div>
   );
 }

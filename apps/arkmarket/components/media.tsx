@@ -22,7 +22,7 @@ export default function Media({
     return (
       <div
         className={cn(
-          "flex items-center justify-center bg-secondary",
+          "flex flex-shrink-0 items-center justify-center bg-secondary",
           className,
         )}
       >
@@ -64,7 +64,7 @@ export default function Media({
 
   if (mediaFormat === "video") {
     return (
-      <video autoPlay className={className} loop muted>
+      <video autoPlay className={cn("flex-shrink-0", className)} loop muted>
         <source src={mediaSrc} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -73,7 +73,7 @@ export default function Media({
     return (
       <img
         alt={alt}
-        className={className}
+        className={cn("flex-shrink-0", className)}
         onError={() => setHasFailedToLoad(true)}
         src={mediaSrc}
       />

@@ -94,7 +94,7 @@ export default function PortfolioItemsDataListView({
                   <Media
                     src={token.metadata?.image}
                     alt={token.metadata?.name ?? "Empty NFT"}
-                    className="h-[2.625rem] w-[2.625rem] rounded-md"
+                    className="h-[2.625rem] w-[2.625rem] rounded-md object-contain"
                   />
                   <p className={cn("w-full font-semibold", ellipsableStyles)}>
                     {token.metadata?.name ?? token.token_id}

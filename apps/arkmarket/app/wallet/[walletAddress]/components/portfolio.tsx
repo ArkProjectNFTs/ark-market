@@ -46,7 +46,7 @@ export default function Portfolio({
         <PortfolioHeader walletAddress={walletAddress} />
 
         <div className="w-full">
-          <div className="sticky top-[var(--site-header-height)] z-10 bg-background px-5 pb-4 sm:pt-4">
+          <div className="sticky top-[var(--site-header-height)] z-10 mb-6 border-b border-border bg-background px-5 pb-4 sm:pt-4 lg:mb-0 lg:border-none">
             <TabsV2 defaultValue="items">
               <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
                 <TabsTriggerV2

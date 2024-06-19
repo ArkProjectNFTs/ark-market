@@ -48,7 +48,7 @@ export interface Metadata {
 export interface CollectionToken {
   contract: string;
   token_id: string;
-  owner: string;
+  owner: string | null;
   minted_at: number;
   updated_at: number;
   price: null | number;

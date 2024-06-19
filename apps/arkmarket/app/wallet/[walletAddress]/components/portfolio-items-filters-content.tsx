@@ -115,7 +115,7 @@ export default function PortfolioItemsFiltersContent({
                 <Media
                   src={collection.image ?? undefined}
                   alt={collection.collection_name}
-                  className="h-8 w-8 rounded-xs"
+                  className="h-8 w-8 rounded-xs object-contain"
                 />
                 <div className="flex h-full flex-col items-start justify-between overflow-hidden">
                   <div className="flex w-full items-center gap-1">
