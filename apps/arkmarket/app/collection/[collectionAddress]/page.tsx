@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { collectionPageSearchParamsCache } from "../search-params";
+import Collection from "./components/collection";
 import CollectionBanner from "./components/collection-banner";
 import CollectionFooter from "./components/collection-footer";
 import CollectionHeader from "./components/collection-header";
@@ -25,7 +26,7 @@ export default async function CollectionPage({
   const { collectionAddress } = params;
   const { direction, sort } =
     collectionPageSearchParamsCache.parse(searchParams);
-  const collectionInfos = await getCollectionInfos({
+  const collectionInfosInitialData = await getCollectionInfos({
     collectionAddress,
   });
 
@@ -37,35 +38,17 @@ export default async function CollectionPage({
 
   if (
     collectionTokensInitialData.data.length === 0 ||
-    collectionInfos === undefined
+    collectionInfosInitialData === undefined
   ) {
     // TODO @YohanTz: Handle case when a collection contract is deployed but no tokens in it
     notFound();
   }
 
   return (
-    <main>
-      <CollectionBanner
-        className="hidden md:block"
-        collectionAddress={collectionAddress}
-      />
-
-      <CollectionHeader
-        collectionAddress={collectionAddress}
-        className="sticky top-[var(--site-header-height)] z-20 hidden md:block"
-        collectionInfos={collectionInfos}
-      />
-      <MobileCollectionHeader
-        className="md:hidden"
-        collectionAddress={collectionAddress}
-        collectionInfos={collectionInfos}
-      />
-
-      <CollectionItemsActivity
-        collectionAddress={collectionAddress}
-        collectionTokensInitialData={collectionTokensInitialData}
-      />
-      <CollectionFooter className="sticky bottom-0 z-10 hidden md:flex" />
-    </main>
+    <Collection
+      collectionAddress={collectionAddress}
+      collectionInfosInitialData={collectionInfosInitialData}
+      collectionTokensInitialData={collectionTokensInitialData}
+    />
   );
 }

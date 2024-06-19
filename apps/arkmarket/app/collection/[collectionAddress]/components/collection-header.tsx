@@ -3,12 +3,6 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 

@@ -1,5 +1,6 @@
 "use client";
 
+import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { useQueryState } from "nuqs";
 
@@ -15,20 +16,20 @@ import {
 } from "../../search-params";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
-import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsToolsBar from "./collection-items-tools-bar";
 import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsActivityProps {
   collectionAddress: string;
   collectionTokensInitialData: CollectionTokensApiResponse;
+  toggleFiltersPanel: () => void;
 }
 
 export default function CollectionItemsActivity({
   collectionAddress,
   collectionTokensInitialData,
+  toggleFiltersPanel,
 }: CollectionItemsActivityProps) {
-  const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Get State from URL query params
   const [activeTab, setActiveTab] = useState("items");
 
@@ -44,24 +45,8 @@ export default function CollectionItemsActivity({
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
 
-  const canShowItemsFilter = activeTab === "items";
-
   return (
     <div className="flex">
-      <CollectionItemsFiltersPanel
-        className={cn(
-          "sticky z-10 hidden sm:block",
-          "h-[calc(100vh-var(--site-header-height)-var(--collection-footer-height))]",
-          "md:h-[calc(100vh-var(--site-header-height)-var(--collection-header-height)-var(--collection-footer-height))]",
-          "top-[var(--site-header-height)]",
-          "md:top-[calc(var(--site-header-height)+var(--collection-header-height))]",
-        )}
-        filtersOpen={itemsFiltersOpen && canShowItemsFilter}
-      />
-      {/* <CollectionItemsFiltersModal
-        filtersOpen={itemsFiltersOpen && canShowItemsFilter}
-      /> */}
-
       <div className="w-full">
         <CollectionItemsActivityHeader
           activeTab={activeTab}
@@ -74,9 +59,7 @@ export default function CollectionItemsActivity({
         >
           {activeTab === "items" && (
             <CollectionItemsToolsBar
-              toggleFiltersOpen={() =>
-                setItemsFiltersOpen((previous) => !previous)
-              }
+              toggleFiltersPanel={toggleFiltersPanel}
               sortDirection={sortDirection}
               setSortDirection={setSortDirection}
               sortBy={sortBy}

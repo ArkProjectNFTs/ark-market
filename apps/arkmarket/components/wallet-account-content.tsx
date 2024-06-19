@@ -47,6 +47,7 @@ export default function WalletAccountContent() {
           href={`/wallet/${address}`}
           className={popoverItemCommonClassName}
           onClick={closePopover}
+          prefetch
         >
           <User size={24} />
           <p className="font-bold">My items</p>
