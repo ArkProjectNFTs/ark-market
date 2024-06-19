@@ -87,6 +87,12 @@ export function getRoundedRemainingTime(endTime: number): string {
   }
 }
 
+const NumberFormatter = new Intl.NumberFormat();
+
+export function formatNumber(value: number) {
+  return NumberFormatter.format(value);
+}
+
 export function formatUnits(value: bigint | number, decimals: number) {
   let display = value.toString();
 

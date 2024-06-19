@@ -3,7 +3,7 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Copy } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
@@ -12,15 +12,22 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/components/collapsible";
-import CopyIcon from "@ark-market/ui/components/icons/copy-icon";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
 import XIcon from "@ark-market/ui/components/icons/x-icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@ark-market/ui/components/tooltip";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
+import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
@@ -36,9 +43,10 @@ export default function CollectionHeader({
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
+  const [copiedText, copy] = useCopyToClipboard();
 
   return (
-    <div className={cn("bg-background", className)} style={style}>
+    <div className={className} style={style}>
       <Collapsible
         className={cn(
           "min-h-[var(--collection-header-height)] w-full border-b border-border p-5 transition-[height]",
@@ -77,10 +85,7 @@ export default function CollectionHeader({
                 </div>
               </div>
               <div className="mb-1 flex h-6 items-center gap-4 text-muted-foreground">
-                <ExternalLink href="/">
-                  {/* TODO @YohanTz: Copy collection address */}
-                  <CopyIcon />
-                </ExternalLink>
+                <CopyButton textToCopy={collectionAddress} />
                 <ExternalLink href="/">
                   <XIcon />
                 </ExternalLink>
@@ -97,7 +102,7 @@ export default function CollectionHeader({
                       focusableStyles,
                     )}
                   >
-                    More Info
+                    {collapsibleOpen ? "Less Info" : "More Info"}
                     <ChevronDown size={16} />
                   </button>
                 </CollapsibleTrigger>

@@ -53,6 +53,7 @@ export default function CollectionItemsDataGridView({
 }: CollectionItemsDataGridViewProps) {
   return (
     <VirtuosoGrid
+      className="mb-6"
       // initialItemCount same as totalCount but needed for SSR
       initialItemCount={collectionTokens.length}
       totalCount={collectionTokens.length}

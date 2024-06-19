@@ -1,5 +1,5 @@
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { cn } from "@ark-market/ui/lib/utils";
+import { cn, formatNumber } from "@ark-market/ui/lib/utils";
 
 interface LiveResultsIndicatorProps {
   totalCount: number;
@@ -17,7 +17,7 @@ export default function LiveResultsIndicator({
       </span>
 
       {/* TODO @YohanTz: Number of tokens */}
-      <p>{totalCount} results</p>
+      <p>{formatNumber(totalCount)} results</p>
     </div>
   );
 }

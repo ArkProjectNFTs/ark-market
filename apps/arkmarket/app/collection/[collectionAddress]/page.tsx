@@ -2,11 +2,6 @@ import { notFound } from "next/navigation";
 
 import { collectionPageSearchParamsCache } from "../search-params";
 import Collection from "./components/collection";
-import CollectionBanner from "./components/collection-banner";
-import CollectionFooter from "./components/collection-footer";
-import CollectionHeader from "./components/collection-header";
-import CollectionItemsActivity from "./components/collection-items-activity";
-import MobileCollectionHeader from "./components/mobile-collection-header";
 import {
   getCollectionInfos,
   getCollectionTokens,

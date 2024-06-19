@@ -4,10 +4,14 @@ import { HelpCircle, Power, Wallet } from "lucide-react";
 import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
 import { ThemeTabs } from "@ark-market/ui/components/theme";
 
+import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
 export default function WalletAccountContent() {
+  if (address === undefined) {
+    return;
+  }
   return (
     <>
       <div className="flex h-12 items-center gap-4">
@@ -34,9 +38,7 @@ export default function WalletAccountContent() {
                 </div>
               )}
               <p className="text-sm">{shortenedAddress}</p>
-              <button onClick={handleCopyAddress} className={focusableStyles}>
-                <Copy size={16} className="text-muted-foreground" />
-              </button>
+              <CopyButton textToCopy={address} />
             </div>
           )}
         </div>

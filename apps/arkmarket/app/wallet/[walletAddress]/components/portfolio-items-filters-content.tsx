@@ -12,6 +12,7 @@ import {
   cn,
   ellipsableStyles,
   focusableStyles,
+  formatNumber,
   formatUnits,
 } from "@ark-market/ui/lib/utils";
 
@@ -73,7 +74,7 @@ export default function PortfolioItemsFiltersContent({
           <h3 className="font-bold">All Collections </h3>
           {infiniteData.pages[0]?.collection_count !== undefined && (
             <span className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs font-medium text-secondary-foreground">
-              {infiniteData.pages[0]?.collection_count}
+              {formatNumber(infiniteData.pages[0]?.collection_count)}
             </span>
           )}
         </div>

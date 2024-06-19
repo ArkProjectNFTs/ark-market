@@ -6,12 +6,10 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   useAccount,
-  useBalance,
   useDisconnect,
   useStarkProfile,
 } from "@starknet-react/core";
-import { Copy, HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
-import { useCopyToClipboard } from "usehooks-ts";
+import { HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
 
 import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
 import StarknetLogo from "@ark-market/ui/components/icons/starknet-logo";
@@ -23,6 +21,7 @@ import {
 import { ThemeTabs } from "@ark-market/ui/components/theme";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
+import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
@@ -60,7 +59,6 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
       ? parseFloat(strkBalance.formatted).toFixed(4)
       : undefined;
 
-  const [, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
 
   const shortenedAddress = useMemo(() => {
@@ -70,20 +68,6 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
 
   function closePopover() {
     setOpen(false);
-  }
-
-  function handleCopyAddress() {
-    if (address === undefined) {
-      return;
-    }
-
-    copy(address)
-      .then(() => {
-        setCopied(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   useEffect(() => {
@@ -129,9 +113,7 @@ export default function WalletAccountPopover({ children }: PropsWithChildren) {
                   </div>
                 )}
                 <p className="text-sm">{shortenedAddress}</p>
-                <button onClick={handleCopyAddress} className={focusableStyles}>
-                  <Copy size={16} className="text-muted-foreground" />
-                </button>
+                <CopyButton textToCopy={address} />
               </div>
             )}
           </div>

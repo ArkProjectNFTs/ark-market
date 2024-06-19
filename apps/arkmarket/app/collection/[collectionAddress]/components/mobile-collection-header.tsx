@@ -19,6 +19,7 @@ import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
 import CollectionHeaderStats from "./collection-header-stats";
 
@@ -88,10 +89,7 @@ export default function MobileCollectionHeader({
             </p>
 
             <div className="mt-4 flex items-center gap-4 text-muted-foreground">
-              <ExternalLink href="/">
-                {/* TODO @YohanTz: Copy collection address */}
-                <Copy className="h-6 w-auto" />
-              </ExternalLink>
+              <CopyButton textToCopy={collectionAddress} className="h-6" />
               <ExternalLink href="/">
                 <XIcon className="h-6 w-auto" />
               </ExternalLink>

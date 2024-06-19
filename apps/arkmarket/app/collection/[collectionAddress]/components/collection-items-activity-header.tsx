@@ -24,7 +24,10 @@ export default function CollectionItemsActivityHeader({
 }: PropsWithChildren<PropsWithClassName<CollectionItemsActivityHeaderProps>>) {
   return (
     <div
-      className={cn("border-b border-border lg:border-none", className)}
+      className={cn(
+        "border-b border-border px-5 pb-4 sm:py-6 sm:pt-4 lg:border-none",
+        className,
+      )}
       style={style}
     >
       <TabsV2 value={activeTab} onValueChange={onTabChange}>
