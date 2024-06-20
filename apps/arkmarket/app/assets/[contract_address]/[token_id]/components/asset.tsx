@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useOrderType } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { MoveLeft } from "lucide-react";
 import { useQuery } from "react-query";
@@ -101,7 +102,7 @@ const Asset: React.FC<AssetProps> = ({ params }) => {
             )}
           </>
         )}
-        <TokenOffers token={token} />
+        <TokenOffers token={token} tokenMarketData={tokenMarketData} />
         <Activity params={params} />
       </div>
     </div>

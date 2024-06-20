@@ -1,6 +1,6 @@
 "use client";
 
-import { useCreateListing } from "@ark-project/react";
+import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
 import moment from "moment";
@@ -65,6 +65,7 @@ const formSchema = z.object({
 const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
   const { account } = useAccount();
   const { createListing, status } = useCreateListing();
+  const { create: createAuction, status: auctionStatus } = useCreateAuction();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,22 +100,35 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
     };
 
     try {
-      await createListing({
-        starknetAccount: account,
-        brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        tokenAddress: token.contract_address,
-        tokenId: processedValues.tokenId,
-        endDate: processedValues.endDate,
-        startAmount: processedValues.startAmount,
-      });
+      if (values.type === AUCTION) {
+        await createAuction({
+          starknetAccount: account,
+          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+          tokenAddress: token.contract_address,
+          tokenId: processedValues.tokenId,
+          endDate: processedValues.endDate,
+          startAmount: processedValues.startAmount,
+          endAmount: processedValues.endAmount,
+        });
+      } else {
+        await createListing({
+          starknetAccount: account,
+          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+          tokenAddress: token.contract_address,
+          tokenId: processedValues.tokenId,
+          endDate: processedValues.endDate,
+          startAmount: processedValues.startAmount,
+        });
+      }
     } catch (error) {
       console.error("error: create listing failed", error);
     }
   }
 
-  const isLoading = status === "loading";
+  const isAuction = form.getValues("type") === AUCTION;
   const duration = form.watch("duration");
   const expiredAt = moment().add(duration, "hours").format("LLLL");
+  const isLoading = status === "loading" || auctionStatus === "loading";
 
   return (
     <div className="w-full rounded border p-4">
@@ -150,18 +164,14 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
                     <FormItem className="flex items-center justify-center p-4">
                       <FormLabel className="flex flex-grow flex-col space-y-2 font-normal">
                         <span className="font-semibold">
-                          Sell to highest bidder (coming soon)
+                          Sell to highest bidder
                         </span>
                         <span className="">
                           The item is listed for auction.
                         </span>
                       </FormLabel>
                       <FormControl>
-                        <RadioGroupItem
-                          value={AUCTION}
-                          className="h-6 w-6"
-                          disabled
-                        />
+                        <RadioGroupItem value={AUCTION} className="h-6 w-6" />
                       </FormControl>
                     </FormItem>
                   </RadioGroup>
@@ -183,6 +193,21 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
               </FormItem>
             )}
           />
+          {isAuction && (
+            <FormField
+              control={form.control}
+              name="endAmount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Reserve Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Amount" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="duration"

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useOrderType } from "@ark-project/react";
 import { ClockIcon } from "@radix-ui/react-icons";
 import moment from "moment";
 import { formatEther } from "viem";
@@ -19,8 +20,9 @@ interface ListingProps {
 }
 
 const Listing: React.FC<ListingProps> = ({ token, tokenMarketData }) => {
-  const type = "LISTING";
-
+  const type = useOrderType({
+    orderHash: BigInt(tokenMarketData?.order_hash),
+  });
   const price = formatEther(BigInt(tokenMarketData.start_amount));
   const reservePrice = formatEther(BigInt(tokenMarketData.end_amount));
 
@@ -28,7 +30,7 @@ const Listing: React.FC<ListingProps> = ({ token, tokenMarketData }) => {
     return null;
   }
 
-  const isAuction = false;
+  const isAuction = type === "AUCTION";
 
   return (
     <div className="w-full rounded border">
@@ -53,7 +55,11 @@ const Listing: React.FC<ListingProps> = ({ token, tokenMarketData }) => {
           <>
             <div className="text-muted-foreground">Current Price</div>
             <div className="mb-4 text-3xl font-bold">{price} ETH</div>
-            <AcceptOffer token={token} tokenMarketData={tokenMarketData} />
+            <AcceptOffer
+              token={token}
+              tokenMarketData={tokenMarketData}
+              isAuction={isAuction}
+            />
             <div className="flex space-x-2">
               <FulfillListing token={token} tokenMarketData={tokenMarketData} />
               <CreateOffer token={token} tokenMarketData={tokenMarketData} />
