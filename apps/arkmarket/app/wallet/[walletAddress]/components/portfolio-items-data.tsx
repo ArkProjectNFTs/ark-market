@@ -74,6 +74,7 @@ export default function PortfolioItemsData({
   return (
     <div className="mb-6">
       <PortfolioItemsDataGridView
+        key={collectionFilter}
         walletTokens={walletTokens}
         viewType={viewType}
       />
