@@ -92,9 +92,12 @@ export default function PortfolioItemsDataListView({
               <TableCell className="pl-5">
                 <div className="flex items-center gap-4">
                   <Media
-                    src={token.metadata?.image}
                     alt={token.metadata?.name ?? "Empty NFT"}
                     className="h-[2.625rem] w-[2.625rem] rounded-md object-contain"
+                    src={token.metadata?.image ?? token.metadata?.animation_url}
+                    mediaKey={
+                      token.metadata?.animation_key ?? token.metadata?.image_key
+                    }
                   />
                   <p className={cn("w-full font-semibold", ellipsableStyles)}>
                     {token.metadata?.name ?? token.token_id}
