@@ -15,6 +15,7 @@ import { Separator } from "@ark-market/ui/components/separator";
 
 import ConnectWalletModal from "./connect-wallet-modal";
 import ProfilePicture from "./profile-picture";
+import WalletAccountModal from "./wallet-account-modal";
 import WalletAccountPopover from "./wallet-account-popover";
 import WrongNetworkModal from "./wrong-network-modal";
 
@@ -67,23 +68,37 @@ export function UserNav() {
   }
 
   return (
-    <WalletAccountPopover>
-      <Button className="gap-1.5 !pl-2 md:gap-3" variant="secondary" size="sm">
-        <EthereumLogo className="hidden size-6 sm:block md:size-8" />
-        <p className="hidden sm:block">
-          {roundedEthBalance}
-          <span className="text-muted-foreground"> ETH</span>
-        </p>
-        <Separator
-          orientation="vertical"
-          className="hidden bg-background sm:block"
-        />
-        <ProfilePicture
-          className="size-6 rounded-full md:size-8"
-          address={address}
-        />
-        {starkProfile?.name ?? shortenedAddress}
-      </Button>
-    </WalletAccountPopover>
+    <>
+      <WalletAccountPopover>
+        <Button
+          className="hidden gap-1.5 !pl-2 sm:inline-flex md:gap-3"
+          variant="secondary"
+          size="sm"
+        >
+          <EthereumLogo className="size-6 md:size-8" />
+          <p>
+            {roundedEthBalance}
+            <span className="text-muted-foreground"> ETH</span>
+          </p>
+          <Separator orientation="vertical" className="bg-background" />
+          <ProfilePicture
+            className="size-6 rounded-full md:size-8"
+            address={address}
+          />
+          {starkProfile?.name ?? shortenedAddress}
+        </Button>
+      </WalletAccountPopover>
+
+      <WalletAccountModal>
+        <Button
+          className="gap-1.5 !pl-2 sm:hidden"
+          size="sm"
+          variant="secondary"
+        >
+          <ProfilePicture className="size-6 rounded-full" address={address} />
+          {starkProfile?.name ?? shortenedAddress}
+        </Button>
+      </WalletAccountModal>
+    </>
   );
 }
