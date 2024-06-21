@@ -13,19 +13,22 @@ import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionTokens } from "../queries/getCollectionData";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
+import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsDataProps {
   collectionAddress: string;
   collectionTokensInitialData: CollectionTokensApiResponse;
-  sortDirection: CollectionSortDirection;
   sortBy: CollectionSortBy;
+  sortDirection: CollectionSortDirection;
+  totalTokensCount: number;
   viewType: ViewType;
 }
 export default function CollectionItemsData({
   collectionAddress,
   collectionTokensInitialData,
-  sortDirection,
   sortBy,
+  sortDirection,
+  totalTokensCount,
   viewType,
 }: CollectionItemsDataProps) {
   const {
@@ -63,14 +66,21 @@ export default function CollectionItemsData({
     [infiniteData],
   );
 
-  if (viewType === "list") {
-    return <CollectionItemsDataListView collectionTokens={collectionTokens} />;
-  }
-
   return (
-    <CollectionItemsDataGridView
-      collectionTokens={collectionTokens}
-      viewType={viewType}
-    />
+    <>
+      <LiveResultsIndicator
+        className="p-6 lg:hidden"
+        totalCount={totalTokensCount}
+      />
+      {viewType === "list" ? (
+        <CollectionItemsDataListView collectionTokens={collectionTokens} />
+      ) : (
+        <CollectionItemsDataGridView
+          className="mb-6"
+          collectionTokens={collectionTokens}
+          viewType={viewType}
+        />
+      )}
+    </>
   );
 }

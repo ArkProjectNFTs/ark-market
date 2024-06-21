@@ -1,7 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/components/separator";
-import { cn, formatUnits } from "@ark-market/ui/lib/utils";
+import { cn, formatNumber, formatUnits } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
 
@@ -36,7 +36,7 @@ export default function CollectionHeaderStats({
             )}
           >
             {collectionInfos.floor_7d_percentage >= 0 && "+"}
-            {collectionInfos.floor_7d_percentage}%
+            {formatNumber(collectionInfos.floor_7d_percentage)}%
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function CollectionHeaderStats({
         <div className="flex items-center ">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {collectionInfos.total_volume ?? "_"} ETH
+            {formatNumber(collectionInfos.total_volume)} ETH
           </p>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function CollectionHeaderStats({
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {collectionInfos.volume_7d_eth ?? "_"} ETH
+            {formatNumber(collectionInfos.volume_7d_eth)} ETH
           </p>
         </div>
       </div>
@@ -68,19 +68,25 @@ export default function CollectionHeaderStats({
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
-        <p className="font-medium">{collectionInfos.total_sales ?? 0}</p>
+        <p className="font-medium">
+          {formatNumber(collectionInfos.total_sales)}
+        </p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Items</p>
-        <p className="font-medium">{collectionInfos.token_count ?? 0}</p>
+        <p className="font-medium">
+          {formatNumber(collectionInfos.token_count ?? 0)}
+        </p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
-        <p className="font-medium">{collectionInfos.owner_count ?? 0}</p>
+        <p className="font-medium">
+          {formatNumber(collectionInfos.owner_count ?? 0)}
+        </p>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function CollectionFooter({ className }: PropsWithClassName) {
   return (
     <footer
       className={cn(
-        "flex h-[var(--collection-footer-height)] items-center justify-between border-t border-border bg-background px-5 text-xs",
+        "flex h-10 items-center justify-between border-t border-border bg-background px-5 text-xs",
         className,
       )}
     >

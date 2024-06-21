@@ -32,7 +32,7 @@ export async function getCollectionInfos({
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
-    return undefined;
+    return {} as CollectionInfosApiResponse;
   }
 
   return response.json() as Promise<CollectionInfosApiResponse>;
@@ -43,12 +43,15 @@ const itemsPerPage = 50;
 export interface Metadata {
   image: string;
   name: string;
+  animation_key: string | null;
+  animation_url: string | null;
+  image_key: string | null;
 }
 
 export interface CollectionToken {
   contract: string;
   token_id: string;
-  owner: string;
+  owner: string | null;
   minted_at: number;
   updated_at: number;
   price: null | number;

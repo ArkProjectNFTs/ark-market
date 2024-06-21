@@ -100,9 +100,15 @@ export default function CollectionItemsDataListView({
                 <TableCell className="pl-5">
                   <div className="flex items-center gap-4">
                     <Media
-                      src={token.metadata?.image}
+                      src={
+                        token.metadata?.image ?? token.metadata?.animation_url
+                      }
+                      mediaKey={
+                        token.metadata?.animation_key ??
+                        token.metadata?.image_key
+                      }
                       alt={token.metadata?.name ?? "Empty NFT"}
-                      className="h-[2.625rem] w-[2.625rem] rounded-md"
+                      className="h-[2.625rem] w-[2.625rem] rounded-md object-contain"
                     />
                     <p className={cn("w-full font-semibold", ellipsableStyles)}>
                       {token.metadata?.name ?? token.token_id}
@@ -119,7 +125,9 @@ export default function CollectionItemsDataListView({
                 <TableCell>
                   <Button asChild variant="link" className="px-0">
                     <Link href={`/wallet/${token.owner}`}>
-                      {token.owner.slice(0, 6)}...
+                      {token.owner !== null
+                        ? `${token.owner.slice(0, 6)}...`
+                        : "_"}
                     </Link>
                   </Button>
                 </TableCell>

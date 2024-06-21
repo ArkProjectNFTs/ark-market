@@ -8,6 +8,7 @@ import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
 import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
+import CopyButton from "~/components/copy-button";
 import ProfilePicture from "~/components/profile-picture";
 
 interface PortfolioHeaderProps {
@@ -36,7 +37,7 @@ export default function PortfolioHeader({
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}
-          className="rounded-xs size-8 sm:size-16 sm:rounded-lg"
+          className="size-8 rounded-xs sm:size-16 sm:rounded-lg"
         />
         <div className="h-full w-full">
           <div className="flex items-center justify-between sm:justify-start">
@@ -44,9 +45,7 @@ export default function PortfolioHeader({
               {starkProfile?.name ?? shortenedAddress}
             </p>
             <div className="ml-2.5 flex items-center gap-4 text-secondary-foreground">
-              <button className={focusableStyles}>
-                <CopyIcon className="h-6 sm:h-4" />
-              </button>
+              <CopyButton className="h-6 sm:h-4" textToCopy={walletAddress} />
             </div>
           </div>
 

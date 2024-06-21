@@ -19,6 +19,7 @@ import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
 import CollectionHeaderStats from "./collection-header-stats";
 
@@ -53,11 +54,17 @@ export default function MobileCollectionHeader({
               ) ? (
                 <img
                   src="/medias/everai_profile_picture.png"
-                  className="rounded-xs aspect-square h-full flex-shrink-0"
+                  className="aspect-square h-full flex-shrink-0 rounded-xs"
                   alt="Everai profile"
                 />
+              ) : collectionInfos.image !== null ? (
+                <img
+                  src={collectionInfos.image}
+                  className="aspect-square h-full flex-shrink-0 rounded-xs"
+                  alt={collectionInfos.collection_name}
+                />
               ) : (
-                <div className="rounded-xs aspect-square h-full flex-shrink-0 bg-secondary" />
+                <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
                 <p className="text-lg font-semibold">
@@ -82,10 +89,7 @@ export default function MobileCollectionHeader({
             </p>
 
             <div className="mt-4 flex items-center gap-4 text-muted-foreground">
-              <ExternalLink href="/">
-                {/* TODO @YohanTz: Copy collection address */}
-                <Copy className="h-6 w-auto" />
-              </ExternalLink>
+              <CopyButton textToCopy={collectionAddress} className="h-6" />
               <ExternalLink href="/">
                 <XIcon className="h-6 w-auto" />
               </ExternalLink>

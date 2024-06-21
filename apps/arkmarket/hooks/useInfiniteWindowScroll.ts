@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 interface UseInfiniteWindowScrollParams {
   isFetchingNextPage: boolean;
   hasNextPage: boolean;
-  fetchNextPage: () => void;
+  fetchNextPage: () => Promise<unknown>;
 }
 
 export default function useInfiniteWindowScroll({

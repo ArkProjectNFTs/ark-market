@@ -1,5 +1,4 @@
 import Portfolio from "./components/portfolio";
-import PortfolioHeader from "./components/portfolio-header";
 import { getWalletCollections, getWalletTokens } from "./queries/getWalletData";
 import { walletPageSearchParamsCache } from "./search-params";
 
@@ -31,16 +30,10 @@ export default async function WalletPage({
   }
 
   return (
-    <main>
-      <div className="sticky top-[var(--site-header-height)]">
-        <PortfolioHeader walletAddress={walletAddress} />
-
-        <Portfolio
-          walletTokensInitialData={walletTokensInitialData}
-          walletCollectionsInitialData={walletCollectionsInitialData}
-          walletAddress={walletAddress}
-        />
-      </div>
-    </main>
+    <Portfolio
+      walletTokensInitialData={walletTokensInitialData}
+      walletCollectionsInitialData={walletCollectionsInitialData}
+      walletAddress={walletAddress}
+    />
   );
 }

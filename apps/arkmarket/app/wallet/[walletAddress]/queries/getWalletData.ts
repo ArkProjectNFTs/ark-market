@@ -5,6 +5,9 @@ const itemsPerPage = 50;
 export interface Metadata {
   image: string;
   name: string;
+  animation_key: string | null;
+  animation_url: string | null;
+  image_key: string | null;
 }
 export interface WalletToken {
   collection_name: string;

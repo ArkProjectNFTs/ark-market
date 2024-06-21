@@ -25,7 +25,7 @@ interface ToolsBarProps {
   setSortDirection: (sortDirection: CollectionSortDirection) => void;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
-  toggleFiltersOpen: () => void;
+  toggleFiltersPanel: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
   totalTokensCount: number;
@@ -37,7 +37,7 @@ export default function CollectionItemsToolsBar({
   setSortDirection,
   sortBy,
   sortDirection,
-  toggleFiltersOpen,
+  toggleFiltersPanel,
   viewType,
   setViewType,
   totalTokensCount,
@@ -52,7 +52,7 @@ export default function CollectionItemsToolsBar({
             </Button>
           </CollectionItemsFiltersModal>
           <Button
-            onClick={toggleFiltersOpen}
+            onClick={toggleFiltersPanel}
             variant="secondary"
             size="lg"
             className="hidden sm:flex"

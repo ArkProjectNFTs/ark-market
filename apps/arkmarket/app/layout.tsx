@@ -56,7 +56,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans text-foreground antialiased",
+          "min-h-screen overscroll-y-none bg-background font-sans text-foreground antialiased",
           inter.variable,
         )}
       >

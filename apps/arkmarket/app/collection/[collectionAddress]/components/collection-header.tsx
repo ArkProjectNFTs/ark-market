@@ -3,23 +3,15 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { Button } from "@ark-market/ui/components/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/components/collapsible";
-import CopyIcon from "@ark-market/ui/components/icons/copy-icon";
 import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
@@ -27,11 +19,9 @@ import XIcon from "@ark-market/ui/components/icons/x-icon";
 import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
 
 import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
-import { collectionBannerRemHeight } from "./collection-banner";
 import CollectionHeaderStats from "./collection-header-stats";
-
-const MotionButton = motion(Button);
 
 interface CollectionHeaderProps {
   collectionAddress: string;
@@ -45,30 +35,15 @@ export default function CollectionHeader({
   collectionInfos,
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
-  const [hasPassedBanner, setHasPassedBanner] = useState(false);
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
-  const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    // TODO @YohanTz: Get root element's font size (might not always be 16)
-    const collectionBannerPxHeight = collectionBannerRemHeight * 16;
-
-    if (!hasPassedBanner && latest >= collectionBannerPxHeight) {
-      setHasPassedBanner(true);
-    } else if (hasPassedBanner && latest < collectionBannerPxHeight) {
-      setHasPassedBanner(false);
-    }
-  });
-
-  const shouldShowCollapsibleContent = !hasPassedBanner && collapsibleOpen;
-
   return (
-    <div className={cn("bg-background", className)} style={style}>
+    <div className={className} style={style}>
       <Collapsible
         className={cn(
-          "min-h-[var(--collection-header-height)] w-full border-b border-border p-5 transition-[height]",
+          "min-h-[6.875rem] w-full border-b border-border p-5 transition-[height]",
         )}
-        open={shouldShowCollapsibleContent}
+        open={collapsibleOpen}
         onOpenChange={setCollapsibleOpen}
       >
         <div className="flex h-full items-center justify-between gap-0">
@@ -81,6 +56,12 @@ export default function CollectionHeader({
                 src="/medias/everai_profile_picture.png"
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
                 alt="Everai profile"
+              />
+            ) : collectionInfos.image !== null ? (
+              <img
+                src={collectionInfos.image}
+                className="aspect-square h-full flex-shrink-0 rounded-lg"
+                alt={collectionInfos.collection_name}
               />
             ) : (
               <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
@@ -96,10 +77,7 @@ export default function CollectionHeader({
                 </div>
               </div>
               <div className="mb-1 flex h-6 items-center gap-4 text-muted-foreground">
-                <ExternalLink href="/">
-                  {/* TODO @YohanTz: Copy collection address */}
-                  <CopyIcon />
-                </ExternalLink>
+                <CopyButton textToCopy={collectionAddress} />
                 <ExternalLink href="/">
                   <XIcon />
                 </ExternalLink>
@@ -109,25 +87,17 @@ export default function CollectionHeader({
                 <ExternalLink href="/">
                   <WebsiteIcon />
                 </ExternalLink>
-                <AnimatePresence>
-                  {!hasPassedBanner && (
-                    <CollapsibleTrigger asChild>
-                      <motion.button
-                        className={cn(
-                          "ml-1 flex items-center gap-1",
-                          focusableStyles,
-                        )}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        transition={{ ease: "easeInOut", duration: 0.15 }}
-                        exit={{ height: 0, opacity: 0 }}
-                      >
-                        More Info
-                        <ChevronDown size={16} />
-                      </motion.button>
-                    </CollapsibleTrigger>
-                  )}
-                </AnimatePresence>
+                <CollapsibleTrigger asChild>
+                  <button
+                    className={cn(
+                      "ml-1 flex items-center gap-1",
+                      focusableStyles,
+                    )}
+                  >
+                    {collapsibleOpen ? "Less Info" : "More Info"}
+                    <ChevronDown size={16} />
+                  </button>
+                </CollapsibleTrigger>
               </div>
             </div>
           </div>

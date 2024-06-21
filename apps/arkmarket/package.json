@@ -41,7 +41,6 @@
     "starknet": "^6.9.0",
     "starknetkit": "^2.2.10",
     "superjson": "2.2.1",
-    "usehooks-ts": "^3.1.0",
     "viem": "^2.13.10",
     "web3": "^4.7.0",
     "zod": "^3.22.4"

@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useState } from "react";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
+import useIsSSR from "~/hooks/useIsSSR";
 import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
@@ -30,6 +31,7 @@ export default function PortfolioItemsData({
     walletCollectionFilterKey,
     walletCollectionFilterParser,
   );
+  const isSSR = useIsSSR();
 
   const {
     data: infiniteData,
@@ -39,11 +41,14 @@ export default function PortfolioItemsData({
   } = useInfiniteQuery({
     queryKey: ["walletTokens", collectionFilter, walletAddress],
     refetchInterval: 10_000,
+    placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => lastPage.next_page,
-    initialData: {
-      pages: [walletTokensInitialData],
-      pageParams: [],
-    },
+    initialData: isSSR
+      ? {
+          pages: [walletTokensInitialData],
+          pageParams: [],
+        }
+      : undefined,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
       getWalletTokens({
@@ -59,15 +64,20 @@ export default function PortfolioItemsData({
     () => infiniteData?.pages.flatMap((page) => page.data),
     [infiniteData],
   );
-
+  if (walletTokens === undefined) {
+    return;
+  }
   if (viewType === "list") {
     return <PortfolioItemsDataListView walletTokens={walletTokens} />;
   }
 
   return (
-    <PortfolioItemsDataGridView
-      walletTokens={walletTokens}
-      viewType={viewType}
-    />
+    <div className="mb-6">
+      <PortfolioItemsDataGridView
+        key={collectionFilter}
+        walletTokens={walletTokens}
+        viewType={viewType}
+      />
+    </div>
   );
 }

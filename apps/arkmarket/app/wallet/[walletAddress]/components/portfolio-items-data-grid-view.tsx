@@ -82,9 +82,12 @@ export default function CollectionItemsDataGridView({
               <NftCardMedia>
                 {/* TODO: Media part of NftCardMedia */}
                 <Media
-                  src={token.metadata?.image}
                   alt={token.metadata?.name ?? "Empty"}
-                  className="aspect-square w-full transition-transform group-hover:scale-110"
+                  className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
+                  src={token.metadata?.image ?? token.metadata?.animation_url}
+                  mediaKey={
+                    token.metadata?.animation_key ?? token.metadata?.image_key
+                  }
                 />
               </NftCardMedia>
             </Link>
