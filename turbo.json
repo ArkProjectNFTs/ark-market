@@ -1,8 +1,7 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "experimentalUI": true,
-  "globalDependencies": ["**/.env"],
-  "pipeline": {
+  "ui": "tui",
+  "tasks": {
     "topo": {
       "dependsOn": ["^topo"]
     },
@@ -12,6 +11,7 @@
         ".next/**",
         "!.next/cache/**",
         "next-env.d.ts",
+        ".expo/**",
         ".output/**",
         ".vercel/output/**"
       ]
@@ -22,14 +22,14 @@
     },
     "format": {
       "outputs": ["node_modules/.cache/.prettiercache"],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": ["^topo"],
+      "dependsOn": ["^topo", "^build"],
       "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": ["^topo"],
+      "dependsOn": ["^topo", "^build"],
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "clean": {
@@ -37,13 +37,31 @@
     },
     "//#clean": {
       "cache": false
+    },
+    "push": {
+      "cache": false,
+      "interactive": true
+    },
+    "ui-add": {
+      "cache": false,
+      "interactive": true
     }
   },
   "globalEnv": [
     "DATABASE_URL",
+    "POSTGRES_URL",
     "AUTH_DISCORD_ID",
     "AUTH_DISCORD_SECRET",
     "AUTH_REDIRECT_PROXY_URL",
-    "AUTH_SECRET"
+    "AUTH_SECRET",
+    "PORT"
+  ],
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "npm_lifecycle_event"
   ]
 }
