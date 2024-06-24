@@ -1,3 +1,5 @@
+"use client";
+
 import { Copy } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
