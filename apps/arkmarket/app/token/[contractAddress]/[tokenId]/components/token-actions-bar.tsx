@@ -6,7 +6,7 @@ import Media from "~/components/media";
 
 export default function TokenActionsBar() {
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8">
+    <div className="fixed left-0 top-0 z-50 hidden h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8 lg:flex">
       <div className="flex items-center gap-3.5">
         <Media
           alt="Everai"
