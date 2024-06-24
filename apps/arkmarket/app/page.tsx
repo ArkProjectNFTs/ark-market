@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@ark-market/ui/components/card";
+import { Card, CardContent, CardFooter } from "@ark-market/ui/components/card";
 
 import { collections } from "~/config/homepage"; // Update with the correct path to your JSON file
 

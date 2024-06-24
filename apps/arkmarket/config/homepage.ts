@@ -6,6 +6,12 @@ export const collections = [
     image: "/collections/c6fc5552-1051-4f68-87c9-fcd6ddc1f026.jpeg",
   },
   {
+    name: "Grails",
+    address:
+      "0x02a819b93cc69b45ee5d1a1bfc16954c16f6d35c3873a06c97b95c009bfe502b",
+    image: "/collections/grail.png",
+  },
+  {
     name: "Starknet.id",
     address:
       "0x05dbdedc203e92749e2e746e2d40a768d966bd243df04a6b712e222bc040a9af",
@@ -28,6 +34,108 @@ export const collections = [
     address:
       "0x01b22f7a9d18754c994ae0ee9adb4628d414232e3ebd748c386ac286f86c3066",
     image: "/collections/eee0d689-bf44-4a77-bdbe-eeeceb6d4b64.png",
+  },
+  {
+    name: "carbonable - KARATHURU",
+    address:
+      "0x05a667adc04676fba78a29371561a0bf91dab25847d5dc4709a93a4cfb5ff293",
+    image: "/collections/carbonable.jpeg",
+  },
+  {
+    name: "Flex storefront",
+    address:
+      "0x02e6c908da3d1ced80d81085ed9374b7c5048f86799e1f35e54daca4d70832d7",
+    image: "/collections/flex-store.png",
+  },
+  {
+    name: "Flex evo",
+    address:
+      "0x04546729db564bb29a9e1e215463f41bc53116ac75eeb8e029b8a87fee7d85fd",
+    image: "/collections/flex-evo.jpg",
+  },
+  {
+    name: "Influence asteroids",
+    address:
+      "0x0603cf837055c64d026a3c5a9e3a83036cea6c4a3f68a9e19f7a687d726fe817",
+    image: "/collections/influence.png",
+  },
+  {
+    name: "Rise of the First LPs",
+    address:
+      "0x05b991e122ff2410d32575eb369059bd26cb69a05d15001a0c93f2678d96d81c",
+    image: "/collections/rise.webp",
+  },
+  {
+    name: "Ventoria Crystals - Ruby Flame",
+    address:
+      "0x00125e36efcba872e578b6955ce08c686b10e1d22ac01de8eb5b2d51488f743a",
+    image: "/collections/ventory.png",
+  },
+  {
+    name: "Mad ape club",
+    address:
+      "0x01335defa219c2d0911a75ff85245200932501d6975d6178eabfa544e7d82b07",
+    image: "/collections/mad-ape.png",
+  },
+  {
+    name: "Pyramid store",
+    address:
+      "0x42e7815d9e90b7ea53f4550f74dc12207ed6a0faaef57ba0dbf9a66f3762d82",
+    image: "/collections/pyramid.png",
+  },
+  {
+    name: "Lotus Project",
+    address:
+      "0x61ccf82a5628c0dbe3d0cc10e904882f1e9bc8adbb9456bdba155341bf430e5",
+    image: "/collections/lotus.webp",
+  },
+  {
+    name: "Fibrous Arena",
+    address:
+      "0x1d2eac1bcddde10b595fd4e6247aa105ec69fef308c94fe612f435fe5798d19",
+    image: "/collections/fibrous.webp",
+  },
+  {
+    name: "The starks",
+    address:
+      "0x0485209349294398d62ad18849b8ec0940ab7fe63117fb59eba2ab7446d78394",
+    image: "/collections/the-starks.webp",
+  },
+  {
+    name: "Stonk",
+    address:
+      "0x076770d3d367bb07af81b9617216d1e1cf1fa1526104cb09686994825283090f",
+    image: "/collections/stonk.png",
+  },
+  {
+    name: "Ventorians",
+    address:
+      "0x064f76d32edd460a30b4acf62bfb2e0e76f450d61994ab698224f0fe6ae72ee5",
+    image: "/collections/ventorians.png",
+  },
+  {
+    name: "Dragark Genesis Collection",
+    address:
+      "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
+    image: "/collections/dragark.png",
+  },
+  {
+    name: "Starkguardians",
+    address:
+      "0x02d679a171589777bc996fb27767ff9a2e44c7e07967760dea3df31704ab398a",
+    image: "/collections/starguardians.webp",
+  },
+  {
+    name: "Metacube: Genesis",
+    address:
+      "0x007ca74fd0a9239678cc6355e38ac1e7820141501727ae37f9c733e5ed1c3592",
+    image: "/collections/metacube-genesis.gif",
+  },
+  {
+    name: "Dreambotty",
+    address:
+      "0x3859bf9178b48a4ba330d6872ab5a6d3895b64d6631197beefde6293bc172cd",
+    image: "/collections/dreambotty.webp",
   },
   {
     name: "The Crown of Stark",
@@ -82,18 +190,6 @@ export const collections = [
     address:
       "0x00b719f69b00a008a797dc48585449730aa1c09901fdbac1bc94b3bdc287cf76",
     image: "/collections/54bae180-0516-4635-a249-6e2add00bc7e.png",
-  },
-  {
-    name: "Starkurabu Traits",
-    address:
-      "0x02fd2dc038802e5282b27974cc2a937f79ea5762d2c195aeff41f1fd57da1ca8",
-    image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
-  },
-  {
-    name: "Stark Fox Club",
-    address:
-      "0x03b0774705a2ca356347181884569cd810155c1b9e8de9ec15d93410cc1e94c3",
-    image: "/collections/2024020519005746c96cca631946d389779db31a4014fc.gif",
   },
   {
     name: "Starkpunks",
