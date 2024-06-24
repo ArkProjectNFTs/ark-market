@@ -1,4 +1,4 @@
-import TokenAboutCollection from "./components/token-about-collection";
+import TokenAbout from "./components/token-about";
 import TokenActions from "./components/token-actions";
 import TokenActivity from "./components/token-activity";
 import TokenOffers from "./components/token-offers";
@@ -29,7 +29,7 @@ export default function TokenPage({
           <TokenActions />
           <TokenOffers />
           <TokenTraits />
-          <TokenAboutCollection />
+          <TokenAbout />
         </div>
       </div>
 

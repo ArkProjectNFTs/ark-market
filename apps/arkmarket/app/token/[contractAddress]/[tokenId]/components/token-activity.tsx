@@ -68,7 +68,7 @@ export default function TokenActivity({ className }: PropsWithClassName) {
   return (
     // TODO @YohanTz: remove min-h
     <div className={cn("min-h-[150vh]", className)}>
-      <div className="sticky top-[var(--site-header-height)] z-20 flex items-center gap-4 bg-background">
+      <div className="flex items-center gap-4">
         <h2 className="text-3xl font-semibold">Activity</h2>
         <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm font-medium text-secondary-foreground">
           {activityData.length}
@@ -89,8 +89,8 @@ export default function TokenActivity({ className }: PropsWithClassName) {
           {activityData.map((activity, index) => {
             const activityItem = activityTypeToItem.get(activity.type);
             return (
-              <TableRow className="h-[4.6875rem]" key={index}>
-                <TableCell className="pl-5">
+              <TableRow className="group h-[4.6875rem]" key={index}>
+                <TableCell className="pl-5 transition-colors group-hover:text-muted-foreground">
                   <div className="flex items-center gap-4 whitespace-nowrap">
                     {activityItem?.icon}
                     <p>{activityItem?.title}</p>
