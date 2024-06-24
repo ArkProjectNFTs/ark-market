@@ -1,4 +1,5 @@
 import React from "react";
+import { useOrderType } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { useQuery } from "react-query";
 import { formatEther, hexToNumber } from "viem";
@@ -24,9 +25,13 @@ import CancelOffer from "./cancel-offer";
 
 interface TokenOffersProps {
   token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
-const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
+const TokenOffers: React.FC<TokenOffersProps> = ({
+  token,
+  tokenMarketData,
+}) => {
   const {
     data: tokenOffers,
     error: tokenOffersError,
@@ -43,7 +48,12 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
     },
   );
   const { address, account } = useAccount();
+  const type = useOrderType({
+    orderHash: BigInt(tokenMarketData.order_hash),
+  });
+
   const isOwner = address && areAddressesEqual(token.owner, address);
+  const isAuction = type === "AUCTION";
 
   if (!account) {
     return null;
@@ -99,7 +109,12 @@ const TokenOffers: React.FC<TokenOffersProps> = ({ token }) => {
                       <TableCell className="flex justify-end">
                         <div className="flex space-x-2">
                           {isOwner && (
-                            <AcceptOffer token={token} offer={offer} />
+                            <AcceptOffer
+                              token={token}
+                              tokenMarketData={tokenMarketData}
+                              offer={offer}
+                              isAuction={isAuction}
+                            />
                           )}
                           {areAddressesEqual(offer.offer_maker, address) && (
                             <CancelOffer token={token} offer={offer} />

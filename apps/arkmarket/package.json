@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@ark-market/ui": "workspace:*",
-    "@ark-project/core": "^2.0.0",
-    "@ark-project/react": "^1.0.0",
+    "@ark-project/core": "^2.1.0",
+    "@ark-project/react": "^1.1.0",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.8.2",
     "@t3-oss/env-nextjs": "^0.9.2",
