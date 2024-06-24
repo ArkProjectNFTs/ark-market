@@ -25,7 +25,7 @@ import CancelOffer from "./cancel-offer";
 
 interface TokenOffersProps {
   token: Token;
-  tokenMarketData: TokenMarketData;
+  tokenMarketData: TokenMarketData | null;
 }
 
 const TokenOffers: React.FC<TokenOffersProps> = ({
@@ -48,12 +48,8 @@ const TokenOffers: React.FC<TokenOffersProps> = ({
     },
   );
   const { address, account } = useAccount();
-  const type = useOrderType({
-    orderHash: BigInt(tokenMarketData.order_hash),
-  });
 
   const isOwner = address && areAddressesEqual(token.owner, address);
-  const isAuction = type === "AUCTION";
 
   if (!account) {
     return null;
@@ -108,12 +104,11 @@ const TokenOffers: React.FC<TokenOffersProps> = ({
                       </TableCell>
                       <TableCell className="flex justify-end">
                         <div className="flex space-x-2">
-                          {isOwner && (
+                          {isOwner && tokenMarketData !== null && (
                             <AcceptOffer
                               token={token}
                               tokenMarketData={tokenMarketData}
                               offer={offer}
-                              isAuction={isAuction}
                             />
                           )}
                           {areAddressesEqual(offer.offer_maker, address) && (
