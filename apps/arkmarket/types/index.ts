@@ -29,3 +29,16 @@ export interface ContractInfo {
   name: string;
   symbol: string;
 }
+
+export interface PricesResult {
+  ethereum: {
+    price: number;
+  };
+  starknet: {
+    price: number;
+  };
+}
+
+export interface SystemStatus {
+  status: string;
+}
