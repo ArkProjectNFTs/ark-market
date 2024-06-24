@@ -9,9 +9,7 @@ import Prices from "~/components/prices";
 import SystemStatus from "~/components/system-status";
 import { siteConfig } from "~/config/site";
 
-export default async function CollectionFooter({
-  className,
-}: PropsWithClassName) {
+export default function CollectionFooter({ className }: PropsWithClassName) {
   return (
     <footer
       className={cn(
