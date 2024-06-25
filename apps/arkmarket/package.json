@@ -8,7 +8,7 @@
     "clean": "git clean -xdf .next .turbo node_modules",
     "dev": "pnpm with-env next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
+    "lint": "eslint",
     "start": "pnpm with-env next start",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
@@ -19,23 +19,25 @@
     "@ark-project/react": "^1.1.0",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.8.2",
-    "@t3-oss/env-nextjs": "^0.9.2",
+    "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.28.6",
     "@tanstack/react-table": "^8.15.3",
     "@tanstack/react-virtual": "^3.5.0",
+    "@trpc/client": "11.0.0-rc.364",
+    "@trpc/react-query": "11.0.0-rc.364",
+    "@trpc/server": "11.0.0-rc.364",
     "@vercel/speed-insights": "^1.0.10",
     "blockies-ts": "^1.0.0",
-    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.6",
     "geist": "^1.2.2",
     "get-starknet-core": "^3.2.0",
     "lucide-react": "^0.381.0",
     "mobula-sdk": "^1.5.4",
     "moment": "^2.30.1",
-    "next": "^14.1.4",
+    "next": "^14.2.3",
     "nuqs": "^1.17.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-icons": "^5.0.1",
     "react-query": "^3.39.3",
     "react-virtuoso": "^4.7.11",
@@ -43,8 +45,7 @@
     "starknetkit": "^2.2.10",
     "superjson": "2.2.1",
     "viem": "^2.13.10",
-    "web3": "^4.7.0",
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@ark-market/eslint-config": "workspace:*",
@@ -52,22 +53,14 @@
     "@ark-market/tailwind-config": "workspace:*",
     "@ark-market/tsconfig": "workspace:*",
     "@types/node": "^20.11.30",
-    "@types/react": "^18.2.69",
-    "@types/react-dom": "^18.2.22",
-    "dotenv-cli": "^7.4.1",
-    "eslint": "^8.57.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "dotenv-cli": "^7.4.2",
+    "eslint": "^9.4.0",
     "jiti": "^1.21.0",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@ark-market/eslint-config/base",
-      "@ark-market/eslint-config/nextjs",
-      "@ark-market/eslint-config/react"
-    ]
+    "prettier": "^3.3.1",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   },
   "prettier": "@ark-market/prettier-config"
 }
