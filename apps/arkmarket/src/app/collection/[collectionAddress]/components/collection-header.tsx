@@ -101,13 +101,12 @@ export default function CollectionHeader({
               </div>
             </div>
           </div>
-
           <CollectionHeaderStats
             collectionInfos={collectionInfos}
             className="hidden md:hidden xl:flex"
           />
         </div>
-        <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
+        <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <p className="flex items-center gap-2 pt-8">
             Created
             <span className="text-muted-foreground"> Feb 2000</span>
@@ -117,7 +116,6 @@ export default function CollectionHeader({
             Creator earnings
             <span className="text-muted-foreground"> 1000%</span>
           </p>
-
           <p className="max-w-lg pt-4 text-sm">
             Everai is a pioneering web3 brand set to expand its universe powered
             by the collective creativity of its artistic partners and vibrant
