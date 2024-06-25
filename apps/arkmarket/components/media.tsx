@@ -132,7 +132,7 @@ export default function Media({
         />
       )}
       <Image
-        // loading="eager"
+        loading="eager"
         unoptimized
         alt={alt}
         className={cn(
