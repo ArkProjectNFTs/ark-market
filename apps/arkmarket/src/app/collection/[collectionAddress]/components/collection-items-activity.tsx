@@ -74,7 +74,7 @@ export default function CollectionItemsActivity({
         >
           {activeTab === "items" && (
             <CollectionItemsToolsBar
-              toggleFiltersOpen={() =>
+              toggleFiltersPanel={() =>
                 setItemsFiltersOpen((previous) => !previous)
               }
               sortDirection={sortDirection}
@@ -105,6 +105,7 @@ export default function CollectionItemsActivity({
               sortDirection={sortDirection}
               sortBy={sortBy}
               viewType={viewType}
+              totalTokensCount={0}
             />
           )}
         </div>

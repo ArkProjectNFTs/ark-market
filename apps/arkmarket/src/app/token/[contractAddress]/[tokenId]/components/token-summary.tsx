@@ -1,8 +1,8 @@
 import { RefreshCw, Share2 } from "lucide-react";
 
-import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import VerifiedIcon from "@ark-market/ui/components/icons/verified-icon";
-import { cn, ellipsableStyles } from "@ark-market/ui/lib/utils";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
@@ -25,7 +25,7 @@ export default function TokenSummary({
       <Media
         alt="Everai"
         src="https://media.arkproject.dev/ab43f917530bbfd33cb3d9d7ef92180d515c3b1bce8674b45a9ace6283ba5d43.mp4"
-        className="w-full rounded-xs"
+        className="rounded-xs w-full"
       />
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-2.5">

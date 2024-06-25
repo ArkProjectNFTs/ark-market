@@ -3,11 +3,7 @@
 import type { PropsWithChildren } from "react";
 import { useState } from "react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@ark-market/ui/components/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 
 import WalletAccountContent from "./wallet-account-content";
 

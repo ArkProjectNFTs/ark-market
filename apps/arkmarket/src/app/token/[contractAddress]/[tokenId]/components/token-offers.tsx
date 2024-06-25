@@ -2,12 +2,12 @@
 
 import { ChevronDown, Meh } from "lucide-react";
 
-import { Button } from "@ark-market/ui/components/button";
+import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@ark-market/ui/components/collapsible";
+} from "@ark-market/ui/collapsible";
 
 export default function TokenOffers() {
   return (

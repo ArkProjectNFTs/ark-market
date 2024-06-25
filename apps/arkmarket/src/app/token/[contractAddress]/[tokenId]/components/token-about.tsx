@@ -1,14 +1,14 @@
 import { ChevronDown } from "lucide-react";
 
-import { Button } from "@ark-market/ui/components/button";
+import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@ark-market/ui/components/collapsible";
-import DiscordIcon from "@ark-market/ui/components/icons/discord-icon";
-import WebsiteIcon from "@ark-market/ui/components/icons/website-icon";
-import XIcon from "@ark-market/ui/components/icons/x-icon";
+} from "@ark-market/ui/collapsible";
+import DiscordIcon from "@ark-market/ui/icons/discord-icon";
+import WebsiteIcon from "@ark-market/ui/icons/website-icon";
+import XIcon from "@ark-market/ui/icons/x-icon";
 
 export default function TokenAbout() {
   return (

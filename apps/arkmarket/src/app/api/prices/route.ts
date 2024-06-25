@@ -1,7 +1,9 @@
 import { Mobula } from "mobula-sdk";
 
+import { env } from "~/env";
+
 const mobula = new Mobula({
-  apiKeyAuth: process.env.MOBULA_API_KEY,
+  apiKeyAuth: env.MOBULA_API_KEY,
 });
 
 export async function GET() {
@@ -20,10 +22,10 @@ export async function GET() {
 
   return Response.json({
     ethereum: {
-      price: response.multiDataResponse?.data?.ethereum?.price as number,
+      price: response.multiDataResponse.data.ethereum?.price as number,
     },
     starknet: {
-      price: response.multiDataResponse?.data?.starknet?.price as number,
+      price: response.multiDataResponse.data.starknet?.price as number,
     },
   });
 }

@@ -77,7 +77,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Items</p>
         <p className="font-medium">
-          {formatNumber(collectionInfos.token_count ?? 0)}
+          {formatNumber(collectionInfos.token_count)}
         </p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
@@ -85,7 +85,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
         <p className="font-medium">
-          {formatNumber(collectionInfos.owner_count ?? 0)}
+          {formatNumber(collectionInfos.owner_count)}
         </p>
       </div>
     </div>

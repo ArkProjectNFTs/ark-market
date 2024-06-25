@@ -1,7 +1,10 @@
-import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
-import { Separator } from "@ark-market/ui/components/separator";
-import { cn, formatNumber, formatUnits } from "@ark-market/ui/lib/utils";
+/* eslint-disable no-constant-binary-expression */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable no-constant-condition */
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn, formatNumber, formatUnits } from "@ark-market/ui";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Separator } from "@ark-market/ui/separator";
 
 export default function TokenStats({ className }: PropsWithClassName) {
   return (

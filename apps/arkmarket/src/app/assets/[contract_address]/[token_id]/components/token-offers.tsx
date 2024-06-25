@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import React from "react";
-import { useOrderType } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { useQuery } from "react-query";
 import { formatEther, hexToNumber } from "viem";
@@ -18,14 +18,14 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { Token } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import { getCollectionTokenOffers } from "../data";
 import AcceptOffer from "./accept-offer";
 import CancelOffer from "./cancel-offer";
 
 interface TokenOffersProps {
   token: Token;
-  tokenMarketData: TokenMarketData | null;
+  tokenMarketData?: TokenMarketData;
 }
 
 const TokenOffers: React.FC<TokenOffersProps> = ({
@@ -104,7 +104,7 @@ const TokenOffers: React.FC<TokenOffersProps> = ({
                       </TableCell>
                       <TableCell className="flex justify-end">
                         <div className="flex space-x-2">
-                          {isOwner && tokenMarketData !== null && (
+                          {isOwner && tokenMarketData && (
                             <AcceptOffer
                               token={token}
                               tokenMarketData={tokenMarketData}

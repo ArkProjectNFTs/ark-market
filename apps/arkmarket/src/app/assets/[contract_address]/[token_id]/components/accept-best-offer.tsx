@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useFulfillOffer } from "@ark-project/react";
+import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 import { formatEther } from "viem";
@@ -16,6 +16,7 @@ import { env } from "~/env";
 interface BuyOrderProps {
   token: Token;
   tokenMarketData: TokenMarketData | undefined;
+  isAuction: boolean;
 }
 
 const AcceptBestOffer: React.FC<BuyOrderProps> = ({

@@ -31,10 +31,7 @@ export default async function CollectionPage({
     sortBy: sort,
   });
 
-  if (
-    collectionTokensInitialData.data.length === 0 ||
-    collectionInfosInitialData === undefined
-  ) {
+  if (!collectionTokensInitialData.data.length) {
     // TODO @YohanTz: Handle case when a collection contract is deployed but no tokens in it
     notFound();
   }

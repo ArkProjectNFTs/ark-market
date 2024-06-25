@@ -2,14 +2,14 @@
 
 import { Copy } from "lucide-react";
 
-import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@ark-market/ui/components/tooltip";
-import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
+} from "@ark-market/ui/tooltip";
 
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 

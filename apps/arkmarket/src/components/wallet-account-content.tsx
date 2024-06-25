@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-
 import { useMemo } from "react";
 import Link from "next/link";
 import {
@@ -10,20 +7,17 @@ import {
 } from "@starknet-react/core";
 import { HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
 
-import EthereumLogo from "@ark-market/ui/components/icons/ethereum-logo";
-import StarknetLogo from "@ark-market/ui/components/icons/starknet-logo";
-import { ThemeTabs } from "@ark-market/ui/components/theme";
-import { cn, focusableStyles } from "@ark-market/ui/lib/utils";
+import { cn, focusableStyles } from "@ark-market/ui";
+import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
+import StarknetLogo from "@ark-market/ui/icons/starknet-logo";
+import { ThemeTabs } from "@ark-market/ui/theme";
 
 import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
-const STRK_CONTRACT_ADDRESS =
-  "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d";
-
 const itemCommonClassName = cn(
-  "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
+  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
   focusableStyles,
 );
 
@@ -44,6 +38,7 @@ export default function WalletAccountContent({
   // const { data: ethBalance } = useBalance({ address });
   const ethBalance = { formatted: "0.00" };
   const roundedEthBalance =
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     ethBalance !== undefined
       ? parseFloat(ethBalance.formatted).toFixed(4)
       : undefined;
@@ -54,6 +49,7 @@ export default function WalletAccountContent({
   // });
   const strkBalance = { formatted: "0.00" };
   const roundedStrkBalance =
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     strkBalance !== undefined
       ? parseFloat(strkBalance.formatted).toFixed(4)
       : undefined;

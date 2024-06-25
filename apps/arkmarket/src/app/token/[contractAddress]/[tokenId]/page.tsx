@@ -14,7 +14,7 @@ interface TokenPageProps {
 }
 
 export default function TokenPage({
-  params: { contractAddress, tokenId },
+  params: { contractAddress },
 }: TokenPageProps) {
   return (
     <main className="m-8">

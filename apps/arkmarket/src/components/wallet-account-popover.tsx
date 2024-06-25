@@ -3,7 +3,11 @@
 import type { PropsWithChildren } from "react";
 import { useState } from "react";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@ark-market/ui";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@ark-market/ui/popover";
 
 import WalletAccountContent from "./wallet-account-content";
 

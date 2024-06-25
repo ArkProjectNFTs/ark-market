@@ -1,7 +1,5 @@
-import type { PropsWithClassName } from "@/lib/utils";
-
-import { cn, formatUnits } from "@ark-market/ui/lib/utils";
-
+import type { PropsWithClassName } from ".";
+import { cn, formatUnits } from ".";
 import EtherIcon from "./icons/ether-icon";
 
 interface PriceTagProps {
@@ -14,7 +12,7 @@ export function PriceTag({
   return (
     <div
       className={cn(
-        "inline-flex h-10 items-center gap-1 rounded-xs bg-secondary pl-1.5 pr-3",
+        "rounded-xs inline-flex h-10 items-center gap-1 bg-secondary pl-1.5 pr-3",
         className,
       )}
     >

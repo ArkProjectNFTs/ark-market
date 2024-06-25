@@ -1,4 +1,4 @@
-import type { PropsWithClassName } from "@/lib/utils";
+import type { PropsWithClassName } from "..";
 
 export default function EtherIcon({ className }: PropsWithClassName) {
   return (

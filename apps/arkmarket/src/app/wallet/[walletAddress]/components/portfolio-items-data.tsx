@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
@@ -59,19 +59,16 @@ export default function PortfolioItemsData({
   });
 
   useInfiniteWindowScroll({
-    // @ts-expect-error, better handle types
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
   });
 
   const walletTokens = useMemo(
-    () => infiniteData.pages.flatMap((page) => page.data),
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
-  if (walletTokens === undefined) {
-    return;
-  }
+
   if (viewType === "list") {
     return <PortfolioItemsDataListView walletTokens={walletTokens} />;
   }

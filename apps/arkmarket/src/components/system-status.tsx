@@ -2,13 +2,13 @@
 
 import { useQuery } from "react-query";
 
+import { cn } from "@ark-market/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@ark-market/ui/components/tooltip";
-import { cn } from "@ark-market/ui/lib/utils";
+} from "@ark-market/ui/tooltip";
 
 import getSystemStatus from "~/lib/getSystemStatus";
 
@@ -37,7 +37,7 @@ export default function SystemStatus() {
     return null;
   }
 
-  const status = statuses[(data.status as keyof typeof statuses) || "ok"];
+  const status = data.status === "ok" ? statuses.ok : statuses.notok;
 
   return (
     <TooltipProvider>

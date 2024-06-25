@@ -3,7 +3,7 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import { ChevronDown, Copy } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -54,17 +54,17 @@ export default function MobileCollectionHeader({
               ) ? (
                 <img
                   src="/medias/everai_profile_picture.png"
-                  className="aspect-square h-full flex-shrink-0 rounded-xs"
+                  className="rounded-xs aspect-square h-full flex-shrink-0"
                   alt="Everai profile"
                 />
               ) : collectionInfos.image !== null ? (
                 <img
                   src={collectionInfos.image}
-                  className="aspect-square h-full flex-shrink-0 rounded-xs"
+                  className="rounded-xs aspect-square h-full flex-shrink-0"
                   alt={collectionInfos.collection_name}
                 />
               ) : (
-                <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
+                <div className="rounded-xs aspect-square h-full flex-shrink-0 bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
                 <p className="text-lg font-semibold">

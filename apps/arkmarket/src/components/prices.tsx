@@ -2,9 +2,9 @@
 
 import { useQuery } from "react-query";
 
-import EthereumLogo2 from "@ark-market/ui/components/icons/ethereum-logo-2";
-import StarknetLogo2 from "@ark-market/ui/components/icons/starknet-logo-2";
-import { Separator } from "@ark-market/ui/components/separator";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import StarknetLogo2 from "@ark-market/ui/icons/starknet-logo-2";
+import { Separator } from "@ark-market/ui/separator";
 
 import getPrices from "~/lib/getPrices";
 

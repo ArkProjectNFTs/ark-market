@@ -7,8 +7,9 @@ import {
   X,
 } from "lucide-react";
 
-import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { PriceTag } from "@ark-market/ui/components/price-tag";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,
@@ -16,8 +17,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@ark-market/ui/components/table";
-import { cn } from "@ark-market/ui/lib/utils";
+} from "@ark-market/ui/table";
 
 const activityTypeToItem = new Map([
   ["sale", { icon: <ShoppingCart size={24} />, title: "Sale" }],
@@ -103,7 +103,7 @@ export default function TokenActivity({ className }: PropsWithClassName) {
                     "_"
                   )}
                 </TableCell>
-                <TableCell>{activity.from ?? "_"}</TableCell>
+                <TableCell>{activity.from}</TableCell>
                 <TableCell>{activity.to ?? "_"}</TableCell>
                 <TableCell>8min ago</TableCell>
               </TableRow>

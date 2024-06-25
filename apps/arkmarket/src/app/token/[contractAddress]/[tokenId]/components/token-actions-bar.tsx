@@ -1,6 +1,6 @@
 import { ShoppingBag, Tag } from "lucide-react";
 
-import { Button } from "@ark-market/ui/components/button";
+import { Button } from "@ark-market/ui/button";
 
 import Media from "~/components/media";
 
@@ -11,7 +11,7 @@ export default function TokenActionsBar() {
         <Media
           alt="Everai"
           src="https://media.arkproject.dev/ab43f917530bbfd33cb3d9d7ef92180d515c3b1bce8674b45a9ace6283ba5d43.mp4"
-          className="size-12 rounded-xs"
+          className="rounded-xs size-12"
         />
         <p className="text-lg font-semibold">Everai #2345</p>
       </div>

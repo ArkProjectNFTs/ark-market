@@ -10,7 +10,7 @@ import { Button } from "@ark-market/ui/button";
 
 import type { Token, TokenMarketData } from "~/types";
 
-interface CreateOfferProps {
+interface CancelListingProps {
   token: Token;
   tokenMarketData: TokenMarketData;
 }
@@ -23,7 +23,7 @@ const CancelListing: React.FC<CancelListingProps> = ({
   const { cancel, status } = useCancel();
   const isOwner = areAddressesEqual(token.owner, address);
 
-  if (!account || !isOwner || !tokenMarketData?.is_listed) {
+  if (!account || !isOwner || !tokenMarketData.is_listed) {
     return;
   }
 

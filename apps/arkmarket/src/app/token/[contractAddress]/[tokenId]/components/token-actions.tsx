@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { ShoppingBag, Tag, TimerReset } from "lucide-react";
 
-import type { PropsWithClassName } from "@ark-market/ui/lib/utils";
-import { Button } from "@ark-market/ui/components/button";
-import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui/lib/utils";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
+import { Button } from "@ark-market/ui/button";
 
 import useIsSSR from "~/hooks/useIsSSR";
 import TokenActionsBar from "./token-actions-bar";

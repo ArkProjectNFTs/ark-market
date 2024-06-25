@@ -56,7 +56,6 @@ export default function CollectionItemsData({
   });
 
   useInfiniteWindowScroll({
-    // @ts-expect-error, better handle types
     fetchNextPage,
     hasNextPage: !!hasNextPage,
     isFetchingNextPage,

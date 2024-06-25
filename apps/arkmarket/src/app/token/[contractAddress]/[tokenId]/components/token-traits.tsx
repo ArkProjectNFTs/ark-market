@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-import { Button } from "@ark-market/ui/components/button";
+import { formatUnits } from "@ark-market/ui";
+import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@ark-market/ui/components/collapsible";
-import { formatUnits } from "@ark-market/ui/lib/utils";
+} from "@ark-market/ui/collapsible";
 
 const traitsData = [
   { trait: "Armor color", name: "Son Of The Sky", price: 768000000000000000n },

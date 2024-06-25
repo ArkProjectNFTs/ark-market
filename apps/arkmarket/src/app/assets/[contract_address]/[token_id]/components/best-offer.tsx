@@ -23,7 +23,11 @@ export function BestOffer({ token, tokenMarketData, isOwner }: BestOfferProps) {
         </div>
       </div>
       {isOwner ? (
-        <AcceptBestOffer token={token} tokenMarketData={tokenMarketData} />
+        <AcceptBestOffer
+          token={token}
+          tokenMarketData={tokenMarketData}
+          isAuction={false}
+        />
       ) : (
         <CreateOffer token={token} tokenMarketData={tokenMarketData} />
       )}

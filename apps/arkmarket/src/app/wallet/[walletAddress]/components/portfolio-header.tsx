@@ -2,10 +2,9 @@
 
 import { useMemo } from "react";
 import { useStarkProfile } from "@starknet-react/core";
-import { CopyIcon } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, focusableStyles } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 
 import CopyButton from "~/components/copy-button";
@@ -37,7 +36,7 @@ export default function PortfolioHeader({
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}
-          className="size-8 rounded-xs sm:size-16 sm:rounded-lg"
+          className="rounded-xs size-8 sm:size-16 sm:rounded-lg"
         />
         <div className="h-full w-full">
           <div className="flex items-center justify-between sm:justify-start">

@@ -1,14 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { useFulfillOffer } from "@ark-project/react";
+import {
+  useFulfillAuction,
+  useFulfillOffer,
+  useOrderType,
+} from "@ark-project/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
-import type { Offer, Token } from "~/types";
+import type { Offer, Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
 
 interface AcceptOfferProps {
@@ -31,7 +35,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   });
   const isAuction = type === "AUCTION";
   const isOwner = areAddressesEqual(token.owner, address);
-  const isListed = tokenMarketData?.is_listed;
+  const isListed = tokenMarketData.is_listed;
 
   if (!account || !isOwner) {
     return null;
