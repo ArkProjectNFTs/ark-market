@@ -34,17 +34,6 @@ jobs:
       - name: Lint
         run: pnpm lint && pnpm lint:ws
 
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup
-        uses: ./tooling/github/setup
-
-      - name: Format
-        run: pnpm format
-
   typecheck:
     runs-on: ubuntu-latest
     steps:
