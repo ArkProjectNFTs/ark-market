@@ -17,7 +17,6 @@ import {
 } from "../../search-params";
 import { getCollectionInfos } from "../queries/getCollectionData";
 import CollectionBanner from "./collection-banner";
-import CollectionFooter from "./collection-footer";
 import CollectionHeader from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
@@ -120,7 +119,6 @@ export default function Collection({
             />
           )}
         </div>
-        <CollectionFooter className="sticky bottom-0 z-10 hidden flex-shrink-0 md:flex" />
       </div>
     </main>
   );

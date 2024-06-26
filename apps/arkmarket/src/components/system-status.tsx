@@ -14,7 +14,7 @@ import getSystemStatus from "~/lib/getSystemStatus";
 
 const statuses = {
   ok: {
-    status: "Live data active",
+    status: "Live Data",
     message: "All systems operational",
     color: "bg-green-500",
     bg: "bg-green-400",

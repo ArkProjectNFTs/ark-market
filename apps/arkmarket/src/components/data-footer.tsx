@@ -9,11 +9,11 @@ import Prices from "~/components/prices";
 import SystemStatus from "~/components/system-status";
 import { siteConfig } from "~/config/site";
 
-export default function CollectionFooter({ className }: PropsWithClassName) {
+export default function DataFooter({ className }: PropsWithClassName) {
   return (
     <footer
       className={cn(
-        "flex h-10 items-center justify-between border-t border-border bg-background px-5 text-xs",
+        "h-10 items-center justify-between border-t border-border bg-background px-5 text-xs",
         className,
       )}
     >

@@ -11,6 +11,8 @@ import "~/app/globals.css";
 
 import type { PropsWithChildren } from "react";
 
+import DataFooter from "~/components/data-footer";
+import Footer from "~/components/footer";
 import Providers from "~/components/providers";
 
 export const dynamic = "force-dynamic";
@@ -57,7 +59,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen overscroll-y-none bg-background font-sans text-foreground antialiased",
+          // pb used as padding for DataFooter, which is position: fixed
+          "min-h-screen overscroll-y-none bg-background font-sans text-foreground antialiased lg:pb-10",
           inter.variable,
         )}
       >
@@ -68,6 +71,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <SpeedInsights />
           </div>
           <Toaster />
+          <Footer />
+          <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
         </Providers>
       </body>
     </html>
