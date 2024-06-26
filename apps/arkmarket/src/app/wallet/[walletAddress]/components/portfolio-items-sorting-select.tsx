@@ -11,7 +11,7 @@ import {
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "~/app/collection/search-params";
+} from "~/app/collection/[collectionAddress]/search-params";
 
 interface PortfolioItemsSortingSelectProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
