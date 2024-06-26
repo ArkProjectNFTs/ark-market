@@ -77,7 +77,7 @@ export default function TokenActivity({ className }: PropsWithClassName) {
 
       <Table className="mt-12">
         <TableHeader>
-          <TableRow>
+          <TableRow className="hover:bg-background">
             <TableHead className="pl-5">Event</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>From</TableHead>

@@ -2,7 +2,7 @@ import type { PropsWithClassName } from "@/lib/utils";
 
 import { cn, formatUnits } from "@ark-market/ui/lib/utils";
 
-import EtherIcon from "./icons/ether-icon";
+import EthereumLogo2 from "./icons/ethereum-logo-2";
 
 interface PriceTagProps {
   price: number | bigint;
@@ -18,7 +18,7 @@ export function PriceTag({
         className,
       )}
     >
-      <EtherIcon className="size-5" />
+      <EthereumLogo2 className="size-5" />
       <p className="whitespace-nowrap">
         {formatUnits(price, 18)}
         <span className="text-muted-foreground"> ETH</span>

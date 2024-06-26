@@ -30,6 +30,7 @@ export default async function CollectionPage({
     sortDirection: direction,
     sortBy: sort,
   });
+  console.log(collectionTokensInitialData.data[0]?.price);
 
   if (
     collectionTokensInitialData.data.length === 0 ||
