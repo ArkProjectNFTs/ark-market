@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["**/*.{ts,tsx}"],
+  content: ["src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -42,22 +42,6 @@ export default {
       },
       borderColor: {
         DEFAULT: "hsl(var(--border))",
-      },
-      keyframes: {
-        "collapsible-down": {
-          from: { height: "0", opacity: "0" },
-          to: {
-            height: "var(--radix-collapsible-content-height)",
-            opacity: "1",
-          },
-        },
-        "collapsible-up": {
-          from: {
-            height: "var(--radix-collapsible-content-height)",
-            opacity: "1",
-          },
-          to: { height: "0", opacity: "0" },
-        },
       },
     },
   },
