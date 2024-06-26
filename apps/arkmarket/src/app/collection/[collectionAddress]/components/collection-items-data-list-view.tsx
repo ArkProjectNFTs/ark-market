@@ -100,15 +100,12 @@ export default function CollectionItemsDataListView({
                 <TableCell className="pl-5">
                   <div className="flex items-center gap-4">
                     <Media
-                      src={
-                        token.metadata?.image ?? token.metadata?.animation_url
-                      }
-                      mediaKey={
-                        token.metadata?.animation_key ??
-                        token.metadata?.image_key
-                      }
+                      src={token.metadata?.image}
+                      mediaKey={token.metadata?.image_key}
                       alt={token.metadata?.name ?? "Empty NFT"}
                       className="h-[2.625rem] w-[2.625rem] rounded-md object-contain"
+                      height={94}
+                      width={94}
                     />
                     <p className={cn("w-full font-semibold", ellipsableStyles)}>
                       {token.metadata?.name ?? token.token_id}

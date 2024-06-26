@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -12,13 +13,27 @@ interface MediaProps {
   mediaKey?: string | null;
   alt: string;
   src?: string | null;
+  width?: number;
+  height?: number;
 }
 
-function getMediaSrc(src?: string | null, media_key?: string | null) {
-  if (media_key) {
-    return `${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`;
+function getMediaSrc(
+  src?: string | null,
+  media_key?: string | null,
+  width?: number,
+  height?: number,
+) {
+  if (media_key && width && height) {
+    const resolutionParam = `:${width}:${height}`;
+    return {
+      mediaSrc: `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`,
+      loadingMediaSrc: `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit:100:100/bl:8.0/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`,
+    };
   }
-  return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
+  return {
+    mediaSrc: src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY),
+    loadingMediaSrc: undefined,
+  };
 }
 
 function MediaPlaceholder({ className }: PropsWithClassName) {
@@ -67,12 +82,21 @@ export default function Media({
   alt,
   className,
   src,
+  width,
+  height,
 }: PropsWithClassName<MediaProps>) {
-  const [hasFailedToLoad, setHasFailedToLoad] = useState(false);
-  const mediaSrc = getMediaSrc(src, mediaKey);
+  const [status, setStatus] = useState<"loading" | "error" | "loaded">(
+    "loading",
+  );
+  const { mediaSrc, loadingMediaSrc } = getMediaSrc(
+    src,
+    mediaKey,
+    width,
+    height,
+  );
   const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
-  if (!mediaSrc || hasFailedToLoad) {
+  if (!mediaSrc || status === "error") {
     return <MediaPlaceholder className={className} />;
   }
 
@@ -85,12 +109,43 @@ export default function Media({
     );
   }
 
+  if (!height || !width || !loadingMediaSrc) {
+    return (
+      <img
+        alt={alt}
+        className={cn("flex-shrink-0", className)}
+        onError={() => setStatus("error")}
+        src={mediaSrc}
+      />
+    );
+  }
   return (
-    <img
-      alt={alt}
-      className={cn("flex-shrink-0", className)}
-      onError={() => setHasFailedToLoad(true)}
-      src={mediaSrc}
-    />
+    <>
+      {status !== "loaded" && (
+        <Image
+          alt={`Loading ${alt}`}
+          className={cn("flex-shrink-0", className)}
+          src={loadingMediaSrc}
+          height={height}
+          width={width}
+        />
+      )}
+      <Image
+        loading="eager"
+        unoptimized
+        alt={alt}
+        className={cn(
+          "flex-shrink-0",
+          className,
+          status !== "loaded" && "hidden",
+        )}
+        onError={() => setStatus("error")}
+        onLoadStart={() => setStatus("loading")}
+        onLoad={() => setStatus("loaded")}
+        src={mediaSrc}
+        height={height}
+        width={width}
+      />
+    </>
   );
 }

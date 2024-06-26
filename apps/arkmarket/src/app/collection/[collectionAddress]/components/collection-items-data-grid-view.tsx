@@ -79,16 +79,12 @@ export default function CollectionItemsDataGridView({
               <NftCard>
                 <NftCardMedia>
                   <Media
-                    src={
-                      collectionToken.metadata?.image ??
-                      collectionToken.metadata?.animation_url
-                    }
-                    mediaKey={
-                      collectionToken.metadata?.animation_key ??
-                      collectionToken.metadata?.image_key
-                    }
+                    src={collectionToken.metadata?.image}
+                    mediaKey={collectionToken.metadata?.image_key}
                     alt={collectionToken.metadata?.name ?? "Empty"}
                     className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
+                    height={viewType === "large-grid" ? 540 : 340}
+                    width={viewType === "large-grid" ? 540 : 340}
                   />
                 </NftCardMedia>
                 <NftCardContent>
