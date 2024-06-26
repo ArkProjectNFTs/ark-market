@@ -29,7 +29,7 @@ export default async function TokenPage({
   }
 
   return (
-    <main className="m-8 mx-auto max-w-[160rem]">
+    <main className="mx-auto max-w-[160rem] p-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <TokenSummary
           className="top-[calc(var(--site-header-height)+2rem)] h-fit lg:sticky"
