@@ -48,7 +48,7 @@ export default function TokenTraits({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))] gap-2 pb-6">
+        <div className="grid grid-cols-2 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
           {tokenAttributes.map((tokenAttribute, index) => {
             return (
               <div className="rounded-lg bg-card p-3.5" key={index}>

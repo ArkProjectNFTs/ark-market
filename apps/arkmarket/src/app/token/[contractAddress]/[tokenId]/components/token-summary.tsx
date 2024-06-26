@@ -27,7 +27,6 @@ export default function TokenSummary({
         className,
       )}
     >
-      {/* TODO @YohanTz: Specify height and width to use image proxy when implemented */}
       <Media
         src={tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image}
         mediaKey={
@@ -38,6 +37,8 @@ export default function TokenSummary({
           `${tokenInfos.collection_name} #${tokenId}`
         }
         className="w-full rounded-xs"
+        height={1000}
+        width={1000}
       />
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-2.5">

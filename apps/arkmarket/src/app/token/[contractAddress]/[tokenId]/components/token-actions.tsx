@@ -29,7 +29,7 @@ export default function TokenActions({
     <>
       <div
         className={cn(
-          "rounded-lg bg-card p-5 lg:px-8 lg:pb-10 lg:pt-8",
+          "rounded-none bg-card p-5 lg:rounded-lg lg:px-8 lg:pb-10 lg:pt-8",
           className,
         )}
       >

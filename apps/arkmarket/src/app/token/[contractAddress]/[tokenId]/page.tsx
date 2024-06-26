@@ -44,7 +44,10 @@ export default async function TokenPage({
               tokenInfos={tokenInfosInitialData.data}
               className="mb-8 lg:mb-0"
             />
-            <TokenActions tokenInfos={tokenInfosInitialData.data} />
+            <TokenActions
+              tokenInfos={tokenInfosInitialData.data}
+              className="-mx-5 lg:mx-0"
+            />
           </div>
           <TokenOffers className="-mx-5 lg:mx-0" />
           <TokenTraits
