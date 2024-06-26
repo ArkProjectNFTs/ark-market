@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { collectionPageSearchParamsCache } from "../search-params";
 import Collection from "./components/collection";
 import {
   getCollectionInfos,
   getCollectionTokens,
 } from "./queries/getCollectionData";
+import { collectionPageSearchParamsCache } from "./search-params";
 
 interface CollectionPageProps {
   params: {

@@ -23,7 +23,7 @@ export default function TokenActions({
   const ref = useRef<HTMLDivElement | null>(null);
   const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
   const isSSR = useIsSSR();
-  const shouldShowTokenActionsTopBar = !isSSR && !isActionItemsInView;
+  const shouldShowFixedTokenActions = !isSSR && !isActionItemsInView;
 
   return (
     <>
@@ -74,9 +74,10 @@ export default function TokenActions({
           </Button>
         </div>
       </div>
-      {shouldShowTokenActionsTopBar && (
-        <TokenActionsBar tokenInfos={tokenInfos} />
-      )}
+      <TokenActionsBar
+        show={shouldShowFixedTokenActions}
+        tokenInfos={tokenInfos}
+      />
     </>
   );
 }

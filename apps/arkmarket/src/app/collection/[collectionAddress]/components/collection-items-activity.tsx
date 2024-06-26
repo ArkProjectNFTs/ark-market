@@ -12,7 +12,7 @@ import {
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
-} from "../../search-params";
+} from "../search-params";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
 import CollectionItemsData from "./collection-items-data";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
