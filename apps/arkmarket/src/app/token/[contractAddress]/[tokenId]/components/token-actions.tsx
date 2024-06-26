@@ -74,7 +74,9 @@ export default function TokenActions({
           </Button>
         </div>
       </div>
-      {shouldShowTokenActionsTopBar && <TokenActionsBar />}
+      {shouldShowTokenActionsTopBar && (
+        <TokenActionsBar tokenInfos={tokenInfos} />
+      )}
     </>
   );
 }

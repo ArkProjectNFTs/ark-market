@@ -60,22 +60,41 @@ export default function TokenAbout({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="flex items-center gap-6">
-          <div className="size-28 flex-shrink-0 rounded-lg bg-secondary"></div>
-          <p className="text-sm">
-            {`Everai is a pioneering web3 brand set to expand its universe powered
+        <div className="flex items-center gap-5">
+          <div className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"></div>
+          <div>
+            <h4 className="text-xl font-semibold">
+              {tokenInfos.collection_name}
+            </h4>
+            <p className="mt-2 hidden text-sm lg:block">
+              {`Everai is a pioneering web3 brand set to expand its universe powered
           by the collective creativity of its artistic partners and vibrant
           community. In the Everai Universe, the Everais stand as the mightiest
           heroes of Shodai's civilization… Get yours now to join us in this
           collaborative journey to shape the Everai Universe!`}
-          </p>
+            </p>
+          </div>
         </div>
 
-        <div className="mt-10 flex items-center gap-4 text-muted-foreground">
-          <XIcon className="size-4" />
-          <DiscordIcon className="size-4" />
-          <WebsiteIcon className="size-4" />
+        <div className="mt-5 flex items-center gap-4 text-muted-foreground lg:mt-10">
+          <Button variant="outline" size="icon" className="w-full lg:w-12">
+            <XIcon className="size-4" />
+          </Button>
+          <Button variant="outline" size="icon" className="w-full lg:w-12">
+            <DiscordIcon className="size-4" />
+          </Button>
+          <Button variant="outline" size="icon" className="w-full lg:w-12">
+            <WebsiteIcon className="size-4" />
+          </Button>
         </div>
+
+        <p className="mt-6 text-sm lg:hidden">
+          {`Everai is a pioneering web3 brand set to expand its universe powered
+          by the collective creativity of its artistic partners and vibrant
+          community. In the Everai Universe, the Everais stand as the mightiest
+          heroes of Shodai's civilization… Get yours now to join us in this
+          collaborative journey to shape the Everai Universe!`}
+        </p>
 
         <div className="mt-8 flex flex-col gap-4 pb-6">
           <div className="flex items-center justify-between">

@@ -2,18 +2,26 @@ import { ShoppingBag, Tag } from "lucide-react";
 
 import { Button } from "@ark-market/ui/button";
 
+import type { TokenInfosApiResponse } from "../queries/getTokenData";
 import Media from "~/components/media";
 
-export default function TokenActionsBar() {
+interface TokenActionsBar {
+  tokenInfos: TokenInfosApiResponse["data"];
+}
+
+export default function TokenActionsBar({ tokenInfos }: TokenActionsBar) {
   return (
     <div className="fixed left-0 top-0 z-50 hidden h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8 lg:flex">
       <div className="flex items-center gap-3.5">
         <Media
-          alt="Everai"
-          src="https://media.arkproject.dev/ab43f917530bbfd33cb3d9d7ef92180d515c3b1bce8674b45a9ace6283ba5d43.mp4"
-          className="rounded-xs size-12"
+          src={tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image}
+          mediaKey={
+            tokenInfos.metadata?.animation_key ?? tokenInfos.metadata?.image_key
+          }
+          alt={tokenInfos.metadata?.name ?? `${tokenInfos.collection_name}`}
+          className="size-12 rounded-xs"
         />
-        <p className="text-lg font-semibold">Everai #2345</p>
+        <p className="text-lg font-semibold">{tokenInfos.metadata?.name}</p>
       </div>
       <div className="flex items-center gap-5">
         <Button>

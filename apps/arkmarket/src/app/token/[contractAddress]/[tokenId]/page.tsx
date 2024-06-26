@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import MobileTokenActivity from "./components/mobile-token-activity";
 import TokenAbout from "./components/token-about";
 import TokenActions from "./components/token-actions";
 import TokenActivity from "./components/token-activity";
@@ -61,7 +62,8 @@ export default async function TokenPage({
         </div>
       </div>
 
-      <TokenActivity className="mt-8 lg:mt-20" />
+      <TokenActivity className="mt-20 hidden lg:block" />
+      <MobileTokenActivity className="mt-8 lg:hidden" />
     </main>
   );
 }
