@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-import { cn, PropsWithClassName } from "@ark-market/ui";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -14,7 +15,7 @@ import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
-import { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { TokenInfosApiResponse } from "../queries/getTokenData";
 
 interface TokenAboutProps {
   contractAddress: string;
@@ -80,7 +81,7 @@ export default function TokenAbout({
           <div className="flex items-center justify-between">
             <p className="font-medium">Contract Address</p>
             <p className="text-muted-foreground">
-              {collectionShortenedAddress ?? "_"}
+              {collectionShortenedAddress}
             </p>
           </div>
           <div className="flex items-center justify-between">

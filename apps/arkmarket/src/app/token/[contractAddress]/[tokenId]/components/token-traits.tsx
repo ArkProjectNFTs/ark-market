@@ -27,7 +27,7 @@ export default function TokenTraits({
   return (
     <Collapsible
       className={cn(
-        "rounded-none border-b border-t border-border px-6 lg:rounded-lg lg:border",
+        "rounded-none border-t border-border px-6 lg:rounded-lg lg:border",
         className,
       )}
       open={open}

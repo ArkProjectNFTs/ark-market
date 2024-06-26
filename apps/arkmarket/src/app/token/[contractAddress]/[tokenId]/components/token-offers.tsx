@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Meh } from "lucide-react";
 
-import { cn, PropsWithClassName } from "@ark-market/ui";
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -16,7 +17,7 @@ export default function TokenOffers({ className }: PropsWithClassName) {
   return (
     <Collapsible
       className={cn(
-        "rounded-none border-b border-t border-border px-6 lg:rounded-lg lg:border",
+        "rounded-none border-t border-border px-6 lg:rounded-lg lg:border",
         className,
       )}
       open={open}

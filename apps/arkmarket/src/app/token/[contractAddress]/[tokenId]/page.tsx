@@ -37,12 +37,14 @@ export default async function TokenPage({
           tokenId={tokenId}
         />
 
-        <div className="flex flex-col gap-8">
-          <TokenStats
-            className="hidden lg:flex"
-            tokenInfos={tokenInfosInitialData.data}
-          />
-          <TokenActions tokenInfos={tokenInfosInitialData.data} />
+        <div className="flex flex-col lg:gap-8">
+          <div className="flex flex-col-reverse gap-8 lg:flex-col">
+            <TokenStats
+              tokenInfos={tokenInfosInitialData.data}
+              className="mb-8 lg:mb-0"
+            />
+            <TokenActions tokenInfos={tokenInfosInitialData.data} />
+          </div>
           <TokenOffers className="-mx-8 lg:mx-0" />
           <TokenTraits
             className="-mx-8 lg:mx-0"
@@ -59,7 +61,7 @@ export default async function TokenPage({
         </div>
       </div>
 
-      <TokenActivity className="mt-20" />
+      <TokenActivity className="mt-8 lg:mt-20" />
     </main>
   );
 }
