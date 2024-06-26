@@ -8,12 +8,18 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
+import type { TokenInfosApiResponse } from "../queries/getTokenData";
 import useIsSSR from "~/hooks/useIsSSR";
 import TokenActionsBar from "./token-actions-bar";
 
-const data = { price: 540000000000000000n, isOwner: false };
+interface TokenActionsProps {
+  tokenInfos: TokenInfosApiResponse["data"];
+}
 
-export default function TokenActions({ className }: PropsWithClassName) {
+export default function TokenActions({
+  className,
+  tokenInfos,
+}: PropsWithClassName<TokenActionsProps>) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
   const isSSR = useIsSSR();
@@ -43,7 +49,7 @@ export default function TokenActions({ className }: PropsWithClassName) {
                 ellipsableStyles,
               )}
             >
-              {formatUnits(data.price, 18)} ETH
+              {formatUnits(BigInt(tokenInfos.price ?? "0"), 18)} ETH
             </p>
             <p className="text-lg font-semibold text-muted-foreground lg:text-2xl">
               $158.86
@@ -60,7 +66,7 @@ export default function TokenActions({ className }: PropsWithClassName) {
         >
           <Button className="relative w-full" size="xl">
             <ShoppingBag size={24} className="absolute left-4" />
-            Buy now for {formatUnits(data.price, 18)} ETH
+            Buy now for {formatUnits(BigInt(tokenInfos.price ?? "0"), 18)} ETH
           </Button>
           <Button className="relative w-full" variant="secondary" size="xl">
             <Tag size={24} className="absolute left-4" />
@@ -68,7 +74,9 @@ export default function TokenActions({ className }: PropsWithClassName) {
           </Button>
         </div>
       </div>
-      {shouldShowTokenActionsTopBar && <TokenActionsBar />}
+      {shouldShowTokenActionsTopBar && (
+        <TokenActionsBar tokenInfos={tokenInfos} />
+      )}
     </>
   );
 }

@@ -66,8 +66,7 @@ const activityData = [
 
 export default function TokenActivity({ className }: PropsWithClassName) {
   return (
-    // TODO @YohanTz: remove min-h
-    <div className={cn("min-h-[150vh]", className)}>
+    <div className={cn("", className)}>
       <div className="flex items-center gap-4">
         <h2 className="text-3xl font-semibold">Activity</h2>
         <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm font-medium text-secondary-foreground">
@@ -77,7 +76,7 @@ export default function TokenActivity({ className }: PropsWithClassName) {
 
       <Table className="mt-12">
         <TableHeader>
-          <TableRow>
+          <TableRow className="hover:bg-background">
             <TableHead className="pl-5">Event</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>From</TableHead>

@@ -1,7 +1,10 @@
 "use client";
 
-import { ChevronDown, Meh } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Meh } from "lucide-react";
 
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -9,15 +12,22 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-export default function TokenOffers() {
+export default function TokenOffers({ className }: PropsWithClassName) {
+  const [open, setOpen] = useState(true);
   return (
-    // TODO @YohanTz: max-height?
-    <Collapsible className="rounded-lg border border-border px-6" defaultOpen>
+    <Collapsible
+      className={cn(
+        "rounded-none border-t border-border px-6 lg:rounded-lg lg:border",
+        className,
+      )}
+      open={open}
+      onOpenChange={setOpen}
+    >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <h2 className="text-3xl font-semibold">Offers</h2>
+        <h3 className="text-2xl font-semibold">Offers</h3>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-small">
-            <ChevronDown size={14} />
+            {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </Button>
         </CollapsibleTrigger>
       </div>
