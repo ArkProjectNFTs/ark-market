@@ -83,7 +83,7 @@ export default function CollectionItemsDataListView({
 
           return (
             <Link
-              href={`/assets/${token.contract}/${token.token_id}`}
+              href={`/token/${token.contract}/${token.token_id}`}
               key={`${token.contract}-${token.token_id}`}
             >
               <TableRow
