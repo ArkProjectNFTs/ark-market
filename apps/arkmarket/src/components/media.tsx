@@ -111,7 +111,6 @@ export default function Media({
 
   if (!height || !width || !loadingMediaSrc) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
       <img
         alt={alt}
         className={cn("flex-shrink-0", className)}
