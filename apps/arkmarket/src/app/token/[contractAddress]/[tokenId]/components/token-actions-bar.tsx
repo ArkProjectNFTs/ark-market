@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag, Tag } from "lucide-react";
 
+import type { PropsWithClassName } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
 import type { TokenInfosApiResponse } from "../queries/getTokenData";
@@ -11,7 +13,11 @@ interface TokenActionsBar {
   tokenInfos: TokenInfosApiResponse["data"];
 }
 
-export default function TokenActionsBar({ show, tokenInfos }: TokenActionsBar) {
+export default function TokenActionsBar({
+  className,
+  show,
+  tokenInfos,
+}: PropsWithClassName<TokenActionsBar>) {
   return (
     <AnimatePresence>
       {show && (
@@ -20,7 +26,10 @@ export default function TokenActionsBar({ show, tokenInfos }: TokenActionsBar) {
           animate={{ transform: "translateY(0%)" }}
           exit={{ transform: "translateY(-100%)" }}
           transition={{ ease: "easeInOut", duration: 0.3 }}
-          className="fixed left-0 top-0 z-50 hidden h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8 lg:flex"
+          className={cn(
+            "fixed left-0 top-0 z-50 h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8",
+            className,
+          )}
         >
           <div className="flex items-center gap-3.5">
             <Media

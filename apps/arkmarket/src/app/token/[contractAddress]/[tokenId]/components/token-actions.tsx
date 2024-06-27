@@ -10,6 +10,7 @@ import { Button } from "@ark-market/ui/button";
 
 import type { TokenInfosApiResponse } from "../queries/getTokenData";
 import useIsSSR from "~/hooks/useIsSSR";
+import MobileTokenAction from "./mobile-token-action";
 import TokenActionsBar from "./token-actions-bar";
 
 interface TokenActionsProps {
@@ -77,6 +78,12 @@ export default function TokenActions({
       <TokenActionsBar
         show={shouldShowFixedTokenActions}
         tokenInfos={tokenInfos}
+        className="hidden lg:flex"
+      />
+      <MobileTokenAction
+        show={shouldShowFixedTokenActions}
+        tokenInfos={tokenInfos}
+        className="lg:hidden"
       />
     </>
   );
