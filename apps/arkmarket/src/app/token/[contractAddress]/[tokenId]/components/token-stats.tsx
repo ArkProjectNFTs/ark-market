@@ -45,7 +45,7 @@ export default function TokenStats({
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
 
-      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-none lg:p-0">
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
@@ -54,7 +54,7 @@ export default function TokenStats({
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
 
-      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-none lg:p-0">
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
@@ -65,7 +65,7 @@ export default function TokenStats({
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
 
-      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-none lg:p-0">
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
           {tokenInfos.owner !== null && (

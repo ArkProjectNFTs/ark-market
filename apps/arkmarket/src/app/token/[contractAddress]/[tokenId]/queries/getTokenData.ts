@@ -43,4 +43,3 @@ export async function getTokenInfos({
 
   return response.json() as Promise<TokenInfosApiResponse>;
 }
-// /tokens/{address}/{chain_id}/{token_id}

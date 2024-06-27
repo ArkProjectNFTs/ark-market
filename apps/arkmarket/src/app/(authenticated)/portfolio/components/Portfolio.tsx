@@ -52,7 +52,7 @@ const Portfolio: React.FC = () => {
       <div className="grid grid-cols-6 gap-4">
         {tokens.map((token, index) => (
           <Link
-            href={`/assets/${token.contract_address}/${token.token_id}`}
+            href={`/token/${token.contract_address}/${token.token_id}`}
             key={index}
           >
             <div className="cursor-pointer rounded-md border p-2 hover:border-slate-400 hover:shadow-md">

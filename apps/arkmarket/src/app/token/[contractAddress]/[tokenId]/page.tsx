@@ -29,7 +29,7 @@ export default async function TokenPage({
   }
 
   return (
-    <main className="m-8">
+    <main className="mx-auto max-w-[160rem] p-5 lg:p-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <TokenSummary
           className="top-[calc(var(--site-header-height)+2rem)] h-fit lg:sticky"
@@ -46,15 +46,15 @@ export default async function TokenPage({
             />
             <TokenActions tokenInfos={tokenInfosInitialData.data} />
           </div>
-          <TokenOffers className="-mx-8 lg:mx-0" />
+          <TokenOffers className="-mx-5 lg:mx-0" />
           <TokenTraits
-            className="-mx-8 lg:mx-0"
+            className="-mx-5 lg:mx-0"
             tokenAttributes={
               tokenInfosInitialData.data.metadata?.attributes ?? []
             }
           />
           <TokenAbout
-            className="-mx-8 lg:mx-0"
+            className="-mx-5 lg:mx-0"
             contractAddress={contractAddress}
             tokenInfos={tokenInfosInitialData.data}
             tokenId={tokenId}
