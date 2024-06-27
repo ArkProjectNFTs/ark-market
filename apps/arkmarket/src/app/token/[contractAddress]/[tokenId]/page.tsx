@@ -30,7 +30,7 @@ export default async function TokenPage({
 
   return (
     <main className="mx-auto max-w-[160rem] p-5 pt-0 lg:p-8">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8">
         <TokenSummary
           className="top-[calc(var(--site-header-height)+2rem)] h-fit lg:sticky"
           contractAddress={contractAddress}
@@ -39,7 +39,7 @@ export default async function TokenPage({
         />
 
         <div className="flex flex-col lg:gap-8">
-          <div className="flex flex-col-reverse gap-5 lg:flex-col lg:gap-8">
+          <div className="flex flex-col-reverse lg:flex-col lg:gap-8">
             <TokenStats
               tokenInfos={tokenInfosInitialData.data}
               className="mb-8 lg:mb-0"
