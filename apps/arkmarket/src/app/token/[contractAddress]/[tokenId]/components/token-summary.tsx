@@ -43,7 +43,7 @@ export default function TokenSummary({
       />
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-1.5">
-          <Link href="/">
+          <Link href={`/collection/`}>
             <h3 className="text-lg text-muted-foreground">
               {tokenInfos.collection_name}
             </h3>
