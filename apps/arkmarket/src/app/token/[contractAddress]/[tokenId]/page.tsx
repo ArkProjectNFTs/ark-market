@@ -39,10 +39,10 @@ export default async function TokenPage({
         />
 
         <div className="flex flex-col lg:gap-8">
-          <div className="flex flex-col-reverse lg:flex-col lg:gap-8">
+          <div className="flex flex-col-reverse gap-5 lg:flex-col lg:gap-8">
             <TokenStats
               tokenInfos={tokenInfosInitialData.data}
-              className="mb-8 lg:mb-0"
+              className="mb-5 lg:mb-0"
             />
             <TokenActions
               tokenInfos={tokenInfosInitialData.data}
