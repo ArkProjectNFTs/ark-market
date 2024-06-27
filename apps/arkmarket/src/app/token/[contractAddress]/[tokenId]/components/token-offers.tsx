@@ -24,7 +24,12 @@ export default function TokenOffers({ className }: PropsWithClassName) {
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <h3 className="text-2xl font-semibold">Offers</h3>
+        <div className="flex items-center gap-1.5">
+          <h3 className="text-2xl font-semibold">Offers</h3>
+          <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
+            {0}
+          </div>
+        </div>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-small">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
