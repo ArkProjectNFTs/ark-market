@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { RefreshCw, Share2 } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -36,20 +37,25 @@ export default function TokenSummary({
           tokenInfos.metadata?.name ??
           `${tokenInfos.collection_name} #${tokenId}`
         }
-        className="w-full rounded-xs"
+        className="w-full rounded-lg"
         height={1000}
         width={1000}
       />
       <div className="flex flex-col lg:gap-4">
-        <div className="flex items-center gap-2.5">
-          <h3 className="text-lg text-muted-foreground">
-            {tokenInfos.collection_name}
-          </h3>
+        <div className="flex items-center gap-1.5">
+          <Link href="/">
+            <h3 className="text-lg text-muted-foreground">
+              {tokenInfos.collection_name}
+            </h3>
+          </Link>
           <VerifiedIcon className="size-6 text-background" />
         </div>
         <div className="flex items-center justify-between">
           <p
-            className={cn("w-full overflow-hidden text-3xl", ellipsableStyles)}
+            className={cn(
+              "w-full overflow-hidden text-2xl lg:text-3xl",
+              ellipsableStyles,
+            )}
           >
             {tokenInfos.metadata?.name}
           </p>
