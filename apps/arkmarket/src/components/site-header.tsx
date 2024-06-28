@@ -17,7 +17,7 @@ import { UserNav } from "~/components/user-nav";
 export default function SiteHeader() {
   const pathname = usePathname();
   const isTokenPage = pathname.includes("token/");
-  const [showHeader, setShowHeader] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
