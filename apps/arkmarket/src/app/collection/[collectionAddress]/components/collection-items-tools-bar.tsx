@@ -11,7 +11,7 @@ import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "../../search-params";
+} from "../search-params";
 import ViewTypeToggleButton from "../../../../components/view-type-toggle-button";
 import ViewTypeToggleGroup from "../../../../components/view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";

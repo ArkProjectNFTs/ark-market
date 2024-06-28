@@ -4,11 +4,11 @@ import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "../../search-params";
-import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
+} from "../search-params";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionTokens } from "../queries/getCollectionData";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";

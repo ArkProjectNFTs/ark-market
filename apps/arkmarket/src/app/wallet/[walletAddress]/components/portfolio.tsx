@@ -49,7 +49,7 @@ export default function Portfolio({
                   value="items"
                   className="flex items-center gap-2"
                 >
-                  My Items{" "}
+                  Items{" "}
                   <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs font-medium text-secondary-foreground">
                     {formatNumber(walletTokensInitialData.token_count)}
                   </p>

@@ -34,7 +34,7 @@ export default function TokenTraits({
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1.5">
           <h3 className="text-2xl font-semibold">Traits</h3>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
             {tokenAttributes.length}
@@ -48,7 +48,7 @@ export default function TokenTraits({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))] gap-2 pb-6">
+        <div className="grid grid-cols-2 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
           {tokenAttributes.map((tokenAttribute, index) => {
             return (
               <div className="rounded-lg bg-card p-3.5" key={index}>

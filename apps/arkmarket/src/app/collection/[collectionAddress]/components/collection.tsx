@@ -9,13 +9,13 @@ import type {
   CollectionTokensApiResponse,
 } from "../queries/getCollectionData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import { getCollectionInfos } from "../queries/getCollectionData";
 import {
   collectionSortByKey,
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
-} from "../../search-params";
-import { getCollectionInfos } from "../queries/getCollectionData";
+} from "../search-params";
 import CollectionBanner from "./collection-banner";
 import CollectionHeader from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";

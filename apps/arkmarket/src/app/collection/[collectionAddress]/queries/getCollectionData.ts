@@ -1,7 +1,7 @@
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "../../search-params";
+} from "../search-params";
 import { env } from "~/env";
 
 export interface CollectionInfosApiResponse {
