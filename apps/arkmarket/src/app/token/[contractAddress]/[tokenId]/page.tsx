@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 
 import {
-  getCollection,
   getCollectionToken,
   getOrderbookCollectionToken,
 } from "~/app/assets/[contract_address]/[token_id]/data";
