@@ -30,6 +30,8 @@ export default function TokenActionsBuyNow({
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(token.owner, address);
 
+  console.log("status", status);
+
   const handeClick = async () => {
     setIsOpen(true);
     await fulfillListing({
