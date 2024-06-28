@@ -63,7 +63,7 @@ export default function TokenSummary({
             <Share2 className="size-6 text-muted-foreground" />
             <CopyButton
               className="size-6 text-muted-foreground"
-              textToCopy={collection.contract_address}
+              textToCopy={contractAddress}
             />
             <RefreshCw className="size-6 text-muted-foreground" />
           </div>

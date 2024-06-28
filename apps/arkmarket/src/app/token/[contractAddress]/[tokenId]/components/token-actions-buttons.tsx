@@ -1,11 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView } from "framer-motion";
+
+// import { useInView } from "framer-motion";
 
 import type { Token, TokenMarketData } from "~/types";
 import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
-import TokenActionsBar from "./token-actions-bar";
+// import TokenActionsBar from "./token-actions-bar";
 import TokenActionsCancelListing from "./token-actions-cancel-listing";
 import { TokenActionsCreateListing } from "./token-actions-create-listing";
 import TokenActionsMakeBid from "./token-actions-make-bid";
