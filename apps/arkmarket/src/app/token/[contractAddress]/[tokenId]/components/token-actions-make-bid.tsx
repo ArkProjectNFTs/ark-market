@@ -5,6 +5,7 @@ import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
+import { Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
@@ -28,18 +29,18 @@ import {
 import { Input } from "@ark-market/ui/input";
 
 import type { Token, TokenMarketData } from "~/types";
+import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
 import { env } from "~/env";
-import TokenMedia from "./token-media";
 
-interface CreateOfferProps {
+interface TokenActionsMakeBidProps {
   token: Token;
-  tokenMarketData?: TokenMarketData;
+  tokenMarketData: TokenMarketData;
 }
 
-export default function CreateOffer({
+export default function TokenActionsMakeBid({
   token,
   tokenMarketData,
-}: CreateOfferProps) {
+}: TokenActionsMakeBidProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account, address } = useAccount();
@@ -48,11 +49,10 @@ export default function CreateOffer({
   const formSchema = z.object({
     startAmount: z.string(),
   });
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      startAmount: "",
+      startAmount: formatEther(BigInt(tokenMarketData.start_amount)),
     },
   });
 
@@ -67,13 +67,20 @@ export default function CreateOffer({
   }, [response]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!account) {
+    if (!account || !config) {
+      return;
+    }
+
+    const tokenIdNumber = parseInt(token.token_id, 10);
+
+    if (isNaN(tokenIdNumber)) {
+      console.error("Invalid token ID");
       return;
     }
 
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      currencyAddress: config?.starknetCurrencyContract,
+      currencyAddress: config.starknetCurrencyContract,
       tokenAddress: token.contract_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
@@ -90,15 +97,20 @@ export default function CreateOffer({
   }
 
   const isDisabled = form.formState.isSubmitting || status === "loading";
+  const price = formatEther(BigInt(tokenMarketData.start_amount));
+  const reservePrice = formatEther(BigInt(tokenMarketData.end_amount));
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="max-w-[320px]">Make offer</Button>
+        <Button className="relative w-full" variant="secondary" size="xl">
+          <Tag size={24} className="absolute left-4" />
+          Make an offer
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Make offer</DialogTitle>
+          <DialogTitle>Place a bid</DialogTitle>
         </DialogHeader>
         <div className="flex items-center space-x-4">
           <div className="w-16 overflow-hidden rounded">
@@ -110,11 +122,9 @@ export default function CreateOffer({
           </div>
           <div className="grow" />
           <div className="">
-            <div className="text-right font-bold">
-              {tokenMarketData?.is_listed && tokenMarketData.start_amount
-                ? formatEther(BigInt(tokenMarketData.start_amount))
-                : "-"}{" "}
-              ETH
+            <div className="text-right font-bold">{price} ETH</div>
+            <div className="text-right text-muted-foreground">
+              Reserve {reservePrice} ETH
             </div>
           </div>
         </div>
@@ -139,7 +149,7 @@ export default function CreateOffer({
               {status === "loading" ? (
                 <ReloadIcon className="animate-spin" />
               ) : (
-                "Create Offer"
+                "Place a bid"
               )}
             </Button>
           </form>
