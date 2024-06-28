@@ -96,9 +96,7 @@ export default function TokenActionsMakeOffer({
       ...processedValues,
     });
 
-    toast("Your offer is successfully sent!", {
-      description: <>dadwa</>,
-    });
+    toast.success("Your offer is successfully sent!");
   }
 
   if (!account || isOwner) {
