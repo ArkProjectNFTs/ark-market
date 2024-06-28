@@ -167,6 +167,28 @@ export default function HomePage() {
             </div>
           </>
         )}
+
+        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="flex w-full items-center gap-8 rounded-lg bg-card p-8">
+            <div className="h-48 w-48 rounded-lg bg-secondary" />
+            <div className="flex h-full flex-col items-start justify-between">
+              <h2 className="text-3xl font-semibold">Need help?</h2>
+              <p>Lorem ipsum...</p>
+              <Button size="xl">Contact support</Button>
+            </div>
+          </div>
+
+          <div className="flex w-full items-center gap-8 rounded-lg bg-card p-8">
+            <div className="h-48 w-48 rounded-lg bg-secondary" />
+            <div className="flex h-full flex-col items-start justify-between">
+              <h2 className="text-3xl font-semibold">
+                Get your collection verified
+              </h2>
+              <p>Lorem ipsum...</p>
+              <Button size="xl">Submit your collection</Button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
