@@ -70,7 +70,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             {children}
             <SpeedInsights />
           </div>
-          <Toaster />
+          <Toaster richColors />
           <Footer />
           <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
         </Providers>

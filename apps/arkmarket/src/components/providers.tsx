@@ -12,7 +12,7 @@ export default function Providers({ children }: PropsWithChildren) {
   const queryClient = new QueryClient();
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark">
       <StarknetProvider>
         <ArkProvider
           config={{

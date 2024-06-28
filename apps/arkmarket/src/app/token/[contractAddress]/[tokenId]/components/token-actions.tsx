@@ -1,90 +1,81 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
-import { ShoppingBag, Tag, TimerReset } from "lucide-react";
+import { useAccount } from "@starknet-react/core";
+import { useQuery } from "react-query";
+import { hexToNumber } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
+import { areAddressesEqual, cn } from "@ark-market/ui";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
-import useIsSSR from "~/hooks/useIsSSR";
-import MobileTokenAction from "./mobile-token-action";
-import TokenActionsBar from "./token-actions-bar";
+import type { Token, TokenMarketData } from "~/types";
+import { getOrderbookCollectionToken } from "~/app/assets/[contract_address]/[token_id]/data";
+import TokenActionsButtons from "./token-actions-buttons";
+import TokenActionsEmpty from "./token-actions-empty";
+import TokenActionsHeader from "./token-actions-header";
+import TokenActionsPrice from "./token-actions-price";
 
 interface TokenActionsProps {
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
+  tokenMarketData: TokenMarketData | null;
+  className?: PropsWithClassName["className"];
 }
 
 export default function TokenActions({
+  token,
+  tokenMarketData,
   className,
-  tokenInfos,
-}: PropsWithClassName<TokenActionsProps>) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
-  const isSSR = useIsSSR();
-  const shouldShowFixedTokenActions = !isSSR && !isActionItemsInView;
+}: TokenActionsProps) {
+  const account = useAccount();
+  const isOwner =
+    !!account.address && areAddressesEqual(account.address, token.owner);
+  const { data } = useQuery(
+    ["tokenMarketData", token.contract_address, token.token_id],
+    () =>
+      getOrderbookCollectionToken({
+        contract_address: token.contract_address,
+        token_id: token.token_id,
+      }),
+    {
+      refetchInterval: 10_000,
+      initialData: tokenMarketData,
+    },
+  );
+
+  if (!data || (!data.has_offer && !data.is_listed)) {
+    return <TokenActionsEmpty token={token} isOwner={isOwner} />;
+  }
+
+  const isListed = data.is_listed;
+  const isAuction =
+    isListed && hexToNumber(data.end_amount as `0x${string}`) > 0;
 
   return (
-    <>
-      <div
-        className={cn(
-          "rounded-none bg-card p-5 lg:rounded-lg lg:px-8 lg:pb-10 lg:pt-8",
-          className,
-        )}
-      >
-        <div className="flex flex-col-reverse gap-6 font-medium text-muted-foreground lg:flex-row lg:items-center lg:justify-between lg:gap-0">
-          <p className="text-sm lg:text-base">Best Price</p>
-          <div className="flex items-center gap-1.5">
-            <TimerReset />
-            <p>Time Left 12d 13h 45m</p>
-          </div>
-        </div>
-
-        <div className="mt-1.5 flex items-center justify-between gap-6 lg:mt-4 lg:justify-start">
-          <div className="flex items-center gap-3 lg:gap-6">
-            <p
-              className={cn(
-                "text-xl font-semibold lg:text-3xl",
-                ellipsableStyles,
-              )}
-            >
-              {formatUnits(BigInt(tokenInfos.price ?? "0"), 18)} ETH
-            </p>
-            <p className="text-lg font-semibold text-muted-foreground lg:text-2xl">
-              $158.86
-            </p>
-          </div>
-          <div className="flex h-8 items-center whitespace-nowrap rounded-full bg-secondary px-3 text-xs text-secondary-foreground lg:text-sm">
-            Royalties _%
-          </div>
-        </div>
-
-        <div
-          className="mt-6 flex flex-col items-center gap-4 lg:mt-9 lg:flex-row lg:gap-8"
-          ref={ref}
-        >
-          <Button className="relative w-full" size="xl">
-            <ShoppingBag size={24} className="absolute left-4" />
-            Buy now for {formatUnits(BigInt(tokenInfos.price ?? "0"), 18)} ETH
-          </Button>
-          <Button className="relative w-full" variant="secondary" size="xl">
-            <Tag size={24} className="absolute left-4" />
-            Make Offer
-          </Button>
-        </div>
-      </div>
-      <TokenActionsBar
-        show={shouldShowFixedTokenActions}
-        tokenInfos={tokenInfos}
-        className="hidden lg:flex"
+    <div
+      className={cn(
+        "rounded-lg bg-card p-5 lg:px-8 lg:pb-10 lg:pt-8",
+        className,
+      )}
+    >
+      <TokenActionsHeader
+        isListed={isListed}
+        isAuction={isAuction}
+        expiresAt={data.end_date}
       />
-      <MobileTokenAction
-        show={shouldShowFixedTokenActions}
-        tokenInfos={tokenInfos}
-        className="lg:hidden"
+      <TokenActionsPrice
+        startAmount={data.start_amount}
+        isAuction={isAuction}
+        hasOffer={data.has_offer}
+        topOffer={data.top_bid}
       />
-    </>
+      <TokenActionsButtons
+        isListed={isListed}
+        isAuction={isAuction}
+        hasOffers={data.has_offer}
+        isOwner={isOwner}
+        startAmount={data.start_amount}
+        token={token}
+        tokenMarketData={data}
+      />
+    </div>
   );
 }

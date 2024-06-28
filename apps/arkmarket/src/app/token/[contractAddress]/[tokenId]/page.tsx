@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
 
+import {
+  getCollectionToken,
+  getOrderbookCollectionToken,
+} from "~/app/assets/[contract_address]/[token_id]/data";
 import MobileTokenActivity from "./components/mobile-token-activity";
 import TokenAbout from "./components/token-about";
 import TokenActions from "./components/token-actions";
@@ -24,8 +28,23 @@ export default async function TokenPage({
     contractAddress,
     tokenId,
   });
+
   if (tokenInfosInitialData === undefined) {
     notFound();
+  }
+
+  const token = await getCollectionToken(contractAddress, tokenId);
+
+  let tokenMarketData;
+
+  try {
+    tokenMarketData = await getOrderbookCollectionToken({
+      contract_address: token.contract_address,
+      token_id: token.token_id,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
+    tokenMarketData = null;
   }
 
   return (
@@ -45,7 +64,8 @@ export default async function TokenPage({
               className="mb-5 lg:mb-0"
             />
             <TokenActions
-              tokenInfos={tokenInfosInitialData.data}
+              token={token}
+              tokenMarketData={tokenMarketData}
               className="-mx-5 lg:mx-0"
             />
           </div>
@@ -64,7 +84,6 @@ export default async function TokenPage({
           />
         </div>
       </div>
-
       <TokenActivity className="mt-20 hidden lg:block" />
       <MobileTokenActivity className="mt-8 lg:hidden" />
     </main>
