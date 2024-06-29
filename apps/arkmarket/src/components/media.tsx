@@ -77,13 +77,13 @@ export default function Media({
   alt,
   className,
   src,
-  width,
-  height,
+  width = 600,
+  height = 600,
 }: PropsWithClassName<MediaProps>) {
   const [status, setStatus] = useState<"loading" | "error" | "loaded">(
     "loading",
   );
-  const mediaSrc = getMediaSrc(src, mediaKey, (width = 800), (height = 800));
+  const mediaSrc = getMediaSrc(src, mediaKey, width, height);
   const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
   if (!mediaSrc || status === "error") {
