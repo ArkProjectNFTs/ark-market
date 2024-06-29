@@ -4,10 +4,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
-import type {
-  CollectionInfosApiResponse,
-  CollectionTokensApiResponse,
-} from "../queries/getCollectionData";
+
 import type { ViewType } from "~/components/view-type-toggle-group";
 import { getCollectionInfos } from "../queries/getCollectionData";
 import {
@@ -26,14 +23,14 @@ import MobileCollectionHeader from "./mobile-collection-header";
 
 interface CollectionProps {
   collectionAddress: string;
-  collectionInfosInitialData: CollectionInfosApiResponse;
-  collectionTokensInitialData: CollectionTokensApiResponse;
+  // collectionInfosInitialData: CollectionInfosApiResponse;
+  // collectionTokensInitialData: CollectionTokensApiResponse;
 }
 
 export default function Collection({
   collectionAddress,
-  collectionInfosInitialData,
-  collectionTokensInitialData,
+  // collectionInfosInitialData,
+  // collectionTokensInitialData,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   // TODO @YohanTz: Get State from URL query params
@@ -54,7 +51,6 @@ export default function Collection({
   const { data: collectionInfos } = useQuery({
     queryKey: ["collectionInfos", collectionAddress],
     refetchInterval: false,
-    initialData: collectionInfosInitialData,
     queryFn: () => getCollectionInfos({ collectionAddress }),
   });
 
@@ -74,19 +70,21 @@ export default function Collection({
           className="hidden md:block"
           collectionAddress={collectionAddress}
         />
-
-        <MobileCollectionHeader
-          className="md:hidden"
-          collectionAddress={collectionAddress}
-          collectionInfos={collectionInfos}
-        />
-
-        <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
-          <CollectionHeader
+        {collectionInfos ? (
+          <MobileCollectionHeader
+            className="md:hidden"
             collectionAddress={collectionAddress}
-            className="hidden md:block"
             collectionInfos={collectionInfos}
           />
+        ) : null}
+        <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
+          {collectionInfos ? (
+            <CollectionHeader
+              collectionAddress={collectionAddress}
+              className="hidden md:block"
+              collectionInfos={collectionInfos}
+            />
+          ) : null}
           <CollectionItemsActivityHeader
             activeTab={activeTab}
             onTabChange={setActiveTab}
@@ -100,7 +98,7 @@ export default function Collection({
                 setSortBy={setSortBy}
                 viewType={viewType}
                 setViewType={setViewType}
-                totalTokensCount={collectionInfos.token_count}
+                totalTokensCount={0}
               />
             )}
             {activeTab === "activity" && <p>Coming</p>}
@@ -111,8 +109,7 @@ export default function Collection({
           {activeTab === "items" && (
             <CollectionItemsData
               collectionAddress={collectionAddress}
-              collectionTokensInitialData={collectionTokensInitialData}
-              totalTokensCount={collectionInfos.token_count}
+              totalTokensCount={0}
               sortDirection={sortDirection}
               sortBy={sortBy}
               viewType={viewType}

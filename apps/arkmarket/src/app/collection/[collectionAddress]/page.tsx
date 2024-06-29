@@ -19,28 +19,28 @@ export default async function CollectionPage({
   searchParams,
 }: CollectionPageProps) {
   const { collectionAddress } = params;
-  const { direction, sort } =
-    collectionPageSearchParamsCache.parse(searchParams);
-  const collectionInfosInitialData = await getCollectionInfos({
-    collectionAddress,
-  });
+  // const { direction, sort } =
+  //   collectionPageSearchParamsCache.parse(searchParams);
+  // const collectionInfosInitialData = await getCollectionInfos({
+  //   collectionAddress,
+  // });
 
-  const collectionTokensInitialData = await getCollectionTokens({
-    collectionAddress,
-    sortDirection: direction,
-    sortBy: sort,
-  });
+  // const collectionTokensInitialData = await getCollectionTokens({
+  //   collectionAddress,
+  //   sortDirection: direction,
+  //   sortBy: sort,
+  // });
 
-  if (!collectionTokensInitialData.data.length) {
-    // TODO @YohanTz: Handle case when a collection contract is deployed but no tokens in it
-    notFound();
-  }
+  // if (!collectionTokensInitialData.data.length) {
+  //   // TODO @YohanTz: Handle case when a collection contract is deployed but no tokens in it
+  //   notFound();
+  // }
 
   return (
     <Collection
       collectionAddress={collectionAddress}
-      collectionInfosInitialData={collectionInfosInitialData}
-      collectionTokensInitialData={collectionTokensInitialData}
+      // collectionInfosInitialData={collectionInfosInitialData}
+      // collectionTokensInitialData={collectionTokensInitialData}
     />
   );
 }

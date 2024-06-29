@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
-import type { CollectionTokensApiResponse } from "../queries/getCollectionData";
+import type { CollectionTokensApiResponse, CollectionToken } from "../queries/getCollectionData";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
@@ -17,15 +17,14 @@ import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsDataProps {
   collectionAddress: string;
-  collectionTokensInitialData: CollectionTokensApiResponse;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
   totalTokensCount: number;
   viewType: ViewType;
 }
+
 export default function CollectionItemsData({
   collectionAddress,
-  collectionTokensInitialData,
   sortBy,
   sortDirection,
   totalTokensCount,
@@ -36,16 +35,12 @@ export default function CollectionItemsData({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isLoading,
   } = useInfiniteQuery({
-    // TODO @YohanTz: add filters states to query key
-    queryKey: ["collectionTokens", sortDirection, sortBy, collectionAddress],
+    queryKey: ["collectionTokens", sortDirection, sortBy, collectionAddress] as const,
     refetchInterval: false,
-    getNextPageParam: (lastPage) => lastPage.next_page,
-    initialData: {
-      pages: [collectionTokensInitialData],
-      pageParams: [],
-    },
-    initialPageParam: undefined,
+    getNextPageParam: (lastPage: CollectionTokensApiResponse) => lastPage.next_page,
+    initialPageParam: undefined as number | undefined,
     queryFn: ({ pageParam }) =>
       getCollectionTokens({
         collectionAddress,
@@ -61,10 +56,14 @@ export default function CollectionItemsData({
     isFetchingNextPage,
   });
 
-  const collectionTokens = useMemo(
-    () => infiniteData.pages.flatMap((page) => page.data),
+  const collectionTokens: CollectionToken[] = useMemo(
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
