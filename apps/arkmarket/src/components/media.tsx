@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
+import { Skeleton } from "@ark-market/ui/skeleton";
 
 import { env } from "~/env";
 
@@ -25,15 +26,9 @@ function getMediaSrc(
 ) {
   if (media_key && width && height) {
     const resolutionParam = `:${width}:${height}`;
-    return {
-      mediaSrc: `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`,
-      loadingMediaSrc: `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit:100:100/bl:8.0/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`,
-    };
+    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`;
   }
-  return {
-    mediaSrc: src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY),
-    loadingMediaSrc: undefined,
-  };
+  return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
 }
 
 function MediaPlaceholder({ className }: PropsWithClassName) {
@@ -88,12 +83,7 @@ export default function Media({
   const [status, setStatus] = useState<"loading" | "error" | "loaded">(
     "loading",
   );
-  const { mediaSrc, loadingMediaSrc } = getMediaSrc(
-    src,
-    mediaKey,
-    width,
-    height,
-  );
+  const mediaSrc = getMediaSrc(src, mediaKey, (width = 800), (height = 800));
   const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
   if (!mediaSrc || status === "error") {
@@ -109,43 +99,24 @@ export default function Media({
     );
   }
 
-  if (!height || !width || !loadingMediaSrc) {
-    return (
-      <img
-        alt={alt}
-        className={cn("flex-shrink-0", className)}
-        onError={() => setStatus("error")}
-        src={mediaSrc}
-      />
-    );
-  }
   return (
     <>
-      {status !== "loaded" && (
+      <div className="relative">
+        {status === "loading" && (
+          <Skeleton className="absolute inset-0 flex-shrink-0" />
+        )}
         <Image
-          alt={`Loading ${alt}`}
+          unoptimized
+          alt={alt}
           className={cn("flex-shrink-0", className)}
-          src={loadingMediaSrc}
+          onError={() => setStatus("error")}
+          onLoadStart={() => setStatus("loading")}
+          onLoad={() => setStatus("loaded")}
+          src={mediaSrc}
           height={height}
           width={width}
         />
-      )}
-      <Image
-        loading="eager"
-        unoptimized
-        alt={alt}
-        className={cn(
-          "flex-shrink-0",
-          className,
-          status !== "loaded" && "hidden",
-        )}
-        onError={() => setStatus("error")}
-        onLoadStart={() => setStatus("loading")}
-        onLoad={() => setStatus("loaded")}
-        src={mediaSrc}
-        height={height}
-        width={width}
-      />
+      </div>
     </>
   );
 }
