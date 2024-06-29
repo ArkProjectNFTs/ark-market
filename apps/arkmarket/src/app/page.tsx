@@ -32,8 +32,7 @@ export default function HomePage() {
                   <Image
                     src={collection.image}
                     alt={collection.name}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
                     className="absolute left-0 top-0 h-full w-full"
                   />
                 </CardContent>

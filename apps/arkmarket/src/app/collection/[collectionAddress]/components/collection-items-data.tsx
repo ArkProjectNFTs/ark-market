@@ -39,7 +39,7 @@ export default function CollectionItemsData({
   } = useInfiniteQuery({
     // TODO @YohanTz: add filters states to query key
     queryKey: ["collectionTokens", sortDirection, sortBy, collectionAddress],
-    refetchInterval: 10_000,
+    refetchInterval: false,
     getNextPageParam: (lastPage) => lastPage.next_page,
     initialData: {
       pages: [collectionTokensInitialData],

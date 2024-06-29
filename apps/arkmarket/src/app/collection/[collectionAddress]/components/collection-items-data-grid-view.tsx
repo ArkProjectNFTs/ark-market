@@ -75,6 +75,7 @@ export default function CollectionItemsDataGridView({
             <Link
               href={`/token/${collectionToken.contract}/${collectionToken.token_id}`}
               key={`${collectionToken.contract}-${collectionToken.token_id}`}
+              prefetch={false}
             >
               <NftCard>
                 <NftCardMedia>
