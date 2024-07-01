@@ -53,7 +53,7 @@ export default function Collection({
 
   const { data: collectionInfos } = useQuery({
     queryKey: ["collectionInfos", collectionAddress],
-    refetchInterval: 10_000,
+    refetchInterval: false,
     initialData: collectionInfosInitialData,
     queryFn: () => getCollectionInfos({ collectionAddress }),
   });

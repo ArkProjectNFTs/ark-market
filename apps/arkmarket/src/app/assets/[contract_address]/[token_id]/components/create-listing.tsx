@@ -1,14 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
+import { ShoppingBag } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
 
 import { Button } from "@ark-market/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 import {
   Form,
   FormControl,
@@ -29,9 +38,10 @@ import {
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
+import TokenMedia from "./token-media";
 
 interface CreateListingProps {
-  token?: Token;
+  token: Token;
   tokenMarketData?: TokenMarketData;
 }
 
@@ -50,17 +60,10 @@ const formSchema = z.object({
   duration: z.string(),
   type: z.enum([FIXED, AUCTION]),
 });
-// .refine(
-//   (data) =>
-//     data.type === AUCTION ? data.endAmount > data.startAmount : true,
-//   {
-//     message: "Reserve price must be greater than starting price",
-//     path: ["endAmount"]
-//   }
-// );
 
 const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
   const { account } = useAccount();
+  const [isOpen, setIsOpen] = useState(false);
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
 
@@ -75,15 +78,9 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (account === undefined || !token?.contract_address || !token.token_id) {
-      console.error("Account, token address, or token ID is missing");
-      return;
-    }
-
-    const tokenId = parseInt(token.token_id, 10);
-
-    if (isNaN(tokenId)) {
-      console.error("Invalid tokenId");
+    if (!account) {
+      // TODO: Handle error with toast
+      console.error("Account is missing");
       return;
     }
 
@@ -123,80 +120,88 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
   }
 
   const isAuction = form.getValues("type") === AUCTION;
-  const duration = form.watch("duration");
-  const expiredAt = moment().add(duration, "hours").format("LLLL");
+  // const duration = form.watch("duration");
+  // const expiredAt = moment().add(duration, "hours").format("LLLL");
   const isLoading = status === "loading" || auctionStatus === "loading";
 
   return (
-    <div className="w-full rounded border p-4">
-      <div className="mb-4 font-semibold">List for sale</div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem className="">
-                <FormLabel>Choose a type of sale</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="gap-0 rounded border"
-                  >
-                    <FormItem className="flex items-center justify-center border-b p-4">
-                      <FormLabel className="flex flex-grow flex-col space-y-2 font-normal">
-                        <span className="font-semibold">Fixed price</span>
-                        <span className="">
-                          The item is listed at the price you set.
-                        </span>
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroupItem value={FIXED} className="h-6 w-6" />
-                      </FormControl>
-                    </FormItem>
-                    <FormItem className="flex items-center justify-center p-4">
-                      <FormLabel className="flex flex-grow flex-col space-y-2 font-normal">
-                        <span className="font-semibold">
-                          Sell to highest bidder
-                        </span>
-                        <span className="">
-                          The item is listed for auction.
-                        </span>
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroupItem value={AUCTION} className="h-6 w-6" />
-                      </FormControl>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="startAmount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Starting Price</FormLabel>
-                <FormControl>
-                  <Input placeholder="Amount" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {isAuction && (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger
+        asChild
+        className="mx-auto flex max-w-[416px] flex-col items-center gap-4 lg:flex-row lg:gap-8"
+      >
+        <Button className="relative w-full" size="xl">
+          <ShoppingBag size={24} className="absolute left-4" />
+          <span>List for sale</span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader className="items-center">
+          <DialogTitle>List for sale</DialogTitle>
+        </DialogHeader>
+        <div className="flex items-center space-x-4">
+          <div className="size-24 overflow-hidden rounded">
+            <TokenMedia token={token} />
+          </div>
+          <div className="">
+            <div className="font-bold">Duo #{token.token_id}</div>
+            <div className="text-muted-foreground">Everai</div>
+          </div>
+          <div className="grow" />
+        </div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col space-y-4"
+          >
             <FormField
               control={form.control}
-              name="endAmount"
+              name="type"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Choose a type of sale</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="gap-0 rounded border"
+                    >
+                      <FormItem className="flex items-center justify-center border-b p-4">
+                        <FormLabel className="text-md flex flex-grow flex-col space-y-2 font-normal">
+                          <span className="font-semibold">Fixed price</span>
+                          <span className="">
+                            The item is listed at the price you set.
+                          </span>
+                        </FormLabel>
+                        <FormControl>
+                          <RadioGroupItem value={FIXED} className="h-6 w-6" />
+                        </FormControl>
+                      </FormItem>
+                      <FormItem className="flex items-center justify-center p-4">
+                        <FormLabel className="text-md flex flex-grow flex-col space-y-2 font-normal">
+                          <span className="font-semibold">
+                            Sell to highest bidder
+                          </span>
+                          <span className="">
+                            The item is listed for auction.
+                          </span>
+                        </FormLabel>
+                        <FormControl>
+                          <RadioGroupItem value={AUCTION} className="h-6 w-6" />
+                        </FormControl>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="startAmount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Reserve Price</FormLabel>
+                  <FormLabel>Set starting price</FormLabel>
                   <FormControl>
                     <Input placeholder="Amount" {...field} />
                   </FormControl>
@@ -204,43 +209,58 @@ const CreateListing: React.FC<CreateListingProps> = ({ token }) => {
                 </FormItem>
               )}
             />
-          )}
-          <FormField
-            control={form.control}
-            name="duration"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex justify-between">
-                  <FormLabel>Duration</FormLabel>
-                  <div className="text-sm">Expires {expiredAt}</div>
-                </div>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value.toString()}
-                >
-                  <FormControl>
-                    <SelectTrigger className="">
-                      <SelectValue placeholder="Theme" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="1">1 hour</SelectItem>
-                    <SelectItem value="3">3 hours</SelectItem>
-                    <SelectItem value="6">6 hours</SelectItem>
-                    <SelectItem value="24">1 day</SelectItem>
-                    <SelectItem value="72">3 days</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
+            {isAuction && (
+              <FormField
+                control={form.control}
+                name="endAmount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Set reserve price</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Amount" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             )}
-          />
-          <Button type="submit" className="" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Complete Listing"}
-          </Button>
-        </form>
-      </Form>
-    </div>
+            <FormField
+              control={form.control}
+              name="duration"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between">
+                    <FormLabel>Set expiration</FormLabel>
+                    {/* <div className="text-sm">Expires {expiredAt}</div> */}
+                  </div>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value.toString()}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="">
+                        <SelectValue placeholder="Theme" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="1">1 hour</SelectItem>
+                      <SelectItem value="3">3 hours</SelectItem>
+                      <SelectItem value="6">6 hours</SelectItem>
+                      <SelectItem value="24">1 day</SelectItem>
+                      <SelectItem value="72">3 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Complete Listing"}
+            </Button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

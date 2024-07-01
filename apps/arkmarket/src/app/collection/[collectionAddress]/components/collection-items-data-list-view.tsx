@@ -83,6 +83,7 @@ export default function CollectionItemsDataListView({
 
           return (
             <Link
+              prefetch={false}
               href={`/token/${token.contract}/${token.token_id}`}
               key={`${token.contract}-${token.token_id}`}
             >
