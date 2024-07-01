@@ -5,7 +5,7 @@ import { useQueryState } from "nuqs";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 
-import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
+// import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
@@ -14,12 +14,12 @@ import PortfolioItemsFiltersContent from "./portfolio-items-filters-content";
 
 interface PortfolioItemsFiltersModal {
   walletAddress: string;
-  walletCollectionsInitialData: WalletCollectionsApiResponse;
+  // walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 
 export default function PortfolioItemsFiltersModal({
   walletAddress,
-  walletCollectionsInitialData,
+  // walletCollectionsInitialData,
   children,
 }: PropsWithChildren<PortfolioItemsFiltersModal>) {
   const [open, setOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function PortfolioItemsFiltersModal({
         <div className="flex h-full flex-col justify-between overflow-auto">
           <PortfolioItemsFiltersContent
             walletAddress={walletAddress}
-            walletCollectionsInitialData={walletCollectionsInitialData}
+            // walletCollectionsInitialData={walletCollectionsInitialData}
             onFilterChange={() => setOpen(false)}
             className="mt-5 pb-5"
           />

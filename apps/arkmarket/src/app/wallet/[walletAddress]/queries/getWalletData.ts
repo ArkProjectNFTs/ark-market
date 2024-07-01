@@ -63,7 +63,7 @@ export interface WalletCollection {
   address: string;
   image: string | null;
   collection_name: string;
-  floor: number;
+  floor: number | null;
   user_listed_tokens: number;
   user_token_count: number;
 }
