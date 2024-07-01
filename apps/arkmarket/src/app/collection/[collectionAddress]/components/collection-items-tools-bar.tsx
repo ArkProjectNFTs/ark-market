@@ -1,11 +1,11 @@
 import type { PropsWithClassName } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import FiltersIcon from "@ark-market/ui/icons/filters-icon";
-import { Input } from "@ark-market/ui/input";
 
 import "@ark-market/ui/toggle-group";
 
 import { cn } from "@ark-market/ui";
+import { SearchInput } from "@ark-market/ui/search-input";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
@@ -64,7 +64,7 @@ export default function CollectionItemsToolsBar({
             className="hidden lg:flex"
           />
 
-          <Input className="flex-1" placeholder="Search item" />
+          <SearchInput className="flex-1" placeholder="Search item" />
 
           <CollectionItemsSortingSelect
             className="hidden lg:block"
