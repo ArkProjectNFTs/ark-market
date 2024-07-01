@@ -55,7 +55,7 @@ export default function Footer() {
             <p>Privacy Policy</p>
             <p>Explore Collections</p>
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:mr-16">
             <h4 className="text-xl font-semibold text-foreground">Contact</h4>
             <p>Telegram</p>
             <p>Support</p>
