@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@ark-market/ui";
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-sm text-sm font-medium text-secondary-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-primary data-[state=on]:text-background data-[state=off]:hover:text-accent-foreground",
+  "inline-flex items-center justify-center rounded-sm text-sm font-medium text-secondary-foreground ring-offset-background transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-primary data-[state=on]:text-background data-[state=off]:hover:text-accent-foreground",
   {
     variants: {
       variant: {
@@ -18,8 +18,8 @@ const toggleVariants = cva(
       },
       size: {
         default: "h-10 px-2",
-        sm: "h-8 px-2",
-        lg: "h-10 px-3",
+        sm: "h-9 px-2.5",
+        lg: "h-11 px-5",
       },
     },
     defaultVariants: {

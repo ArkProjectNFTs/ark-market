@@ -39,7 +39,7 @@ const CancelListing: React.FC<CancelListingProps> = ({
   const isDisabled = ["loading", "cancelling"].includes(status);
 
   return (
-    <Button onClick={handleClick} disabled={isDisabled}>
+    <Button onClick={handleClick} disabled={isDisabled} size="xl">
       {status === "loading" ? (
         <ReloadIcon className="animate-spin" />
       ) : (

@@ -16,7 +16,9 @@ export default function CollectionItemsFiltersModal({
         <div className="flex h-full flex-col justify-between">
           <CollectionItemsFiltersContent />
           <div>
-            <Button className="w-full">Done</Button>
+            <Button className="w-full" size="xl">
+              Done
+            </Button>
           </div>
         </div>
       </DialogContent>

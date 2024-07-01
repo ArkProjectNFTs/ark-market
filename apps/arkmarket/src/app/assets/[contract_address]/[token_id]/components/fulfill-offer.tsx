@@ -28,6 +28,7 @@ const BuyOrder: React.FC<BuyOrderProps> = ({ token, tokenMarketData }) => {
     <div className="flex w-full flex-col space-y-4 rounded border p-4">
       <h1>Accept best offers</h1>
       <Button
+        size="xl"
         onClick={() =>
           fulfillOffer({
             starknetAccount: account,

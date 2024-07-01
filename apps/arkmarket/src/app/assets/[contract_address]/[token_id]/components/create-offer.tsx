@@ -94,7 +94,9 @@ export default function CreateOffer({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="max-w-[320px]">Make offer</Button>
+        <Button className="max-w-[320px]" size="xl">
+          Make offer
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -135,7 +137,7 @@ export default function CreateOffer({
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isDisabled}>
+            <Button type="submit" disabled={isDisabled} size="xl">
               {status === "loading" ? (
                 <ReloadIcon className="animate-spin" />
               ) : (

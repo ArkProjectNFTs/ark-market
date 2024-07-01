@@ -70,8 +70,9 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 onClick={() => connect(connector)}
                 variant="secondary"
                 className="relative"
+                size="xl"
               >
-                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
+                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
                   <img
                     src={
                       isArgentMobile ? argent().icon.dark : connector.icon.dark
@@ -101,8 +102,9 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 onClick={() => connect(webWalletConnector)}
                 variant="secondary"
                 className="relative h-14"
+                size="xl"
               >
-                <div className="rounded-xs absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center bg-background">
+                <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
                   <Mail size={20} />
                 </div>
                 <div>

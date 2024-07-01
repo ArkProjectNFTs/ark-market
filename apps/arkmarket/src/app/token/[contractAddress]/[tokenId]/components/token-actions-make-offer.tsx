@@ -203,6 +203,7 @@ export default function TokenActionsMakeOffer({
                 type="submit"
                 disabled={isDisabled}
                 className="mx-auto w-fit px-10"
+                size="xl"
               >
                 {status === "loading" ? (
                   <ReloadIcon className="animate-spin" />

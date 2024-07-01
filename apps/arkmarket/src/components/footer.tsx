@@ -26,15 +26,15 @@ export default function Footer() {
             yourself at home among other NFT enthusiasts.
           </p>
           <div className="flex items-center gap-4">
-            <Button variant="outline" className="w-full lg:w-auto">
+            <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Follow us on </p>
               <XIcon className="size-4" />
             </Button>
-            <Button variant="outline" className="w-full lg:w-auto">
+            <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Join us on</p>
               <DiscordIcon className="size-4" />
             </Button>
-            <Button variant="outline" className="w-full lg:w-auto">
+            <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Chat with us on </p>
               <SiTelegram size={16} />
             </Button>

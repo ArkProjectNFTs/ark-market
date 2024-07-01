@@ -145,7 +145,7 @@ export default function TokenActionsMakeBid({
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isDisabled}>
+            <Button type="submit" disabled={isDisabled} size="xl">
               {status === "loading" ? (
                 <ReloadIcon className="animate-spin" />
               ) : (

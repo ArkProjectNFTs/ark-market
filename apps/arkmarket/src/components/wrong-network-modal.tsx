@@ -40,7 +40,7 @@ export default function WrongNetworkModal({ children }: PropsWithChildren) {
           use the marketplace you need to switch to mainnet in your Starknet
           wallet. Thank you!
         </p>
-        <Button className="inline-block" onClick={closeModal}>
+        <Button className="inline-block" onClick={closeModal} size="xl">
           Ok, got it!
         </Button>
       </DialogContent>

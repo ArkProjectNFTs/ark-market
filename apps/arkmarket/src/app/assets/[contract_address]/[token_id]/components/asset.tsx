@@ -44,7 +44,7 @@ const Asset: React.FC<AssetProps> = ({ token }) => {
       <div className="col-span-1 row-span-3 flex flex-col space-y-5">
         <div className="flex flex-col space-y-2">
           <Link href={`/collection/${token.contract_address}`}>
-            <Button>
+            <Button size="xl">
               <MoveLeft className="mr-2 h-4 w-4" />
               Back to collection
             </Button>

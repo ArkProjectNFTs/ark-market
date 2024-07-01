@@ -271,7 +271,7 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="" disabled={isLoading}>
+              <Button type="submit" className="" disabled={isLoading} size="xl">
                 {isLoading ? "Loading..." : "Complete Listing"}
               </Button>
             </form>
