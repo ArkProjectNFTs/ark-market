@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SiTelegram } from "react-icons/si";
 
 import { cn, focusableStyles } from "@ark-market/ui";
@@ -10,6 +13,11 @@ import { siteConfig } from "~/config/site";
 import { Icons } from "./icons";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.includes("/wallet/") || pathname.includes("/collection/")) {
+    return null;
+  }
+
   return (
     <footer className="border-t border-border px-8 py-11">
       <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center">
