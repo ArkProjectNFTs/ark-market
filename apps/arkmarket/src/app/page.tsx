@@ -1,57 +1,193 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Button } from "@ark-market/ui/button";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
-import { collections } from "~/config/homepage";
+import { homepageConfig } from "~/config/homepage";
 
 export default function HomePage() {
+  const [exploreCollectionsToShow, setExploreCollectionsToShow] = useState(6);
+  const canShowMoreExploreCollectionsItems =
+    exploreCollectionsToShow < homepageConfig.exploreCollections.length;
+
+  function showMoreCollectionsToExplore() {
+    setExploreCollectionsToShow((previous) =>
+      Math.min(previous + 3, homepageConfig.exploreCollections.length),
+    );
+  }
+
+  function showLessCollectionsToExplore() {
+    setExploreCollectionsToShow(6);
+  }
+
   return (
-    <main className="container py-12">
-      <div className="relative mb-10 w-auto overflow-hidden rounded-md">
-        <Link
-          href={`/collection/${"0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478"}`}
-        >
-          <Image
-            src="/temp/everai_banner.png"
-            alt="everai"
-            width="3024"
-            height="532"
-          />
-        </Link>
-      </div>
-      <div className="flex flex-col space-y-4">
-        <div className="grid grid-cols-4 gap-4">
-          {collections.map((collection, index) => (
-            <Link href={`/collection/${collection.address}`} key={index}>
-              <Card className="overflow-hidden">
-                <CardContent
-                  className="relative w-full"
-                  style={{ paddingBottom: "100%" }}
+    <main>
+      <div className="h-[30rem] w-full bg-secondary" />
+      <div className="mx-auto max-w-[160rem] px-8 pb-8">
+        {homepageConfig.latestDropCollections.length !== 0 && (
+          <>
+            <h2 className="pt-10 text-3xl font-semibold">Latest drop</h2>
+            <div className="mt-8 grid grid-cols-4 gap-6">
+              {homepageConfig.latestDropCollections.map((collection, index) => {
+                return (
+                  <Link href="/" key={index}>
+                    <Card className="overflow-hidden border-none">
+                      <CardContent className="p-0">
+                        <div className="aspect-square bg-secondary" />
+                      </CardContent>
+                      <CardFooter className="flex flex-col items-start p-5">
+                        <div className="flex items-center gap-1.5">
+                          <h4 className="text-xl font-semibold">
+                            {collection.name}
+                          </h4>
+                          <VerifiedIcon className="text-background" />
+                        </div>
+                        <span className="mt-5 text-sm font-medium text-muted-foreground">
+                          Status
+                        </span>
+                        <p className="font-medium">Mint starts in 2 hours</p>
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {homepageConfig.trendingCollections.length !== 0 && (
+          <>
+            <h2 className="pt-10 text-3xl font-semibold">Trending now</h2>
+            <div className="mt-8 grid grid-cols-4 gap-6">
+              {homepageConfig.trendingCollections.map((collection, index) => {
+                return (
+                  <Link href={`/collection/${collection.address}`} key={index}>
+                    <Card className="overflow-hidden border-none">
+                      <CardContent className="p-0">
+                        <Image
+                          src={collection.image}
+                          alt={collection.name}
+                          objectFit="cover"
+                          // layout="fill"
+                          height={600}
+                          width={600}
+                          className="aspect-square w-full"
+                        />
+                      </CardContent>
+                      <CardFooter className="flex flex-col items-start p-5">
+                        <div className="flex items-center gap-1.5">
+                          <h4 className="text-xl font-semibold">
+                            {collection.name}
+                          </h4>
+                          <VerifiedIcon className="text-background" />
+                        </div>
+                        <span className="mt-5 text-sm font-medium text-muted-foreground">
+                          Floor price
+                        </span>
+                        <p className="font-medium">
+                          1.6 ETH{" "}
+                          <span className="font-bold text-green-500">
+                            +0.02%
+                          </span>
+                        </p>
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {homepageConfig.exploreCollections.length !== 0 && (
+          <>
+            <h2 className="pt-10 text-3xl font-semibold">
+              Explore Collections
+            </h2>
+            <div className="mt-8 grid grid-cols-3 gap-6">
+              {homepageConfig.exploreCollections
+                .slice(0, exploreCollectionsToShow)
+                .map((collection, index) => {
+                  return (
+                    <Link
+                      href={`/collection/${collection.address}`}
+                      key={index}
+                    >
+                      <div>
+                        {collection.banner_image !== undefined ? (
+                          <Image
+                            src={collection.banner_image}
+                            className="aspect-video rounded-lg"
+                            alt={collection.name}
+                            height={512}
+                            width={932}
+                          />
+                        ) : (
+                          <div className="aspect-video rounded-lg bg-secondary" />
+                        )}
+                        <div className="mt-4 flex items-center gap-2">
+                          <Image
+                            className="aspect-square w-16 rounded-sm"
+                            src={collection.image}
+                            alt={collection.name}
+                            height={124}
+                            width={124}
+                          />
+                          <h4 className="text-xl font-semibold">
+                            {collection.name}
+                          </h4>
+                          <VerifiedIcon className="text-background" />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+            </div>
+            <div className="mt-16 flex justify-center">
+              {canShowMoreExploreCollectionsItems ? (
+                <Button
+                  variant="outline"
+                  onClick={showMoreCollectionsToExplore}
                 >
-                  <Image
-                    src={collection.image}
-                    alt={collection.name}
-                    fill
-                    className="absolute left-0 top-0 h-full w-full"
-                  />
-                </CardContent>
-                <CardFooter className="flex flex-col items-start p-4">
-                  <div className="mb-2 font-bold">{collection.name}</div>
-                  <div className="flex w-full justify-between">
-                    <div>
-                      <div className="text-xs">Floor</div>
-                      <div className="text-sm font-bold">2 ETH</div>
-                    </div>
-                    <div className="min-w-20">
-                      <div className="text-xs">Volume</div>
-                      <div className="text-sm font-bold">10 ETH</div>
-                    </div>
-                  </div>
-                </CardFooter>
-              </Card>
-            </Link>
-          ))}
+                  View more
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  onClick={showLessCollectionsToExplore}
+                >
+                  View less
+                </Button>
+              )}
+            </div>
+          </>
+        )}
+
+        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="flex w-full items-center gap-8 rounded-lg bg-card p-8">
+            <div className="h-48 w-48 rounded-lg bg-secondary" />
+            <div className="flex h-full flex-col items-start justify-between">
+              <h2 className="text-3xl font-semibold">Need help?</h2>
+              <p>Lorem ipsum...</p>
+              <Button size="xl">Contact support</Button>
+            </div>
+          </div>
+
+          <div className="flex w-full items-center gap-8 rounded-lg bg-card p-8">
+            <div className="h-48 w-48 rounded-lg bg-secondary" />
+            <div className="flex h-full flex-col items-start justify-between">
+              <h2 className="text-3xl font-semibold">
+                Get your collection verified
+              </h2>
+              <p>Lorem ipsum...</p>
+              <Button size="xl">Submit your collection</Button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
