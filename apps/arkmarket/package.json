@@ -42,7 +42,7 @@
     "react-query": "^3.39.3",
     "react-virtuoso": "^4.7.11",
     "starknet": "^6.9.0",
-    "starknetkit": "^2.2.10",
+    "starknetkit": "^1.1.9",
     "superjson": "2.2.1",
     "viem": "^2.13.10",
     "zod": "^3.23.8"
