@@ -1,11 +1,4 @@
-import { notFound } from "next/navigation";
-
 import Collection from "./components/collection";
-import {
-  getCollectionInfos,
-  getCollectionTokens,
-} from "./queries/getCollectionData";
-import { collectionPageSearchParamsCache } from "./search-params";
 
 interface CollectionPageProps {
   params: {
@@ -14,9 +7,9 @@ interface CollectionPageProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-export default async function CollectionPage({
+export default function CollectionPage({
   params,
-  searchParams,
+  // searchParams,
 }: CollectionPageProps) {
   const { collectionAddress } = params;
   // const { direction, sort } =
