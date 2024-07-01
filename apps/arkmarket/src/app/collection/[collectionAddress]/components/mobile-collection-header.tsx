@@ -53,7 +53,7 @@ export default function MobileCollectionHeader({
                 "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
               ) ? (
                 <img
-                  src="/medias/everai_profile_picture.png"
+                  src="/collections/everai.png"
                   className="aspect-square h-full flex-shrink-0 rounded-xs"
                   alt="Everai profile"
                 />
