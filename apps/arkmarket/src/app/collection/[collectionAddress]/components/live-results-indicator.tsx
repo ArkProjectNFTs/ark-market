@@ -16,7 +16,6 @@ export default function LiveResultsIndicator({
         <span className="relative inline-flex h-4 w-4 rounded-full bg-green-500" />
       </span>
 
-      {/* TODO @YohanTz: Number of tokens */}
       <p>{formatNumber(totalCount)} results</p>
     </div>
   );

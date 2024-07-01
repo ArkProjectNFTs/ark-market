@@ -1,6 +1,5 @@
 import { env } from "~/env";
 
-// TODO @YohanTz: double check this type
 interface TokenMetadataAttribute {
   display_type: string | null;
   trait_type: string | null;
