@@ -86,7 +86,7 @@ export default function TokenActionsBuyNow({
                   token={token}
                   amount={formatEther(BigInt(tokenMarketData.start_amount))}
                 />
-                <Button onClick={() => setIsOpen(false)} size="xl">
+                <Button onClick={() => setIsOpen(false)} size="xxl">
                   Continue to explore NFTs
                 </Button>
               </div>

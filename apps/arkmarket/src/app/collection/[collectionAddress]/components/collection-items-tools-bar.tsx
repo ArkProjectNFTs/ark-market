@@ -45,14 +45,14 @@ export default function CollectionItemsToolsBar({
       <div className={cn("bg-background", className)}>
         <div className="flex items-center gap-2 md:gap-6">
           <CollectionItemsFiltersModal>
-            <Button variant="secondary" size="icon" className="sm:hidden">
+            <Button variant="secondary" size="icon-xl" className="sm:hidden">
               <FiltersIcon />
             </Button>
           </CollectionItemsFiltersModal>
           <Button
             onClick={toggleFiltersPanel}
             variant="secondary"
-            size="lg"
+            size="xl"
             className="hidden sm:flex"
           >
             <FiltersIcon />

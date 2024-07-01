@@ -27,16 +27,15 @@ const buttonVariants = cva(
         icon: "h-10 w-10",
 
         // Custom
+        md: "h-8 px-3.5 text-xs md:h-12 md:px-4 md:text-sm",
         xl: "h-12 px-4",
+        xxl: "h-14 px-4 text-base",
+        "icon-xl": "h-12 w-12",
+        "icon-sm": "h-8 w-8 rounded-xs",
       },
 
       // size: {
-      //   default: "h-12 px-4",
-      //   sm: "h-8 px-3.5 text-xs md:h-12 md:px-4 md:text-sm",
-      //   lg: "h-12 px-4",
-      //   xl: "h-14 px-4 text-base",
-      //   icon: "h-12 w-12",
-      //   "icon-small": "h-8 w-8 rounded-xs",
+      //   sm: "",
       // },
     },
     defaultVariants: {
