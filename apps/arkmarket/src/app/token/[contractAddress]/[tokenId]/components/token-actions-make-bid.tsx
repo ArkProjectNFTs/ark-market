@@ -103,7 +103,7 @@ export default function TokenActionsMakeBid({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full" variant="secondary" size="xl">
+        <Button className="relative w-full" variant="secondary" size="xxl">
           <Tag size={24} className="absolute left-4" />
           Make an offer
         </Button>
@@ -145,7 +145,7 @@ export default function TokenActionsMakeBid({
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isDisabled}>
+            <Button type="submit" disabled={isDisabled} size="xl">
               {status === "loading" ? (
                 <ReloadIcon className="animate-spin" />
               ) : (

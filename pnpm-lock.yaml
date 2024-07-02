@@ -120,8 +120,8 @@ importers:
         specifier: ^6.9.0
         version: 6.9.0
       starknetkit:
-        specifier: ^2.2.10
-        version: 2.2.10(starknet@6.9.0)
+        specifier: ^1.1.9
+        version: 1.1.9(starknet@6.9.0)
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -250,7 +250,7 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(next@14.2.4)(react-dom@18.3.1)(react@18.3.1)
       react-hook-form:
-        specifier: ^7.51.1
+        specifier: ^7.51.3
         version: 7.51.3(react@18.3.1)
       sonner:
         specifier: ^1.4.41
@@ -1055,7 +1055,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dependencies:
       is-glob: 4.0.3
-      micromatch: 4.0.5
+      micromatch: 4.0.7
       napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
@@ -1094,7 +1094,7 @@ packages:
     dependencies:
       detect-libc: 1.0.3
       is-glob: 4.0.3
-      micromatch: 4.0.5
+      micromatch: 4.0.7
       node-addon-api: 7.1.0
     optionalDependencies:
       '@parcel/watcher-android-arm64': 2.4.1
@@ -2896,6 +2896,7 @@ packages:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: true
 
   /acorn@8.12.0:
     resolution: {integrity: sha512-RTvkC4w+KNXrM39/lWCUaG0IbRkWdCv7W/IOW9oU6SawyxulvkQy5HQPVTKxEjczcUvapcrw3cFx/60VN/NRNw==}
@@ -3212,7 +3213,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       fill-range: 7.1.1
-    dev: true
 
   /broadcast-channel@3.7.0:
     resolution: {integrity: sha512-cIAKJXAxGJceNZGTZSBzMxzyOn72cVgPnKx4dc6LRjQgbaJUQqhy5rzL3zbMxkMWsGKkv2hSFkPRMEXfoMZ2Mg==}
@@ -4363,7 +4363,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       to-regex-range: 5.0.1
-    dev: true
 
   /filter-obj@1.1.0:
     resolution: {integrity: sha512-8rXg1ZnX7xzy2NGDVkBVaAy+lSlPNwad13BtgSlLuxfIslyt5Vg64U7tFcCt4WS1R0hvtnQybT/IyCkGZ3DpXQ==}
@@ -5543,7 +5542,6 @@ packages:
     dependencies:
       braces: 3.0.3
       picomatch: 2.3.1
-    dev: true
 
   /microseconds@0.2.0:
     resolution: {integrity: sha512-n7DHHMjR1avBbSpsTBj6fmMGh2AGrifVV4e+WYc3Q9lO+xnSZ3NyhcBND3vzzatt05LFhoKFRxrIyklmLlUtyA==}
@@ -5608,7 +5606,7 @@ packages:
   /mlly@1.7.0:
     resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.0
       pathe: 1.1.2
       pkg-types: 1.1.1
       ufo: 1.5.3
@@ -6872,10 +6870,10 @@ packages:
       - encoding
     dev: false
 
-  /starknetkit@2.2.10(starknet@6.9.0):
-    resolution: {integrity: sha512-nOxyxCrXFI/mdAxg2SJiM9Wyt66h0ZIePaB1AJepLA3gUfcogej/hgChZJAr7SYueu2ANcns+eIGohb/sp48nQ==}
+  /starknetkit@1.1.9(starknet@6.9.0):
+    resolution: {integrity: sha512-KarnNS9sJoImTdpTKizyNzDlQSAOutbzuZ6CzHQpJHWzaf8ION9aIf+d87sY7hSlbmD7cqGRUG28Hpke24arCg==}
     peerDependencies:
-      starknet: ^6.9.0
+      starknet: ^6.7.0
     dependencies:
       '@trpc/client': 10.45.2(@trpc/server@10.45.2)
       '@trpc/server': 10.45.2
@@ -6884,8 +6882,7 @@ packages:
       detect-browser: 5.3.0
       eventemitter3: 5.0.1
       events: 3.3.0
-      get-starknet-core: 4.0.0-next.5
-      get-starknet-coreV3: /get-starknet-core@3.2.0(starknet@6.9.0)
+      get-starknet-core: 3.3.0(starknet@6.9.0)
       lodash-es: 4.17.21
       starknet: 6.9.0
       svelte-forms: 2.3.1

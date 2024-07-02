@@ -26,7 +26,7 @@ export default function ViewTypeToggleButton({
   return (
     <Button
       variant="secondary"
-      size="icon"
+      size="icon-xl"
       className={className}
       onClick={onButtonClick}
     >

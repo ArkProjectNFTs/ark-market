@@ -14,6 +14,7 @@ function ConnectWallet() {
             key={connector.id}
             onClick={() => connect({ connector })}
             className="gap-x-2"
+            size="xl"
           >
             {connector.name}
           </Button>

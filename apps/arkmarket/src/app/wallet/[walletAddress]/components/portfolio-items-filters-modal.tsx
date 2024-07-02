@@ -46,10 +46,13 @@ export default function PortfolioItemsFiltersModal({
                 await setCollectionFilter(null);
                 setOpen(false);
               }}
+              size="xl"
             >
               Clear
             </Button>
-            <Button onClick={() => setOpen(false)}>Done</Button>
+            <Button onClick={() => setOpen(false)} size="xl">
+              Done
+            </Button>
           </div>
         </div>
       </DialogContent>

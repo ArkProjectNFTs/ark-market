@@ -32,14 +32,14 @@ export default function PortfolioItemsToolsBar({
           walletAddress={walletAddress}
           // walletCollectionsInitialData={walletCollectionsInitialData}
         >
-          <Button variant="secondary" size="icon" className="sm:hidden">
+          <Button variant="secondary" size="icon-xl" className="sm:hidden">
             <FiltersIcon />
           </Button>
         </PortfolioItemsFiltersModal>
         <Button
           onClick={toggleFiltersOpen}
           variant="secondary"
-          size="lg"
+          size="xl"
           className="hidden sm:flex"
         >
           <FiltersIcon />

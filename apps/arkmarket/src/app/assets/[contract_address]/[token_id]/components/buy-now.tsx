@@ -34,6 +34,7 @@ const BuyNow: React.FC<BuyOrderProps> = ({ token, tokenMarketData }) => {
 
   return (
     <Button
+      size="xl"
       disabled={status === "loading"}
       onClick={() =>
         fulfillListing({

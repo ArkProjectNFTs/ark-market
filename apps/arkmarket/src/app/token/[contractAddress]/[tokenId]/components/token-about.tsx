@@ -53,7 +53,7 @@ export default function TokenAbout({
       <div className="flex h-[4.5rem] items-center justify-between">
         <h3 className="text-2xl font-semibold">About & details</h3>
         <CollapsibleTrigger asChild>
-          <Button variant="outline" size="icon-small">
+          <Button variant="outline" size="icon-sm">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </Button>
         </CollapsibleTrigger>
@@ -77,13 +77,13 @@ export default function TokenAbout({
         </div>
 
         <div className="mt-5 flex items-center gap-4 text-muted-foreground lg:mt-10">
-          <Button variant="outline" size="icon" className="w-full lg:w-12">
+          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
             <XIcon className="size-4" />
           </Button>
-          <Button variant="outline" size="icon" className="w-full lg:w-12">
+          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
             <DiscordIcon className="size-4" />
           </Button>
-          <Button variant="outline" size="icon" className="w-full lg:w-12">
+          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
             <WebsiteIcon className="size-4" />
           </Button>
         </div>

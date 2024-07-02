@@ -41,7 +41,7 @@ export default function TokenActionsCancelListing({
       onClick={handleClick}
       disabled={status === "loading"}
       className="relative w-full lg:max-w-[50%]"
-      size="xl"
+      size="xxl"
       variant="secondary"
     >
       {status === "loading" ? (

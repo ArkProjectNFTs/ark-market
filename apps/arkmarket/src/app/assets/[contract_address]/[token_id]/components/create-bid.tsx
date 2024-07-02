@@ -102,7 +102,9 @@ export default function CreateBid({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full">Place a bid</Button>
+        <Button className="w-full" size="xl">
+          Place a bid
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -141,7 +143,7 @@ export default function CreateBid({
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isDisabled}>
+            <Button type="submit" disabled={isDisabled} size="xl">
               {status === "loading" ? (
                 <ReloadIcon className="animate-spin" />
               ) : (

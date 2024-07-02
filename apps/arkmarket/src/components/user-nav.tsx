@@ -38,7 +38,7 @@ export function UserNav() {
   if (address === undefined) {
     return (
       <ConnectWalletModal>
-        <Button variant="default" size="sm">
+        <Button variant="default" size="md">
           <div className="hidden items-center gap-2.5 md:flex">
             <WalletIcon />
             Connect wallet
@@ -52,7 +52,7 @@ export function UserNav() {
   if (isWrongNetwork) {
     return (
       <WrongNetworkModal>
-        <Button variant="default" size="sm">
+        <Button variant="default" size="md">
           <div className="hidden items-center gap-2.5 md:flex">
             <WalletIcon />
             Wrong network
@@ -69,7 +69,7 @@ export function UserNav() {
         <Button
           className="hidden gap-1.5 !pl-2 sm:inline-flex md:gap-3"
           variant="secondary"
-          size="sm"
+          size="md"
         >
           <EthereumLogo className="size-6 md:size-8" />
           <p>
@@ -88,7 +88,7 @@ export function UserNav() {
       <WalletAccountModal>
         <Button
           className="gap-1.5 !pl-2 sm:hidden"
-          size="sm"
+          size="md"
           variant="secondary"
         >
           <ProfilePicture className="size-6 rounded-full" address={address} />
