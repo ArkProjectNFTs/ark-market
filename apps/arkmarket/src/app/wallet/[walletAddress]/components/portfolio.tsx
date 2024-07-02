@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
+import { useQueryState } from "nuqs";
 
 import { formatNumber } from "@ark-market/ui";
 import { TabsListV2, TabsTriggerV2, TabsV2 } from "@ark-market/ui/tabs-v2";
 
-import type {
-  WalletCollectionsApiResponse,
-  WalletTokensApiResponse,
-} from "../queries/getWalletData";
+import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
+import { getWalletTokens } from "../queries/getWalletData";
+import {
+  walletCollectionFilterKey,
+  walletCollectionFilterParser,
+} from "../search-params";
 import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
@@ -17,18 +22,59 @@ import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
 
 interface PortfolioProps {
   walletAddress: string;
-  walletCollectionsInitialData: WalletCollectionsApiResponse;
-  walletTokensInitialData: WalletTokensApiResponse;
+  // walletCollectionsInitialData: WalletCollectionsApiResponse;
+  // walletTokensInitialData: WalletTokensApiResponse;
 }
 
 export default function Portfolio({
   walletAddress,
-  walletCollectionsInitialData,
-  walletTokensInitialData,
+  // walletCollectionsInitialData,
+  // walletTokensInitialData,
 }: PortfolioProps) {
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
+
+  const [collectionFilter, _] = useQueryState(
+    walletCollectionFilterKey,
+    walletCollectionFilterParser,
+  );
+
+  const {
+    data: infiniteData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["walletTokens", collectionFilter, walletAddress],
+    refetchInterval: 10_000,
+    placeholderData: keepPreviousData,
+    getNextPageParam: (lastPage: WalletTokensApiResponse) => lastPage.next_page,
+    // initialData: isSSR
+    //   ? {
+    //       pages: [walletTokensInitialData],
+    //       pageParams: [],
+    //     }
+    //   : undefined,
+    initialPageParam: undefined,
+    queryFn: ({ pageParam }) =>
+      getWalletTokens({
+        page: pageParam,
+        walletAddress,
+        collectionAddress: collectionFilter,
+      }),
+  });
+
+  useInfiniteWindowScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+
+  const walletTokens = useMemo(
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
+    [infiniteData],
+  );
 
   return (
     <main className="flex">
@@ -36,7 +82,7 @@ export default function Portfolio({
         walletAddress={walletAddress}
         filtersOpen={itemsFiltersOpen}
         className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
-        walletCollectionsInitialData={walletCollectionsInitialData}
+        // walletCollectionsInitialData={walletCollectionsInitialData}
       />
       <div className="flex-1">
         <PortfolioHeader walletAddress={walletAddress} />
@@ -51,7 +97,7 @@ export default function Portfolio({
                 >
                   Items{" "}
                   <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs font-medium text-secondary-foreground">
-                    {formatNumber(walletTokensInitialData.token_count)}
+                    {formatNumber(infiniteData?.pages[0]?.token_count ?? 0)}
                   </p>
                 </TabsTriggerV2>
                 <TabsTriggerV2 value="orders">Orders</TabsTriggerV2>
@@ -60,7 +106,7 @@ export default function Portfolio({
             </TabsV2>
             <PortfolioItemsToolsBar
               walletAddress={walletAddress}
-              walletCollectionsInitialData={walletCollectionsInitialData}
+              // walletCollectionsInitialData={walletCollectionsInitialData}
               toggleFiltersOpen={() =>
                 setItemsFiltersOpen((previous) => !previous)
               }
@@ -70,8 +116,9 @@ export default function Portfolio({
           </div>
           <PortfolioItemsData
             viewType={viewType}
-            walletTokensInitialData={walletTokensInitialData}
+            walletTokens={walletTokens}
             walletAddress={walletAddress}
+            collectionFilter={collectionFilter}
           />
         </div>
       </div>

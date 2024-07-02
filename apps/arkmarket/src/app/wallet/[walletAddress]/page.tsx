@@ -1,6 +1,4 @@
 import Portfolio from "./components/portfolio";
-import { getWalletCollections, getWalletTokens } from "./queries/getWalletData";
-import { walletPageSearchParamsCache } from "./search-params";
 
 interface WalletPageProps {
   params: {
@@ -10,29 +8,29 @@ interface WalletPageProps {
 }
 
 // TODO: Fetch starknet-id name on the server
-export default async function WalletPage({
+export default function WalletPage({
   params,
-  searchParams,
+  // , searchParams
 }: WalletPageProps) {
   const { walletAddress } = params;
-  const { collection } = walletPageSearchParamsCache.parse(searchParams);
-  const walletTokensInitialData = await getWalletTokens({
-    walletAddress,
-    collectionAddress: collection,
-  });
-  const walletCollectionsInitialData = await getWalletCollections({
-    walletAddress,
-  });
+  // const { collection } = walletPageSearchParamsCache.parse(searchParams);
+  // const walletTokensInitialData = await getWalletTokens({
+  //   walletAddress,
+  //   collectionAddress: collection,
+  // });
+  // const walletCollectionsInitialData = await getWalletCollections({
+  //   walletAddress,
+  // });
 
-  if (walletTokensInitialData.data.length === 0) {
-    // TODO @YohanTz: Empty state
-    return;
-  }
+  // if (walletTokensInitialData.data.length === 0) {
+  //   // TODO @YohanTz: Empty state
+  //   return;
+  // }
 
   return (
     <Portfolio
-      walletTokensInitialData={walletTokensInitialData}
-      walletCollectionsInitialData={walletCollectionsInitialData}
+      // walletTokensInitialData={walletTokensInitialData}
+      // walletCollectionsInitialData={walletCollectionsInitialData}
       walletAddress={walletAddress}
     />
   );

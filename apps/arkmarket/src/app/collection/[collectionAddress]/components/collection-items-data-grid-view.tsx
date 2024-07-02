@@ -71,7 +71,6 @@ export default function CollectionItemsDataGridView({
           }
 
           return (
-            // TODO @YohanTz: Extract to NftCard component and sub-components
             <Link
               href={`/token/${collectionToken.contract}/${collectionToken.token_id}`}
               key={`${collectionToken.contract}-${collectionToken.token_id}`}

@@ -4,7 +4,7 @@ import { Button } from "@ark-market/ui/button";
 import FiltersIcon from "@ark-market/ui/icons/filters-icon";
 import { SearchInput } from "@ark-market/ui/search-input";
 
-import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
+// import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
 import ViewTypeToggleButton from "~/components/view-type-toggle-button";
 import ViewTypeToggleGroup from "~/components/view-type-toggle-group";
@@ -15,7 +15,7 @@ interface PortfolioItemsToolsBarProps {
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
   walletAddress: string;
-  walletCollectionsInitialData: WalletCollectionsApiResponse;
+  // walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 export default function PortfolioItemsToolsBar({
   className,
@@ -23,14 +23,14 @@ export default function PortfolioItemsToolsBar({
   viewType,
   setViewType,
   walletAddress,
-  walletCollectionsInitialData,
+  // walletCollectionsInitialData,
 }: PropsWithClassName<PortfolioItemsToolsBarProps>) {
   return (
     <div className={cn("bg-background", className)}>
       <div className="flex items-center gap-2 md:gap-6">
         <PortfolioItemsFiltersModal
           walletAddress={walletAddress}
-          walletCollectionsInitialData={walletCollectionsInitialData}
+          // walletCollectionsInitialData={walletCollectionsInitialData}
         >
           <Button variant="secondary" size="icon-xl" className="sm:hidden">
             <FiltersIcon />
