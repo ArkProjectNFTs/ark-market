@@ -111,7 +111,7 @@ export default function TokenActionsMakeOffer({
       <DialogTrigger asChild>
         <Button
           className="relative w-full lg:max-w-[50%]"
-          size="xl"
+          size="xxl"
           variant="secondary"
         >
           <Tag size={24} className="absolute left-4" />
@@ -203,6 +203,7 @@ export default function TokenActionsMakeOffer({
                 type="submit"
                 disabled={isDisabled}
                 className="mx-auto w-fit px-10"
+                size="xl"
               >
                 {status === "loading" ? (
                   <ReloadIcon className="animate-spin" />

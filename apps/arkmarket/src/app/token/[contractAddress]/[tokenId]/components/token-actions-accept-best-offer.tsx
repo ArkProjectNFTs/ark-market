@@ -67,7 +67,7 @@ export default function TokenActionsAcceptBestOffer({
       onClick={handleClick}
       disabled={isLoading}
       className="relative w-full lg:max-w-[50%]"
-      size="xl"
+      size="xxl"
     >
       {isLoading ? (
         <ReloadIcon className="absolute left-4 size-6 animate-spin" />

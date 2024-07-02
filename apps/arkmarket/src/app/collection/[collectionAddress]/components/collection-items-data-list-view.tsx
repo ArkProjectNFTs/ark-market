@@ -121,11 +121,9 @@ export default function CollectionItemsDataListView({
                 <TableCell>_</TableCell>
                 <TableCell>_</TableCell>
                 <TableCell>
-                  <Button asChild variant="link" className="px-0">
+                  <Button asChild variant="link" className="px-0" size="xl">
                     <Link href={`/wallet/${token.owner}`}>
-                      {token.owner !== null
-                        ? `${token.owner.slice(0, 6)}...`
-                        : "_"}
+                      {token.owner ? `${token.owner.slice(0, 6)}...` : "_"}
                     </Link>
                   </Button>
                 </TableCell>

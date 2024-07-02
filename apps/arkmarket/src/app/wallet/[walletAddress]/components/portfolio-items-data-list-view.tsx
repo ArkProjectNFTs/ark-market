@@ -110,7 +110,10 @@ export default function PortfolioItemsDataListView({
               <TableCell>{token.received_at ?? "_"}</TableCell>
               <TableCell>
                 {/* TODO @YohanTz: List button only if owner is connected */}
-                <Button className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100">
+                <Button
+                  className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
+                  size="xl"
+                >
                   List for sale
                 </Button>
               </TableCell>

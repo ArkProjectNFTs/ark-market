@@ -73,7 +73,7 @@ export default function MobileCollectionHeader({
               </div>
             </div>
             <CollapsibleTrigger asChild>
-              <Button variant="outline" size="icon-small">
+              <Button variant="outline" size="icon-sm">
                 <ChevronDown size={14} />
               </Button>
             </CollapsibleTrigger>

@@ -41,7 +41,7 @@ export default function TokenTraits({
           </div>
         </div>
         <CollapsibleTrigger asChild>
-          <Button variant="outline" size="icon-small">
+          <Button variant="outline" size="icon-sm">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           </Button>
         </CollapsibleTrigger>

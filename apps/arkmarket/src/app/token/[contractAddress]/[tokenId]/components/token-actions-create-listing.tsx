@@ -141,7 +141,7 @@ export function TokenActionsCreateListing({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full lg:max-w-[50%]" size="xl">
+        <Button className="relative w-full lg:max-w-[50%]" size="xxl">
           <List size={24} className="absolute left-4" />
           <span>List for sale</span>
         </Button>
@@ -271,7 +271,7 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="" disabled={isLoading}>
+              <Button type="submit" className="" disabled={isLoading} size="xl">
                 {isLoading ? "Loading..." : "Complete Listing"}
               </Button>
             </form>

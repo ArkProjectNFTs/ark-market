@@ -46,11 +46,11 @@ export default function TokenActionsBar({
             <p className="text-lg font-semibold">{tokenInfos.metadata?.name}</p>
           </div>
           <div className="flex items-center gap-5">
-            <Button>
+            <Button size="xl">
               <ShoppingBag size={24} />
               Buy now for 0.054 ETH
             </Button>
-            <Button variant="secondary">
+            <Button variant="secondary" size="xl">
               <Tag size={24} />
               Make Offer
             </Button>
