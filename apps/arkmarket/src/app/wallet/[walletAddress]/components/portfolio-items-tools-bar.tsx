@@ -2,7 +2,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import FiltersIcon from "@ark-market/ui/icons/filters-icon";
-import { Input } from "@ark-market/ui/input";
+import { SearchInput } from "@ark-market/ui/search-input";
 
 import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
@@ -46,7 +46,7 @@ export default function PortfolioItemsToolsBar({
           <span>Filters</span>
         </Button>
 
-        <Input className="flex-1" placeholder="Search item" />
+        <SearchInput className="flex-1" placeholder="Search item" />
 
         {/* <PortfolioItemsSortingSelect
           className="hidden lg:block"

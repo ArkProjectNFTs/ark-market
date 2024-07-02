@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 
 import { cn } from "@ark-market/ui";
-import { Input } from "@ark-market/ui/input";
+import { SearchInput } from "@ark-market/ui/search-input";
 
 import { MainNav } from "~/components/main-nav";
 import { UserNav } from "~/components/user-nav";
@@ -35,7 +35,7 @@ export default function SiteHeader() {
     >
       <MainNav />
       <div className="w-full flex-1 md:w-auto md:flex-none">
-        <Input
+        <SearchInput
           placeholder="Search Nft, collections and account"
           className="hidden w-80 lg:block"
         />
