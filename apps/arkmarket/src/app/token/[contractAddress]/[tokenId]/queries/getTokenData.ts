@@ -42,3 +42,40 @@ export async function getTokenInfos({
 
   return response.json() as Promise<TokenInfosApiResponse>;
 }
+
+export interface TokenOffer {
+  expire_at: number;
+  floor_difference: string | null;
+  hash: string;
+  offer_id: number;
+  price: string;
+  source: string | null;
+}
+interface TokenOffersApiResponse {
+  data: TokenOffer[];
+}
+interface GetTokenOffersParams {
+  contractAddress: string;
+  page?: number;
+  tokenId: string;
+}
+export async function getTokenOffers({
+  contractAddress,
+  page,
+  tokenId,
+}: GetTokenOffersParams) {
+  const queryParams = [`items_per_page=${10}`];
+  if (page !== undefined) {
+    queryParams.push(`page=${page}`);
+  }
+
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}/offers?${queryParams.join("&")}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.error(url, response.status);
+    return undefined;
+  }
+
+  return (await response.json()) as Promise<TokenOffersApiResponse>;
+}

@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@ark-market/ui";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -33,10 +33,6 @@ const buttonVariants = cva(
         "icon-xl": "h-12 w-12",
         "icon-sm": "h-8 w-8 rounded-xs",
       },
-
-      // size: {
-      //   sm: "",
-      // },
     },
     defaultVariants: {
       variant: "default",

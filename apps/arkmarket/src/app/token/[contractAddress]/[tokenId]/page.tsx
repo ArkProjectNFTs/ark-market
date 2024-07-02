@@ -69,7 +69,12 @@ export default async function TokenPage({
               className="-mx-5 lg:mx-0"
             />
           </div>
-          <TokenOffers className="-mx-5 lg:mx-0" />
+          <TokenOffers
+            className="-mx-5 lg:mx-0"
+            contractAddress={contractAddress}
+            tokenId={tokenId}
+            owner={tokenInfosInitialData.data.owner}
+          />
           <TokenTraits
             className="-mx-5 lg:mx-0"
             tokenAttributes={
