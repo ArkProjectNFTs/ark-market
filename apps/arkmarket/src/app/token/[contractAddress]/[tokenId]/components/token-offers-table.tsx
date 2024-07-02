@@ -1,7 +1,7 @@
 import { useAccount } from "@starknet-react/core";
 import { validateAndParseAddress } from "starknet";
 
-import { shortAddress } from "@ark-market/ui";
+import { cn, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
@@ -18,7 +18,7 @@ import ConnectWalletModal from "~/components/connect-wallet-modal";
 
 interface TokenOffersTableProps {
   tokenOffers: TokenOffer[];
-  owner: string;
+  owner: string | null;
 }
 
 export default function TokenOffersTable({
@@ -29,23 +29,46 @@ export default function TokenOffersTable({
 
   const isOwner =
     address !== undefined &&
-    validateAndParseAddress(address) === validateAndParseAddress(owner);
+    validateAndParseAddress(address) === validateAndParseAddress(owner ?? "");
 
   const showActionHeader = !isConnected || isOwner;
 
   return (
-    <Table className="w-full">
+    <Table>
       <TableHeader className="hover:bg-background">
-        <TableHead>Price</TableHead>
-        <TableHead>Floor difference</TableHead>
-        <TableHead>From</TableHead>
-        <TableHead>Expiration</TableHead>
-        {showActionHeader && <TableHead>Action</TableHead>}
+        <TableRow
+          className={cn(
+            "grid w-full items-center",
+            showActionHeader ? "grid-cols-5" : "grid-cols-4",
+          )}
+        >
+          <TableHead className="sticky top-0 flex items-center">
+            Price
+          </TableHead>
+          <TableHead className="sticky top-0 flex items-center">
+            Floor difference
+          </TableHead>
+          <TableHead className="sticky top-0 flex items-center">From</TableHead>
+          <TableHead className="sticky top-0 flex items-center">
+            Expiration
+          </TableHead>
+          {showActionHeader && (
+            <TableHead className="sticky top-0 flex items-center">
+              Action
+            </TableHead>
+          )}
+        </TableRow>
       </TableHeader>
-      <TableBody className="text-sm font-semibold">
+      <TableBody className="block max-h-[25.5rem] overflow-auto text-sm font-semibold">
         {tokenOffers.map((offer) => {
           return (
-            <TableRow key={offer.offer_id}>
+            <TableRow
+              key={offer.offer_id}
+              className={cn(
+                "grid h-[4.625rem] w-full items-center",
+                showActionHeader ? "grid-cols-5" : "grid-cols-4",
+              )}
+            >
               <TableCell>
                 <PriceTag price={offer.price} />
               </TableCell>

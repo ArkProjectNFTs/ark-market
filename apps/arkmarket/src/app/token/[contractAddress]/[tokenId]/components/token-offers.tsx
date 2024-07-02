@@ -1,10 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useAccount } from "@starknet-react/core";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, Meh } from "lucide-react";
-import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -21,7 +19,7 @@ import TokenOffersTable from "./token-offers-table";
 interface TokenOffersProps {
   contractAddress: string;
   tokenId: string;
-  owner: string;
+  owner: string | null;
 }
 
 export default function TokenOffers({
