@@ -26,7 +26,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { Input } from "@ark-market/ui/input";
+import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -39,6 +39,7 @@ import { toast } from "@ark-market/ui/toast";
 import type { Token, TokenMarketData } from "~/types";
 import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
 import { env } from "~/env";
+import formatAmount from "~/lib/formatAmount";
 
 const formSchema = z.object({
   startAmount: z.string(),
@@ -105,6 +106,7 @@ export default function TokenActionsMakeOffer({
 
   const isDisabled = form.formState.isSubmitting || status === "loading";
   const startAmount = form.watch("startAmount");
+  const formattedStartAmount = formatAmount(startAmount);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -136,9 +138,9 @@ export default function TokenActionsMakeOffer({
               </div>
             </div>
             <div className="grow" />
-            <div className="flex flex-col gap-1">
+            <div className="order-4 flex max-w-[40%] flex-[0_0_auto] flex-col justify-center self-stretch overflow-hidden text-right">
               <div className="text-xl font-semibold">
-                {startAmount || "---"} ETH
+                {formattedStartAmount} ETH
               </div>
               <div className="text-right text-lg font-semibold text-muted-foreground">
                 $---
@@ -157,10 +159,9 @@ export default function TokenActionsMakeOffer({
                   <FormItem>
                     <FormLabel>Set price</FormLabel>
                     <FormControl>
-                      <Input
-                        autoComplete="off"
-                        placeholder="Price"
-                        {...field}
+                      <NumericalInput
+                        value={field.value}
+                        onChange={field.onChange}
                       />
                     </FormControl>
                     <div className="mx-2 text-lg font-semibold text-muted-foreground">
