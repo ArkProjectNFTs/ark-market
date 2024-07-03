@@ -8,25 +8,31 @@ import CancelOffer from "~/app/assets/[contract_address]/[token_id]/components/c
 import ConnectWalletModal from "~/components/connect-wallet-modal";
 
 interface TokenOffersTableActionProps {
-  owner: string | null;
+  owner: string;
   offerSourceAddress: string | null;
   offerOrderHash: string;
   tokenId: string;
   tokenContractAddress: string;
+  offerAmount: string;
+  tokenIsListed: boolean;
+  tokenListingOrderHash: string | null;
 }
 
 export default function TokenOffersTableAction({
-  owner,
-  offerSourceAddress,
+  offerAmount,
   offerOrderHash,
-  tokenId,
+  offerSourceAddress,
+  owner,
   tokenContractAddress,
+  tokenId,
+  tokenIsListed,
+  tokenListingOrderHash,
 }: TokenOffersTableActionProps) {
   const { address } = useAccount();
 
   const isOwner =
     address !== undefined &&
-    validateAndParseAddress(address) === validateAndParseAddress(owner ?? "");
+    validateAndParseAddress(address) === validateAndParseAddress(owner);
 
   if (!address) {
     return (
@@ -36,8 +42,18 @@ export default function TokenOffersTableAction({
     );
   }
 
-  if (isOwner) {
-    return <AcceptOffer />;
+  if (isOwner && tokenListingOrderHash !== null) {
+    return (
+      <AcceptOffer
+        offerOrderHash={offerOrderHash}
+        tokenId={tokenId}
+        tokenContractAddress={tokenContractAddress}
+        tokenOwner={owner}
+        offerAmount={offerAmount}
+        tokenIsListed={tokenIsListed}
+        tokenListingOrderHash={tokenListingOrderHash}
+      />
+    );
   }
 
   if (

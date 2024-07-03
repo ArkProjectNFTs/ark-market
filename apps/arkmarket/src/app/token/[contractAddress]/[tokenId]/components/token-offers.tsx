@@ -13,13 +13,15 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
+import type { TokenMarketData } from "~/types";
 import { getTokenOffers } from "../queries/getTokenData";
 import TokenOffersTable from "./token-offers-table";
 
 interface TokenOffersProps {
   contractAddress: string;
   tokenId: string;
-  owner: string | null;
+  owner: string;
+  tokenMarketData: TokenMarketData | null;
 }
 
 export default function TokenOffers({
@@ -27,6 +29,7 @@ export default function TokenOffers({
   contractAddress,
   owner,
   tokenId,
+  tokenMarketData,
 }: PropsWithClassName<TokenOffersProps>) {
   const [open, setOpen] = useState(true);
 
@@ -75,6 +78,7 @@ export default function TokenOffers({
               owner={owner}
               tokenContractAdress={contractAddress}
               tokenId={tokenId}
+              tokenMarketData={tokenMarketData}
             />
           </div>
         ) : (

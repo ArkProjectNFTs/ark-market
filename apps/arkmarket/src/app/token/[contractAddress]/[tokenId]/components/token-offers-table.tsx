@@ -1,5 +1,3 @@
-import moment from "moment";
-
 import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
@@ -12,13 +10,15 @@ import {
 } from "@ark-market/ui/table";
 
 import type { TokenOffer } from "../queries/getTokenData";
+import type { TokenMarketData } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenOffersTableProps {
   tokenOffers: TokenOffer[];
   tokenContractAdress: string;
   tokenId: string;
-  owner: string | null;
+  owner: string;
+  tokenMarketData: TokenMarketData | null;
 }
 
 export default function TokenOffersTable({
@@ -26,6 +26,7 @@ export default function TokenOffersTable({
   owner,
   tokenContractAdress,
   tokenId,
+  tokenMarketData,
 }: TokenOffersTableProps) {
   return (
     <Table>
@@ -48,7 +49,6 @@ export default function TokenOffersTable({
       </TableHeader>
       <TableBody className="block max-h-[25.5rem] overflow-auto text-sm font-semibold">
         {tokenOffers.map((offer) => {
-          console.log(offer.expire_at);
           return (
             <TableRow
               key={offer.offer_id}
@@ -72,6 +72,9 @@ export default function TokenOffersTable({
                   offerOrderHash={offer.hash}
                   tokenContractAddress={tokenContractAdress}
                   tokenId={tokenId}
+                  offerAmount={offer.price}
+                  tokenIsListed={tokenMarketData?.is_listed ?? false}
+                  tokenListingOrderHash={tokenMarketData?.order_hash ?? null}
                 />
               </TableCell>
             </TableRow>

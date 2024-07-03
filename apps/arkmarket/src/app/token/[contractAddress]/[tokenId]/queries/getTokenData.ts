@@ -19,7 +19,7 @@ export interface TokenInfosApiResponse {
     collection_name: string;
     last_price: string | null;
     metadata: TokenMetadata | null;
-    owner: string | null;
+    owner: string;
     price: string | null;
     top_offer: string | null;
   };
