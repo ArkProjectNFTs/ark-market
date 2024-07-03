@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import {
+  getCollection,
   getCollectionToken,
   getOrderbookCollectionToken,
 } from "~/app/assets/[contract_address]/[token_id]/data";
@@ -33,6 +34,7 @@ export default async function TokenPage({
     notFound();
   }
 
+  const collection = await getCollection(contractAddress);
   const token = await getCollectionToken(contractAddress, tokenId);
 
   let tokenMarketData;
@@ -64,6 +66,7 @@ export default async function TokenPage({
               className="mb-5 lg:mb-0"
             />
             <TokenActions
+              collection={collection}
               token={token}
               tokenMarketData={tokenMarketData}
               className="-mx-5 lg:mx-0"

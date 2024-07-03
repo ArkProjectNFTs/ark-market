@@ -5,7 +5,7 @@ import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { BadgeCheck, Tag } from "lucide-react";
+import { Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
@@ -36,32 +36,54 @@ import {
 } from "@ark-market/ui/select";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
+import type { Collection, Token } from "~/types";
 import { env } from "~/env";
+import useBalance from "~/hooks/useBalance";
 import formatAmount from "~/lib/formatAmount";
+import TokenActionsTokenOverview from "./token-actions-token-overview";
 
-const formSchema = z.object({
-  startAmount: z.string(),
-  duration: z.string(),
-});
-
-interface CreateOfferProps {
+interface TokenActionsMakeOfferProps {
+  collection: Collection;
   token: Token;
-  tokenMarketData?: TokenMarketData;
 }
 
 export default function TokenActionsMakeOffer({
+  collection,
   token,
-  // tokenMarketData,
-}: CreateOfferProps) {
+}: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account, address } = useAccount();
   const { response, createOffer, status } = useCreateOffer();
   const isOwner = address && areAddressesEqual(token.owner, address);
+  const { data } = useBalance();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const formSchema = z.object({
+    startAmount: z
+      .string()
+      .refine(
+        (val) => {
+          const num = parseFloat(val);
+          return !isNaN(num) && num > 0.0015;
+        },
+        {
+          message: "Must be a valid amount and greater than 0.0015",
+        },
+      )
+      .refine(
+        (val) => {
+          const num = parseEther(val);
+          return num <= data.value;
+        },
+        {
+          message: "Insufficient balance",
+        },
+      ),
+    duration: z.string(),
+  });
+
+  const form = useForm({
+    mode: "all",
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
@@ -78,6 +100,12 @@ export default function TokenActionsMakeOffer({
       setIsOpen(false);
     }
   }, [response]);
+
+  useEffect(() => {
+    if (status === "error") {
+      toast.error("Offer creation failed");
+    }
+  }, [status]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {
@@ -104,7 +132,10 @@ export default function TokenActionsMakeOffer({
     return;
   }
 
-  const isDisabled = form.formState.isSubmitting || status === "loading";
+  const isDisabled =
+    !form.formState.isValid ||
+    form.formState.isSubmitting ||
+    status === "loading";
   const startAmount = form.watch("startAmount");
   const formattedStartAmount = formatAmount(startAmount);
 
@@ -124,29 +155,11 @@ export default function TokenActionsMakeOffer({
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
           <div className="text-center text-xl font-semibold">Make an offer</div>
-          <div className="flex items-center space-x-4">
-            <div className="size-24 overflow-hidden rounded-xl">
-              <TokenMedia token={token} />
-            </div>
-            <div className="flex flex-col gap-1">
-              <div className="text-xl font-semibold">Duo #{token.token_id}</div>
-              <div className="flex items-center gap-2">
-                <div className="text-lg font-semibold text-muted-foreground">
-                  Everai
-                </div>
-                <BadgeCheck className="size-4 text-muted-foreground" />
-              </div>
-            </div>
-            <div className="grow" />
-            <div className="order-4 flex max-w-[40%] flex-[0_0_auto] flex-col justify-center self-stretch overflow-hidden text-right">
-              <div className="text-xl font-semibold">
-                {formattedStartAmount} ETH
-              </div>
-              <div className="text-right text-lg font-semibold text-muted-foreground">
-                $---
-              </div>
-            </div>
-          </div>
+          <TokenActionsTokenOverview
+            collection={collection}
+            token={token}
+            amount={formattedStartAmount}
+          />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -164,9 +177,7 @@ export default function TokenActionsMakeOffer({
                         onChange={field.onChange}
                       />
                     </FormControl>
-                    <div className="mx-2 text-lg font-semibold text-muted-foreground">
-                      $---
-                    </div>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -177,7 +188,6 @@ export default function TokenActionsMakeOffer({
                   <FormItem>
                     <div className="flex justify-between">
                       <FormLabel>Offer expiration</FormLabel>
-                      {/* <div className="text-sm">Expires {expiredAt}</div> */}
                     </div>
                     <Select
                       onValueChange={field.onChange}
@@ -206,11 +216,10 @@ export default function TokenActionsMakeOffer({
                 className="mx-auto w-fit px-10"
                 size="xl"
               >
-                {status === "loading" ? (
+                {status === "loading" && (
                   <ReloadIcon className="animate-spin" />
-                ) : (
-                  "Make offer"
                 )}
+                Make offer
               </Button>
             </form>
           </Form>

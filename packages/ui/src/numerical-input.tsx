@@ -41,7 +41,7 @@ function NumericalInput({
   return (
     <Input
       value={value ?? amount}
-      defaultValue={value}
+      // defaultValue={value}
       onChange={handleChange}
       readOnly={readOnly}
       className={cn(
