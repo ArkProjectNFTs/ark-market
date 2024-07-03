@@ -8,14 +8,17 @@ import { useAccount } from "@starknet-react/core";
 import { Button } from "@ark-market/ui/button";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Offer, Token } from "~/types";
-
 interface CancelOfferProps {
-  token: Token;
-  offer: Offer;
+  tokenContractAddress: string;
+  tokenId: string;
+  offerOrderHash: string;
 }
 
-const CancelOffer: React.FC<CancelOfferProps> = ({ token, offer }) => {
+const CancelOffer = ({
+  offerOrderHash,
+  tokenContractAddress,
+  tokenId,
+}: CancelOfferProps) => {
   const { account } = useAccount();
   const { cancel, status } = useCancel();
 
@@ -32,9 +35,9 @@ const CancelOffer: React.FC<CancelOfferProps> = ({ token, offer }) => {
 
     await cancel({
       starknetAccount: account,
-      tokenAddress: token.contract_address,
-      tokenId: BigInt(token.token_id),
-      orderHash: BigInt(offer.order_hash),
+      tokenAddress: tokenContractAddress,
+      tokenId: BigInt(tokenId),
+      orderHash: BigInt(offerOrderHash),
     });
   };
 
@@ -45,7 +48,7 @@ const CancelOffer: React.FC<CancelOfferProps> = ({ token, offer }) => {
   const isLoading = ["loading", "cancelling"].includes(status);
 
   return (
-    <Button size="sm" onClick={handleClick} disabled={isLoading}>
+    <Button size="xl" onClick={handleClick} disabled={isLoading}>
       {status === "loading" ? (
         <ReloadIcon className="animate-spin" />
       ) : (

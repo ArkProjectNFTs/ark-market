@@ -112,7 +112,11 @@ const TokenOffers: React.FC<TokenOffersProps> = ({
                             />
                           )}
                           {areAddressesEqual(offer.offer_maker, address) && (
-                            <CancelOffer token={token} offer={offer} />
+                            <CancelOffer
+                              tokenId={token.token_id}
+                              offerOrderHash={offer.order_hash}
+                              tokenContractAddress={token.contract_address}
+                            />
                           )}
                         </div>
                       </TableCell>
