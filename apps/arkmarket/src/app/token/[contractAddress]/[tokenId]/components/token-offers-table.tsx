@@ -1,4 +1,6 @@
-import { shortAddress } from "@ark-market/ui";
+import moment from "moment";
+
+import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -46,6 +48,7 @@ export default function TokenOffersTable({
       </TableHeader>
       <TableBody className="block max-h-[25.5rem] overflow-auto text-sm font-semibold">
         {tokenOffers.map((offer) => {
+          console.log(offer.expire_at);
           return (
             <TableRow
               key={offer.offer_id}
@@ -59,7 +62,9 @@ export default function TokenOffersTable({
               <TableCell>
                 {offer.source ? shortAddress(offer.source) : "_"}
               </TableCell>
-              <TableCell>{offer.expire_at}</TableCell>
+              <TableCell>
+                In {getRoundedRemainingTime(offer.expire_at)}
+              </TableCell>
               <TableCell>
                 <TokenOffersTableAction
                   owner={owner}
