@@ -12,19 +12,21 @@ import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
-interface BuyOrderProps {
+interface TokenActionsBuyNowProps {
+  collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsBuyNow({
+  collection,
   token,
   tokenMarketData,
-}: BuyOrderProps) {
+}: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
@@ -83,6 +85,7 @@ export default function TokenActionsBuyNow({
                   </div>
                 </div>
                 <TokenActionsTokenOverview
+                  collection={collection}
                   token={token}
                   amount={formatEther(BigInt(tokenMarketData.start_amount))}
                 />

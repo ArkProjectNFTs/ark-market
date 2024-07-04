@@ -7,7 +7,7 @@ import { hexToNumber } from "viem";
 import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 import { getOrderbookCollectionToken } from "~/app/assets/[contract_address]/[token_id]/data";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
@@ -15,12 +15,14 @@ import TokenActionsHeader from "./token-actions-header";
 import TokenActionsPrice from "./token-actions-price";
 
 interface TokenActionsProps {
+  collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData | null;
   className?: PropsWithClassName["className"];
 }
 
 export default function TokenActions({
+  collection,
   token,
   tokenMarketData,
   className,
@@ -42,7 +44,13 @@ export default function TokenActions({
   );
 
   if (!data || (!data.has_offer && !data.is_listed)) {
-    return <TokenActionsEmpty token={token} isOwner={isOwner} />;
+    return (
+      <TokenActionsEmpty
+        collection={collection}
+        token={token}
+        isOwner={isOwner}
+      />
+    );
   }
 
   const isListed = data.is_listed;
@@ -73,6 +81,7 @@ export default function TokenActions({
         hasOffers={data.has_offer}
         isOwner={isOwner}
         startAmount={data.start_amount}
+        collection={collection}
         token={token}
         tokenMarketData={data}
       />

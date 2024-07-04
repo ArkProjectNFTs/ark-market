@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 // import { useInView } from "framer-motion";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
 // import TokenActionsBar from "./token-actions-bar";
 import TokenActionsCancelListing from "./token-actions-cancel-listing";
@@ -19,6 +19,7 @@ interface TokenActionsButtonsProps {
   hasOffers: boolean;
   isOwner: boolean;
   startAmount: string;
+  collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData;
 }
@@ -29,6 +30,7 @@ export default function TokenActionsButtons({
   hasOffers,
   isOwner,
   // startAmount,
+  collection,
   token,
   tokenMarketData,
 }: TokenActionsButtonsProps) {
@@ -75,16 +77,14 @@ export default function TokenActionsButtons({
                   </>
                 ) : (
                   <TokenActionsBuyNow
+                    collection={collection}
                     token={token}
                     tokenMarketData={tokenMarketData}
                   />
                 )}
               </>
             )}
-            <TokenActionsMakeOffer
-              token={token}
-              tokenMarketData={tokenMarketData}
-            />
+            <TokenActionsMakeOffer collection={collection} token={token} />
           </>
         )}
       </div>
