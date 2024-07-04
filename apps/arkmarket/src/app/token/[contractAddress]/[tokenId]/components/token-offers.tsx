@@ -72,15 +72,13 @@ export default function TokenOffers({
       </div>
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
         {tokenOffers.length > 0 ? (
-          <div className="pb-6">
-            <TokenOffersTable
-              tokenOffers={tokenOffers}
-              owner={owner}
-              tokenContractAdress={contractAddress}
-              tokenId={tokenId}
-              tokenMarketData={tokenMarketData}
-            />
-          </div>
+          <TokenOffersTable
+            tokenOffers={tokenOffers}
+            owner={owner}
+            tokenContractAdress={contractAddress}
+            tokenId={tokenId}
+            tokenMarketData={tokenMarketData}
+          />
         ) : (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
             <Meh size={42} className="flex-shrink-0" />
