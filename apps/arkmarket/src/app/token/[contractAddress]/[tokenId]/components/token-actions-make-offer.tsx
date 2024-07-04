@@ -103,7 +103,9 @@ export default function TokenActionsMakeOffer({
 
   useEffect(() => {
     if (status === "error") {
-      toast.error("Offer creation failed");
+      toast.error("Offer creation failed.");
+    } else if (status === "success") {
+      toast.success("Your offer is successfully sent.");
     }
   }, [status]);
 
@@ -124,8 +126,6 @@ export default function TokenActionsMakeOffer({
       starknetAccount: account,
       ...processedValues,
     });
-
-    toast.success("Your offer is successfully sent!");
   }
 
   if (!account || isOwner) {
@@ -163,7 +163,7 @@ export default function TokenActionsMakeOffer({
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col space-y-4"
+              className="flex flex-col gap-6"
             >
               <FormField
                 control={form.control}
@@ -177,7 +177,7 @@ export default function TokenActionsMakeOffer({
                         onChange={field.onChange}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {formattedStartAmount !== "-" && <FormMessage />}
                   </FormItem>
                 )}
               />
