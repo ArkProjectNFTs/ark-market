@@ -75,7 +75,7 @@ export default function TokenActionsAcceptBestOffer({
         <Tag size={24} className="absolute left-4" />
       )}
       Accept offer
-      <Separator orientation="vertical" className="h-5" />
+      <Separator orientation="vertical" className="mx-2 h-5" />
       {formatEther(BigInt(tokenMarketData.top_bid.amount))} ETH
     </Button>
   );
