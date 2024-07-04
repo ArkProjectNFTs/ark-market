@@ -113,7 +113,7 @@ export default function TokenActionsBuyNow({
       </Dialog>
       <Button
         className="relative w-full"
-        size="xl"
+        size="xxl"
         disabled={status === "loading"}
         onClick={handeClick}
       >

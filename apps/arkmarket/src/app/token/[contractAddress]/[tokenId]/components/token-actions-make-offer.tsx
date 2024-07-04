@@ -213,11 +213,11 @@ export default function TokenActionsMakeOffer({
               <Button
                 type="submit"
                 disabled={isDisabled}
-                className="mx-auto w-fit px-10"
+                className="mx-auto w-full px-10 lg:w-[152px]"
                 size="xl"
               >
                 {status === "loading" && (
-                  <ReloadIcon className="animate-spin" />
+                  <ReloadIcon className="mr-2 animate-spin" />
                 )}
                 Make offer
               </Button>
