@@ -18,7 +18,7 @@ export default function LatestDrop() {
   }
 
   return (
-    <div>
+    <section>
       <h2 className="text-3xl font-semibold">Latest drop</h2>
       <Carousel className="mt-8">
         <CarouselContent>
@@ -71,6 +71,6 @@ export default function LatestDrop() {
           })}
         </CarouselContent>
       </Carousel>
-    </div>
+    </section>
   );
 }

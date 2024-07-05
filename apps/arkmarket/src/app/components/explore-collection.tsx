@@ -29,7 +29,7 @@ export default function ExploreCollection() {
   }
 
   return (
-    <div>
+    <section>
       <h2 className="text-3xl font-semibold">Explore Collections</h2>
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {homepageConfig.exploreCollections
@@ -76,6 +76,6 @@ export default function ExploreCollection() {
           </Button>
         )}
       </div>
-    </div>
+    </section>
   );
 }

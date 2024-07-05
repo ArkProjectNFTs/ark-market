@@ -18,7 +18,7 @@ export default function LiveAuctions() {
   }
 
   return (
-    <div>
+    <section>
       <h2 className="text-3xl font-semibold">Live auctions</h2>
       <Carousel className="mt-8">
         <CarouselContent>
@@ -65,6 +65,6 @@ export default function LiveAuctions() {
           })}
         </CarouselContent>
       </Carousel>
-    </div>
+    </section>
   );
 }

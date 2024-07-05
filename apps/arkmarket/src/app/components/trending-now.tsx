@@ -17,7 +17,7 @@ export default function TrendingNow() {
   }
 
   return (
-    <div>
+    <section>
       <h2 className="text-3xl font-semibold">Trending now</h2>
       <Carousel className="mt-8">
         <CarouselContent>
@@ -118,6 +118,6 @@ export default function TrendingNow() {
           })}
         </CarouselContent>
       </Carousel>
-    </div>
+    </section>
   );
 }
