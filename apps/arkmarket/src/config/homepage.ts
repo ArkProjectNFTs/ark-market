@@ -354,5 +354,21 @@ export const homepageConfig = {
       name: "Canadian Rapper Duck",
       image: "/nfts/canadian_rapper_duck.png",
     },
+    {
+      name: "Nounsters #23",
+      image: "/nfts/nounsters_23.png",
+    },
+    {
+      name: "Masked Duck",
+      image: "/nfts/masked_duck.png",
+    },
+    {
+      name: "Nounsters #67",
+      image: "/nfts/nounsters_67.png",
+    },
+    {
+      name: "Canadian Rapper Duck",
+      image: "/nfts/canadian_rapper_duck.png",
+    },
   ],
 };
