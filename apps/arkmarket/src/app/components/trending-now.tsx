@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import {
@@ -19,7 +22,11 @@ export default function TrendingNow() {
   return (
     <section>
       <h2 className="text-3xl font-semibold">Trending now</h2>
-      <Carousel className="mt-8">
+      <Carousel
+        className="mt-8"
+        plugins={[WheelGesturesPlugin()]}
+        opts={{ skipSnaps: true }}
+      >
         <CarouselContent>
           {homepageConfig.trendingNow.map((collection, index) => {
             return (

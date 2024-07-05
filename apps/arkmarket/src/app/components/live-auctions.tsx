@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { TimerReset } from "lucide-react";
 
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
@@ -20,7 +23,11 @@ export default function LiveAuctions() {
   return (
     <section>
       <h2 className="text-3xl font-semibold">Live auctions</h2>
-      <Carousel className="mt-8">
+      <Carousel
+        className="mt-8"
+        plugins={[WheelGesturesPlugin()]}
+        opts={{ skipSnaps: true }}
+      >
         <CarouselContent>
           {homepageConfig.liveAuctions.map((collection, index) => {
             return (

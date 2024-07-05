@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
@@ -20,7 +23,11 @@ export default function LatestDrop() {
   return (
     <section>
       <h2 className="text-3xl font-semibold">Latest drop</h2>
-      <Carousel className="mt-8">
+      <Carousel
+        className="mt-8"
+        plugins={[WheelGesturesPlugin()]}
+        opts={{ skipSnaps: true }}
+      >
         <CarouselContent>
           {homepageConfig.latestDropCollections.map((collection, index) => {
             return (
