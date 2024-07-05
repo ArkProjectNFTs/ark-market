@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <main>
       <div className="h-[30rem] w-full bg-secondary" />
-      <div className="mx-auto mt-16 flex max-w-[160rem] flex-col gap-16 px-8 pb-8">
+      <div className="mx-auto mt-16 flex max-w-[120rem] flex-col gap-16 px-8 pb-8">
         <ExploreCategory />
         <LatestDrop />
         <TrendingNow />

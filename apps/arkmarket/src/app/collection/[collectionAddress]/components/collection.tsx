@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
-
 import type { ViewType } from "~/components/view-type-toggle-group";
 import { getCollectionInfos } from "../queries/getCollectionData";
 import {
@@ -53,6 +52,7 @@ export default function Collection({
     refetchInterval: false,
     queryFn: () => getCollectionInfos({ collectionAddress }),
   });
+  console.log(collectionInfos);
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 

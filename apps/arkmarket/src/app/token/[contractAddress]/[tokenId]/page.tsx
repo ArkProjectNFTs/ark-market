@@ -50,7 +50,7 @@ export default async function TokenPage({
   }
 
   return (
-    <main className="mx-auto max-w-[160rem] p-5 pt-0 lg:p-8">
+    <main className="mx-auto max-w-[120rem] p-5 pt-0 lg:p-8">
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8">
         <TokenSummary
           className="top-[calc(var(--site-header-height)+2rem)] h-fit lg:sticky"
