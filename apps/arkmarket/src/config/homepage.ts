@@ -1,34 +1,110 @@
 export const homepageConfig = {
-  latestDropCollections: [
-    { name: "Collection name" },
-    { name: "Collection name" },
-    { name: "Collection name" },
-    { name: "Collection name" },
+  exploreCategory: [
+    { name: "Gaming", image: "/collection_categories/gaming.png" },
+    { name: "Art", image: "/collection_categories/art.png" },
+    { name: "PFPs", image: "/collection_categories/pfps.png" },
+    { name: "Name domain", image: "/collection_categories/name_domain.png" },
+    { name: "OG Collections", image: "/collection_categories/og.png" },
+    {
+      name: "Starknet achievements",
+      image: "/collection_categories/achievements.png",
+    },
   ],
-  trendingCollections: [
+  latestDropCollections: [
     {
-      name: "Grails",
+      name: "Influence Asteroids",
       address:
-        "0x02a819b93cc69b45ee5d1a1bfc16954c16f6d35c3873a06c97b95c009bfe502b",
-      image: "/collections/grail.png",
+        "0x0603cf837055c64d026a3c5a9e3a83036cea6c4a3f68a9e19f7a687d726fe817",
+      image: "/medias/influence.png",
     },
     {
-      name: "Starknet Quest",
+      name: "Influence Crewmates",
       address:
-        "0x076503062d78f4481be03c9145022d6a4a71ec0719aa07756f79a2384dc7ef16",
-      image: "/collections/fff43877-5668-4392-bced-f95f6faa8dd8.png",
+        "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
+      image: "/medias/crewmates.png",
     },
     {
-      name: "Argent: Xplorer",
+      name: "Dragark",
       address:
-        "0x01b22f7a9d18754c994ae0ee9adb4628d414232e3ebd748c386ac286f86c3066",
-      image: "/collections/eee0d689-bf44-4a77-bdbe-eeeceb6d4b64.png",
+        "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
+      image: "/medias/dragark.png",
     },
     {
-      name: "Starknet.id",
+      name: "Dragark Element NFT",
       address:
-        "0x05dbdedc203e92749e2e746e2d40a768d966bd243df04a6b712e222bc040a9af",
-      image: "/collections/59685ea9-aeae-4784-82a1-5aa9364cea9b.png",
+        "0x0537fa10cefbb8ff7e61e86e950746809f95faa7398f250f0063069b29bb7933",
+      image: "/medias/dragark-2.png",
+    },
+    {
+      name: "Influence Asteroids",
+      address:
+        "0x0603cf837055c64d026a3c5a9e3a83036cea6c4a3f68a9e19f7a687d726fe817",
+      image: "/medias/influence.png",
+    },
+    {
+      name: "Influence Crewmates",
+      address:
+        "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
+      image: "/medias/crewmates.png",
+    },
+    {
+      name: "Dragark",
+      address:
+        "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
+      image: "/medias/dragark.png",
+    },
+    {
+      name: "Dragark Element NFT",
+      address:
+        "0x0537fa10cefbb8ff7e61e86e950746809f95faa7398f250f0063069b29bb7933",
+      image: "/medias/dragark-2.png",
+    },
+  ],
+  trendingNow: [
+    {
+      name: "Everai",
+      address:
+        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      image: "/collections/everai.png",
+      first_nft: "/nfts/everai_1.png",
+      second_nft: "/nfts/everai_2.png",
+      third_nft: "/nfts/everai_3.png",
+    },
+    {
+      name: "Starkurabu",
+      address:
+        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
+      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
+      first_nft: "/nfts/starkurabu_1.png",
+      second_nft: "/nfts/starkurabu_2.png",
+      third_nft: "/nfts/starkurabu_3.png",
+    },
+    {
+      name: "Influence crewmates",
+      address:
+        "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
+      image: "/collections/crewmates.png",
+      first_nft: "/nfts/crewmates_1.png",
+      second_nft: "/nfts/crewmates_2.png",
+      third_nft: "/nfts/crewmates_3.png",
+    },
+    {
+      name: "Everai",
+      address:
+        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      image: "/collections/everai.png",
+      first_nft: "/nfts/everai_1.png",
+      second_nft: "/nfts/everai_2.png",
+      third_nft: "/nfts/everai_3.png",
+    },
+    {
+      name: "Starkurabu",
+      address:
+        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
+      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
+      first_nft: "/nfts/starkurabu_1.png",
+      second_nft: "/nfts/starkurabu_2.png",
+      third_nft: "/nfts/starkurabu_3.png",
     },
   ],
   exploreCollections: [
@@ -85,6 +161,18 @@ export const homepageConfig = {
       address:
         "0x01b22f7a9d18754c994ae0ee9adb4628d414232e3ebd748c386ac286f86c3066",
       image: "/collections/eee0d689-bf44-4a77-bdbe-eeeceb6d4b64.png",
+    },
+    {
+      name: "Starknet Quest",
+      address:
+        "0x076503062d78f4481be03c9145022d6a4a71ec0719aa07756f79a2384dc7ef16",
+      image: "/collections/fff43877-5668-4392-bced-f95f6faa8dd8.png",
+    },
+    {
+      name: "Starknet.id",
+      address:
+        "0x05dbdedc203e92749e2e746e2d40a768d966bd243df04a6b712e222bc040a9af",
+      image: "/collections/59685ea9-aeae-4784-82a1-5aa9364cea9b.png",
     },
     {
       name: "Carbonable - KARATHURU",
