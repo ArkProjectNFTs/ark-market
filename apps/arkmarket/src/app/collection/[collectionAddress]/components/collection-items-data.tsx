@@ -4,7 +4,10 @@ import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
-import type { CollectionTokensApiResponse, CollectionToken } from "../queries/getCollectionData";
+import type {
+  CollectionToken,
+  CollectionTokensApiResponse,
+} from "../queries/getCollectionData";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
@@ -37,9 +40,15 @@ export default function CollectionItemsData({
     isFetchingNextPage,
     isLoading,
   } = useInfiniteQuery({
-    queryKey: ["collectionTokens", sortDirection, sortBy, collectionAddress] as const,
+    queryKey: [
+      "collectionTokens",
+      sortDirection,
+      sortBy,
+      collectionAddress,
+    ] as const,
     refetchInterval: false,
-    getNextPageParam: (lastPage: CollectionTokensApiResponse) => lastPage.next_page,
+    getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
+      lastPage.next_page,
     initialPageParam: undefined as number | undefined,
     queryFn: ({ pageParam }) =>
       getCollectionTokens({

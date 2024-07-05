@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 import { List } from "lucide-react";
 import moment from "moment";
@@ -25,8 +26,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { Input } from "@ark-market/ui/input";
-import { RadioGroup, RadioGroupItem } from "@ark-market/ui/radio-group";
+import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -34,50 +34,101 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
+import { toast } from "@ark-market/ui/toast";
 
-import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
+import type { Collection, Token } from "~/types";
 import { env } from "~/env";
+import formatAmount from "~/lib/formatAmount";
+import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
+  collection: Collection;
   token: Token;
-  tokenMarketData?: TokenMarketData;
 }
 
-const FIXED = "fixed";
-const AUCTION = "auction";
-
-const formSchema = z.object({
-  startAmount: z.string({
-    invalid_type_error: "Please enter a valid amount",
-  }),
-  endAmount: z
-    .string({
-      invalid_type_error: "Please enter a valid amount",
-    })
-    .optional(),
-  duration: z.string(),
-  type: z.enum([FIXED, AUCTION]),
-});
-
 export function TokenActionsCreateListing({
+  collection,
   token,
-  // tokenMarketData,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuction, setIsAuction] = useState(false);
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const formSchema = z
+    .object({
+      startAmount: z.string().refine(
+        (val) => {
+          const num = parseFloat(val);
+          return !isNaN(num) && num > 0;
+        },
+        {
+          message: "Must be a valid amount",
+        },
+      ),
+      endAmount: z
+        .string()
+        .refine(
+          (val) => {
+            const num = parseFloat(val);
+
+            if (!isAuction) {
+              return true;
+            }
+
+            return !isNaN(num);
+          },
+          {
+            message: "Must be a valid amount",
+          },
+        )
+        .optional(),
+      duration: z.string(),
+    })
+    .refine(
+      (data) => {
+        if (!isAuction) {
+          return true;
+        }
+
+        if (data.endAmount !== undefined) {
+          const sa = parseFloat(data.startAmount);
+          const ea = parseFloat(data.endAmount);
+          return ea > sa;
+        }
+        return true;
+      },
+      {
+        message: "Must be greater than start amount",
+        path: ["endAmount"],
+      },
+    );
+
+  const form = useForm({
+    mode: "all",
     resolver: zodResolver(formSchema),
-    mode: "onBlur",
     defaultValues: {
-      type: FIXED,
-      startAmount: "0.1",
+      startAmount: "",
+      endAmount: "",
       duration: "1",
     },
   });
+
+  useEffect(() => {
+    if (status === "error") {
+      setIsOpen(false);
+      toast.error("Your token listing failed.");
+    } else if (status === "success") {
+      setIsOpen(false);
+      toast.success("Your token is successfully listed.");
+    }
+  }, [status]);
+
+  useEffect(() => {
+    setIsAuction(false);
+    form.reset();
+  }, [form, isOpen]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {
@@ -96,7 +147,7 @@ export function TokenActionsCreateListing({
     };
 
     try {
-      if (values.type === AUCTION) {
+      if (isAuction) {
         await createAuction({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
@@ -116,27 +167,20 @@ export function TokenActionsCreateListing({
           startAmount: processedValues.startAmount,
         });
       }
-
-      // queryClient.setQueryData(
-      //   ["tokenMarketData", token.contract_address, token.token_id],
-      //   {
-      //     ...tokenMarketData,
-      //     is_listed: true,
-      //     type: values.type === AUCTION ? "AUCTION" ,
-      //     start_amount: processedValues.startAmount,
-      //     end_amount: processedValues.endAmount,
-      //     end_date: processedValues.endDate,
-      //   },
-      // );
     } catch (error) {
       console.error("error: create listing failed", error);
     }
   }
 
-  const isAuction = form.getValues("type") === AUCTION;
-  // const duration = form.watch("duration");
-  // const expiredAt = moment().add(duration, "hours").format("LLLL");
+  const startAmount = form.watch("startAmount");
+  const formattedStartAmount = formatAmount(startAmount);
   const isLoading = status === "loading" || auctionStatus === "loading";
+
+  const isDisabled =
+    !form.formState.isValid ||
+    form.formState.isSubmitting ||
+    status === "loading" ||
+    auctionStatus === "loading";
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -147,82 +191,69 @@ export function TokenActionsCreateListing({
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="items-center">
-          {/* <DialogTitle>List for sale</DialogTitle> */}
-        </DialogHeader>
-        <div className="flex-row gap-10">
+        <DialogHeader className="items-center"></DialogHeader>
+        <div className="flex flex-col gap-6">
           <div className="text-center text-xl font-semibold">List for sale</div>
-          <div className="flex items-center space-x-4">
-            <div className="size-24 overflow-hidden rounded">
-              <TokenMedia token={token} />
-            </div>
-            <div className="">
-              <div className="font-bold">Duo #{token.token_id}</div>
-              <div className="text-muted-foreground">Everai</div>
-            </div>
-            <div className="grow" />
-          </div>
-
+          <TokenActionsTokenOverview
+            collection={collection}
+            token={token}
+            amount={formattedStartAmount}
+          />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col space-y-4"
             >
-              <FormField
-                control={form.control}
-                name="type"
-                render={({ field }) => (
-                  <FormItem className="">
-                    <FormLabel>Choose a type of sale</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="gap-0 rounded border"
-                      >
-                        <FormItem className="flex items-center justify-center border-b p-4">
-                          <FormLabel className="text-md flex flex-grow flex-col space-y-2 font-normal">
-                            <span className="font-semibold">Fixed price</span>
-                            <span className="">
-                              The item is listed at the price you set.
-                            </span>
-                          </FormLabel>
-                          <FormControl>
-                            <RadioGroupItem value={FIXED} className="h-6 w-6" />
-                          </FormControl>
-                        </FormItem>
-                        <FormItem className="flex items-center justify-center p-4">
-                          <FormLabel className="text-md flex flex-grow flex-col space-y-2 font-normal">
-                            <span className="font-semibold">
-                              Sell to highest bidder
-                            </span>
-                            <span className="">
-                              The item is listed for auction.
-                            </span>
-                          </FormLabel>
-                          <FormControl>
-                            <RadioGroupItem
-                              value={AUCTION}
-                              className="h-6 w-6"
-                            />
-                          </FormControl>
-                        </FormItem>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <FormItem className="">
+                <FormLabel>Type of sale</FormLabel>
+                <div className="flex gap-6">
+                  <Button
+                    type="button"
+                    className="w-full"
+                    size="xl"
+                    variant={isAuction ? "outline" : "default"}
+                    onClick={() => setIsAuction(false)}
+                  >
+                    Fixed price
+                  </Button>
+                  <Button
+                    type="button"
+                    className="w-full"
+                    size="xl"
+                    variant={isAuction ? "default" : "outline"}
+                    onClick={() => setIsAuction(true)}
+                  >
+                    In auction
+                  </Button>
+                </div>
+              </FormItem>
+
               <FormField
                 control={form.control}
                 name="startAmount"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Set starting price</FormLabel>
+                    <Button
+                      type="button"
+                      className="w-full"
+                      variant="outline"
+                      size="xl"
+                      onClick={() => {
+                        field.onChange("0.5");
+                      }}
+                    >
+                      Choose floor price 0.5 ETH
+                    </Button>
                     <FormControl>
-                      <Input placeholder="Amount" {...field} />
+                      <NumericalInput
+                        // {...field}
+                        defaultValue="0.1"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                     </FormControl>
-                    <FormMessage />
+                    {formattedStartAmount !== "-" && <FormMessage />}
                   </FormItem>
                 )}
               />
@@ -234,7 +265,10 @@ export function TokenActionsCreateListing({
                     <FormItem>
                       <FormLabel>Set reserve price</FormLabel>
                       <FormControl>
-                        <Input placeholder="Amount" {...field} />
+                        <NumericalInput
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -246,10 +280,7 @@ export function TokenActionsCreateListing({
                 name="duration"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex justify-between">
-                      <FormLabel>Set expiration</FormLabel>
-                      {/* <div className="text-sm">Expires {expiredAt}</div> */}
-                    </div>
+                    <FormLabel>Set expiration</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value.toString()}
@@ -271,8 +302,14 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="" disabled={isLoading} size="xl">
-                {isLoading ? "Loading..." : "Complete Listing"}
+              <Button
+                type="submit"
+                className="mx-auto w-full px-10 lg:w-auto"
+                disabled={isDisabled}
+                size="xl"
+              >
+                {isLoading && <ReloadIcon className="mr-2 animate-spin" />}
+                List
               </Button>
             </form>
           </Form>

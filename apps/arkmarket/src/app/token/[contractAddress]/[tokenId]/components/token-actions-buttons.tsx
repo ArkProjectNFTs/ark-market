@@ -59,8 +59,8 @@ export default function TokenActionsButtons({
               </>
             ) : (
               <TokenActionsCreateListing
+                collection={collection}
                 token={token}
-                tokenMarketData={tokenMarketData}
               />
             )}
           </>
