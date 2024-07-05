@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, Meh } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -12,8 +13,41 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-export default function TokenOffers({ className }: PropsWithClassName) {
+import type { TokenMarketData } from "~/types";
+import { getTokenOffers } from "../queries/getTokenData";
+import TokenOffersTable from "./token-offers-table";
+
+interface TokenOffersProps {
+  contractAddress: string;
+  tokenId: string;
+  owner: string;
+  tokenMarketData: TokenMarketData | null;
+}
+
+export default function TokenOffers({
+  className,
+  contractAddress,
+  owner,
+  tokenId,
+  tokenMarketData,
+}: PropsWithClassName<TokenOffersProps>) {
   const [open, setOpen] = useState(true);
+
+  const { data: infiniteData } = useInfiniteQuery({
+    queryKey: ["tokenOffers", contractAddress, tokenId],
+    refetchInterval: 10_000,
+    // getNextPageParam: (lastPage) => lastPage.next_page,
+    getNextPageParam: () => null,
+    initialPageParam: undefined,
+    queryFn: ({ pageParam }) =>
+      getTokenOffers({ contractAddress, tokenId, page: pageParam }),
+  });
+
+  const tokenOffers = useMemo(
+    () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
+    [infiniteData],
+  );
+
   return (
     <Collapsible
       className={cn(
@@ -27,7 +61,7 @@ export default function TokenOffers({ className }: PropsWithClassName) {
         <div className="flex items-center gap-1.5">
           <h3 className="text-2xl font-semibold">Offers</h3>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
-            {0}
+            {tokenOffers.length}
           </div>
         </div>
         <CollapsibleTrigger asChild>
@@ -37,14 +71,24 @@ export default function TokenOffers({ className }: PropsWithClassName) {
         </CollapsibleTrigger>
       </div>
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="flex flex-col items-center pb-8 text-muted-foreground">
-          <Meh size={42} className="flex-shrink-0" />
-          <p className="mt-3 text-center text-xl font-semibold">
-            No offers yet!
-            <br />
-            Make the first offers!
-          </p>
-        </div>
+        {tokenOffers.length > 0 ? (
+          <TokenOffersTable
+            tokenOffers={tokenOffers}
+            owner={owner}
+            tokenContractAdress={contractAddress}
+            tokenId={tokenId}
+            tokenMarketData={tokenMarketData}
+          />
+        ) : (
+          <div className="flex flex-col items-center pb-8 text-muted-foreground">
+            <Meh size={42} className="flex-shrink-0" />
+            <p className="mt-3 text-center text-xl font-semibold">
+              No offers yet!
+              <br />
+              Make the first offers!
+            </p>
+          </div>
+        )}
       </CollapsibleContent>
     </Collapsible>
   );

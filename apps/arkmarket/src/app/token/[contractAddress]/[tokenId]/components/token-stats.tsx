@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles, formatNumber } from "@ark-market/ui";
+import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
 
@@ -19,9 +19,6 @@ export default function TokenStats({
   tokenInfos,
 }: PropsWithClassName<TokenStatsProps>) {
   const shortenedAddress = useMemo(() => {
-    if (tokenInfos.owner === null) {
-      return undefined;
-    }
     return `${tokenInfos.owner.slice(0, 7)}...${tokenInfos.owner.slice(-4)}`;
   }, [tokenInfos.owner]);
 
@@ -59,7 +56,7 @@ export default function TokenStats({
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatNumber(BigInt(tokenInfos.top_offer ?? "0"))} ETH
+            {formatUnits(BigInt(tokenInfos.top_offer ?? "0"), 18)} ETH
           </p>
         </div>
       </div>
@@ -68,12 +65,10 @@ export default function TokenStats({
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
-          {tokenInfos.owner !== null && (
-            <ProfilePicture
-              address={tokenInfos.owner}
-              className="size-6 rounded-full"
-            />
-          )}
+          <ProfilePicture
+            address={tokenInfos.owner}
+            className="size-6 rounded-full"
+          />
 
           <p
             className={cn(
@@ -81,7 +76,7 @@ export default function TokenStats({
               ellipsableStyles,
             )}
           >
-            {shortenedAddress ?? "_"}
+            {shortenedAddress}
           </p>
         </div>
       </div>

@@ -35,9 +35,6 @@ export default function TokenAbout({
   }, [contractAddress]);
 
   const ownerShortenedAddress = useMemo(() => {
-    if (tokenInfos.owner === null) {
-      return undefined;
-    }
     return `${tokenInfos.owner.slice(0, 4)}...${tokenInfos.owner.slice(-4)}`;
   }, [tokenInfos.owner]);
 
