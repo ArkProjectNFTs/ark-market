@@ -25,7 +25,7 @@ export default function TrendingNow() {
             return (
               <CarouselItem
                 key={index}
-                className="basis-[calc(100%-4rem)] md:basis-1/2 lg:basis-1/2 xl:basis-1/3 2xl:basis-1/4"
+                className="basis-[calc(100%-3rem)] md:basis-1/2 lg:basis-1/2 xl:basis-1/3 2xl:basis-1/4"
               >
                 <Link
                   href={`/collection/${collection.address}`}

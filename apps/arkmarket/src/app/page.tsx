@@ -3,6 +3,7 @@ import { Button } from "@ark-market/ui/button";
 import ExploreCategory from "./components/explore-category";
 import ExploreCollection from "./components/explore-collection";
 import LatestDrop from "./components/latest-drop";
+import LiveAuctions from "./components/live-auctions";
 import TrendingNow from "./components/trending-now";
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
         <LatestDrop />
         <TrendingNow />
         <ExploreCollection />
+        <LiveAuctions />
 
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="flex w-full flex-col gap-8 rounded-lg bg-card p-8 md:flex-row md:items-center">

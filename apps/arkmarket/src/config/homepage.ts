@@ -337,4 +337,22 @@ export const homepageConfig = {
       image: "/collections/20240602033225e51b51e85e60446eaa5f53421b0ebd98.gif",
     },
   ],
+  liveAuctions: [
+    {
+      name: "Nounsters #23",
+      image: "/nfts/nounsters_23.png",
+    },
+    {
+      name: "Masked Duck",
+      image: "/nfts/masked_duck.png",
+    },
+    {
+      name: "Nounsters #67",
+      image: "/nfts/nounsters_67.png",
+    },
+    {
+      name: "Canadian Rapper Duck",
+      image: "/nfts/canadian_rapper_duck.png",
+    },
+  ],
 };

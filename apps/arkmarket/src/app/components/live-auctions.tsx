@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TimerReset } from "lucide-react";
 
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
@@ -8,31 +9,26 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import { homepageConfig } from "~/config/homepage";
 
-export default function LatestDrop() {
-  if (homepageConfig.latestDropCollections.length === 0) {
+export default function LiveAuctions() {
+  if (homepageConfig.liveAuctions.length === 0) {
     return null;
   }
 
   return (
     <div>
-      <h2 className="text-3xl font-semibold">Latest drop</h2>
+      <h2 className="text-3xl font-semibold">Live auctions</h2>
       <Carousel className="mt-8">
         <CarouselContent>
-          {homepageConfig.latestDropCollections.map((collection, index) => {
+          {homepageConfig.liveAuctions.map((collection, index) => {
             return (
               <CarouselItem
                 key={index}
                 className="basis-[calc(100%-3rem)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
               >
-                <Link
-                  href={`/collection/${collection.address}`}
-                  key={index}
-                  className={focusableStyles}
-                >
+                <Link href="" key={index} className={focusableStyles}>
                   <Card className="overflow-hidden border-none">
                     <CardContent className="p-0">
                       {collection.image ? (
@@ -57,12 +53,10 @@ export default function LatestDrop() {
                         >
                           {collection.name}
                         </h4>
-                        <VerifiedIcon className="text-background" />
                       </div>
-                      <span className="mt-5 text-sm font-medium text-muted-foreground">
-                        Status
-                      </span>
-                      <p className="font-medium">Mint starts in 2 hours</p>
+                      <p className="mt-2.5 flex gap-1.5 font-medium text-muted-foreground">
+                        <TimerReset size={20} /> End in 2d 8h 56min 23s
+                      </p>
                     </CardFooter>
                   </Card>
                 </Link>
