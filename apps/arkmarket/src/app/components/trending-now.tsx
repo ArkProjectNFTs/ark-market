@@ -61,7 +61,7 @@ export default function TrendingNow() {
                       <Image
                         height={150}
                         width={150}
-                        className="w-full rounded-sm sm:block"
+                        className="hidden w-full rounded-sm sm:block"
                         alt={collection.name}
                         src={collection.third_nft}
                       />
