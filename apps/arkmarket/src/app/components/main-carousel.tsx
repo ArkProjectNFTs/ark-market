@@ -98,6 +98,7 @@ export default function MainCarousel() {
                   "h-1.5 w-24 rounded-full",
                   isSelected ? "bg-secondary" : "bg-card",
                 )}
+                key={index}
                 onClick={() => api?.scrollTo(index)}
               ></button>
             );
