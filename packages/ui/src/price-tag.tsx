@@ -3,7 +3,7 @@ import { cn, formatUnits } from ".";
 import EthereumLogo2 from "./icons/ethereum-logo-2";
 
 interface PriceTagProps {
-  price: number | bigint;
+  price: number | bigint | string;
 }
 export function PriceTag({
   className,

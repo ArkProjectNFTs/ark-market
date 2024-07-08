@@ -54,7 +54,7 @@ export default function TokenActionsMakeOffer({
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account, address } = useAccount();
-  const { response, createOffer, status } = useCreateOffer();
+  const { createOffer, status } = useCreateOffer();
   const isOwner = address && areAddressesEqual(token.owner, address);
   const { data } = useBalance();
 
@@ -96,15 +96,11 @@ export default function TokenActionsMakeOffer({
   }, [form, isOpen]);
 
   useEffect(() => {
-    if (response) {
-      setIsOpen(false);
-    }
-  }, [response]);
-
-  useEffect(() => {
     if (status === "error") {
+      setIsOpen(false);
       toast.error("Offer creation failed.");
     } else if (status === "success") {
+      setIsOpen(false);
       toast.success("Your offer is successfully sent.");
     }
   }, [status]);
@@ -132,6 +128,7 @@ export default function TokenActionsMakeOffer({
     return;
   }
 
+  const isLoading = status === "loading";
   const isDisabled =
     !form.formState.isValid ||
     form.formState.isSubmitting ||
@@ -213,12 +210,10 @@ export default function TokenActionsMakeOffer({
               <Button
                 type="submit"
                 disabled={isDisabled}
-                className="mx-auto w-fit px-10"
+                className="mx-auto w-full px-10 lg:w-auto"
                 size="xl"
               >
-                {status === "loading" && (
-                  <ReloadIcon className="animate-spin" />
-                )}
+                {isLoading && <ReloadIcon className="mr-2 animate-spin" />}
                 Make offer
               </Button>
             </form>

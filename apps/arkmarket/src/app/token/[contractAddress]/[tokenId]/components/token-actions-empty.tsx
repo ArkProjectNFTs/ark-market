@@ -28,7 +28,7 @@ export default function TokenActionsEmpty({
         </p>
       </div>
       {isOwner ? (
-        <TokenActionsCreateListing token={token} />
+        <TokenActionsCreateListing collection={collection} token={token} />
       ) : (
         <TokenActionsMakeOffer collection={collection} token={token} />
       )}

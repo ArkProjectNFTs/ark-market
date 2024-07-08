@@ -94,7 +94,7 @@ export function formatNumber(value: number | bigint) {
 }
 
 // TODO: use viem formatEther instead
-export function formatUnits(value: bigint | number, decimals: number) {
+export function formatUnits(value: bigint | number | string, decimals: number) {
   let display = value.toString();
 
   const negative = display.startsWith("-");

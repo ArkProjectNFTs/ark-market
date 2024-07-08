@@ -106,13 +106,21 @@ const TokenOffers: React.FC<TokenOffersProps> = ({
                         <div className="flex space-x-2">
                           {isOwner && tokenMarketData && (
                             <AcceptOffer
-                              token={token}
-                              tokenMarketData={tokenMarketData}
-                              offer={offer}
+                              offerAmount={offer.offer_amount}
+                              offerOrderHash={offer.order_hash}
+                              tokenContractAddress={token.contract_address}
+                              tokenId={token.token_id}
+                              tokenIsListed={tokenMarketData.is_listed}
+                              tokenListingOrderHash={tokenMarketData.order_hash}
+                              tokenOwner={token.owner}
                             />
                           )}
                           {areAddressesEqual(offer.offer_maker, address) && (
-                            <CancelOffer token={token} offer={offer} />
+                            <CancelOffer
+                              tokenId={token.token_id}
+                              offerOrderHash={offer.order_hash}
+                              tokenContractAddress={token.contract_address}
+                            />
                           )}
                         </div>
                       </TableCell>
