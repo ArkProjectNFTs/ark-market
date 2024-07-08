@@ -1,6 +1,7 @@
 import {
   ArrowLeftRight,
   CircleDot,
+  Gavel,
   List,
   Meh,
   ShoppingCart,
@@ -30,6 +31,8 @@ export const activityTypeToItem = new Map([
   ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
   ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
   ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
+  ["AUCTION", { icon: <Gavel size={24} />, title: "Put in auction" }],
+
   // ["delist", { icon: <ListX size={24} />, title: "Delist" }],
 ]);
 
@@ -41,6 +44,7 @@ export default function DesktopTokenActivity({
   className,
   tokenActivity,
 }: PropsWithClassName<DesktopTokenActivityProps>) {
+  console.log(tokenActivity);
   return (
     <Table className={className}>
       <TableHeader>
