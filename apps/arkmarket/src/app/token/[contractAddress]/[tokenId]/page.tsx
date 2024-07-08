@@ -93,7 +93,11 @@ export default async function TokenPage({
           />
         </div>
       </div>
-      <TokenActivity className="mt-20 hidden lg:block" />
+      <TokenActivity
+        className="mt-20 hidden lg:block"
+        contractAddress={contractAddress}
+        tokenId={tokenId}
+      />
       <MobileTokenActivity className="mt-8 lg:hidden" />
     </main>
   );

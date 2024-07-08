@@ -79,3 +79,43 @@ export async function getTokenOffers({
 
   return (await response.json()) as Promise<TokenOffersApiResponse>;
 }
+
+export type TokenActivityType = "LISTING" | "OFFER" | "CANCELLED";
+export interface TokenActivity {
+  activity_type: TokenActivityType;
+  from: string | null;
+  price: string | null;
+  time_stamp: number;
+  to: string | null;
+  transaction_hash: string | null;
+}
+export interface TokenActivityApiResponse {
+  data: TokenActivity[];
+  count: number;
+  next_page: number;
+}
+interface GetTokenActivityParams {
+  contractAddress: string;
+  page?: number;
+  tokenId: string;
+}
+export async function getTokenActivity({
+  contractAddress,
+  page,
+  tokenId,
+}: GetTokenActivityParams) {
+  const queryParams = [`items_per_page=${30}`];
+  if (page !== undefined) {
+    queryParams.push(`page=${page}`);
+  }
+
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}/activity?${queryParams.join("&")}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.error(url, response.status);
+    return undefined;
+  }
+
+  return (await response.json()) as Promise<TokenActivityApiResponse>;
+}
