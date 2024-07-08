@@ -24,8 +24,9 @@ import {
 import type { TokenActivity } from "../queries/getTokenData";
 
 export const activityTypeToItem = new Map([
-  ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale" }],
+  ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale in progress" }],
   ["EXECUTED", { icon: <ShoppingCart size={24} />, title: "Sale" }],
+  ["SALE", { icon: <ShoppingCart size={24} />, title: "Sale" }],
   ["TRANSFER", { icon: <ArrowLeftRight size={24} />, title: "Transfer" }],
   ["LISTING", { icon: <List size={24} />, title: "List" }],
   ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
