@@ -29,6 +29,7 @@
     "@trpc/server": "11.0.0-rc.364",
     "@vercel/speed-insights": "^1.0.10",
     "blockies-ts": "^1.0.0",
+    "embla-carousel-autoplay": "^8.1.6",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "framer-motion": "^11.2.6",
     "geist": "^1.2.2",
