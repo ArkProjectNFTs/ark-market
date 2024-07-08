@@ -37,7 +37,7 @@ export default function TokenOffersTableAction({
   if (!address) {
     return (
       <ConnectWalletModal>
-        <Button size="xl">Connect wallet</Button>
+        <Button size="md">Connect wallet</Button>
       </ConnectWalletModal>
     );
   }

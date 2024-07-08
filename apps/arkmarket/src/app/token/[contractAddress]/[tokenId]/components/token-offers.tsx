@@ -15,6 +15,7 @@ import {
 
 import type { TokenMarketData } from "~/types";
 import { getTokenOffers } from "../queries/getTokenData";
+import TokenOffersMobileTable from "./token-offers-mobile-table";
 import TokenOffersTable from "./token-offers-table";
 
 interface TokenOffersProps {
@@ -43,6 +44,8 @@ export default function TokenOffers({
       getTokenOffers({ contractAddress, tokenId, page: pageParam }),
   });
 
+  const offersCount = infiniteData?.pages[0]?.count ?? 0;
+
   const tokenOffers = useMemo(
     () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
     [infiniteData],
@@ -61,7 +64,7 @@ export default function TokenOffers({
         <div className="flex items-center gap-1.5">
           <h3 className="text-2xl font-semibold">Offers</h3>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
-            {tokenOffers.length}
+            {offersCount}
           </div>
         </div>
         <CollapsibleTrigger asChild>
@@ -70,15 +73,24 @@ export default function TokenOffers({
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
+      <CollapsibleContent className="max-h-[26rem] overflow-auto data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
         {tokenOffers.length > 0 ? (
-          <TokenOffersTable
-            tokenOffers={tokenOffers}
-            owner={owner}
-            tokenContractAdress={contractAddress}
-            tokenId={tokenId}
-            tokenMarketData={tokenMarketData}
-          />
+          <>
+            <TokenOffersTable
+              tokenOffers={tokenOffers}
+              owner={owner}
+              tokenContractAdress={contractAddress}
+              tokenId={tokenId}
+              tokenMarketData={tokenMarketData}
+            />
+            <TokenOffersMobileTable
+              tokenOffers={tokenOffers}
+              owner={owner}
+              tokenContractAdress={contractAddress}
+              tokenId={tokenId}
+              tokenMarketData={tokenMarketData}
+            />
+          </>
         ) : (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
             <Meh size={42} className="flex-shrink-0" />
