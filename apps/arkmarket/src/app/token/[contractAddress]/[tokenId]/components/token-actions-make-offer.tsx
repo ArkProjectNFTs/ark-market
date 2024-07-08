@@ -155,6 +155,7 @@ export default function TokenActionsMakeOffer({
             collection={collection}
             token={token}
             amount={formattedStartAmount}
+            small
           />
           <Form {...form}>
             <form

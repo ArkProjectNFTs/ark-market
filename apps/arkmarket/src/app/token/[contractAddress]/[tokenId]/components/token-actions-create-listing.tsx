@@ -197,6 +197,7 @@ export function TokenActionsCreateListing({
             collection={collection}
             token={token}
             amount={formattedStartAmount}
+            small
           />
           <Form {...form}>
             <form
@@ -290,7 +291,9 @@ export function TokenActionsCreateListing({
                 name="duration"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">Set expiration</FormLabel>
+                    <FormLabel className="text-lg">
+                      Listing expiration
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value.toString()}

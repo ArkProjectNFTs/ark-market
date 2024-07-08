@@ -1,7 +1,6 @@
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
-
 import { cn } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { Collection, Token } from "~/types";
 import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
@@ -37,9 +36,11 @@ export default function TokenActionsTokenOverview({
           </div>
           <VerifiedIcon className="size-6 text-background" />
         </div>
-        <div className="flex h-6 items-center justify-center rounded-2xl bg-secondary text-[12px] text-secondary-foreground">
-          Royalties 5%
-        </div>
+        {small ?? (
+          <div className="flex h-6 items-center justify-center rounded-2xl bg-secondary text-[12px] text-secondary-foreground">
+            Royalties 5%
+          </div>
+        )}
       </div>
       <div className="grow" />
       <div className="flex flex-col gap-1">
