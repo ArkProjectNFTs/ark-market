@@ -80,11 +80,9 @@ export default function TokenOffersTable({
                 </TableCell>
                 {/* TODO @YohanTz: Check how this one looks */}
                 <TableCell>
-                  {
-                    <TokenFloorDifference
-                      floor_difference={offer.floor_difference}
-                    />
-                  }
+                  <TokenFloorDifference
+                    floor_difference={offer.floor_difference}
+                  />
                 </TableCell>
                 <TableCell>
                   {offer.source ? shortAddress(offer.source) : "_"}
