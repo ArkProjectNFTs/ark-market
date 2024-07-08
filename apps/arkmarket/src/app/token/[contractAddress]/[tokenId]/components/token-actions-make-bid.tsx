@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
@@ -147,7 +146,7 @@ export default function TokenActionsMakeBid({
             />
             <Button type="submit" disabled={isDisabled} size="xl">
               {status === "loading" ? (
-                <ReloadIcon className="animate-spin" />
+                <LoaderCircle className="animate-spin" />
               ) : (
                 "Place a bid"
               )}

@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
@@ -213,7 +212,7 @@ export default function TokenActionsMakeOffer({
                 className="mx-auto w-full px-10 lg:w-auto"
                 size="xl"
               >
-                {isLoading && <ReloadIcon className="mr-2 animate-spin" />}
+                {isLoading && <LoaderCircle className="mr-2 animate-spin" />}
                 Make offer
               </Button>
             </form>

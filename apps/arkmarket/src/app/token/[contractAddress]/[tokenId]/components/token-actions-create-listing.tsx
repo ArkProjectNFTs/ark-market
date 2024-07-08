@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { List } from "lucide-react";
+import { List, LoaderCircle } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
@@ -319,7 +318,7 @@ export function TokenActionsCreateListing({
                 disabled={isDisabled}
                 size="xl"
               >
-                {isLoading && <ReloadIcon className="mr-2 animate-spin" />}
+                {isLoading && <LoaderCircle className="mr-2 animate-spin" />}
                 List
               </Button>
             </form>

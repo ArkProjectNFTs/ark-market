@@ -1,9 +1,8 @@
 "use client";
 
 import { useCancel } from "@ark-project/react";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { ListX } from "lucide-react";
+import { ListX, LoaderCircle } from "lucide-react";
 
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
@@ -45,7 +44,7 @@ export default function TokenActionsCancelListing({
       variant="secondary"
     >
       {status === "loading" ? (
-        <ReloadIcon className="absolute left-4 h-6 w-6 animate-spin" />
+        <LoaderCircle className="absolute left-4 h-6 w-6 animate-spin" />
       ) : (
         <ListX size={24} className="absolute left-4" />
       )}
