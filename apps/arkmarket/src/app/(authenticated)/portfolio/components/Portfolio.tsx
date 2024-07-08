@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -58,7 +57,7 @@ const Portfolio: React.FC = () => {
             <div className="cursor-pointer rounded-md border p-2 hover:border-slate-400 hover:shadow-md">
               <div className="flex flex-col space-y-2">
                 <div className="overflow-hidden rounded-md">
-                  {token.metadata.normalized.image ? (
+                  {token.metadata?.normalized.image ? (
                     <Media
                       src={token.metadata.normalized.image}
                       alt={token.token_id || "Token Image"}
@@ -72,7 +71,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="space-y-1 text-sm">
                   <h3 className="font-medium leading-none">
-                    {token.metadata.normalized
+                    {token.metadata?.normalized
                       ? token.metadata.normalized.name
                       : token.token_id}
                   </h3>

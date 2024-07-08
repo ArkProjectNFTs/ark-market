@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
-import { ShoppingBag } from "lucide-react";
+import { LoaderCircle, ShoppingBag } from "lucide-react";
 import { formatEther } from "viem";
 
 import { areAddressesEqual } from "@ark-market/ui";
@@ -31,8 +30,6 @@ export default function TokenActionsBuyNow({
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(token.owner, address);
-
-  console.log("status", status);
 
   const handeClick = async () => {
     setIsOpen(true);
@@ -68,47 +65,55 @@ export default function TokenActionsBuyNow({
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
-          className="p-6"
+          className="justify-normal p-6 lg:justify-center"
           onInteractOutside={(e) => {
             e.preventDefault();
           }}
         >
-          {isSuccess ? (
-            <>
-              <div className="flex flex-col gap-10">
-                <div className="flex flex-col gap-4">
-                  <div className="mt-6 text-center text-xl font-semibold">
-                    Congratulations for your purchase
-                  </div>
-                  <div className="text-center text-sm">
-                    Nice purchase, this NFT is now in your wallet ;)
-                  </div>
-                </div>
-                <TokenActionsTokenOverview
-                  collection={collection}
-                  token={token}
-                  amount={formatEther(BigInt(tokenMarketData.start_amount))}
-                />
-                <Button onClick={() => setIsOpen(false)} size="xxl">
-                  Continue to explore NFTs
-                </Button>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-4">
+              <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
+              <div className="text-center text-xl font-semibold">
+                {isSuccess
+                  ? "Congratulations for your purchase"
+                  : "Confirm your purchase"}
               </div>
-            </>
-          ) : (
-            <>
-              <div className="flex flex-col gap-10">
-                <div className="mt-6 text-center text-xl font-semibold">
-                  Checking your payment
+              {isSuccess && (
+                <div className="mb-4 text-center text-sm">
+                  Nice purchase, this NFT is now in your wallet ;)
                 </div>
-                <div className="mb-6 flex justify-center">
-                  <ReloadIcon className="mr-4 size-6 animate-spin" />
+              )}
+            </div>
+
+            <TokenActionsTokenOverview
+              collection={collection}
+              token={token}
+              amount={formatEther(BigInt(tokenMarketData.start_amount))}
+            />
+
+            {isSuccess ? (
+              <Button
+                onClick={() => setIsOpen(false)}
+                size="xl"
+                className="mx-auto w-full lg:w-fit"
+              >
+                Continue to explore NFTs
+              </Button>
+            ) : (
+              <div className="flex flex-col items-center gap-6 rounded-md bg-card p-6 lg:flex-row lg:p-4">
+                <LoaderCircle className="size-10 animate-spin" />
+
+                <div className="text-center lg:text-left">
+                  <div className="text-xl font-semibold">
+                    Checking your payment
+                  </div>
                   <div className="text-sm">
                     Checking your payment can take a few seconds...
                   </div>
                 </div>
               </div>
-            </>
-          )}
+            )}
+          </div>
         </DialogContent>
       </Dialog>
       <Button

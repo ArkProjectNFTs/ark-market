@@ -5,7 +5,7 @@ export function TokenMedia({ token }: { token: Token }) {
   return (
     <Media
       src={
-        token.metadata.normalized.image
+        token.metadata?.normalized.image
           ? token.metadata.normalized.image
           : "/missing.jpg"
       }
