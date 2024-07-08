@@ -2,7 +2,7 @@ import Link from "next/link";
 import { RefreshCw, Share2 } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { TokenInfosApiResponse } from "../queries/getTokenData";
@@ -43,7 +43,10 @@ export default function TokenSummary({
       />
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-1.5">
-          <Link href={`/collection/${contractAddress}`}>
+          <Link
+            href={`/collection/${contractAddress}`}
+            className={focusableStyles}
+          >
             <h3 className="text-lg text-muted-foreground">
               {tokenInfos.collection_name}
             </h3>

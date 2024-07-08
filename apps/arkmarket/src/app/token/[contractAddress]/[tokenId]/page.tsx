@@ -5,7 +5,6 @@ import {
   getCollectionToken,
   getOrderbookCollectionToken,
 } from "~/app/assets/[contract_address]/[token_id]/data";
-import MobileTokenActivity from "./components/mobile-token-activity";
 import TokenAbout from "./components/token-about";
 import TokenActions from "./components/token-actions";
 import TokenActivity from "./components/token-activity";
@@ -94,11 +93,10 @@ export default async function TokenPage({
         </div>
       </div>
       <TokenActivity
-        className="mt-20 hidden lg:block"
+        className="mt-20"
         contractAddress={contractAddress}
         tokenId={tokenId}
       />
-      <MobileTokenActivity className="mt-8 lg:hidden" />
     </main>
   );
 }
