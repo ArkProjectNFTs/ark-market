@@ -2,9 +2,9 @@
 
 import { useMemo, useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import {
   ArrowLeftRight,
+  CircleDot,
   List,
   ListX,
   ShoppingCart,
@@ -34,6 +34,7 @@ const activityTypeToItem = new Map([
   ["LISTING", { icon: <List size={24} />, title: "List" }],
   ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
   ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
+  ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
   ["delist", { icon: <ListX size={24} />, title: "Delist" }],
 ]);
 
