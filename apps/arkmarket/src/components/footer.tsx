@@ -14,7 +14,11 @@ import { Icons } from "./icons";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname.includes("/wallet/") || pathname.includes("/collection/")) {
+  if (
+    pathname.includes("/wallet/") ||
+    pathname.includes("/collection/") ||
+    pathname.includes("/token/")
+  ) {
     return null;
   }
 

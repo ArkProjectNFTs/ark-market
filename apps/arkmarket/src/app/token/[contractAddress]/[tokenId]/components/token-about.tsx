@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -100,9 +100,11 @@ export default function TokenAbout({
               {collectionShortenedAddress}
             </p>
           </div>
-          <div className="flex items-center justify-between">
-            <p className="font-medium">Token ID</p>
-            <p className="text-muted-foreground">{tokenId}</p>
+          <div className="flex items-center justify-between gap-4">
+            <p className="whitespace-nowrap font-medium">Token ID</p>
+            <p className={cn("text-muted-foreground", ellipsableStyles)}>
+              {tokenId}
+            </p>
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Token Standard</p>

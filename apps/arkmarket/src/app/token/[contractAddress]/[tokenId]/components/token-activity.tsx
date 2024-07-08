@@ -1,115 +1,88 @@
-import {
-  ArrowLeftRight,
-  List,
-  ListX,
-  ShoppingCart,
-  Tag,
-  X,
-} from "lucide-react";
+"use client";
+
+import { useMemo, useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
-import { PriceTag } from "@ark-market/ui/price-tag";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@ark-market/ui/table";
 
-const activityTypeToItem = new Map([
-  ["sale", { icon: <ShoppingCart size={24} />, title: "Sale" }],
-  ["transfer", { icon: <ArrowLeftRight size={24} />, title: "Transfer" }],
-  ["list", { icon: <List size={24} />, title: "List" }],
-  ["offer", { icon: <Tag size={24} />, title: "Offer" }],
-  ["cancel_offer", { icon: <X size={24} />, title: "Cancel Offer" }],
-  ["delist", { icon: <ListX size={24} />, title: "Delist" }],
-]);
+import type { TokenActivityApiResponse } from "../queries/getTokenData";
+import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
+import { getTokenActivity } from "../queries/getTokenData";
+import DesktopTokenActivity from "./desktop-token-activity";
+import MobileTokenActivity from "./mobile-token-activity";
 
-const activityData = [
-  {
-    type: "transfer",
-    from: "0x123",
-    to: "0x456",
-  },
-  {
-    type: "list",
-    price: 1180000000000000000n,
-    from: "0x123",
-  },
-  {
-    type: "offer",
-    price: 1840000000000000000n,
-    from: "0x123",
-    to: "0x456",
-  },
-  {
-    type: "cancel_offer",
-    price: 1540000000000000000n,
-    from: "0x123",
-    to: "0x456",
-  },
-  {
-    type: "delist",
-    price: 3240000000000000000n,
-    from: "0x123",
-  },
-  {
-    type: "sale",
-    price: 1140000000000000000n,
-    from: "0x123",
-    to: "0x456",
-  },
-];
+interface TokenActivityProps {
+  contractAddress: string;
+  tokenId: string;
+}
 
-export default function TokenActivity({ className }: PropsWithClassName) {
+export default function TokenActivity({
+  className,
+  contractAddress,
+  tokenId,
+}: PropsWithClassName<TokenActivityProps>) {
+  const tableContainerRef = useRef<HTMLTableElement | null>(null);
+  const {
+    data: infiniteData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["tokenActivity", contractAddress, tokenId],
+    refetchInterval: 10_000,
+    // getNextPageParam: (lastPage) => lastPage.next_page,
+    getNextPageParam: (lastPage?: TokenActivityApiResponse) =>
+      lastPage?.next_page,
+    initialPageParam: undefined,
+    queryFn: ({ pageParam }) =>
+      getTokenActivity({ contractAddress, tokenId, page: pageParam }),
+  });
+
+  const totalCount = infiniteData?.pages[0]?.count ?? 0;
+  const tokenActivity = useMemo(
+    () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
+    [infiniteData],
+  );
+  console.log(tokenActivity);
+
+  useInfiniteWindowScroll({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  });
+
+  // const rowVirtualizer = useWindowVirtualizer({
+  //   // Approximate initial rect for SSR
+  //   initialRect: { height: 1080, width: 1920 },
+  //   count: tokenActivity.length,
+  //   estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
+  //   // Measure dynamic row height, except in firefox because it measures table border height incorrectly
+  //   measureElement:
+  //     typeof window !== "undefined" && !navigator.userAgent.includes("Firefox")
+  //       ? (element) => element.getBoundingClientRect().height
+  //       : undefined,
+  //   overscan: 5,
+  //   scrollMargin: tableContainer.current?.offsetTop ?? 0,
+  // });
+
   return (
     <div className={cn("", className)}>
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-4 lg:gap-1.5">
         <h2 className="text-2xl font-semibold">Activity</h2>
         <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm font-medium text-secondary-foreground">
-          {activityData.length}
+          {totalCount}
         </div>
       </div>
 
-      <Table className="mt-12">
-        <TableHeader>
-          <TableRow className="hover:bg-background">
-            <TableHead className="pl-5">Event</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>From</TableHead>
-            <TableHead>To</TableHead>
-            <TableHead>Date</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="text-sm font-semibold">
-          {activityData.map((activity, index) => {
-            const activityItem = activityTypeToItem.get(activity.type);
-            return (
-              <TableRow className="group h-[4.6875rem]" key={index}>
-                <TableCell className="pl-5 transition-colors group-hover:text-muted-foreground">
-                  <div className="flex items-center gap-4 whitespace-nowrap">
-                    {activityItem?.icon}
-                    <p>{activityItem?.title}</p>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  {activity.price !== undefined ? (
-                    <PriceTag price={activity.price} />
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>{activity.from}</TableCell>
-                <TableCell>{activity.to ?? "_"}</TableCell>
-                <TableCell>8min ago</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+      <div className="mt-6 lg:mt-12" ref={tableContainerRef}>
+        <div className="hidden lg:block">
+          <DesktopTokenActivity tokenActivity={tokenActivity} />
+        </div>
+        <div className="lg:hidden">
+          <MobileTokenActivity tokenActivity={tokenActivity} />
+        </div>
+      </div>
     </div>
   );
 }

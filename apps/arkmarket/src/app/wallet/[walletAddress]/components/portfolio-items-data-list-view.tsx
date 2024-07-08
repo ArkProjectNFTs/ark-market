@@ -77,13 +77,13 @@ export default function PortfolioItemsDataListView({
 
           return (
             <TableRow
-              key={`${token.contract}-${token.token_id}`}
-              data-index={virtualRow.index} // Needed for dynamic row height measurement
-              ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
               className={cn(
                 "group absolute grid h-[4.6875rem] w-full items-center",
                 gridTemplateColumnValue,
               )}
+              data-index={virtualRow.index} // Needed for dynamic row height measurement
+              key={`${token.contract}-${token.token_id}`}
+              ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}

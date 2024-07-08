@@ -1,4 +1,4 @@
-import { BadgeCheck } from "lucide-react";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { Collection, Token } from "~/types";
 import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
@@ -25,7 +25,7 @@ export default function TokenActionsTokenOverview({
           <div className="text-lg font-semibold text-muted-foreground">
             {collection.name || "Unknown"}
           </div>
-          <BadgeCheck className="size-4 text-muted-foreground" />
+          <VerifiedIcon className="size-6 text-background" />
         </div>
       </div>
       <div className="grow" />
