@@ -3,6 +3,7 @@ import {
   CircleDot,
   Gavel,
   List,
+  ListX,
   Meh,
   ShoppingCart,
   Tag,
@@ -33,8 +34,7 @@ export const activityTypeToItem = new Map([
   ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
   ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
   ["AUCTION", { icon: <Gavel size={24} />, title: "Put in auction" }],
-
-  // ["delist", { icon: <ListX size={24} />, title: "Delist" }],
+  ["DELISTING", { icon: <ListX size={24} />, title: "Delist" }],
 ]);
 
 interface DesktopTokenActivityProps {
