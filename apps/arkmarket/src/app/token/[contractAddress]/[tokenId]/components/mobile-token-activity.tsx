@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Meh } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { shortAddress, timeSince } from "@ark-market/ui";
@@ -20,6 +21,13 @@ export default function MobileTokenActivity({
     <div className={className}>
       <p className="text-sm font-semibold text-muted-foreground">Event</p>
       <Separator className="my-4" />
+
+      {tokenActivity.length === 0 && (
+        <div className="flex flex-col items-center gap-3 pt-10 text-muted-foreground">
+          <Meh size={42} />
+          <p className="text-xl font-semibold">No activity yet!</p>
+        </div>
+      )}
 
       {tokenActivity.map((activity, index) => {
         const activityItem = activityTypeToItem.get(activity.activity_type);
