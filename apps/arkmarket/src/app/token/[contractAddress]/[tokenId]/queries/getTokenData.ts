@@ -52,7 +52,9 @@ export interface TokenOffer {
   source: string | null;
 }
 interface TokenOffersApiResponse {
+  count: number;
   data: TokenOffer[];
+  next_page: number;
 }
 interface GetTokenOffersParams {
   contractAddress: string;

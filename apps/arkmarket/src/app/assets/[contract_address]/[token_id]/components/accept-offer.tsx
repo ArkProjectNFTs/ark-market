@@ -74,7 +74,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   const isLoading = status === "loading" || statusAuction === "loading";
 
   return (
-    <Button onClick={handleClick} disabled={isLoading} size="sm">
+    <Button onClick={handleClick} disabled={isLoading} size="md">
       {isLoading ? <ReloadIcon className="animate-spin" /> : "Accept"}
     </Button>
   );
