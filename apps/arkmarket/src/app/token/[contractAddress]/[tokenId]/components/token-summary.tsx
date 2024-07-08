@@ -37,7 +37,7 @@ export default function TokenSummary({
           tokenInfos.metadata?.name ??
           `${tokenInfos.collection_name} #${tokenId}`
         }
-        className="w-full rounded-lg"
+        className="aspect-square w-full rounded-lg object-contain"
         height={1000}
         width={1000}
       />
