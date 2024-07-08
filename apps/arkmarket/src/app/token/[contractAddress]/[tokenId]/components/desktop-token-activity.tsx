@@ -44,7 +44,6 @@ export default function DesktopTokenActivity({
   className,
   tokenActivity,
 }: PropsWithClassName<DesktopTokenActivityProps>) {
-  console.log(tokenActivity);
   return (
     <Table className={className}>
       <TableHeader>
