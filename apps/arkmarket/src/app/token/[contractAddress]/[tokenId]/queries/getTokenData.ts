@@ -45,7 +45,7 @@ export async function getTokenInfos({
 
 export interface TokenOffer {
   expire_at: number;
-  floor_difference: string | null;
+  floor_difference: number | null;
   hash: string;
   offer_id: number;
   price: string;

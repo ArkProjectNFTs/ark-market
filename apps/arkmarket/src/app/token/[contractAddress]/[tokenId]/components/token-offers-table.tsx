@@ -13,6 +13,24 @@ import type { TokenOffer } from "../queries/getTokenData";
 import type { TokenMarketData } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
+interface TokenFloorDifferenceProps {
+  floor_difference: number | null;
+}
+
+function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
+  if (floor_difference === null) {
+    return "_";
+  }
+  if (floor_difference < 0) {
+    return (
+      <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
+    );
+  }
+  return (
+    <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
+  );
+}
+
 interface TokenOffersTableProps {
   tokenOffers: TokenOffer[];
   tokenContractAdress: string;
@@ -61,7 +79,13 @@ export default function TokenOffersTable({
                   <PriceTag price={offer.price} />
                 </TableCell>
                 {/* TODO @YohanTz: Check how this one looks */}
-                <TableCell>{offer.floor_difference ?? "_"}</TableCell>
+                <TableCell>
+                  {
+                    <TokenFloorDifference
+                      floor_difference={offer.floor_difference}
+                    />
+                  }
+                </TableCell>
                 <TableCell>
                   {offer.source ? shortAddress(offer.source) : "_"}
                 </TableCell>

@@ -8,6 +8,24 @@ import type { TokenOffer } from "../queries/getTokenData";
 import type { TokenMarketData } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
+interface TokenFloorDifferenceProps {
+  floor_difference: number | null;
+}
+
+function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
+  if (floor_difference === null) {
+    return "_";
+  }
+  if (floor_difference < 0) {
+    return (
+      <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
+    );
+  }
+  return (
+    <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
+  );
+}
+
 interface TokenOffersMobileTableProps {
   tokenOffers: TokenOffer[];
   tokenContractAdress: string;
@@ -32,7 +50,9 @@ export default function TokenOffersMobileTable({
             <div className="mb-4">
               <div className="flex items-center gap-4">
                 <PriceTag price={offer.price} className="h-7 text-xs" />
-                <p className="text-sm">{offer.floor_difference ?? "_"}</p>
+                <TokenFloorDifference
+                  floor_difference={offer.floor_difference}
+                />
               </div>
 
               <div className="flex items-center justify-between">
