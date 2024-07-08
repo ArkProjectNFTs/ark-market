@@ -44,6 +44,7 @@ export default function TokenActivity({
     () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
     [infiniteData],
   );
+  console.log(tokenActivity);
 
   useInfiniteWindowScroll({
     fetchNextPage,

@@ -2,7 +2,6 @@ import {
   ArrowLeftRight,
   CircleDot,
   List,
-  ListX,
   Meh,
   ShoppingCart,
   Tag,
@@ -25,12 +24,13 @@ import type { TokenActivity } from "../queries/getTokenData";
 
 export const activityTypeToItem = new Map([
   ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale" }],
+  ["EXECUTED", { icon: <ShoppingCart size={24} />, title: "Sale" }],
   ["TRANSFER", { icon: <ArrowLeftRight size={24} />, title: "Transfer" }],
   ["LISTING", { icon: <List size={24} />, title: "List" }],
   ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
   ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
   ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
-  ["delist", { icon: <ListX size={24} />, title: "Delist" }],
+  // ["delist", { icon: <ListX size={24} />, title: "Delist" }],
 ]);
 
 interface DesktopTokenActivityProps {
