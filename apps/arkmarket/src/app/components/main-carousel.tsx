@@ -96,7 +96,7 @@ export default function MainCarousel() {
               <button
                 className={cn(
                   "h-1.5 w-24 rounded-full",
-                  isSelected ? "bg-secondary" : "bg-card",
+                  isSelected ? "bg-accent" : "bg-card",
                 )}
                 key={index}
                 onClick={() => api?.scrollTo(index)}
