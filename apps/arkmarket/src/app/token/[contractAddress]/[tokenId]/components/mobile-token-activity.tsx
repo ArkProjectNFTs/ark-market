@@ -23,7 +23,7 @@ export default function MobileTokenActivity({
       <Separator className="my-4" />
 
       {tokenActivity.length === 0 && (
-        <div className="flex flex-col items-center gap-3 pt-10 text-muted-foreground">
+        <div className="flex flex-col items-center gap-3 py-10 text-muted-foreground">
           <Meh size={42} />
           <p className="text-xl font-semibold">No activity yet!</p>
         </div>
