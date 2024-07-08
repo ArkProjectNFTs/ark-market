@@ -48,25 +48,12 @@ export default function TokenOffersMobileTable({
         return (
           <>
             <div className="mb-4">
-              <div className="flex items-center gap-4">
-                <PriceTag price={offer.price} className="h-7 text-xs" />
-                <TokenFloorDifference
-                  floor_difference={offer.floor_difference}
-                />
-              </div>
-
               <div className="flex items-center justify-between">
-                <div className="mt-3.5 flex items-center gap-3.5">
-                  <p className="text-sm font-semibold">
-                    from{" "}
-                    <span className="text-muted-foreground">
-                      {offer.source ? shortAddress(offer.source) : "_"}
-                    </span>
-                  </p>
-
-                  <p className="text-xs text-muted-foreground">
-                    Expire in {getRoundedRemainingTime(offer.expire_at)}
-                  </p>
+                <div className="flex items-center gap-4">
+                  <PriceTag price={offer.price} className="h-7 text-xs" />
+                  <TokenFloorDifference
+                    floor_difference={offer.floor_difference}
+                  />
                 </div>
 
                 <TokenOffersTableAction
@@ -79,6 +66,20 @@ export default function TokenOffersMobileTable({
                   tokenIsListed={tokenMarketData?.is_listed ?? false}
                   tokenListingOrderHash={tokenMarketData?.order_hash ?? null}
                 />
+              </div>
+
+              <div className="mt-3.5 flex items-center justify-between ">
+                <div className="flex items-center gap-3.5">
+                  <p className="text-sm font-semibold">
+                    from{" "}
+                    <span className="text-muted-foreground">
+                      {offer.source ? shortAddress(offer.source) : "_"}
+                    </span>
+                  </p>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Expire in {getRoundedRemainingTime(offer.expire_at)}
+                </p>
               </div>
             </div>
             {index !== tokenOffers.length - 1 && <Separator className="mb-4" />}
