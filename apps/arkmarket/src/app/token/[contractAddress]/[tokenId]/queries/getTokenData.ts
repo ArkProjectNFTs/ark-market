@@ -80,7 +80,14 @@ export async function getTokenOffers({
   return (await response.json()) as Promise<TokenOffersApiResponse>;
 }
 
-export type TokenActivityType = "LISTING" | "OFFER" | "CANCELLED";
+export type TokenActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT";
 export interface TokenActivity {
   activity_type: TokenActivityType;
   from: string | null;
