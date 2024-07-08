@@ -192,7 +192,7 @@ export function TokenActionsCreateListing({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="items-center"></DialogHeader>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-8">
           <div className="text-center text-xl font-semibold">List for sale</div>
           <TokenActionsTokenOverview
             collection={collection}
@@ -205,7 +205,7 @@ export function TokenActionsCreateListing({
               className="flex flex-col space-y-4"
             >
               <FormItem className="">
-                <FormLabel>Type of sale</FormLabel>
+                <FormLabel className="text-lg">Type of sale</FormLabel>
                 <div className="flex gap-6">
                   <Button
                     type="button"
@@ -233,7 +233,9 @@ export function TokenActionsCreateListing({
                 name="startAmount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Set starting price</FormLabel>
+                    <FormLabel className="text-lg">
+                      Set {isAuction && "starting"} price
+                    </FormLabel>
                     <Button
                       type="button"
                       className="w-full"
@@ -243,7 +245,10 @@ export function TokenActionsCreateListing({
                         field.onChange("0.5");
                       }}
                     >
-                      Choose floor price 0.5 ETH
+                      <p>
+                        Choose floor price of{" "}
+                        <span className="font-bold">0.5 ETH</span>
+                      </p>
                     </Button>
                     <FormControl>
                       <NumericalInput
@@ -251,8 +256,12 @@ export function TokenActionsCreateListing({
                         defaultValue="0.1"
                         value={field.value}
                         onChange={field.onChange}
+                        placeholder="Price"
                       />
                     </FormControl>
+                    <p className="!mt-1 ml-3 text-sm text-muted-foreground">
+                      $---
+                    </p>
                     {formattedStartAmount !== "-" && <FormMessage />}
                   </FormItem>
                 )}
@@ -263,7 +272,9 @@ export function TokenActionsCreateListing({
                   name="endAmount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Set reserve price</FormLabel>
+                      <FormLabel className="text-lg">
+                        Set reserve price
+                      </FormLabel>
                       <FormControl>
                         <NumericalInput
                           value={field.value}
@@ -280,7 +291,7 @@ export function TokenActionsCreateListing({
                 name="duration"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Set expiration</FormLabel>
+                    <FormLabel className="text-lg">Set expiration</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value.toString()}
@@ -304,7 +315,7 @@ export function TokenActionsCreateListing({
               />
               <Button
                 type="submit"
-                className="mx-auto w-full px-10 lg:w-auto"
+                className="mx-auto !mt-8 w-full px-10 lg:w-auto"
                 disabled={isDisabled}
                 size="xl"
               >
