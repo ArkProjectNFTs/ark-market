@@ -58,7 +58,7 @@ export interface Token {
   contract_address: string;
   token_id: string;
   owner: string;
-  metadata: {
+  metadata?: {
     normalized: {
       image: string;
       name: string;
