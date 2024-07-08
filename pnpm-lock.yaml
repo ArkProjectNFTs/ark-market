@@ -80,9 +80,12 @@ importers:
       blockies-ts:
         specifier: ^1.0.0
         version: 1.0.0
+      embla-carousel-autoplay:
+        specifier: ^8.1.6
+        version: 8.1.6(embla-carousel@8.1.6)
       embla-carousel-wheel-gestures:
         specifier: ^8.0.1
-        version: 8.0.1(@babel/core@7.24.4)(embla-carousel@8.0.2)
+        version: 8.0.1(@babel/core@7.24.4)(embla-carousel@8.1.6)
       framer-motion:
         specifier: ^11.2.6
         version: 11.2.6(react-dom@18.3.1)(react@18.3.1)
@@ -4202,6 +4205,14 @@ packages:
     resolution: {integrity: sha512-lwKft2CLFztD+vEIpesrOtCrko/TFnEJlHFdRhazU7Y/jx5qc4cqsocfVrBg4So4gGe9lvxnbLIoev47WMpg+A==}
     dev: false
 
+  /embla-carousel-autoplay@8.1.6(embla-carousel@8.1.6):
+    resolution: {integrity: sha512-e5n9f4q+DVeBPiPPT3gwzqpiqfae8aP8fQACS4OZkPFvFLdsVhnWcw+cwtewryP7snWJGKPXEMA1GOjieEKv+w==}
+    peerDependencies:
+      embla-carousel: 8.1.6
+    dependencies:
+      embla-carousel: 8.1.6
+    dev: false
+
   /embla-carousel-react@8.0.2(react@18.3.1):
     resolution: {integrity: sha512-RHe1GKLulOW8EDN+cJgbFbVVfRXcaLT2/89dyVw3ONGgVpZjD19wB87I1LUZ1aCzOSrTccx0PFSQanK4OOfGPA==}
     peerDependencies:
@@ -4220,13 +4231,13 @@ packages:
       embla-carousel: 8.0.2
     dev: false
 
-  /embla-carousel-wheel-gestures@8.0.1(@babel/core@7.24.4)(embla-carousel@8.0.2):
+  /embla-carousel-wheel-gestures@8.0.1(@babel/core@7.24.4)(embla-carousel@8.1.6):
     resolution: {integrity: sha512-LMAnruDqDmsjL6UoQD65aLotpmfO49Fsr3H0bMi7I+BH6jbv9OJiE61kN56daKsVtCQEt0SU1MrJslbhtgF3yQ==}
     engines: {node: '>=10'}
     peerDependencies:
       embla-carousel: ^8.0.0 || ~8.0.0-rc03
     dependencies:
-      embla-carousel: 8.0.2
+      embla-carousel: 8.1.6
       wheel-gestures: 2.2.47(@babel/core@7.24.4)
     transitivePeerDependencies:
       - '@babel/core'
@@ -4238,6 +4249,10 @@ packages:
 
   /embla-carousel@8.0.2:
     resolution: {integrity: sha512-bogsDO8xosuh/l3PxIvA5AMl3+BnRVAse9sDW/60amzj4MbGS5re4WH5eVEXiuH8G1/3G7QUAX2QNr3Yx8z5rA==}
+    dev: false
+
+  /embla-carousel@8.1.6:
+    resolution: {integrity: sha512-9n7FVsbPAs1KD+JmO84DnEDOZMXPBQbLujjMQqvsBRN2CDWwgZ9hRSNapztdPnyJfzOIxowGmj0BUQ8ACYAPkA==}
     dev: false
 
   /emoji-regex@10.3.0:
