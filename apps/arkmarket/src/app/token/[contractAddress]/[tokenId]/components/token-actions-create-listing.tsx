@@ -110,7 +110,7 @@ export function TokenActionsCreateListing({
     defaultValues: {
       startAmount: "",
       endAmount: "",
-      duration: "1",
+      duration: "730",
     },
   });
 
@@ -309,6 +309,8 @@ export function TokenActionsCreateListing({
                         <SelectItem value="6">6 hours</SelectItem>
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
+                        <SelectItem value="168">7 days</SelectItem>
+                        <SelectItem value="730">1 month</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

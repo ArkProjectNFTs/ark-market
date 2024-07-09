@@ -8,6 +8,7 @@ import { LoaderCircle, Tag } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
+import moment from "moment";
 
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
@@ -86,7 +87,7 @@ export default function TokenActionsMakeOffer({
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
-      duration: "1",
+      duration: "730",
     },
   });
 
@@ -115,6 +116,7 @@ export default function TokenActionsMakeOffer({
       tokenAddress: token.contract_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
+      endDate: moment().add(values.duration, "hours").unix(),
     };
 
     await createOffer({
@@ -201,6 +203,10 @@ export default function TokenActionsMakeOffer({
                         <SelectItem value="6">6 hours</SelectItem>
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
+                        <SelectItem value="168">7 days</SelectItem>
+                        <SelectItem value="730">
+                          1 month
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
