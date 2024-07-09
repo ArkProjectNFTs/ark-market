@@ -87,7 +87,7 @@ export default function TokenActionsMakeOffer({
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
-      duration: "729",
+      duration: "719",
     },
   });
 
@@ -204,7 +204,7 @@ export default function TokenActionsMakeOffer({
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
                         <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="729">
+                        <SelectItem value="719">
                           1 month
                         </SelectItem>
                       </SelectContent>
