@@ -53,7 +53,7 @@ export default function DesktopTokenActivity({
           <TableHead>Price</TableHead>
           <TableHead>From</TableHead>
           <TableHead>To</TableHead>
-          <TableHead>Date</TableHead>
+          <TableHead className="text-end">Date</TableHead>
         </TableRow>
       </TableHeader>
       {tokenActivity.length === 0 ? (
@@ -89,7 +89,9 @@ export default function DesktopTokenActivity({
                 <TableCell>
                   {activity.to ? shortAddress(activity.to) : "_"}
                 </TableCell>
-                <TableCell>{timeSince(activity.time_stamp)}</TableCell>
+                <TableCell className="text-end">
+                  {timeSince(activity.time_stamp)}
+                </TableCell>
               </TableRow>
             );
           })}
