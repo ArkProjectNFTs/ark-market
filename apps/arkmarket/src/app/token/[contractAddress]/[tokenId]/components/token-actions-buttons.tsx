@@ -18,7 +18,6 @@ interface TokenActionsButtonsProps {
   isAuction: boolean;
   hasOffers: boolean;
   isOwner: boolean;
-  startAmount: string;
   collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData;
@@ -29,7 +28,6 @@ export default function TokenActionsButtons({
   isAuction,
   hasOffers,
   isOwner,
-  // startAmount,
   collection,
   token,
   tokenMarketData,

@@ -48,7 +48,8 @@
     "starknetkit": "^1.1.9",
     "superjson": "2.2.1",
     "viem": "^2.13.10",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@ark-market/eslint-config": "workspace:*",

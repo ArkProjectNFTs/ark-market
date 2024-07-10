@@ -38,8 +38,8 @@ export default function TokenActionsBuyNow({
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       tokenAddress: token.contract_address,
       tokenId: token.token_id,
-      orderHash: tokenMarketData.order_hash,
-      startAmount: tokenMarketData.start_amount,
+      orderHash: tokenMarketData.listing.order_hash,
+      startAmount: tokenMarketData.listing.start_amount,
     });
   };
 
@@ -54,7 +54,7 @@ export default function TokenActionsBuyNow({
     !account ||
     isOwner ||
     !tokenMarketData.is_listed ||
-    tokenMarketData.status === "FULFILLED"
+    tokenMarketData.buy_in_progress
   ) {
     return null;
   }
@@ -88,7 +88,9 @@ export default function TokenActionsBuyNow({
             <TokenActionsTokenOverview
               collection={collection}
               token={token}
-              amount={formatEther(BigInt(tokenMarketData.start_amount))}
+              amount={formatEther(
+                BigInt(tokenMarketData.listing.start_amount ?? 0),
+              )}
             />
 
             {isSuccess ? (
@@ -123,7 +125,8 @@ export default function TokenActionsBuyNow({
         onClick={handeClick}
       >
         <ShoppingBag size={24} className="absolute left-4" />
-        Buy now for {formatEther(BigInt(tokenMarketData.start_amount))} ETH
+        Buy now for{" "}
+        {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
       </Button>
     </>
   );

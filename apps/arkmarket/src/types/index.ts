@@ -75,27 +75,33 @@ export interface OwnersTokensApiResponse {
 }
 
 export interface TokenMarketData {
-  token_chain_id: string;
-  token_address: string;
-  token_id: string;
-  listed_timestamp: number;
-  updated_timestamp: number;
-  current_owner: string;
-  last_price: number | null;
-  quantity: string;
-  order_hash: string;
-  start_amount: string;
-  end_amount: string;
-  start_date: number;
-  end_date: number;
-  broker_id: string;
-  is_listed: boolean;
+  buy_in_progress: boolean;
+  created_timestamp: number | null;
+  floor: string;
   has_offer: boolean;
-  status: string;
-  top_bid: {
-    amount: string;
+  is_listed: boolean;
+  listing: {
+    currency_address: string | null;
+    end_amount: string | null;
+    end_date: number | null;
+    is_auction: boolean;
     order_hash: string;
+    start_amount: string | null;
+    start_date: number | null;
   };
+  owner: string;
+  top_offer: {
+    amount: string;
+    currency_address: string;
+    end_date: number;
+    order_hash: string;
+    start_date: number;
+  };
+  updated_timestamp: number;
+}
+
+export interface CollectionTokenMarketApiResponse {
+  data: TokenMarketData;
 }
 
 export interface ContractInfo {

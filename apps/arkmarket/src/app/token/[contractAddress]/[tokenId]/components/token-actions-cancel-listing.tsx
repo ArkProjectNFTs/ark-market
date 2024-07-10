@@ -29,7 +29,7 @@ export default function TokenActionsCancelListing({
   const handleClick = async () => {
     await cancel({
       starknetAccount: account,
-      orderHash: BigInt(tokenMarketData.order_hash),
+      orderHash: BigInt(tokenMarketData.listing.order_hash),
       tokenAddress: token.contract_address,
       tokenId: BigInt(token.token_id),
     });

@@ -1,10 +1,8 @@
 import { notFound } from "next/navigation";
 
-import {
-  getCollection,
-  getCollectionToken,
-  getOrderbookCollectionToken,
-} from "~/app/assets/[contract_address]/[token_id]/data";
+import getCollection from "~/lib/getCollection";
+import getCollectionToken from "~/lib/getCollectionToken";
+import getCollectionTokenMarket from "~/lib/getCollectionTokenMarket";
 import TokenAbout from "./components/token-about";
 import TokenActions from "./components/token-actions";
 import TokenActivity from "./components/token-activity";
@@ -35,18 +33,10 @@ export default async function TokenPage({
 
   const collection = await getCollection(contractAddress);
   const token = await getCollectionToken(contractAddress, tokenId);
-
-  let tokenMarketData;
-
-  try {
-    tokenMarketData = await getOrderbookCollectionToken({
-      contract_address: token.contract_address,
-      token_id: token.token_id,
-    });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (_error) {
-    tokenMarketData = null;
-  }
+  const tokenMarketData = await getCollectionTokenMarket(
+    contractAddress,
+    tokenId,
+  );
 
   return (
     <main className="mx-auto max-w-[120rem] p-5 pt-0 lg:p-8">

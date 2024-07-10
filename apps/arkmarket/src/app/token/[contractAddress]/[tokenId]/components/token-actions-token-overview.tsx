@@ -3,7 +3,7 @@ import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { Collection, Token } from "~/types";
-import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
+import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
 
 interface tokenActionsTokenOverviewProps {
   collection: Collection;

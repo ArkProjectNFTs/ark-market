@@ -2,13 +2,12 @@
 
 import { useAccount } from "@starknet-react/core";
 import { useQuery } from "react-query";
-import { hexToNumber } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
 import type { Collection, Token, TokenMarketData } from "~/types";
-import { getOrderbookCollectionToken } from "~/app/assets/[contract_address]/[token_id]/data";
+import getCollectionTokenMarket from "~/lib/getCollectionTokenMarket";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
 import TokenActionsHeader from "./token-actions-header";
@@ -32,11 +31,7 @@ export default function TokenActions({
     !!account.address && areAddressesEqual(account.address, token.owner);
   const { data } = useQuery(
     ["tokenMarketData", token.contract_address, token.token_id],
-    () =>
-      getOrderbookCollectionToken({
-        contract_address: token.contract_address,
-        token_id: token.token_id,
-      }),
+    () => getCollectionTokenMarket(token.contract_address, token.token_id),
     {
       refetchInterval: 10_000,
       initialData: tokenMarketData,
@@ -53,10 +48,6 @@ export default function TokenActions({
     );
   }
 
-  const isListed = data.is_listed;
-  const isAuction =
-    isListed && hexToNumber(data.end_amount as `0x${string}`) > 0;
-
   return (
     <div
       className={cn(
@@ -65,22 +56,21 @@ export default function TokenActions({
       )}
     >
       <TokenActionsHeader
-        isListed={isListed}
-        isAuction={isAuction}
-        expiresAt={data.end_date}
+        isListed={data.is_listed}
+        isAuction={data.listing.is_auction}
+        expiresAt={data.listing.end_date}
       />
       <TokenActionsPrice
-        startAmount={data.start_amount}
-        isAuction={isAuction}
+        startAmount={data.listing.start_amount}
+        isAuction={data.listing.is_auction}
         hasOffer={data.has_offer}
-        topOffer={data.top_bid}
+        topOffer={data.top_offer}
       />
       <TokenActionsButtons
-        isListed={isListed}
-        isAuction={isAuction}
+        isListed={data.is_listed}
+        isAuction={data.listing.is_auction}
         hasOffers={data.has_offer}
         isOwner={isOwner}
-        startAmount={data.start_amount}
         collection={collection}
         token={token}
         tokenMarketData={data}

@@ -36,7 +36,7 @@ interface TokenOffersTableProps {
   tokenContractAdress: string;
   tokenId: string;
   owner: string;
-  tokenMarketData: TokenMarketData | null;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersTable({
@@ -98,8 +98,8 @@ export default function TokenOffersTable({
                     tokenContractAddress={tokenContractAdress}
                     tokenId={tokenId}
                     offerAmount={offer.price}
-                    tokenIsListed={tokenMarketData?.is_listed ?? false}
-                    tokenListingOrderHash={tokenMarketData?.order_hash ?? null}
+                    tokenIsListed={tokenMarketData.is_listed}
+                    tokenListingOrderHash={tokenMarketData.listing.order_hash}
                   />
                 </TableCell>
               </TableRow>

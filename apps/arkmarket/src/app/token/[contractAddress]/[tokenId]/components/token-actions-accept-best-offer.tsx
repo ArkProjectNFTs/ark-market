@@ -42,8 +42,8 @@ export default function TokenActionsAcceptBestOffer({
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
           tokenAddress: token.contract_address,
           tokenId: token.token_id,
-          orderHash: tokenMarketData.top_bid.order_hash,
-          relatedOrderHash: tokenMarketData.order_hash,
+          orderHash: tokenMarketData.top_offer.order_hash,
+          relatedOrderHash: tokenMarketData.listing.order_hash,
         });
       } else {
         await fulfillOffer({
@@ -51,7 +51,7 @@ export default function TokenActionsAcceptBestOffer({
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
           tokenAddress: token.contract_address,
           tokenId: token.token_id,
-          orderHash: tokenMarketData.top_bid.order_hash,
+          orderHash: tokenMarketData.top_offer.order_hash,
         });
       }
     } catch (error) {
@@ -75,7 +75,7 @@ export default function TokenActionsAcceptBestOffer({
       )}
       Accept offer
       <Separator orientation="vertical" className="mx-2 h-5" />
-      {formatEther(BigInt(tokenMarketData.top_bid.amount))} ETH
+      {formatEther(BigInt(tokenMarketData.top_offer.amount))} ETH
     </Button>
   );
 }

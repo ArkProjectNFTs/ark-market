@@ -22,7 +22,7 @@ interface TokenOffersProps {
   contractAddress: string;
   tokenId: string;
   owner: string;
-  tokenMarketData: TokenMarketData | null;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffers({
