@@ -63,7 +63,7 @@ export default function TokenOffersTable({
             <TableHead className="sticky top-0 flex items-center">
               Expiration
             </TableHead>
-            <TableHead className="sticky top-0 flex items-center">
+            <TableHead className="sticky top-0 flex items-center justify-end">
               Action
             </TableHead>
           </TableRow>
@@ -90,7 +90,7 @@ export default function TokenOffersTable({
                 <TableCell>
                   In {getRoundedRemainingTime(offer.expire_at)}
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-end">
                   <TokenOffersTableAction
                     owner={owner}
                     offerSourceAddress={offer.source}
