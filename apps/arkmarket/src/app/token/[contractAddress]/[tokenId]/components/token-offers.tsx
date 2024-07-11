@@ -14,7 +14,7 @@ import {
 } from "@ark-market/ui/collapsible";
 
 import type { TokenMarketData } from "~/types";
-import { getTokenOffers } from "../queries/getTokenData";
+import { getTokenOffers } from "~/lib/getTokenOffers";
 import TokenOffersMobileTable from "./token-offers-mobile-table";
 import TokenOffersTable from "./token-offers-table";
 
@@ -33,21 +33,17 @@ export default function TokenOffers({
   tokenMarketData,
 }: PropsWithClassName<TokenOffersProps>) {
   const [open, setOpen] = useState(true);
-
   const { data: infiniteData } = useInfiniteQuery({
     queryKey: ["tokenOffers", contractAddress, tokenId],
     refetchInterval: 10_000,
-    // getNextPageParam: (lastPage) => lastPage.next_page,
     getNextPageParam: () => null,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
       getTokenOffers({ contractAddress, tokenId, page: pageParam }),
   });
-
   const offersCount = infiniteData?.pages[0]?.count ?? 0;
-
   const tokenOffers = useMemo(
-    () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
 

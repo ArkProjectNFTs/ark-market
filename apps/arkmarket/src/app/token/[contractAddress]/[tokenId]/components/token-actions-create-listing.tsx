@@ -43,11 +43,13 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 interface TokenActionsCreateListingProps {
   collection: Collection;
   token: Token;
+  tokenId: string;
 }
 
 export function TokenActionsCreateListing({
   collection,
   token,
+  tokenId,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
@@ -138,8 +140,8 @@ export function TokenActionsCreateListing({
 
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
-      tokenId: BigInt(token.token_id),
+      tokenAddress: collection.contract_address,
+      tokenId: BigInt(tokenId),
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
       endDate: moment().add(values.duration, "hours").unix(),
@@ -150,7 +152,7 @@ export function TokenActionsCreateListing({
         await createAuction({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: collection.contract_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -160,7 +162,7 @@ export function TokenActionsCreateListing({
         await createListing({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: collection.contract_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -196,6 +198,7 @@ export function TokenActionsCreateListing({
           <TokenActionsTokenOverview
             collection={collection}
             token={token}
+            tokenId={tokenId}
             amount={formattedStartAmount}
             small
           />

@@ -1,16 +1,14 @@
 import type { Token } from "~/types";
 import Media from "~/components/media";
 
-export function TokenMedia({ token }: { token: Token }) {
+interface TokenMediaProps {
+  token: Token;
+  tokenId: string;
+}
+
+export function TokenMedia({ token, tokenId }: TokenMediaProps) {
   return (
-    <Media
-      src={
-        token.metadata?.normalized.image
-          ? token.metadata.normalized.image
-          : "/missing.jpg"
-      }
-      alt={token.token_id || "Token Image"}
-    />
+    <Media src={token.metadata?.image_key ?? "/missing.jpg"} alt={tokenId} />
   );
 }
 

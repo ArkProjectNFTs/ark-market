@@ -27,17 +27,21 @@ import {
 } from "@ark-market/ui/form";
 import { Input } from "@ark-market/ui/input";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
 import { env } from "~/env";
 
 interface TokenActionsMakeBidProps {
+  collection: Collection;
   token: Token;
+  tokenId: string;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsMakeBid({
+  collection,
   token,
+  tokenId,
   tokenMarketData,
 }: TokenActionsMakeBidProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +76,7 @@ export default function TokenActionsMakeBid({
       return;
     }
 
-    const tokenIdNumber = parseInt(token.token_id, 10);
+    const tokenIdNumber = parseInt(tokenId, 10);
 
     if (isNaN(tokenIdNumber)) {
       console.error("Invalid token ID");
@@ -82,8 +86,8 @@ export default function TokenActionsMakeBid({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
-      tokenId: BigInt(token.token_id),
+      tokenAddress: collection.contract_address,
+      tokenId: BigInt(tokenId),
       startAmount: parseEther(values.startAmount),
     };
 
@@ -117,10 +121,10 @@ export default function TokenActionsMakeBid({
         </DialogHeader>
         <div className="flex items-center space-x-4">
           <div className="w-16 overflow-hidden rounded">
-            <TokenMedia token={token} />
+            <TokenMedia token={token} tokenId={tokenId} />
           </div>
           <div className="">
-            <div className="font-bold">Duo #{token.token_id}</div>
+            <div className="font-bold">Duo #{tokenId}</div>
             <div className="text-muted-foreground">Everai</div>
           </div>
           <div className="grow" />

@@ -7,15 +7,19 @@ import { ListX, LoaderCircle } from "lucide-react";
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 
 interface TokenActionsCancelListingProps {
+  collection: Collection;
   token: Token;
+  tokenId: string;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsCancelListing({
+  collection,
   token,
+  tokenId,
   tokenMarketData,
 }: TokenActionsCancelListingProps) {
   const { account, address } = useAccount();
@@ -30,8 +34,8 @@ export default function TokenActionsCancelListing({
     await cancel({
       starknetAccount: account,
       orderHash: BigInt(tokenMarketData.listing.order_hash),
-      tokenAddress: token.contract_address,
-      tokenId: BigInt(token.token_id),
+      tokenAddress: collection.contract_address,
+      tokenId: BigInt(tokenId),
     });
   };
 

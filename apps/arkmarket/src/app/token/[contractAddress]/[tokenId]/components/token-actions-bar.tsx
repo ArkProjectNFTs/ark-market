@@ -5,18 +5,18 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 import Media from "~/components/media";
 
 interface TokenActionsBar {
   show: boolean;
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
 }
 
 export default function TokenActionsBar({
   className,
   show,
-  tokenInfos,
+  token,
 }: PropsWithClassName<TokenActionsBar>) {
   return (
     <AnimatePresence>
@@ -33,17 +33,14 @@ export default function TokenActionsBar({
         >
           <div className="flex items-center gap-3.5">
             <Media
-              src={
-                tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image
-              }
+              src={token.metadata?.animation_url ?? token.metadata?.image}
               mediaKey={
-                tokenInfos.metadata?.animation_key ??
-                tokenInfos.metadata?.image_key
+                token.metadata?.animation_key ?? token.metadata?.image_key
               }
-              alt={tokenInfos.metadata?.name ?? `${tokenInfos.collection_name}`}
+              alt={token.metadata?.name ?? `${token.collection_name}`}
               className="size-12 rounded-xs"
             />
-            <p className="text-lg font-semibold">{tokenInfos.metadata?.name}</p>
+            <p className="text-lg font-semibold">{token.metadata?.name}</p>
           </div>
           <div className="flex items-center gap-5">
             <Button size="xl">

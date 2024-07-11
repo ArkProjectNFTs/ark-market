@@ -9,8 +9,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { TokenOffer } from "../queries/getTokenData";
-import type { TokenMarketData } from "~/types";
+import type { TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {

@@ -9,12 +9,14 @@ import TokenActionsMakeOffer from "./token-actions-make-offer";
 interface TokenActionsEmptyProps {
   collection: Collection;
   token: Token;
+  tokenId: string;
   isOwner: boolean;
 }
 
 export default function TokenActionsEmpty({
   collection,
   token,
+  tokenId,
   isOwner,
 }: TokenActionsEmptyProps) {
   return (
@@ -28,9 +30,17 @@ export default function TokenActionsEmpty({
         </p>
       </div>
       {isOwner ? (
-        <TokenActionsCreateListing collection={collection} token={token} />
+        <TokenActionsCreateListing
+          collection={collection}
+          token={token}
+          tokenId={tokenId}
+        />
       ) : (
-        <TokenActionsMakeOffer collection={collection} token={token} />
+        <TokenActionsMakeOffer
+          collection={collection}
+          token={token}
+          tokenId={tokenId}
+        />
       )}
     </div>
   );

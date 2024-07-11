@@ -54,16 +54,37 @@ export interface CollectionTokenApiResponse {
   result: Token;
 }
 
+interface TokenMetadataAttribute {
+  display_type?: string;
+  trait_type?: string;
+  value?: string;
+}
+
+export interface TokenMetadata {
+  image: string;
+  name: string;
+  animation_key?: string;
+  animation_url?: string;
+  image_key?: string;
+  attributes: TokenMetadataAttribute[];
+}
+
 export interface Token {
-  contract_address: string;
-  token_id: string;
+  collection_name: string;
+  last_price?: string;
+  metadata?: TokenMetadata;
   owner: string;
-  metadata?: {
-    normalized: {
-      image: string;
-      name: string;
-    };
-  };
+  price?: string;
+  top_offer?: string;
+}
+
+export interface TokenOffer {
+  expire_at: number;
+  floor_difference: number | null;
+  hash: string;
+  offer_id: number;
+  price: string;
+  source: string | null;
 }
 
 export interface TokenApiResponse {
@@ -100,10 +121,6 @@ export interface TokenMarketData {
   updated_timestamp: number;
 }
 
-export interface CollectionTokenMarketApiResponse {
-  data: TokenMarketData;
-}
-
 export interface ContractInfo {
   contract_address: string;
   contract_type: string;
@@ -123,4 +140,22 @@ export interface PricesResult {
 
 export interface SystemStatus {
   status: string;
+}
+
+export type TokenActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT";
+
+export interface TokenActivity {
+  activity_type: TokenActivityType;
+  from: string | null;
+  price: string | null;
+  time_stamp: number;
+  to: string | null;
+  transaction_hash: string | null;
 }

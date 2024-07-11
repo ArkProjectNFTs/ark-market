@@ -4,8 +4,7 @@ import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenOffer } from "../queries/getTokenData";
-import type { TokenMarketData } from "~/types";
+import type { TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {

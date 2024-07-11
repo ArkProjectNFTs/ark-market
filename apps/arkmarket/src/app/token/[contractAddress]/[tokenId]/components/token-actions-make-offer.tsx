@@ -45,11 +45,13 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 interface TokenActionsMakeOfferProps {
   collection: Collection;
   token: Token;
+  tokenId: string;
 }
 
 export default function TokenActionsMakeOffer({
   collection,
   token,
+  tokenId,
 }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
@@ -113,8 +115,8 @@ export default function TokenActionsMakeOffer({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config?.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
-      tokenId: BigInt(token.token_id),
+      tokenAddress: collection.contract_address,
+      tokenId: BigInt(tokenId),
       startAmount: parseEther(values.startAmount),
       endDate: moment().add(values.duration, "hours").unix(),
     };
@@ -156,6 +158,7 @@ export default function TokenActionsMakeOffer({
           <TokenActionsTokenOverview
             collection={collection}
             token={token}
+            tokenId={tokenId}
             amount={formattedStartAmount}
             small
           />

@@ -10,17 +10,21 @@ import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { Token, TokenMarketData } from "~/types";
+import type { Collection, Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
 
 interface TokenActionsAcceptBestOfferProps {
+  collection: Collection;
   token: Token;
+  tokenId: string;
   tokenMarketData: TokenMarketData | undefined;
   isAuction: boolean;
 }
 
 export default function TokenActionsAcceptBestOffer({
+  collection,
   token,
+  tokenId,
   tokenMarketData,
   isAuction,
 }: TokenActionsAcceptBestOfferProps) {
@@ -40,8 +44,8 @@ export default function TokenActionsAcceptBestOffer({
         await fulfillAuction({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
-          tokenId: token.token_id,
+          tokenAddress: collection.contract_address,
+          tokenId,
           orderHash: tokenMarketData.top_offer.order_hash,
           relatedOrderHash: tokenMarketData.listing.order_hash,
         });
@@ -49,8 +53,8 @@ export default function TokenActionsAcceptBestOffer({
         await fulfillOffer({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
-          tokenId: token.token_id,
+          tokenAddress: collection.contract_address,
+          tokenId,
           orderHash: tokenMarketData.top_offer.order_hash,
         });
       }

@@ -15,19 +15,19 @@ import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 
 interface TokenAboutProps {
   contractAddress: string;
+  token: Token;
   tokenId: string;
-  tokenInfos: TokenInfosApiResponse["data"];
 }
 
 export default function TokenAbout({
   className,
   contractAddress,
+  token,
   tokenId,
-  tokenInfos,
 }: PropsWithClassName<TokenAboutProps>) {
   const [open, setOpen] = useState(true);
   const collectionShortenedAddress = useMemo(() => {
@@ -35,8 +35,8 @@ export default function TokenAbout({
   }, [contractAddress]);
 
   const ownerShortenedAddress = useMemo(() => {
-    return `${tokenInfos.owner.slice(0, 4)}...${tokenInfos.owner.slice(-4)}`;
-  }, [tokenInfos.owner]);
+    return `${token.owner.slice(0, 4)}...${token.owner.slice(-4)}`;
+  }, [token.owner]);
 
   return (
     <Collapsible
@@ -60,9 +60,7 @@ export default function TokenAbout({
         <div className="flex items-center gap-5">
           <div className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"></div>
           <div>
-            <h4 className="text-xl font-semibold">
-              {tokenInfos.collection_name}
-            </h4>
+            <h4 className="text-xl font-semibold">{token.collection_name}</h4>
             <p className="mt-2 hidden text-sm lg:block">
               {`Everai is a pioneering web3 brand set to expand its universe powered
           by the collective creativity of its artistic partners and vibrant

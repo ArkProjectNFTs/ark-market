@@ -20,6 +20,7 @@ interface TokenActionsButtonsProps {
   isOwner: boolean;
   collection: Collection;
   token: Token;
+  tokenId: string;
   tokenMarketData: TokenMarketData;
 }
 
@@ -30,6 +31,7 @@ export default function TokenActionsButtons({
   isOwner,
   collection,
   token,
+  tokenId,
   tokenMarketData,
 }: TokenActionsButtonsProps) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -45,13 +47,17 @@ export default function TokenActionsButtons({
               <>
                 {hasOffers && (
                   <TokenActionsAcceptBestOffer
+                    collection={collection}
                     token={token}
+                    tokenId={tokenId}
                     tokenMarketData={tokenMarketData}
                     isAuction={isAuction}
                   />
                 )}
                 <TokenActionsCancelListing
+                  collection={collection}
                   token={token}
+                  tokenId={tokenId}
                   tokenMarketData={tokenMarketData}
                 />
               </>
@@ -59,6 +65,7 @@ export default function TokenActionsButtons({
               <TokenActionsCreateListing
                 collection={collection}
                 token={token}
+                tokenId={tokenId}
               />
             )}
           </>
@@ -69,7 +76,9 @@ export default function TokenActionsButtons({
                 {isAuction ? (
                   <>
                     <TokenActionsMakeBid
+                      collection={collection}
                       token={token}
+                      tokenId={tokenId}
                       tokenMarketData={tokenMarketData}
                     />
                   </>
@@ -77,12 +86,17 @@ export default function TokenActionsButtons({
                   <TokenActionsBuyNow
                     collection={collection}
                     token={token}
+                    tokenId={tokenId}
                     tokenMarketData={tokenMarketData}
                   />
                 )}
               </>
             )}
-            <TokenActionsMakeOffer collection={collection} token={token} />
+            <TokenActionsMakeOffer
+              collection={collection}
+              token={token}
+              tokenId={tokenId}
+            />
           </>
         )}
       </div>

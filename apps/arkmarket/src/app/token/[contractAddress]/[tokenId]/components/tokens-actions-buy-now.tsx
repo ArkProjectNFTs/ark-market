@@ -18,12 +18,14 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 interface TokenActionsBuyNowProps {
   collection: Collection;
   token: Token;
+  tokenId: string;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsBuyNow({
   collection,
   token,
+  tokenId,
   tokenMarketData,
 }: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +38,8 @@ export default function TokenActionsBuyNow({
     await fulfillListing({
       starknetAccount: account,
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
-      tokenId: token.token_id,
+      tokenAddress: collection.contract_address,
+      tokenId,
       orderHash: tokenMarketData.listing.order_hash,
       startAmount: tokenMarketData.listing.start_amount,
     });
@@ -88,6 +90,7 @@ export default function TokenActionsBuyNow({
             <TokenActionsTokenOverview
               collection={collection}
               token={token}
+              tokenId={tokenId}
               amount={formatEther(
                 BigInt(tokenMarketData.listing.start_amount ?? 0),
               )}

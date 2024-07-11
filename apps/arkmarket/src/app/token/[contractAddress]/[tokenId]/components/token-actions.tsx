@@ -7,7 +7,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
 import type { Collection, Token, TokenMarketData } from "~/types";
-import getCollectionTokenMarket from "~/lib/getCollectionTokenMarket";
+import getTokenMarketData from "~/lib/getTokenMarketData";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
 import TokenActionsHeader from "./token-actions-header";
@@ -16,13 +16,15 @@ import TokenActionsPrice from "./token-actions-price";
 interface TokenActionsProps {
   collection: Collection;
   token: Token;
-  tokenMarketData: TokenMarketData | null;
+  tokenId: string;
+  tokenMarketData?: TokenMarketData;
   className?: PropsWithClassName["className"];
 }
 
 export default function TokenActions({
   collection,
   token,
+  tokenId,
   tokenMarketData,
   className,
 }: TokenActionsProps) {
@@ -30,8 +32,12 @@ export default function TokenActions({
   const isOwner =
     !!account.address && areAddressesEqual(account.address, token.owner);
   const { data } = useQuery(
-    ["tokenMarketData", token.contract_address, token.token_id],
-    () => getCollectionTokenMarket(token.contract_address, token.token_id),
+    ["tokenMarketData", collection.contract_address, tokenId],
+    () =>
+      getTokenMarketData({
+        contractAddress: collection.contract_address,
+        tokenId,
+      }),
     {
       refetchInterval: 10_000,
       initialData: tokenMarketData,
@@ -43,6 +49,7 @@ export default function TokenActions({
       <TokenActionsEmpty
         collection={collection}
         token={token}
+        tokenId={tokenId}
         isOwner={isOwner}
       />
     );
@@ -73,6 +80,7 @@ export default function TokenActions({
         isOwner={isOwner}
         collection={collection}
         token={token}
+        tokenId={tokenId}
         tokenMarketData={data}
       />
     </div>

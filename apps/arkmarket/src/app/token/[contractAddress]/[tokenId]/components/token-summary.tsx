@@ -5,20 +5,20 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
 
 interface TokenSummaryProps {
   contractAddress: string;
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
   tokenId: string;
 }
 
 export default function TokenSummary({
   className,
   contractAddress,
-  tokenInfos,
+  token,
   tokenId,
 }: PropsWithClassName<TokenSummaryProps>) {
   return (
@@ -29,14 +29,9 @@ export default function TokenSummary({
       )}
     >
       <Media
-        src={tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image}
-        mediaKey={
-          tokenInfos.metadata?.animation_key ?? tokenInfos.metadata?.image_key
-        }
-        alt={
-          tokenInfos.metadata?.name ??
-          `${tokenInfos.collection_name} #${tokenId}`
-        }
+        src={token.metadata?.animation_url ?? token.metadata?.image}
+        mediaKey={token.metadata?.animation_key ?? token.metadata?.image_key}
+        alt={token.metadata?.name ?? `${token.collection_name} #${tokenId}`}
         className="aspect-square w-full rounded-lg object-contain"
         height={1000}
         width={1000}
@@ -48,7 +43,7 @@ export default function TokenSummary({
             className={focusableStyles}
           >
             <h3 className="text-lg text-muted-foreground">
-              {tokenInfos.collection_name}
+              {token.collection_name}
             </h3>
           </Link>
           <VerifiedIcon className="size-6 text-background" />
@@ -60,7 +55,7 @@ export default function TokenSummary({
               ellipsableStyles,
             )}
           >
-            {tokenInfos.metadata?.name}
+            {token.metadata?.name}
           </p>
           <div className="flex items-center gap-6">
             <Share2 className="size-6 text-muted-foreground" />

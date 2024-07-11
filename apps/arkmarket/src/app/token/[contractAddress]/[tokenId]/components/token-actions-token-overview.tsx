@@ -3,11 +3,12 @@ import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { Collection, Token } from "~/types";
-import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
+import Media from "~/components/media";
 
 interface tokenActionsTokenOverviewProps {
   collection: Collection;
   token: Token;
+  tokenId: string;
   amount: string;
   small?: boolean;
 }
@@ -15,6 +16,7 @@ interface tokenActionsTokenOverviewProps {
 export default function TokenActionsTokenOverview({
   collection,
   token,
+  tokenId,
   amount,
   small,
 }: tokenActionsTokenOverviewProps) {
@@ -26,10 +28,17 @@ export default function TokenActionsTokenOverview({
           small ? "size-16" : "size-24",
         )}
       >
-        <TokenMedia token={token} />
+        <Media
+          src={token.metadata?.image}
+          mediaKey={token.metadata?.image_key}
+          alt={token.metadata?.name ?? "Empty"}
+          className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
+          // height={viewType === "large-grid" ? 540 : 340}
+          // width={viewType === "large-grid" ? 540 : 340}
+        />
       </div>
       <div className="flex flex-col justify-between">
-        <div className="text-xl font-semibold">#{token.token_id}</div>
+        <div className="text-xl font-semibold">#{tokenId}</div>
         <div className="flex items-center gap-2">
           <div className="text-lg font-semibold text-muted-foreground">
             {collection.name || "Unknown"}
