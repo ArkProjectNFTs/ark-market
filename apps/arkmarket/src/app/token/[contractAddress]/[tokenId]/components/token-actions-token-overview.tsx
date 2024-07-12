@@ -2,21 +2,17 @@ import { cn } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
-import type { Collection, Token } from "~/types";
+import type { Token } from "~/types";
 import Media from "~/components/media";
 
 interface tokenActionsTokenOverviewProps {
-  collection: Collection;
   token: Token;
-  tokenId: string;
   amount: string;
   small?: boolean;
 }
 
 export default function TokenActionsTokenOverview({
-  collection,
   token,
-  tokenId,
   amount,
   small,
 }: tokenActionsTokenOverviewProps) {
@@ -38,10 +34,10 @@ export default function TokenActionsTokenOverview({
         />
       </div>
       <div className="flex flex-col justify-between">
-        <div className="text-xl font-semibold">#{tokenId}</div>
+        <div className="text-xl font-semibold">#{token.token_id}</div>
         <div className="flex items-center gap-2">
           <div className="text-lg font-semibold text-muted-foreground">
-            {collection.name || "Unknown"}
+            {token.collection_name || "Unknown"}
           </div>
           <VerifiedIcon className="size-6 text-background" />
         </div>

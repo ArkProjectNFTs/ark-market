@@ -10,16 +10,12 @@ import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
 
 interface TokenSummaryProps {
-  contractAddress: string;
   token: Token;
-  tokenId: string;
 }
 
 export default function TokenSummary({
   className,
-  contractAddress,
   token,
-  tokenId,
 }: PropsWithClassName<TokenSummaryProps>) {
   return (
     <div
@@ -31,7 +27,9 @@ export default function TokenSummary({
       <Media
         src={token.metadata?.animation_url ?? token.metadata?.image}
         mediaKey={token.metadata?.animation_key ?? token.metadata?.image_key}
-        alt={token.metadata?.name ?? `${token.collection_name} #${tokenId}`}
+        alt={
+          token.metadata?.name ?? `${token.collection_name} #${token.token_id}`
+        }
         className="aspect-square w-full rounded-lg object-contain"
         height={1000}
         width={1000}
@@ -39,7 +37,7 @@ export default function TokenSummary({
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-1.5">
           <Link
-            href={`/collection/${contractAddress}`}
+            href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
             <h3 className="text-lg text-muted-foreground">
@@ -61,7 +59,7 @@ export default function TokenSummary({
             <Share2 className="size-6 text-muted-foreground" />
             <CopyButton
               className="size-6 text-muted-foreground"
-              textToCopy={contractAddress}
+              textToCopy={token.collection_address}
             />
             <RefreshCw className="size-6 text-muted-foreground" />
           </div>

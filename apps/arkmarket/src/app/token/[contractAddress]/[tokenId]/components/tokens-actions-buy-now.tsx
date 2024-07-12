@@ -11,21 +11,17 @@ import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Collection, Token, TokenMarketData } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
-  collection: Collection;
   token: Token;
-  tokenId: string;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsBuyNow({
-  collection,
   token,
-  tokenId,
   tokenMarketData,
 }: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,8 +34,8 @@ export default function TokenActionsBuyNow({
     await fulfillListing({
       starknetAccount: account,
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: collection.contract_address,
-      tokenId,
+      tokenAddress: token.collection_address,
+      tokenId: token.token_id,
       orderHash: tokenMarketData.listing.order_hash,
       startAmount: tokenMarketData.listing.start_amount,
     });
@@ -88,9 +84,7 @@ export default function TokenActionsBuyNow({
             </div>
 
             <TokenActionsTokenOverview
-              collection={collection}
               token={token}
-              tokenId={tokenId}
               amount={formatEther(
                 BigInt(tokenMarketData.listing.start_amount ?? 0),
               )}

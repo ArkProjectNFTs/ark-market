@@ -71,11 +71,13 @@ export interface TokenMetadata {
 
 export interface Token {
   collection_name: string;
+  collection_address: string;
   last_price?: string;
   metadata?: TokenMetadata;
   owner: string;
   price?: string;
   top_offer?: string;
+  token_id: string;
 }
 
 export interface TokenOffer {

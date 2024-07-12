@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
-import type { Collection, Token, TokenMarketData } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import getTokenMarketData from "~/lib/getTokenMarketData";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
@@ -14,17 +14,13 @@ import TokenActionsHeader from "./token-actions-header";
 import TokenActionsPrice from "./token-actions-price";
 
 interface TokenActionsProps {
-  collection: Collection;
   token: Token;
-  tokenId: string;
   tokenMarketData?: TokenMarketData;
   className?: PropsWithClassName["className"];
 }
 
 export default function TokenActions({
-  collection,
   token,
-  tokenId,
   tokenMarketData,
   className,
 }: TokenActionsProps) {
@@ -32,11 +28,11 @@ export default function TokenActions({
   const isOwner =
     !!account.address && areAddressesEqual(account.address, token.owner);
   const { data } = useQuery(
-    ["tokenMarketData", collection.contract_address, tokenId],
+    ["tokenMarketData", token.collection_address, token.token_id],
     () =>
       getTokenMarketData({
-        contractAddress: collection.contract_address,
-        tokenId,
+        contractAddress: token.collection_address,
+        tokenId: token.token_id,
       }),
     {
       refetchInterval: 10_000,
@@ -45,14 +41,7 @@ export default function TokenActions({
   );
 
   if (!data || (!data.has_offer && !data.is_listed)) {
-    return (
-      <TokenActionsEmpty
-        collection={collection}
-        token={token}
-        tokenId={tokenId}
-        isOwner={isOwner}
-      />
-    );
+    return <TokenActionsEmpty token={token} isOwner={isOwner} />;
   }
 
   return (
@@ -78,9 +67,7 @@ export default function TokenActions({
         isAuction={data.listing.is_auction}
         hasOffers={data.has_offer}
         isOwner={isOwner}
-        collection={collection}
         token={token}
-        tokenId={tokenId}
         tokenMarketData={data}
       />
     </div>

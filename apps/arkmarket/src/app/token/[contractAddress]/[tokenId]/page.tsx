@@ -40,17 +40,13 @@ export default async function TokenPage({
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8">
         <TokenSummary
           className="top-[calc(var(--site-header-height)+2rem)] h-fit lg:sticky"
-          contractAddress={contractAddress}
           token={token}
-          tokenId={tokenId}
         />
         <div className="flex flex-col lg:gap-8">
           <div className="flex flex-col-reverse gap-5 lg:flex-col lg:gap-8">
             <TokenStats token={token} className="mb-5 lg:mb-0" />
             <TokenActions
-              collection={collection}
               token={token}
-              tokenId={tokenId}
               tokenMarketData={tokenMarketData}
               className="-mx-5 lg:mx-0"
             />

@@ -2,21 +2,17 @@
 
 import { Meh } from "lucide-react";
 
-import type { Collection, Token } from "~/types";
+import type { Token } from "~/types";
 import { TokenActionsCreateListing } from "./token-actions-create-listing";
 import TokenActionsMakeOffer from "./token-actions-make-offer";
 
 interface TokenActionsEmptyProps {
-  collection: Collection;
   token: Token;
-  tokenId: string;
   isOwner: boolean;
 }
 
 export default function TokenActionsEmpty({
-  collection,
   token,
-  tokenId,
   isOwner,
 }: TokenActionsEmptyProps) {
   return (
@@ -30,17 +26,9 @@ export default function TokenActionsEmpty({
         </p>
       </div>
       {isOwner ? (
-        <TokenActionsCreateListing
-          collection={collection}
-          token={token}
-          tokenId={tokenId}
-        />
+        <TokenActionsCreateListing token={token} />
       ) : (
-        <TokenActionsMakeOffer
-          collection={collection}
-          token={token}
-          tokenId={tokenId}
-        />
+        <TokenActionsMakeOffer token={token} />
       )}
     </div>
   );
