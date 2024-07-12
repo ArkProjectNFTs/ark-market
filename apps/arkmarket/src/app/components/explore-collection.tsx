@@ -36,16 +36,22 @@ export default function ExploreCollection() {
           .slice(0, exploreCollectionsToShow)
           .map((collection, index) => {
             return (
-              <Link href={`/collection/${collection.address}`} key={index}>
+              <Link
+                href={`/collection/${collection.address}`}
+                key={index}
+                className="group"
+              >
                 <div>
                   {collection.banner_image !== undefined ? (
-                    <Image
-                      src={collection.banner_image}
-                      className="aspect-video rounded-lg"
-                      alt={collection.name}
-                      height={512}
-                      width={932}
-                    />
+                    <div className="aspect-video w-full overflow-hidden rounded-lg">
+                      <Image
+                        src={collection.banner_image}
+                        className="aspect-video transition-transform group-hover:scale-110"
+                        alt={collection.name}
+                        height={512}
+                        width={932}
+                      />
+                    </div>
                   ) : (
                     <div className="aspect-video rounded-lg bg-secondary" />
                   )}
