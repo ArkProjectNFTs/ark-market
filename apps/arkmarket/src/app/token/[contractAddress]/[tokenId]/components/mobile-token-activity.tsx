@@ -5,7 +5,7 @@ import { shortAddress, timeSince } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenActivity } from "../queries/getTokenData";
+import type { TokenActivity } from "~/types";
 import { activityTypeToItem } from "./desktop-token-activity";
 
 interface MobileTokenActivityProps {

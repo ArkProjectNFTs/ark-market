@@ -11,18 +11,16 @@ import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Collection, Token, TokenMarketData } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
-  collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenActionsBuyNow({
-  collection,
   token,
   tokenMarketData,
 }: TokenActionsBuyNowProps) {
@@ -36,10 +34,10 @@ export default function TokenActionsBuyNow({
     await fulfillListing({
       starknetAccount: account,
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: token.token_id,
-      orderHash: tokenMarketData.order_hash,
-      startAmount: tokenMarketData.start_amount,
+      orderHash: tokenMarketData.listing.order_hash,
+      startAmount: tokenMarketData.listing.start_amount,
     });
   };
 
@@ -54,7 +52,7 @@ export default function TokenActionsBuyNow({
     !account ||
     isOwner ||
     !tokenMarketData.is_listed ||
-    tokenMarketData.status === "FULFILLED"
+    tokenMarketData.buy_in_progress
   ) {
     return null;
   }
@@ -86,9 +84,10 @@ export default function TokenActionsBuyNow({
             </div>
 
             <TokenActionsTokenOverview
-              collection={collection}
               token={token}
-              amount={formatEther(BigInt(tokenMarketData.start_amount))}
+              amount={formatEther(
+                BigInt(tokenMarketData.listing.start_amount ?? 0),
+              )}
             />
 
             {isSuccess ? (
@@ -123,7 +122,8 @@ export default function TokenActionsBuyNow({
         onClick={handeClick}
       >
         <ShoppingBag size={24} className="absolute left-4" />
-        Buy now for {formatEther(BigInt(tokenMarketData.start_amount))} ETH
+        Buy now for{" "}
+        {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
       </Button>
     </>
   );

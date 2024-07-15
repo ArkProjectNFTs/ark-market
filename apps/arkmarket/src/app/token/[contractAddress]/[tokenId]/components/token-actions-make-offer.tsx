@@ -36,19 +36,17 @@ import {
 } from "@ark-market/ui/select";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Collection, Token } from "~/types";
+import type { Token } from "~/types";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import formatAmount from "~/lib/formatAmount";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
-  collection: Collection;
   token: Token;
 }
 
 export default function TokenActionsMakeOffer({
-  collection,
   token,
 }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -113,7 +111,7 @@ export default function TokenActionsMakeOffer({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config?.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endDate: moment().add(values.duration, "hours").unix(),
@@ -154,7 +152,6 @@ export default function TokenActionsMakeOffer({
         <div className="flex flex-col gap-6">
           <div className="text-center text-xl font-semibold">Make an offer</div>
           <TokenActionsTokenOverview
-            collection={collection}
             token={token}
             amount={formattedStartAmount}
             small

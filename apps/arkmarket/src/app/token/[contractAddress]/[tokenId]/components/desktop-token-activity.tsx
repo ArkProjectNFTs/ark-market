@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { TokenActivity } from "../queries/getTokenData";
+import type { TokenActivity } from "~/types";
 
 export const activityTypeToItem = new Map([
   ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale in progress" }],

@@ -6,9 +6,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
-import type { TokenActivityApiResponse } from "../queries/getTokenData";
+import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getTokenActivity } from "../queries/getTokenData";
+import getTokenActivity from "~/lib/getTokenActivity";
 import DesktopTokenActivity from "./desktop-token-activity";
 import MobileTokenActivity from "./mobile-token-activity";
 
@@ -41,7 +41,7 @@ export default function TokenActivity({
 
   const totalCount = infiniteData?.pages[0]?.count ?? 0;
   const tokenActivity = useMemo(
-    () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
 
