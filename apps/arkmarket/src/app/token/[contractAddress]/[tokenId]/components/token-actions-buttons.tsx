@@ -69,19 +69,15 @@ export default function TokenActionsButtons({
                 ) : (
                   <>
                     <TokenActionsBuyNow
-                      collection={collection}
                       token={token}
                       tokenMarketData={tokenMarketData}
                     />
-                    <TokenActionsMakeOffer
-                      collection={collection}
-                      token={token}
-                    />
+                    <TokenActionsMakeOffer token={token} />
                   </>
                 )}
               </>
             ) : (
-              <TokenActionsMakeOffer collection={collection} token={token} />
+              <TokenActionsMakeOffer token={token} />
             )}
           </>
         )}

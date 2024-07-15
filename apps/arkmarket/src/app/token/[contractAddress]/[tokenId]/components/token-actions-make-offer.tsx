@@ -46,10 +46,7 @@ interface TokenActionsMakeOfferProps {
   token: Token;
 }
 
-function TokenActionsMakeOffer({
-  collection,
-  token,
-}: TokenActionsMakeOfferProps) {
+function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
