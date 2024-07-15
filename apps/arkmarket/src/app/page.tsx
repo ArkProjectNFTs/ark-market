@@ -3,6 +3,7 @@ import { Button } from "@ark-market/ui/button";
 import ExploreCategory from "./components/explore-category";
 import ExploreCollection from "./components/explore-collection";
 import LatestDrop from "./components/latest-drop";
+import LatestSales from "./components/latest-sales";
 import LiveAuctions from "./components/live-auctions";
 import MainCarousel from "./components/main-carousel";
 import TrendingNow from "./components/trending-now";
@@ -10,13 +11,14 @@ import TrendingNow from "./components/trending-now";
 export default function HomePage() {
   return (
     <main>
-      <div className="mx-auto mt-8 flex max-w-[120rem] flex-col gap-16 px-8 pb-8">
+      <div className="mx-auto mt-8 flex max-w-[120rem] flex-col gap-16 px-5 pb-8 md:px-8">
         <MainCarousel />
         <ExploreCategory />
         <LatestDrop />
         <TrendingNow />
         <ExploreCollection />
         <LiveAuctions />
+        <LatestSales />
 
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="flex w-full flex-col gap-8 rounded-lg bg-card p-8 md:flex-row md:items-center">

@@ -35,17 +35,23 @@ export default function LiveAuctions() {
                 key={index}
                 className="basis-[calc(100%-3rem)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
               >
-                <Link href="" key={index} className={focusableStyles}>
+                <Link
+                  href=""
+                  key={index}
+                  className={cn("group", focusableStyles)}
+                >
                   <Card className="overflow-hidden border-none">
                     <CardContent className="p-0">
                       {collection.image ? (
-                        <Image
-                          src={collection.image}
-                          height={500}
-                          width={500}
-                          alt={collection.name}
-                          className="aspect-square w-full object-cover"
-                        />
+                        <div className="aspect-square w-full overflow-hidden">
+                          <Image
+                            src={collection.image}
+                            height={500}
+                            width={500}
+                            alt={collection.name}
+                            className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
+                          />
+                        </div>
                       ) : (
                         <div className="aspect-square bg-secondary" />
                       )}
