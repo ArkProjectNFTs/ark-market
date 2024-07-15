@@ -13,6 +13,7 @@ import { toast } from "@ark-market/ui/toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
+import useConnectWallet from "~/hooks/useConnectWallet";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
@@ -29,8 +30,9 @@ export default function TokenActionsBuyNow({
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(token.owner, address);
 
-  const handeClick = async () => {
+  const buy = async () => {
     setIsOpen(true);
+
     await fulfillListing({
       starknetAccount: account,
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
@@ -41,6 +43,13 @@ export default function TokenActionsBuyNow({
     });
   };
 
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      void buy();
+    },
+  });
+
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
@@ -49,7 +58,6 @@ export default function TokenActionsBuyNow({
   }, [status]);
 
   if (
-    !account ||
     isOwner ||
     !tokenMarketData.is_listed ||
     tokenMarketData.buy_in_progress
@@ -119,7 +127,13 @@ export default function TokenActionsBuyNow({
         className="relative w-full"
         size="xxl"
         disabled={status === "loading"}
-        onClick={handeClick}
+        onClick={(e) => {
+          ensureConnect(e);
+
+          if (account) {
+            void buy();
+          }
+        }}
       >
         <ShoppingBag size={24} className="absolute left-4" />
         Buy now for{" "}

@@ -11,6 +11,7 @@ import "~/app/globals.css";
 
 import type { PropsWithChildren } from "react";
 
+import ConnectWalletDialog from "~/components/connect-wallet-dialog";
 import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
@@ -70,9 +71,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
             {children}
             <SpeedInsights />
           </div>
-          <Toaster richColors />
           <Footer />
           <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
+          <Toaster richColors />
+          <ConnectWalletDialog />
         </Providers>
       </body>
     </html>
