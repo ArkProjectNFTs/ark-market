@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowLeftRight,
   CircleDot,
@@ -84,10 +85,22 @@ export default function DesktopTokenActivity({
                   )}
                 </TableCell>
                 <TableCell>
-                  {activity.from ? shortAddress(activity.from) : "_"}
+                  {activity.from ? (
+                    <Link href={`/wallet/${activity.from}`}>
+                      {shortAddress(activity.from)}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell>
-                  {activity.to ? shortAddress(activity.to) : "_"}
+                  {activity.to ? (
+                    <Link href={`/wallet/${activity.to}`}>
+                      {shortAddress(activity.to)}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell className="text-end">
                   {timeSince(activity.time_stamp)}

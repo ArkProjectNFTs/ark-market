@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
@@ -70,14 +71,16 @@ export default function TokenStats({
             className="size-6 rounded-full"
           />
 
-          <p
-            className={cn(
-              "text-sm font-medium text-muted-foreground",
-              ellipsableStyles,
-            )}
-          >
-            {shortenedAddress}
-          </p>
+          <Link href={`/wallet/${tokenInfos.owner}`}>
+            <p
+              className={cn(
+                "text-sm font-medium text-muted-foreground",
+                ellipsableStyles,
+              )}
+            >
+              {shortenedAddress}
+            </p>
+          </Link>
         </div>
       </div>
     </div>
