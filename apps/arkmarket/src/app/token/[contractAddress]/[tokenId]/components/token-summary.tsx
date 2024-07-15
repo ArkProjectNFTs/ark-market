@@ -8,6 +8,7 @@ import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import type { TokenInfosApiResponse } from "../queries/getTokenData";
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
+import TokenSummaryMobileActions from "./token-summary-mobile-actions";
 
 interface TokenSummaryProps {
   contractAddress: string;
@@ -62,13 +63,17 @@ export default function TokenSummary({
           >
             {tokenInfos.metadata?.name}
           </p>
-          <div className="flex items-center gap-6">
+
+          <div className="hidden items-center gap-6 lg:flex">
             <Share2 className="size-6 text-muted-foreground" />
             <CopyButton
               className="size-6 text-muted-foreground"
               textToCopy={contractAddress}
             />
             <RefreshCw className="size-6 text-muted-foreground" />
+          </div>
+          <div className="lg:hidden">
+            <TokenSummaryMobileActions textToCopy={contractAddress} />
           </div>
         </div>
       </div>
