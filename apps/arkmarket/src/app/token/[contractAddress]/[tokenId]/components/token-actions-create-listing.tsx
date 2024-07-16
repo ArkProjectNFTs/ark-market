@@ -35,18 +35,16 @@ import {
 } from "@ark-market/ui/select";
 import { toast } from "@ark-market/ui/toast";
 
-import type { Collection, Token } from "~/types";
+import type { Token } from "~/types";
 import { env } from "~/env";
 import formatAmount from "~/lib/formatAmount";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
-  collection: Collection;
   token: Token;
 }
 
 export function TokenActionsCreateListing({
-  collection,
   token,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
@@ -138,7 +136,7 @@ export function TokenActionsCreateListing({
 
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
@@ -150,7 +148,7 @@ export function TokenActionsCreateListing({
         await createAuction({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -160,7 +158,7 @@ export function TokenActionsCreateListing({
         await createListing({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -194,7 +192,6 @@ export function TokenActionsCreateListing({
         <div className="flex flex-col gap-8">
           <div className="text-center text-xl font-semibold">List for sale</div>
           <TokenActionsTokenOverview
-            collection={collection}
             token={token}
             amount={formattedStartAmount}
             small

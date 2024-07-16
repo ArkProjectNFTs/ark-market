@@ -12,7 +12,7 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-import type { TokenMetadata } from "../queries/getTokenData";
+import type { TokenMetadata } from "~/types";
 
 interface TokenTraitsProps {
   tokenAttributes: TokenMetadata["attributes"];

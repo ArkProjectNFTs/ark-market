@@ -28,7 +28,7 @@ import {
 import { Input } from "@ark-market/ui/input";
 
 import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
+import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
 import { env } from "~/env";
 
 interface TokenActionsMakeBidProps {
@@ -51,7 +51,9 @@ export default function TokenActionsMakeBid({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      startAmount: formatEther(BigInt(tokenMarketData.start_amount)),
+      startAmount: formatEther(
+        BigInt(tokenMarketData.listing.start_amount ?? 0),
+      ),
     },
   });
 
@@ -80,7 +82,7 @@ export default function TokenActionsMakeBid({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
     };
@@ -96,8 +98,10 @@ export default function TokenActionsMakeBid({
   }
 
   const isDisabled = form.formState.isSubmitting || status === "loading";
-  const price = formatEther(BigInt(tokenMarketData.start_amount));
-  const reservePrice = formatEther(BigInt(tokenMarketData.end_amount));
+  const price = formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0));
+  const reservePrice = formatEther(
+    BigInt(tokenMarketData.listing.end_amount ?? 0),
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

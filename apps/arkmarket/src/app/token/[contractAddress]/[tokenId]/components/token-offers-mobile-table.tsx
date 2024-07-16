@@ -4,8 +4,7 @@ import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenOffer } from "../queries/getTokenData";
-import type { TokenMarketData } from "~/types";
+import type { TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
@@ -31,7 +30,7 @@ interface TokenOffersMobileTableProps {
   tokenContractAdress: string;
   tokenId: string;
   owner: string;
-  tokenMarketData: TokenMarketData | null;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersMobileTable({
@@ -63,8 +62,8 @@ export default function TokenOffersMobileTable({
                   tokenContractAddress={tokenContractAdress}
                   tokenId={tokenId}
                   offerAmount={offer.price}
-                  tokenIsListed={tokenMarketData?.is_listed ?? false}
-                  tokenListingOrderHash={tokenMarketData?.order_hash ?? null}
+                  tokenIsListed={tokenMarketData.is_listed}
+                  tokenListingOrderHash={tokenMarketData.listing.order_hash}
                 />
               </div>
 

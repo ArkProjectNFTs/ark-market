@@ -2,26 +2,27 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
+import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 import ProfilePicture from "~/components/profile-picture";
 
 interface TokenStatsProps {
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
 }
 
 export default function TokenStats({
   className,
-  tokenInfos,
+  token,
 }: PropsWithClassName<TokenStatsProps>) {
   const shortenedAddress = useMemo(() => {
-    return `${tokenInfos.owner.slice(0, 7)}...${tokenInfos.owner.slice(-4)}`;
-  }, [tokenInfos.owner]);
+    return `${token.owner.slice(0, 7)}...${token.owner.slice(-4)}`;
+  }, [token.owner]);
 
   return (
     <div
@@ -57,7 +58,7 @@ export default function TokenStats({
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatUnits(BigInt(tokenInfos.top_offer ?? "0"), 18)} ETH
+            {formatEther(BigInt(token.top_offer ?? 0))} ETH
           </p>
         </div>
       </div>
@@ -67,7 +68,7 @@ export default function TokenStats({
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
           <ProfilePicture
-            address={tokenInfos.owner}
+            address={token.owner}
             className="size-6 rounded-full"
           />
 

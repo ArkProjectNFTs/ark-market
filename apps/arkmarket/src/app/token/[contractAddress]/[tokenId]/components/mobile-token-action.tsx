@@ -1,22 +1,23 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
+import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, formatUnits } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 
 const MotionButton = motion(Button);
 
 interface MobileTokenActionProps {
   show: boolean;
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
 }
 
 export default function MobileTokenAction({
   show,
-  tokenInfos,
+  token,
   className,
 }: PropsWithClassName<MobileTokenActionProps>) {
   return (
@@ -30,7 +31,7 @@ export default function MobileTokenAction({
           className={cn("fixed bottom-5 left-5 right-5 z-50", className)}
         >
           <ShoppingBag size={24} />
-          Buy now for {formatUnits(BigInt(tokenInfos.price ?? "0"), 18)} ETH
+          Buy now for {formatEther(BigInt(token.price ?? "0"))} ETH
         </MotionButton>
       )}
     </AnimatePresence>
