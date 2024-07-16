@@ -31,7 +31,7 @@ export default function TokenActionsTokenOverview({
       <div className="flex flex-col justify-between">
         <div className="text-xl font-semibold">#{token.token_id}</div>
         <div className="flex items-center gap-2">
-          <div className="text-lg font-semibold text-muted-foreground">
+          <div className="text-sm font-semibold text-muted-foreground lg:text-lg">
             {collection.name || "Unknown"}
           </div>
           <VerifiedIcon className="size-6 text-background" />

@@ -317,6 +317,20 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
+              <div className="mt-8 text-xl font-semibold">
+                <div className="flex items-center justify-between">
+                  <p>Earning details</p>
+                  <p>--- ETH</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-sm font-medium text-muted-foreground">
+                  <p>Arkmarket fees 2%</p>
+                  <p>-- ETH</p>
+                </div>
+                <div className="mt-0.5 flex items-center justify-between text-sm font-medium text-muted-foreground">
+                  <p>Creator royalties 2%</p>
+                  <p>-- ETH</p>
+                </div>
+              </div>
               <Button
                 type="submit"
                 className="mx-auto !mt-8 w-full px-10 lg:w-auto"

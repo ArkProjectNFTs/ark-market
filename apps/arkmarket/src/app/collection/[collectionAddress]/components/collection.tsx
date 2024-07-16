@@ -52,7 +52,6 @@ export default function Collection({
     refetchInterval: false,
     queryFn: () => getCollectionInfos({ collectionAddress }),
   });
-  console.log(collectionInfos);
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 

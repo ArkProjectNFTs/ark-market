@@ -65,7 +65,7 @@ export default function TokenActionsBuyNow({
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
-          className="justify-normal p-6 lg:justify-center"
+          className="justify-normal lg:justify-center"
           onInteractOutside={(e) => {
             e.preventDefault();
           }}
@@ -100,11 +100,11 @@ export default function TokenActionsBuyNow({
                 Continue to explore NFTs
               </Button>
             ) : (
-              <div className="flex flex-col items-center gap-6 rounded-md bg-card p-6 lg:flex-row lg:p-4">
+              <div className="flex flex-col items-center gap-5 rounded-md bg-card p-6 lg:flex-row lg:p-4">
                 <LoaderCircle className="size-10 animate-spin" />
 
                 <div className="text-center lg:text-left">
-                  <div className="text-xl font-semibold">
+                  <div className="text-lg font-semibold">
                     Checking your payment
                   </div>
                   <div className="text-sm">

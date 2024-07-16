@@ -5,10 +5,10 @@ import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
 import { LoaderCircle, Tag } from "lucide-react";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
-import moment from "moment";
 
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
@@ -152,6 +152,7 @@ export default function TokenActionsMakeOffer({
       <DialogContent>
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
+          <div className="mx-auto size-20 rounded-full bg-secondary" />
           <div className="text-center text-xl font-semibold">Make an offer</div>
           <TokenActionsTokenOverview
             collection={collection}
@@ -204,9 +205,7 @@ export default function TokenActionsMakeOffer({
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
                         <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="719">
-                          1 month
-                        </SelectItem>
+                        <SelectItem value="719">1 month</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
