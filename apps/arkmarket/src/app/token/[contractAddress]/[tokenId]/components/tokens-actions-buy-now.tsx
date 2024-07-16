@@ -99,7 +99,7 @@ export default function TokenActionsBuyNow({
                 Continue to explore NFTs
               </Button>
             ) : (
-              <div className="flex flex-col items-center gap-5 rounded-md bg-card p-6 lg:flex-row lg:p-4">
+              <div className="flex flex-col items-center gap-4 rounded-md bg-card p-5 lg:flex-row lg:gap-5 lg:p-4">
                 <LoaderCircle className="size-10 animate-spin" />
 
                 <div className="text-center lg:text-left">

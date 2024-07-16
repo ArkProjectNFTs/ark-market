@@ -17,39 +17,36 @@ export default function TokenActionsTokenOverview({
   small,
 }: tokenActionsTokenOverviewProps) {
   return (
-    <div className="flex space-x-4">
-      <div
-        className={cn(
-          "size-24 overflow-hidden rounded-xl",
-          small ? "size-16" : "size-24",
-        )}
-      >
+    <div className="flex gap-4">
+      <div className="flex-shrink-0">
         <Media
           src={token.metadata?.image}
           mediaKey={token.metadata?.image_key}
           alt={token.metadata?.name ?? "Empty"}
-          className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
-          // height={viewType === "large-grid" ? 540 : 340}
-          // width={viewType === "large-grid" ? 540 : 340}
+          className={cn(
+            "aspect-square w-full flex-shrink-0 object-contain transition-transform group-hover:scale-110",
+            "overflow-hidden rounded-xl",
+            small ? "size-16" : "size-14 sm:size-24",
+          )}
         />
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col items-start justify-between">
         <div className="text-xl font-semibold">#{token.token_id}</div>
         <div className="flex items-center gap-2">
-          <div className="text-sm font-semibold text-muted-foreground lg:text-lg">
+          <div className="text-sm font-semibold text-muted-foreground sm:text-lg">
             {token.collection_name || "Unknown"}
           </div>
           <VerifiedIcon className="size-6 text-background" />
         </div>
         {small ?? (
-          <div className="flex h-6 items-center justify-center rounded-2xl bg-secondary text-[12px] text-secondary-foreground">
+          <div className="flex h-6 items-center justify-center rounded-full bg-secondary px-2 text-xs font-medium text-secondary-foreground">
             Royalties 5%
           </div>
         )}
       </div>
       <div className="grow" />
       <div className="flex flex-col gap-1">
-        <div className="flex text-xl font-semibold">
+        <div className="flex text-lg font-semibold sm:text-xl">
           <EthereumLogo2 className="size-6" />
           {amount || "---"} ETH
         </div>
