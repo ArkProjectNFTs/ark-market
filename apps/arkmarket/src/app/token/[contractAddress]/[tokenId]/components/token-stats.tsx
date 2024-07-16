@@ -72,7 +72,7 @@ export default function TokenStats({
             className="size-6 rounded-full"
           />
 
-          <Link href={`/wallet/${tokenInfos.owner}`}>
+          <Link href={`/wallet/${token.owner}`}>
             <p
               className={cn(
                 "text-sm font-medium text-muted-foreground",
