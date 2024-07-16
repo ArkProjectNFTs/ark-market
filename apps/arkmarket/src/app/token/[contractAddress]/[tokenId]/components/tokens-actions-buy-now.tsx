@@ -68,10 +68,10 @@ export default function TokenActionsBuyNow({
             e.preventDefault();
           }}
         >
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
               <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
-              <div className="text-center text-xl font-semibold">
+              <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                 {isSuccess
                   ? "Congratulations for your purchase"
                   : "Confirm your purchase"}
