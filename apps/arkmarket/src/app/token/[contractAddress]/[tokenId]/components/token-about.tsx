@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -110,7 +111,9 @@ export default function TokenAbout({
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Owner</p>
-            <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+            <Link href={`/wallet/${token.owner}`}>
+              <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+            </Link>
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Royalty</p>

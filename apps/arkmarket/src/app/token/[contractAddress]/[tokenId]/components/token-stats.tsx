@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -71,14 +72,16 @@ export default function TokenStats({
             className="size-6 rounded-full"
           />
 
-          <p
-            className={cn(
-              "text-sm font-medium text-muted-foreground",
-              ellipsableStyles,
-            )}
-          >
-            {shortenedAddress}
-          </p>
+          <Link href={`/wallet/${token.owner}`}>
+            <p
+              className={cn(
+                "text-sm font-medium text-muted-foreground",
+                ellipsableStyles,
+              )}
+            >
+              {shortenedAddress}
+            </p>
+          </Link>
         </div>
       </div>
     </div>
