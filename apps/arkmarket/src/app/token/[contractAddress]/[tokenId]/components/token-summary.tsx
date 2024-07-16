@@ -61,6 +61,7 @@ export default function TokenSummary({
               className="size-6 text-muted-foreground"
               textToCopy={token.collection_address}
             />
+
             <RefreshCw className="size-6 text-muted-foreground" />
           </div>
         </div>
