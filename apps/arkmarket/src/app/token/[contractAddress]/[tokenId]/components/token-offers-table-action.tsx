@@ -3,9 +3,9 @@ import { validateAndParseAddress } from "starknet";
 
 import { Button } from "@ark-market/ui/button";
 
-import AcceptOffer from "~/app/assets/[contract_address]/[token_id]/components/accept-offer";
-import CancelOffer from "~/app/assets/[contract_address]/[token_id]/components/cancel-offer";
 import ConnectWalletModal from "~/components/connect-wallet-modal";
+import AcceptOffer from "./accept-offer";
+import CancelOffer from "./cancel-offer";
 
 interface TokenOffersTableActionProps {
   owner: string;

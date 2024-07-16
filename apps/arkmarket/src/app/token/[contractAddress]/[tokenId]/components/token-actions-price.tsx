@@ -8,7 +8,7 @@ import { cn, ellipsableStyles } from "@ark-market/ui";
 import getPrices from "~/lib/getPrices";
 
 interface TokenActionsPriceProps {
-  startAmount: string;
+  startAmount: string | null;
   isAuction: boolean;
   hasOffer: boolean;
   topOffer: {
@@ -29,7 +29,7 @@ export default function TokenActionsPrice({
 
   const price = hasOffer
     ? formatEther(BigInt(topOffer.amount))
-    : formatEther(BigInt(startAmount || 0));
+    : formatEther(BigInt(startAmount ?? 0));
   const priceInUSD = data ? data.ethereum.price * parseFloat(price) : 0;
 
   return (
