@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
 import { LoaderCircle, Tag } from "lucide-react";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
-import moment from "moment";
 
-import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -39,6 +38,7 @@ import { toast } from "@ark-market/ui/toast";
 import type { Token } from "~/types";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
+import useConnectWallet from "~/hooks/useConnectWallet";
 import formatAmount from "~/lib/formatAmount";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
@@ -46,15 +46,18 @@ interface TokenActionsMakeOfferProps {
   token: Token;
 }
 
-export default function TokenActionsMakeOffer({
-  token,
-}: TokenActionsMakeOfferProps) {
+function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { account, address } = useAccount();
+  const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
-  const isOwner = address && areAddressesEqual(token.owner, address);
   const { data } = useBalance();
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      setIsOpen(true);
+    },
+  });
 
   const formSchema = z.object({
     startAmount: z
@@ -123,10 +126,6 @@ export default function TokenActionsMakeOffer({
     });
   }
 
-  if (!account || isOwner) {
-    return;
-  }
-
   const isLoading = status === "loading";
   const isDisabled =
     !form.formState.isValid ||
@@ -142,6 +141,7 @@ export default function TokenActionsMakeOffer({
           className="relative w-full lg:max-w-[50%]"
           size="xxl"
           variant="secondary"
+          onClick={ensureConnect}
         >
           <Tag size={24} className="absolute left-4" />
           Make offer
@@ -201,9 +201,7 @@ export default function TokenActionsMakeOffer({
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
                         <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="719">
-                          1 month
-                        </SelectItem>
+                        <SelectItem value="719">1 month</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -226,3 +224,5 @@ export default function TokenActionsMakeOffer({
     </Dialog>
   );
 }
+
+export default memo(TokenActionsMakeOffer);

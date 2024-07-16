@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
-import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -30,6 +29,7 @@ import { Input } from "@ark-market/ui/input";
 import type { Token, TokenMarketData } from "~/types";
 import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
 import { env } from "~/env";
+import useConnectWallet from "~/hooks/useConnectWallet";
 
 interface TokenActionsMakeBidProps {
   token: Token;
@@ -42,9 +42,8 @@ export default function TokenActionsMakeBid({
 }: TokenActionsMakeBidProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { account, address } = useAccount();
+  const { account } = useAccount();
   const { response, createOffer, status } = useCreateOffer();
-  const isOwner = address && areAddressesEqual(token.owner, address);
   const formSchema = z.object({
     startAmount: z.string(),
   });
@@ -54,6 +53,12 @@ export default function TokenActionsMakeBid({
       startAmount: formatEther(
         BigInt(tokenMarketData.listing.start_amount ?? 0),
       ),
+    },
+  });
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      setIsOpen(true);
     },
   });
 
@@ -93,10 +98,6 @@ export default function TokenActionsMakeBid({
     });
   }
 
-  if (!account || isOwner) {
-    return;
-  }
-
   const isDisabled = form.formState.isSubmitting || status === "loading";
   const price = formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0));
   const reservePrice = formatEther(
@@ -106,9 +107,14 @@ export default function TokenActionsMakeBid({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full" variant="secondary" size="xxl">
+        <Button
+          className="relative w-full lg:max-w-[50%]"
+          variant="secondary"
+          size="xxl"
+          onClick={ensureConnect}
+        >
           <Tag size={24} className="absolute left-4" />
-          Make an offer
+          Place a bid
         </Button>
       </DialogTrigger>
       <DialogContent>

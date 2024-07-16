@@ -59,24 +59,26 @@ export default function TokenActionsButtons({
           </>
         ) : (
           <>
-            {isListed && (
+            {isListed ? (
               <>
                 {isAuction ? (
-                  <>
-                    <TokenActionsMakeBid
-                      token={token}
-                      tokenMarketData={tokenMarketData}
-                    />
-                  </>
-                ) : (
-                  <TokenActionsBuyNow
+                  <TokenActionsMakeBid
                     token={token}
                     tokenMarketData={tokenMarketData}
                   />
+                ) : (
+                  <>
+                    <TokenActionsBuyNow
+                      token={token}
+                      tokenMarketData={tokenMarketData}
+                    />
+                    <TokenActionsMakeOffer token={token} />
+                  </>
                 )}
               </>
+            ) : (
+              <TokenActionsMakeOffer token={token} />
             )}
-            <TokenActionsMakeOffer token={token} />
           </>
         )}
       </div>
