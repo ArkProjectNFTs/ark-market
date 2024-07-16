@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -25,7 +26,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -248,7 +248,7 @@ export function TokenActionsCreateListing({
                       </p>
                     </Button>
                     <FormControl>
-                      <NumericalInput
+                      <EthInput
                         // {...field}
                         defaultValue="0.1"
                         value={field.value}
@@ -273,7 +273,7 @@ export function TokenActionsCreateListing({
                         Set reserve price
                       </FormLabel>
                       <FormControl>
-                        <NumericalInput
+                        <EthInput
                           value={field.value}
                           onChange={field.onChange}
                         />

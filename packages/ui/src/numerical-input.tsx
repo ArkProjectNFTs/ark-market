@@ -4,7 +4,7 @@ import { cn } from "@ark-market/ui";
 
 import { Input } from "./input";
 
-interface NumericalInputProps {
+export interface NumericalInputProps {
   onChange?: (value: string) => void;
   value?: string;
   defaultValue?: string;
