@@ -71,7 +71,7 @@ export default async function TokenPage({
         </div>
       </div>
       <TokenActivity
-        className="mt-20"
+        className="mt-6 lg:mt-20"
         contractAddress={contractAddress}
         tokenId={tokenId}
       />
