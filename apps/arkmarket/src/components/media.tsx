@@ -101,7 +101,7 @@ export default function Media({
 
   return (
     <>
-      <div className="relative">
+      <div className="relative flex-shrink-0">
         {status === "loading" && (
           <Skeleton className="absolute inset-0 flex-shrink-0" />
         )}

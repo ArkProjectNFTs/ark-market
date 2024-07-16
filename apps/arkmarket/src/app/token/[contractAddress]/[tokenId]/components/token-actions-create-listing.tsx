@@ -25,6 +25,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
+import { CheckIcon } from "@ark-market/ui/icons/check-icon";
 import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
@@ -228,40 +229,51 @@ export function TokenActionsCreateListing({
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lg">
-                      Set {isAuction && "starting"} price
-                    </FormLabel>
-                    <Button
-                      type="button"
-                      className="w-full"
-                      variant="outline"
-                      size="xl"
-                      onClick={() => {
-                        field.onChange("0.5");
-                      }}
-                    >
-                      <p>
-                        Choose floor price of{" "}
-                        <span className="font-bold">0.5 ETH</span>
+                render={({ field }) => {
+                  const isFloorPrice = field.value === "0.5";
+
+                  return (
+                    <FormItem>
+                      <FormLabel className="text-lg">
+                        Set {isAuction && "starting"} price
+                      </FormLabel>
+                      <Button
+                        type="button"
+                        className="relative w-full"
+                        variant="outline"
+                        size="xl"
+                        onClick={() => {
+                          if (isFloorPrice) {
+                            field.onChange("");
+                            return;
+                          }
+                          field.onChange("0.5");
+                        }}
+                      >
+                        <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
+                          {isFloorPrice && <CheckIcon />}
+                        </div>
+                        <p>
+                          Choose floor price of{" "}
+                          <span className="font-bold">0.5 ETH</span>
+                        </p>
+                      </Button>
+                      <FormControl>
+                        <NumericalInput
+                          // {...field}
+                          defaultValue="0.1"
+                          value={field.value}
+                          onChange={field.onChange}
+                          placeholder="Price"
+                        />
+                      </FormControl>
+                      <p className="!mt-1 ml-3 text-sm text-muted-foreground">
+                        $---
                       </p>
-                    </Button>
-                    <FormControl>
-                      <NumericalInput
-                        // {...field}
-                        defaultValue="0.1"
-                        value={field.value}
-                        onChange={field.onChange}
-                        placeholder="Price"
-                      />
-                    </FormControl>
-                    <p className="!mt-1 ml-3 text-sm text-muted-foreground">
-                      $---
-                    </p>
-                    {formattedStartAmount !== "-" && <FormMessage />}
-                  </FormItem>
-                )}
+                      {formattedStartAmount !== "-" && <FormMessage />}
+                    </FormItem>
+                  );
+                }}
               />
               {isAuction && (
                 <FormField
