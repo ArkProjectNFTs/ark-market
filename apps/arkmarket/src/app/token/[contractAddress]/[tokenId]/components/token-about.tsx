@@ -111,7 +111,7 @@ export default function TokenAbout({
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Owner</p>
-            <Link href={`/wallet/${tokenInfos.owner}`}>
+            <Link href={`/wallet/${token.owner}`}>
               <p className="text-muted-foreground">{ownerShortenedAddress}</p>
             </Link>
           </div>
