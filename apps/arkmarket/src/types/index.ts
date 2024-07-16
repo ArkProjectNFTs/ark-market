@@ -70,6 +70,7 @@ export interface TokenMetadata {
 }
 
 export interface Token {
+  collection_image: string;
   collection_name: string;
   collection_address: string;
   last_price?: string;

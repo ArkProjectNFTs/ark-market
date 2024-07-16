@@ -17,6 +17,7 @@ import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
 import type { Token } from "~/types";
+import Media from "~/components/media";
 
 interface TokenAboutProps {
   contractAddress: string;
@@ -39,6 +40,8 @@ export default function TokenAbout({
     return `${token.owner.slice(0, 4)}...${token.owner.slice(-4)}`;
   }, [token.owner]);
 
+  console.log(token);
+
   return (
     <Collapsible
       className={cn(
@@ -59,7 +62,13 @@ export default function TokenAbout({
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
         <div className="flex items-center gap-5">
-          <div className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"></div>
+          <Media
+            height={224}
+            width={224}
+            className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"
+            alt={token.collection_name}
+            src={token.collection_image}
+          />
           <div>
             <h4 className="text-xl font-semibold">{token.collection_name}</h4>
             <p className="mt-2 hidden text-sm lg:block">
