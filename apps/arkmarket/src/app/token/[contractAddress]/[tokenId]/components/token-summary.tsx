@@ -66,7 +66,7 @@ export default function TokenSummary({
             <RefreshCw className="size-6 text-muted-foreground" />
           </div>
           <div className="lg:hidden">
-            <TokenSummaryMobileActions textToCopy={contractAddress} />
+            <TokenSummaryMobileActions textToCopy={token.collection_address} />
           </div>
         </div>
       </div>
