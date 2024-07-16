@@ -1,6 +1,11 @@
 "use client";
 
-import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
+import {
+  cn,
+  ellipsableStyles,
+  getRoundedRemainingTime,
+  shortAddress,
+} from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
@@ -17,11 +22,15 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
   }
   if (floor_difference < 0) {
     return (
-      <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
+      <p className={cn("text-sm font-semibold text-red-500", ellipsableStyles)}>
+        {floor_difference}%
+      </p>
     );
   }
   return (
-    <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
+    <p className={cn("text-sm font-semibold text-green-500", ellipsableStyles)}>
+      +{floor_difference}%
+    </p>
   );
 }
 
@@ -48,7 +57,7 @@ export default function TokenOffersMobileTable({
           <>
             <div className="mb-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 overflow-hidden">
                   <PriceTag price={offer.price} className="h-7 text-xs" />
                   <TokenFloorDifference
                     floor_difference={offer.floor_difference}

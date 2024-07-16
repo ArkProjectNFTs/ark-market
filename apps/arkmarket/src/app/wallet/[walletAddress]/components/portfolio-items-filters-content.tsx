@@ -62,7 +62,6 @@ export default function PortfolioItemsFiltersContent({
         walletAddress,
       }),
   });
-  console.log(infiniteData);
 
   const walletCollections = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],

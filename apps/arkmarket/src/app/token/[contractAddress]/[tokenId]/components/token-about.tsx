@@ -40,8 +40,6 @@ export default function TokenAbout({
     return `${token.owner.slice(0, 4)}...${token.owner.slice(-4)}`;
   }, [token.owner]);
 
-  console.log(token);
-
   return (
     <Collapsible
       className={cn(
