@@ -3,16 +3,17 @@ import { cn, formatNumber, formatUnits } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import type { Collection } from "~/types";
+
+const separatorCommonClassNames = "hidden md:block";
 
 interface CollectionHeaderStatsProps {
-  collectionInfos: CollectionInfosApiResponse;
+  collection: Collection;
 }
-const separatorCommonClassNames = "hidden md:block";
 
 export default function CollectionHeaderStats({
   className,
-  collectionInfos,
+  collection,
 }: PropsWithClassName<CollectionHeaderStatsProps>) {
   return (
     <div
@@ -25,19 +26,19 @@ export default function CollectionHeaderStats({
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="flex items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
-          <p>{formatUnits(collectionInfos.floor ?? 0, 18)} ETH</p>
+          <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
           {/* TODO @YohanTz: Proper color */}
-          <p
+          {/* <p
             className={cn(
               "text-sm font-semibold",
-              collectionInfos.floor_7d_percentage < 0
+              collection.floor_7d_percentage < 0
                 ? "text-red-500"
                 : "text-green-500",
             )}
           >
-            {collectionInfos.floor_7d_percentage >= 0 && "+"}
-            {formatNumber(collectionInfos.floor_7d_percentage)}%
-          </p>
+            {collection.floor_7d_percentage >= 0 && "+"}
+            {formatNumber(collection.floor_7d_percentage)}%
+          </p> */}
         </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
@@ -49,7 +50,7 @@ export default function CollectionHeaderStats({
         <div className="flex items-center ">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatNumber(collectionInfos.total_volume)} ETH
+            {formatNumber(collection.total_volume)} ETH
           </p>
         </div>
       </div>
@@ -60,7 +61,7 @@ export default function CollectionHeaderStats({
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatNumber(collectionInfos.volume_7d_eth)} ETH
+            {formatNumber(collection.volume_7d_eth)} ETH
           </p>
         </div>
       </div>
@@ -68,25 +69,19 @@ export default function CollectionHeaderStats({
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
-        <p className="font-medium">
-          {formatNumber(collectionInfos.total_sales)}
-        </p>
+        <p className="font-medium">{formatNumber(collection.total_sales)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Items</p>
-        <p className="font-medium">
-          {formatNumber(collectionInfos.token_count)}
-        </p>
+        <p className="font-medium">{formatNumber(collection.token_count)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
-        <p className="font-medium">
-          {formatNumber(collectionInfos.owner_count)}
-        </p>
+        <p className="font-medium">{formatNumber(collection.owner_count)}</p>
       </div>
     </div>
   );
