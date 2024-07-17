@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "@ark-market/ui";
-import { Toaster } from "@ark-market/ui/sonner";
+import { Toaster as Sonner } from "@ark-market/ui/sonner";
+import { Toaster } from "@ark-market/ui/toaster";
 
 import SiteHeader from "~/components/site-header";
 
@@ -73,7 +74,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
           </div>
           <Footer />
           <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
-          <Toaster richColors />
+          <Toaster />
+          <Sonner richColors />
           <ConnectWalletDialog />
         </Providers>
       </body>

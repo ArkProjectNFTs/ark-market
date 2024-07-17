@@ -9,7 +9,7 @@ import { formatEther } from "viem";
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
-import { toast } from "@ark-market/ui/sonner";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
@@ -29,6 +29,7 @@ export default function TokenActionsBuyNow({
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(token.owner, address);
+  const { toast } = useToast();
 
   const buy = async () => {
     setIsOpen(true);
@@ -53,7 +54,7 @@ export default function TokenActionsBuyNow({
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Purchase cancelled by user");
+      // toast.error("Purchase cancelled by user");
     }
   }, [status]);
 
@@ -127,13 +128,21 @@ export default function TokenActionsBuyNow({
         className="relative w-full"
         size="xxl"
         disabled={status === "loading"}
-        onClick={(e) => {
-          ensureConnect(e);
-
-          if (account) {
-            void buy();
-          }
+        onClick={() => {
+          toast({
+            variant: "canceled",
+            title: "Purchase canceled",
+            description: `You didn't sign the transaction in your wallet`,
+            // action: <div>OUI</div>,
+          });
         }}
+        // onClick={(e) => {
+        //   ensureConnect(e);
+
+        //   if (account) {
+        //     void buy();
+        //   }
+        // }}
       >
         <ShoppingBag size={24} className="absolute left-4" />
         Buy now for{" "}
