@@ -111,12 +111,15 @@ export default function TokenActionsMakeBid({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="relative w-full lg:max-w-[50%]"
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
           variant="secondary"
           size={small ? "xl" : "xxl"}
           onClick={ensureConnect}
         >
-          <Tag size={24} className={cn("left-4", small ? "" : "absolute")} />
+          <Tag
+            size={small ? 20 : 24}
+            className={cn("left-4", small ? "" : "absolute")}
+          />
           Make a bid
         </Button>
       </DialogTrigger>

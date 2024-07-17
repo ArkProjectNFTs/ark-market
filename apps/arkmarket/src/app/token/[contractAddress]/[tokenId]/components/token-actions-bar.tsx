@@ -81,7 +81,7 @@ export default function TokenActionsBar({
               </>
             ) : (
               <>
-                {isListed && (
+                {isListed ? (
                   <>
                     {isAuction ? (
                       <>
@@ -99,8 +99,9 @@ export default function TokenActionsBar({
                       />
                     )}
                   </>
+                ) : (
+                  <TokenActionsMakeOffer token={token} small />
                 )}
-                <TokenActionsMakeOffer token={token} small />
               </>
             )}
           </div>
