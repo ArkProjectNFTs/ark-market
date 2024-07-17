@@ -11,6 +11,7 @@ export interface NumericalInputProps {
   placeholder?: string;
   readOnly?: boolean;
   className?: string;
+  status?: "error" | "default";
 }
 
 function NumericalInput({
@@ -20,6 +21,7 @@ function NumericalInput({
   placeholder,
   readOnly,
   className,
+  status = "default",
 }: NumericalInputProps) {
   const [amount, setAmount] = useState(defaultValue ?? "");
 
@@ -50,6 +52,7 @@ function NumericalInput({
         readOnly && value !== "0" && "text-white/70",
         className,
       )}
+      status={status}
       inputMode="decimal"
       autoComplete="off"
       autoCorrect="off"

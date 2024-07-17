@@ -228,7 +228,7 @@ export function TokenActionsCreateListing({
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel className="text-lg">
                       Set {isAuction && "starting"} price
@@ -250,6 +250,12 @@ export function TokenActionsCreateListing({
                     <FormControl>
                       <EthInput
                         // {...field}
+                        status={
+                          formattedStartAmount !== "-" &&
+                          fieldState.error?.message
+                            ? "error"
+                            : "default"
+                        }
                         defaultValue="0.1"
                         value={field.value}
                         onChange={field.onChange}
@@ -267,13 +273,16 @@ export function TokenActionsCreateListing({
                 <FormField
                   control={form.control}
                   name="endAmount"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel className="text-lg">
                         Set reserve price
                       </FormLabel>
                       <FormControl>
                         <EthInput
+                          status={
+                            fieldState.error?.message ? "error" : "default"
+                          }
                           value={field.value}
                           onChange={field.onChange}
                         />
