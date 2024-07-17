@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -34,11 +35,13 @@ import useConnectWallet from "~/hooks/useConnectWallet";
 interface TokenActionsMakeBidProps {
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsMakeBid({
   token,
   tokenMarketData,
+  small,
 }: TokenActionsMakeBidProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
@@ -110,11 +113,11 @@ export default function TokenActionsMakeBid({
         <Button
           className="relative w-full lg:max-w-[50%]"
           variant="secondary"
-          size="xxl"
+          size={small ? "xl" : "xxl"}
           onClick={ensureConnect}
         >
-          <Tag size={24} className="absolute left-4" />
-          Place a bid
+          <Tag size={24} className={cn("left-4", small ? "" : "absolute")} />
+          Make a bid
         </Button>
       </DialogTrigger>
       <DialogContent>

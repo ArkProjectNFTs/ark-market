@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-
-// import { useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 
 import type { Token, TokenMarketData } from "~/types";
 import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
-// import TokenActionsBar from "./token-actions-bar";
+import TokenActionsBar from "./token-actions-bar";
 import TokenActionsCancelListing from "./token-actions-cancel-listing";
 import { TokenActionsCreateListing } from "./token-actions-create-listing";
 import TokenActionsMakeBid from "./token-actions-make-bid";
@@ -31,11 +30,19 @@ export default function TokenActionsButtons({
   tokenMarketData,
 }: TokenActionsButtonsProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  // const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
+  const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
 
   return (
     <>
-      {/* {isActionItemsInView || <TokenActionsBar />} */}
+      <TokenActionsBar
+        token={token}
+        tokenMarketData={tokenMarketData}
+        show={!isActionItemsInView}
+        isOwner={isOwner}
+        isListed={isListed}
+        isAuction={isAuction}
+        hasOffers={hasOffers}
+      />
       <div className="flex flex-col gap-4 lg:flex-row lg:gap-8" ref={ref}>
         {isOwner ? (
           <>
