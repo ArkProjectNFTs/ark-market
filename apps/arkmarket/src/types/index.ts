@@ -15,6 +15,15 @@ export interface Collection {
   volume_7d_eth: number;
 }
 
+export interface PortfolioCollection {
+  address: string;
+  image?: string;
+  collection_name: string;
+  floor?: number;
+  user_listed_tokens: number;
+  user_token_count: number;
+}
+
 export interface Offer {
   order_hash: string;
   offer_maker: string;
@@ -95,6 +104,18 @@ export interface CollectionToken {
   owner: string;
   price?: string;
   token_id: string;
+}
+
+export interface PortfolioToken {
+  collection_name: string;
+  collection_address: string;
+  best_offer?: number;
+  floor?: number;
+  list_price?: number;
+  owner: string;
+  received_at?: string;
+  token_id: string;
+  metadata?: TokenMetadata;
 }
 
 export interface TokenOffer {
