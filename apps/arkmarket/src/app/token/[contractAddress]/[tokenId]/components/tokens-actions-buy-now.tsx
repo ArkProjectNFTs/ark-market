@@ -72,15 +72,15 @@ export default function TokenActionsBuyNow({
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
-          className="justify-normal p-6 lg:justify-center"
+          className="justify-normal lg:justify-center"
           onInteractOutside={(e) => {
             e.preventDefault();
           }}
         >
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
               <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
-              <div className="text-center text-xl font-semibold">
+              <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                 {isSuccess
                   ? "Congratulations for your purchase"
                   : "Confirm your purchase"}
@@ -108,11 +108,11 @@ export default function TokenActionsBuyNow({
                 Continue to explore NFTs
               </Button>
             ) : (
-              <div className="flex flex-col items-center gap-6 rounded-md bg-card p-6 lg:flex-row lg:p-4">
+              <div className="flex flex-col items-center gap-4 rounded-md bg-card p-5 lg:flex-row lg:gap-5 lg:p-4">
                 <LoaderCircle className="size-10 animate-spin" />
 
                 <div className="text-center lg:text-left">
-                  <div className="text-xl font-semibold">
+                  <div className="text-lg font-semibold">
                     Checking your payment
                   </div>
                   <div className="text-sm">
