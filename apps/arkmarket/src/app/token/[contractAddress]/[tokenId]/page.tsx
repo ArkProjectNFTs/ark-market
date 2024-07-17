@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import getCollection from "~/lib/getCollection";
 import getToken from "~/lib/getToken";
 import getTokenMarketData from "~/lib/getTokenMarketData";
 import TokenAbout from "./components/token-about";
@@ -21,7 +20,6 @@ interface TokenPageProps {
 export default async function TokenPage({
   params: { contractAddress, tokenId },
 }: TokenPageProps) {
-  const collection = await getCollection({ contractAddress });
   const token = await getToken({
     contractAddress,
     tokenId,
@@ -31,7 +29,7 @@ export default async function TokenPage({
     tokenId,
   });
 
-  if (!collection || !token || !tokenMarketData) {
+  if (!token || !tokenMarketData) {
     return notFound();
   }
 

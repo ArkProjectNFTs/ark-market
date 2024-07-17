@@ -5,15 +5,13 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
-  CollectionToken,
-  CollectionTokensApiResponse,
-} from "../queries/getCollectionData";
-import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "../search-params";
+  CollectionTokensApiResponse,
+} from "~/lib/getCollectionTokens";
+import type { CollectionToken } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionTokens } from "../queries/getCollectionData";
+import { getCollectionTokens } from "~/lib/getCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
 import LiveResultsIndicator from "./live-results-indicator";
