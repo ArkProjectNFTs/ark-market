@@ -132,8 +132,7 @@ export default function TokenActionsBuyNow({
           toast({
             variant: "canceled",
             title: "Purchase canceled",
-            description: `You didn't sign the transaction in your wallet`,
-            // action: <div>OUI</div>,
+            content: <></>,
           });
         }}
         // onClick={(e) => {
