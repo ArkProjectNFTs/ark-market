@@ -33,7 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast } from "@ark-market/ui/toast";
+import { toast } from "@ark-market/ui/sonner";
 
 import type { Token } from "~/types";
 import { env } from "~/env";

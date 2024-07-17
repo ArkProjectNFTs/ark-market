@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "@ark-market/ui";
-import { Toaster } from "@ark-market/ui/toast";
+import { Toaster } from "@ark-market/ui/sonner";
 
 import SiteHeader from "~/components/site-header";
 

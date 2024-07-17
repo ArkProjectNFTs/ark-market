@@ -9,7 +9,7 @@ import { formatEther } from "viem";
 import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
-import { toast } from "@ark-market/ui/toast";
+import { toast } from "@ark-market/ui/sonner";
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";

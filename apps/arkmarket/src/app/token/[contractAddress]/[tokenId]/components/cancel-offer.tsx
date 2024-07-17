@@ -6,7 +6,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 
 import { Button } from "@ark-market/ui/button";
-import { toast } from "@ark-market/ui/toast";
+import { toast } from "@ark-market/ui/sonner";
 
 interface CancelOfferProps {
   tokenContractAddress: string;
