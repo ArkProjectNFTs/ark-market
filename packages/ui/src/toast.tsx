@@ -32,6 +32,7 @@ const toastVariants = cva(
       variant: {
         // TODO: Update when colors from the theme are chosen by Nolo
         canceled: "bg-slate-400 text-black",
+        success: "bg-emerald-500 text-black",
         default: "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",

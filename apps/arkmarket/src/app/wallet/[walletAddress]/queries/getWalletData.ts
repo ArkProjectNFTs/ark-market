@@ -46,6 +46,7 @@ export async function getWalletTokens({
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${walletAddress}?${queryParams.join("&")}`;
 
+  console.log(url);
   const response = await fetch(url);
   if (!response.ok) {
     console.error(url, response.status);
