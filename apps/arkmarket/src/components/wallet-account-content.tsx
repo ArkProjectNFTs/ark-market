@@ -117,10 +117,10 @@ export default function WalletAccountContent({
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <Link href="/" className={itemCommonClassName} onClick={onClose}>
+          {/* <Link href="/" className={itemCommonClassName} onClick={onClose}>
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
-          </Link>
+          </Link> */}
           <Link href="/" className={itemCommonClassName} onClick={onClose}>
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
