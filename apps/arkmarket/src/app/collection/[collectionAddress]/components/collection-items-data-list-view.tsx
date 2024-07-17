@@ -115,9 +115,7 @@ export default function CollectionItemsDataListView({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {token.price === undefined
-                    ? "_"
-                    : `${formatUnits(token.price, 18)} ETH`}
+                  {token.price ? `${formatUnits(token.price, 18)} ETH` : "_"}
                 </TableCell>
                 <TableCell>_</TableCell>
                 <TableCell>_</TableCell>
