@@ -33,6 +33,7 @@ export default function TokenOffersTableAction({
   const isOwner =
     address !== undefined &&
     validateAndParseAddress(address) === validateAndParseAddress(owner);
+  console.log(tokenListingOrderHash);
 
   if (!address) {
     return (
