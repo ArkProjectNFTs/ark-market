@@ -136,13 +136,12 @@ export default function GlobalSearchWrapper() {
   const closeSearch = () => setOpen(false);
 
   return (
-    <CommandPrimitive filter={() => 1}>
+    <CommandPrimitive filter={() => 1} className="w-[30rem]">
       <CommandInput
         placeholder="Type a command or search..."
         onFocus={openSearch}
         onBlur={closeSearch}
         ref={inputRef}
-        className="w-[30rem]"
         onValueChange={(value) => {
           setInputValue(value);
           setInputDebouncedValue(value);
