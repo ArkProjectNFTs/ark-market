@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import type { Token, TokenMarketData } from "~/types";
 import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
 import TokenActionsBar from "./token-actions-bar";
+import TokenActionsBarMobile from "./token-actions-bar-mobile";
 import TokenActionsCancelListing from "./token-actions-cancel-listing";
 import { TokenActionsCreateListing } from "./token-actions-create-listing";
 import TokenActionsMakeBid from "./token-actions-make-bid";
@@ -42,6 +43,11 @@ export default function TokenActionsButtons({
         isListed={isListed}
         isAuction={isAuction}
         hasOffers={hasOffers}
+      />
+      <TokenActionsBarMobile
+        token={token}
+        tokenMarketData={tokenMarketData}
+        show={!isActionItemsInView && isListed && !isAuction && !isOwner}
       />
       <div className="flex flex-col gap-4 lg:flex-row lg:gap-8" ref={ref}>
         {isOwner ? (

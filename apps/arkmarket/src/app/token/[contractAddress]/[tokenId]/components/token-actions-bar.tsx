@@ -41,7 +41,7 @@ export default function TokenActionsBar({
           exit={{ transform: "translateY(-100%)" }}
           transition={{ ease: "easeInOut", duration: 0.3 }}
           className={cn(
-            "fixed left-0 top-0 z-50 flex h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8",
+            "fixed left-0 top-0 z-50 hidden h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8 lg:flex",
             className,
           )}
         >
