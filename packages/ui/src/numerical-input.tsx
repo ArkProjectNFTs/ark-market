@@ -12,6 +12,7 @@ export interface NumericalInputProps {
   readOnly?: boolean;
   className?: string;
   status?: "error" | "default";
+  id?: string;
 }
 
 function NumericalInput({
@@ -22,6 +23,7 @@ function NumericalInput({
   readOnly,
   className,
   status = "default",
+  id,
 }: NumericalInputProps) {
   const [amount, setAmount] = useState(defaultValue ?? "");
 
@@ -42,6 +44,7 @@ function NumericalInput({
 
   return (
     <Input
+      id={id}
       value={value ?? amount}
       // defaultValue={value}
       onChange={handleChange}
