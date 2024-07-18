@@ -66,7 +66,7 @@ export async function getWalletTokens({
 export interface WalletCollection {
   address: string;
   image: string | null;
-  collection_name: string;
+  name: string;
   floor: number | null;
   user_listed_tokens: number;
   user_token_count: number;
