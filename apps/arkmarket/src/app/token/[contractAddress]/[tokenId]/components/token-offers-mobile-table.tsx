@@ -9,7 +9,7 @@ import {
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenMarketData, TokenOffer } from "~/types";
+import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
@@ -20,6 +20,7 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
   if (floor_difference === null) {
     return "_";
   }
+
   if (floor_difference < 0) {
     return (
       <p className={cn("text-sm font-semibold text-red-500", ellipsableStyles)}>
@@ -27,6 +28,7 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
       </p>
     );
   }
+
   return (
     <p className={cn("text-sm font-semibold text-green-500", ellipsableStyles)}>
       +{floor_difference}%
@@ -36,16 +38,12 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
 interface TokenOffersMobileTableProps {
   tokenOffers: TokenOffer[];
-  tokenContractAdress: string;
-  tokenId: string;
-  owner: string;
+  token: Token;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersMobileTable({
-  owner,
-  tokenContractAdress,
-  tokenId,
+  token,
   tokenMarketData,
   tokenOffers,
 }: TokenOffersMobileTableProps) {
@@ -65,14 +63,9 @@ export default function TokenOffersMobileTable({
                 </div>
 
                 <TokenOffersTableAction
-                  owner={owner}
-                  offerSourceAddress={offer.source}
-                  offerOrderHash={offer.hash}
-                  tokenContractAddress={tokenContractAdress}
-                  tokenId={tokenId}
-                  offerAmount={offer.price}
-                  tokenIsListed={tokenMarketData.is_listed}
-                  tokenListingOrderHash={tokenMarketData.listing.order_hash}
+                  offer={offer}
+                  token={token}
+                  tokenMarketData={tokenMarketData}
                 />
               </div>
 
