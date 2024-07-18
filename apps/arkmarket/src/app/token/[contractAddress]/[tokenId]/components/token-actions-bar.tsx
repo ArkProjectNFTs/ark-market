@@ -92,11 +92,14 @@ export default function TokenActionsBar({
                         />
                       </>
                     ) : (
-                      <TokenActionsBuyNow
-                        token={token}
-                        tokenMarketData={tokenMarketData}
-                        small
-                      />
+                      <>
+                        <TokenActionsBuyNow
+                          token={token}
+                          tokenMarketData={tokenMarketData}
+                          small
+                        />
+                        <TokenActionsMakeOffer token={token} small />
+                      </>
                     )}
                   </>
                 ) : (
