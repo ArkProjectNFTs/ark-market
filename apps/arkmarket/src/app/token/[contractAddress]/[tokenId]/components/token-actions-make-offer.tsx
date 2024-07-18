@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
 
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -44,9 +45,10 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
   token: Token;
+  small?: boolean;
 }
 
-function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
+function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
@@ -138,12 +140,15 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="relative w-full lg:max-w-[50%]"
-          size="xxl"
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+          size={small ? "xl" : "xxl"}
           variant="secondary"
           onClick={ensureConnect}
         >
-          <Tag size={24} className="absolute left-4" />
+          <Tag
+            size={small ? 20 : 24}
+            className={cn(small ?? "absolute left-4")}
+          />
           Make offer
         </Button>
       </DialogTrigger>

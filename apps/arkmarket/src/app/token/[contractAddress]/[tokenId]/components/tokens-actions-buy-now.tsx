@@ -6,7 +6,7 @@ import { useAccount } from "@starknet-react/core";
 import { LoaderCircle, ShoppingBag } from "lucide-react";
 import { formatEther } from "viem";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast } from "@ark-market/ui/toast";
@@ -19,11 +19,13 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 interface TokenActionsBuyNowProps {
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsBuyNow({
   token,
   tokenMarketData,
+  small,
 }: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { fulfillListing, status } = useFulfillListing();
@@ -124,8 +126,8 @@ export default function TokenActionsBuyNow({
         </DialogContent>
       </Dialog>
       <Button
-        className="relative w-full"
-        size="xxl"
+        className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+        size={small ? "xl" : "xxl"}
         disabled={status === "loading"}
         onClick={(e) => {
           ensureConnect(e);
@@ -135,8 +137,11 @@ export default function TokenActionsBuyNow({
           }
         }}
       >
-        <ShoppingBag size={24} className="absolute left-4" />
-        Buy now for{" "}
+        <ShoppingBag
+          size={small ? 20 : 24}
+          className={cn("left-4", small ? "" : "absolute")}
+        />
+        {"Buy now for "}
         {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
       </Button>
     </>
