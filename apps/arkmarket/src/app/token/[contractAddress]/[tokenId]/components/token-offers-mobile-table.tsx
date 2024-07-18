@@ -13,11 +13,11 @@ import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
-  floor_difference?: number;
+  floor_difference: number | null;
 }
 
 function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
-  if (floor_difference === undefined) {
+  if (floor_difference === null) {
     return "_";
   }
 

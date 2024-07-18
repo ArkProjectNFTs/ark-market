@@ -97,7 +97,7 @@ export interface Token {
 
 export interface CollectionToken {
   collection_address: string;
-  floor_difference?: number;
+  floor_difference: number | null;
   last_price?: string;
   listed_at?: number;
   metadata?: TokenMetadata;
@@ -120,7 +120,7 @@ export interface PortfolioToken {
 
 export interface TokenOffer {
   expire_at: number;
-  floor_difference?: number;
+  floor_difference: number | null;
   hash: string;
   offer_id: number;
   price: string;
