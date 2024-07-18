@@ -9,22 +9,24 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { TokenMarketData, TokenOffer } from "~/types";
+import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
-  floor_difference: number | null;
+  floor_difference?: number;
 }
 
 function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
-  if (floor_difference === null) {
+  if (floor_difference === undefined) {
     return "_";
   }
+
   if (floor_difference < 0) {
     return (
       <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
     );
   }
+
   return (
     <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
   );
@@ -32,17 +34,13 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
 interface TokenOffersTableProps {
   tokenOffers: TokenOffer[];
-  tokenContractAdress: string;
-  tokenId: string;
-  owner: string;
+  token: Token;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersTable({
   tokenOffers,
-  owner,
-  tokenContractAdress,
-  tokenId,
+  token,
   tokenMarketData,
 }: TokenOffersTableProps) {
   return (
@@ -91,14 +89,9 @@ export default function TokenOffersTable({
                 </TableCell>
                 <TableCell className="text-end">
                   <TokenOffersTableAction
-                    owner={owner}
-                    offerSourceAddress={offer.source}
-                    offerOrderHash={offer.hash}
-                    tokenContractAddress={tokenContractAdress}
-                    tokenId={tokenId}
-                    offerAmount={offer.price}
-                    tokenIsListed={tokenMarketData.is_listed}
-                    tokenListingOrderHash={tokenMarketData.listing.order_hash}
+                    offer={offer}
+                    token={token}
+                    tokenMarketData={tokenMarketData}
                   />
                 </TableCell>
               </TableRow>

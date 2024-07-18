@@ -13,33 +13,33 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-import type { TokenMarketData } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import { getTokenOffers } from "~/lib/getTokenOffers";
 import TokenOffersMobileTable from "./token-offers-mobile-table";
 import TokenOffersTable from "./token-offers-table";
 
 interface TokenOffersProps {
-  contractAddress: string;
-  tokenId: string;
-  owner: string;
+  token: Token;
   tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffers({
   className,
-  contractAddress,
-  owner,
-  tokenId,
+  token,
   tokenMarketData,
 }: PropsWithClassName<TokenOffersProps>) {
   const [open, setOpen] = useState(true);
   const { data: infiniteData } = useInfiniteQuery({
-    queryKey: ["tokenOffers", contractAddress, tokenId],
+    queryKey: ["tokenOffers", token.collection_address, token.token_id],
     refetchInterval: 10_000,
     getNextPageParam: () => null,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
-      getTokenOffers({ contractAddress, tokenId, page: pageParam }),
+      getTokenOffers({
+        contractAddress: token.collection_address,
+        tokenId: token.token_id,
+        page: pageParam,
+      }),
   });
   const offersCount = infiniteData?.pages[0]?.count ?? 0;
   const tokenOffers = useMemo(
@@ -74,16 +74,12 @@ export default function TokenOffers({
           <>
             <TokenOffersTable
               tokenOffers={tokenOffers}
-              owner={owner}
-              tokenContractAdress={contractAddress}
-              tokenId={tokenId}
+              token={token}
               tokenMarketData={tokenMarketData}
             />
             <TokenOffersMobileTable
               tokenOffers={tokenOffers}
-              owner={owner}
-              tokenContractAdress={contractAddress}
-              tokenId={tokenId}
+              token={token}
               tokenMarketData={tokenMarketData}
             />
           </>

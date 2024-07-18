@@ -41,13 +41,6 @@ export default function TokenActionsButtons({
           <>
             {isListed ? (
               <>
-                {hasOffers && (
-                  <TokenActionsAcceptBestOffer
-                    token={token}
-                    tokenMarketData={tokenMarketData}
-                    isAuction={isAuction}
-                  />
-                )}
                 <TokenActionsCancelListing
                   token={token}
                   tokenMarketData={tokenMarketData}
@@ -55,6 +48,14 @@ export default function TokenActionsButtons({
               </>
             ) : (
               <TokenActionsCreateListing token={token} />
+            )}
+
+            {hasOffers && (
+              <TokenActionsAcceptBestOffer
+                token={token}
+                tokenMarketData={tokenMarketData}
+                isAuction={isAuction}
+              />
             )}
           </>
         ) : (

@@ -120,11 +120,11 @@ export interface PortfolioToken {
 
 export interface TokenOffer {
   expire_at: number;
-  floor_difference: number | null;
+  floor_difference?: number;
   hash: string;
   offer_id: number;
   price: string;
-  source: string | null;
+  source: string;
 }
 
 export interface TokenApiResponse {
