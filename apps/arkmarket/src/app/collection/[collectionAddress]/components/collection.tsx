@@ -5,13 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
-import { getCollectionInfos } from "../queries/getCollectionData";
+import getCollection from "~/lib/getCollection";
 import {
   collectionSortByKey,
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
-} from "../search-params";
+} from "~/lib/getCollectionTokens";
 import CollectionBanner from "./collection-banner";
 import CollectionHeader from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
@@ -47,11 +47,13 @@ export default function Collection({
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
 
-  const { data: collectionInfos } = useQuery({
-    queryKey: ["collectionInfos", collectionAddress],
+  const { data: collection } = useQuery({
+    queryKey: ["collection", collectionAddress],
     refetchInterval: false,
-    queryFn: () => getCollectionInfos({ collectionAddress }),
+    queryFn: () => getCollection({ collectionAddress }),
   });
+
+  const totalTokensCount = collection?.token_count ?? 0;
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 
@@ -69,19 +71,19 @@ export default function Collection({
           className="hidden md:block"
           collectionAddress={collectionAddress}
         />
-        {collectionInfos ? (
+        {collection ? (
           <MobileCollectionHeader
             className="md:hidden"
             collectionAddress={collectionAddress}
-            collectionInfos={collectionInfos}
+            collection={collection}
           />
         ) : null}
         <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
-          {collectionInfos ? (
+          {collection ? (
             <CollectionHeader
               collectionAddress={collectionAddress}
               className="hidden md:block"
-              collectionInfos={collectionInfos}
+              collection={collection}
             />
           ) : null}
           <CollectionItemsActivityHeader
@@ -97,7 +99,7 @@ export default function Collection({
                 setSortBy={setSortBy}
                 viewType={viewType}
                 setViewType={setViewType}
-                totalTokensCount={0}
+                totalTokensCount={totalTokensCount}
               />
             )}
             {activeTab === "activity" && <p>Coming</p>}
@@ -108,7 +110,7 @@ export default function Collection({
           {activeTab === "items" && (
             <CollectionItemsData
               collectionAddress={collectionAddress}
-              totalTokensCount={0}
+              totalTokensCount={totalTokensCount}
               sortDirection={sortDirection}
               sortBy={sortBy}
               viewType={viewType}

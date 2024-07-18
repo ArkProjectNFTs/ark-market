@@ -1,13 +1,26 @@
 export interface Collection {
-  contract_address: string;
-  contract_type: string;
-  image: string;
+  address: string;
   name: string;
-  symbol: string;
+  floor?: number;
+  image?: string;
+  listed_items: number;
+  listed_percentage: number;
+  marketcap: number;
+  owner_count: number;
+  sales_7d: number;
+  token_count: number;
+  total_sales: number;
+  total_volume: number;
+  volume_7d_eth: number;
 }
 
-export interface CollectionApiResponse {
-  result: Collection;
+export interface PortfolioCollection {
+  address: string;
+  image?: string;
+  name: string;
+  floor?: number;
+  user_listed_tokens: number;
+  user_token_count: number;
 }
 
 export interface Offer {
@@ -81,13 +94,36 @@ export interface Token {
   token_id: string;
 }
 
+export interface CollectionToken {
+  collection_address: string;
+  floor_difference: number | null;
+  last_price?: string;
+  listed_at?: number;
+  metadata?: TokenMetadata;
+  owner: string;
+  price?: string;
+  token_id: string;
+}
+
+export interface PortfolioToken {
+  collection_name: string;
+  collection_address: string;
+  best_offer?: number;
+  floor?: number;
+  list_price?: number;
+  owner: string;
+  received_at?: string;
+  token_id: string;
+  metadata?: TokenMetadata;
+}
+
 export interface TokenOffer {
   expire_at: number;
   floor_difference: number | null;
   hash: string;
   offer_id: number;
   price: string;
-  source: string | null;
+  source: string;
 }
 
 export interface TokenApiResponse {

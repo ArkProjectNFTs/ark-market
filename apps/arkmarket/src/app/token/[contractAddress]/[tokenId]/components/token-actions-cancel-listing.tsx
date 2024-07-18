@@ -4,7 +4,7 @@ import { useCancel } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { ListX, LoaderCircle } from "lucide-react";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -12,11 +12,13 @@ import type { Token, TokenMarketData } from "~/types";
 interface TokenActionsCancelListingProps {
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsCancelListing({
   token,
   tokenMarketData,
+  small,
 }: TokenActionsCancelListingProps) {
   const { account, address } = useAccount();
   const { cancel, status } = useCancel();
@@ -39,14 +41,20 @@ export default function TokenActionsCancelListing({
     <Button
       onClick={handleClick}
       disabled={status === "loading"}
-      className="relative w-full lg:max-w-[50%]"
-      size="xxl"
+      className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+      size={small ? "xl" : "xxl"}
       variant="secondary"
     >
       {status === "loading" ? (
-        <LoaderCircle className="absolute left-4 h-6 w-6 animate-spin" />
+        <LoaderCircle
+          className={cn("animate-spin", small ?? "absolute left-4")}
+          size={small ? 20 : 24}
+        />
       ) : (
-        <ListX size={24} className="absolute left-4" />
+        <ListX
+          size={small ? 20 : 24}
+          className={cn(small ?? "absolute left-4")}
+        />
       )}
       Cancel listing
     </Button>

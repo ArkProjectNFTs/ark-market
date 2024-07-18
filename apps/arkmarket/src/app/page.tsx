@@ -23,7 +23,7 @@ export default function HomePage() {
             <div className="size-28 flex-shrink-0 rounded-lg bg-secondary md:size-48" />
             <div className="flex h-full flex-col items-start justify-between gap-3.5 md:gap-0">
               <h2 className="text-3xl font-semibold">Need help?</h2>
-              <p>Lorem ipsum...</p>
+              <p>Help Lorem ipsum...</p>
               <Button size="xl">Contact support</Button>
             </div>
           </div>

@@ -4,13 +4,15 @@ import { cn } from "@ark-market/ui";
 
 import { Input } from "./input";
 
-interface NumericalInputProps {
+export interface NumericalInputProps {
   onChange?: (value: string) => void;
   value?: string;
   defaultValue?: string;
   placeholder?: string;
   readOnly?: boolean;
   className?: string;
+  status?: "error" | "default";
+  id?: string;
 }
 
 function NumericalInput({
@@ -20,6 +22,8 @@ function NumericalInput({
   placeholder,
   readOnly,
   className,
+  status = "default",
+  id,
 }: NumericalInputProps) {
   const [amount, setAmount] = useState(defaultValue ?? "");
 
@@ -40,6 +44,7 @@ function NumericalInput({
 
   return (
     <Input
+      id={id}
       value={value ?? amount}
       // defaultValue={value}
       onChange={handleChange}
@@ -50,6 +55,7 @@ function NumericalInput({
         readOnly && value !== "0" && "text-white/70",
         className,
       )}
+      status={status}
       inputMode="decimal"
       autoComplete="off"
       autoCorrect="off"

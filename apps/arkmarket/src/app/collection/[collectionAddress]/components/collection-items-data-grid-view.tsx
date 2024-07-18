@@ -12,7 +12,7 @@ import {
 } from "@ark-market/ui/nft-card";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
-import type { CollectionToken } from "../queries/getCollectionData";
+import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
 
 const LargeGridContainer = forwardRef<
@@ -65,23 +65,24 @@ export default function CollectionItemsDataGridView({
             viewType === "large-grid" ? LargeGridContainer : SmallGridContainer,
         }}
         itemContent={(index) => {
-          const collectionToken = collectionTokens[index];
-          if (collectionToken === undefined) {
+          const token = collectionTokens[index];
+
+          if (!token) {
             return null;
           }
 
           return (
             <Link
-              href={`/token/${collectionToken.contract}/${collectionToken.token_id}`}
-              key={`${collectionToken.contract}-${collectionToken.token_id}`}
+              href={`/token/${token.collection_address}/${token.token_id}`}
+              key={`${token.collection_address}-${token.token_id}`}
               prefetch={false}
             >
               <NftCard>
                 <NftCardMedia>
                   <Media
-                    src={collectionToken.metadata?.image}
-                    mediaKey={collectionToken.metadata?.image_key}
-                    alt={collectionToken.metadata?.name ?? "Empty"}
+                    src={token.metadata?.image}
+                    mediaKey={token.metadata?.image_key}
+                    alt={token.metadata?.name ?? "Empty"}
                     className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
                     height={viewType === "large-grid" ? 540 : 340}
                     width={viewType === "large-grid" ? 540 : 340}
@@ -97,12 +98,11 @@ export default function CollectionItemsDataGridView({
                           ellipsableStyles,
                         )}
                       >
-                        {collectionToken.metadata?.name ??
-                          collectionToken.token_id}
+                        {token.metadata?.name ?? token.token_id}
                       </p>
-                      {collectionToken.price ? (
+                      {token.price ? (
                         <p className={cn("mt-1 text-sm", ellipsableStyles)}>
-                          {formatUnits(collectionToken.price, 18)} ETH
+                          {formatUnits(token.price, 18)} ETH
                         </p>
                       ) : (
                         <p className="mt-1 text-sm font-medium">Not for sale</p>

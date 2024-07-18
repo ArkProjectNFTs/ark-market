@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { CollectionToken } from "../queries/getCollectionData";
+import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
 
 const gridTemplateColumnValue =
@@ -77,15 +77,16 @@ export default function CollectionItemsDataListView({
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const token = collectionTokens[virtualRow.index];
-          if (token === undefined) {
+
+          if (!token) {
             return null;
           }
 
           return (
             <Link
               prefetch={false}
-              href={`/token/${token.contract}/${token.token_id}`}
-              key={`${token.contract}-${token.token_id}`}
+              href={`/token/${token.collection_address}/${token.token_id}`}
+              key={`${token.collection_address}-${token.token_id}`}
             >
               <TableRow
                 data-index={virtualRow.index} // Needed for dynamic row height measurement
@@ -114,9 +115,7 @@ export default function CollectionItemsDataListView({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {token.price === null
-                    ? "_"
-                    : `${formatUnits(token.price, 18)} ETH`}
+                  {token.price ? `${formatUnits(token.price, 18)} ETH` : "_"}
                 </TableCell>
                 <TableCell>_</TableCell>
                 <TableCell>_</TableCell>

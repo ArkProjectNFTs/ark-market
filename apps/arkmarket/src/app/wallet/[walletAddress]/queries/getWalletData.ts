@@ -9,10 +9,11 @@ export interface Metadata {
   animation_url: string | null;
   image_key: string | null;
 }
+
 export interface WalletToken {
   collection_name: string;
   best_offer: number | null;
-  contract: string;
+  collection_address: string;
   floor: number | null;
   list_price: number | null;
   owner: string;
@@ -20,16 +21,19 @@ export interface WalletToken {
   token_id: string;
   metadata: Metadata | null;
 }
+
 export interface WalletTokensApiResponse {
   data: WalletToken[];
   next_page: number | null;
   token_count: number;
 }
+
 interface GetWalletTokensParams {
   page?: number;
   walletAddress: string;
   collectionAddress?: string | null;
 }
+
 export async function getWalletTokens({
   page,
   walletAddress,
@@ -63,21 +67,24 @@ export async function getWalletTokens({
 export interface WalletCollection {
   address: string;
   image: string | null;
-  collection_name: string;
+  name: string;
   floor: number | null;
   user_listed_tokens: number;
   user_token_count: number;
 }
+
 export interface WalletCollectionsApiResponse {
   data: WalletCollection[];
   next_page: number | null;
   collection_count: number;
   token_count: number;
 }
+
 interface GetWalletCollectionsParams {
   page?: number;
   walletAddress: string;
 }
+
 export async function getWalletCollections({
   page,
   walletAddress,

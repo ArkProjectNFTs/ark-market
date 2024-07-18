@@ -18,21 +18,21 @@ import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
-import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
   collectionAddress: string;
-  collectionInfos: CollectionInfosApiResponse;
+  collection: Collection;
   style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function CollectionHeader({
   className,
   collectionAddress,
-  collectionInfos,
+  collection,
   style,
 }: PropsWithClassName<CollectionHeaderProps>) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
@@ -57,11 +57,11 @@ export default function CollectionHeader({
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
                 alt="Everai profile"
               />
-            ) : collectionInfos.image !== null ? (
+            ) : collection.image !== null ? (
               <img
-                src={collectionInfos.image}
+                src={collection.image}
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
-                alt={collectionInfos.collection_name}
+                alt={collection.name}
               />
             ) : (
               <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
@@ -71,7 +71,7 @@ export default function CollectionHeader({
               <div>
                 <div className="flex items-center gap-1">
                   <p className="text-2xl font-semibold">
-                    {collectionInfos.collection_name ?? "Unknown collection"}
+                    {collection.name ?? "Unknown collection"}
                   </p>
                   <VerifiedIcon className="text-background" />
                 </div>
@@ -102,7 +102,7 @@ export default function CollectionHeader({
             </div>
           </div>
           <CollectionHeaderStats
-            collectionInfos={collectionInfos}
+            collection={collection}
             className="hidden md:hidden xl:flex"
           />
         </div>
@@ -124,7 +124,7 @@ export default function CollectionHeader({
             join us in this collaborative journey to shape the Everai Universe!
           </p>
           <CollectionHeaderStats
-            collectionInfos={collectionInfos}
+            collection={collection}
             className="mt-8 xl:hidden"
           />
         </CollapsibleContent>

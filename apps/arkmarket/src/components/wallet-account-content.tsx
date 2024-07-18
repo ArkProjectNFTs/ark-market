@@ -5,7 +5,13 @@ import {
   useDisconnect,
   useStarkProfile,
 } from "@starknet-react/core";
-import { HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
+import {
+  HelpCircle,
+  Power,
+  // Settings,
+  User,
+  Wallet,
+} from "lucide-react";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
@@ -17,7 +23,7 @@ import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
 const itemCommonClassName = cn(
-  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
+  "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
   focusableStyles,
 );
 
@@ -117,10 +123,10 @@ export default function WalletAccountContent({
               <p className="font-bold">Web Wallet</p>
             </ExternalLink>
           )}
-          <Link href="/" className={itemCommonClassName} onClick={onClose}>
+          {/* <Link href="/" className={itemCommonClassName} onClick={onClose}>
             <Settings size={24} />
             <p className="font-bold">Account settings</p>
-          </Link>
+          </Link> */}
           <Link href="/" className={itemCommonClassName} onClick={onClose}>
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>

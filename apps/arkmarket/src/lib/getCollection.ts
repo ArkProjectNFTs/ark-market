@@ -1,18 +1,17 @@
-import type { CollectionApiResponse } from "~/types";
+import type { Collection } from "~/types";
 import { env } from "~/env";
 
 interface GetCollectionParams {
-  contractAddress: string;
+  collectionAddress: string;
 }
 
 export default async function getCollection({
-  contractAddress,
+  collectionAddress,
 }: GetCollectionParams) {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_NFT_API_URL}/v1/contracts/${contractAddress}`,
+    `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e`,
     {
       headers: {
-        "x-api-key": env.NEXT_PUBLIC_NFT_API_KEY,
         "Content-Type": "application/json",
       },
     },
@@ -23,7 +22,7 @@ export default async function getCollection({
     return null;
   }
 
-  const { result } = (await response.json()) as CollectionApiResponse;
+  const collection = (await response.json()) as Collection;
 
-  return result;
+  return collection;
 }
