@@ -76,7 +76,7 @@ export default function CollectionItemsDataGridView({
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <NftCard>
             <Link
-              href={`/token/${token.contract}/${token.token_id}`}
+              href={`/token/${token.collection_address}/${token.token_id}`}
               className={cn("flex items-center gap-1", focusableStyles)}
             >
               <NftCardMedia>
@@ -95,7 +95,7 @@ export default function CollectionItemsDataGridView({
               <div className="flex w-full justify-between">
                 <div className="w-full space-y-1 overflow-hidden">
                   <Link
-                    href={`/token/${token.contract}/${token.token_id}`}
+                    href={`/token/${token.collection_address}/${token.token_id}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
                   >
                     <p
@@ -109,7 +109,7 @@ export default function CollectionItemsDataGridView({
                     </p>
                   </Link>
                   <Link
-                    href={`/collection/${token.contract}`}
+                    href={`/collection/${token.collection_address}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
                   >
                     <p

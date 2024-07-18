@@ -18,21 +18,21 @@ import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
-import type { CollectionInfosApiResponse } from "../queries/getCollectionData";
+import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface MobileCollectionHeaderProps {
   collectionAddress: string;
-  collectionInfos: CollectionInfosApiResponse;
+  collection: Collection;
   style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function MobileCollectionHeader({
   className,
   collectionAddress,
-  collectionInfos,
+  collection,
   style,
 }: PropsWithClassName<MobileCollectionHeaderProps>) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
@@ -57,18 +57,18 @@ export default function MobileCollectionHeader({
                   className="aspect-square h-full flex-shrink-0 rounded-xs"
                   alt="Everai profile"
                 />
-              ) : collectionInfos.image !== null ? (
+              ) : collection.image !== null ? (
                 <img
-                  src={collectionInfos.image}
+                  src={collection.image}
                   className="aspect-square h-full flex-shrink-0 rounded-xs"
-                  alt={collectionInfos.collection_name}
+                  alt={collection.collection_name}
                 />
               ) : (
                 <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
                 <p className="text-lg font-semibold">
-                  {collectionInfos.collection_name ?? "Unknown collection"}
+                  {collection.collection_name ?? "Unknown collection"}
                 </p>
               </div>
             </div>
@@ -101,10 +101,7 @@ export default function MobileCollectionHeader({
               </ExternalLink>
             </div>
 
-            <CollectionHeaderStats
-              collectionInfos={collectionInfos}
-              className="mt-6"
-            />
+            <CollectionHeaderStats collection={collection} className="mt-6" />
           </div>
         </CollapsibleContent>
       </Collapsible>
