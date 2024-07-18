@@ -22,7 +22,7 @@ export default function GlobalSearchSuggestions({
   const router = useRouter();
 
   return (
-    <CommandGroup forceMount>
+    <CommandGroup forceMount className="p-0">
       <p className="text-sm font-medium text-muted-foreground">
         Best Collections
       </p>
