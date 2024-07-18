@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import EthInput from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -25,7 +26,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -77,7 +77,7 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
           return num <= data.value;
         },
         {
-          message: "Insufficient balance",
+          message: "You don't have enough funds in your wallet",
         },
       ),
     duration: z.string(),
@@ -165,18 +165,26 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Set price</FormLabel>
-                    <FormControl>
-                      <NumericalInput
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    {formattedStartAmount !== "-" && <FormMessage />}
-                  </FormItem>
-                )}
+                render={({ field, fieldState }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Set price</FormLabel>
+                      <FormControl>
+                        <EthInput
+                          value={field.value}
+                          onChange={field.onChange}
+                          status={
+                            formattedStartAmount !== "-" &&
+                            fieldState.error?.message
+                              ? "error"
+                              : "default"
+                          }
+                        />
+                      </FormControl>
+                      {formattedStartAmount !== "-" && <FormMessage />}
+                    </FormItem>
+                  );
+                }}
               />
               <FormField
                 control={form.control}

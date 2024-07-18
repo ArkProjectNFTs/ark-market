@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -279,13 +280,16 @@ export function TokenActionsCreateListing({
                 <FormField
                   control={form.control}
                   name="endAmount"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel className="text-lg">
                         Set reserve price
                       </FormLabel>
                       <FormControl>
-                        <NumericalInput
+                        <EthInput
+                          status={
+                            fieldState.error?.message ? "error" : "default"
+                          }
                           value={field.value}
                           onChange={field.onChange}
                         />
