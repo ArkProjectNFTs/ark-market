@@ -61,14 +61,14 @@ export default function MobileCollectionHeader({
                 <img
                   src={collection.image}
                   className="aspect-square h-full flex-shrink-0 rounded-xs"
-                  alt={collection.collection_name}
+                  alt={collection.name}
                 />
               ) : (
                 <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
                 <p className="text-lg font-semibold">
-                  {collection.collection_name ?? "Unknown collection"}
+                  {collection.name ?? "Unknown collection"}
                 </p>
               </div>
             </div>

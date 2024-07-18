@@ -1,7 +1,6 @@
 export interface Collection {
   address: string;
-  collection_name: string;
-  contract_symbol: string;
+  name: string;
   floor?: number;
   image?: string;
   listed_items: number;
@@ -18,7 +17,7 @@ export interface Collection {
 export interface PortfolioCollection {
   address: string;
   image?: string;
-  collection_name: string;
+  name: string;
   floor?: number;
   user_listed_tokens: number;
   user_token_count: number;
