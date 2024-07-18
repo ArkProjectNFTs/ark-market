@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import { Meh } from "lucide-react";
 import { useDebounceValue } from "usehooks-ts";
 
 import { cn, focusableStyles } from "@ark-market/ui";
@@ -21,7 +22,7 @@ interface GlobalSearchProps {
 }
 
 function GlobalSearch({ inputValue, inputDebouncedValue }: GlobalSearchProps) {
-  const { data: searchResults, isLoading } = useQuery({
+  const { data: searchResults } = useQuery({
     queryKey: ["searchCollection", inputDebouncedValue],
     refetchInterval: false,
     queryFn: () => getCollectionSearch({ searchQuery: inputDebouncedValue }),
@@ -32,50 +33,55 @@ function GlobalSearch({ inputValue, inputDebouncedValue }: GlobalSearchProps) {
     return <p className="pl-3 font-medium">Enter something</p>;
   }
 
-  return (
-    <>
-      {inputValue.length > 0 && (searchResults?.data.length ?? 0) > 0 ? (
-        <div>
-          <p className="pl-3 font-medium text-muted-foreground">Collections</p>
-          <div className="gap- mt-4">
-            {searchResults?.data.map((searchResult) => {
-              return (
-                <Link
-                  className={cn(
-                    "flex items-center gap-2 rounded-xs bg-transparent p-2 transition-colors hover:bg-accent",
-                    focusableStyles,
-                  )}
-                  href={`/collection/${searchResult.address}`}
-                >
-                  <Media
-                    src={searchResult.image}
-                    alt={searchResult.name}
-                    height={64}
-                    width={64}
-                    className="size-8 rounded-xs"
-                  />
-                  <div>
-                    <p className="text-sm font-medium">{searchResult.name}</p>
-                    <div className="flex items-center">
-                      <EthereumLogo2 className="size-4" />
-                      <p className="text-xs font-medium text-muted-foreground">
-                        {searchResult.token_count} items
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      ) : inputValue.length > 0 ? (
-        <p className="pl-3 font-medium">
+  if (searchResults === undefined) {
+    return <p className="pl-3 font-medium">Loading...</p>;
+  }
+
+  if (searchResults.data.length === 0) {
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <Meh className="size-10" />
+        <p className="pl-3 text-xl font-semibold">
           Sorry, there are no results for your search.
         </p>
-      ) : (
-        <p className="pl-3 font-medium">Enter something</p>
-      )}
-    </>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <p className="pl-3 font-medium text-muted-foreground">Collections</p>
+      <div className="gap- mt-4">
+        {searchResults.data.map((searchResult) => {
+          return (
+            <Link
+              className={cn(
+                "flex items-center gap-2 rounded-xs bg-transparent p-2 transition-colors hover:bg-accent",
+                focusableStyles,
+              )}
+              href={`/collection/${searchResult.address}`}
+            >
+              <Media
+                src={searchResult.image}
+                alt={searchResult.name}
+                height={64}
+                width={64}
+                className="size-8 rounded-xs"
+              />
+              <div>
+                <p className="text-sm font-medium">{searchResult.name}</p>
+                <div className="flex items-center">
+                  <EthereumLogo2 className="size-4" />
+                  <p className="text-xs font-medium text-muted-foreground">
+                    {searchResult.token_count} items
+                  </p>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

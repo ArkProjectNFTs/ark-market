@@ -25,7 +25,7 @@ export default async function getCollectionSearch({
 
   if (!response.ok) {
     console.log("Failed to fetch perform collection search");
-    return null;
+    return { data: [] } as CollectionSearchApiResponse;
   }
 
   const collection = (await response.json()) as CollectionSearchApiResponse;
