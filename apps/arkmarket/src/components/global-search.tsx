@@ -133,8 +133,7 @@ export default function GlobalSearchWrapper() {
   );
 
   const openSearch = () => setOpen(true);
-  // const closeSearch = () => setOpen(false);
-  const closeSearch = () => null;
+  const closeSearch = () => setOpen(false);
 
   return (
     <CommandPrimitive filter={() => 1}>
