@@ -1,72 +1,49 @@
 "use client";
 
 import * as React from "react";
-import {
-  useFulfillAuction,
-  useFulfillOffer,
-  useOrderType,
-} from "@ark-project/react";
+import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 
-import { areAddressesEqual } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 
+import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import { env } from "~/env";
 
 interface AcceptOfferProps {
-  offerOrderHash: string;
-  offerAmount: string;
-
-  tokenOwner: string;
-  tokenContractAddress: string;
-  tokenId: string;
-  tokenIsListed: boolean;
-  tokenListingOrderHash: string;
+  offer: TokenOffer;
+  token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
 const AcceptOffer: React.FC<AcceptOfferProps> = ({
-  offerAmount,
-  offerOrderHash,
-  tokenIsListed,
-  tokenListingOrderHash,
-  tokenContractAddress,
-  tokenId,
-  tokenOwner,
+  offer,
+  token,
+  tokenMarketData,
 }) => {
-  const { address, account } = useAccount();
+  const { account } = useAccount();
   const { fulfillOffer, status } = useFulfillOffer();
   const { fulfill: fulfillAuction, status: statusAuction } =
     useFulfillAuction();
-  const type = useOrderType({
-    orderHash: BigInt(tokenListingOrderHash),
-  });
-  const isAuction = type === "AUCTION";
-  const isOwner = areAddressesEqual(tokenOwner, address);
-  const isListed = tokenIsListed;
-
-  if (!account || !isOwner) {
-    return null;
-  }
 
   const handleClick = async () => {
-    if (isListed && isAuction) {
+    if (tokenMarketData.is_listed && tokenMarketData.listing.is_auction) {
       await fulfillAuction({
         starknetAccount: account,
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        tokenAddress: tokenContractAddress,
-        tokenId,
-        orderHash: tokenListingOrderHash,
-        relatedOrderHash: offerOrderHash,
-        startAmount: offerAmount,
+        tokenAddress: token.collection_address,
+        tokenId: token.token_id,
+        orderHash: tokenMarketData.listing.order_hash,
+        relatedOrderHash: offer.hash,
+        startAmount: offer.price,
       });
     } else {
       await fulfillOffer({
         starknetAccount: account,
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        tokenAddress: tokenContractAddress,
-        tokenId,
-        orderHash: offerOrderHash,
+        tokenAddress: token.collection_address,
+        tokenId: token.token_id,
+        orderHash: offer.hash,
       });
     }
   };

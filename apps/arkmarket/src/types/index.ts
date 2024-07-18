@@ -1,7 +1,6 @@
 export interface Collection {
   address: string;
-  collection_name: string;
-  contract_symbol: string;
+  name: string;
   floor?: number;
   image?: string;
   listed_items: number;
@@ -18,7 +17,7 @@ export interface Collection {
 export interface PortfolioCollection {
   address: string;
   image?: string;
-  collection_name: string;
+  name: string;
   floor?: number;
   user_listed_tokens: number;
   user_token_count: number;
@@ -97,7 +96,7 @@ export interface Token {
 
 export interface CollectionToken {
   collection_address: string;
-  floor_difference?: number;
+  floor_difference: number | null;
   last_price?: string;
   listed_at?: number;
   metadata?: TokenMetadata;
@@ -132,7 +131,7 @@ export interface TokenOffer {
   hash: string;
   offer_id: number;
   price: string;
-  source: string | null;
+  source: string;
 }
 
 export interface TokenApiResponse {

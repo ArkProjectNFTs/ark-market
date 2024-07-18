@@ -115,7 +115,7 @@ export default function PortfolioItemsFiltersContent({
               <div className="flex h-full items-center gap-2 overflow-hidden">
                 <Media
                   src={collection.image ?? undefined}
-                  alt={collection.collection_name}
+                  alt={collection.name}
                   className="h-8 w-8 rounded-xs object-contain"
                 />
                 <div className="flex h-full flex-col items-start justify-between overflow-hidden">
@@ -126,7 +126,7 @@ export default function PortfolioItemsFiltersContent({
                         ellipsableStyles,
                       )}
                     >
-                      {collection.collection_name}
+                      {collection.name}
                     </p>
                     <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
                   </div>

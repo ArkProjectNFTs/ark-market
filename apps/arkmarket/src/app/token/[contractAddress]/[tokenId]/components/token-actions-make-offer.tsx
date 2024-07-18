@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
 
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -17,6 +18,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import EthInput from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -25,7 +27,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -44,9 +45,10 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
   token: Token;
+  small?: boolean;
 }
 
-function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
+function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
@@ -77,7 +79,7 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
           return num <= data.value;
         },
         {
-          message: "Insufficient balance",
+          message: "You don't have enough funds in your wallet",
         },
       ),
     duration: z.string(),
@@ -138,12 +140,15 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="relative w-full lg:max-w-[50%]"
-          size="xxl"
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+          size={small ? "xl" : "xxl"}
           variant="secondary"
           onClick={ensureConnect}
         >
-          <Tag size={24} className="absolute left-4" />
+          <Tag
+            size={small ? 20 : 24}
+            className={cn(small ?? "absolute left-4")}
+          />
           Make offer
         </Button>
       </DialogTrigger>
@@ -165,18 +170,26 @@ function TokenActionsMakeOffer({ token }: TokenActionsMakeOfferProps) {
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Set price</FormLabel>
-                    <FormControl>
-                      <NumericalInput
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    {formattedStartAmount !== "-" && <FormMessage />}
-                  </FormItem>
-                )}
+                render={({ field, fieldState }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Set price</FormLabel>
+                      <FormControl>
+                        <EthInput
+                          value={field.value}
+                          onChange={field.onChange}
+                          status={
+                            formattedStartAmount !== "-" &&
+                            fieldState.error?.message
+                              ? "error"
+                              : "default"
+                          }
+                        />
+                      </FormControl>
+                      {formattedStartAmount !== "-" && <FormMessage />}
+                    </FormItem>
+                  );
+                }}
               />
               <FormField
                 control={form.control}

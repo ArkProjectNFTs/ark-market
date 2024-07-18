@@ -61,7 +61,7 @@ export default function CollectionHeader({
               <img
                 src={collection.image}
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
-                alt={collection.collection_name}
+                alt={collection.name}
               />
             ) : (
               <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
@@ -71,7 +71,7 @@ export default function CollectionHeader({
               <div>
                 <div className="flex items-center gap-1">
                   <p className="text-2xl font-semibold">
-                    {collection.collection_name ?? "Unknown collection"}
+                    {collection.name ?? "Unknown collection"}
                   </p>
                   <VerifiedIcon className="text-background" />
                 </div>

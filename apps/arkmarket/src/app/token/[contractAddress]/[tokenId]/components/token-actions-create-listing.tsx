@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
 
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -17,6 +18,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -43,10 +45,12 @@ import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
   token: Token;
+  small?: boolean;
 }
 
 export function TokenActionsCreateListing({
   token,
+  small,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
@@ -183,9 +187,12 @@ export function TokenActionsCreateListing({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full lg:max-w-[50%]" size="xxl">
-          <List size={24} className="absolute left-4" />
-          <span>List for sale</span>
+        <Button
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+          size={small ? "xl" : "xxl"}
+        >
+          <List size={24} className={cn("left-4", small ? "" : "absolute")} />
+          List for sale
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -279,13 +286,16 @@ export function TokenActionsCreateListing({
                 <FormField
                   control={form.control}
                   name="endAmount"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel className="text-lg">
                         Set reserve price
                       </FormLabel>
                       <FormControl>
-                        <NumericalInput
+                        <EthInput
+                          status={
+                            fieldState.error?.message ? "error" : "default"
+                          }
                           value={field.value}
                           onChange={field.onChange}
                         />
