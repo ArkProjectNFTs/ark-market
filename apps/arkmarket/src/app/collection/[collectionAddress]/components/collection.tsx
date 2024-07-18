@@ -53,6 +53,8 @@ export default function Collection({
     queryFn: () => getCollection({ collectionAddress }),
   });
 
+  const totalTokensCount = collection?.token_count ?? 0;
+
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 
   return (
@@ -97,7 +99,7 @@ export default function Collection({
                 setSortBy={setSortBy}
                 viewType={viewType}
                 setViewType={setViewType}
-                totalTokensCount={0}
+                totalTokensCount={totalTokensCount}
               />
             )}
             {activeTab === "activity" && <p>Coming</p>}
@@ -108,7 +110,7 @@ export default function Collection({
           {activeTab === "items" && (
             <CollectionItemsData
               collectionAddress={collectionAddress}
-              totalTokensCount={0}
+              totalTokensCount={totalTokensCount}
               sortDirection={sortDirection}
               sortBy={sortBy}
               viewType={viewType}
