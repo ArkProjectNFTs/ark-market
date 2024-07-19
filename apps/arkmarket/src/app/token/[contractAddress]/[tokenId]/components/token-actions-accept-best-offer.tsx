@@ -30,7 +30,7 @@ export default function TokenActionsAcceptBestOffer({
   const { fulfill: fulfillAuction, status: statusAuction } =
     useFulfillAuction();
   const { fulfillOffer, status } = useFulfillOffer();
-  const isOwner = areAddressesEqual(token.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData?.owner, address);
 
   if (!account || !isOwner || !tokenMarketData?.has_offer) {
     return null;
