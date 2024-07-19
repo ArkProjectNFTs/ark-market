@@ -28,7 +28,6 @@ import {
 import { Input } from "@ark-market/ui/input";
 
 import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
 import Media from "~/components/media";
 import { env } from "~/env";
 import useConnectWallet from "~/hooks/useConnectWallet";
