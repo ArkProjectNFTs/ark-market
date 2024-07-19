@@ -109,8 +109,10 @@ export default function CollectionItemsDataGridView({
                       )}
                     </div>
                   </div>
-                  <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                    Last sale _ ETH
+                  <p className="mt-5 h-5 text-sm font-medium text-secondary-foreground">
+                    {token.last_price ? (
+                      <>Last sale {formatUnits(token.last_price, 18)} ETH</>
+                    ) : null}
                   </p>
                   <NftCardAction>Details</NftCardAction>
                 </NftCardContent>
