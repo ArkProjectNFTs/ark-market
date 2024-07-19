@@ -44,7 +44,7 @@ export default function CollectionItemsData({
       sortBy,
       collectionAddress,
     ] as const,
-    refetchInterval: false,
+    refetchInterval: 10_000,
     getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
       lastPage.next_page,
     initialPageParam: undefined as number | undefined,
@@ -56,6 +56,7 @@ export default function CollectionItemsData({
         sortBy,
       }),
   });
+  console.log(infiniteData);
 
   useInfiniteWindowScroll({
     fetchNextPage,
