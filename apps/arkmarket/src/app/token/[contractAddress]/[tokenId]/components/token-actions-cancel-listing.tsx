@@ -22,7 +22,7 @@ export default function TokenActionsCancelListing({
 }: TokenActionsCancelListingProps) {
   const { account, address } = useAccount();
   const { cancel, status } = useCancel();
-  const isOwner = areAddressesEqual(token.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
 
   if (!account || !isOwner || !tokenMarketData.is_listed) {
     return;

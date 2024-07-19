@@ -30,7 +30,7 @@ export default function TokenActionsBuyNow({
   const [isOpen, setIsOpen] = useState(false);
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
-  const isOwner = areAddressesEqual(token.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
 
   const buy = async () => {
     setIsOpen(true);
