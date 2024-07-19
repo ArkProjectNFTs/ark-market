@@ -13,6 +13,7 @@ import { toast } from "@ark-market/ui/toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
+import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
@@ -31,8 +32,14 @@ export default function TokenActionsBuyNow({
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
+  const { data } = useBalance();
 
   const buy = async () => {
+    if (data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)) {
+      toast.error("Insufficient balance");
+      return;
+    }
+
     setIsOpen(true);
 
     await fulfillListing({
