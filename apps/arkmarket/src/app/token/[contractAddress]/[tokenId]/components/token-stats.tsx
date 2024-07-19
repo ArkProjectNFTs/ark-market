@@ -56,7 +56,6 @@ export default function TokenStats({
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
         <div className="flex items-center gap-1">
@@ -67,7 +66,6 @@ export default function TokenStats({
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
         <div className="flex items-center gap-1">
@@ -78,7 +76,6 @@ export default function TokenStats({
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
@@ -86,15 +83,12 @@ export default function TokenStats({
             address={data?.owner ?? token.owner}
             className="size-6 rounded-full"
           />
-
           <Link href={`/wallet/${data?.owner}`}>
-            <p
-              className={cn(
-                "text-sm font-medium text-muted-foreground",
-                ellipsableStyles,
-              )}
-            >
-              {ownerOrShortAddress(address, data?.owner)}
+            <p className={cn("font-medium", ellipsableStyles)}>
+              {ownerOrShortAddress({
+                ownerAddress: data?.owner ?? token.owner,
+                address,
+              })}
             </p>
           </Link>
         </div>
