@@ -66,11 +66,7 @@ export default function TokenActionsBuyNow({
     }
   }, [status]);
 
-  if (
-    isOwner ||
-    !tokenMarketData.is_listed ||
-    tokenMarketData.buy_in_progress
-  ) {
+  if (isOwner || !tokenMarketData.is_listed) {
     return null;
   }
 
@@ -135,7 +131,7 @@ export default function TokenActionsBuyNow({
       <Button
         className={cn(small ?? "relative w-full lg:max-w-[50%]")}
         size={small ? "xl" : "xxl"}
-        disabled={status === "loading"}
+        disabled={status === "loading" || tokenMarketData.buy_in_progress}
         onClick={(e) => {
           ensureConnect(e);
 
@@ -144,12 +140,24 @@ export default function TokenActionsBuyNow({
           }
         }}
       >
-        <ShoppingBag
-          size={small ? 20 : 24}
-          className={cn("left-4", small ? "" : "absolute")}
-        />
-        {"Buy now for "}
-        {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
+        {tokenMarketData.buy_in_progress ? (
+          <>
+            <LoaderCircle
+              className={cn("animate-spin", small ?? "absolute left-4")}
+              size={small ? 20 : 24}
+            />
+            Buy in progress
+          </>
+        ) : (
+          <>
+            <ShoppingBag
+              size={small ? 20 : 24}
+              className={cn("left-4", small ? "" : "absolute")}
+            />
+            {"Buy now for "}
+            {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
+          </>
+        )}
       </Button>
     </>
   );
