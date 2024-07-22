@@ -9,6 +9,7 @@ import getPrices from "~/lib/getPrices";
 
 interface TokenActionsPriceProps {
   startAmount: string | null;
+  isListed: boolean;
   isAuction: boolean;
   hasOffer: boolean;
   topOffer: {
@@ -20,27 +21,31 @@ interface TokenActionsPriceProps {
 export default function TokenActionsPrice({
   startAmount,
   isAuction,
+  isListed,
   hasOffer,
   topOffer,
 }: TokenActionsPriceProps) {
   const { data } = useQuery("prices", getPrices, {
     refetchInterval: 15_000,
   });
-
   const price = hasOffer
     ? formatEther(BigInt(topOffer.amount))
     : formatEther(BigInt(startAmount ?? 0));
   const priceInUSD = data ? data.ethereum.price * parseFloat(price) : 0;
 
+  let label = "Best offer";
+
+  if (isListed) {
+    if (isAuction) {
+      label = "Minimum starting price";
+    } else {
+      label = "Current Price";
+    }
+  }
+
   return (
     <div className="mb-6">
-      <div className="font-medium text-secondary-foreground">
-        {hasOffer
-          ? "Best offer"
-          : isAuction
-            ? "Minimum starting price"
-            : "Current Price"}
-      </div>
+      <div className="font-medium text-secondary-foreground">{label}</div>
       <div className="flex items-end gap-3 lg:gap-6">
         <div
           className={cn("text-xl font-semibold lg:text-3xl", ellipsableStyles)}

@@ -58,6 +58,7 @@ export default function TokenActions({
       />
       <TokenActionsPrice
         startAmount={data.listing.start_amount}
+        isListed={data.is_listed}
         isAuction={data.listing.is_auction}
         hasOffer={data.has_offer}
         topOffer={data.top_offer}
