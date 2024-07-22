@@ -12,12 +12,7 @@ import * as z from "zod";
 
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@ark-market/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
@@ -28,7 +23,6 @@ import {
   FormMessage,
 } from "@ark-market/ui/form";
 import { CheckIcon } from "@ark-market/ui/icons/check-icon";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -60,32 +54,21 @@ export function TokenActionsCreateListing({
 
   const formSchema = z
     .object({
-      startAmount: z.string().refine(
+      startAmount: z.string().refine((val) => Number(val) > 0, {
+        message: "Must be a valid amount",
+      }),
+      endAmount: z.string().refine(
         (val) => {
-          const num = parseFloat(val);
-          return !isNaN(num) && num > 0;
+          if (!isAuction) {
+            return true;
+          }
+
+          return Number(val) > 0;
         },
         {
           message: "Must be a valid amount",
         },
       ),
-      endAmount: z
-        .string()
-        .refine(
-          (val) => {
-            const num = parseFloat(val);
-
-            if (!isAuction) {
-              return true;
-            }
-
-            return !isNaN(num);
-          },
-          {
-            message: "Must be a valid amount",
-          },
-        )
-        .optional(),
       duration: z.string(),
     })
     .refine(
@@ -94,26 +77,25 @@ export function TokenActionsCreateListing({
           return true;
         }
 
-        if (data.endAmount !== undefined) {
-          const sa = parseFloat(data.startAmount);
-          const ea = parseFloat(data.endAmount);
-          return ea > sa;
-        }
-        return true;
+        const sa = Number(data.startAmount);
+        const ea = Number(data.endAmount);
+
+        return ea > sa;
       },
       {
-        message: "Must be greater than start amount",
+        message: "Must be greater than starting price",
         path: ["endAmount"],
       },
     );
 
   const form = useForm({
-    mode: "all",
+    mode: "onChange",
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
       endAmount: "",
       duration: "719",
+      username: "",
     },
   });
 
@@ -196,7 +178,6 @@ export function TokenActionsCreateListing({
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-8">
           <div className="text-center text-xl font-semibold">List for sale</div>
           <TokenActionsTokenOverview
@@ -209,7 +190,7 @@ export function TokenActionsCreateListing({
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col space-y-4"
             >
-              <FormItem className="">
+              <FormItem>
                 <FormLabel className="text-lg">Type of sale</FormLabel>
                 <div className="flex gap-6">
                   <Button
@@ -232,55 +213,45 @@ export function TokenActionsCreateListing({
                   </Button>
                 </div>
               </FormItem>
-
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => {
-                  const isFloorPrice = field.value === "0.5";
-
-                  return (
-                    <FormItem>
-                      <FormLabel className="text-lg">
-                        Set {isAuction && "starting"} price
-                      </FormLabel>
-                      <Button
-                        type="button"
-                        className="relative w-full"
-                        variant="outline"
-                        size="xl"
-                        onClick={() => {
-                          if (isFloorPrice) {
-                            field.onChange("");
-                            return;
-                          }
-                          field.onChange("0.5");
-                        }}
-                      >
-                        <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
-                          {isFloorPrice && <CheckIcon />}
-                        </div>
-                        <p>
-                          Choose floor price of{" "}
-                          <span className="font-bold">0.5 ETH</span>
-                        </p>
-                      </Button>
-                      <FormControl>
-                        <NumericalInput
-                          // {...field}
-                          defaultValue="0.1"
-                          value={field.value}
-                          onChange={field.onChange}
-                          placeholder="Price"
-                        />
-                      </FormControl>
-                      <p className="!mt-1 ml-3 text-sm text-muted-foreground">
-                        $---
+                render={({ field, fieldState }) => (
+                  <FormItem>
+                    <FormLabel className="text-lg">
+                      Set {isAuction && "starting"} price
+                    </FormLabel>
+                    <Button
+                      type="button"
+                      className="relative w-full"
+                      variant="outline"
+                      size="xl"
+                      onClick={async () => {
+                        form.setValue(
+                          "startAmount",
+                          field.value === "0.5" ? "" : "0.5",
+                        );
+                        await form.trigger("startAmount");
+                      }}
+                    >
+                      <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
+                        {field.value === "0.5" && <CheckIcon />}
+                      </div>
+                      <p>
+                        Choose floor price of{" "}
+                        <span className="font-bold">0.5 ETH</span>
                       </p>
-                      {formattedStartAmount !== "-" && <FormMessage />}
-                    </FormItem>
-                  );
-                }}
+                    </Button>
+                    <FormControl>
+                      <EthInput
+                        {...field}
+                        status={fieldState.error?.message ? "error" : "default"}
+                        autoFocus
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
               {isAuction && (
                 <FormField
@@ -293,11 +264,14 @@ export function TokenActionsCreateListing({
                       </FormLabel>
                       <FormControl>
                         <EthInput
+                          {...field}
+                          onChange={async (e) => {
+                            field.onChange(e);
+                            await form.trigger("endAmount");
+                          }}
                           status={
                             fieldState.error?.message ? "error" : "default"
                           }
-                          value={field.value}
-                          onChange={field.onChange}
                         />
                       </FormControl>
                       <FormMessage />
