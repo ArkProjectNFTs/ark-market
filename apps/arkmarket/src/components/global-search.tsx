@@ -1,6 +1,5 @@
 "use client";
 
-import type { KeyboardEventHandler } from "react";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
