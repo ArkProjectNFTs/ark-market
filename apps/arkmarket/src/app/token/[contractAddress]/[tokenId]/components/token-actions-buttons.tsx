@@ -47,7 +47,10 @@ export default function TokenActionsButtons({
       <TokenActionsBarMobile
         token={token}
         tokenMarketData={tokenMarketData}
-        show={!isActionItemsInView && isListed && !isAuction && !isOwner}
+        isListed={isListed}
+        isAuction={isAuction}
+        isOwner={isOwner}
+        show={!isActionItemsInView}
       />
       <div className="flex flex-col gap-4 lg:flex-row lg:gap-8" ref={ref}>
         {isOwner ? (

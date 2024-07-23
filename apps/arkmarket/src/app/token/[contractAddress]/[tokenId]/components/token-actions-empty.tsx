@@ -6,6 +6,7 @@ import { Meh } from "lucide-react";
 
 import type { Token } from "~/types";
 import TokenActionsBarEmpty from "./token-actions-bar-empty";
+import TokenActionsBarEmptyMobile from "./token-actions-bar-empty-mobile";
 import { TokenActionsCreateListing } from "./token-actions-create-listing";
 import TokenActionsMakeOffer from "./token-actions-make-offer";
 
@@ -24,6 +25,11 @@ export default function TokenActionsEmpty({
   return (
     <>
       <TokenActionsBarEmpty
+        token={token}
+        isOwner={isOwner}
+        show={!isActionItemsInView}
+      />
+      <TokenActionsBarEmptyMobile
         token={token}
         isOwner={isOwner}
         show={!isActionItemsInView}
