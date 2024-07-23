@@ -27,7 +27,7 @@ export default function SiteHeader() {
   return (
     <div
       className={cn(
-        "sticky top-0 z-20 flex h-[var(--site-header-height)] w-full items-center justify-between bg-background px-5 transition-transform duration-300 lg:border-b",
+        "sticky top-0 z-30 flex h-[var(--site-header-height)] w-full items-center justify-between bg-background px-5 transition-transform duration-300 lg:border-b",
         !showHeader && isTokenPage
           ? "lg:-translate-y-full"
           : "lg:translate-y-0",
