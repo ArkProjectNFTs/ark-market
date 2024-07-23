@@ -38,19 +38,15 @@ function GlobalSearchCommands({
     refetchInterval: false,
     placeholderData: keepPreviousData,
     queryFn: () => getCollectionSearch({ searchQuery: inputDebouncedValue }),
-    enabled: inputDebouncedValue.length > 0,
+    enabled: inputDebouncedValue.length >= 3,
   });
   const router = useRouter();
 
-  if (inputValue.length === 0) {
-    return (
-      <div className="px-4 pb-4 pt-5">
-        <GlobalSearchSuggestions onClose={onClose} />
-      </div>
-    );
-  }
-
-  if (searchResults === undefined || inputDebouncedValue.length === 0) {
+  if (
+    searchResults === undefined ||
+    inputValue.length < 3 ||
+    inputDebouncedValue.length < 3
+  ) {
     return (
       <div className="px-4 pb-4 pt-5">
         <GlobalSearchSuggestions onClose={onClose} />
@@ -141,9 +137,17 @@ export default function GlobalSearchWrapper() {
     );
   };
 
-  const handleKeyDown = () => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!inputRef.current) {
+      return;
+    }
+
     if (!open) {
       setOpen(true);
+    }
+
+    if (event.key === "Escape") {
+      inputRef.current.blur();
     }
   };
 
@@ -158,9 +162,10 @@ export default function GlobalSearchWrapper() {
         onFocus={openSearch}
         onBlur={closeSearch}
         ref={inputRef}
+        value={inputValue}
         onValueChange={(value) => {
-          setInputValue(value);
           setInputDebouncedValue(value);
+          setInputValue(value);
         }}
       />
       <div className="relative">

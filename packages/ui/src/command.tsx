@@ -3,9 +3,9 @@
 import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search } from "lucide-react";
+import { Search, X, XSquare } from "lucide-react";
 
-import { cn } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 
 import { Dialog, DialogContent } from "./dialog";
 
@@ -41,9 +41,9 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
+>(({ className, value, onValueChange, ...props }, ref) => (
   <div
-    className="flex items-center rounded-lg border px-3"
+    className="flex items-center rounded-lg border px-3 focus-within:ring-1 focus-within:ring-offset-1"
     cmdk-input-wrapper=""
   >
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
@@ -53,8 +53,22 @@ const CommandInput = React.forwardRef<
         "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
+      value={value}
+      onValueChange={onValueChange}
       {...props}
     />
+
+    {(value?.length ?? 0) > 0 && (
+      <button
+        className={cn(
+          "flex size-8 flex-shrink-0 items-center justify-center rounded-xs bg-secondary",
+          focusableStyles,
+        )}
+        onClick={() => onValueChange?.("")}
+      >
+        <X size={14} />
+      </button>
+    )}
   </div>
 ));
 
