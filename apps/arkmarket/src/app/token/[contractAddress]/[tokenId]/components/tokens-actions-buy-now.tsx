@@ -12,6 +12,7 @@ import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast } from "@ark-market/ui/toast";
 
 import type { Token, TokenMarketData } from "~/types";
+import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
@@ -32,7 +33,7 @@ export default function TokenActionsBuyNow({
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
-  const { data } = useBalance();
+  const { data } = useBalance({ token: ETH });
 
   const buy = async () => {
     if (data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)) {

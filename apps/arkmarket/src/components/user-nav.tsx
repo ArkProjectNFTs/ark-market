@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
 import { useAccount, useNetwork, useStarkProfile } from "@starknet-react/core";
 
+import { shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
 import WalletIcon from "@ark-market/ui/icons/wallet-icon";
 import { Separator } from "@ark-market/ui/separator";
 
+import { ETH } from "~/constants/tokens";
+import useBalance from "~/hooks/useBalance";
 import ConnectWalletModal from "./connect-wallet-modal";
 import ProfilePicture from "./profile-picture";
 import WalletAccountModal from "./wallet-account-modal";
@@ -16,26 +18,16 @@ import WrongNetworkModal from "./wrong-network-modal";
 
 export function UserNav() {
   const { address, chainId } = useAccount();
+  const { data: ethBalance } = useBalance({ token: ETH });
   const { chain } = useNetwork();
   const { data: starkProfile } = useStarkProfile({ address });
 
-  // const { data: ethBalance } = useBalance({ address });
-  const ethBalance = { formatted: "0.00" };
-
-  const shortenedAddress = useMemo(() => {
-    if (!address) return "";
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  }, [address]);
-
   const isWrongNetwork = chainId !== chain.id && chainId !== undefined;
+  const nameOrShortAddress =
+    starkProfile?.name ?? shortAddress(address ?? "0x");
+  const roundedEthBalance = parseFloat(ethBalance.formatted ?? "0").toFixed(4);
 
-  const roundedEthBalance =
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    ethBalance !== undefined
-      ? parseFloat(ethBalance.formatted).toFixed(4)
-      : undefined;
-
-  if (address === undefined) {
+  if (!address) {
     return (
       <ConnectWalletModal>
         <Button variant="default" size="md">
@@ -81,7 +73,7 @@ export function UserNav() {
             className="size-6 rounded-full md:size-8"
             address={address}
           />
-          {starkProfile?.name ?? shortenedAddress}
+          {nameOrShortAddress}
         </Button>
       </WalletAccountPopover>
 
@@ -92,7 +84,7 @@ export function UserNav() {
           variant="secondary"
         >
           <ProfilePicture className="size-6 rounded-full" address={address} />
-          {starkProfile?.name ?? shortenedAddress}
+          {nameOrShortAddress}
         </Button>
       </WalletAccountModal>
     </>
