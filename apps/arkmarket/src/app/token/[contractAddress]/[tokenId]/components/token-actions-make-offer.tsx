@@ -37,6 +37,7 @@ import {
 import { toast } from "@ark-market/ui/toast";
 
 import type { Token } from "~/types";
+import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
@@ -53,7 +54,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const config = useConfig();
   const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
-  const { data } = useBalance();
+  const { data } = useBalance({ token: ETH });
   const { ensureConnect } = useConnectWallet({
     account,
     onConnect: () => {

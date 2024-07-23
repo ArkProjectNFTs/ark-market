@@ -86,7 +86,6 @@ export default function Portfolio({
       />
       <div className="flex-1">
         <PortfolioHeader walletAddress={walletAddress} />
-
         <div className="w-full">
           <div className="sticky top-[var(--site-header-height)] z-10 mb-6 border-b border-border bg-background px-5 pb-4 sm:pt-4 lg:mb-0 lg:border-none">
             <TabsV2 defaultValue="items">

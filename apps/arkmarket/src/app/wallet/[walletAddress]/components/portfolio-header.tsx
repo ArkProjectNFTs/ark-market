@@ -1,14 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
 import { useStarkProfile } from "@starknet-react/core";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn } from "@ark-market/ui";
+import { cn, shortAddress } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 
 import CopyButton from "~/components/copy-button";
 import ProfilePicture from "~/components/profile-picture";
+import { ETH } from "~/constants/tokens";
+import useBalance from "~/hooks/useBalance";
 
 interface PortfolioHeaderProps {
   walletAddress: string;
@@ -18,13 +19,11 @@ export default function PortfolioHeader({
   className,
   walletAddress,
 }: PropsWithClassName<PortfolioHeaderProps>) {
-  const shortenedAddress = useMemo(() => {
-    return `${walletAddress.slice(0, 7)}...${walletAddress.slice(-10)}`;
-  }, [walletAddress]);
-
+  const { data: ethBalance } = useBalance({ token: ETH });
   const { data: starkProfile } = useStarkProfile({
     address: walletAddress,
   });
+  const shortenedAddress = shortAddress(walletAddress);
 
   return (
     <div
@@ -36,7 +35,7 @@ export default function PortfolioHeader({
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}
-          className="rounded-xs size-8 sm:size-16 sm:rounded-lg"
+          className="size-8 rounded-xs sm:size-16 sm:rounded-lg"
         />
         <div className="h-full w-full">
           <div className="flex items-center justify-between sm:justify-start">
@@ -62,7 +61,8 @@ export default function PortfolioHeader({
           <div className="flex flex-col gap-1.5">
             <p className="text-sm text-secondary-foreground">Portfolio value</p>
             <p className="text-xl font-semibold">
-              0.00 <span className="text-secondary-foreground">ETH</span>
+              {ethBalance.rounded}{" "}
+              <span className="text-secondary-foreground">ETH</span>
             </p>
           </div>
         </div>

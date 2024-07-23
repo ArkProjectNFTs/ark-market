@@ -30,7 +30,8 @@ export default function TokenOffersTableAction({
   }
 
   const isOwner =
-    validateAndParseAddress(address) === validateAndParseAddress(token.owner);
+    validateAndParseAddress(address) ===
+    validateAndParseAddress(tokenMarketData.owner);
   const isOfferer =
     validateAndParseAddress(address) === validateAndParseAddress(offer.source);
 

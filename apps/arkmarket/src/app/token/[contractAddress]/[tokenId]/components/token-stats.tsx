@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
+import { useQuery } from "react-query";
 import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -11,6 +12,8 @@ import { Separator } from "@ark-market/ui/separator";
 
 import type { Token } from "~/types";
 import ProfilePicture from "~/components/profile-picture";
+import getToken from "~/lib/getToken";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenStatsProps {
   token: Token;
@@ -20,9 +23,19 @@ export default function TokenStats({
   className,
   token,
 }: PropsWithClassName<TokenStatsProps>) {
-  const shortenedAddress = useMemo(() => {
-    return `${token.owner.slice(0, 7)}...${token.owner.slice(-4)}`;
-  }, [token.owner]);
+  const { address } = useAccount();
+  const { data } = useQuery(
+    ["token", token.collection_address, token.token_id],
+    () =>
+      getToken({
+        contractAddress: token.collection_address,
+        tokenId: token.token_id,
+      }),
+    {
+      refetchInterval: 5_000,
+      initialData: token,
+    },
+  );
 
   return (
     <div
@@ -43,43 +56,39 @@ export default function TokenStats({
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
-          <p className="font-medium">{"_"} ETH</p>
+          <p className="font-medium">
+            {formatEther(BigInt(data?.last_price ?? 0))} ETH
+          </p>
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatEther(BigInt(token.top_offer ?? 0))} ETH
+            {formatEther(BigInt(data?.top_offer ?? 0))} ETH
           </p>
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
-
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
           <ProfilePicture
-            address={token.owner}
+            address={data?.owner ?? token.owner}
             className="size-6 rounded-full"
           />
-
-          <Link href={`/wallet/${token.owner}`}>
-            <p
-              className={cn(
-                "text-sm font-medium text-muted-foreground",
-                ellipsableStyles,
-              )}
-            >
-              {shortenedAddress}
+          <Link href={`/wallet/${data?.owner}`}>
+            <p className={cn("font-medium", ellipsableStyles)}>
+              {ownerOrShortAddress({
+                ownerAddress: data?.owner ?? token.owner,
+                address,
+              })}
             </p>
           </Link>
         </div>
