@@ -1,5 +1,6 @@
 "use client";
 
+import type { KeyboardEventHandler } from "react";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -92,6 +93,7 @@ function GlobalSearchCommands({
               <Link
                 className={cn(focusableStyles)}
                 href={`/collection/${searchResult.address}`}
+                prefetch
               >
                 <Media
                   src={searchResult.image}
@@ -133,10 +135,25 @@ export default function GlobalSearchWrapper() {
   );
 
   const openSearch = () => setOpen(true);
-  const closeSearch = () => setOpen(false);
+  const closeSearch = () => {
+    // Delay input close to let enough time to perform redirection if needed
+    void new Promise((resolve) => setTimeout(resolve, 200)).then(() =>
+      setOpen(false),
+    );
+  };
+
+  const handleKeyDown = () => {
+    if (!open) {
+      setOpen(true);
+    }
+  };
 
   return (
-    <CommandPrimitive filter={() => 1} className="w-[30rem]">
+    <CommandPrimitive
+      filter={() => 1}
+      className="w-[30rem]"
+      onKeyDown={handleKeyDown}
+    >
       <CommandInput
         placeholder="Type a command or search..."
         onFocus={openSearch}
