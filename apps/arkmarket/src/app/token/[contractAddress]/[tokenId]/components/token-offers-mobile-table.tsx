@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
 import { cn, ellipsableStyles, getRoundedRemainingTime } from "@ark-market/ui";
@@ -50,46 +51,46 @@ export default function TokenOffersMobileTable({
   return (
     <div className="lg:hidden">
       <Separator className="my-4" />
-      {tokenOffers.map((offer, index) => {
-        return (
-          <>
-            <div className="mb-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 overflow-hidden">
-                  <PriceTag price={offer.price} className="h-7 text-xs" />
-                  <TokenFloorDifference
-                    floor_difference={offer.floor_difference}
-                  />
-                </div>
-
-                <TokenOffersTableAction
-                  offer={offer}
-                  token={token}
-                  tokenMarketData={tokenMarketData}
+      {tokenOffers.map((offer, index) => (
+        <>
+          <div className="mb-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4 overflow-hidden">
+                <PriceTag price={offer.price} className="h-7 text-xs" />
+                <TokenFloorDifference
+                  floor_difference={offer.floor_difference}
                 />
               </div>
 
-              <div className="mt-3.5 flex items-center justify-between ">
-                <div className="flex items-center gap-3.5">
-                  <p className="text-sm font-semibold">
-                    from{" "}
-                    <span className="text-muted-foreground">
+              <TokenOffersTableAction
+                offer={offer}
+                token={token}
+                tokenMarketData={tokenMarketData}
+              />
+            </div>
+
+            <div className="mt-3.5 flex items-center justify-between ">
+              <div className="flex items-center gap-3.5">
+                <p className="text-sm font-semibold">
+                  from{" "}
+                  <span className="text-muted-foreground">
+                    <Link href={`/wallet/${offer.source}`}>
                       {ownerOrShortAddress({
                         ownerAddress: offer.source,
                         address,
                       })}
-                    </span>
-                  </p>
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  Expire in {getRoundedRemainingTime(offer.expire_at)}
+                    </Link>
+                  </span>
                 </p>
               </div>
+              <p className="text-xs text-muted-foreground">
+                Expire in {getRoundedRemainingTime(offer.expire_at)}
+              </p>
             </div>
-            {index !== tokenOffers.length - 1 && <Separator className="mb-4" />}
-          </>
-        );
-      })}
+          </div>
+          {index !== tokenOffers.length - 1 && <Separator className="mb-4" />}
+        </>
+      ))}
     </div>
   );
 }
