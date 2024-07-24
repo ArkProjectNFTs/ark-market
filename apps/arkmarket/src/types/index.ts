@@ -1,7 +1,7 @@
 export interface Collection {
   address: string;
   name: string;
-  floor?: number;
+  floor?: string;
   image?: string;
   listed_items: number;
   listed_percentage: number;
