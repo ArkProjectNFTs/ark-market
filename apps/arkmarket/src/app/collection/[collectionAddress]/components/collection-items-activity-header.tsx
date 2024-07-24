@@ -34,7 +34,7 @@ export default function CollectionItemsActivityHeader({
         value={activeTab}
         onValueChange={(value) => onTabChange(value as PortfolioTabsValues)}
       >
-        <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
+        <TabsListV2 className="flex gap-8 border-b border-border sm:border-none">
           <TabsTriggerV2 value="items">Items</TabsTriggerV2>
           <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
         </TabsListV2>

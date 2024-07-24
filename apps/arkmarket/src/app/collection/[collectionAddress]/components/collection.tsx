@@ -95,6 +95,7 @@ export default function Collection({
           >
             {activeTab === "items" && (
               <CollectionItemsToolsBar
+                className="mt-4 sm:mt-6"
                 toggleFiltersPanel={toggleFiltersPanel}
                 sortDirection={sortDirection}
                 setSortDirection={setSortDirection}
