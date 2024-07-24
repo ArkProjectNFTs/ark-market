@@ -74,12 +74,6 @@ export default function PortfolioActivityData({
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage: PortfolioActivityApiResponse) =>
       lastPage.next_page,
-    // initialData: isSSR
-    //   ? {
-    //       pages: [walletTokensInitialData],
-    //       pageParams: [],
-    //     }
-    //   : undefined,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
       getPortfolioActivity({
