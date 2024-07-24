@@ -1,15 +1,13 @@
 "use client";
 
-import {
-  cn,
-  ellipsableStyles,
-  getRoundedRemainingTime,
-  shortAddress,
-} from "@ark-market/ui";
+import { useAccount } from "@starknet-react/core";
+
+import { cn, ellipsableStyles, getRoundedRemainingTime } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
@@ -47,6 +45,8 @@ export default function TokenOffersMobileTable({
   tokenMarketData,
   tokenOffers,
 }: TokenOffersMobileTableProps) {
+  const { address } = useAccount();
+
   return (
     <div className="lg:hidden">
       <Separator className="my-4" />
@@ -74,7 +74,10 @@ export default function TokenOffersMobileTable({
                   <p className="text-sm font-semibold">
                     from{" "}
                     <span className="text-muted-foreground">
-                      {offer.source ? shortAddress(offer.source) : "_"}
+                      {ownerOrShortAddress({
+                        ownerAddress: offer.source,
+                        address,
+                      })}
                     </span>
                   </p>
                 </div>
