@@ -1,4 +1,7 @@
-import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
+import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
+
+import { getRoundedRemainingTime } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -10,6 +13,7 @@ import {
 } from "@ark-market/ui/table";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
@@ -43,6 +47,8 @@ export default function TokenOffersTable({
   token,
   tokenMarketData,
 }: TokenOffersTableProps) {
+  const { address } = useAccount();
+
   return (
     <div className="hidden lg:block">
       <Table>
@@ -82,7 +88,12 @@ export default function TokenOffersTable({
                   />
                 </TableCell>
                 <TableCell>
-                  {offer.source ? shortAddress(offer.source) : "_"}
+                  <Link href={`/wallet/${offer.source}`}>
+                    {ownerOrShortAddress({
+                      ownerAddress: offer.source,
+                      address,
+                    })}
+                  </Link>
                 </TableCell>
                 <TableCell>
                   In {getRoundedRemainingTime(offer.expire_at)}
