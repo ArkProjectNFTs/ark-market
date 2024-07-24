@@ -42,7 +42,11 @@ export default async function TokenPage({
         />
         <div className="flex flex-col lg:gap-8">
           <div className="flex flex-col-reverse gap-5 lg:flex-col lg:gap-8">
-            <TokenStats token={token} className="mb-5 lg:mb-0" />
+            <TokenStats
+              token={token}
+              tokenMarketData={tokenMarketData}
+              className="mb-5 lg:mb-0"
+            />
             <TokenActions
               token={token}
               tokenMarketData={tokenMarketData}

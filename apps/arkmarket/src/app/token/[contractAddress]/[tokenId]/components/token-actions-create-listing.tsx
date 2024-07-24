@@ -7,7 +7,8 @@ import { useAccount } from "@starknet-react/core";
 import { List, LoaderCircle } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import { parseEther } from "viem";
+import { useQuery } from "react-query";
+import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
 import { cn } from "@ark-market/ui";
@@ -35,6 +36,7 @@ import { toast } from "@ark-market/ui/toast";
 import type { Token } from "~/types";
 import { env } from "~/env";
 import formatAmount from "~/lib/formatAmount";
+import getCollection from "~/lib/getCollection";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
@@ -49,6 +51,16 @@ export function TokenActionsCreateListing({
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
+  const { data: collection } = useQuery(
+    ["collection", token.collection_address],
+    () =>
+      getCollection({
+        collectionAddress: token.collection_address,
+      }),
+    {
+      refetchInterval: 5_000,
+    },
+  );
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
 
@@ -160,6 +172,8 @@ export function TokenActionsCreateListing({
   const formattedStartAmount = formatAmount(startAmount);
   const isLoading = status === "loading" || auctionStatus === "loading";
 
+  const formattedCollectionFloor = formatEther(BigInt(collection?.floor ?? 0));
+
   const isDisabled =
     !form.formState.isValid ||
     form.formState.isSubmitting ||
@@ -229,17 +243,23 @@ export function TokenActionsCreateListing({
                       onClick={async () => {
                         form.setValue(
                           "startAmount",
-                          field.value === "0.5" ? "" : "0.5",
+                          field.value === formattedCollectionFloor
+                            ? ""
+                            : formattedCollectionFloor,
                         );
                         await form.trigger("startAmount");
                       }}
                     >
                       <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
-                        {field.value === "0.5" && <CheckIcon />}
+                        {field.value === formattedCollectionFloor && (
+                          <CheckIcon />
+                        )}
                       </div>
                       <p>
                         Choose floor price of{" "}
-                        <span className="font-bold">0.5 ETH</span>
+                        <span className="font-bold">
+                          {formattedCollectionFloor} ETH
+                        </span>
                       </p>
                     </Button>
                     <FormControl>

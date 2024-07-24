@@ -10,30 +10,44 @@ import { cn, ellipsableStyles } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { Token } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
 import ProfilePicture from "~/components/profile-picture";
-import getToken from "~/lib/getToken";
+import getCollection from "~/lib/getCollection";
+import getTokenMarketData from "~/lib/getTokenMarketData";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenStatsProps {
   token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenStats({
   className,
   token,
+  tokenMarketData,
 }: PropsWithClassName<TokenStatsProps>) {
   const { address } = useAccount();
   const { data } = useQuery(
-    ["token", token.collection_address, token.token_id],
+    ["tokenMarketData", token.collection_address, token.token_id],
     () =>
-      getToken({
+      getTokenMarketData({
         contractAddress: token.collection_address,
         tokenId: token.token_id,
       }),
     {
       refetchInterval: 5_000,
-      initialData: token,
+      initialData: tokenMarketData,
+    },
+  );
+
+  const { data: collection, isLoading } = useQuery(
+    ["collection", token.collection_address],
+    () =>
+      getCollection({
+        collectionAddress: token.collection_address,
+      }),
+    {
+      refetchInterval: 5_000,
     },
   );
 
@@ -48,11 +62,11 @@ export default function TokenStats({
         <p className="text-sm font-medium text-muted-foreground">
           Collection Floor
         </p>
-        <div className="flex items-center gap-1 font-medium">
+        <div className="flex min-h-6 items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
-          <p>{"_"} ETH</p>
+          {isLoading || <>{formatEther(BigInt(collection?.floor ?? 0))} ETH</>}
           {/* TODO @YohanTz: Proper color */}
-          <p className={cn("text-sm font-semibold text-green-500")}>+ {"_"}%</p>
+          {/* <p className={cn("text-sm font-semibold text-green-500")}>+ {"_"}%</p> */}
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
@@ -71,7 +85,7 @@ export default function TokenStats({
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
-            {formatEther(BigInt(data?.top_offer ?? 0))} ETH
+            {formatEther(BigInt(data?.top_offer.amount ?? 0))} ETH
           </p>
         </div>
       </div>
@@ -80,13 +94,13 @@ export default function TokenStats({
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="flex items-center gap-2">
           <ProfilePicture
-            address={data?.owner ?? token.owner}
+            address={data?.owner ?? tokenMarketData.owner}
             className="size-6 rounded-full"
           />
           <Link href={`/wallet/${data?.owner}`}>
             <p className={cn("font-medium", ellipsableStyles)}>
               {ownerOrShortAddress({
-                ownerAddress: data?.owner ?? token.owner,
+                ownerAddress: data?.owner ?? tokenMarketData.owner,
                 address,
               })}
             </p>
