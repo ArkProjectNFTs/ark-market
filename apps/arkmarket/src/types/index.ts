@@ -140,6 +140,7 @@ export interface TokenMarketData {
   floor: string;
   has_offer: boolean;
   is_listed: boolean;
+  last_price: string | null;
   listing: {
     currency_address: string | null;
     end_amount: string | null;
