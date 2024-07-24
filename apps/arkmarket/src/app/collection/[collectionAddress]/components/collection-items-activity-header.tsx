@@ -4,10 +4,14 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { TabsListV2, TabsTriggerV2, TabsV2 } from "@ark-market/ui/tabs-v2";
 
+export const collectionTabsValue = ["items", "activity"] as const;
+
+export type PortfolioTabsValues = (typeof collectionTabsValue)[number];
+
 interface CollectionItemsActivityHeaderProps {
   // TODO @YohanTz: Type properly
   activeTab: string;
-  onTabChange: (newTab: string) => void;
+  onTabChange: (newTab: PortfolioTabsValues) => void;
   style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
@@ -26,7 +30,10 @@ export default function CollectionItemsActivityHeader({
       )}
       style={style}
     >
-      <TabsV2 value={activeTab} onValueChange={onTabChange}>
+      <TabsV2
+        value={activeTab}
+        onValueChange={(value) => onTabChange(value as PortfolioTabsValues)}
+      >
         <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
           <TabsTriggerV2 value="items">Items</TabsTriggerV2>
           <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>

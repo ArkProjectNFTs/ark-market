@@ -12,7 +12,6 @@ export interface PortfolioActivityApiResponse {
 interface GetPortfolioActivityParams {
   page?: number;
   walletAddress: string;
-  collectionAddress?: string;
 }
 
 export async function getPortfolioActivity({
