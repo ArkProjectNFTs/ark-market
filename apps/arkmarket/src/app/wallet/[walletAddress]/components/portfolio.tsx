@@ -4,21 +4,21 @@ import { useMemo, useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
-import { formatNumber } from "@ark-market/ui";
-import { TabsListV2, TabsTriggerV2, TabsV2 } from "@ark-market/ui/tabs-v2";
-
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
-import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
 } from "../search-params";
+import PortfolioActivityData from "./portfolio-activity-data";
 import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
+import PortfolioTabs from "./portfolio-tabs";
+
+type PortfolioTab = "items" | "activity" | "offers";
 
 interface PortfolioProps {
   walletAddress: string;
@@ -34,6 +34,7 @@ export default function Portfolio({
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
+  const [selectedTab, setSelectedTab] = useState<PortfolioTab>("activity");
 
   const [collectionFilter, _] = useQueryState(
     walletCollectionFilterKey,
@@ -64,12 +65,7 @@ export default function Portfolio({
         collectionAddress: collectionFilter,
       }),
   });
-
-  useInfiniteWindowScroll({
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  });
+  const portoflioItemsCount = infiniteData?.pages[0]?.token_count ?? 0;
 
   const walletTokens = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
@@ -78,47 +74,48 @@ export default function Portfolio({
 
   return (
     <main className="flex">
-      <PortfolioItemsFiltersPanel
-        walletAddress={walletAddress}
-        filtersOpen={itemsFiltersOpen}
-        className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
-        // walletCollectionsInitialData={walletCollectionsInitialData}
-      />
+      {selectedTab === "items" && (
+        <PortfolioItemsFiltersPanel
+          walletAddress={walletAddress}
+          filtersOpen={itemsFiltersOpen}
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
+          // walletCollectionsInitialData={walletCollectionsInitialData}
+        />
+      )}
       <div className="flex-1">
         <PortfolioHeader walletAddress={walletAddress} />
         <div className="w-full">
           <div className="sticky top-[var(--site-header-height)] z-10 mb-6 border-b border-border bg-background px-5 pb-4 sm:pt-4 lg:mb-0 lg:border-none">
-            <TabsV2 defaultValue="items">
-              <TabsListV2 className="mb-4 flex gap-8 border-b border-border sm:mb-6 sm:border-none">
-                <TabsTriggerV2
-                  value="items"
-                  className="flex items-center gap-2"
-                >
-                  Items{" "}
-                  <p className="flex h-5 items-center rounded-full bg-secondary px-1.5 text-xs font-medium text-secondary-foreground">
-                    {formatNumber(infiniteData?.pages[0]?.token_count ?? 0)}
-                  </p>
-                </TabsTriggerV2>
-                <TabsTriggerV2 value="orders">Orders</TabsTriggerV2>
-                <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
-              </TabsListV2>
-            </TabsV2>
-            <PortfolioItemsToolsBar
-              walletAddress={walletAddress}
-              // walletCollectionsInitialData={walletCollectionsInitialData}
-              toggleFiltersOpen={() =>
-                setItemsFiltersOpen((previous) => !previous)
-              }
-              setViewType={setViewType}
-              viewType={viewType}
+            <PortfolioTabs
+              value={selectedTab}
+              onValueChange={(value) => setSelectedTab(value as PortfolioTab)}
+              portfolioItemsCount={portoflioItemsCount}
             />
+            {selectedTab === "items" && (
+              <PortfolioItemsToolsBar
+                walletAddress={walletAddress}
+                // walletCollectionsInitialData={walletCollectionsInitialData}
+                toggleFiltersOpen={() =>
+                  setItemsFiltersOpen((previous) => !previous)
+                }
+                setViewType={setViewType}
+                viewType={viewType}
+              />
+            )}
           </div>
-          <PortfolioItemsData
-            viewType={viewType}
-            walletTokens={walletTokens}
-            walletAddress={walletAddress}
-            collectionFilter={collectionFilter}
-          />
+          {selectedTab === "items" && (
+            <PortfolioItemsData
+              viewType={viewType}
+              walletTokens={walletTokens}
+              collectionFilter={collectionFilter}
+              fetchNextPage={fetchNextPage}
+              hasNextPage={hasNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+            />
+          )}
+          {selectedTab === "activity" && (
+            <PortfolioActivityData walletAddress={walletAddress} />
+          )}
         </div>
       </div>
     </main>

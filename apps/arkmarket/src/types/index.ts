@@ -117,6 +117,25 @@ export interface PortfolioToken {
   metadata?: TokenMetadata;
 }
 
+export type PortfolioActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT"
+  | "BURN";
+
+export interface PortfolioActivity {
+  activity_type: PortfolioActivityType;
+  from: string;
+  price: string;
+  to: string;
+  time_stamp: number;
+  transaction_hash: string | null;
+}
+
 export interface TokenOffer {
   expire_at: number;
   floor_difference: number | null;

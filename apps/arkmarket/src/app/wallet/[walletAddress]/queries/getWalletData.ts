@@ -17,7 +17,7 @@ export interface WalletToken {
   floor: number | null;
   list_price: number | null;
   owner: string;
-  received_at: null | string;
+  received_at: number | null;
   token_id: string;
   metadata: Metadata | null;
 }

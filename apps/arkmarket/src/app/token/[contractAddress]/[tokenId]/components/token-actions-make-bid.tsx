@@ -106,7 +106,6 @@ export default function TokenActionsMakeBid({
   const reservePrice = formatEther(
     BigInt(tokenMarketData.listing.end_amount ?? 0),
   );
-  console.log(token);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
