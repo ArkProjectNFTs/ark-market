@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
 import { getRoundedRemainingTime } from "@ark-market/ui";
@@ -87,10 +88,12 @@ export default function TokenOffersTable({
                   />
                 </TableCell>
                 <TableCell>
-                  {ownerOrShortAddress({
-                    ownerAddress: offer.source,
-                    address,
-                  })}
+                  <Link href={`/wallet/${offer.source}`}>
+                    {ownerOrShortAddress({
+                      ownerAddress: offer.source,
+                      address,
+                    })}
+                  </Link>
                 </TableCell>
                 <TableCell>
                   In {getRoundedRemainingTime(offer.expire_at)}
