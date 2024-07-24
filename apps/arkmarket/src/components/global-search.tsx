@@ -158,7 +158,7 @@ export default function GlobalSearchWrapper() {
       onKeyDown={handleKeyDown}
     >
       <CommandInput
-        placeholder="Type a command or search..."
+        placeholder="Search Nft, collections and account..."
         onFocus={openSearch}
         onBlur={closeSearch}
         ref={inputRef}
@@ -180,7 +180,7 @@ export default function GlobalSearchWrapper() {
               inputDebouncedValue={inputDebouncedValue}
               inputValue={inputValue}
               onClose={() => {
-                inputRef.current?.blur();
+                inputRef.current.blur();
               }}
             />
           </CommandList>
