@@ -180,7 +180,7 @@ export default function GlobalSearchWrapper() {
               inputDebouncedValue={inputDebouncedValue}
               inputValue={inputValue}
               onClose={() => {
-                inputRef.current.blur();
+                inputRef.current?.blur();
               }}
             />
           </CommandList>
