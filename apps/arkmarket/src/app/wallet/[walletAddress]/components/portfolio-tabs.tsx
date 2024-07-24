@@ -1,7 +1,9 @@
 import { formatNumber } from "@ark-market/ui";
 import { TabsListV2, TabsTriggerV2, TabsV2 } from "@ark-market/ui/tabs-v2";
 
-export type PortfolioTabsValues = "items" | "activity" | "offers";
+export const portfolioTabsValues = ["items", "activity", "orders"] as const;
+
+export type PortfolioTabsValues = (typeof portfolioTabsValues)[number];
 
 interface PortfolioTabsProps {
   value: PortfolioTabsValues;

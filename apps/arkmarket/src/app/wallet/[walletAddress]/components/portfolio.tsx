@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { useQueryState } from "nuqs";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
@@ -16,9 +16,7 @@ import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
-import PortfolioTabs from "./portfolio-tabs";
-
-type PortfolioTab = "items" | "activity" | "offers";
+import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
 
 interface PortfolioProps {
   walletAddress: string;
@@ -34,7 +32,10 @@ export default function Portfolio({
   const [itemsFiltersOpen, setItemsFiltersOpen] = useState(false);
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
-  const [selectedTab, setSelectedTab] = useState<PortfolioTab>("activity");
+  const [selectedTab, setSelectedTab] = useQueryState(
+    "activeTab",
+    parseAsStringLiteral(portfolioTabsValues).withDefault("items"),
+  );
 
   const [collectionFilter, _] = useQueryState(
     walletCollectionFilterKey,
@@ -88,7 +89,7 @@ export default function Portfolio({
           <div className="sticky top-[var(--site-header-height)] z-10 mb-6 border-b border-border bg-background px-5 pb-4 sm:pt-4 lg:mb-0 lg:border-none">
             <PortfolioTabs
               value={selectedTab}
-              onValueChange={(value) => setSelectedTab(value as PortfolioTab)}
+              onValueChange={setSelectedTab}
               portfolioItemsCount={portoflioItemsCount}
             />
             {selectedTab === "items" && (
