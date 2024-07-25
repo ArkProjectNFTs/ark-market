@@ -33,7 +33,7 @@ export default function TokenActions({
         tokenId: token.token_id,
       }),
     {
-      refetchInterval: 10_000,
+      refetchInterval: 5_000,
       initialData: tokenMarketData,
     },
   );
