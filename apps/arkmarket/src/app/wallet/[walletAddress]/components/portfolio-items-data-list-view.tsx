@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Table,
@@ -104,10 +104,22 @@ export default function PortfolioItemsDataListView({
                   </p>
                 </div>
               </TableCell>
-              <TableCell>{token.list_price ?? "_"}</TableCell>
-              <TableCell>{token.best_offer ?? "_"}</TableCell>
-              <TableCell>{token.floor ?? "_"}</TableCell>
-              <TableCell>{token.received_at ?? "_"}</TableCell>
+              <TableCell>
+                {token.list_price
+                  ? `${formatUnits(token.list_price, 18)} ETH`
+                  : "_"}
+              </TableCell>
+              <TableCell>
+                {token.best_offer
+                  ? `${formatUnits(token.best_offer, 18)} ETH`
+                  : "_"}
+              </TableCell>
+              <TableCell>
+                {token.floor ? `${formatUnits(token.floor, 18)} ETH` : "_"}
+              </TableCell>
+              <TableCell>
+                {token.received_at ? timeSince(token.received_at) : "_"}
+              </TableCell>
               <TableCell>
                 {/* TODO @YohanTz: List button only if owner is connected */}
                 <Button
