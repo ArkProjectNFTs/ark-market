@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useQueryState } from "nuqs";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
 import getCollection from "~/lib/getCollection";
@@ -12,6 +12,7 @@ import {
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
 } from "~/lib/getCollectionTokens";
+import CollectionActivityData from "./collection-activity-data";
 import CollectionBanner from "./collection-banner";
 import CollectionHeader from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
@@ -32,8 +33,10 @@ export default function Collection({
   // collectionTokensInitialData,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
-  // TODO @YohanTz: Get State from URL query params
-  const [activeTab, setActiveTab] = useState("items");
+  const [activeTab, setActiveTab] = useQueryState(
+    "activeTab",
+    parseAsStringLiteral(["items", "activity"]).withDefault("items"),
+  );
 
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
@@ -92,6 +95,7 @@ export default function Collection({
           >
             {activeTab === "items" && (
               <CollectionItemsToolsBar
+                className="mt-4 sm:mt-6"
                 toggleFiltersPanel={toggleFiltersPanel}
                 sortDirection={sortDirection}
                 setSortDirection={setSortDirection}
@@ -102,7 +106,6 @@ export default function Collection({
                 totalTokensCount={totalTokensCount}
               />
             )}
-            {activeTab === "activity" && <p>Coming</p>}
           </CollectionItemsActivityHeader>
         </div>
 
@@ -115,6 +118,9 @@ export default function Collection({
               sortBy={sortBy}
               viewType={viewType}
             />
+          )}
+          {activeTab === "activity" && (
+            <CollectionActivityData collectionAddress={collectionAddress} />
           )}
         </div>
       </div>

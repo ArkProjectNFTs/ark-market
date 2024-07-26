@@ -29,15 +29,15 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { PortfolioActivityApiResponse } from "~/lib/getPortfolioActivity";
+import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
 import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getPortfolioActivity } from "~/lib/getPortfolioActivity";
+import { getCollectionActivity } from "~/lib/getCollectionActivity";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
-interface PortfolioActivityDataProps {
-  walletAddress: string;
+interface CollectionActivityDataProps {
+  collectionAddress: string;
 }
 
 export const activityTypeToItem = new Map([
@@ -57,9 +57,9 @@ export const activityTypeToItem = new Map([
 const gridTemplateColumnValue =
   "grid-cols-[minmax(7rem,1fr)_minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
 
-export default function PortfolioActivityData({
-  walletAddress,
-}: PortfolioActivityDataProps) {
+export default function CollectionActivityData({
+  collectionAddress,
+}: CollectionActivityDataProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
   const { address } = useAccount();
 
@@ -69,16 +69,16 @@ export default function PortfolioActivityData({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["walletActivity", walletAddress],
+    queryKey: ["collectionActivity", collectionAddress],
     refetchInterval: 10_000,
     placeholderData: keepPreviousData,
-    getNextPageParam: (lastPage: PortfolioActivityApiResponse) =>
+    getNextPageParam: (lastPage: CollectionActivityApiResponse) =>
       lastPage.next_page,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
-      getPortfolioActivity({
+      getCollectionActivity({
         page: pageParam,
-        walletAddress,
+        collectionAddress,
       }),
   });
 
