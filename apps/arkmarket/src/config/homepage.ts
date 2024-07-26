@@ -98,6 +98,7 @@ export const homepageConfig = {
       first_nft: "/nfts/everai_1.png",
       second_nft: "/nfts/everai_2.png",
       third_nft: "/nfts/everai_3.png",
+      token_count: 919,
     },
     {
       name: "Starkurabu",
@@ -107,6 +108,7 @@ export const homepageConfig = {
       first_nft: "/nfts/starkurabu_1.png",
       second_nft: "/nfts/starkurabu_2.png",
       third_nft: "/nfts/starkurabu_3.png",
+      token_count: 10_000,
     },
     {
       name: "Influence crewmates",
@@ -116,6 +118,7 @@ export const homepageConfig = {
       first_nft: "/nfts/crewmates_1.png",
       second_nft: "/nfts/crewmates_2.png",
       third_nft: "/nfts/crewmates_3.png",
+      token_count: 16_563,
     },
     {
       name: "Everai",
@@ -125,15 +128,7 @@ export const homepageConfig = {
       first_nft: "/nfts/everai_1.png",
       second_nft: "/nfts/everai_2.png",
       third_nft: "/nfts/everai_3.png",
-    },
-    {
-      name: "Starkurabu",
-      address:
-        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
-      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
-      first_nft: "/nfts/starkurabu_1.png",
-      second_nft: "/nfts/starkurabu_2.png",
-      third_nft: "/nfts/starkurabu_3.png",
+      token_count: 919,
     },
   ],
   exploreCollections: [

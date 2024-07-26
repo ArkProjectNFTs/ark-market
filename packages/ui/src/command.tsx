@@ -3,9 +3,9 @@
 import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
-import { cn } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 
 import { Dialog, DialogContent } from "./dialog";
 
@@ -41,8 +41,11 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
+>(({ className, value, onValueChange, ...props }, ref) => (
+  <div
+    className="flex items-center rounded-lg border px-3 focus-within:ring-1 focus-within:ring-offset-1"
+    cmdk-input-wrapper=""
+  >
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
       ref={ref}
@@ -50,8 +53,22 @@ const CommandInput = React.forwardRef<
         "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className,
       )}
+      value={value}
+      onValueChange={onValueChange}
       {...props}
     />
+
+    {(value?.length ?? 0) > 0 && (
+      <button
+        className={cn(
+          "flex size-8 flex-shrink-0 items-center justify-center rounded-xs bg-secondary",
+          focusableStyles,
+        )}
+        onClick={() => onValueChange?.("")}
+      >
+        <X size={14} />
+      </button>
+    )}
   </div>
 ));
 
@@ -114,11 +131,19 @@ CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
+>(({ className, disabled, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
+    disabled={disabled}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50",
+      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground ",
+      /**
+       * TODO @YohanTz: Fix disabled when fix available on shadcn side
+       * https://github.com/pacocoursey/cmdk/issues/285
+       */
+      disabled
+        ? "data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+        : "",
       className,
     )}
     {...props}

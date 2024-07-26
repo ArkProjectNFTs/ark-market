@@ -105,6 +105,14 @@ export interface CollectionToken {
   token_id: string;
 }
 
+export interface CollectionSearch {
+  address: string;
+  image: string | null;
+  is_verified: boolean;
+  name: string;
+  token_count: number;
+}
+
 export interface PortfolioToken {
   collection_name: string;
   collection_address: string;
