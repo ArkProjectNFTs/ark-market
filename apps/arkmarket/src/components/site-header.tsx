@@ -10,6 +10,7 @@ import { cn } from "@ark-market/ui";
 import { MainNav } from "~/components/main-nav";
 import { UserNav } from "~/components/user-nav";
 import GlobalSearch from "./global-search";
+import MobileGlobalSearch from "./mobile-global-search";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -34,10 +35,15 @@ export default function SiteHeader() {
       )}
     >
       <MainNav />
-      <div className="w-full flex-1 md:w-auto md:flex-none lg:block">
+      <div className="hidden w-full justify-center md:flex">
         <GlobalSearch />
       </div>
-      <div className="flex items-center space-x-4">
+
+      <div className="flex items-center gap-4">
+        <div className="md:hidden">
+          <MobileGlobalSearch />
+        </div>
+
         <UserNav />
       </div>
     </div>
