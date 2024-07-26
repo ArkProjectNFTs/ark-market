@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
@@ -59,7 +59,7 @@ function GlobalSearchCommands({
       <div className=" px-4 pb-4 pt-5">
         <div className="mb-8 flex flex-col items-center gap-3 text-muted-foreground">
           <Meh className="size-10" />
-          <p className="pl-3 text-xl font-semibold">
+          <p className="pl-3 text-center text-xl font-semibold">
             Sorry, there are no results for your search.
           </p>
         </div>
@@ -150,6 +150,20 @@ export default function GlobalSearchWrapper() {
       inputRef.current.blur();
     }
   };
+
+  useEffect(() => {
+    const down = (event: KeyboardEvent) => {
+      if (event.key === "/") {
+        event.preventDefault();
+        if (!inputRef.current) {
+          return;
+        }
+        inputRef.current.focus();
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   return (
     <CommandPrimitive

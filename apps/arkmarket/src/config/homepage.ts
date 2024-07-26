@@ -91,20 +91,22 @@ export const homepageConfig = {
   ],
   trendingNow: [
     {
-      name: "Everai",
+      name: "EveraiDuo",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      image: "/collections/everai.png",
+      image:
+        "https://media.arkproject.dev/contracts/0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478/avatar.png",
       first_nft: "/nfts/everai_1.png",
       second_nft: "/nfts/everai_2.png",
       third_nft: "/nfts/everai_3.png",
-      token_count: 919,
+      token_count: 921,
     },
     {
       name: "Starkurabu",
       address:
         "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
-      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
+      image:
+        "https://img.starkurabu.com/15576896767724894447561965312147459.png",
       first_nft: "/nfts/starkurabu_1.png",
       second_nft: "/nfts/starkurabu_2.png",
       third_nft: "/nfts/starkurabu_3.png",
@@ -114,11 +116,12 @@ export const homepageConfig = {
       name: "Influence crewmates",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
-      image: "/collections/crewmates.png",
+      image:
+        "https://media.arkproject.dev/contracts/0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74/avatar.jpg",
       first_nft: "/nfts/crewmates_1.png",
       second_nft: "/nfts/crewmates_2.png",
       third_nft: "/nfts/crewmates_3.png",
-      token_count: 16_563,
+      token_count: 17_746,
     },
     {
       name: "Everai",

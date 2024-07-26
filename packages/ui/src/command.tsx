@@ -3,7 +3,7 @@
 import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search, X } from "lucide-react";
+import { Search, Slash, X } from "lucide-react";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 
@@ -58,7 +58,7 @@ const CommandInput = React.forwardRef<
       {...props}
     />
 
-    {(value?.length ?? 0) > 0 && (
+    {(value?.length ?? 0) > 0 ? (
       <button
         className={cn(
           "flex size-8 flex-shrink-0 items-center justify-center rounded-xs bg-secondary",
@@ -68,6 +68,10 @@ const CommandInput = React.forwardRef<
       >
         <X size={14} />
       </button>
+    ) : (
+      <div className="flex size-8 flex-shrink-0 items-center justify-center rounded-xs bg-secondary">
+        <Slash className="size-3.5 -rotate-12" />
+      </div>
     )}
   </div>
 ));

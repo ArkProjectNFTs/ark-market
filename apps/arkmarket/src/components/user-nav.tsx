@@ -63,7 +63,7 @@ export function UserNav() {
           variant="secondary"
           size="md"
         >
-          <EthereumLogo className="size-6 md:size-8" />
+          <EthereumLogo className="size-6 flex-shrink-0 md:size-8" />
           <p>
             {roundedEthBalance}
             <span className="text-muted-foreground"> ETH</span>
