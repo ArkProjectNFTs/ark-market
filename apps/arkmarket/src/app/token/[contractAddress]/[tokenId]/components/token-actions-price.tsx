@@ -3,7 +3,7 @@
 import { useQuery } from "react-query";
 import { formatEther } from "viem";
 
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, formatNumber } from "@ark-market/ui";
 
 import getPrices from "~/lib/getPrices";
 
@@ -53,7 +53,7 @@ export default function TokenActionsPrice({
           {price} ETH
         </div>
         <div className="text-lg font-semibold text-muted-foreground lg:text-2xl">
-          ${priceInUSD ? priceInUSD.toFixed(2) : "--"}
+          ${priceInUSD ? formatNumber(priceInUSD) : "--"}
         </div>
         <div className="flex h-8 items-center whitespace-nowrap rounded-full bg-secondary px-3 text-xs text-secondary-foreground lg:text-sm">
           Royalties 5%

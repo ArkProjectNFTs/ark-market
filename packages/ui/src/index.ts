@@ -87,7 +87,9 @@ export function getRoundedRemainingTime(endTime: number): string {
   }
 }
 
-const NumberFormatter = new Intl.NumberFormat();
+const NumberFormatter = new Intl.NumberFormat(undefined, {
+  maximumFractionDigits: 2,
+});
 
 export function formatNumber(value: number | bigint) {
   return NumberFormatter.format(value);

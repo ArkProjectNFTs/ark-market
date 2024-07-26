@@ -88,7 +88,7 @@ export default function CollectionActivityData({
     isFetchingNextPage,
   });
 
-  const portfolioActivity = useMemo(
+  const collectionActivity = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
@@ -96,7 +96,7 @@ export default function CollectionActivityData({
   const rowVirtualizer = useWindowVirtualizer({
     // Approximate initial rect for SSR
     initialRect: { height: 1080, width: 1920 },
-    count: portfolioActivity.length,
+    count: collectionActivity.length,
     estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
     // Measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
@@ -137,7 +137,7 @@ export default function CollectionActivityData({
         style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const activity = portfolioActivity[virtualRow.index];
+          const activity = collectionActivity[virtualRow.index];
           if (activity === undefined) {
             return null;
           }

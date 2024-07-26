@@ -6,7 +6,12 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Meh, Search } from "lucide-react";
 import { useDebounceValue } from "usehooks-ts";
 
-import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
+import {
+  cn,
+  ellipsableStyles,
+  focusableStyles,
+  formatNumber,
+} from "@ark-market/ui";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
@@ -84,11 +89,13 @@ function MobileGlobalSearch({
                 width={64}
                 className="size-8 rounded-xs"
               />
-              <div>
+              <div className="overflow-hidden">
                 <div className="flex items-center gap-1">
-                  <p className="text-sm font-medium">{searchResult.name}</p>
+                  <p className={cn("text-sm font-medium", ellipsableStyles)}>
+                    {searchResult.name}
+                  </p>
                   {searchResult.is_verified && (
-                    <VerifiedIcon className="size-3 text-background" />
+                    <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
                   )}
                 </div>
                 <div className="flex items-center">
