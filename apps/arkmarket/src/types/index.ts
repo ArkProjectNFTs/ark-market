@@ -76,9 +76,9 @@ interface TokenMetadataAttribute {
 export interface TokenMetadata {
   image: string;
   name: string;
-  animation_key?: string;
-  animation_url?: string;
-  image_key?: string;
+  animation_key: string | null;
+  animation_url: string | null;
+  image_key: string | null;
   attributes: TokenMetadataAttribute[];
 }
 
@@ -137,10 +137,13 @@ export type PortfolioActivityType =
 
 export interface PortfolioActivity {
   activity_type: PortfolioActivityType;
+  collection_is_verified: boolean;
+  collection_name: string;
   from: string;
+  metadata: TokenMetadata;
   price: string;
-  to: string;
   time_stamp: number;
+  to: string;
   transaction_hash: string | null;
 }
 
@@ -157,9 +160,13 @@ export type CollectionActivityType =
 export interface CollectionActivity {
   activity_type: CollectionActivityType;
   from: string;
+  is_verified: boolean;
+  name: string;
   price: string;
-  to: string;
   time_stamp: number;
+  to: string;
+  token_id: string;
+  token_metadata: TokenMetadata;
   transaction_hash: string | null;
 }
 
