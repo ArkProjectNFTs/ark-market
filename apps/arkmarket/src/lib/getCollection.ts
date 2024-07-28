@@ -5,6 +5,10 @@ interface GetCollectionParams {
   collectionAddress: string;
 }
 
+interface CollectionApiResponse {
+  data: Collection;
+}
+
 export default async function getCollection({
   collectionAddress,
 }: GetCollectionParams) {
@@ -22,7 +26,7 @@ export default async function getCollection({
     return null;
   }
 
-  const collection = (await response.json()) as Collection;
+  const collection = (await response.json()) as CollectionApiResponse;
 
   return collection;
 }

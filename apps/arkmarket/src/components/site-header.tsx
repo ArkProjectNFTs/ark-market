@@ -35,7 +35,7 @@ export default function SiteHeader() {
       )}
     >
       <MainNav />
-      <div className="hidden w-full justify-center md:flex">
+      <div className="hidden justify-center md:flex">
         <GlobalSearch />
       </div>
 

@@ -18,8 +18,16 @@ import {
   X,
 } from "lucide-react";
 
-import { cn, ellipsableStyles, timeSince } from "@ark-market/ui";
+import {
+  cn,
+  ellipsableStyles,
+  focusableStyles,
+  formatUnits,
+  timeSince,
+} from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import {
   Table,
   TableBody,
@@ -88,7 +96,7 @@ export default function CollectionActivityData({
     isFetchingNextPage,
   });
 
-  const portfolioActivity = useMemo(
+  const collectionActivity = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
@@ -96,7 +104,7 @@ export default function CollectionActivityData({
   const rowVirtualizer = useWindowVirtualizer({
     // Approximate initial rect for SSR
     initialRect: { height: 1080, width: 1920 },
-    count: portfolioActivity.length,
+    count: collectionActivity.length,
     estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
     // Measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
@@ -137,7 +145,7 @@ export default function CollectionActivityData({
         style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const activity = portfolioActivity[virtualRow.index];
+          const activity = collectionActivity[virtualRow.index];
           if (activity === undefined) {
             return null;
           }
@@ -165,33 +173,54 @@ export default function CollectionActivityData({
               <TableCell>
                 <div className="flex items-center gap-4">
                   <Media
-                    alt=""
+                    alt={activity.token_metadata.name}
                     className="size-[3.75rem] rounded-xs object-contain"
                     height={120}
                     width={120}
+                    src={activity.token_metadata.image}
+                    mediaKey={activity.token_metadata.image_key}
                   />
 
                   <div className="w-full overflow-hidden">
-                    <p
+                    <Link
                       className={cn(
                         "w-full text-base font-medium",
+                        focusableStyles,
                         ellipsableStyles,
                       )}
+                      href={`/token/${collectionAddress}/${activity.token_id}`}
                     >
-                      Token #0
-                    </p>
-                    <p
-                      className={cn(
-                        "w-full text-muted-foreground",
-                        ellipsableStyles,
+                      {activity.token_metadata.name}
+                    </Link>
+                    <div className="flex w-full items-center gap-1">
+                      <p
+                        className={cn(
+                          "text-muted-foreground",
+                          ellipsableStyles,
+                        )}
+                      >
+                        {activity.name}
+                      </p>
+                      {activity.is_verified && (
+                        <VerifiedIcon className="size-4 text-background" />
                       )}
-                    >
-                      Unknown collection
-                    </p>
+                    </div>
                   </div>
                 </div>
               </TableCell>
-              <TableCell>_</TableCell>
+              <TableCell>
+                {activity.price ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p>
+                      {formatUnits(activity.price, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
+              </TableCell>
               <TableCell>
                 {activity.from ? (
                   <Link href={`/wallet/${activity.from}`}>

@@ -3,6 +3,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import {
   Table,
   TableBody,
@@ -105,17 +106,43 @@ export default function PortfolioItemsDataListView({
                 </div>
               </TableCell>
               <TableCell>
-                {token.list_price
-                  ? `${formatUnits(token.list_price, 18)} ETH`
-                  : "_"}
+                {token.list_price ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.list_price, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
               </TableCell>
               <TableCell>
-                {token.best_offer
-                  ? `${formatUnits(token.best_offer, 18)} ETH`
-                  : "_"}
+                {token.best_offer ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.best_offer, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
               </TableCell>
               <TableCell>
-                {token.floor ? `${formatUnits(token.floor, 18)} ETH` : "_"}
+                {token.floor ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.floor, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
               </TableCell>
               <TableCell>
                 {token.received_at ? timeSince(token.received_at) : "_"}

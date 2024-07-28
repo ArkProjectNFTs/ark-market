@@ -64,7 +64,9 @@ export default function TokenStats({
         </p>
         <div className="flex min-h-6 items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
-          {isLoading || <>{formatEther(BigInt(collection?.floor ?? 0))} ETH</>}
+          {isLoading || (
+            <>{formatEther(BigInt(collection?.data.floor ?? 0))} ETH</>
+          )}
           {/* TODO @YohanTz: Proper color */}
           {/* <p className={cn("text-sm font-semibold text-green-500")}>+ {"_"}%</p> */}
         </div>

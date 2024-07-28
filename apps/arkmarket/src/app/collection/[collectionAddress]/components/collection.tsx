@@ -56,7 +56,7 @@ export default function Collection({
     queryFn: () => getCollection({ collectionAddress }),
   });
 
-  const totalTokensCount = collection?.token_count ?? 0;
+  const totalTokensCount = collection?.data.token_count ?? 0;
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 
@@ -78,7 +78,7 @@ export default function Collection({
           <MobileCollectionHeader
             className="md:hidden"
             collectionAddress={collectionAddress}
-            collection={collection}
+            collection={collection.data}
           />
         ) : null}
         <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
@@ -86,7 +86,7 @@ export default function Collection({
             <CollectionHeader
               collectionAddress={collectionAddress}
               className="hidden md:block"
-              collection={collection}
+              collection={collection.data}
             />
           ) : null}
           <CollectionItemsActivityHeader
