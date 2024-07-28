@@ -172,7 +172,9 @@ export function TokenActionsCreateListing({
   const formattedStartAmount = formatAmount(startAmount);
   const isLoading = status === "loading" || auctionStatus === "loading";
 
-  const formattedCollectionFloor = formatEther(BigInt(collection?.floor ?? 0));
+  const formattedCollectionFloor = formatEther(
+    BigInt(collection?.data.floor ?? 0),
+  );
 
   const isDisabled =
     !form.formState.isValid ||
