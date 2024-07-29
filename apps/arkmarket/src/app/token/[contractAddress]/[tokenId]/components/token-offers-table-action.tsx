@@ -45,14 +45,7 @@ export default function TokenOffersTableAction({
     );
   }
 
-  if (isOfferer)
-    return (
-      <CancelOffer
-        offerOrderHash={offer.hash}
-        tokenId={token.token_id}
-        tokenContractAddress={token.collection_address}
-      />
-    );
+  if (isOfferer) return <CancelOffer offer={offer} token={token} />;
 
   return null;
 }

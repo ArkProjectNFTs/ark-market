@@ -4,27 +4,48 @@ import React, { useEffect } from "react";
 import { useCancel } from "@ark-project/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
+import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";
-import { toast } from "@ark-market/ui/sonner";
+import { useToast } from "@ark-market/ui/use-toast";
+
+import type { Token, TokenOffer } from "~/types";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface CancelOfferProps {
-  tokenContractAddress: string;
-  tokenId: string;
-  offerOrderHash: string;
+  token: Token;
+  offer: TokenOffer;
 }
 
-const CancelOffer = ({
-  offerOrderHash,
-  tokenContractAddress,
-  tokenId,
-}: CancelOfferProps) => {
+const CancelOffer = ({ offer, token }: CancelOfferProps) => {
   const { account } = useAccount();
   const { cancel, status } = useCancel();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (status === "error") {
-      toast("An error occurred while cancelling the offer");
+      toast({
+        variant: "canceled",
+        title: "The offer could not be canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={formatEther(BigInt(offer.price))}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your offer is successfully canceled",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={formatEther(BigInt(offer.price))}
+            token={token}
+          />
+        ),
+      });
     }
   }, [status]);
 
@@ -35,9 +56,9 @@ const CancelOffer = ({
 
     await cancel({
       starknetAccount: account,
-      tokenAddress: tokenContractAddress,
-      tokenId: BigInt(tokenId),
-      orderHash: BigInt(offerOrderHash),
+      tokenAddress: token.collection_address,
+      tokenId: BigInt(token.token_id),
+      orderHash: BigInt(offer.hash),
     });
   };
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { FileSignature, LoaderCircle, ShoppingBag } from "lucide-react";
+import { LoaderCircle, ShoppingBag } from "lucide-react";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
@@ -13,11 +13,12 @@ import { toast as sonner } from "@ark-market/ui/sonner";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
-import Media from "~/components/media";
 import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
@@ -70,44 +71,25 @@ export default function TokenActionsBuyNow({
         variant: "canceled",
         title: "Purchase canceled",
         additionalContent: (
-          <div className="mt-5 flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <Media
-                  src={token.metadata?.animation_url ?? token.metadata?.image}
-                  alt={
-                    token.metadata?.name ??
-                    `${token.collection_name} #${token.token_id}`
-                  }
-                  mediaKey={
-                    token.metadata?.animation_key ?? token.metadata?.image_key
-                  }
-                  height={84}
-                  width={84}
-                  className="size-10 rounded-xs object-contain"
-                />
-                <p className="font-medium">
-                  {token.metadata?.name ??
-                    `${token.collection_name} #${token.token_id}`}
-                </p>
-              </div>
-              <div className="text-end">
-                <p className="font-medium">
-                  {formatEther(
-                    BigInt(tokenMarketData.listing.start_amount ?? 0),
-                  )}{" "}
-                  ETH
-                </p>
-                <p className="text-xs font-medium">$---</p>
-              </div>
-            </div>
-            <div className="flex h-10 w-full items-center rounded-xs bg-slate-600 px-4 text-white opacity-50">
-              <FileSignature className="size-4" />
-              <p className="w-full text-center text-sm">
-                You didn't sign the transaction in your wallet
-              </p>
-            </div>
-          </div>
+          <ToastRejectedTransactionContent
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+            token={token}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            token={token}
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+          />
         ),
       });
     }

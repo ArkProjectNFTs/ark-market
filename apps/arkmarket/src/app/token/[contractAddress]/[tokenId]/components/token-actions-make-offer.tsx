@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { FileSignature, LoaderCircle, Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
@@ -34,16 +34,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast as sonner } from "@ark-market/ui/sonner";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token } from "~/types";
-import Media from "~/components/media";
 import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
 import formatAmount from "~/lib/formatAmount";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
@@ -109,44 +109,24 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         variant: "canceled",
         title: "Offer canceled",
         additionalContent: (
-          <div className="mt-5 flex flex-col gap-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <Media
-                  src={token.metadata?.animation_url ?? token.metadata?.image}
-                  alt={
-                    token.metadata?.name ??
-                    `${token.collection_name} #${token.token_id}`
-                  }
-                  mediaKey={
-                    token.metadata?.animation_key ?? token.metadata?.image_key
-                  }
-                  height={84}
-                  width={84}
-                  className="size-10 rounded-xs object-contain"
-                />
-                <p className="font-medium">
-                  {token.metadata?.name ??
-                    `${token.collection_name} #${token.token_id}`}
-                </p>
-              </div>
-              <div className="text-end">
-                <p className="font-medium">{startAmount} ETH</p>
-                <p className="text-xs font-medium">$---</p>
-              </div>
-            </div>
-            <div className="flex h-10 w-full items-center rounded-xs bg-slate-600 px-4 text-white opacity-50">
-              <FileSignature className="size-4" />
-              <p className="w-full text-center text-sm">
-                You didn't sign the transaction in your wallet
-              </p>
-            </div>
-          </div>
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={startAmount}
+          />
         ),
       });
     } else if (status === "success") {
       setIsOpen(false);
-      sonner.success("Your offer is successfully sent.");
+      toast({
+        variant: "success",
+        title: "Your offer is successfully sent",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     }
   }, [status, toast]);
 
