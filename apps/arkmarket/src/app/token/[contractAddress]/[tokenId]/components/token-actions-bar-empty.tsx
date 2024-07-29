@@ -36,9 +36,7 @@ export default function TokenActionsBarEmpty({
           <div className="flex items-center gap-3.5">
             <Media
               src={token.metadata?.animation_url ?? token.metadata?.image}
-              mediaKey={
-                token.metadata?.animation_key ?? token.metadata?.image_key
-              }
+              mediaKey={token.metadata?.image_key}
               alt={token.metadata?.name ?? `${token.collection_name}`}
               className="size-12 rounded-xs"
             />

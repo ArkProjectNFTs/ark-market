@@ -1,13 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCancel } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { ListX, LoaderCircle } from "lucide-react";
+import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface TokenActionsCancelListingProps {
   token: Token;
@@ -23,6 +28,37 @@ export default function TokenActionsCancelListing({
   const { account, address } = useAccount();
   const { cancel, status } = useCancel();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (status === "error") {
+      toast({
+        variant: "canceled",
+        title: "The listing could not be canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your listing is successfully canceled",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+            token={token}
+          />
+        ),
+      });
+    }
+  }, [status]);
 
   if (!account || !isOwner || !tokenMarketData.is_listed) {
     return;

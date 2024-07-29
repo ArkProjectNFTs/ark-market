@@ -9,13 +9,16 @@ import { formatEther } from "viem";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
-import { toast } from "@ark-market/ui/toast";
+import { toast as sonner } from "@ark-market/ui/sonner";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
@@ -34,10 +37,11 @@ export default function TokenActionsBuyNow({
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
   const { data } = useBalance({ token: ETH });
+  const { toast } = useToast();
 
   const buy = async () => {
     if (data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)) {
-      toast.error("Insufficient balance");
+      sonner.error("Insufficient balance");
       return;
     }
 
@@ -63,7 +67,31 @@ export default function TokenActionsBuyNow({
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Purchase cancelled by user");
+      toast({
+        variant: "canceled",
+        title: "Purchase canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+            token={token}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            token={token}
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+          />
+        ),
+      });
     }
   }, [status]);
 

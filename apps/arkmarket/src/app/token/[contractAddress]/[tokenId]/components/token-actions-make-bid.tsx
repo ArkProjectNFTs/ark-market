@@ -26,11 +26,14 @@ import {
   FormLabel,
 } from "@ark-market/ui/form";
 import { Input } from "@ark-market/ui/input";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import Media from "~/components/media";
 import { env } from "~/env";
 import useConnectWallet from "~/hooks/useConnectWallet";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface TokenActionsMakeBidProps {
   token: Token;
@@ -64,6 +67,7 @@ export default function TokenActionsMakeBid({
       setIsOpen(true);
     },
   });
+  const { toast } = useToast();
 
   useEffect(() => {
     form.reset();
@@ -74,6 +78,35 @@ export default function TokenActionsMakeBid({
       setIsOpen(false);
     }
   }, [response]);
+
+  const startAmount = form.watch("startAmount");
+
+  useEffect(() => {
+    if (status === "error") {
+      setIsOpen(false);
+      toast({
+        variant: "canceled",
+        title: "Purchase canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
+    }
+  }, [status]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account || !config) {
@@ -131,9 +164,7 @@ export default function TokenActionsMakeBid({
           <Media
             className="size-16 rounded-lg"
             src={token.metadata?.animation_url ?? token.metadata?.image}
-            mediaKey={
-              token.metadata?.animation_key ?? token.metadata?.image_key
-            }
+            mediaKey={token.metadata?.image_key}
             alt={token.token_id}
           />
           <div className="">

@@ -34,7 +34,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast } from "@ark-market/ui/toast";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token } from "~/types";
 import { ETH } from "~/constants/tokens";
@@ -42,6 +42,8 @@ import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
 import formatAmount from "~/lib/formatAmount";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
@@ -54,6 +56,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const config = useConfig();
   const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
+  const { toast } = useToast();
   const { data } = useBalance({ token: ETH });
   const { ensureConnect } = useConnectWallet({
     account,
@@ -102,12 +105,30 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Offer creation failed.");
+      toast({
+        variant: "canceled",
+        title: "Offer canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
     } else if (status === "success") {
       setIsOpen(false);
-      toast.success("Your offer is successfully sent.");
+      toast({
+        variant: "success",
+        title: "Your offer is successfully sent",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     }
-  }, [status]);
+  }, [status, toast]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {

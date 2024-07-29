@@ -31,12 +31,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast } from "@ark-market/ui/toast";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token } from "~/types";
 import { env } from "~/env";
 import formatAmount from "~/lib/formatAmount";
 import getCollection from "~/lib/getCollection";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
@@ -63,6 +65,7 @@ export function TokenActionsCreateListing({
   );
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
+  const { toast } = useToast();
 
   const formSchema = z
     .object({
@@ -114,10 +117,29 @@ export function TokenActionsCreateListing({
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Your token listing failed.");
+      toast({
+        variant: "canceled",
+        title: "Listing canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     } else if (status === "success") {
       setIsOpen(false);
-      toast.success("Your token is successfully listed.");
+
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     }
   }, [status]);
 
