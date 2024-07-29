@@ -24,9 +24,7 @@ export default function TokenActions({
   tokenMarketData,
   className,
 }: TokenActionsProps) {
-  const account = useAccount();
-  const isOwner =
-    !!account.address && areAddressesEqual(account.address, token.owner);
+  const { address } = useAccount();
   const { data } = useQuery(
     ["tokenMarketData", token.collection_address, token.token_id],
     () =>
@@ -35,10 +33,12 @@ export default function TokenActions({
         tokenId: token.token_id,
       }),
     {
-      refetchInterval: 10_000,
+      refetchInterval: 5_000,
       initialData: tokenMarketData,
     },
   );
+
+  const isOwner = areAddressesEqual(address, data?.owner);
 
   if (!data || (!data.has_offer && !data.is_listed)) {
     return <TokenActionsEmpty token={token} isOwner={isOwner} />;
@@ -58,6 +58,7 @@ export default function TokenActions({
       />
       <TokenActionsPrice
         startAmount={data.listing.start_amount}
+        isListed={data.is_listed}
         isAuction={data.listing.is_auction}
         hasOffer={data.has_offer}
         topOffer={data.top_offer}

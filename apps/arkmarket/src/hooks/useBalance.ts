@@ -1,7 +1,11 @@
 import { useAccount, useContractRead } from "@starknet-react/core";
 import { formatEther } from "viem";
 
-export default function useBalance() {
+interface UseBalanceProps {
+  token: string;
+}
+
+export default function useBalance({ token }: UseBalanceProps) {
   const { address } = useAccount();
   const { data, isError, isLoading, error } = useContractRead({
     functionName: "balance_of",
@@ -25,16 +29,19 @@ export default function useBalance() {
         state_mutability: "view",
       },
     ],
-    address:
-      "0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7",
+    address: token,
     watch: true,
     enabled: !!address,
+    refetchInterval: 5_000,
   });
+
+  const formatted = data ? formatEther(data as bigint) : undefined;
 
   return {
     data: {
       value: data as bigint,
-      formatted: data ? formatEther(data as bigint) : undefined,
+      formatted,
+      rounded: formatted ? parseFloat(formatted).toFixed(4) : undefined,
     },
     isError,
     isLoading,

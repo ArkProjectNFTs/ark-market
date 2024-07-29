@@ -28,7 +28,7 @@ import {
 import { Input } from "@ark-market/ui/input";
 
 import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/token/[contractAddress]/[tokenId]/components/token-media";
+import Media from "~/components/media";
 import { env } from "~/env";
 import useConnectWallet from "~/hooks/useConnectWallet";
 
@@ -128,9 +128,14 @@ export default function TokenActionsMakeBid({
           <DialogTitle>Place a bid</DialogTitle>
         </DialogHeader>
         <div className="flex items-center space-x-4">
-          <div className="w-16 overflow-hidden rounded">
-            <TokenMedia token={token} />
-          </div>
+          <Media
+            className="size-16 rounded-lg"
+            src={token.metadata?.animation_url ?? token.metadata?.image}
+            mediaKey={
+              token.metadata?.animation_key ?? token.metadata?.image_key
+            }
+            alt={token.token_id}
+          />
           <div className="">
             <div className="font-bold">Duo #{token.token_id}</div>
             <div className="text-muted-foreground">Everai</div>

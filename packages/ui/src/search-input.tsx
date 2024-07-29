@@ -9,12 +9,17 @@ import { Input } from "./input";
 const SearchInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div className={cn("relative w-full", className)}>
+      <div className="relative w-full flex-1">
         <Search
-          size={24}
+          size={16}
           className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 transform text-muted-foreground"
         />
-        <Input ref={ref} type="search" className="pl-10" {...props} />
+        <Input
+          ref={ref}
+          type="search"
+          className={cn("pl-10", className)}
+          {...props}
+        />
       </div>
     );
   },

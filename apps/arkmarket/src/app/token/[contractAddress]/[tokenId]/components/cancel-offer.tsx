@@ -48,7 +48,7 @@ const CancelOffer = ({
   const isLoading = ["loading", "cancelling"].includes(status);
 
   return (
-    <Button size="md" onClick={handleClick} disabled={isLoading}>
+    <Button size="sm" onClick={handleClick} disabled={isLoading}>
       {status === "loading" ? (
         <ReloadIcon className="animate-spin" />
       ) : (

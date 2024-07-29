@@ -4,7 +4,6 @@
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { validateAndParseAddress } from "starknet";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, focusableStyles } from "@ark-market/ui";
@@ -48,16 +47,7 @@ export default function CollectionHeader({
       >
         <div className="flex h-full items-center justify-between gap-0">
           <div className="flex h-[3.875rem] flex-shrink-0 items-center gap-4 transition-[height]">
-            {validateAndParseAddress(collectionAddress) ===
-            validateAndParseAddress(
-              "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-            ) ? (
-              <img
-                src="/collections/everai.png"
-                className="aspect-square h-full flex-shrink-0 rounded-lg"
-                alt="Everai profile"
-              />
-            ) : collection.image !== null ? (
+            {collection.image !== null ? (
               <img
                 src={collection.image}
                 className="aspect-square h-full flex-shrink-0 rounded-lg"

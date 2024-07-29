@@ -1,7 +1,7 @@
 export interface Collection {
   address: string;
   name: string;
-  floor?: number;
+  floor?: string;
   image?: string;
   listed_items: number;
   listed_percentage: number;
@@ -76,9 +76,9 @@ interface TokenMetadataAttribute {
 export interface TokenMetadata {
   image: string;
   name: string;
-  animation_key?: string;
-  animation_url?: string;
-  image_key?: string;
+  animation_key: string | null;
+  animation_url: string | null;
+  image_key: string | null;
   attributes: TokenMetadataAttribute[];
 }
 
@@ -105,6 +105,14 @@ export interface CollectionToken {
   token_id: string;
 }
 
+export interface CollectionSearch {
+  address: string;
+  image: string | null;
+  is_verified: boolean;
+  name: string;
+  token_count: number;
+}
+
 export interface PortfolioToken {
   collection_name: string;
   collection_address: string;
@@ -115,6 +123,51 @@ export interface PortfolioToken {
   received_at?: string;
   token_id: string;
   metadata?: TokenMetadata;
+}
+
+export type PortfolioActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT"
+  | "BURN";
+
+export interface PortfolioActivity {
+  activity_type: PortfolioActivityType;
+  collection_is_verified: boolean;
+  collection_name: string;
+  from: string;
+  metadata: TokenMetadata;
+  price: string;
+  time_stamp: number;
+  to: string;
+  transaction_hash: string | null;
+}
+
+export type CollectionActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT"
+  | "BURN";
+
+export interface CollectionActivity {
+  activity_type: CollectionActivityType;
+  from: string;
+  is_verified: boolean;
+  name: string;
+  price: string;
+  time_stamp: number;
+  to: string;
+  token_id: string;
+  token_metadata: TokenMetadata;
+  transaction_hash: string | null;
 }
 
 export interface TokenOffer {
@@ -140,6 +193,7 @@ export interface TokenMarketData {
   floor: string;
   has_offer: boolean;
   is_listed: boolean;
+  last_price: string | null;
   listing: {
     currency_address: string | null;
     end_amount: string | null;

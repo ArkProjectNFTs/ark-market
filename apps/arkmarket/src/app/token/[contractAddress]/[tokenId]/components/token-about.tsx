@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -18,6 +19,7 @@ import XIcon from "@ark-market/ui/icons/x-icon";
 
 import type { Token } from "~/types";
 import Media from "~/components/media";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenAboutProps {
   contractAddress: string;
@@ -32,13 +34,12 @@ export default function TokenAbout({
   tokenId,
 }: PropsWithClassName<TokenAboutProps>) {
   const [open, setOpen] = useState(true);
-  const collectionShortenedAddress = useMemo(() => {
-    return `${contractAddress.slice(0, 4)}...${contractAddress.slice(-4)}`;
-  }, [contractAddress]);
-
-  const ownerShortenedAddress = useMemo(() => {
-    return `${token.owner.slice(0, 4)}...${token.owner.slice(-4)}`;
-  }, [token.owner]);
+  const { address } = useAccount();
+  const collectionShortenedAddress = shortAddress(contractAddress);
+  const ownerShortenedAddress = ownerOrShortAddress({
+    ownerAddress: token.owner,
+    address,
+  });
 
   return (
     <Collapsible
@@ -103,7 +104,12 @@ export default function TokenAbout({
           <div className="flex items-center justify-between">
             <p className="font-medium">Contract Address</p>
             <p className="text-muted-foreground">
-              {collectionShortenedAddress}
+              <Link
+                href={`https://starkscan.co/nft-contract/${contractAddress}`}
+                target="_blank"
+              >
+                {collectionShortenedAddress}
+              </Link>
             </p>
           </div>
           <div className="flex items-center justify-between gap-4">

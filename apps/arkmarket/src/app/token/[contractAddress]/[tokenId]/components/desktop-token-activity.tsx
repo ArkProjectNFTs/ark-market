@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
 import {
   ArrowLeftRight,
   CircleDot,
@@ -12,7 +13,7 @@ import {
 } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { shortAddress, timeSince } from "@ark-market/ui";
+import { timeSince } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -24,6 +25,7 @@ import {
 } from "@ark-market/ui/table";
 
 import type { TokenActivity } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 export const activityTypeToItem = new Map([
   ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale in progress" }],
@@ -46,6 +48,8 @@ export default function DesktopTokenActivity({
   className,
   tokenActivity,
 }: PropsWithClassName<DesktopTokenActivityProps>) {
+  const { address } = useAccount();
+
   return (
     <Table className={className}>
       <TableHeader>
@@ -87,7 +91,10 @@ export default function DesktopTokenActivity({
                 <TableCell>
                   {activity.from ? (
                     <Link href={`/wallet/${activity.from}`}>
-                      {shortAddress(activity.from)}
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.from,
+                        address,
+                      })}
                     </Link>
                   ) : (
                     "_"
@@ -96,7 +103,10 @@ export default function DesktopTokenActivity({
                 <TableCell>
                   {activity.to ? (
                     <Link href={`/wallet/${activity.to}`}>
-                      {shortAddress(activity.to)}
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.to,
+                        address,
+                      })}
                     </Link>
                   ) : (
                     "_"
