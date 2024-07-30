@@ -29,7 +29,7 @@ export default async function TokenPage({
     tokenId,
   });
 
-  if (!token || !tokenMarketData) {
+  if (!token?.owner || !tokenMarketData) {
     return notFound();
   }
 
