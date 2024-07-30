@@ -1,8 +1,11 @@
-import type { CollectionSearch } from "~/types";
+import type { AccountSearchResult, CollectionSearchResult } from "~/types";
 import { env } from "~/env";
 
 interface CollectionSearchApiResponse {
-  data: CollectionSearch[];
+  data: {
+    collections: CollectionSearchResult[];
+    accounts: AccountSearchResult[];
+  };
 }
 
 interface GetCollectionSearchParams {
@@ -25,7 +28,9 @@ export default async function getCollectionSearch({
 
   if (!response.ok) {
     console.log("Failed to fetch perform collection search");
-    return { data: [] } as CollectionSearchApiResponse;
+    return {
+      data: { collections: [], accounts: [] },
+    } as CollectionSearchApiResponse;
   }
 
   const collection = (await response.json()) as CollectionSearchApiResponse;

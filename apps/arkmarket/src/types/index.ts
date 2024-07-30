@@ -105,7 +105,11 @@ export interface CollectionToken {
   token_id: string;
 }
 
-export interface CollectionSearch {
+export interface AccountSearchResult {
+  owner: string;
+}
+
+export interface CollectionSearchResult {
   address: string;
   image: string | null;
   is_verified: boolean;
