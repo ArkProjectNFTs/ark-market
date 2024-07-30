@@ -52,7 +52,10 @@ function MobileGlobalSearch({
     );
   }
 
-  if (searchResults.data.length === 0) {
+  if (
+    searchResults.data.collections.length === 0 &&
+    searchResults.data.accounts.length === 0
+  ) {
     return (
       <div className="pt-4">
         <div className="mb-8 flex flex-col items-center gap-3 text-muted-foreground">
@@ -69,46 +72,86 @@ function MobileGlobalSearch({
 
   return (
     <div>
-      <p className="text-sm font-medium text-muted-foreground">Collections</p>
-      <div className="mt-4 flex flex-col gap-2.5">
-        {searchResults.data.map((searchResult) => {
-          return (
-            <Link
-              onClick={onClose}
-              key={`${searchResult.address}-${searchResult.name}`}
-              className={cn(
-                "flex cursor-pointer items-center gap-2 rounded-xs bg-transparent p-2 transition-colors",
-                focusableStyles,
-              )}
-              href={`/collection/${searchResult.address}`}
-            >
-              <Media
-                src={searchResult.image}
-                alt={searchResult.name}
-                height={64}
-                width={64}
-                className="size-8 rounded-xs"
-              />
-              <div className="overflow-hidden">
-                <div className="flex items-center gap-1">
-                  <p className={cn("text-sm font-medium", ellipsableStyles)}>
-                    {searchResult.name}
-                  </p>
-                  {searchResult.is_verified && (
-                    <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+      {searchResults.data.collections.length > 0 && (
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">
+            Collections
+          </p>
+          <div className="my-4 flex flex-col gap-2.5">
+            {searchResults.data.collections.map((searchResult) => {
+              return (
+                <Link
+                  onClick={onClose}
+                  key={`${searchResult.address}-${searchResult.name}`}
+                  className={cn(
+                    "flex cursor-pointer items-center gap-2 rounded-xs bg-transparent p-2 transition-colors",
+                    focusableStyles,
                   )}
-                </div>
-                <div className="flex items-center">
-                  <EthereumLogo2 className="-ml-1 size-4" />
-                  <p className="text-xs font-medium text-muted-foreground">
-                    {formatNumber(searchResult.token_count)} items
-                  </p>
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+                  href={`/collection/${searchResult.address}`}
+                >
+                  <Media
+                    src={searchResult.image}
+                    alt={searchResult.name}
+                    height={64}
+                    width={64}
+                    className="size-8 rounded-xs"
+                  />
+                  <div className="overflow-hidden">
+                    <div className="flex items-center gap-1">
+                      <p
+                        className={cn("text-sm font-medium", ellipsableStyles)}
+                      >
+                        {searchResult.name}
+                      </p>
+                      {searchResult.is_verified && (
+                        <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+                      )}
+                    </div>
+                    <div className="flex items-center">
+                      <EthereumLogo2 className="-ml-1 size-4" />
+                      <p className="text-xs font-medium text-muted-foreground">
+                        {formatNumber(searchResult.token_count)} items
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {searchResults.data.accounts.length > 0 && (
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">Accounts</p>
+          <div className="mt-4 flex flex-col gap-2.5">
+            {searchResults.data.accounts.map((searchResult) => {
+              return (
+                <Link
+                  onClick={onClose}
+                  key={`${searchResult.owner}`}
+                  className={cn(
+                    "flex cursor-pointer items-center gap-2 rounded-xs bg-transparent p-2 transition-colors",
+                    focusableStyles,
+                  )}
+                  href={`/wallet/${searchResult.owner}`}
+                >
+                  <Media
+                    alt=""
+                    height={64}
+                    width={64}
+                    className="size-8 rounded-xs"
+                  />
+                  <div className="overflow-hidden">
+                    <p className={cn("text-sm font-medium", ellipsableStyles)}>
+                      {searchResult.owner}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
