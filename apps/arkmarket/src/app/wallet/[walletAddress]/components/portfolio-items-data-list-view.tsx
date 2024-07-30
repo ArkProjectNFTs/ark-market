@@ -79,6 +79,7 @@ export default function PortfolioItemsDataListView({
           if (token === undefined) {
             return null;
           }
+          const canListItem = isOwner && !token.list_price;
 
           return (
             <TableRow
@@ -152,7 +153,7 @@ export default function PortfolioItemsDataListView({
                 {token.received_at ? timeSince(token.received_at) : "_"}
               </TableCell>
               <TableCell>
-                {isOwner ? (
+                {canListItem ? (
                   <TokenActionsCreateListing token={token}>
                     <Button
                       className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"

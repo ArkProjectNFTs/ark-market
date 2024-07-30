@@ -75,6 +75,8 @@ export default function CollectionItemsDataGridView({
         if (token === undefined) {
           return null;
         }
+        const canListItem = isOwner && !token.list_price;
+
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <NftCard>
@@ -139,7 +141,7 @@ export default function CollectionItemsDataGridView({
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
-              {isOwner ? (
+              {canListItem ? (
                 <TokenActionsCreateListing token={token}>
                   <NftCardAction>List for sale</NftCardAction>
                 </TokenActionsCreateListing>
