@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Autoplay from "embla-carousel-autoplay";
 
 import type { CarouselApi } from "@ark-market/ui/carousel";
 import { cn } from "@ark-market/ui";
@@ -16,16 +15,42 @@ import {
 
 import { homepageConfig } from "~/config/homepage";
 
+const AUTO_SLIDE_INTERVAL = 8_000;
+
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [selectedItem, setSelectedItem] = useState(
     api?.selectedScrollSnap() ?? 0,
   );
+  const [progressPercentage, setProgressPercentage] = useState(0);
 
   useEffect(() => {
-    api?.on("select", () => {
-      setSelectedItem(api.selectedScrollSnap());
-    });
+    if (api) {
+      const progressInterval = setInterval(() => {
+        setProgressPercentage((prev) => (prev < 100 ? prev + 1 : 0));
+      }, AUTO_SLIDE_INTERVAL / 100);
+
+      const autoSlideInterval = setInterval(() => {
+        const nextIndex =
+          (selectedItem + 1) % homepageConfig.mainCarousel.length;
+        api.scrollTo(nextIndex);
+        setProgressPercentage(0);
+      }, AUTO_SLIDE_INTERVAL);
+
+      return () => {
+        clearInterval(progressInterval);
+        clearInterval(autoSlideInterval);
+      };
+    }
+  }, [api, selectedItem]);
+
+  useEffect(() => {
+    if (api) {
+      api.on("select", () => {
+        setSelectedItem(api.selectedScrollSnap());
+        setProgressPercentage(0);
+      });
+    }
   }, [api]);
 
   if (homepageConfig.mainCarousel.length === 0) {
@@ -34,14 +59,7 @@ export default function MainCarousel() {
 
   return (
     <div className="hidden lg:block">
-      <Carousel
-        setApi={setApi}
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-        ]}
-      >
+      <Carousel setApi={setApi}>
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
@@ -91,16 +109,28 @@ export default function MainCarousel() {
         <div className="mt-8 flex justify-center gap-4">
           {homepageConfig.mainCarousel.map((_, index) => {
             const isSelected = selectedItem === index;
+            const progressWidth =
+              isSelected && progressPercentage > 0
+                ? `${progressPercentage}%`
+                : "0%";
 
             return (
               <button
                 className={cn(
-                  "h-1.5 w-24 rounded-full",
-                  isSelected ? "bg-accent" : "bg-card",
+                  "relative h-1.5 w-24 overflow-hidden rounded-full",
+                  "bg-card",
                 )}
                 key={index}
-                onClick={() => api?.scrollTo(index)}
-              ></button>
+                onClick={() => {
+                  api?.scrollTo(index);
+                  setProgressPercentage(0);
+                }}
+              >
+                <div
+                  className="absolute bottom-0 left-0 top-0 bg-accent transition-[width]"
+                  style={{ width: progressWidth }}
+                ></div>
+              </button>
             );
           })}
         </div>

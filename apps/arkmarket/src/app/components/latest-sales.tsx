@@ -19,7 +19,8 @@ export default function LatestSales() {
   }
   return (
     <section>
-      <Table>
+      <h2 className="text-3xl font-semibold">Latest sale</h2>
+      <Table className="mt-12">
         <TableHeader>
           <TableRow className="hover:bg-background">
             <TableHead>
@@ -60,7 +61,7 @@ export default function LatestSales() {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-white">
                   <PriceTag price={sale.price} />
                 </TableCell>
                 <TableCell>{sale.from}</TableCell>
