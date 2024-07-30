@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, Meh } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -13,6 +13,7 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
+import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
 import type { Token, TokenMarketData } from "~/types";
 import { getTokenOffers } from "~/lib/getTokenOffers";
 import TokenOffersMobileTable from "./token-offers-mobile-table";
@@ -28,11 +29,19 @@ export default function TokenOffers({
   token,
   tokenMarketData,
 }: PropsWithClassName<TokenOffersProps>) {
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+
   const [open, setOpen] = useState(true);
-  const { data: infiniteData } = useInfiniteQuery({
+  const {
+    data: infiniteData,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ["tokenOffers", token.collection_address, token.token_id],
     refetchInterval: 10_000,
-    getNextPageParam: () => null,
+    getNextPageParam: (lastPage: TokenOffersApiResponse) => lastPage.next_page,
+    placeholderData: keepPreviousData,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
       getTokenOffers({
@@ -46,6 +55,26 @@ export default function TokenOffers({
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
+
+  const fetchMoreOnBottomReached = useCallback(
+    (containerRefElement?: HTMLDivElement | null) => {
+      if (containerRefElement) {
+        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
+        if (
+          scrollHeight - scrollTop - clientHeight < 150 &&
+          !isFetching &&
+          hasNextPage
+        ) {
+          void fetchNextPage();
+        }
+      }
+    },
+    [fetchNextPage, hasNextPage, isFetching],
+  );
+
+  useEffect(() => {
+    fetchMoreOnBottomReached(tableContainerRef.current);
+  }, [fetchMoreOnBottomReached]);
 
   return (
     <Collapsible
@@ -69,7 +98,13 @@ export default function TokenOffers({
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent className="max-h-[26rem] overflow-auto data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
+      <CollapsibleContent
+        className="max-h-[26rem] overflow-auto data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]"
+        ref={tableContainerRef}
+        onScroll={(event) =>
+          fetchMoreOnBottomReached(event.target as HTMLDivElement)
+        }
+      >
         {tokenOffers.length > 0 ? (
           <>
             <TokenOffersTable

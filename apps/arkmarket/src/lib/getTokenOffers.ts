@@ -1,7 +1,7 @@
 import type { TokenOffer } from "~/types";
 import { env } from "~/env";
 
-interface TokenOffersApiResponse {
+export interface TokenOffersApiResponse {
   count: number;
   data: TokenOffer[];
   next_page: number;
