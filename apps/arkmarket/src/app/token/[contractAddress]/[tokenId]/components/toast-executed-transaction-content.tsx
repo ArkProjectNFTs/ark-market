@@ -1,8 +1,9 @@
+import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
+import type { Token } from "~/types";
 import Media from "~/components/media";
-import { Token } from "~/types";
 
 interface ToastExecutedTransactionContentProps {
-  token: Token;
+  token: Token | WalletToken;
   formattedPrice: string;
 }
 

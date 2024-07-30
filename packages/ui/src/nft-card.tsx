@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import type { ButtonProps } from "./button";
 import { cn } from ".";
 import { Button } from "./button";
 
@@ -38,23 +39,22 @@ const NftCardContent = React.forwardRef<
 ));
 NftCardContent.displayName = "NftCardContent";
 
-const NftCardAction = React.forwardRef<
-  HTMLButtonElement,
-  React.HTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => (
-  // TODO @YohanTz: Handle focus-visible properly
-  <div className="absolute bottom-0 left-0 w-full bg-card opacity-0 transition-opacity group-hover:opacity-100">
-    <Button
-      size="xl"
-      ref={ref}
-      className={cn(
-        "h-10 w-full rounded-none opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100",
-        className,
-      )}
-      {...props}
-    />
-  </div>
-));
+const NftCardAction = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, ...props }, ref) => (
+    // TODO @YohanTz: Handle focus-visible properly
+    <div className="absolute bottom-0 left-0 w-full bg-card opacity-0 transition-opacity group-hover:opacity-100">
+      <Button
+        size="xl"
+        ref={ref}
+        className={cn(
+          "h-10 w-full rounded-none opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100",
+          className,
+        )}
+        {...props}
+      />
+    </div>
+  ),
+);
 NftCardAction.displayName = "NftCardAction";
 
 export { NftCard, NftCardMedia, NftCardContent, NftCardAction };

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
@@ -14,6 +15,7 @@ import {
 } from "@ark-market/ui/table";
 
 import type { WalletToken } from "../queries/getWalletData";
+import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
 import Media from "~/components/media";
 
 const gridTemplateColumnValue =
@@ -21,10 +23,12 @@ const gridTemplateColumnValue =
 
 interface PortfolioItemsDataListViewProps {
   walletTokens: WalletToken[];
+  isOwner: boolean;
 }
 
 export default function PortfolioItemsDataListView({
   walletTokens,
+  isOwner,
 }: PortfolioItemsDataListViewProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
 
@@ -148,13 +152,28 @@ export default function PortfolioItemsDataListView({
                 {token.received_at ? timeSince(token.received_at) : "_"}
               </TableCell>
               <TableCell>
-                {/* TODO @YohanTz: List button only if owner is connected */}
-                <Button
-                  className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
-                  size="xl"
-                >
-                  List for sale
-                </Button>
+                {isOwner ? (
+                  <TokenActionsCreateListing token={token}>
+                    <Button
+                      className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
+                      size="xl"
+                    >
+                      List for sale
+                    </Button>
+                  </TokenActionsCreateListing>
+                ) : (
+                  <Button
+                    className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
+                    size="xl"
+                    asChild
+                  >
+                    <Link
+                      href={`/token/${token.collection_address}/${token.token_id}`}
+                    >
+                      Details
+                    </Link>
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           );

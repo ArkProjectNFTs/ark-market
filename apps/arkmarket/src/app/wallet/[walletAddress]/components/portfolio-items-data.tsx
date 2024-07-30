@@ -14,6 +14,7 @@ interface PortfolioItemsDataProps {
   fetchNextPage: () => Promise<unknown>;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
+  isOwner: boolean;
 }
 
 export default function PortfolioItemsData({
@@ -24,6 +25,7 @@ export default function PortfolioItemsData({
   fetchNextPage,
   hasNextPage,
   isFetchingNextPage,
+  isOwner,
 }: PortfolioItemsDataProps) {
   // const isSSR = useIsSSR();
   useInfiniteWindowScroll({
@@ -33,7 +35,12 @@ export default function PortfolioItemsData({
   });
 
   if (viewType === "list") {
-    return <PortfolioItemsDataListView walletTokens={walletTokens} />;
+    return (
+      <PortfolioItemsDataListView
+        walletTokens={walletTokens}
+        isOwner={isOwner}
+      />
+    );
   }
 
   return (
@@ -42,6 +49,7 @@ export default function PortfolioItemsData({
         key={collectionFilter}
         walletTokens={walletTokens}
         viewType={viewType}
+        isOwner={isOwner}
       />
     </div>
   );

@@ -1,10 +1,11 @@
 import { FileSignature } from "lucide-react";
 
+import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import Media from "~/components/media";
 
 interface ToastRejectedTransactionContentProps {
-  token: Token;
+  token: Token | WalletToken;
   formattedPrice: string;
 }
 
