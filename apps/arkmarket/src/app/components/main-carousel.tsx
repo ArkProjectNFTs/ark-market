@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,27 +19,37 @@ const AUTO_SLIDE_INTERVAL = 8_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
-  const [selectedItem, setSelectedItem] = useState(
-    api?.selectedScrollSnap() ?? 0,
-  );
+  const [selectedItem, setSelectedItem] = useState(0);
   const [progressPercentage, setProgressPercentage] = useState(0);
+  const intervalId = useRef<number | null>(null);
+  const progressIntervalId = useRef<number | null>(null);
+
+  const startProgress = () => {
+    progressIntervalId.current = window.setInterval(() => {
+      setProgressPercentage((prev) => (prev < 100 ? prev + 1 : 0));
+    }, AUTO_SLIDE_INTERVAL / 100);
+  };
+
+  const startAutoSlide = () => {
+    intervalId.current = window.setInterval(() => {
+      const nextIndex = (selectedItem + 1) % homepageConfig.mainCarousel.length;
+      api?.scrollTo(nextIndex);
+      setProgressPercentage(0);
+    }, AUTO_SLIDE_INTERVAL);
+  };
+
+  const stopAutoSlide = () => {
+    if (intervalId.current) clearInterval(intervalId.current);
+    if (progressIntervalId.current) clearInterval(progressIntervalId.current);
+  };
 
   useEffect(() => {
     if (api) {
-      const progressInterval = setInterval(() => {
-        setProgressPercentage((prev) => (prev < 100 ? prev + 1 : 0));
-      }, AUTO_SLIDE_INTERVAL / 100);
-
-      const autoSlideInterval = setInterval(() => {
-        const nextIndex =
-          (selectedItem + 1) % homepageConfig.mainCarousel.length;
-        api.scrollTo(nextIndex);
-        setProgressPercentage(0);
-      }, AUTO_SLIDE_INTERVAL);
+      startProgress();
+      startAutoSlide();
 
       return () => {
-        clearInterval(progressInterval);
-        clearInterval(autoSlideInterval);
+        stopAutoSlide();
       };
     }
   }, [api, selectedItem]);
@@ -63,7 +73,16 @@ export default function MainCarousel() {
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
-              <CarouselItem className="basis-full" key={index}>
+              <CarouselItem
+                className="basis-full"
+                key={index}
+                onMouseEnter={stopAutoSlide}
+                onMouseLeave={() => {
+                  setProgressPercentage(0);
+                  startProgress();
+                  startAutoSlide();
+                }}
+              >
                 <div className="relative h-[30rem] overflow-hidden rounded-[1.5rem]">
                   <Image
                     src={carouselItem.bannerSrc}
@@ -124,6 +143,9 @@ export default function MainCarousel() {
                 onClick={() => {
                   api?.scrollTo(index);
                   setProgressPercentage(0);
+                  stopAutoSlide();
+                  startProgress();
+                  startAutoSlide();
                 }}
               >
                 <div
