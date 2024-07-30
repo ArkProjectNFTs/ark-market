@@ -2,11 +2,12 @@ import { cn, ellipsableStyles } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
+import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import Media from "~/components/media";
 
 interface tokenActionsTokenOverviewProps {
-  token: Token;
+  token: Token | WalletToken;
   amount: string;
   small?: boolean;
 }

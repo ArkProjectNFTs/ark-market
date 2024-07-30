@@ -18,6 +18,7 @@ import {
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { WalletToken } from "../queries/getWalletData";
+import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
 import Media from "~/components/media";
 
 const LargeGridContainer = forwardRef<
@@ -51,11 +52,13 @@ SmallGridContainer.displayName = "SmallGridContainer";
 interface CollectionItemsDataGridViewProps {
   walletTokens: WalletToken[];
   viewType: ViewType;
+  isOwner: boolean;
 }
 
 export default function CollectionItemsDataGridView({
   walletTokens,
   viewType,
+  isOwner,
 }: CollectionItemsDataGridViewProps) {
   return (
     <VirtuosoGrid
@@ -72,6 +75,8 @@ export default function CollectionItemsDataGridView({
         if (token === undefined) {
           return null;
         }
+        const canListItem = isOwner && !token.list_price;
+
         return (
           // TODO @YohanTz: Extract to NftCard component and sub-components
           <NftCard>
@@ -136,7 +141,19 @@ export default function CollectionItemsDataGridView({
               <p className="mt-5 text-sm font-medium text-secondary-foreground">
                 Last sale _ ETH
               </p>
-              <NftCardAction>List</NftCardAction>
+              {canListItem ? (
+                <TokenActionsCreateListing token={token}>
+                  <NftCardAction>List for sale</NftCardAction>
+                </TokenActionsCreateListing>
+              ) : (
+                <NftCardAction asChild>
+                  <Link
+                    href={`/token/${token.collection_address}/${token.token_id}`}
+                  >
+                    Details
+                  </Link>
+                </NftCardAction>
+              )}
             </NftCardContent>
           </NftCard>
         );

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,6 +34,7 @@ import {
 } from "@ark-market/ui/select";
 import { useToast } from "@ark-market/ui/use-toast";
 
+import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import { env } from "~/env";
 import formatAmount from "~/lib/formatAmount";
@@ -42,13 +44,15 @@ import ToastRejectedTransactionContent from "./toast-rejected-transaction-conten
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
-  token: Token;
+  token: Token | WalletToken;
   small?: boolean;
+  children?: ReactNode;
 }
 
 export function TokenActionsCreateListing({
   token,
   small,
+  children,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
@@ -207,13 +211,15 @@ export function TokenActionsCreateListing({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button
-          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
-          size={small ? "xl" : "xxl"}
-        >
-          <List size={24} className={cn("left-4", small ? "" : "absolute")} />
-          List for sale
-        </Button>
+        {children ?? (
+          <Button
+            className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+            size={small ? "xl" : "xxl"}
+          >
+            <List size={24} className={cn("left-4", small ? "" : "absolute")} />
+            List for sale
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col gap-8">

@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useAccount } from "@starknet-react/core";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { validateAndParseAddress } from "starknet";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
@@ -36,11 +38,16 @@ export default function Portfolio({
     "activeTab",
     parseAsStringLiteral(portfolioTabsValues).withDefault("items"),
   );
+  const { address } = useAccount();
 
   const [collectionFilter, _] = useQueryState(
     walletCollectionFilterKey,
     walletCollectionFilterParser,
   );
+
+  const isOwner =
+    address !== undefined &&
+    validateAndParseAddress(address) === validateAndParseAddress(walletAddress);
 
   const {
     data: infiniteData,
@@ -88,6 +95,7 @@ export default function Portfolio({
         <div className="w-full">
           <div className="sticky top-[var(--site-header-height)] z-10 mb-6 border-b border-border bg-background px-5 pb-4 sm:pt-4 lg:mb-0 lg:border-none">
             <PortfolioTabs
+              isOwner={isOwner}
               value={selectedTab}
               onValueChange={setSelectedTab}
               portfolioItemsCount={portoflioItemsCount}
@@ -112,6 +120,7 @@ export default function Portfolio({
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
               isFetchingNextPage={isFetchingNextPage}
+              isOwner={isOwner}
             />
           )}
           {selectedTab === "activity" && (
