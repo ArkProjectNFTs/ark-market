@@ -1,10 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -15,28 +17,29 @@ import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
+import Media from "~/components/media";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenAboutProps {
   contractAddress: string;
+  token: Token;
   tokenId: string;
-  tokenInfos: TokenInfosApiResponse["data"];
 }
 
 export default function TokenAbout({
   className,
   contractAddress,
+  token,
   tokenId,
-  tokenInfos,
 }: PropsWithClassName<TokenAboutProps>) {
   const [open, setOpen] = useState(true);
-  const collectionShortenedAddress = useMemo(() => {
-    return `${contractAddress.slice(0, 4)}...${contractAddress.slice(-4)}`;
-  }, [contractAddress]);
-
-  const ownerShortenedAddress = useMemo(() => {
-    return `${tokenInfos.owner.slice(0, 4)}...${tokenInfos.owner.slice(-4)}`;
-  }, [tokenInfos.owner]);
+  const { address } = useAccount();
+  const collectionShortenedAddress = shortAddress(contractAddress);
+  const ownerShortenedAddress = ownerOrShortAddress({
+    ownerAddress: token.owner,
+    address,
+  });
 
   return (
     <Collapsible
@@ -58,11 +61,15 @@ export default function TokenAbout({
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
         <div className="flex items-center gap-5">
-          <div className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"></div>
+          <Media
+            height={224}
+            width={224}
+            className="size-16 flex-shrink-0 rounded-lg bg-secondary lg:size-28"
+            alt={token.collection_name}
+            src={token.collection_image}
+          />
           <div>
-            <h4 className="text-xl font-semibold">
-              {tokenInfos.collection_name}
-            </h4>
+            <h4 className="text-xl font-semibold">{token.collection_name}</h4>
             <p className="mt-2 hidden text-sm lg:block">
               {`Everai is a pioneering web3 brand set to expand its universe powered
           by the collective creativity of its artistic partners and vibrant
@@ -97,7 +104,12 @@ export default function TokenAbout({
           <div className="flex items-center justify-between">
             <p className="font-medium">Contract Address</p>
             <p className="text-muted-foreground">
-              {collectionShortenedAddress}
+              <Link
+                href={`https://starkscan.co/nft-contract/${contractAddress}`}
+                target="_blank"
+              >
+                {collectionShortenedAddress}
+              </Link>
             </p>
           </div>
           <div className="flex items-center justify-between gap-4">
@@ -112,7 +124,9 @@ export default function TokenAbout({
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Owner</p>
-            <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+            <Link href={`/wallet/${token.owner}`}>
+              <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+            </Link>
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Royalty</p>

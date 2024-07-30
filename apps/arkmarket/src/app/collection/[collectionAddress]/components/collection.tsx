@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useQueryState } from "nuqs";
+import { parseAsStringLiteral, useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
-import { getCollectionInfos } from "../queries/getCollectionData";
+import getCollection from "~/lib/getCollection";
 import {
   collectionSortByKey,
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
-} from "../search-params";
+} from "~/lib/getCollectionTokens";
+import CollectionActivityData from "./collection-activity-data";
 import CollectionBanner from "./collection-banner";
 import CollectionHeader from "./collection-header";
 import CollectionItemsActivityHeader from "./collection-items-activity-header";
@@ -32,8 +33,10 @@ export default function Collection({
   // collectionTokensInitialData,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
-  // TODO @YohanTz: Get State from URL query params
-  const [activeTab, setActiveTab] = useState("items");
+  const [activeTab, setActiveTab] = useQueryState(
+    "activeTab",
+    parseAsStringLiteral(["items", "activity"]).withDefault("items"),
+  );
 
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
@@ -47,12 +50,13 @@ export default function Collection({
   // TODO @YohanTz: Choose between local storage and URL query param
   const [viewType, setViewType] = useState<ViewType>("large-grid");
 
-  const { data: collectionInfos } = useQuery({
-    queryKey: ["collectionInfos", collectionAddress],
+  const { data: collection } = useQuery({
+    queryKey: ["collection", collectionAddress],
     refetchInterval: false,
-    queryFn: () => getCollectionInfos({ collectionAddress }),
+    queryFn: () => getCollection({ collectionAddress }),
   });
-  console.log(collectionInfos);
+
+  const totalTokensCount = collection?.data.token_count ?? 0;
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 
@@ -70,19 +74,19 @@ export default function Collection({
           className="hidden md:block"
           collectionAddress={collectionAddress}
         />
-        {collectionInfos ? (
+        {collection ? (
           <MobileCollectionHeader
             className="md:hidden"
             collectionAddress={collectionAddress}
-            collectionInfos={collectionInfos}
+            collection={collection.data}
           />
         ) : null}
         <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
-          {collectionInfos ? (
+          {collection ? (
             <CollectionHeader
               collectionAddress={collectionAddress}
               className="hidden md:block"
-              collectionInfos={collectionInfos}
+              collection={collection.data}
             />
           ) : null}
           <CollectionItemsActivityHeader
@@ -91,6 +95,7 @@ export default function Collection({
           >
             {activeTab === "items" && (
               <CollectionItemsToolsBar
+                className="mt-4 sm:mt-6"
                 toggleFiltersPanel={toggleFiltersPanel}
                 sortDirection={sortDirection}
                 setSortDirection={setSortDirection}
@@ -98,10 +103,9 @@ export default function Collection({
                 setSortBy={setSortBy}
                 viewType={viewType}
                 setViewType={setViewType}
-                totalTokensCount={0}
+                totalTokensCount={totalTokensCount}
               />
             )}
-            {activeTab === "activity" && <p>Coming</p>}
           </CollectionItemsActivityHeader>
         </div>
 
@@ -109,11 +113,14 @@ export default function Collection({
           {activeTab === "items" && (
             <CollectionItemsData
               collectionAddress={collectionAddress}
-              totalTokensCount={0}
+              totalTokensCount={totalTokensCount}
               sortDirection={sortDirection}
               sortBy={sortBy}
               viewType={viewType}
             />
+          )}
+          {activeTab === "activity" && (
+            <CollectionActivityData collectionAddress={collectionAddress} />
           )}
         </div>
       </div>

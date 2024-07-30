@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
 import { LoaderCircle, Tag } from "lucide-react";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
 import * as z from "zod";
-import moment from "moment";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import EthInput from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -26,7 +27,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
 import {
   Select,
   SelectContent,
@@ -34,29 +34,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast } from "@ark-market/ui/toast";
+import { useToast } from "@ark-market/ui/use-toast";
 
-import type { Collection, Token } from "~/types";
+import type { Token } from "~/types";
+import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
+import useConnectWallet from "~/hooks/useConnectWallet";
 import formatAmount from "~/lib/formatAmount";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsMakeOfferProps {
-  collection: Collection;
   token: Token;
+  small?: boolean;
 }
 
-export default function TokenActionsMakeOffer({
-  collection,
-  token,
-}: TokenActionsMakeOfferProps) {
+function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { account, address } = useAccount();
+  const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
-  const isOwner = address && areAddressesEqual(token.owner, address);
-  const { data } = useBalance();
+  const { toast } = useToast();
+  const { data } = useBalance({ token: ETH });
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      setIsOpen(true);
+    },
+  });
 
   const formSchema = z.object({
     startAmount: z
@@ -76,7 +83,7 @@ export default function TokenActionsMakeOffer({
           return num <= data.value;
         },
         {
-          message: "Insufficient balance",
+          message: "You don't have enough funds in your wallet",
         },
       ),
     duration: z.string(),
@@ -98,12 +105,30 @@ export default function TokenActionsMakeOffer({
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Offer creation failed.");
+      toast({
+        variant: "canceled",
+        title: "Offer canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
     } else if (status === "success") {
       setIsOpen(false);
-      toast.success("Your offer is successfully sent.");
+      toast({
+        variant: "success",
+        title: "Your offer is successfully sent",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     }
-  }, [status]);
+  }, [status, toast]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {
@@ -113,7 +138,7 @@ export default function TokenActionsMakeOffer({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config?.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endDate: moment().add(values.duration, "hours").unix(),
@@ -123,10 +148,6 @@ export default function TokenActionsMakeOffer({
       starknetAccount: account,
       ...processedValues,
     });
-  }
-
-  if (!account || isOwner) {
-    return;
   }
 
   const isLoading = status === "loading";
@@ -141,20 +162,24 @@ export default function TokenActionsMakeOffer({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="relative w-full lg:max-w-[50%]"
-          size="xxl"
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+          size={small ? "xl" : "xxl"}
           variant="secondary"
+          onClick={ensureConnect}
         >
-          <Tag size={24} className="absolute left-4" />
+          <Tag
+            size={small ? 20 : 24}
+            className={cn(small ?? "absolute left-4")}
+          />
           Make offer
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
+          <div className="mx-auto size-20 rounded-full bg-secondary" />
           <div className="text-center text-xl font-semibold">Make an offer</div>
           <TokenActionsTokenOverview
-            collection={collection}
             token={token}
             amount={formattedStartAmount}
             small
@@ -167,18 +192,26 @@ export default function TokenActionsMakeOffer({
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Set price</FormLabel>
-                    <FormControl>
-                      <NumericalInput
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    {formattedStartAmount !== "-" && <FormMessage />}
-                  </FormItem>
-                )}
+                render={({ field, fieldState }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Set price</FormLabel>
+                      <FormControl>
+                        <EthInput
+                          value={field.value}
+                          onChange={field.onChange}
+                          status={
+                            formattedStartAmount !== "-" &&
+                            fieldState.error?.message
+                              ? "error"
+                              : "default"
+                          }
+                        />
+                      </FormControl>
+                      {formattedStartAmount !== "-" && <FormMessage />}
+                    </FormItem>
+                  );
+                }}
               />
               <FormField
                 control={form.control}
@@ -204,9 +237,7 @@ export default function TokenActionsMakeOffer({
                         <SelectItem value="24">1 day</SelectItem>
                         <SelectItem value="72">3 days</SelectItem>
                         <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="719">
-                          1 month
-                        </SelectItem>
+                        <SelectItem value="719">1 month</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -229,3 +260,5 @@ export default function TokenActionsMakeOffer({
     </Dialog>
   );
 }
+
+export default memo(TokenActionsMakeOffer);

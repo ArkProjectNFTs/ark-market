@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -26,34 +26,48 @@ import {
   FormLabel,
 } from "@ark-market/ui/form";
 import { Input } from "@ark-market/ui/input";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
-import TokenMedia from "~/app/assets/[contract_address]/[token_id]/components/token-media";
+import Media from "~/components/media";
 import { env } from "~/env";
+import useConnectWallet from "~/hooks/useConnectWallet";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface TokenActionsMakeBidProps {
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsMakeBid({
   token,
   tokenMarketData,
+  small,
 }: TokenActionsMakeBidProps) {
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { account, address } = useAccount();
+  const { account } = useAccount();
   const { response, createOffer, status } = useCreateOffer();
-  const isOwner = address && areAddressesEqual(token.owner, address);
   const formSchema = z.object({
     startAmount: z.string(),
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      startAmount: formatEther(BigInt(tokenMarketData.start_amount)),
+      startAmount: formatEther(
+        BigInt(tokenMarketData.listing.start_amount ?? 0),
+      ),
     },
   });
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      setIsOpen(true);
+    },
+  });
+  const { toast } = useToast();
 
   useEffect(() => {
     form.reset();
@@ -64,6 +78,35 @@ export default function TokenActionsMakeBid({
       setIsOpen(false);
     }
   }, [response]);
+
+  const startAmount = form.watch("startAmount");
+
+  useEffect(() => {
+    if (status === "error") {
+      setIsOpen(false);
+      toast({
+        variant: "canceled",
+        title: "Purchase canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
+    }
+  }, [status]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account || !config) {
@@ -80,7 +123,7 @@ export default function TokenActionsMakeBid({
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config.starknetCurrencyContract,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
     };
@@ -91,20 +134,26 @@ export default function TokenActionsMakeBid({
     });
   }
 
-  if (!account || isOwner) {
-    return;
-  }
-
   const isDisabled = form.formState.isSubmitting || status === "loading";
-  const price = formatEther(BigInt(tokenMarketData.start_amount));
-  const reservePrice = formatEther(BigInt(tokenMarketData.end_amount));
+  const price = formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0));
+  const reservePrice = formatEther(
+    BigInt(tokenMarketData.listing.end_amount ?? 0),
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full" variant="secondary" size="xxl">
-          <Tag size={24} className="absolute left-4" />
-          Make an offer
+        <Button
+          className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+          variant="secondary"
+          size={small ? "xl" : "xxl"}
+          onClick={ensureConnect}
+        >
+          <Tag
+            size={small ? 20 : 24}
+            className={cn("left-4", small ? "" : "absolute")}
+          />
+          Make a bid
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -112,9 +161,12 @@ export default function TokenActionsMakeBid({
           <DialogTitle>Place a bid</DialogTitle>
         </DialogHeader>
         <div className="flex items-center space-x-4">
-          <div className="w-16 overflow-hidden rounded">
-            <TokenMedia token={token} />
-          </div>
+          <Media
+            className="size-16 rounded-lg"
+            src={token.metadata?.animation_url ?? token.metadata?.image}
+            mediaKey={token.metadata?.image_key}
+            alt={token.token_id}
+          />
           <div className="">
             <div className="font-bold">Duo #{token.token_id}</div>
             <div className="text-muted-foreground">Everai</div>

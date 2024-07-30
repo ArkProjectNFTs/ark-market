@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { cn } from "@ark-market/ui";
-import { Toaster } from "@ark-market/ui/toast";
+import { Toaster as Sonner } from "@ark-market/ui/sonner";
+import { Toaster } from "@ark-market/ui/toaster";
 
 import SiteHeader from "~/components/site-header";
 
@@ -11,6 +12,7 @@ import "~/app/globals.css";
 
 import type { PropsWithChildren } from "react";
 
+import ConnectWalletDialog from "~/components/connect-wallet-dialog";
 import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
@@ -70,9 +72,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
             {children}
             <SpeedInsights />
           </div>
-          <Toaster richColors />
           <Footer />
           <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
+          <Toaster />
+          <Sonner richColors />
+          <ConnectWalletDialog />
         </Providers>
       </body>
     </html>

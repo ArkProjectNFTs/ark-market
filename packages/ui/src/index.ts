@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 export type PropsWithClassName<P = unknown> = P & { className?: string };
 
 export const focusableStyles =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
 export const ellipsableStyles =
   "whitespace-nowrap text-ellipsis overflow-hidden";
 
@@ -87,7 +87,9 @@ export function getRoundedRemainingTime(endTime: number): string {
   }
 }
 
-const NumberFormatter = new Intl.NumberFormat();
+const NumberFormatter = new Intl.NumberFormat(undefined, {
+  maximumFractionDigits: 2,
+});
 
 export function formatNumber(value: number | bigint) {
   return NumberFormatter.format(value);

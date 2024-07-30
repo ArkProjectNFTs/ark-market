@@ -1,26 +1,64 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCancel } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { ListX, LoaderCircle } from "lucide-react";
+import { formatEther } from "viem";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface TokenActionsCancelListingProps {
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsCancelListing({
   token,
   tokenMarketData,
+  small,
 }: TokenActionsCancelListingProps) {
   const { account, address } = useAccount();
   const { cancel, status } = useCancel();
-  const isOwner = areAddressesEqual(token.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (status === "error") {
+      toast({
+        variant: "canceled",
+        title: "The listing could not be canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your listing is successfully canceled",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+            token={token}
+          />
+        ),
+      });
+    }
+  }, [status]);
 
   if (!account || !isOwner || !tokenMarketData.is_listed) {
     return;
@@ -29,8 +67,8 @@ export default function TokenActionsCancelListing({
   const handleClick = async () => {
     await cancel({
       starknetAccount: account,
-      orderHash: BigInt(tokenMarketData.order_hash),
-      tokenAddress: token.contract_address,
+      orderHash: BigInt(tokenMarketData.listing.order_hash),
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
     });
   };
@@ -39,14 +77,20 @@ export default function TokenActionsCancelListing({
     <Button
       onClick={handleClick}
       disabled={status === "loading"}
-      className="relative w-full lg:max-w-[50%]"
-      size="xxl"
+      className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+      size={small ? "xl" : "xxl"}
       variant="secondary"
     >
       {status === "loading" ? (
-        <LoaderCircle className="absolute left-4 h-6 w-6 animate-spin" />
+        <LoaderCircle
+          className={cn("animate-spin", small ?? "absolute left-4")}
+          size={small ? 20 : 24}
+        />
       ) : (
-        <ListX size={24} className="absolute left-4" />
+        <ListX
+          size={small ? 20 : 24}
+          className={cn(small ?? "absolute left-4")}
+        />
       )}
       Cancel listing
     </Button>

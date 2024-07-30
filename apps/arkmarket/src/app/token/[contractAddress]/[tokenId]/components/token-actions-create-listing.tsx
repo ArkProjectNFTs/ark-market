@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,16 +8,14 @@ import { useAccount } from "@starknet-react/core";
 import { List, LoaderCircle } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import { parseEther } from "viem";
+import { useQuery } from "react-query";
+import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@ark-market/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -25,7 +24,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { NumericalInput } from "@ark-market/ui/numerical-input";
+import { CheckIcon } from "@ark-market/ui/icons/check-icon";
 import {
   Select,
   SelectContent,
@@ -33,56 +32,62 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
-import { toast } from "@ark-market/ui/toast";
+import { useToast } from "@ark-market/ui/use-toast";
 
-import type { Collection, Token } from "~/types";
+import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
+import type { Token } from "~/types";
 import { env } from "~/env";
 import formatAmount from "~/lib/formatAmount";
+import getCollection from "~/lib/getCollection";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsCreateListingProps {
-  collection: Collection;
-  token: Token;
+  token: Token | WalletToken;
+  small?: boolean;
+  children?: ReactNode;
 }
 
 export function TokenActionsCreateListing({
-  collection,
   token,
+  small,
+  children,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
+  const { data: collection } = useQuery(
+    ["collection", token.collection_address],
+    () =>
+      getCollection({
+        collectionAddress: token.collection_address,
+      }),
+    {
+      refetchInterval: 5_000,
+    },
+  );
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
+  const { toast } = useToast();
 
   const formSchema = z
     .object({
-      startAmount: z.string().refine(
+      startAmount: z.string().refine((val) => Number(val) > 0, {
+        message: "Must be a valid amount",
+      }),
+      endAmount: z.string().refine(
         (val) => {
-          const num = parseFloat(val);
-          return !isNaN(num) && num > 0;
+          if (!isAuction) {
+            return true;
+          }
+
+          return Number(val) > 0;
         },
         {
           message: "Must be a valid amount",
         },
       ),
-      endAmount: z
-        .string()
-        .refine(
-          (val) => {
-            const num = parseFloat(val);
-
-            if (!isAuction) {
-              return true;
-            }
-
-            return !isNaN(num);
-          },
-          {
-            message: "Must be a valid amount",
-          },
-        )
-        .optional(),
       duration: z.string(),
     })
     .refine(
@@ -91,36 +96,54 @@ export function TokenActionsCreateListing({
           return true;
         }
 
-        if (data.endAmount !== undefined) {
-          const sa = parseFloat(data.startAmount);
-          const ea = parseFloat(data.endAmount);
-          return ea > sa;
-        }
-        return true;
+        const sa = Number(data.startAmount);
+        const ea = Number(data.endAmount);
+
+        return ea > sa;
       },
       {
-        message: "Must be greater than start amount",
+        message: "Must be greater than starting price",
         path: ["endAmount"],
       },
     );
 
   const form = useForm({
-    mode: "all",
+    mode: "onChange",
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
       endAmount: "",
       duration: "719",
+      username: "",
     },
   });
 
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Your token listing failed.");
+      toast({
+        variant: "canceled",
+        title: "Listing canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     } else if (status === "success") {
       setIsOpen(false);
-      toast.success("Your token is successfully listed.");
+
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            formattedPrice={startAmount}
+            token={token}
+          />
+        ),
+      });
     }
   }, [status]);
 
@@ -138,7 +161,7 @@ export function TokenActionsCreateListing({
 
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
@@ -150,7 +173,7 @@ export function TokenActionsCreateListing({
         await createAuction({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -160,7 +183,7 @@ export function TokenActionsCreateListing({
         await createListing({
           starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.contract_address,
+          tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
           startAmount: processedValues.startAmount,
@@ -175,6 +198,10 @@ export function TokenActionsCreateListing({
   const formattedStartAmount = formatAmount(startAmount);
   const isLoading = status === "loading" || auctionStatus === "loading";
 
+  const formattedCollectionFloor = formatEther(
+    BigInt(collection?.data.floor ?? 0),
+  );
+
   const isDisabled =
     !form.formState.isValid ||
     form.formState.isSubmitting ||
@@ -184,17 +211,20 @@ export function TokenActionsCreateListing({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="relative w-full lg:max-w-[50%]" size="xxl">
-          <List size={24} className="absolute left-4" />
-          <span>List for sale</span>
-        </Button>
+        {children ?? (
+          <Button
+            className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+            size={small ? "xl" : "xxl"}
+          >
+            <List size={24} className={cn("left-4", small ? "" : "absolute")} />
+            List for sale
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-8">
           <div className="text-center text-xl font-semibold">List for sale</div>
           <TokenActionsTokenOverview
-            collection={collection}
             token={token}
             amount={formattedStartAmount}
             small
@@ -204,7 +234,7 @@ export function TokenActionsCreateListing({
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col space-y-4"
             >
-              <FormItem className="">
+              <FormItem>
                 <FormLabel className="text-lg">Type of sale</FormLabel>
                 <div className="flex gap-6">
                   <Button
@@ -227,42 +257,49 @@ export function TokenActionsCreateListing({
                   </Button>
                 </div>
               </FormItem>
-
               <FormField
                 control={form.control}
                 name="startAmount"
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel className="text-lg">
                       Set {isAuction && "starting"} price
                     </FormLabel>
                     <Button
                       type="button"
-                      className="w-full"
+                      className="relative w-full"
                       variant="outline"
                       size="xl"
-                      onClick={() => {
-                        field.onChange("0.5");
+                      onClick={async () => {
+                        form.setValue(
+                          "startAmount",
+                          field.value === formattedCollectionFloor
+                            ? ""
+                            : formattedCollectionFloor,
+                        );
+                        await form.trigger("startAmount");
                       }}
                     >
+                      <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
+                        {field.value === formattedCollectionFloor && (
+                          <CheckIcon />
+                        )}
+                      </div>
                       <p>
                         Choose floor price of{" "}
-                        <span className="font-bold">0.5 ETH</span>
+                        <span className="font-bold">
+                          {formattedCollectionFloor} ETH
+                        </span>
                       </p>
                     </Button>
                     <FormControl>
-                      <NumericalInput
-                        // {...field}
-                        defaultValue="0.1"
-                        value={field.value}
-                        onChange={field.onChange}
-                        placeholder="Price"
+                      <EthInput
+                        {...field}
+                        status={fieldState.error?.message ? "error" : "default"}
+                        autoFocus
                       />
                     </FormControl>
-                    <p className="!mt-1 ml-3 text-sm text-muted-foreground">
-                      $---
-                    </p>
-                    {formattedStartAmount !== "-" && <FormMessage />}
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -270,15 +307,21 @@ export function TokenActionsCreateListing({
                 <FormField
                   control={form.control}
                   name="endAmount"
-                  render={({ field }) => (
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel className="text-lg">
                         Set reserve price
                       </FormLabel>
                       <FormControl>
-                        <NumericalInput
-                          value={field.value}
-                          onChange={field.onChange}
+                        <EthInput
+                          {...field}
+                          onChange={async (e) => {
+                            field.onChange(e);
+                            await form.trigger("endAmount");
+                          }}
+                          status={
+                            fieldState.error?.message ? "error" : "default"
+                          }
                         />
                       </FormControl>
                       <FormMessage />
@@ -317,6 +360,20 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
+              <div className="mt-8 text-xl font-semibold">
+                <div className="flex items-center justify-between">
+                  <p>Earning details</p>
+                  <p>--- ETH</p>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-sm font-medium text-muted-foreground">
+                  <p>Arkmarket fees 2%</p>
+                  <p>-- ETH</p>
+                </div>
+                <div className="mt-0.5 flex items-center justify-between text-sm font-medium text-muted-foreground">
+                  <p>Creator royalties 2%</p>
+                  <p>-- ETH</p>
+                </div>
+              </div>
               <Button
                 type="submit"
                 className="mx-auto !mt-8 w-full px-10 lg:w-auto"

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp, Meh } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -13,43 +13,68 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-import type { TokenMarketData } from "~/types";
-import { getTokenOffers } from "../queries/getTokenData";
+import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
+import type { Token, TokenMarketData } from "~/types";
+import { getTokenOffers } from "~/lib/getTokenOffers";
 import TokenOffersMobileTable from "./token-offers-mobile-table";
 import TokenOffersTable from "./token-offers-table";
 
 interface TokenOffersProps {
-  contractAddress: string;
-  tokenId: string;
-  owner: string;
-  tokenMarketData: TokenMarketData | null;
+  token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffers({
   className,
-  contractAddress,
-  owner,
-  tokenId,
+  token,
   tokenMarketData,
 }: PropsWithClassName<TokenOffersProps>) {
-  const [open, setOpen] = useState(true);
+  const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  const { data: infiniteData } = useInfiniteQuery({
-    queryKey: ["tokenOffers", contractAddress, tokenId],
+  const [open, setOpen] = useState(true);
+  const {
+    data: infiniteData,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["tokenOffers", token.collection_address, token.token_id],
     refetchInterval: 10_000,
-    // getNextPageParam: (lastPage) => lastPage.next_page,
-    getNextPageParam: () => null,
+    getNextPageParam: (lastPage: TokenOffersApiResponse) => lastPage.next_page,
+    placeholderData: keepPreviousData,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
-      getTokenOffers({ contractAddress, tokenId, page: pageParam }),
+      getTokenOffers({
+        contractAddress: token.collection_address,
+        tokenId: token.token_id,
+        page: pageParam,
+      }),
   });
-
   const offersCount = infiniteData?.pages[0]?.count ?? 0;
-
   const tokenOffers = useMemo(
-    () => infiniteData?.pages.flatMap((page) => page?.data ?? []) ?? [],
+    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
+
+  const fetchMoreOnBottomReached = useCallback(
+    (containerRefElement?: HTMLDivElement | null) => {
+      if (containerRefElement) {
+        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
+        if (
+          scrollHeight - scrollTop - clientHeight < 150 &&
+          !isFetching &&
+          hasNextPage
+        ) {
+          void fetchNextPage();
+        }
+      }
+    },
+    [fetchNextPage, hasNextPage, isFetching],
+  );
+
+  useEffect(() => {
+    fetchMoreOnBottomReached(tableContainerRef.current);
+  }, [fetchMoreOnBottomReached]);
 
   return (
     <Collapsible
@@ -73,21 +98,23 @@ export default function TokenOffers({
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent className="max-h-[26rem] overflow-auto data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
+      <CollapsibleContent
+        className="max-h-[26rem] overflow-auto data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]"
+        ref={tableContainerRef}
+        onScroll={(event) =>
+          fetchMoreOnBottomReached(event.target as HTMLDivElement)
+        }
+      >
         {tokenOffers.length > 0 ? (
           <>
             <TokenOffersTable
               tokenOffers={tokenOffers}
-              owner={owner}
-              tokenContractAdress={contractAddress}
-              tokenId={tokenId}
+              token={token}
               tokenMarketData={tokenMarketData}
             />
             <TokenOffersMobileTable
               tokenOffers={tokenOffers}
-              owner={owner}
-              tokenContractAdress={contractAddress}
-              tokenId={tokenId}
+              token={token}
               tokenMarketData={tokenMarketData}
             />
           </>

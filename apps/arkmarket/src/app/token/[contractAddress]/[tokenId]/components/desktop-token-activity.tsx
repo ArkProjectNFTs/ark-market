@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
 import {
   ArrowLeftRight,
   CircleDot,
@@ -11,7 +13,7 @@ import {
 } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { shortAddress, timeSince } from "@ark-market/ui";
+import { timeSince } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -22,7 +24,8 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { TokenActivity } from "../queries/getTokenData";
+import type { TokenActivity } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 export const activityTypeToItem = new Map([
   ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale in progress" }],
@@ -45,6 +48,8 @@ export default function DesktopTokenActivity({
   className,
   tokenActivity,
 }: PropsWithClassName<DesktopTokenActivityProps>) {
+  const { address } = useAccount();
+
   return (
     <Table className={className}>
       <TableHeader>
@@ -84,10 +89,28 @@ export default function DesktopTokenActivity({
                   )}
                 </TableCell>
                 <TableCell>
-                  {activity.from ? shortAddress(activity.from) : "_"}
+                  {activity.from ? (
+                    <Link href={`/wallet/${activity.from}`}>
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.from,
+                        address,
+                      })}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell>
-                  {activity.to ? shortAddress(activity.to) : "_"}
+                  {activity.to ? (
+                    <Link href={`/wallet/${activity.to}`}>
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.to,
+                        address,
+                      })}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell className="text-end">
                   {timeSince(activity.time_stamp)}

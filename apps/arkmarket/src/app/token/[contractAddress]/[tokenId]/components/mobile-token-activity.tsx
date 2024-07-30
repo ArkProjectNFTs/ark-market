@@ -1,11 +1,14 @@
 import { Fragment } from "react";
+import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { shortAddress, timeSince } from "@ark-market/ui";
+import { timeSince } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { TokenActivity } from "../queries/getTokenData";
+import type { TokenActivity } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import { activityTypeToItem } from "./desktop-token-activity";
 
 interface MobileTokenActivityProps {
@@ -16,6 +19,8 @@ export default function MobileTokenActivity({
   className,
   tokenActivity,
 }: PropsWithClassName<MobileTokenActivityProps>) {
+  const { address } = useAccount();
+
   return (
     <div className={className}>
       <p className="text-sm font-semibold text-muted-foreground">Event</p>
@@ -42,7 +47,19 @@ export default function MobileTokenActivity({
                 <p>
                   by{" "}
                   <span className="text-muted-foreground">
-                    {activity.from ? shortAddress(activity.from) : "_"}
+                    {activity.from ? (
+                      <Link
+                        href={`/wallet/${activity.from}`}
+                        className="text-muted-foreground"
+                      >
+                        {ownerOrShortAddress({
+                          ownerAddress: activity.from,
+                          address,
+                        })}
+                      </Link>
+                    ) : (
+                      "-"
+                    )}
                   </span>
                 </p>
                 <p className="text-xs text-muted-foreground">

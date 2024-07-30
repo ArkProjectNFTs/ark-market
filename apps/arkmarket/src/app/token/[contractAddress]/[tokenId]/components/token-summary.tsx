@@ -5,21 +5,18 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token } from "~/types";
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
+import TokenSummaryMobileActions from "./token-summary-mobile-actions";
 
 interface TokenSummaryProps {
-  contractAddress: string;
-  tokenInfos: TokenInfosApiResponse["data"];
-  tokenId: string;
+  token: Token;
 }
 
 export default function TokenSummary({
   className,
-  contractAddress,
-  tokenInfos,
-  tokenId,
+  token,
 }: PropsWithClassName<TokenSummaryProps>) {
   return (
     <div
@@ -29,13 +26,10 @@ export default function TokenSummary({
       )}
     >
       <Media
-        src={tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image}
-        mediaKey={
-          tokenInfos.metadata?.animation_key ?? tokenInfos.metadata?.image_key
-        }
+        src={token.metadata?.animation_url ?? token.metadata?.image}
+        mediaKey={token.metadata?.image_key}
         alt={
-          tokenInfos.metadata?.name ??
-          `${tokenInfos.collection_name} #${tokenId}`
+          token.metadata?.name ?? `${token.collection_name} #${token.token_id}`
         }
         className="aspect-square w-full rounded-lg object-contain"
         height={1000}
@@ -44,11 +38,11 @@ export default function TokenSummary({
       <div className="flex flex-col lg:gap-4">
         <div className="flex items-center gap-1.5">
           <Link
-            href={`/collection/${contractAddress}`}
+            href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
             <h3 className="text-lg text-muted-foreground">
-              {tokenInfos.collection_name}
+              {token.collection_name}
             </h3>
           </Link>
           <VerifiedIcon className="size-6 text-background" />
@@ -60,15 +54,19 @@ export default function TokenSummary({
               ellipsableStyles,
             )}
           >
-            {tokenInfos.metadata?.name}
+            {token.metadata?.name}
           </p>
-          <div className="flex items-center gap-6">
+
+          <div className="hidden items-center gap-6 lg:flex">
             <Share2 className="size-6 text-muted-foreground" />
             <CopyButton
               className="size-6 text-muted-foreground"
-              textToCopy={contractAddress}
+              textToCopy={token.collection_address}
             />
             <RefreshCw className="size-6 text-muted-foreground" />
+          </div>
+          <div className="lg:hidden">
+            <TokenSummaryMobileActions textToCopy={token.collection_address} />
           </div>
         </div>
       </div>

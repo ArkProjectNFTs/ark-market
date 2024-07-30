@@ -1,4 +1,9 @@
-import { getRoundedRemainingTime, shortAddress } from "@ark-market/ui";
+"use client";
+
+import Link from "next/link";
+import { useAccount } from "@starknet-react/core";
+
+import { getRoundedRemainingTime } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -9,8 +14,8 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { TokenOffer } from "../queries/getTokenData";
-import type { TokenMarketData } from "~/types";
+import type { Token, TokenMarketData, TokenOffer } from "~/types";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import TokenOffersTableAction from "./token-offers-table-action";
 
 interface TokenFloorDifferenceProps {
@@ -21,11 +26,13 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
   if (floor_difference === null) {
     return "_";
   }
+
   if (floor_difference < 0) {
     return (
       <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
     );
   }
+
   return (
     <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
   );
@@ -33,19 +40,17 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
 interface TokenOffersTableProps {
   tokenOffers: TokenOffer[];
-  tokenContractAdress: string;
-  tokenId: string;
-  owner: string;
-  tokenMarketData: TokenMarketData | null;
+  token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersTable({
   tokenOffers,
-  owner,
-  tokenContractAdress,
-  tokenId,
+  token,
   tokenMarketData,
 }: TokenOffersTableProps) {
+  const { address } = useAccount();
+
   return (
     <div className="hidden lg:block">
       <Table>
@@ -85,21 +90,21 @@ export default function TokenOffersTable({
                   />
                 </TableCell>
                 <TableCell>
-                  {offer.source ? shortAddress(offer.source) : "_"}
+                  <Link href={`/wallet/${offer.source}`}>
+                    {ownerOrShortAddress({
+                      ownerAddress: offer.source,
+                      address,
+                    })}
+                  </Link>
                 </TableCell>
                 <TableCell>
                   In {getRoundedRemainingTime(offer.expire_at)}
                 </TableCell>
                 <TableCell className="text-end">
                   <TokenOffersTableAction
-                    owner={owner}
-                    offerSourceAddress={offer.source}
-                    offerOrderHash={offer.hash}
-                    tokenContractAddress={tokenContractAdress}
-                    tokenId={tokenId}
-                    offerAmount={offer.price}
-                    tokenIsListed={tokenMarketData?.is_listed ?? false}
-                    tokenListingOrderHash={tokenMarketData?.order_hash ?? null}
+                    offer={offer}
+                    token={token}
+                    tokenMarketData={tokenMarketData}
                   />
                 </TableCell>
               </TableRow>

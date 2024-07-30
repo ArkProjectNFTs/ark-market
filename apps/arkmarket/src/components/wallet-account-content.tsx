@@ -1,23 +1,24 @@
-import { useMemo } from "react";
 import Link from "next/link";
 import {
   useAccount,
   useDisconnect,
   useStarkProfile,
 } from "@starknet-react/core";
-import { HelpCircle, Power, Settings, User, Wallet } from "lucide-react";
+import { HelpCircle, Power, User, Wallet } from "lucide-react";
 
-import { cn, focusableStyles } from "@ark-market/ui";
+import { cn, focusableStyles, shortAddress } from "@ark-market/ui";
 import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
 import StarknetLogo from "@ark-market/ui/icons/starknet-logo";
 import { ThemeTabs } from "@ark-market/ui/theme";
 
+import { ETH, STRK } from "~/constants/tokens";
+import useBalance from "~/hooks/useBalance";
 import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
 
 const itemCommonClassName = cn(
-  "rounded-xs flex items-center gap-2 px-1.5 py-2 transition-colors hover:bg-card",
+  "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
   focusableStyles,
 );
 
@@ -33,34 +34,13 @@ export default function WalletAccountContent({
   const { data: starkProfile } = useStarkProfile({
     address,
   });
+  const { data: ethBalance } = useBalance({ token: ETH });
+  const { data: strkBalance } = useBalance({ token: STRK });
   const isWebWallet = connector?.id === "argentWebWallet";
+  const shortenedAddress = shortAddress(address ?? "0x");
+  const nameOrShortAddress = starkProfile?.name ?? shortenedAddress;
 
-  // const { data: ethBalance } = useBalance({ address });
-  const ethBalance = { formatted: "0.00" };
-  const roundedEthBalance =
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    ethBalance !== undefined
-      ? parseFloat(ethBalance.formatted).toFixed(4)
-      : undefined;
-
-  // const { data: strkBalance } = useBalance({
-  //   address,
-  //   token: STRK_CONTRACT_ADDRESS,
-  // });
-  const strkBalance = { formatted: "0.00" };
-  const roundedStrkBalance =
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    strkBalance !== undefined
-      ? parseFloat(strkBalance.formatted).toFixed(4)
-      : undefined;
-
-  const shortenedAddress = useMemo(() => {
-    if (!address) return "";
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  }, [address]);
-
-  if (address === undefined) {
-    // should not happen
+  if (!address) {
     return null;
   }
 
@@ -77,7 +57,7 @@ export default function WalletAccountContent({
                 starkProfile?.name === undefined && "my-auto",
               )}
             >
-              {starkProfile?.name ?? shortenedAddress}
+              {nameOrShortAddress}
             </p>
             {starkProfile?.name !== undefined && (
               <div className="text- flex items-center gap-2">
@@ -118,10 +98,6 @@ export default function WalletAccountContent({
             </ExternalLink>
           )}
           <Link href="/" className={itemCommonClassName} onClick={onClose}>
-            <Settings size={24} />
-            <p className="font-bold">Account settings</p>
-          </Link>
-          <Link href="/" className={itemCommonClassName} onClick={onClose}>
             <HelpCircle size={24} />
             <p className="font-bold">Support</p>
           </Link>
@@ -140,7 +116,7 @@ export default function WalletAccountContent({
             <span className="font-bold">ETH</span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{roundedEthBalance}</p>
+            <p className="text-sm font-medium">{ethBalance.rounded}</p>
             <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>
@@ -150,7 +126,7 @@ export default function WalletAccountContent({
             <span className="font-bold">STRK</span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{roundedStrkBalance}</p>
+            <p className="text-sm font-medium">{strkBalance.rounded}</p>
             <p className="text-xs text-secondary-foreground">0.00$</p>
           </div>
         </div>

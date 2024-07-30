@@ -1,8 +1,10 @@
 import { useRef } from "react";
+import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import {
   Table,
   TableBody,
@@ -13,6 +15,7 @@ import {
 } from "@ark-market/ui/table";
 
 import type { WalletToken } from "../queries/getWalletData";
+import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
 import Media from "~/components/media";
 
 const gridTemplateColumnValue =
@@ -20,10 +23,12 @@ const gridTemplateColumnValue =
 
 interface PortfolioItemsDataListViewProps {
   walletTokens: WalletToken[];
+  isOwner: boolean;
 }
 
 export default function PortfolioItemsDataListView({
   walletTokens,
+  isOwner,
 }: PortfolioItemsDataListViewProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
 
@@ -74,6 +79,7 @@ export default function PortfolioItemsDataListView({
           if (token === undefined) {
             return null;
           }
+          const canListItem = isOwner && !token.list_price;
 
           return (
             <TableRow
@@ -82,7 +88,7 @@ export default function PortfolioItemsDataListView({
                 gridTemplateColumnValue,
               )}
               data-index={virtualRow.index} // Needed for dynamic row height measurement
-              key={`${token.contract}-${token.token_id}`}
+              key={`${token.collection_address}-${token.token_id}`}
               ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
@@ -104,18 +110,71 @@ export default function PortfolioItemsDataListView({
                   </p>
                 </div>
               </TableCell>
-              <TableCell>{token.list_price ?? "_"}</TableCell>
-              <TableCell>{token.best_offer ?? "_"}</TableCell>
-              <TableCell>{token.floor ?? "_"}</TableCell>
-              <TableCell>{token.received_at ?? "_"}</TableCell>
               <TableCell>
-                {/* TODO @YohanTz: List button only if owner is connected */}
-                <Button
-                  className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
-                  size="xl"
-                >
-                  List for sale
-                </Button>
+                {token.list_price ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.list_price, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
+              </TableCell>
+              <TableCell>
+                {token.best_offer ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.best_offer, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
+              </TableCell>
+              <TableCell>
+                {token.floor ? (
+                  <div className="flex items-center">
+                    <EthereumLogo2 className="size-4" />
+                    <p className="font-semibold">
+                      {formatUnits(token.floor, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
+                    </p>
+                  </div>
+                ) : (
+                  "_"
+                )}
+              </TableCell>
+              <TableCell>
+                {token.received_at ? timeSince(token.received_at) : "_"}
+              </TableCell>
+              <TableCell>
+                {canListItem ? (
+                  <TokenActionsCreateListing token={token}>
+                    <Button
+                      className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
+                      size="xl"
+                    >
+                      List for sale
+                    </Button>
+                  </TokenActionsCreateListing>
+                ) : (
+                  <Button
+                    className="w-full opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
+                    size="xl"
+                    asChild
+                  >
+                    <Link
+                      href={`/token/${token.collection_address}/${token.token_id}`}
+                    >
+                      Details
+                    </Link>
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           );

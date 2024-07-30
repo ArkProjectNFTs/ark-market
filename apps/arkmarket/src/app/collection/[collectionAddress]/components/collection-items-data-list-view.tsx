@@ -6,6 +6,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import {
   Table,
   TableBody,
@@ -15,7 +16,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { CollectionToken } from "../queries/getCollectionData";
+import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
 
 const gridTemplateColumnValue =
@@ -77,15 +78,16 @@ export default function CollectionItemsDataListView({
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
           const token = collectionTokens[virtualRow.index];
-          if (token === undefined) {
+
+          if (!token) {
             return null;
           }
 
           return (
             <Link
               prefetch={false}
-              href={`/token/${token.contract}/${token.token_id}`}
-              key={`${token.contract}-${token.token_id}`}
+              href={`/token/${token.collection_address}/${token.token_id}`}
+              key={`${token.collection_address}-${token.token_id}`}
             >
               <TableRow
                 data-index={virtualRow.index} // Needed for dynamic row height measurement
@@ -114,11 +116,31 @@ export default function CollectionItemsDataListView({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {token.price === null
-                    ? "_"
-                    : `${formatUnits(token.price, 18)} ETH`}
+                  {token.price ? (
+                    <div className="flex items-center">
+                      <EthereumLogo2 className="size-4" />
+                      <p>
+                        {formatUnits(token.price, 18)}{" "}
+                        <span className="text-muted-foreground">ETH</span>
+                      </p>
+                    </div>
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
-                <TableCell>_</TableCell>
+                <TableCell>
+                  {token.last_price ? (
+                    <div className="flex items-center">
+                      <EthereumLogo2 className="size-4" />
+                      <p>
+                        {formatUnits(token.last_price, 18)}{" "}
+                        <span className="text-muted-foreground">ETH</span>
+                      </p>
+                    </div>
+                  ) : (
+                    "_"
+                  )}
+                </TableCell>
                 <TableCell>_</TableCell>
                 <TableCell>
                   <Button asChild variant="link" className="px-0" size="xl">

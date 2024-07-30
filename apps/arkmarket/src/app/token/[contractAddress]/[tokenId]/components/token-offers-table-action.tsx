@@ -3,36 +3,23 @@ import { validateAndParseAddress } from "starknet";
 
 import { Button } from "@ark-market/ui/button";
 
-import AcceptOffer from "~/app/assets/[contract_address]/[token_id]/components/accept-offer";
-import CancelOffer from "~/app/assets/[contract_address]/[token_id]/components/cancel-offer";
+import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import ConnectWalletModal from "~/components/connect-wallet-modal";
+import AcceptOffer from "./accept-offer";
+import CancelOffer from "./cancel-offer";
 
 interface TokenOffersTableActionProps {
-  owner: string;
-  offerSourceAddress: string | null;
-  offerOrderHash: string;
-  tokenId: string;
-  tokenContractAddress: string;
-  offerAmount: string;
-  tokenIsListed: boolean;
-  tokenListingOrderHash: string | null;
+  offer: TokenOffer;
+  token: Token;
+  tokenMarketData: TokenMarketData;
 }
 
 export default function TokenOffersTableAction({
-  offerAmount,
-  offerOrderHash,
-  offerSourceAddress,
-  owner,
-  tokenContractAddress,
-  tokenId,
-  tokenIsListed,
-  tokenListingOrderHash,
+  offer,
+  token,
+  tokenMarketData,
 }: TokenOffersTableActionProps) {
   const { address } = useAccount();
-
-  const isOwner =
-    address !== undefined &&
-    validateAndParseAddress(address) === validateAndParseAddress(owner);
 
   if (!address) {
     return (
@@ -42,31 +29,23 @@ export default function TokenOffersTableAction({
     );
   }
 
-  if (isOwner && tokenListingOrderHash !== null) {
+  const isOwner =
+    validateAndParseAddress(address) ===
+    validateAndParseAddress(tokenMarketData.owner);
+  const isOfferer =
+    validateAndParseAddress(address) === validateAndParseAddress(offer.source);
+
+  if (isOwner) {
     return (
       <AcceptOffer
-        offerOrderHash={offerOrderHash}
-        tokenId={tokenId}
-        tokenContractAddress={tokenContractAddress}
-        tokenOwner={owner}
-        offerAmount={offerAmount}
-        tokenIsListed={tokenIsListed}
-        tokenListingOrderHash={tokenListingOrderHash}
+        offer={offer}
+        token={token}
+        tokenMarketData={tokenMarketData}
       />
     );
   }
 
-  if (
-    validateAndParseAddress(address) ===
-    validateAndParseAddress(offerSourceAddress ?? "")
-  )
-    return (
-      <CancelOffer
-        offerOrderHash={offerOrderHash}
-        tokenId={tokenId}
-        tokenContractAddress={tokenContractAddress}
-      />
-    );
+  if (isOfferer) return <CancelOffer offer={offer} token={token} />;
 
   return null;
 }

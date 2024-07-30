@@ -6,56 +6,96 @@ import { useAccount } from "@starknet-react/core";
 import { LoaderCircle, ShoppingBag } from "lucide-react";
 import { formatEther } from "viem";
 
-import { areAddressesEqual } from "@ark-market/ui";
+import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
-import { toast } from "@ark-market/ui/toast";
+import { toast as sonner } from "@ark-market/ui/sonner";
+import { useToast } from "@ark-market/ui/use-toast";
 
-import type { Collection, Token, TokenMarketData } from "~/types";
+import type { Token, TokenMarketData } from "~/types";
+import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
+import useBalance from "~/hooks/useBalance";
+import useConnectWallet from "~/hooks/useConnectWallet";
+import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
 
 interface TokenActionsBuyNowProps {
-  collection: Collection;
   token: Token;
   tokenMarketData: TokenMarketData;
+  small?: boolean;
 }
 
 export default function TokenActionsBuyNow({
-  collection,
   token,
   tokenMarketData,
+  small,
 }: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
-  const isOwner = areAddressesEqual(token.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
+  const { data } = useBalance({ token: ETH });
+  const { toast } = useToast();
 
-  const handeClick = async () => {
+  const buy = async () => {
+    if (data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)) {
+      sonner.error("Insufficient balance");
+      return;
+    }
+
     setIsOpen(true);
+
     await fulfillListing({
       starknetAccount: account,
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      tokenAddress: token.contract_address,
+      tokenAddress: token.collection_address,
       tokenId: token.token_id,
-      orderHash: tokenMarketData.order_hash,
-      startAmount: tokenMarketData.start_amount,
+      orderHash: tokenMarketData.listing.order_hash,
+      startAmount: tokenMarketData.listing.start_amount,
     });
   };
+
+  const { ensureConnect } = useConnectWallet({
+    account,
+    onConnect: () => {
+      void buy();
+    },
+  });
 
   useEffect(() => {
     if (status === "error") {
       setIsOpen(false);
-      toast.error("Purchase cancelled by user");
+      toast({
+        variant: "canceled",
+        title: "Purchase canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+            token={token}
+          />
+        ),
+      });
+    } else if (status === "success") {
+      toast({
+        variant: "success",
+        title: "Your token is successfully listed!",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            token={token}
+            formattedPrice={formatEther(
+              BigInt(tokenMarketData.listing.start_amount ?? 0),
+            )}
+          />
+        ),
+      });
     }
   }, [status]);
 
-  if (
-    !account ||
-    isOwner ||
-    !tokenMarketData.is_listed ||
-    tokenMarketData.status === "FULFILLED"
-  ) {
+  if (isOwner || !tokenMarketData.is_listed) {
     return null;
   }
 
@@ -65,15 +105,15 @@ export default function TokenActionsBuyNow({
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
-          className="justify-normal p-6 lg:justify-center"
+          className="justify-normal lg:justify-center"
           onInteractOutside={(e) => {
             e.preventDefault();
           }}
         >
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
               <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
-              <div className="text-center text-xl font-semibold">
+              <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                 {isSuccess
                   ? "Congratulations for your purchase"
                   : "Confirm your purchase"}
@@ -86,9 +126,10 @@ export default function TokenActionsBuyNow({
             </div>
 
             <TokenActionsTokenOverview
-              collection={collection}
               token={token}
-              amount={formatEther(BigInt(tokenMarketData.start_amount))}
+              amount={formatEther(
+                BigInt(tokenMarketData.listing.start_amount ?? 0),
+              )}
             />
 
             {isSuccess ? (
@@ -100,11 +141,11 @@ export default function TokenActionsBuyNow({
                 Continue to explore NFTs
               </Button>
             ) : (
-              <div className="flex flex-col items-center gap-6 rounded-md bg-card p-6 lg:flex-row lg:p-4">
+              <div className="flex flex-col items-center gap-4 rounded-md bg-card p-5 lg:flex-row lg:gap-5 lg:p-4">
                 <LoaderCircle className="size-10 animate-spin" />
 
                 <div className="text-center lg:text-left">
-                  <div className="text-xl font-semibold">
+                  <div className="text-lg font-semibold">
                     Checking your payment
                   </div>
                   <div className="text-sm">
@@ -117,13 +158,35 @@ export default function TokenActionsBuyNow({
         </DialogContent>
       </Dialog>
       <Button
-        className="relative w-full"
-        size="xxl"
-        disabled={status === "loading"}
-        onClick={handeClick}
+        className={cn(small ?? "relative w-full lg:max-w-[50%]")}
+        size={small ? "xl" : "xxl"}
+        disabled={status === "loading" || tokenMarketData.buy_in_progress}
+        onClick={(e) => {
+          ensureConnect(e);
+
+          if (account) {
+            void buy();
+          }
+        }}
       >
-        <ShoppingBag size={24} className="absolute left-4" />
-        Buy now for {formatEther(BigInt(tokenMarketData.start_amount))} ETH
+        {tokenMarketData.buy_in_progress ? (
+          <>
+            <LoaderCircle
+              className={cn("animate-spin", small ?? "absolute left-4")}
+              size={small ? 20 : 24}
+            />
+            Buy in progress
+          </>
+        ) : (
+          <>
+            <ShoppingBag
+              size={small ? 20 : 24}
+              className={cn("left-4", small ? "" : "absolute")}
+            />
+            {"Buy now for "}
+            {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
+          </>
+        )}
       </Button>
     </>
   );

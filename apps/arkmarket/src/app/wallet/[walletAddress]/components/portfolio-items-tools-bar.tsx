@@ -26,7 +26,7 @@ export default function PortfolioItemsToolsBar({
   // walletCollectionsInitialData,
 }: PropsWithClassName<PortfolioItemsToolsBarProps>) {
   return (
-    <div className={cn("bg-background", className)}>
+    <div className={cn("mt-4 bg-background sm:mt-6", className)}>
       <div className="flex items-center gap-2 md:gap-6">
         <PortfolioItemsFiltersModal
           walletAddress={walletAddress}

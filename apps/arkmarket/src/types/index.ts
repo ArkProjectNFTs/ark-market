@@ -1,13 +1,26 @@
 export interface Collection {
-  contract_address: string;
-  contract_type: string;
-  image: string;
+  address: string;
   name: string;
-  symbol: string;
+  floor?: string;
+  image?: string;
+  listed_items: number;
+  listed_percentage: number;
+  marketcap: number;
+  owner_count: number;
+  sales_7d: number;
+  token_count: number;
+  total_sales: number;
+  total_volume: number;
+  volume_7d_eth: number;
 }
 
-export interface CollectionApiResponse {
-  result: Collection;
+export interface PortfolioCollection {
+  address: string;
+  image?: string;
+  name: string;
+  floor?: number;
+  user_listed_tokens: number;
+  user_token_count: number;
 }
 
 export interface Offer {
@@ -54,16 +67,120 @@ export interface CollectionTokenApiResponse {
   result: Token;
 }
 
+interface TokenMetadataAttribute {
+  display_type?: string;
+  trait_type?: string;
+  value?: string;
+}
+
+export interface TokenMetadata {
+  image: string;
+  name: string;
+  animation_key: string | null;
+  animation_url: string | null;
+  image_key: string | null;
+  attributes: TokenMetadataAttribute[];
+}
+
 export interface Token {
-  contract_address: string;
-  token_id: string;
+  collection_image: string;
+  collection_name: string;
+  collection_address: string;
+  last_price?: string;
+  metadata?: TokenMetadata;
   owner: string;
-  metadata?: {
-    normalized: {
-      image: string;
-      name: string;
-    };
-  };
+  price?: string;
+  top_offer?: string;
+  token_id: string;
+}
+
+export interface CollectionToken {
+  collection_address: string;
+  floor_difference: number | null;
+  last_price?: string;
+  listed_at?: number;
+  metadata?: TokenMetadata;
+  owner: string;
+  price?: string;
+  token_id: string;
+}
+
+export interface AccountSearchResult {
+  owner: string;
+}
+
+export interface CollectionSearchResult {
+  address: string;
+  image: string | null;
+  is_verified: boolean;
+  name: string;
+  token_count: number;
+}
+
+export interface PortfolioToken {
+  collection_name: string;
+  collection_address: string;
+  best_offer?: number;
+  floor?: number;
+  list_price?: number;
+  owner: string;
+  received_at?: string;
+  token_id: string;
+  metadata?: TokenMetadata;
+}
+
+export type PortfolioActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT"
+  | "BURN";
+
+export interface PortfolioActivity {
+  activity_type: PortfolioActivityType;
+  collection_is_verified: boolean;
+  collection_name: string;
+  from: string;
+  metadata: TokenMetadata;
+  price: string;
+  time_stamp: number;
+  to: string;
+  transaction_hash: string | null;
+}
+
+export type CollectionActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT"
+  | "BURN";
+
+export interface CollectionActivity {
+  activity_type: CollectionActivityType;
+  from: string;
+  is_verified: boolean;
+  name: string;
+  price: string;
+  time_stamp: number;
+  to: string;
+  token_id: string;
+  token_metadata: TokenMetadata;
+  transaction_hash: string | null;
+}
+
+export interface TokenOffer {
+  expire_at: number;
+  floor_difference: number | null;
+  hash: string;
+  offer_id: number;
+  price: string;
+  source: string;
 }
 
 export interface TokenApiResponse {
@@ -75,27 +192,30 @@ export interface OwnersTokensApiResponse {
 }
 
 export interface TokenMarketData {
-  token_chain_id: string;
-  token_address: string;
-  token_id: string;
-  listed_timestamp: number;
-  updated_timestamp: number;
-  current_owner: string;
-  last_price: number | null;
-  quantity: string;
-  order_hash: string;
-  start_amount: string;
-  end_amount: string;
-  start_date: number;
-  end_date: number;
-  broker_id: string;
-  is_listed: boolean;
+  buy_in_progress: boolean;
+  created_timestamp: number | null;
+  floor: string;
   has_offer: boolean;
-  status: string;
-  top_bid: {
-    amount: string;
+  is_listed: boolean;
+  last_price: string | null;
+  listing: {
+    currency_address: string | null;
+    end_amount: string | null;
+    end_date: number | null;
+    is_auction: boolean;
     order_hash: string;
+    start_amount: string | null;
+    start_date: number | null;
   };
+  owner: string;
+  top_offer: {
+    amount: string;
+    currency_address: string;
+    end_date: number;
+    order_hash: string;
+    start_date: number;
+  };
+  updated_timestamp: number;
 }
 
 export interface ContractInfo {
@@ -117,4 +237,22 @@ export interface PricesResult {
 
 export interface SystemStatus {
   status: string;
+}
+
+export type TokenActivityType =
+  | "LISTING"
+  | "OFFER"
+  | "CANCELLED"
+  | "FULFILL"
+  | "TRANSFER"
+  | "EXECUTED"
+  | "MINT";
+
+export interface TokenActivity {
+  activity_type: TokenActivityType;
+  from: string | null;
+  price: string | null;
+  time_stamp: number;
+  to: string | null;
+  transaction_hash: string | null;
 }

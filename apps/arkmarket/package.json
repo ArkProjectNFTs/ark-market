@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@ark-market/ui": "workspace:*",
-    "@ark-project/core": "^2.1.0",
-    "@ark-project/react": "^1.1.0",
+    "@ark-project/core": "^2.1.1",
+    "@ark-project/react": "^1.1.1",
     "@hookform/error-message": "^2.0.1",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.8.3",
@@ -47,8 +47,10 @@
     "starknet": "^6.9.0",
     "starknetkit": "^1.1.9",
     "superjson": "2.2.1",
+    "usehooks-ts": "^3.1.0",
     "viem": "^2.13.10",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@ark-market/eslint-config": "workspace:*",

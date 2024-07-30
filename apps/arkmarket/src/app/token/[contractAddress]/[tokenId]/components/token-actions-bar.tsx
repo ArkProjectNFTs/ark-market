@@ -1,22 +1,36 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ShoppingBag, Tag } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
 
-import type { TokenInfosApiResponse } from "../queries/getTokenData";
+import type { Token, TokenMarketData } from "~/types";
 import Media from "~/components/media";
+import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
+import TokenActionsCancelListing from "./token-actions-cancel-listing";
+import { TokenActionsCreateListing } from "./token-actions-create-listing";
+import TokenActionsMakeBid from "./token-actions-make-bid";
+import TokenActionsMakeOffer from "./token-actions-make-offer";
+import TokenActionsBuyNow from "./tokens-actions-buy-now";
 
 interface TokenActionsBar {
   show: boolean;
-  tokenInfos: TokenInfosApiResponse["data"];
+  token: Token;
+  tokenMarketData: TokenMarketData;
+  isOwner: boolean;
+  isListed: boolean;
+  isAuction: boolean;
+  hasOffers: boolean;
 }
 
 export default function TokenActionsBar({
   className,
   show,
-  tokenInfos,
+  token,
+  tokenMarketData,
+  isOwner,
+  isListed,
+  isAuction,
+  hasOffers,
 }: PropsWithClassName<TokenActionsBar>) {
   return (
     <AnimatePresence>
@@ -27,33 +41,70 @@ export default function TokenActionsBar({
           exit={{ transform: "translateY(-100%)" }}
           transition={{ ease: "easeInOut", duration: 0.3 }}
           className={cn(
-            "fixed left-0 top-0 z-50 h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8",
+            "fixed left-0 top-0 z-50 hidden h-[var(--site-header-height)] w-full items-center justify-between border-b border-border bg-background px-8 lg:flex",
             className,
           )}
         >
           <div className="flex items-center gap-3.5">
             <Media
-              src={
-                tokenInfos.metadata?.animation_url ?? tokenInfos.metadata?.image
-              }
-              mediaKey={
-                tokenInfos.metadata?.animation_key ??
-                tokenInfos.metadata?.image_key
-              }
-              alt={tokenInfos.metadata?.name ?? `${tokenInfos.collection_name}`}
+              src={token.metadata?.animation_url ?? token.metadata?.image}
+              mediaKey={token.metadata?.image_key}
+              alt={token.metadata?.name ?? `${token.collection_name}`}
               className="size-12 rounded-xs"
             />
-            <p className="text-lg font-semibold">{tokenInfos.metadata?.name}</p>
+            <p className="text-lg font-semibold">{token.metadata?.name}</p>
           </div>
-          <div className="flex items-center gap-5">
-            <Button size="xl">
-              <ShoppingBag size={24} />
-              Buy now for 0.054 ETH
-            </Button>
-            <Button variant="secondary" size="xl">
-              <Tag size={24} />
-              Make Offer
-            </Button>
+          <div className="flex gap-5">
+            {isOwner ? (
+              <>
+                {isListed ? (
+                  <>
+                    {hasOffers && (
+                      <TokenActionsAcceptBestOffer
+                        token={token}
+                        tokenMarketData={tokenMarketData}
+                        isAuction={isAuction}
+                        small
+                      />
+                    )}
+                    <TokenActionsCancelListing
+                      token={token}
+                      tokenMarketData={tokenMarketData}
+                      small
+                    />
+                  </>
+                ) : (
+                  <TokenActionsCreateListing token={token} small />
+                )}
+              </>
+            ) : (
+              <>
+                {isListed ? (
+                  <>
+                    {isAuction ? (
+                      <>
+                        <TokenActionsMakeBid
+                          token={token}
+                          tokenMarketData={tokenMarketData}
+                          small
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <TokenActionsBuyNow
+                          token={token}
+                          tokenMarketData={tokenMarketData}
+                          small
+                        />
+                        <TokenActionsMakeOffer token={token} small />
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <TokenActionsMakeOffer token={token} small />
+                )}
+              </>
+            )}
           </div>
         </motion.div>
       )}
