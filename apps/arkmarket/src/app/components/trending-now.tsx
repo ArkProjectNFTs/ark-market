@@ -37,41 +37,47 @@ export default function TrendingNow() {
                 <Link
                   href={`/collection/${collection.address}`}
                   className={cn(
-                    "block rounded-lg bg-card p-5",
+                    "group block rounded-lg bg-card p-5",
                     focusableStyles,
                   )}
                 >
                   <div className="grid grid-cols-2 gap-7 sm:grid-cols-3">
                     {collection.second_nft ? (
-                      <Image
-                        height={150}
-                        width={150}
-                        className="w-full rounded-sm"
-                        alt={collection.name}
-                        src={collection.second_nft}
-                      />
+                      <div className="w-full overflow-hidden rounded-sm">
+                        <Image
+                          height={150}
+                          width={150}
+                          className="aspect-square w-full transition-transform group-hover:scale-110"
+                          alt={collection.name}
+                          src={collection.second_nft}
+                        />
+                      </div>
                     ) : (
                       <div className="aspect-square w-full rounded-sm bg-secondary" />
                     )}
                     {collection.first_nft ? (
-                      <Image
-                        height={150}
-                        width={150}
-                        className="w-full rounded-sm"
-                        alt={collection.name}
-                        src={collection.first_nft}
-                      />
+                      <div className="w-full overflow-hidden rounded-sm">
+                        <Image
+                          height={150}
+                          width={150}
+                          className="aspect-square w-full transition-transform group-hover:scale-110"
+                          alt={collection.name}
+                          src={collection.first_nft}
+                        />
+                      </div>
                     ) : (
                       <div className="aspect-square w-full rounded-sm bg-secondary" />
                     )}
                     {collection.third_nft ? (
-                      <Image
-                        height={150}
-                        width={150}
-                        className="hidden w-full rounded-sm sm:block"
-                        alt={collection.name}
-                        src={collection.third_nft}
-                      />
+                      <div className="hidden w-full overflow-hidden rounded-sm sm:block">
+                        <Image
+                          height={150}
+                          width={150}
+                          className="aspect-square w-full transition-transform group-hover:scale-110"
+                          alt={collection.name}
+                          src={collection.third_nft}
+                        />
+                      </div>
                     ) : (
                       <div className="hidden aspect-square w-full rounded-sm bg-secondary sm:block" />
                     )}

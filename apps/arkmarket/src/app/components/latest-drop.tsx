@@ -14,6 +14,7 @@ import {
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import { homepageConfig } from "~/config/homepage";
+import LatestDropStatus from "./latest-drop-status";
 
 export default function LatestDrop() {
   if (homepageConfig.latestDropCollections.length === 0) {
@@ -38,21 +39,22 @@ export default function LatestDrop() {
                 <Link
                   href={`/collection/${collection.address}`}
                   key={index}
-                  className={focusableStyles}
+                  className={cn("group", focusableStyles)}
                 >
                   <Card className="overflow-hidden border-none">
                     <CardContent className="p-0">
-                      {collection.image ? (
+                      <div className="relative aspect-square w-full overflow-hidden">
+                        <div className="absolute right-5 top-5 z-10">
+                          <LatestDropStatus status={collection.status} />
+                        </div>
                         <Image
                           src={collection.image}
                           height={500}
                           width={500}
                           alt={collection.name}
-                          className="aspect-square w-full object-cover"
+                          className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
                         />
-                      ) : (
-                        <div className="aspect-square bg-secondary" />
-                      )}
+                      </div>
                     </CardContent>
                     <CardFooter className="flex flex-col items-start p-5">
                       <div className="flex w-full items-center gap-1.5">

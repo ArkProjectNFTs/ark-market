@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
@@ -39,7 +40,7 @@ export default function ExploreCollection() {
               <Link
                 href={`/collection/${collection.address}`}
                 key={index}
-                className="group"
+                className={cn("group", focusableStyles)}
               >
                 <div>
                   {collection.banner_image !== undefined ? (
