@@ -69,7 +69,7 @@ export default function MainCarousel() {
   }
 
   return (
-    <div className="sm:text-white">
+    <div className="md:text-white">
       <Carousel setApi={setApi}>
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
@@ -84,39 +84,44 @@ export default function MainCarousel() {
                   startAutoSlide();
                 }}
               >
-                <div className="relative h-[35rem] overflow-hidden rounded-[1.5rem]">
+                <div className="relative">
                   <Image
                     src={carouselItem.bannerSrc}
                     height={555}
                     width={1448}
                     alt={carouselItem.name}
-                    className="h-full w-full object-cover"
+                    className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
                   />
                   <div
-                    className="absolute inset-0 flex flex-col items-start justify-center gap-8 p-12"
+                    className="mt-5 flex flex-col justify-center gap-5 md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
                     style={{
                       background:
                         "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 54.6%, rgba(0, 0, 0, 0.80) 107.55%)",
                     }}
                   >
-                    <Image
-                      src={carouselItem.collectionSrc}
-                      height={120}
-                      width={120}
-                      alt={carouselItem.name}
-                      className="size-16 rounded-lg"
-                    />
-                    <h1 className="text-5xl font-extrabold">
-                      {carouselItem.name}
-                    </h1>
-                    <div className="flex items-center text-sm font-semibold">
-                      <p className="mr-1">{carouselItem.itemsCount}</p>
-                      <p className="mr-1 text-muted-foreground">ITEMS</p> |{" "}
-                      <EthereumLogo2 className="size-4" />
-                      <p className="mr-1">{carouselItem.floorPrice}</p>
-                      <p className="text-muted-foreground">ETH</p>
+                    <div className="flex gap-4 md:flex-col md:gap-8">
+                      <Image
+                        src={carouselItem.collectionSrc}
+                        height={120}
+                        width={120}
+                        alt={carouselItem.name}
+                        className="size-16 rounded-lg"
+                      />
+                      <div className="flex flex-col gap-2 md:gap-8">
+                        <h1 className="text-3xl font-extrabold md:text-5xl">
+                          {carouselItem.name}
+                        </h1>
+                        <div className="flex items-center text-sm font-semibold">
+                          <p className="mr-1">{carouselItem.itemsCount}</p>
+                          <p className="mr-1 text-muted-foreground">
+                            ITEMS
+                          </p> | <EthereumLogo2 className="size-4" />
+                          <p className="mr-1">{carouselItem.floorPrice}</p>
+                          <p className="text-muted-foreground">ETH</p>
+                        </div>
+                      </div>
                     </div>
-                    <p className="max-w-lg text-xl">
+                    <p className="text-base md:max-w-lg md:text-xl">
                       {carouselItem.description}
                     </p>
                     <Button size="xxl" asChild className="flex-shrink-0">

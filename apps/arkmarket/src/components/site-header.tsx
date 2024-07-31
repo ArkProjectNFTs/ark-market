@@ -40,7 +40,7 @@ export default function SiteHeader() {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="md:hidden">
+        <div className="flex items-center md:hidden">
           <MobileGlobalSearch />
         </div>
 
