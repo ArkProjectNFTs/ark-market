@@ -12,6 +12,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -68,7 +69,7 @@ export default function MainCarousel() {
   }
 
   return (
-    <div className="hidden lg:block">
+    <div className="sm:text-white">
       <Carousel setApi={setApi}>
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
@@ -83,7 +84,7 @@ export default function MainCarousel() {
                   startAutoSlide();
                 }}
               >
-                <div className="relative h-[30rem] overflow-hidden rounded-[1.5rem]">
+                <div className="relative h-[35rem] overflow-hidden rounded-[1.5rem]">
                   <Image
                     src={carouselItem.bannerSrc}
                     height={555}
@@ -92,30 +93,34 @@ export default function MainCarousel() {
                     className="h-full w-full object-cover"
                   />
                   <div
-                    className="absolute inset-0 flex items-end justify-between p-12"
+                    className="absolute inset-0 flex flex-col items-start justify-center gap-8 p-12"
                     style={{
                       background:
                         "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 54.6%, rgba(0, 0, 0, 0.80) 107.55%)",
                     }}
                   >
-                    <div className="flex h-[7.5rem] items-center gap-6">
-                      <Image
-                        src={carouselItem.collectionSrc}
-                        height={120}
-                        width={120}
-                        alt={carouselItem.name}
-                        className="h-full rounded-lg"
-                      />
-                      <div className="flex h-full max-w-lg flex-col justify-between">
-                        <h1 className="text-5xl font-extrabold">
-                          {carouselItem.name}
-                        </h1>
-                        <p className="text-xl">{carouselItem.description}</p>
-                      </div>
+                    <Image
+                      src={carouselItem.collectionSrc}
+                      height={120}
+                      width={120}
+                      alt={carouselItem.name}
+                      className="size-16 rounded-lg"
+                    />
+                    <h1 className="text-5xl font-extrabold">
+                      {carouselItem.name}
+                    </h1>
+                    <div className="flex items-center text-sm font-semibold">
+                      <p className="mr-1">{carouselItem.itemsCount}</p>
+                      <p className="mr-1 text-muted-foreground">ITEMS</p> |{" "}
+                      <EthereumLogo2 className="size-4" />
+                      <p className="mr-1">{carouselItem.floorPrice}</p>
+                      <p className="text-muted-foreground">ETH</p>
                     </div>
-                    <Button size="xxl" asChild>
+                    <p className="max-w-lg text-xl">
+                      {carouselItem.description}
+                    </p>
+                    <Button size="xxl" asChild className="flex-shrink-0">
                       <Link href={`/collection/${carouselItem.address}`}>
-                        {" "}
                         View collection
                       </Link>
                     </Button>

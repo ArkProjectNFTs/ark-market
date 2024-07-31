@@ -5,27 +5,33 @@ export const homepageConfig = {
       collectionSrc: "/collections/everai.png",
       name: "Everai",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
     {
       bannerSrc: "/carousel_banner/everai.png",
       collectionSrc: "/collections/everai.png",
       name: "Everai 2",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
     {
       bannerSrc: "/carousel_banner/everai.png",
       collectionSrc: "/collections/everai.png",
       name: "Everai 3",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
   ],
   exploreCategory: [
