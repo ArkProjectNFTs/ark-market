@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
+import Media from "~/components/media";
 import { homepageConfig } from "~/config/homepage";
 
 export default function LatestSales() {
@@ -48,7 +49,13 @@ export default function LatestSales() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-4">
-                    <div className="size-14 rounded-xs bg-secondary" />
+                    <Media
+                      className="size-14 rounded-xs"
+                      alt={sale.token.name}
+                      src={sale.token.image}
+                      height={112}
+                      width={112}
+                    />
                     <div>
                       <p className="text-base font-medium text-white">
                         {sale.token.name}

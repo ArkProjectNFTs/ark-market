@@ -424,6 +424,31 @@ export const homepageConfig = {
         collection_name: "Everai",
         collection_address:
           "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_1.png",
+      },
+      price: "52500000000000000",
+      from: "0x7689b5",
+      to: "kwiss.stark",
+    },
+    {
+      token: {
+        name: "Everai #2345",
+        collection_name: "Everai",
+        collection_address:
+          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_2.png",
+      },
+      price: "52500000000000000",
+      from: "0x7689b5",
+      to: "kwiss.stark",
+    },
+    {
+      token: {
+        name: "Everai #2345",
+        collection_name: "Everai",
+        collection_address:
+          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_3.png",
       },
       price: "52500000000000000",
       from: "0x7689b5",
