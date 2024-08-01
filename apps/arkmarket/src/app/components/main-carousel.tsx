@@ -74,16 +74,7 @@ export default function MainCarousel() {
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
-              <CarouselItem
-                className="basis-full"
-                key={index}
-                onMouseEnter={stopAutoSlide}
-                onMouseLeave={() => {
-                  setProgressPercentage(0);
-                  startProgress();
-                  startAutoSlide();
-                }}
-              >
+              <CarouselItem className="basis-full" key={index}>
                 <div className="relative">
                   <Image
                     src={carouselItem.bannerSrc}
