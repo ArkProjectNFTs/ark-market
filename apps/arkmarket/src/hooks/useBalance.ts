@@ -1,6 +1,25 @@
 import { useAccount, useContractRead } from "@starknet-react/core";
 import { formatEther } from "viem";
 
+const abi = [
+  {
+    name: "balance_of",
+    type: "function",
+    inputs: [
+      {
+        name: "account",
+        type: "core::starknet::contract_address::ContractAddress",
+      },
+    ],
+    outputs: [
+      {
+        type: "core::integer::u256",
+      },
+    ],
+    state_mutability: "view",
+  },
+];
+
 interface UseBalanceProps {
   token: string;
 }
@@ -11,24 +30,7 @@ export default function useBalance({ token }: UseBalanceProps) {
     functionName: "balance_of",
     // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
     args: [address as string],
-    abi: [
-      {
-        name: "balance_of",
-        type: "function",
-        inputs: [
-          {
-            name: "account",
-            type: "core::starknet::contract_address::ContractAddress",
-          },
-        ],
-        outputs: [
-          {
-            type: "core::integer::u256",
-          },
-        ],
-        state_mutability: "view",
-      },
-    ],
+    abi,
     address: token,
     watch: true,
     enabled: !!address,
@@ -41,7 +43,7 @@ export default function useBalance({ token }: UseBalanceProps) {
     data: {
       value: data as bigint,
       formatted,
-      rounded: formatted ? parseFloat(formatted).toFixed(4) : undefined,
+      rounded: formatted ? parseFloat(formatted).toFixed(4) : "0.0",
     },
     isError,
     isLoading,

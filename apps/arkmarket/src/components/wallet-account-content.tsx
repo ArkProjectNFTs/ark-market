@@ -13,6 +13,7 @@ import { ThemeTabs } from "@ark-market/ui/theme";
 
 import { ETH, STRK } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
+import usePrices from "~/hooks/usePrices";
 import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
@@ -31,11 +32,13 @@ export default function WalletAccountContent({
 }: WalletAccountContentProps) {
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
-  const { data: starkProfile } = useStarkProfile({
-    address,
-  });
+  const { data: starkProfile } = useStarkProfile({ address });
+  const { convertInUsd } = usePrices();
   const { data: ethBalance } = useBalance({ token: ETH });
   const { data: strkBalance } = useBalance({ token: STRK });
+  const ethBalanceInUsd = convertInUsd({ amount: ethBalance.value });
+  const strkBalanceInUsd = convertInUsd({ amount: strkBalance.value });
+
   const isWebWallet = connector?.id === "argentWebWallet";
   const shortenedAddress = shortAddress(address ?? "0x");
   const nameOrShortAddress = starkProfile?.name ?? shortenedAddress;
@@ -49,7 +52,6 @@ export default function WalletAccountContent({
       <div className="mt-10 sm:mt-0">
         <div className="flex h-12 items-center gap-4">
           <ProfilePicture address={address} className="size-12 rounded-md" />
-
           <div className="flex h-full flex-col justify-between">
             <p
               className={cn(
@@ -76,7 +78,6 @@ export default function WalletAccountContent({
             )}
           </div>
         </div>
-
         <div className="my-11 flex flex-col gap-2 sm:my-5">
           <Link
             href={`/wallet/${address}`}
@@ -117,7 +118,9 @@ export default function WalletAccountContent({
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{ethBalance.rounded}</p>
-            <p className="text-xs text-secondary-foreground">0.00$</p>
+            <p className="text-xs text-secondary-foreground">
+              {ethBalanceInUsd.toFixed(2)}$
+            </p>
           </div>
         </div>
         <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-card p-4">
@@ -127,11 +130,12 @@ export default function WalletAccountContent({
           </div>
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{strkBalance.rounded}</p>
-            <p className="text-xs text-secondary-foreground">0.00$</p>
+            <p className="text-xs text-secondary-foreground">
+              {strkBalanceInUsd.toFixed(2)}$
+            </p>
           </div>
         </div>
       </div>
-
       <ThemeTabs className="mt-5" />
     </div>
   );
