@@ -96,6 +96,7 @@ export interface Token {
 
 export interface CollectionToken {
   collection_address: string;
+  collection_name: string;
   floor_difference: number | null;
   last_price?: string;
   listed_at?: number;
