@@ -36,9 +36,9 @@ export default function WalletAccountContent({
   const { convertInUsd } = usePrices();
   const { data: ethBalance } = useBalance({ token: ETH });
   const { data: strkBalance } = useBalance({ token: STRK });
+
   const ethBalanceInUsd = convertInUsd({ amount: ethBalance.value });
   const strkBalanceInUsd = convertInUsd({ amount: strkBalance.value });
-
   const isWebWallet = connector?.id === "argentWebWallet";
   const shortenedAddress = shortAddress(address ?? "0x");
   const nameOrShortAddress = starkProfile?.name ?? shortenedAddress;
@@ -110,7 +110,6 @@ export default function WalletAccountContent({
             <p className="font-bold">Log out</p>
           </button>
         </div>
-
         <div className="flex h-16 items-center justify-between rounded-t-lg bg-card p-4">
           <div className="flex items-center gap-2.5">
             <EthereumLogo />
@@ -119,7 +118,7 @@ export default function WalletAccountContent({
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{ethBalance.rounded}</p>
             <p className="text-xs text-secondary-foreground">
-              {ethBalanceInUsd.toFixed(2)}$
+              {ethBalanceInUsd}$
             </p>
           </div>
         </div>
@@ -131,7 +130,7 @@ export default function WalletAccountContent({
           <div className="flex flex-col items-end gap-1">
             <p className="text-sm font-medium">{strkBalance.rounded}</p>
             <p className="text-xs text-secondary-foreground">
-              {strkBalanceInUsd.toFixed(2)}$
+              {strkBalanceInUsd}$
             </p>
           </div>
         </div>
