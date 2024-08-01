@@ -5,27 +5,33 @@ export const homepageConfig = {
       collectionSrc: "/collections/everai.png",
       name: "Everai",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
     {
       bannerSrc: "/carousel_banner/everai.png",
       collectionSrc: "/collections/everai.png",
       name: "Everai 2",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
     {
       bannerSrc: "/carousel_banner/everai.png",
       collectionSrc: "/collections/everai.png",
       name: "Everai 3",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization…",
+        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+      itemsCount: 921,
+      floorPrice: 0.12,
     },
   ],
   exploreCategory: [
@@ -45,50 +51,63 @@ export const homepageConfig = {
       address:
         "0x0603cf837055c64d026a3c5a9e3a83036cea6c4a3f68a9e19f7a687d726fe817",
       image: "/medias/influence.png",
+      status: "live",
     },
     {
       name: "Influence Crewmates",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
       image: "/medias/crewmates.png",
+      status: "live",
     },
     {
       name: "Dragark",
       address:
         "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
       image: "/medias/dragark.png",
+      status: "upcoming",
     },
     {
       name: "Dragark Element NFT",
       address:
         "0x0537fa10cefbb8ff7e61e86e950746809f95faa7398f250f0063069b29bb7933",
       image: "/medias/dragark-2.png",
+      status: "upcoming",
     },
     {
       name: "Influence Asteroids",
       address:
         "0x0603cf837055c64d026a3c5a9e3a83036cea6c4a3f68a9e19f7a687d726fe817",
       image: "/medias/influence.png",
+      status: "upcoming",
     },
     {
       name: "Influence Crewmates",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
       image: "/medias/crewmates.png",
+      status: "upcoming",
     },
     {
       name: "Dragark",
       address:
         "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
       image: "/medias/dragark.png",
+      status: "upcoming",
     },
     {
       name: "Dragark Element NFT",
       address:
         "0x0537fa10cefbb8ff7e61e86e950746809f95faa7398f250f0063069b29bb7933",
       image: "/medias/dragark-2.png",
+      status: "upcoming",
     },
-  ],
+  ] as {
+    name: string;
+    address: string;
+    image: string;
+    status: "live" | "upcoming";
+  }[],
   trendingNow: [
     {
       name: "EveraiDuo",
@@ -396,6 +415,44 @@ export const homepageConfig = {
     {
       name: "Canadian Rapper Duck",
       image: "/nfts/canadian_rapper_duck.png",
+    },
+  ],
+  latestSales: [
+    {
+      token: {
+        name: "Everai #2345",
+        collection_name: "Everai",
+        collection_address:
+          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_1.png",
+      },
+      price: "52500000000000000",
+      from: "0x7689b5",
+      to: "kwiss.stark",
+    },
+    {
+      token: {
+        name: "Everai #2345",
+        collection_name: "Everai",
+        collection_address:
+          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_2.png",
+      },
+      price: "52500000000000000",
+      from: "0x7689b5",
+      to: "kwiss.stark",
+    },
+    {
+      token: {
+        name: "Everai #2345",
+        collection_name: "Everai",
+        collection_address:
+          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+        image: "/nfts/everai_3.png",
+      },
+      price: "52500000000000000",
+      from: "0x7689b5",
+      to: "kwiss.stark",
     },
   ],
 };

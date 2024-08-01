@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Autoplay from "embla-carousel-autoplay";
 
 import type { CarouselApi } from "@ark-market/ui/carousel";
 import { cn } from "@ark-market/ui";
@@ -13,19 +12,56 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 
 import { homepageConfig } from "~/config/homepage";
 
+const AUTO_SLIDE_INTERVAL = 8_000;
+
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
-  const [selectedItem, setSelectedItem] = useState(
-    api?.selectedScrollSnap() ?? 0,
-  );
+  const [selectedItem, setSelectedItem] = useState(0);
+  const [progressPercentage, setProgressPercentage] = useState(0);
+  const intervalId = useRef<number | null>(null);
+  const progressIntervalId = useRef<number | null>(null);
+
+  const startProgress = () => {
+    progressIntervalId.current = window.setInterval(() => {
+      setProgressPercentage((prev) => (prev < 100 ? prev + 1 : 0));
+    }, AUTO_SLIDE_INTERVAL / 100);
+  };
+
+  const startAutoSlide = () => {
+    intervalId.current = window.setInterval(() => {
+      const nextIndex = (selectedItem + 1) % homepageConfig.mainCarousel.length;
+      api?.scrollTo(nextIndex);
+      setProgressPercentage(0);
+    }, AUTO_SLIDE_INTERVAL);
+  };
+
+  const stopAutoSlide = () => {
+    if (intervalId.current) clearInterval(intervalId.current);
+    if (progressIntervalId.current) clearInterval(progressIntervalId.current);
+  };
 
   useEffect(() => {
-    api?.on("select", () => {
-      setSelectedItem(api.selectedScrollSnap());
-    });
+    if (api) {
+      startProgress();
+      startAutoSlide();
+
+      return () => {
+        stopAutoSlide();
+      };
+    }
+  }, [api, selectedItem]);
+
+  useEffect(() => {
+    if (api) {
+      api.on("select", () => {
+        setSelectedItem(api.selectedScrollSnap());
+        setProgressPercentage(0);
+      });
+    }
   }, [api]);
 
   if (homepageConfig.mainCarousel.length === 0) {
@@ -33,52 +69,54 @@ export default function MainCarousel() {
   }
 
   return (
-    <div className="hidden lg:block">
-      <Carousel
-        setApi={setApi}
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-        ]}
-      >
+    <div className="md:text-white">
+      <Carousel setApi={setApi}>
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
               <CarouselItem className="basis-full" key={index}>
-                <div className="relative h-[30rem] overflow-hidden rounded-[1.5rem]">
+                <div className="relative">
                   <Image
                     src={carouselItem.bannerSrc}
                     height={555}
                     width={1448}
                     alt={carouselItem.name}
-                    className="h-full w-full object-cover"
+                    className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
                   />
                   <div
-                    className="absolute inset-0 flex items-end justify-between p-12"
+                    className="mt-5 flex flex-col justify-center gap-5 md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
                     style={{
                       background:
                         "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 54.6%, rgba(0, 0, 0, 0.80) 107.55%)",
                     }}
                   >
-                    <div className="flex h-[7.5rem] items-center gap-6">
+                    <div className="flex gap-4 md:flex-col md:gap-8">
                       <Image
                         src={carouselItem.collectionSrc}
                         height={120}
                         width={120}
                         alt={carouselItem.name}
-                        className="h-full rounded-lg"
+                        className="size-16 rounded-lg"
                       />
-                      <div className="flex h-full max-w-lg flex-col justify-between">
-                        <h1 className="text-5xl font-extrabold">
+                      <div className="flex flex-col gap-2 md:gap-8">
+                        <h1 className="text-3xl font-extrabold md:text-5xl">
                           {carouselItem.name}
                         </h1>
-                        <p className="text-xl">{carouselItem.description}</p>
+                        <div className="flex items-center text-sm font-semibold">
+                          <p className="mr-1">{carouselItem.itemsCount}</p>
+                          <p className="mr-1 text-muted-foreground">
+                            ITEMS
+                          </p> | <EthereumLogo2 className="size-4" />
+                          <p className="mr-1">{carouselItem.floorPrice}</p>
+                          <p className="text-muted-foreground">ETH</p>
+                        </div>
                       </div>
                     </div>
-                    <Button size="xxl" asChild>
+                    <p className="text-base md:max-w-lg md:text-xl">
+                      {carouselItem.description}
+                    </p>
+                    <Button size="xxl" asChild className="flex-shrink-0">
                       <Link href={`/collection/${carouselItem.address}`}>
-                        {" "}
                         View collection
                       </Link>
                     </Button>
@@ -91,16 +129,31 @@ export default function MainCarousel() {
         <div className="mt-8 flex justify-center gap-4">
           {homepageConfig.mainCarousel.map((_, index) => {
             const isSelected = selectedItem === index;
+            const progressWidth =
+              isSelected && progressPercentage > 0
+                ? `${progressPercentage}%`
+                : "0%";
 
             return (
               <button
                 className={cn(
-                  "h-1.5 w-24 rounded-full",
-                  isSelected ? "bg-accent" : "bg-card",
+                  "relative h-1.5 w-24 overflow-hidden rounded-full",
+                  "bg-card",
                 )}
                 key={index}
-                onClick={() => api?.scrollTo(index)}
-              ></button>
+                onClick={() => {
+                  api?.scrollTo(index);
+                  setProgressPercentage(0);
+                  stopAutoSlide();
+                  startProgress();
+                  startAutoSlide();
+                }}
+              >
+                <div
+                  className="absolute bottom-0 left-0 top-0 bg-accent transition-[width]"
+                  style={{ width: progressWidth }}
+                ></div>
+              </button>
             );
           })}
         </div>
