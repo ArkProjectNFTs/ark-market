@@ -109,7 +109,9 @@ export default function CollectionItemsDataGridView({
                   <p className="mt-5 text-sm font-medium text-secondary-foreground">
                     Last sale {formatEther(BigInt(token.last_price ?? 0))} ETH
                   </p>
-                  {token.price && <CollectionItemsBuyNow token={token} />}
+                  {token.is_listed && !token.listing.is_auction && (
+                    <CollectionItemsBuyNow token={token} />
+                  )}
                 </NftCardContent>
               </NftCard>
             </Link>

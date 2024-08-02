@@ -99,7 +99,11 @@ export interface CollectionToken {
   collection_name: string;
   floor_difference: number | null;
   last_price?: string;
+  is_listed: boolean;
   listed_at?: number;
+  listing: {
+    is_auction: boolean;
+  };
   metadata?: TokenMetadata;
   owner: string;
   price?: string;
