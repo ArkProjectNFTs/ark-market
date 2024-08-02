@@ -1,3 +1,5 @@
+import { parseEther } from "viem";
+
 import { cn, ellipsableStyles } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
@@ -5,6 +7,8 @@ import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import Media from "~/components/media";
+import usePrices from "~/hooks/usePrices";
+import formatAmount from "~/lib/formatAmount";
 
 interface tokenActionsTokenOverviewProps {
   token: Token | WalletToken;
@@ -17,6 +21,11 @@ export default function TokenActionsTokenOverview({
   amount,
   small,
 }: tokenActionsTokenOverviewProps) {
+  const { convertInUsd } = usePrices();
+
+  const formattedAmount = formatAmount(amount);
+  const ethAmountInUsd = convertInUsd({ amount: parseEther(amount) });
+
   return (
     <div className="flex justify-between">
       <div className="flex items-center gap-4">
@@ -61,13 +70,13 @@ export default function TokenActionsTokenOverview({
         </div>
       </div>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col items-end gap-1">
         <div className="flex whitespace-nowrap text-lg font-semibold sm:text-xl">
           <EthereumLogo2 className="size-6" />
-          {amount || "---"} ETH
+          {formattedAmount || "---"} ETH
         </div>
-        <div className="text-right text-sm font-semibold text-muted-foreground">
-          $---
+        <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">
+          ${ethAmountInUsd || "---"}
         </div>
       </div>
     </div>

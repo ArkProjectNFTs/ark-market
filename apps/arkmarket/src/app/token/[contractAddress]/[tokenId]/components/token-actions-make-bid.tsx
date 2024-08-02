@@ -90,6 +90,7 @@ export default function TokenActionsMakeBid({
         additionalContent: (
           <ToastRejectedTransactionContent
             token={token}
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={startAmount}
           />
         ),
@@ -100,12 +101,14 @@ export default function TokenActionsMakeBid({
         title: "Your token is successfully listed!",
         additionalContent: (
           <ToastExecutedTransactionContent
-            formattedPrice={startAmount}
             token={token}
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            formattedPrice={startAmount}
           />
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

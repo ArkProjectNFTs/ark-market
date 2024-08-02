@@ -31,6 +31,7 @@ const CancelOffer = ({ offer, token }: CancelOfferProps) => {
         additionalContent: (
           <ToastRejectedTransactionContent
             token={token}
+            price={BigInt(offer.price)}
             formattedPrice={formatEther(BigInt(offer.price))}
           />
         ),
@@ -41,12 +42,14 @@ const CancelOffer = ({ offer, token }: CancelOfferProps) => {
         title: "Your offer is successfully canceled",
         additionalContent: (
           <ToastExecutedTransactionContent
-            formattedPrice={formatEther(BigInt(offer.price))}
             token={token}
+            price={BigInt(offer.price)}
+            formattedPrice={formatEther(BigInt(offer.price))}
           />
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   const handleClick = async () => {

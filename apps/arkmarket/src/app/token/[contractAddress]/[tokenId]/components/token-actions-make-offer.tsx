@@ -111,6 +111,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         additionalContent: (
           <ToastRejectedTransactionContent
             token={token}
+            price={parseEther(startAmount)}
             formattedPrice={startAmount}
           />
         ),
@@ -122,12 +123,14 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         title: "Your offer is successfully sent",
         additionalContent: (
           <ToastExecutedTransactionContent
-            formattedPrice={startAmount}
             token={token}
+            price={parseEther(startAmount)}
+            formattedPrice={startAmount}
           />
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, toast]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -179,11 +182,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         <div className="flex flex-col gap-6">
           <div className="mx-auto size-20 rounded-full bg-secondary" />
           <div className="text-center text-xl font-semibold">Make an offer</div>
-          <TokenActionsTokenOverview
-            token={token}
-            amount={formattedStartAmount}
-            small
-          />
+          <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

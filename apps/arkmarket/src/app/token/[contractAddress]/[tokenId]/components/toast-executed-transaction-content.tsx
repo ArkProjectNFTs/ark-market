@@ -1,16 +1,22 @@
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import Media from "~/components/media";
+import usePrices from "~/hooks/usePrices";
 
 interface ToastExecutedTransactionContentProps {
   token: Token | WalletToken;
+  price: bigint;
   formattedPrice: string;
 }
 
 export default function ToastExecutedTransactionContent({
   token,
+  price,
   formattedPrice,
 }: ToastExecutedTransactionContentProps) {
+  const { convertInUsd } = usePrices();
+  const priceInUsd = convertInUsd({ amount: price });
+
   return (
     <div className="mt-5 flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -33,7 +39,7 @@ export default function ToastExecutedTransactionContent({
         </div>
         <div className="text-end">
           <p className="font-medium">{formattedPrice} ETH</p>
-          <p className="text-xs font-medium">$---</p>
+          <p className="text-xs font-medium">${priceInUsd}</p>
         </div>
       </div>
     </div>

@@ -4,12 +4,10 @@ import { useStarkProfile } from "@starknet-react/core";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, shortAddress } from "@ark-market/ui";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 
 import CopyButton from "~/components/copy-button";
 import ProfilePicture from "~/components/profile-picture";
-import { ETH } from "~/constants/tokens";
-import useBalance from "~/hooks/useBalance";
+import PortfolioValue from "./portfolio-value";
 
 interface PortfolioHeaderProps {
   walletAddress: string;
@@ -19,10 +17,7 @@ export default function PortfolioHeader({
   className,
   walletAddress,
 }: PropsWithClassName<PortfolioHeaderProps>) {
-  const { data: ethBalance } = useBalance({ token: ETH });
-  const { data: starkProfile } = useStarkProfile({
-    address: walletAddress,
-  });
+  const { data: starkProfile } = useStarkProfile({ address: walletAddress });
   const shortenedAddress = shortAddress(walletAddress);
 
   return (
@@ -54,23 +49,7 @@ export default function PortfolioHeader({
           )}
         </div>
       </div>
-
-      <div className="flex rounded-lg bg-card py-2 pl-1 pr-4">
-        <div className="flex items-center gap-1">
-          <EthereumLogo2 />
-          <div className="flex flex-col gap-1.5">
-            <p className="text-sm text-secondary-foreground">Portfolio value</p>
-            <p className="text-xl font-semibold">
-              {ethBalance.rounded}{" "}
-              <span className="text-secondary-foreground">ETH</span>
-            </p>
-          </div>
-        </div>
-
-        <div className="ml-10 hidden items-end sm:flex">
-          <span className="text-muted-foreground">$00,00</span>
-        </div>
-      </div>
+      <PortfolioValue />
     </div>
   );
 }

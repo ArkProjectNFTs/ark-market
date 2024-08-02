@@ -3,16 +3,22 @@ import { FileSignature } from "lucide-react";
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import Media from "~/components/media";
+import usePrices from "~/hooks/usePrices";
 
 interface ToastRejectedTransactionContentProps {
   token: Token | WalletToken;
+  price: bigint;
   formattedPrice: string;
 }
 
 export default function ToastRejectedTransactionContent({
   token,
+  price,
   formattedPrice,
 }: ToastRejectedTransactionContentProps) {
+  const { convertInUsd } = usePrices();
+  const priceInUsd = convertInUsd({ amount: price });
+
   return (
     <div className="mt-5 flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -35,7 +41,7 @@ export default function ToastRejectedTransactionContent({
         </div>
         <div className="text-end">
           <p className="font-medium">{formattedPrice} ETH</p>
-          <p className="text-xs font-medium">$---</p>
+          <p className="text-xs font-medium">${priceInUsd}</p>
         </div>
       </div>
       <div className="flex h-10 w-full items-center rounded-xs bg-slate-600 px-4 text-white opacity-50">
