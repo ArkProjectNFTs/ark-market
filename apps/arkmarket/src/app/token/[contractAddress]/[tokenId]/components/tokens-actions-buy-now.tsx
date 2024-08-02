@@ -72,6 +72,7 @@ export default function TokenActionsBuyNow({
         title: "Purchase canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
@@ -86,6 +87,7 @@ export default function TokenActionsBuyNow({
         additionalContent: (
           <ToastExecutedTransactionContent
             token={token}
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
@@ -93,6 +95,7 @@ export default function TokenActionsBuyNow({
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   if (isOwner || !tokenMarketData.is_listed) {
@@ -124,14 +127,12 @@ export default function TokenActionsBuyNow({
                 </div>
               )}
             </div>
-
             <TokenActionsTokenOverview
               token={token}
               amount={formatEther(
                 BigInt(tokenMarketData.listing.start_amount ?? 0),
               )}
             />
-
             {isSuccess ? (
               <Button
                 onClick={() => setIsOpen(false)}

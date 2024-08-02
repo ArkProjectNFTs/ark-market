@@ -9,8 +9,9 @@ interface ConvertInUsdParams {
 }
 
 export default function usePrices() {
-  const { data, isLoading, isError, error } = useQuery("prices", getPrices, {
+  const { data, isLoading, isError, error } = useQuery(["prices"], getPrices, {
     refetchInterval: 15_000,
+    staleTime: 15_000,
   });
 
   const convertInUsd = ({
@@ -24,7 +25,10 @@ export default function usePrices() {
     const amountInEther = parseFloat(formatEther(amount));
     const price = data[token].price;
 
-    return (amountInEther * price).toFixed(2);
+    return (amountInEther * price).toLocaleString("en-us", {
+      notation: "compact",
+      minimumFractionDigits: 2,
+    });
   };
 
   return {

@@ -1,11 +1,10 @@
 "use client";
 
-import { useQuery } from "react-query";
 import { formatEther } from "viem";
 
-import { cn, ellipsableStyles, formatNumber } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 
-import getPrices from "~/lib/getPrices";
+import usePrices from "~/hooks/usePrices";
 
 interface TokenActionsPriceProps {
   startAmount: string | null;
@@ -22,16 +21,12 @@ export default function TokenActionsPrice({
   startAmount,
   isAuction,
   isListed,
-  hasOffer,
   topOffer,
 }: TokenActionsPriceProps) {
-  const { data } = useQuery("prices", getPrices, {
-    refetchInterval: 15_000,
-  });
-  const price = hasOffer
-    ? formatEther(BigInt(topOffer.amount))
-    : formatEther(BigInt(startAmount ?? 0));
-  const priceInUSD = data ? data.ethereum.price * parseFloat(price) : 0;
+  const { convertInUsd } = usePrices();
+  const amountHex = isListed ? startAmount : topOffer.amount;
+  const amount = formatEther(BigInt(amountHex ?? 0));
+  const amountInUsd = convertInUsd({ amount: BigInt(amountHex ?? 0) });
 
   let label = "Best offer";
 
@@ -50,10 +45,10 @@ export default function TokenActionsPrice({
         <div
           className={cn("text-xl font-semibold lg:text-3xl", ellipsableStyles)}
         >
-          {price} ETH
+          {amount} ETH
         </div>
         <div className="text-lg font-semibold text-muted-foreground lg:text-2xl">
-          ${priceInUSD ? formatNumber(priceInUSD) : "--"}
+          ${amountInUsd}
         </div>
         <div className="flex h-8 items-center whitespace-nowrap rounded-full bg-secondary px-3 text-xs text-secondary-foreground lg:text-sm">
           Royalties 5%

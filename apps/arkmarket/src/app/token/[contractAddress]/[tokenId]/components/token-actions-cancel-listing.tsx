@@ -38,6 +38,7 @@ export default function TokenActionsCancelListing({
         additionalContent: (
           <ToastRejectedTransactionContent
             token={token}
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
@@ -50,14 +51,16 @@ export default function TokenActionsCancelListing({
         title: "Your listing is successfully canceled",
         additionalContent: (
           <ToastExecutedTransactionContent
+            token={token}
+            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
-            token={token}
           />
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   if (!account || !isOwner || !tokenMarketData.is_listed) {

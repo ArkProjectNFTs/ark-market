@@ -37,7 +37,6 @@ import { useToast } from "@ark-market/ui/use-toast";
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import { env } from "~/env";
-import formatAmount from "~/lib/formatAmount";
 import getCollection from "~/lib/getCollection";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
@@ -126,8 +125,9 @@ export function TokenActionsCreateListing({
         title: "Listing canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            formattedPrice={startAmount}
             token={token}
+            price={parseEther(startAmount)}
+            formattedPrice={startAmount}
           />
         ),
       });
@@ -139,12 +139,14 @@ export function TokenActionsCreateListing({
         title: "Your token is successfully listed!",
         additionalContent: (
           <ToastExecutedTransactionContent
-            formattedPrice={startAmount}
             token={token}
+            price={parseEther(startAmount)}
+            formattedPrice={startAmount}
           />
         ),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   useEffect(() => {
@@ -195,7 +197,6 @@ export function TokenActionsCreateListing({
   }
 
   const startAmount = form.watch("startAmount");
-  const formattedStartAmount = formatAmount(startAmount);
   const isLoading = status === "loading" || auctionStatus === "loading";
 
   const formattedCollectionFloor = formatEther(
@@ -224,11 +225,7 @@ export function TokenActionsCreateListing({
       <DialogContent>
         <div className="flex flex-col gap-8">
           <div className="text-center text-xl font-semibold">List for sale</div>
-          <TokenActionsTokenOverview
-            token={token}
-            amount={formattedStartAmount}
-            small
-          />
+          <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
