@@ -90,8 +90,9 @@ export default function CollectionItemsBuyNow({
         title: "Purchase canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            formattedPrice={formatEther(BigInt(token.price ?? 0))}
             token={token}
+            price={BigInt(token.price ?? 0)}
+            formattedPrice={formatEther(BigInt(token.price ?? 0))}
           />
         ),
       });
@@ -102,6 +103,7 @@ export default function CollectionItemsBuyNow({
         additionalContent: (
           <ToastExecutedTransactionContent
             token={token}
+            price={BigInt(token.price ?? 0)}
             formattedPrice={formatEther(BigInt(token.price ?? 0))}
           />
         ),
