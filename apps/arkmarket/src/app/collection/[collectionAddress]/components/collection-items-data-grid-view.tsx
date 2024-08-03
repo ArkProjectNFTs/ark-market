@@ -1,19 +1,16 @@
 import { forwardRef } from "react";
 import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
+import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
-import {
-  NftCard,
-  NftCardAction,
-  NftCardContent,
-  NftCardMedia,
-} from "@ark-market/ui/nft-card";
+import { NftCard, NftCardContent, NftCardMedia } from "@ark-market/ui/nft-card";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
+import CollectionItemsBuyNow from "./collection-items-buy-now";
 
 const LargeGridContainer = forwardRef<
   HTMLDivElement,
@@ -110,9 +107,11 @@ export default function CollectionItemsDataGridView({
                     </div>
                   </div>
                   <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                    Last sale _ ETH
+                    Last sale {formatEther(BigInt(token.last_price ?? 0))} ETH
                   </p>
-                  <NftCardAction>Details</NftCardAction>
+                  {token.is_listed && !token.listing.is_auction && (
+                    <CollectionItemsBuyNow token={token} />
+                  )}
                 </NftCardContent>
               </NftCard>
             </Link>

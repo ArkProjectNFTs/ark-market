@@ -5,13 +5,13 @@ import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
-import type { Token } from "~/types";
+import type { CollectionToken, Token } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
 import formatAmount from "~/lib/formatAmount";
 
 interface tokenActionsTokenOverviewProps {
-  token: Token | WalletToken;
+  token: Token | CollectionToken | WalletToken;
   amount: string;
   small?: boolean;
 }
