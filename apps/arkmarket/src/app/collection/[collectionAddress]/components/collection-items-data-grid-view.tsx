@@ -5,7 +5,6 @@ import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
-import { NftCard, NftCardContent, NftCardMedia } from "@ark-market/ui/nft-card";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "~/types";
@@ -69,13 +68,13 @@ export default function CollectionItemsDataGridView({
           }
 
           return (
-            <Link
-              href={`/token/${token.collection_address}/${token.token_id}`}
-              key={`${token.collection_address}-${token.token_id}`}
-              prefetch={false}
-            >
-              <NftCard>
-                <NftCardMedia>
+            <div className="group relative w-full overflow-hidden rounded-xs bg-card text-card-foreground">
+              <Link
+                href={`/token/${token.collection_address}/${token.token_id}`}
+                key={`${token.collection_address}-${token.token_id}`}
+                prefetch={false}
+              >
+                <div className="aspect-square w-full overflow-hidden">
                   <Media
                     src={token.metadata?.image}
                     mediaKey={token.metadata?.image_key}
@@ -84,8 +83,8 @@ export default function CollectionItemsDataGridView({
                     height={viewType === "large-grid" ? 540 : 340}
                     width={viewType === "large-grid" ? 540 : 340}
                   />
-                </NftCardMedia>
-                <NftCardContent>
+                </div>
+                <div className="p-3">
                   <div className="flex w-full justify-between">
                     <div className="w-full">
                       <p
@@ -106,15 +105,20 @@ export default function CollectionItemsDataGridView({
                       )}
                     </div>
                   </div>
-                  <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                    Last sale {formatEther(BigInt(token.last_price ?? 0))} ETH
+                  <p className="mt-5 h-5 text-sm font-medium text-secondary-foreground">
+                    {token.last_price && (
+                      <>
+                        Last sale {formatEther(BigInt(token.last_price ?? 0))}{" "}
+                        ETH
+                      </>
+                    )}
                   </p>
-                  {token.is_listed && !token.listing.is_auction && (
-                    <CollectionItemsBuyNow token={token} />
-                  )}
-                </NftCardContent>
-              </NftCard>
-            </Link>
+                </div>
+              </Link>
+              {token.is_listed && !token.listing.is_auction && (
+                <CollectionItemsBuyNow token={token} />
+              )}
+            </div>
           );
         }}
       />
