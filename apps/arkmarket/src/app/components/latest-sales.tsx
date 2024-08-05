@@ -21,7 +21,7 @@ export default function LatestSales() {
   return (
     <section>
       <h2 className="text-3xl font-semibold">Latest sale</h2>
-      <Table className="mt-12">
+      <Table className="mt-8 md:mt-12">
         <TableHeader>
           <TableRow className="hover:bg-background">
             <TableHead>
@@ -48,7 +48,7 @@ export default function LatestSales() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-4">
+                  <div className="flex min-w-44 items-center gap-4">
                     <Media
                       className="size-14 rounded-xs"
                       alt={sale.token.name}
@@ -56,8 +56,8 @@ export default function LatestSales() {
                       height={112}
                       width={112}
                     />
-                    <div>
-                      <p className="text-base font-medium text-white">
+                    <div className="overflow-hidden whitespace-nowrap">
+                      <p className="overflow-hidden text-ellipsis text-base font-medium text-white">
                         {sale.token.name}
                       </p>
                       <Link

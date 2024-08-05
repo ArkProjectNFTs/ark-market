@@ -242,7 +242,7 @@ export default function GlobalSearchWrapper() {
             open ? "block" : "hidden",
           )}
         >
-          <CommandList>
+          <CommandList className="max-h-[21rem]">
             <GlobalSearchCommands
               inputDebouncedValue={inputDebouncedValue}
               inputValue={inputValue}
