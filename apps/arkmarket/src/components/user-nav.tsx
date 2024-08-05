@@ -2,7 +2,7 @@
 
 import { useAccount, useNetwork, useStarkProfile } from "@starknet-react/core";
 
-import { shortAddress } from "@ark-market/ui";
+import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
 import WalletIcon from "@ark-market/ui/icons/wallet-icon";
@@ -84,7 +84,9 @@ export function UserNav() {
           variant="secondary"
         >
           <ProfilePicture className="size-6 rounded-full" address={address} />
-          {nameOrShortAddress}
+          <span className={cn("max-w-16 sm:max-w-none", ellipsableStyles)}>
+            {nameOrShortAddress}
+          </span>
         </Button>
       </WalletAccountModal>
     </>
