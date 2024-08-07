@@ -1,3 +1,4 @@
+import getCollection from "~/lib/getCollection";
 import Collection from "./components/collection";
 
 interface CollectionPageProps {
@@ -7,16 +8,16 @@ interface CollectionPageProps {
   searchParams: Record<string, string | string[] | undefined>;
 }
 
-export default function CollectionPage({
+export default async function CollectionPage({
   params,
   // searchParams,
 }: CollectionPageProps) {
   const { collectionAddress } = params;
   // const { direction, sort } =
   //   collectionPageSearchParamsCache.parse(searchParams);
-  // const collectionInfosInitialData = await getCollectionInfos({
-  //   collectionAddress,
-  // });
+  const collectionInitialData = await getCollection({
+    collectionAddress,
+  });
 
   // const collectionTokensInitialData = await getCollectionTokens({
   //   collectionAddress,
@@ -32,7 +33,7 @@ export default function CollectionPage({
   return (
     <Collection
       collectionAddress={collectionAddress}
-      // collectionInfosInitialData={collectionInfosInitialData}
+      collectionInitialData={collectionInitialData}
       // collectionTokensInitialData={collectionTokensInitialData}
     />
   );
