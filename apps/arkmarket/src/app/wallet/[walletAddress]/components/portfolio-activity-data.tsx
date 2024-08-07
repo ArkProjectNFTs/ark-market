@@ -13,6 +13,7 @@ import {
   Gavel,
   List,
   ListX,
+  Meh,
   ShoppingCart,
   Tag,
   X,
@@ -134,123 +135,134 @@ export default function PortfolioActivityData({
           <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody
-        className="relative text-sm font-semibold"
-        style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const activity = portfolioActivity[virtualRow.index];
-          if (activity === undefined) {
-            return null;
-          }
-          const activityItem = activityTypeToItem.get(activity.activity_type);
+      {portfolioActivity.length === 0 ? (
+        <TableBody className="table-caption">
+          <div className="flex flex-col items-center gap-3 pt-10 text-muted-foreground">
+            <Meh size={42} />
+            <p className="text-xl font-semibold">No activity yet!</p>
+          </div>
+        </TableBody>
+      ) : (
+        <TableBody
+          className="relative text-sm font-semibold"
+          style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
+        >
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            const activity = portfolioActivity[virtualRow.index];
+            if (activity === undefined) {
+              return null;
+            }
+            const activityItem = activityTypeToItem.get(activity.activity_type);
 
-          return (
-            <TableRow
-              className={cn(
-                "group absolute grid h-[6.25rem] w-full items-center",
-                gridTemplateColumnValue,
-              )}
-              data-index={virtualRow.index}
-              key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
-              ref={(node) => rowVirtualizer.measureElement(node)}
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
-            >
-              <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
-                <div className="flex items-center gap-4 whitespace-nowrap">
-                  {activityItem?.icon}
-                  <p>{activityItem?.title}</p>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-4">
-                  <Media
-                    alt={activity.metadata.name}
-                    className="size-[3.75rem] rounded-xs object-contain"
-                    height={120}
-                    width={120}
-                    src={activity.metadata.image}
-                    mediaKey={activity.metadata.image_key}
-                  />
+            return (
+              <TableRow
+                className={cn(
+                  "group absolute grid h-[6.25rem] w-full items-center",
+                  gridTemplateColumnValue,
+                )}
+                data-index={virtualRow.index}
+                key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
+                ref={(node) => rowVirtualizer.measureElement(node)}
+                style={{
+                  transform: `translateY(${virtualRow.start}px)`,
+                }}
+              >
+                <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
+                  <div className="flex items-center gap-4 whitespace-nowrap">
+                    {activityItem?.icon}
+                    <p>{activityItem?.title}</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-4">
+                    <Media
+                      alt={activity.metadata.name}
+                      className="size-[3.75rem] rounded-xs object-contain"
+                      height={120}
+                      width={120}
+                      src={activity.metadata.image}
+                      mediaKey={activity.metadata.image_key}
+                    />
 
-                  <div className="w-full overflow-hidden">
-                    <p
-                      className={cn(
-                        "w-full text-base font-medium",
-                        ellipsableStyles,
-                      )}
-                    >
-                      {activity.metadata.name}
-                    </p>
-                    <div className="flex w-full items-center gap-1">
+                    <div className="w-full overflow-hidden">
                       <p
                         className={cn(
-                          "text-muted-foreground",
+                          "w-full text-base font-medium",
                           ellipsableStyles,
                         )}
                       >
-                        {activity.collection_name}
+                        {activity.metadata.name}
                       </p>
-                      {activity.collection_is_verified && (
-                        <VerifiedIcon className="size-4 text-background" />
-                      )}
+                      <div className="flex w-full items-center gap-1">
+                        <p
+                          className={cn(
+                            "text-muted-foreground",
+                            ellipsableStyles,
+                          )}
+                        >
+                          {activity.collection_name}
+                        </p>
+                        {activity.collection_is_verified && (
+                          <VerifiedIcon className="size-4 text-background" />
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </TableCell>
-              <TableCell>
-                {activity.price ? (
-                  <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
-                    <p className="font-semibold">
-                      {formatUnits(activity.price, 18)}{" "}
-                      <span className="text-muted-foreground">ETH</span>
-                    </p>
-                  </div>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.from ? (
-                  <Link href={`/wallet/${activity.from}`}>
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.from,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.to ? (
-                  <Link href={`/wallet/${activity.to}`}>
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.to,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
-              </TableCell>
-              <TableCell className="pr-5">
-                <Button asChild size="icon" variant="outline">
-                  <ExternalLink href="/">
-                    <ArrowUpRight className="size-5" />
-                  </ExternalLink>
-                </Button>
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
+                </TableCell>
+                <TableCell>
+                  {activity.price ? (
+                    <div className="flex items-center">
+                      <EthereumLogo2 className="size-4" />
+                      <p className="font-semibold">
+                        {formatUnits(activity.price, 18)}{" "}
+                        <span className="text-muted-foreground">ETH</span>
+                      </p>
+                    </div>
+                  ) : (
+                    "_"
+                  )}
+                </TableCell>
+                <TableCell>
+                  {activity.from ? (
+                    <Link href={`/wallet/${activity.from}`}>
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.from,
+                        address,
+                      })}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
+                </TableCell>
+                <TableCell>
+                  {activity.to ? (
+                    <Link href={`/wallet/${activity.to}`}>
+                      {ownerOrShortAddress({
+                        ownerAddress: activity.to,
+                        address,
+                      })}
+                    </Link>
+                  ) : (
+                    "_"
+                  )}
+                </TableCell>
+                <TableCell>
+                  {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
+                </TableCell>
+                <TableCell className="pr-5">
+                  <Button asChild size="icon" variant="outline">
+                    <ExternalLink
+                      href={`https://starkscan.co/tx/${activity.transaction_hash}`}
+                    >
+                      <ArrowUpRight className="size-5" />
+                    </ExternalLink>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      )}
     </Table>
   );
 }
