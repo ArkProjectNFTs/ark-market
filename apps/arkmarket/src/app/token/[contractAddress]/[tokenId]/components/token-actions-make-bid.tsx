@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
-import { cn } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Dialog,
@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import EthInput from "@ark-market/ui/eth-input";
 import {
   Form,
   FormControl,
@@ -25,7 +26,8 @@ import {
   FormItem,
   FormLabel,
 } from "@ark-market/ui/form";
-import { Input } from "@ark-market/ui/input";
+import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -86,7 +88,7 @@ export default function TokenActionsMakeBid({
       setIsOpen(false);
       toast({
         variant: "canceled",
-        title: "Purchase canceled",
+        title: "Your bid could not be submitted",
         additionalContent: (
           <ToastRejectedTransactionContent
             token={token}
@@ -98,7 +100,7 @@ export default function TokenActionsMakeBid({
     } else if (status === "success") {
       toast({
         variant: "success",
-        title: "Your token is successfully listed!",
+        title: "Your bid has been sucessfullly sent!",
         additionalContent: (
           <ToastExecutedTransactionContent
             token={token}
@@ -161,53 +163,94 @@ export default function TokenActionsMakeBid({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Place a bid</DialogTitle>
+          <DialogTitle className="sr-only">Place a bid</DialogTitle>
         </DialogHeader>
-        <div className="flex items-center space-x-4">
-          <Media
-            className="size-16 rounded-lg"
-            src={token.metadata?.animation_url ?? token.metadata?.image}
-            mediaKey={token.metadata?.image_key}
-            alt={token.token_id}
-          />
-          <div className="">
-            <div className="font-bold">Duo #{token.token_id}</div>
-            <div className="text-muted-foreground">Everai</div>
-          </div>
-          <div className="grow" />
-          <div className="">
-            <div className="text-right font-bold">{price} ETH</div>
-            <div className="text-right text-muted-foreground">
-              Reserve {reservePrice} ETH
+        <div className="flex flex-col gap-6">
+          <div className="mx-auto size-20 rounded-full bg-secondary" />
+          <div className="text-center text-xl font-semibold">Place a bid</div>
+
+          <div className="flex justify-between">
+            <div className="flex items-center gap-4">
+              <Media
+                src={token.metadata?.image}
+                mediaKey={token.metadata?.image_key}
+                alt={token.metadata?.name ?? "Empty"}
+                className={cn(
+                  "aspect-square size-16 w-full flex-shrink-0 overflow-hidden rounded-xl object-contain transition-transform group-hover:scale-110",
+                )}
+                height={192}
+                width={192}
+              />
+
+              <div className="flex flex-col items-start justify-between overflow-hidden">
+                <div
+                  className={cn(
+                    "w-full text-xl font-semibold",
+                    ellipsableStyles,
+                  )}
+                >
+                  {token.metadata?.name ?? `#${token.token_id}`}
+                </div>
+                <div className="flex w-full items-center gap-1 sm:gap-2">
+                  <p
+                    className={cn(
+                      "text-sm font-semibold text-muted-foreground sm:text-lg",
+                      ellipsableStyles,
+                    )}
+                  >
+                    {token.collection_name || "Unknown"}
+                  </p>
+                  <VerifiedIcon className="size-4 flex-shrink-0 text-background sm:size-6" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex whitespace-nowrap text-lg font-semibold sm:text-xl">
+                <EthereumLogo2 className="size-6" />
+                {price} ETH
+              </div>
+              <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">
+                Reserve {reservePrice} ETH
+              </div>
             </div>
           </div>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex flex-col gap-6"
+            >
+              <FormField
+                control={form.control}
+                name="startAmount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price</FormLabel>
+                    <FormControl>
+                      <EthInput
+                        autoComplete="off"
+                        placeholder="Price"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                disabled={isDisabled}
+                size="xl"
+                className="mx-auto w-full px-10 lg:w-auto"
+              >
+                {status === "loading" ? (
+                  <LoaderCircle className="animate-spin" />
+                ) : (
+                  "Place a bid"
+                )}
+              </Button>
+            </form>
+          </Form>
         </div>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col space-y-4"
-          >
-            <FormField
-              control={form.control}
-              name="startAmount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input autoComplete="off" placeholder="Price" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <Button type="submit" disabled={isDisabled} size="xl">
-              {status === "loading" ? (
-                <LoaderCircle className="animate-spin" />
-              ) : (
-                "Place a bid"
-              )}
-            </Button>
-          </form>
-        </Form>
       </DialogContent>
     </Dialog>
   );

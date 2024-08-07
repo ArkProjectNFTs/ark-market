@@ -83,7 +83,7 @@ export default function TokenActionsBuyNow({
     } else if (status === "success") {
       toast({
         variant: "success",
-        title: "Your token is successfully listed!",
+        title: "Your purchase is confirmed",
         additionalContent: (
           <ToastExecutedTransactionContent
             token={token}

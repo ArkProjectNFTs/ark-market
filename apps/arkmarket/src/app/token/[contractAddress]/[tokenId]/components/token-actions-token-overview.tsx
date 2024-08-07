@@ -44,7 +44,7 @@ export default function TokenActionsTokenOverview({
 
         <div className="flex flex-col items-start justify-between overflow-hidden">
           <div className={cn("w-full text-xl font-semibold", ellipsableStyles)}>
-            #{token.token_id}
+            {token.metadata?.name ?? `#${token.token_id}`}
           </div>
           <div className="flex w-full items-center gap-1 sm:gap-2">
             <p

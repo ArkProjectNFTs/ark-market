@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
@@ -52,7 +53,7 @@ export default function TokenOffersMobileTable({
     <div className="lg:hidden">
       <Separator className="my-4" />
       {tokenOffers.map((offer, index) => (
-        <>
+        <React.Fragment key={`${offer.hash}-${offer.offer_id}`}>
           <div className="mb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 overflow-hidden">
@@ -89,7 +90,7 @@ export default function TokenOffersMobileTable({
             </div>
           </div>
           {index !== tokenOffers.length - 1 && <Separator className="mb-4" />}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

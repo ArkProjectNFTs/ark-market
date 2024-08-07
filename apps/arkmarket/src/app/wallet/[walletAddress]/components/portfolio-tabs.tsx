@@ -1,7 +1,7 @@
 import { formatNumber } from "@ark-market/ui";
 import { TabsListV2, TabsTriggerV2, TabsV2 } from "@ark-market/ui/tabs-v2";
 
-export const portfolioTabsValues = ["items", "activity", "orders"] as const;
+export const portfolioTabsValues = ["items", "activity", "offers"] as const;
 
 export type PortfolioTabsValues = (typeof portfolioTabsValues)[number];
 
@@ -30,7 +30,7 @@ export default function PortfolioTabs({
             {formatNumber(portfolioItemsCount)}
           </p>
         </TabsTriggerV2>
-        <TabsTriggerV2 value="orders">Orders</TabsTriggerV2>
+        <TabsTriggerV2 value="offers">Offers</TabsTriggerV2>
         <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
       </TabsListV2>
     </TabsV2>
