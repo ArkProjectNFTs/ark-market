@@ -34,9 +34,11 @@ export const activityTypeToItem = new Map([
   ["TRANSFER", { icon: <ArrowLeftRight size={24} />, title: "Transfer" }],
   ["LISTING", { icon: <List size={24} />, title: "List" }],
   ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
+  ["CANCEL_OFFER", { icon: <X size={24} />, title: "Offer" }],
   ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
   ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
   ["AUCTION", { icon: <Gavel size={24} />, title: "Put in auction" }],
+  ["CANCEL_AUCTION", { icon: <X size={24} />, title: "Cancel auction" }],
   ["DELISTING", { icon: <ListX size={24} />, title: "Delist" }],
 ]);
 
