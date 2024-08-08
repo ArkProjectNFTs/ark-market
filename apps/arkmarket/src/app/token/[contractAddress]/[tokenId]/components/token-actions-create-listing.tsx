@@ -37,6 +37,8 @@ import { useToast } from "@ark-market/ui/use-toast";
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
 import { env } from "~/env";
+import usePrices from "~/hooks/usePrices";
+import formatAmount from "~/lib/formatAmount";
 import getCollection from "~/lib/getCollection";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
@@ -69,6 +71,7 @@ export function TokenActionsCreateListing({
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
   const { toast } = useToast();
+  const { convertInUsd } = usePrices();
 
   const formSchema = z
     .object({
@@ -150,6 +153,38 @@ export function TokenActionsCreateListing({
   }, [status]);
 
   useEffect(() => {
+    if (auctionStatus === "error") {
+      setIsOpen(false);
+      toast({
+        variant: "canceled",
+        title: "Auction canceled",
+        additionalContent: (
+          <ToastRejectedTransactionContent
+            token={token}
+            price={parseEther(startAmount)}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
+    } else if (auctionStatus === "success") {
+      setIsOpen(false);
+
+      toast({
+        variant: "success",
+        title: "Auction successfully launched",
+        additionalContent: (
+          <ToastExecutedTransactionContent
+            token={token}
+            price={parseEther(startAmount)}
+            formattedPrice={startAmount}
+          />
+        ),
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auctionStatus]);
+
+  useEffect(() => {
     setIsAuction(false);
     form.reset();
   }, [form, isOpen]);
@@ -209,6 +244,8 @@ export function TokenActionsCreateListing({
     status === "loading" ||
     auctionStatus === "loading";
 
+  const startAmountInUsd = convertInUsd({ amount: parseEther(startAmount) });
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -224,14 +261,16 @@ export function TokenActionsCreateListing({
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col gap-8">
-          <div className="text-center text-xl font-semibold">List for sale</div>
+          <div className="mt-4 text-center text-xl font-semibold">
+            List for sale
+          </div>
           <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col space-y-4"
             >
-              <FormItem>
+              <FormItem className="!mt-0">
                 <FormLabel className="text-lg">Type of sale</FormLabel>
                 <div className="flex gap-6">
                   <Button
@@ -277,7 +316,7 @@ export function TokenActionsCreateListing({
                         await form.trigger("startAmount");
                       }}
                     >
-                      <div className="flex size-5 items-center justify-center rounded-xs bg-secondary">
+                      <div className="absolute left-3 flex size-5 items-center justify-center rounded-xs bg-secondary">
                         {field.value === formattedCollectionFloor && (
                           <CheckIcon />
                         )}
@@ -296,7 +335,13 @@ export function TokenActionsCreateListing({
                         autoFocus
                       />
                     </FormControl>
-                    <FormMessage />
+                    {fieldState.error?.message ? (
+                      <FormMessage />
+                    ) : (
+                      <p className="!mt-1 ml-3 text-sm font-medium text-muted-foreground">
+                        $<span>{startAmountInUsd}</span>
+                      </p>
+                    )}
                   </FormItem>
                 )}
               />
@@ -357,7 +402,7 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
-              <div className="mt-8 text-xl font-semibold">
+              <div className="!mt-8 text-xl font-semibold">
                 <div className="flex items-center justify-between">
                   <p>Earning details</p>
                   <p>--- ETH</p>
@@ -371,15 +416,28 @@ export function TokenActionsCreateListing({
                   <p>-- ETH</p>
                 </div>
               </div>
-              <Button
-                type="submit"
-                className="mx-auto !mt-8 w-full px-10 lg:w-auto"
-                disabled={isDisabled}
-                size="xl"
-              >
-                {isLoading && <LoaderCircle className="mr-2 animate-spin" />}
-                List
-              </Button>
+              <div className="sticky bottom-0 !mt-8 flex w-full translate-y-5 items-center justify-center bg-background pb-5">
+                <Button
+                  type="submit"
+                  className="mx-auto w-full px-10 lg:w-auto"
+                  disabled={isDisabled}
+                  size="xl"
+                >
+                  {isLoading && <LoaderCircle className="mr-2 animate-spin" />}
+                  <p>
+                    List
+                    {startAmount ? (
+                      <>
+                        {" "}
+                        for{" "}
+                        <span className="font-bold">
+                          {formatAmount(startAmount)} ETH
+                        </span>
+                      </>
+                    ) : null}
+                  </p>
+                </Button>
+              </div>
             </form>
           </Form>
         </div>

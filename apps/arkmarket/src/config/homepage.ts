@@ -8,7 +8,7 @@ export const homepageConfig = {
         "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 921,
+      itemsCount: 923,
       floorPrice: 0.12,
     },
     {
@@ -19,7 +19,7 @@ export const homepageConfig = {
         "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 921,
+      itemsCount: 923,
       floorPrice: 0.12,
     },
     {
@@ -30,7 +30,7 @@ export const homepageConfig = {
         "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
       address:
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 921,
+      itemsCount: 923,
       floorPrice: 0.12,
     },
   ],
@@ -54,7 +54,7 @@ export const homepageConfig = {
       status: "live",
     },
     {
-      name: "Influence Crewmates",
+      name: "Influence CrewMate",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
       image: "/medias/crewmates.png",
@@ -82,7 +82,7 @@ export const homepageConfig = {
       status: "upcoming",
     },
     {
-      name: "Influence Crewmates",
+      name: "Influence CrewMate",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
       image: "/medias/crewmates.png",
@@ -118,7 +118,7 @@ export const homepageConfig = {
       first_nft: "/nfts/everai_1.png",
       second_nft: "/nfts/everai_2.png",
       third_nft: "/nfts/everai_3.png",
-      token_count: 921,
+      token_count: 923,
     },
     {
       name: "Starkurabu",
@@ -132,7 +132,7 @@ export const homepageConfig = {
       token_count: 10_000,
     },
     {
-      name: "Influence crewmates",
+      name: "Influence CrewMate",
       address:
         "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
       image:
@@ -140,7 +140,7 @@ export const homepageConfig = {
       first_nft: "/nfts/crewmates_1.png",
       second_nft: "/nfts/crewmates_2.png",
       third_nft: "/nfts/crewmates_3.png",
-      token_count: 17_746,
+      token_count: 18_926,
     },
     {
       name: "Everai",
