@@ -69,7 +69,7 @@ export default function CollectionItemsData({
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (

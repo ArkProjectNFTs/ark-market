@@ -5,7 +5,7 @@ interface GetCollectionParams {
   collectionAddress: string;
 }
 
-interface CollectionApiResponse {
+export interface CollectionApiResponse {
   data: Collection;
 }
 
@@ -22,8 +22,7 @@ export default async function getCollection({
   );
 
   if (!response.ok) {
-    console.log("Failed to fetch collection");
-    return null;
+    throw new Error("Failed to fetch collection data");
   }
 
   const collection = (await response.json()) as CollectionApiResponse;
