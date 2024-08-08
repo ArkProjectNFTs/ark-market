@@ -1,5 +1,12 @@
-import type { TokenActivity } from "~/types";
+import { parseAsStringLiteral } from "nuqs";
+
+import type { TokenActivity, TokenActivityType } from "~/types";
 import { env } from "~/env";
+import { tokenActivityTypes } from "~/types";
+
+export const tokenActivityFilterKey = "activityFilter";
+export const TokenActivityFiltersParser =
+  parseAsStringLiteral(tokenActivityTypes);
 
 export interface TokenActivityApiResponse {
   data: TokenActivity[];
@@ -8,12 +15,14 @@ export interface TokenActivityApiResponse {
 }
 
 interface GetTokenActivityParams {
+  activityFilter: TokenActivityType | null;
   contractAddress: string;
   page?: number;
   tokenId: string;
 }
 
 export default async function getTokenActivity({
+  activityFilter,
   contractAddress,
   page,
   tokenId,
@@ -22,6 +31,10 @@ export default async function getTokenActivity({
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+
+  if (activityFilter !== null) {
+    queryParams.push(`types[]=${activityFilter}`);
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}/activity?${queryParams.join("&")}`;

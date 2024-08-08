@@ -244,14 +244,22 @@ export interface SystemStatus {
   status: string;
 }
 
-export type TokenActivityType =
-  | "LISTING"
-  | "OFFER"
-  | "CANCELLED"
-  | "FULFILL"
-  | "TRANSFER"
-  | "EXECUTED"
-  | "MINT";
+export const tokenActivityTypes = [
+  "LISTING",
+  "OFFER",
+  "CANCELLED",
+  "FULFILL",
+  "TRANSFER",
+  "EXECUTED",
+  "MINT",
+  "SALE",
+  "CANCEL_OFFER",
+  "AUCTION",
+  "CANCEL_AUCTION",
+  "DELISTING",
+] as const;
+
+export type TokenActivityType = (typeof tokenActivityTypes)[number];
 
 export interface TokenActivity {
   activity_type: TokenActivityType;

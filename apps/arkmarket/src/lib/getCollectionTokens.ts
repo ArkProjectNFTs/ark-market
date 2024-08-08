@@ -3,7 +3,7 @@ import { createSearchParamsCache, parseAsStringLiteral } from "nuqs/server";
 import type { CollectionToken } from "~/types";
 import { env } from "~/env";
 
-export const itemsPerPage = 50;
+const itemsPerPage = 50;
 
 export const collectionSortDirectionKey = "direction";
 export const collectionSortDirectionsValues = ["asc", "desc"] as const;

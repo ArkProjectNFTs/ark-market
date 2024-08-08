@@ -2,15 +2,20 @@
 
 import { useMemo, useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQueryState } from "nuqs";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
 import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import getTokenActivity from "~/lib/getTokenActivity";
+import getTokenActivity, {
+  tokenActivityFilterKey,
+  TokenActivityFiltersParser,
+} from "~/lib/getTokenActivity";
 import DesktopTokenActivity from "./desktop-token-activity";
 import MobileTokenActivity from "./mobile-token-activity";
+import TokenActivityFilterSelect from "./token-activity-filter-select";
 
 interface TokenActivityProps {
   contractAddress: string;
@@ -23,6 +28,11 @@ export default function TokenActivity({
   tokenId,
 }: PropsWithClassName<TokenActivityProps>) {
   const tableContainerRef = useRef<HTMLTableElement | null>(null);
+  const [tokenActivityFilter] = useQueryState(
+    tokenActivityFilterKey,
+    TokenActivityFiltersParser,
+  );
+
   const {
     data: infiniteData,
     fetchNextPage,
@@ -36,7 +46,12 @@ export default function TokenActivity({
       lastPage?.next_page,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
-      getTokenActivity({ contractAddress, tokenId, page: pageParam }),
+      getTokenActivity({
+        activityFilter: tokenActivityFilter,
+        contractAddress,
+        tokenId,
+        page: pageParam,
+      }),
   });
 
   const totalCount = infiniteData?.pages[0]?.count ?? 0;
@@ -73,7 +88,9 @@ export default function TokenActivity({
           {totalCount}
         </div>
       </div>
-
+      <div className="mt-4">
+        <TokenActivityFilterSelect />
+      </div>
       <div className="mt-6 lg:mt-12" ref={tableContainerRef}>
         <div className="hidden lg:block">
           <DesktopTokenActivity tokenActivity={tokenActivity} />
