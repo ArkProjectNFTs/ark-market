@@ -148,6 +148,7 @@ export type PortfolioActivityType =
 
 export interface PortfolioActivity {
   activity_type: PortfolioActivityType;
+  collection_address: string;
   collection_is_verified: boolean;
   collection_name: string;
   from: string;
