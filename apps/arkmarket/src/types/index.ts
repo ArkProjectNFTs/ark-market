@@ -112,6 +112,8 @@ export interface CollectionToken {
 
 export interface AccountSearchResult {
   owner: string;
+  starknet_id: string | null;
+  image: string | null;
 }
 
 export interface CollectionSearchResult {
