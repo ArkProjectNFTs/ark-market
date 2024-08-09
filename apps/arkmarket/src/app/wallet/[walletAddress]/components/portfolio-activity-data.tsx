@@ -18,7 +18,13 @@ import {
   X,
 } from "lucide-react";
 
-import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
+import {
+  cn,
+  ellipsableStyles,
+  focusableStyles,
+  formatUnits,
+  timeSince,
+} from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
@@ -109,6 +115,8 @@ export default function PortfolioActivityData({
     scrollMargin: tableRef.current?.offsetTop ?? 0,
   });
 
+  console.log(portfolioActivity);
+
   return (
     <Table ref={tableRef}>
       <TableHeader>
@@ -176,23 +184,34 @@ export default function PortfolioActivityData({
                   />
 
                   <div className="w-full overflow-hidden">
-                    <p
-                      className={cn(
-                        "w-full text-base font-medium",
-                        ellipsableStyles,
-                      )}
+                    <Link
+                      className={focusableStyles}
+                      // TODO @YohanTz: Update token ID when available
+                      href={`/token/${activity.collection_address}/0}`}
                     >
-                      {activity.metadata.name}
-                    </p>
-                    <div className="flex w-full items-center gap-1">
                       <p
                         className={cn(
-                          "text-muted-foreground",
+                          "w-full text-base font-medium",
                           ellipsableStyles,
                         )}
                       >
-                        {activity.collection_name}
+                        {activity.metadata.name}
                       </p>
+                    </Link>
+                    <div className="flex w-full items-center gap-1">
+                      <Link
+                        className={focusableStyles}
+                        href={`/collection/${activity.collection_address}`}
+                      >
+                        <p
+                          className={cn(
+                            "text-muted-foreground",
+                            ellipsableStyles,
+                          )}
+                        >
+                          {activity.collection_name}
+                        </p>
+                      </Link>
                       {activity.collection_is_verified && (
                         <VerifiedIcon className="size-4 text-background" />
                       )}

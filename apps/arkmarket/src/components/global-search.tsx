@@ -26,6 +26,7 @@ import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import getCollectionSearch from "~/lib/getCollectionSearch";
 import GlobalSearchSuggestions from "./global-search-suggestions";
 import Media from "./media";
+import ProfilePicture from "./profile-picture";
 
 interface GlobalSearchCommandsProps {
   inputValue: string;
@@ -153,14 +154,22 @@ function GlobalSearchCommands({
                     href={`/wallet/${searchResult.owner}`}
                     prefetch
                   >
-                    <Media
-                      alt=""
-                      height={64}
-                      width={64}
-                      className="size-8 rounded-full"
-                    />
+                    {searchResult.image ? (
+                      <Media
+                        alt=""
+                        src={searchResult.image}
+                        height={64}
+                        width={64}
+                        className="size-8 rounded-full"
+                      />
+                    ) : (
+                      <ProfilePicture
+                        className="size-8 rounded-full"
+                        address={searchResult.owner}
+                      />
+                    )}
                     <p className={cn("text-sm font-medium", ellipsableStyles)}>
-                      {searchResult.owner}
+                      {searchResult.starknet_id ?? searchResult.owner}
                     </p>
                   </Link>
                 </CommandItem>
