@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useAccount } from "@starknet-react/core";
+import { useAccount, useStarkProfile } from "@starknet-react/core";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -36,10 +36,14 @@ export default function TokenAbout({
   const [open, setOpen] = useState(true);
   const { address } = useAccount();
   const collectionShortenedAddress = shortAddress(contractAddress);
-  const ownerShortenedAddress = ownerOrShortAddress({
-    ownerAddress: token.owner,
-    address,
-  });
+  const { data: starkProfile } = useStarkProfile({ address: token.owner });
+
+  const ownerShortenedAddress =
+    starkProfile?.name ??
+    ownerOrShortAddress({
+      ownerAddress: token.owner,
+      address,
+    });
 
   return (
     <Collapsible
