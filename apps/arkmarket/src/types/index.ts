@@ -1,11 +1,12 @@
 export interface Collection {
   address: string;
-  name: string;
   floor?: string;
   image?: string;
+  is_verified: boolean;
   listed_items: number;
   listed_percentage: number;
   marketcap: number;
+  name: string;
   owner_count: number;
   sales_7d: number;
   token_count: number;
