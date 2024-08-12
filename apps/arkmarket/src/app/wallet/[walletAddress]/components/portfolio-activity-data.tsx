@@ -115,8 +115,6 @@ export default function PortfolioActivityData({
     scrollMargin: tableRef.current?.offsetTop ?? 0,
   });
 
-  console.log(portfolioActivity);
-
   return (
     <Table ref={tableRef}>
       <TableHeader>
