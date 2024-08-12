@@ -20,6 +20,7 @@ import { SearchInput } from "@ark-market/ui/search-input";
 import getCollectionSearch from "~/lib/getCollectionSearch";
 import Media from "./media";
 import MobileGlobalSearchSuggestions from "./mobile-global-search-suggestions";
+import ProfilePicture from "./profile-picture";
 
 interface MobileGlobalSearchProps {
   inputValue: string;
@@ -135,12 +136,20 @@ function MobileGlobalSearch({
                   )}
                   href={`/wallet/${searchResult.owner}`}
                 >
-                  <Media
-                    alt=""
-                    height={64}
-                    width={64}
-                    className="size-8 rounded-xs"
-                  />
+                  {searchResult.image ? (
+                    <Media
+                      alt=""
+                      src={searchResult.image}
+                      height={64}
+                      width={64}
+                      className="size-8 rounded-xs"
+                    />
+                  ) : (
+                    <ProfilePicture
+                      address={searchResult.owner}
+                      className="size-8 rounded-xs"
+                    />
+                  )}
                   <div className="overflow-hidden">
                     <p className={cn("text-sm font-medium", ellipsableStyles)}>
                       {searchResult.owner}
