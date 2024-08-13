@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
-import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
@@ -111,13 +110,12 @@ export default function CollectionItemsDataGridView({
                       )}
                     </div>
                   </div>
-                  <div className="mt-5 h-5">
+
+                  <p className="mt-5 h-5 text-sm font-medium text-secondary-foreground">
                     {token.last_price ? (
-                      <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                        Last sale {formatEther(BigInt(token.last_price))} ETH
-                      </p>
+                      <>Last sale {formatUnits(token.last_price, 18)} ETH</>
                     ) : null}
-                  </div>
+                  </p>
                   {token.is_listed && !token.listing.is_auction ? (
                     <CollectionItemsBuyNow token={token} />
                   ) : (
