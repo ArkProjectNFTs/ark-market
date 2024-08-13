@@ -48,24 +48,29 @@ export default function CollectionItemsDataListView({
 
   return (
     <Table ref={tableRef}>
-      <TableHeader>
-        <TableRow className={cn("grid items-center", gridTemplateColumnValue)}>
+      <TableHeader className="h-12">
+        <TableRow
+          className={cn(
+            "absolute grid w-full items-center",
+            gridTemplateColumnValue,
+          )}
+        >
           <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Item
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
+          <TableHead className="flex items-center bg-background">
             Current price
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
+          <TableHead className="flex items-center bg-background">
             Last sold
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
+          <TableHead className="flex items-center bg-background">
             Floor difference
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
+          <TableHead className="flex items-center bg-background">
             Owner
           </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
+          <TableHead className="flex items-center bg-background">
             Time listed
           </TableHead>
         </TableRow>
@@ -84,21 +89,22 @@ export default function CollectionItemsDataListView({
           }
 
           return (
-            <Link
-              prefetch={false}
-              href={`/token/${token.collection_address}/${token.token_id}`}
+            <TableRow
+              data-index={virtualRow.index} // Needed for dynamic row height measurement
+              ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
+              className="absolute h-[4.6875rem] w-full"
+              style={{
+                transform: `translateY(${virtualRow.start}px)`,
+              }}
               key={`${token.collection_address}-${token.token_id}`}
             >
-              <TableRow
-                data-index={virtualRow.index} // Needed for dynamic row height measurement
-                ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
+              <Link
+                prefetch={false}
+                href={`/token/${token.collection_address}/${token.token_id}`}
                 className={cn(
-                  "absolute grid h-[4.6875rem] w-full items-center",
+                  "grid h-full w-full items-center",
                   gridTemplateColumnValue,
                 )}
-                style={{
-                  transform: `translateY(${virtualRow.start}px)`,
-                }}
               >
                 <TableCell className="pl-5">
                   <div className="flex items-center gap-4">
@@ -150,8 +156,8 @@ export default function CollectionItemsDataListView({
                   </Button>
                 </TableCell>
                 <TableCell>_</TableCell>
-              </TableRow>
-            </Link>
+              </Link>
+            </TableRow>
           );
         })}
       </TableBody>
