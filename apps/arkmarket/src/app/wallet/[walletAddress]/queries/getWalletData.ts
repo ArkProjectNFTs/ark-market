@@ -11,6 +11,7 @@ export interface Metadata {
 }
 
 export interface WalletToken {
+  last_price: string | null;
   collection_name: string;
   best_offer: number | null;
   collection_address: string;
