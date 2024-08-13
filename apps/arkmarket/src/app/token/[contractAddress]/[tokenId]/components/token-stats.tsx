@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useAccount } from "@starknet-react/core";
+import { useAccount, useStarkProfile } from "@starknet-react/core";
 import { useQuery } from "react-query";
 import { formatEther } from "viem";
 
@@ -50,6 +50,9 @@ export default function TokenStats({
       refetchInterval: 5_000,
     },
   );
+  const { data: starkProfile } = useStarkProfile({
+    address: data?.owner ?? tokenMarketData.owner,
+  });
 
   return (
     <div
@@ -101,10 +104,11 @@ export default function TokenStats({
           />
           <Link href={`/wallet/${data?.owner}`}>
             <p className={cn("font-medium", ellipsableStyles)}>
-              {ownerOrShortAddress({
-                ownerAddress: data?.owner ?? tokenMarketData.owner,
-                address,
-              })}
+              {starkProfile?.name ??
+                ownerOrShortAddress({
+                  ownerAddress: data?.owner ?? tokenMarketData.owner,
+                  address,
+                })}
             </p>
           </Link>
         </div>
