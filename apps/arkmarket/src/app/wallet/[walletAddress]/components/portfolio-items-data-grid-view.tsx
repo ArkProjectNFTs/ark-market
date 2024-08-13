@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
+import { formatEther } from "viem";
 
 import {
   cn,
@@ -72,6 +73,7 @@ export default function CollectionItemsDataGridView({
       }}
       itemContent={(index) => {
         const token = walletTokens[index];
+        console.log(token);
         if (token === undefined) {
           return null;
         }
@@ -138,9 +140,13 @@ export default function CollectionItemsDataGridView({
                   )}
                 </div>
               </div>
-              <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                Last sale _ ETH
-              </p>
+              <div className="mt-5 h-5">
+                {token.last_price ? (
+                  <p className="mt-5 text-sm font-medium text-secondary-foreground">
+                    Last sale {formatEther(BigInt(token.last_price))} ETH
+                  </p>
+                ) : null}
+              </div>
               {canListItem ? (
                 <TokenActionsCreateListing token={token}>
                   <NftCardAction>List for sale</NftCardAction>

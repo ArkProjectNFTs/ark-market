@@ -5,7 +5,12 @@ import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
-import { NftCard, NftCardContent, NftCardMedia } from "@ark-market/ui/nft-card";
+import {
+  NftCard,
+  NftCardAction,
+  NftCardContent,
+  NftCardMedia,
+} from "@ark-market/ui/nft-card";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "~/types";
@@ -106,11 +111,23 @@ export default function CollectionItemsDataGridView({
                       )}
                     </div>
                   </div>
-                  <p className="mt-5 text-sm font-medium text-secondary-foreground">
-                    Last sale {formatEther(BigInt(token.last_price ?? 0))} ETH
-                  </p>
-                  {token.is_listed && !token.listing.is_auction && (
+                  <div className="mt-5 h-5">
+                    {token.last_price ? (
+                      <p className="mt-5 text-sm font-medium text-secondary-foreground">
+                        Last sale {formatEther(BigInt(token.last_price))} ETH
+                      </p>
+                    ) : null}
+                  </div>
+                  {token.is_listed && !token.listing.is_auction ? (
                     <CollectionItemsBuyNow token={token} />
+                  ) : (
+                    <NftCardAction asChild>
+                      <Link
+                        href={`/token/${token.collection_address}/${token.token_id}`}
+                      >
+                        Details
+                      </Link>
+                    </NftCardAction>
                   )}
                 </NftCardContent>
               </NftCard>
