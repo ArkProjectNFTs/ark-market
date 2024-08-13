@@ -63,7 +63,7 @@ export const activityTypeToItem = new Map([
 ]);
 
 const gridTemplateColumnValue =
-  "grid-cols-[minmax(7rem,1fr)_minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
+  "grid-cols-[minmax(8rem,1fr)_minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
 
 export default function CollectionActivityData({
   collectionAddress,
@@ -117,8 +117,13 @@ export default function CollectionActivityData({
 
   return (
     <Table ref={tableRef}>
-      <TableHeader>
-        <TableRow className={cn("grid items-center", gridTemplateColumnValue)}>
+      <TableHeader className="h-12">
+        <TableRow
+          className={cn(
+            "absolute grid w-full items-center",
+            gridTemplateColumnValue,
+          )}
+        >
           <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Event
           </TableHead>

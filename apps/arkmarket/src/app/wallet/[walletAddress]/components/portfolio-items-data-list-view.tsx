@@ -48,8 +48,13 @@ export default function PortfolioItemsDataListView({
 
   return (
     <Table ref={tableRef}>
-      <TableHeader>
-        <TableRow className={cn("grid items-center", gridTemplateColumnValue)}>
+      <TableHeader className="h-12">
+        <TableRow
+          className={cn(
+            "absolute grid w-full items-center",
+            gridTemplateColumnValue,
+          )}
+        >
           <TableHead className="sticky top-0 flex items-center bg-background pl-5">
             Item
           </TableHead>
