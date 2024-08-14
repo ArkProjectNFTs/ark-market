@@ -1,4 +1,5 @@
-import { forwardRef } from "react";
+import type { Components } from "react-virtuoso";
+import React from "react";
 import Link from "next/link";
 import { VirtuosoGrid } from "react-virtuoso";
 import { formatEther } from "viem";
@@ -22,32 +23,36 @@ import type { WalletToken } from "../queries/getWalletData";
 import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
 import Media from "~/components/media";
 
-const LargeGridContainer = forwardRef<
-  HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div">
->(({ children, ...props }, ref) => (
-  <div
-    ref={ref}
-    {...props}
-    className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))] sm:gap-2"
-  >
-    {children}
-  </div>
-));
+const LargeGridContainer: Components["List"] = React.forwardRef(
+  ({ style, children }, ref) => {
+    return (
+      <div
+        ref={ref}
+        style={style}
+        className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(15rem,1fr))] sm:gap-2"
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
 LargeGridContainer.displayName = "LargeGridContainer";
 
-const SmallGridContainer = forwardRef<
-  HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div">
->(({ children, ...props }, ref) => (
-  <div
-    ref={ref}
-    {...props}
-    className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))] sm:gap-2"
-  >
-    {children}
-  </div>
-));
+const SmallGridContainer: Components["List"] = React.forwardRef(
+  ({ style, children }, ref) => {
+    return (
+      <div
+        ref={ref}
+        style={style}
+        className="mb-2 grid w-full grid-cols-2 gap-4 px-5 py-6 sm:grid-cols-[repeat(auto-fill,_minmax(10rem,1fr))] sm:gap-2"
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
 SmallGridContainer.displayName = "SmallGridContainer";
 
 interface CollectionItemsDataGridViewProps {
