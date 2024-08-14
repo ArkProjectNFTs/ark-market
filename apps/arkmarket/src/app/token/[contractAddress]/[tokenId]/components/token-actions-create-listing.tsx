@@ -215,9 +215,10 @@ export function TokenActionsCreateListing({
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
       endDate: values.endDateTime
-        ? values.endDateTime.getTime()
+        ? values.endDateTime.getTime() / 1000
         : moment().add(values.duration, "hours").unix(),
     };
+    console.log(processedValues);
 
     try {
       if (isAuction) {
