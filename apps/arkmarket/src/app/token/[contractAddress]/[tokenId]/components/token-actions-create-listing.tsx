@@ -214,7 +214,9 @@ export function TokenActionsCreateListing({
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
-      endDate: moment().add(values.duration, "hours").unix(),
+      endDate: values.endDateTime
+        ? values.endDateTime.getTime()
+        : moment().add(values.duration, "hours").unix(),
     };
 
     try {
