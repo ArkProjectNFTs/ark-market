@@ -218,7 +218,6 @@ export function TokenActionsCreateListing({
         ? values.endDateTime.getTime() / 1000
         : moment().add(values.duration, "hours").unix(),
     };
-    console.log(processedValues);
 
     try {
       if (isAuction) {
