@@ -1,32 +1,19 @@
-import { EvmChain } from "@moralisweb3/common-evm-utils";
-import Moralis from "moralis";
-
-import { env } from "~/env";
-
-void Moralis.start({
-  apiKey: env.MORALIS_API_KEY,
-});
+interface PriceEngineResponse {
+  eth_usd: number;
+  strk_usd: number;
+}
 
 export async function GET() {
-  const response = await Moralis.EvmApi.token.getMultipleTokenPrices(
-    {
-      chain: EvmChain.ETHEREUM,
-    },
-    {
-      tokens: [
-        {
-          tokenAddress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-        },
-        {
-          tokenAddress: "0xca14007eff0db1f8135f4c25b34de49ab0d42766",
-        },
-      ],
-    },
-  );
-  const data = response.toJSON();
+  const response = await fetch("https://price-engine.arkproject.dev");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch price data");
+  }
+
+  const data = (await response.json()) as PriceEngineResponse;
 
   return Response.json({
-    ethereum: { price: data[0]?.usdPrice },
-    starknet: { price: data[1]?.usdPrice },
+    ethereum: { price: data.eth_usd },
+    starknet: { price: data.strk_usd },
   });
 }
