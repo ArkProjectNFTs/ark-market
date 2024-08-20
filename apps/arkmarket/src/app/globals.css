@@ -7,10 +7,26 @@
     --site-header-height: 3.75rem;
     --radius: 0.75rem;
 
+
+    @media screen and (min-width: 768px) {
+      --site-header-height: 4.5rem;
+    }
+  }
+
+} */
+
+@layer base {
+  :root {
+    --site-header-height: 3.75rem;
+    --radius: 0.75rem;
+
+    /* Default theme light variables */
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
     --card: 209, 39%, 96%;
-    --card-foreground: 222.2 47.4% 11.2%; --popover: 0 0% 100%; --popover-foreground: 222.2 47.4% 11.2%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210, 40%, 98%;
     --secondary: 214.3 31.8% 91.4%;
@@ -30,6 +46,7 @@
     }
   }
 
+  /* Default theme dark variables */
   .dark {
     --accent-foreground: 0 0% 100%;
     --accent: 215, 24%, 26%;
@@ -51,13 +68,9 @@
     --secondary-foreground: 215, 20%, 65%;
     --secondary: 217.2 32.6% 17.5%;
   }
-} */
 
-@layer base {
-  :root {
-    --site-header-height: 3.75rem;
-    --radius: 0.75rem;
-
+  /* Unframed theme light variables */
+  .unframed {
     --background: 0 0% 100%;
     --foreground: 0, 0%, 0%;
     --card: 222, 100%, 98%;
@@ -77,13 +90,10 @@
     --border: 224, 17%, 83%;
     --input: 224, 17%, 83%;
     --ring: 0, 0%, 0%;
-
-    @media screen and (min-width: 768px) {
-      --site-header-height: 4.5rem;
-    }
   }
 
-  .dark {
+  /* Unframed theme dark variables */
+  .unframed.dark {
     --background: 0 0% 0%;
     --foreground: 0, 0%, 100%;
     --card: 282, 20%, 6%;
