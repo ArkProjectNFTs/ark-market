@@ -11,6 +11,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { TokenMetadata } from "~/types";
 
@@ -55,7 +56,9 @@ export default function TokenTraits({
                 <p className="text-sm font-medium text-muted-foreground">
                   {tokenAttribute.trait_type}
                 </p>
-                <p className="text-lg font-semibold">{tokenAttribute.value}</p>
+                <Typography variant="body_bold_m">
+                  {tokenAttribute.value}
+                </Typography>
                 {/* <p className="mt-2 text-sm font-medium">
                   {formatUnits(data.price, 18)}{" "}
                   <span className="text-muted-foreground">ETH</span>

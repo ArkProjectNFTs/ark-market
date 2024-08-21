@@ -11,7 +11,18 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter-sans)", ...fontFamily.sans],
+        numbers: [
+          process.env.NEXT_PUBLIC_THEME === "unframed"
+            ? "nitti"
+            : "var(--font-inter-sans)",
+          ...fontFamily.sans,
+        ],
+        sans: [
+          process.env.NEXT_PUBLIC_THEME === "unframed"
+            ? "degular"
+            : "var(--font-inter-sans)",
+          ...fontFamily.sans,
+        ],
       },
     },
   },

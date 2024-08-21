@@ -3,6 +3,7 @@ import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { CollectionToken, Token } from "~/types";
 import TokenActionsTokenOverview from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-token-overview";
@@ -61,9 +62,9 @@ export default function BuyNowDialog({
               <LoaderCircle className="size-10 animate-spin" />
 
               <div className="text-center lg:text-left">
-                <div className="text-lg font-semibold">
+                <Typography variant="body_bold_m">
                   Checking your payment
-                </div>
+                </Typography>
                 <div className="text-sm">
                   Checking your payment can take a few seconds...
                 </div>

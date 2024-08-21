@@ -64,6 +64,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
       suppressHydrationWarning
       className={env.NEXT_PUBLIC_THEME === "unframed" ? "unframed" : undefined}
     >
+      {env.NEXT_PUBLIC_THEME === "unframed" && (
+        // Include Unframed fonts
+        <head>
+          <link rel="stylesheet" href="https://use.typekit.net/tzw7xdb.css" />
+          <link rel="stylesheet" href="https://use.typekit.net/ucz5xlt.css" />
+        </head>
+      )}
       <body
         className={cn(
           // pb used as padding for DataFooter, which is position: fixed

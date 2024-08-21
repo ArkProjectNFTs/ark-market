@@ -17,6 +17,7 @@ import {
 import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -67,9 +68,9 @@ export default function MobileCollectionHeader({
                 <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
               )}
               <div className="flex flex-shrink-0">
-                <p className="text-lg font-semibold">
+                <Typography variant="body_bold_m">
                   {collection.name ?? "Unknown collection"}
-                </p>
+                </Typography>
               </div>
             </div>
             <CollapsibleTrigger asChild>

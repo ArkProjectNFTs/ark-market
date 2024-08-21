@@ -3,6 +3,7 @@
 import { formatEther } from "viem";
 
 import { cn, ellipsableStyles } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import usePrices from "~/hooks/usePrices";
 
@@ -47,9 +48,12 @@ export default function TokenActionsPrice({
         >
           {amount} ETH
         </div>
-        <div className="text-lg font-semibold text-muted-foreground lg:text-2xl">
+        <Typography
+          className="text-muted-foreground lg:text-2xl"
+          variant="body_bold_m"
+        >
           ${amountInUsd}
-        </div>
+        </Typography>
         <div className="flex h-8 items-center whitespace-nowrap rounded-full bg-secondary px-3 text-xs text-secondary-foreground lg:text-sm">
           Royalties 5%
         </div>

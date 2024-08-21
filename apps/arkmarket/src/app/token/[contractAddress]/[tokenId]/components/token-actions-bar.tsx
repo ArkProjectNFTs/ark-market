@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Token, TokenMarketData } from "~/types";
 import Media from "~/components/media";
@@ -52,7 +53,9 @@ export default function TokenActionsBar({
               alt={token.metadata?.name ?? `${token.collection_name}`}
               className="size-12 rounded-xs"
             />
-            <p className="text-lg font-semibold">{token.metadata?.name}</p>
+            <Typography variant="body_bold_m">
+              {token.metadata?.name}
+            </Typography>
           </div>
           <div className="flex gap-5">
             {isOwner ? (

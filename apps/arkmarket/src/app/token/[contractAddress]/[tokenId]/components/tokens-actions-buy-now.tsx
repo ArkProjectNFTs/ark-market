@@ -10,6 +10,7 @@ import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
 import { toast as sonner } from "@ark-market/ui/sonner";
+import { Typography } from "@ark-market/ui/typography";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -146,9 +147,9 @@ export default function TokenActionsBuyNow({
                 <LoaderCircle className="size-10 animate-spin" />
 
                 <div className="text-center lg:text-left">
-                  <div className="text-lg font-semibold">
+                  <Typography variant="body_bold_m">
                     Checking your payment
-                  </div>
+                  </Typography>
                   <div className="text-sm">
                     Checking your payment can take a few seconds...
                   </div>
