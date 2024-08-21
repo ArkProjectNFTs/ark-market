@@ -24,7 +24,9 @@ export default function LatestDrop() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Latest drop</h2>
+      <Typography asChild variant="h2">
+        <h2>Latest drop</h2>
+      </Typography>
       <Carousel
         className="mt-8"
         plugins={[WheelGesturesPlugin()]}

@@ -21,7 +21,9 @@ export default function LatestSales() {
   }
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Latest sale</h2>
+      <Typography asChild variant="h2">
+        <h2>Latest sale</h2>
+      </Typography>
       <Table className="mt-8 md:mt-12">
         <TableHeader>
           <TableRow className="hover:bg-background">

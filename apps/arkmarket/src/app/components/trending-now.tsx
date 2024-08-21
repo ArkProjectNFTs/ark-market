@@ -22,7 +22,9 @@ export default function TrendingNow() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Trending now</h2>
+      <Typography variant="h2" asChild>
+        <h2>Trending now</h2>
+      </Typography>
       <Carousel
         className="mt-8"
         plugins={[WheelGesturesPlugin()]}

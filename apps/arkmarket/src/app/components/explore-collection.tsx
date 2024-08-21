@@ -7,6 +7,7 @@ import Link from "next/link";
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -31,7 +32,9 @@ export default function ExploreCollection() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Explore Collections</h2>
+      <Typography asChild variant="h2">
+        <h2>Explore Collections</h2>
+      </Typography>
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {homepageConfig.exploreCollections
           .slice(0, exploreCollectionsToShow)

@@ -12,6 +12,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -22,7 +23,9 @@ export default function LiveAuctions() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Live auctions</h2>
+      <Typography asChild variant="h2">
+        <h2>Live auctions</h2>
+      </Typography>
       <Carousel
         className="mt-8"
         plugins={[WheelGesturesPlugin()]}
