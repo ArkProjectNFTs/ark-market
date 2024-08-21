@@ -56,8 +56,8 @@ export default function TokenAbout({
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <Typography asChild variant="h2">
-          <h2>About & details</h2>
+        <Typography asChild variant="h3">
+          <h3>About & details</h3>
         </Typography>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-sm">

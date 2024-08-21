@@ -25,7 +25,7 @@ export default function HomePage() {
           <div className="flex w-full flex-col gap-8 rounded-lg bg-card p-8 md:flex-row md:items-center">
             <div className="size-28 flex-shrink-0 rounded-lg bg-secondary md:size-48" />
             <div className="flex h-full flex-col items-start justify-between gap-3.5 md:gap-0">
-              <Typography className="md:text-3xl" variant="h2" asChild>
+              <Typography className="md:text-3xl" variant="h3" asChild>
                 <h2>Need help?</h2>
               </Typography>
               <p>Help Lorem ipsum...</p>

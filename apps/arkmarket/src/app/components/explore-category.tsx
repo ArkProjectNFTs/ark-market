@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { cn, focusableStyles } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -13,7 +14,9 @@ export default function ExploreCategory() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Explore Category</h2>
+      <Typography variant="h2" asChild>
+        <h2>Explore Category</h2>
+      </Typography>
       <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-6 md:grid-cols-2 md:gap-y-8 xl:grid-cols-3">
         {homepageConfig.exploreCategory.map((category) => {
           return (

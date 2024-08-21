@@ -65,8 +65,8 @@ export default function Authentication() {
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col items-center justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
-              <Typography asChild variant="h2">
-                <h2>Connect your wallet</h2>
+              <Typography asChild variant="h3">
+                <h3>Connect your wallet</h3>
               </Typography>
               <p className="text-sm text-muted-foreground">
                 Choose a starknet wallet to start with

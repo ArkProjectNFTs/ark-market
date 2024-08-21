@@ -88,8 +88,8 @@ export default function TokenOffers({
     >
       <div className="flex h-[4.5rem] items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <Typography asChild variant="h2">
-            <h2>Offers</h2>
+          <Typography asChild variant="h3">
+            <h3>Offers</h3>
           </Typography>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
             {offersCount}

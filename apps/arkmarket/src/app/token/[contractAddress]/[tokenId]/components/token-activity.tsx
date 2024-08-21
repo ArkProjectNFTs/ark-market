@@ -69,8 +69,8 @@ export default function TokenActivity({
   return (
     <div className={cn("", className)}>
       <div className="flex items-center gap-4 lg:gap-1.5">
-        <Typography asChild variant="h2">
-          <h2>Activity</h2>
+        <Typography asChild variant="h3">
+          <h3>Activity</h3>
         </Typography>
         <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-secondary-foreground">
           <Typography variant="body_s">{totalCount}</Typography>

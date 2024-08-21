@@ -61,8 +61,8 @@ export default function CollectionHeader({
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <div className="flex items-center gap-1">
-                  <Typography asChild variant="h2">
-                    <h2>{collection.name ?? "Unknown collection"}</h2>
+                  <Typography asChild variant="h3">
+                    <h3>{collection.name ?? "Unknown collection"}</h3>
                   </Typography>
                   {collection.is_verified && (
                     <VerifiedIcon className="text-background" />
