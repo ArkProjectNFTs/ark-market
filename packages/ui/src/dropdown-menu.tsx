@@ -6,6 +6,8 @@ import { Check, ChevronRight, Circle } from "lucide-react";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -147,7 +149,8 @@ const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      "px-2 py-1.5 text-sm font-semibold",
+      "px-2 py-1.5",
+      typographyVariants({ variant: "button_text_s" }),
       inset && "pl-8",
       className,
     )}

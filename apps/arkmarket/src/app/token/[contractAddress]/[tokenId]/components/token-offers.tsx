@@ -12,6 +12,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
 import type { Token, TokenMarketData } from "~/types";
@@ -87,7 +88,9 @@ export default function TokenOffers({
     >
       <div className="flex h-[4.5rem] items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <h3 className="text-2xl font-semibold">Offers</h3>
+          <Typography asChild variant="h2">
+            <h2>Offers</h2>
+          </Typography>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
             {offersCount}
           </div>

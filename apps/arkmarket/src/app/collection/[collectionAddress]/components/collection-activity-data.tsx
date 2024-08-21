@@ -36,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
 import ExternalLink from "~/components/external-link";
@@ -189,13 +190,15 @@ export default function CollectionActivityData({
                   <div className="w-full overflow-hidden">
                     <Link
                       className={cn(
-                        "w-full text-base font-medium",
+                        "w-full",
                         focusableStyles,
                         ellipsableStyles,
                       )}
                       href={`/token/${collectionAddress}/${activity.token_id}`}
                     >
-                      {activity.token_metadata.name}
+                      <Typography variant="body_bold_s">
+                        {activity.token_metadata.name}
+                      </Typography>
                     </Link>
                     <div className="flex w-full items-center gap-1">
                       <p

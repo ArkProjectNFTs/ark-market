@@ -7,6 +7,7 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form";
 import { cn } from "@ark-market/ui";
 
 import { Label } from "./label";
+import { typographyVariants } from "./typography";
 
 const Form = FormProvider;
 
@@ -153,7 +154,8 @@ const FormMessage = React.forwardRef<
       ref={ref}
       id={formMessageId}
       className={cn(
-        "!mt-1 ml-3 text-sm font-medium text-destructive",
+        "!mt-1 ml-3 text-destructive",
+        typographyVariants({ variant: "body_s" }),
         className,
       )}
       {...props}

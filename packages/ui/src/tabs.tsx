@@ -5,6 +5,8 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const Tabs = TabsPrimitive.Root;
 
 const TabsList = React.forwardRef<
@@ -29,7 +31,8 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground",
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground",
+      typographyVariants({ variant: "body_s" }),
       className,
     )}
     {...props}

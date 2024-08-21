@@ -10,6 +10,7 @@ import {
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/nft-card";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { CollectionToken } from "~/types";
@@ -106,16 +107,21 @@ export default function CollectionItemsDataGridView({
                           {formatUnits(token.price, 18)} ETH
                         </p>
                       ) : (
-                        <p className="mt-1 text-sm font-medium">Not for sale</p>
+                        <Typography variant="body_s" className="mt-1">
+                          Not for sale
+                        </Typography>
                       )}
                     </div>
                   </div>
 
-                  <p className="mt-5 h-5 text-sm font-medium text-secondary-foreground">
+                  <Typography
+                    variant="body_s"
+                    className="mt-5 h-5 text-secondary-foreground"
+                  >
                     {token.last_price ? (
                       <>Last sale {formatUnits(token.last_price, 18)} ETH</>
                     ) : null}
-                  </p>
+                  </Typography>
                   {token.is_listed && !token.listing.is_auction ? (
                     <CollectionItemsBuyNow token={token} />
                   ) : (

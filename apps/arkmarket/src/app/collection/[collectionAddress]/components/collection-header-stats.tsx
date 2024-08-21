@@ -2,6 +2,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, formatNumber, formatUnits } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Collection } from "~/types";
 
@@ -23,41 +24,46 @@ export default function CollectionHeaderStats({
       )}
     >
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Floor</p>
-        <div className="flex items-center gap-1 font-medium">
+        <Typography className="text-muted-foreground" variant="body_s">
+          Floor
+        </Typography>
+        <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
-          <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
+          <Typography variant="body_bold_s">
+            {formatUnits(collection.floor ?? 0, 18)} ETH
+          </Typography>
           {/* TODO @YohanTz: Proper color */}
-          {/* <p
-            className={cn(
-              "text-sm font-semibold",
-              collection.floor_7d_percentage < 0
+          {/* <Typography
+            variant="button_text_s"
+            className={collection.floor_7d_percentage < 0
                 ? "text-red-500"
                 : "text-green-500",
-            )}
+            }
           >
             {collection.floor_7d_percentage >= 0 && "+"}
             {formatNumber(collection.floor_7d_percentage)}%
-          </p> */}
+          </Typography> */}
         </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">
+        <Typography className="text-muted-foreground" variant="body_s">
           Total Volume
-        </p>
+        </Typography>
         <div className="flex items-center ">
           <EthereumLogo2 className="size-5" />
-          <p className="font-medium">
+          <Typography variant="body_bold_s">
             {formatNumber(collection.total_volume)} ETH
-          </p>
+          </Typography>
         </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          7D Volume
+        </Typography>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
@@ -68,19 +74,25 @@ export default function CollectionHeaderStats({
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Total Sales
+        </Typography>
         <p className="font-medium">{formatNumber(collection.total_sales)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Items</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Items
+        </Typography>
         <p className="font-medium">{formatNumber(collection.token_count)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Owners</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Owners
+        </Typography>
         <p className="font-medium">{formatNumber(collection.owner_count)}</p>
       </div>
     </div>

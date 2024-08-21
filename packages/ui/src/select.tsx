@@ -6,6 +6,8 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const Select = SelectPrimitive.Root;
 
 const SelectGroup = SelectPrimitive.Group;
@@ -105,7 +107,11 @@ const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
     ref={ref}
-    className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
+    className={cn(
+      "py-1.5 pl-8 pr-2",
+      typographyVariants({ variant: "button_text_s" }),
+      className,
+    )}
     {...props}
   />
 ));

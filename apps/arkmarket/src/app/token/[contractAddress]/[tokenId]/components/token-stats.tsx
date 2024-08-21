@@ -9,6 +9,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { Separator } from "@ark-market/ui/separator";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Token, TokenMarketData } from "~/types";
 import ProfilePicture from "~/components/profile-picture";
@@ -62,21 +63,23 @@ export default function TokenStats({
       )}
     >
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
-        <p className="text-sm font-medium text-muted-foreground">
+        <Typography className="text-muted-foreground" variant="body_s">
           Collection Floor
-        </p>
+        </Typography>
         <div className="flex min-h-6 items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
           {isLoading || (
             <>{formatEther(BigInt(collection?.data.floor ?? 0))} ETH</>
           )}
           {/* TODO @YohanTz: Proper color */}
-          {/* <p className={cn("text-sm font-semibold text-green-500")}>+ {"_"}%</p> */}
+          {/* <Typography variant="button_text_s" className="text-sm font-semibold text-green-500">+ {"_"}%</Typography> */}
         </div>
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Last sale</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Last sale
+        </Typography>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
@@ -86,7 +89,9 @@ export default function TokenStats({
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Top offer</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Top offer
+        </Typography>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
@@ -96,7 +101,9 @@ export default function TokenStats({
       </div>
       <Separator orientation="vertical" className="hidden lg:block" />
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
-        <p className="text-sm font-medium text-muted-foreground">Owner</p>
+        <Typography className="text-muted-foreground" variant="body_s">
+          Owner
+        </Typography>
         <div className="flex items-center gap-2">
           <ProfilePicture
             address={data?.owner ?? tokenMarketData.owner}

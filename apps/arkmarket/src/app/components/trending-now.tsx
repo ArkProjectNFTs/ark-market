@@ -11,6 +11,7 @@ import {
   CarouselItem,
 } from "@ark-market/ui/carousel";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -114,9 +115,12 @@ export default function TrendingNow() {
                       </div>
                     </div>
                     <div className="hidden flex-shrink-0 flex-col items-end sm:flex">
-                      <p className="text-sm font-medium text-muted-foreground">
+                      <Typography
+                        variant="body_s"
+                        className="text-muted-foreground"
+                      >
                         Floor price
-                      </p>
+                      </Typography>
                       <p className="text-end font-medium">
                         1.6 ETH{" "}
                         <span className="font-bold text-green-500">

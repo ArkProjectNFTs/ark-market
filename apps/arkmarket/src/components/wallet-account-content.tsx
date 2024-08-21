@@ -10,6 +10,7 @@ import { cn, focusableStyles, shortAddress } from "@ark-market/ui";
 import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
 import StarknetLogo from "@ark-market/ui/icons/starknet-logo";
 import { ThemeTabs } from "@ark-market/ui/theme";
+import { Typography } from "@ark-market/ui/typography";
 
 import { ETH, STRK } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
@@ -116,7 +117,7 @@ export default function WalletAccountContent({
             <span className="font-bold">ETH</span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{ethBalance.rounded}</p>
+            <Typography variant="body_bold_s">{ethBalance.rounded}</Typography>
             <p className="text-xs text-secondary-foreground">
               {ethBalanceInUsd}$
             </p>
@@ -128,7 +129,7 @@ export default function WalletAccountContent({
             <span className="font-bold">STRK</span>
           </div>
           <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{strkBalance.rounded}</p>
+            <Typography variant="body_s">{strkBalance.rounded}</Typography>
             <p className="text-xs text-secondary-foreground">
               {strkBalanceInUsd}$
             </p>

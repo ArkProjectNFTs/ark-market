@@ -1,4 +1,5 @@
 import { Button } from "@ark-market/ui/button";
+import { Typography } from "@ark-market/ui/typography";
 
 import ExploreCategory from "./components/explore-category";
 import ExploreCollection from "./components/explore-collection";
@@ -24,7 +25,9 @@ export default function HomePage() {
           <div className="flex w-full flex-col gap-8 rounded-lg bg-card p-8 md:flex-row md:items-center">
             <div className="size-28 flex-shrink-0 rounded-lg bg-secondary md:size-48" />
             <div className="flex h-full flex-col items-start justify-between gap-3.5 md:gap-0">
-              <h2 className="text-2xl font-semibold md:text-3xl">Need help?</h2>
+              <Typography className="md:text-3xl" variant="h2" asChild>
+                <h2>Need help?</h2>
+              </Typography>
               <p>Help Lorem ipsum...</p>
               <Button size="xl">Contact support</Button>
             </div>
@@ -33,9 +36,9 @@ export default function HomePage() {
           <div className="flex w-full flex-col gap-8 rounded-lg bg-card p-8 md:flex-row md:items-center">
             <div className="size-28 flex-shrink-0 rounded-lg bg-secondary md:size-48" />
             <div className="flex h-full flex-col items-start justify-between gap-3.5 md:gap-0">
-              <h2 className="text-2xl font-semibold md:text-3xl">
-                Get your collection verified
-              </h2>
+              <Typography asChild className="md:text-3xl">
+                <h2>Get your collection verified</h2>
+              </Typography>
               <p>Lorem ipsum...</p>
               <Button size="xl">Submit your collection</Button>
             </div>

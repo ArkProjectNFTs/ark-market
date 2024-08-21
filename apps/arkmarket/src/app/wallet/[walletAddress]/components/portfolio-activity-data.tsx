@@ -36,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { PortfolioActivityApiResponse } from "~/lib/getPortfolioActivity";
 import ExternalLink from "~/components/external-link";
@@ -192,14 +193,13 @@ export default function PortfolioActivityData({
                       // TODO @YohanTz: Update token ID when available
                       href={`/token/${activity.collection_address}/0}`}
                     >
-                      <p
-                        className={cn(
-                          "w-full text-base font-medium",
-                          ellipsableStyles,
-                        )}
+                      <Typography
+                        ellipsable
+                        className="w-full"
+                        variant="body_bold_s"
                       >
                         {activity.metadata.name}
-                      </p>
+                      </Typography>
                     </Link>
                     <div className="flex w-full items-center gap-1">
                       <Link

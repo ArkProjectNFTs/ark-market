@@ -5,6 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
@@ -68,9 +69,11 @@ export default function TokenActivity({
   return (
     <div className={cn("", className)}>
       <div className="flex items-center gap-4 lg:gap-1.5">
-        <h2 className="text-2xl font-semibold">Activity</h2>
-        <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm font-medium text-secondary-foreground">
-          {totalCount}
+        <Typography asChild variant="h2">
+          <h2>Activity</h2>
+        </Typography>
+        <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-secondary-foreground">
+          <Typography variant="body_s">{totalCount}</Typography>
         </div>
       </div>
 

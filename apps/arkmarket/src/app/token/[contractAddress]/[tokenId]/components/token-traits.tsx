@@ -36,7 +36,9 @@ export default function TokenTraits({
     >
       <div className="flex h-[4.5rem] items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <h3 className="text-2xl font-semibold">Traits</h3>
+          <Typography asChild variant="h2">
+            <h2>Traits</h2>
+          </Typography>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
             {tokenAttributes.length}
           </div>
@@ -53,16 +55,16 @@ export default function TokenTraits({
           {tokenAttributes.map((tokenAttribute, index) => {
             return (
               <div className="rounded-lg bg-card p-3.5" key={index}>
-                <p className="text-sm font-medium text-muted-foreground">
+                <Typography className="text-muted-foreground" variant="body_s">
                   {tokenAttribute.trait_type}
-                </p>
+                </Typography>
                 <Typography variant="body_bold_m">
                   {tokenAttribute.value}
                 </Typography>
-                {/* <p className="mt-2 text-sm font-medium">
+                {/* <Typography className="mt-2" variant="body_bold_m">
                   {formatUnits(data.price, 18)}{" "}
                   <span className="text-muted-foreground">ETH</span>
-                </p> */}
+                </Typography> */}
               </div>
             );
           })}

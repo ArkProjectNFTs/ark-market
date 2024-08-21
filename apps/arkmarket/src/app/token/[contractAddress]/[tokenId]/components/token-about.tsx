@@ -16,6 +16,7 @@ import {
 import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Token } from "~/types";
 import Media from "~/components/media";
@@ -55,7 +56,9 @@ export default function TokenAbout({
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <h3 className="text-2xl font-semibold">About & details</h3>
+        <Typography asChild variant="h2">
+          <h2>About & details</h2>
+        </Typography>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-sm">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

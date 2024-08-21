@@ -6,16 +6,12 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Meh, Search } from "lucide-react";
 import { useDebounceValue } from "usehooks-ts";
 
-import {
-  cn,
-  ellipsableStyles,
-  focusableStyles,
-  formatNumber,
-} from "@ark-market/ui";
+import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import { SearchInput } from "@ark-market/ui/search-input";
+import { Typography } from "@ark-market/ui/typography";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";
 import Media from "./media";
@@ -75,9 +71,9 @@ function MobileGlobalSearch({
     <div>
       {searchResults.data.collections.length > 0 && (
         <div>
-          <p className="text-sm font-medium text-muted-foreground">
+          <Typography className="text-muted-foreground" variant="body_s">
             Collections
-          </p>
+          </Typography>
           <div className="my-4 flex flex-col gap-2.5">
             {searchResults.data.collections.map((searchResult) => {
               return (
@@ -99,11 +95,9 @@ function MobileGlobalSearch({
                   />
                   <div className="overflow-hidden">
                     <div className="flex items-center gap-1">
-                      <p
-                        className={cn("text-sm font-medium", ellipsableStyles)}
-                      >
+                      <Typography ellipsable variant="body_s">
                         {searchResult.name}
-                      </p>
+                      </Typography>
                       {searchResult.is_verified && (
                         <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
                       )}
@@ -123,7 +117,9 @@ function MobileGlobalSearch({
       )}
       {searchResults.data.accounts.length > 0 && (
         <div>
-          <p className="text-sm font-medium text-muted-foreground">Accounts</p>
+          <Typography className="text-muted-foreground" variant="body_s">
+            Accounts
+          </Typography>
           <div className="mt-4 flex flex-col gap-2.5">
             {searchResults.data.accounts.map((searchResult) => {
               return (
@@ -151,9 +147,9 @@ function MobileGlobalSearch({
                     />
                   )}
                   <div className="overflow-hidden">
-                    <p className={cn("text-sm font-medium", ellipsableStyles)}>
+                    <Typography variant="body_s" ellipsable>
                       {searchResult.owner}
-                    </p>
+                    </Typography>
                   </div>
                 </Link>
               );
@@ -191,11 +187,10 @@ export default function MobileGlobalSearchWrapper() {
               setInputValue(event.target.value);
             }}
           />
-          <button
-            className="text-sm font-medium text-muted-foreground"
-            onClick={closeModal}
-          >
-            Cancel
+          <button onClick={closeModal}>
+            <Typography variant="body_s" className="text-muted-foreground">
+              Cancel
+            </Typography>
           </button>
         </div>
         <div className="mt-10 h-full pt-5 ">

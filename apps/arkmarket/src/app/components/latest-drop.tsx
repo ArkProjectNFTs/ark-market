@@ -12,6 +12,7 @@ import {
   CarouselItem,
 } from "@ark-market/ui/carousel";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 import LatestDropStatus from "./latest-drop-status";
@@ -68,10 +69,15 @@ export default function LatestDrop() {
                         </h4>
                         <VerifiedIcon className="text-background" />
                       </div>
-                      <span className="mt-5 text-sm font-medium text-muted-foreground">
+                      <Typography
+                        variant="body_s"
+                        className="mt-5 text-muted-foreground"
+                      >
                         Status
-                      </span>
-                      <p className="font-medium">Mint starts in 2 hours</p>
+                      </Typography>
+                      <Typography variant="body_bold_s" className="font-medium">
+                        Mint starts in 2 hours
+                      </Typography>
                     </CardFooter>
                   </Card>
                 </Link>

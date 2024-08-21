@@ -3,6 +3,7 @@ import Link from "next/link";
 import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 import Media from "./media";
@@ -16,9 +17,9 @@ export default function MobileGlobalSearchSuggestions({
 }: MobileGlobalSearchSuggestionsProps) {
   return (
     <div>
-      <p className="text-sm font-medium text-muted-foreground">
+      <Typography className="text-muted-foreground" variant="body_s">
         Best Collections
-      </p>
+      </Typography>
 
       <div className="mt-4 flex flex-col gap-2.5">
         {homepageConfig.trendingNow.slice(0, 3).map((collection) => {
@@ -41,7 +42,7 @@ export default function MobileGlobalSearchSuggestions({
               />
               <div>
                 <div className="flex items-center gap-1">
-                  <p className="text-sm font-medium">{collection.name}</p>
+                  <Typography variant="body_s">{collection.name}</Typography>
                   <VerifiedIcon className="size-3 text-background" />
                 </div>
                 <div className="flex items-center">

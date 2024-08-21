@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -33,7 +35,8 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
+      "leading-none tracking-tight",
+      typographyVariants({ variant: "h2" }),
       className,
     )}
     {...props}

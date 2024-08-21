@@ -6,6 +6,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { timeSince } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { TokenActivity } from "~/types";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -23,7 +24,9 @@ export default function MobileTokenActivity({
 
   return (
     <div className={className}>
-      <p className="text-sm font-semibold text-muted-foreground">Event</p>
+      <Typography className="text-muted-foreground" variant="button_text_s">
+        Event
+      </Typography>
       <Separator className="my-4" />
 
       {tokenActivity.map((activity, index) => {
@@ -43,8 +46,8 @@ export default function MobileTokenActivity({
                   "_"
                 )}
               </div>
-              <div className="flex items-center justify-between text-sm font-semibold">
-                <p>
+              <div className="flex items-center justify-between">
+                <Typography variant="button_text_s">
                   by{" "}
                   <span className="text-muted-foreground">
                     {activity.from ? (
@@ -61,8 +64,8 @@ export default function MobileTokenActivity({
                       "-"
                     )}
                   </span>
-                </p>
-                <p className="text-xs text-muted-foreground">
+                </Typography>
+                <p className="text-xs font-semibold text-muted-foreground">
                   {timeSince(activity.time_stamp)}
                 </p>
               </div>

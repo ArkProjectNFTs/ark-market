@@ -13,6 +13,7 @@ import {
   CarouselItem,
 } from "@ark-market/ui/carousel";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Typography } from "@ark-market/ui/typography";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -102,13 +103,26 @@ export default function MainCarousel() {
                         <h1 className="text-3xl font-extrabold md:text-5xl">
                           {carouselItem.name}
                         </h1>
-                        <div className="flex items-center text-sm font-semibold">
-                          <p className="mr-1">{carouselItem.itemsCount}</p>
-                          <p className="mr-1 text-muted-foreground">
+                        <div className="flex items-center">
+                          <Typography className="mr-1" variant="button_text_s">
+                            {carouselItem.itemsCount}
+                          </Typography>
+                          <Typography
+                            className="mr-1 text-muted-foreground"
+                            variant="button_text_s"
+                          >
                             ITEMS
-                          </p> | <EthereumLogo2 className="size-4" />
-                          <p className="mr-1">{carouselItem.floorPrice}</p>
-                          <p className="text-muted-foreground">ETH</p>
+                          </Typography>{" "}
+                          | <EthereumLogo2 className="size-4" />
+                          <Typography className="mr-1" variant="button_text_s">
+                            {carouselItem.floorPrice}
+                          </Typography>
+                          <Typography
+                            className="text-muted-foreground"
+                            variant="button_text_s"
+                          >
+                            ETH
+                          </Typography>
                         </div>
                       </div>
                     </div>

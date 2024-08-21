@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -29,12 +30,16 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
   if (floor_difference < 0) {
     return (
-      <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
+      <Typography variant="button_text_s" className="text-red-500">
+        {floor_difference}%
+      </Typography>
     );
   }
 
   return (
-    <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
+    <Typography className="text-green-500" variant="button_text_s">
+      +{floor_difference}%
+    </Typography>
   );
 }
 

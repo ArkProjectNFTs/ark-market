@@ -8,12 +8,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { Meh } from "lucide-react";
 import { useDebounceValue } from "usehooks-ts";
 
-import {
-  cn,
-  ellipsableStyles,
-  focusableStyles,
-  formatNumber,
-} from "@ark-market/ui";
+import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
 import {
   CommandGroup,
   CommandInput,
@@ -22,6 +17,7 @@ import {
 } from "@ark-market/ui/command";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";
 import GlobalSearchSuggestions from "./global-search-suggestions";
@@ -82,9 +78,9 @@ function GlobalSearchCommands({
     <>
       {searchResults.data.collections.length > 0 && (
         <CommandGroup forceMount className="px-4 pb-4 pt-5">
-          <p className="text-sm font-medium text-muted-foreground">
+          <Typography className="text-muted-foreground" variant="body_s">
             Collections
-          </p>
+          </Typography>
           <div className="mt-4 flex flex-col gap-2.5">
             {searchResults.data.collections.map((searchResult) => {
               return (
@@ -112,9 +108,9 @@ function GlobalSearchCommands({
                     />
                     <div>
                       <div className="flex items-center gap-1">
-                        <p className="text-sm font-medium">
+                        <Typography variant="body_bold_s">
                           {searchResult.name}
-                        </p>
+                        </Typography>
                         {searchResult.is_verified && (
                           <VerifiedIcon className="size-3 text-background" />
                         )}
@@ -135,7 +131,9 @@ function GlobalSearchCommands({
       )}
       {searchResults.data.accounts.length > 0 && (
         <CommandGroup forceMount className="px-4 pb-4 pt-5">
-          <p className="text-sm font-medium text-muted-foreground">Accounts</p>
+          <Typography variant="body_bold_s" className="text-muted-foreground">
+            Accounts
+          </Typography>
           <div className="mt-4 flex flex-col gap-2.5">
             {searchResults.data.accounts.map((searchResult) => {
               return (
@@ -168,9 +166,9 @@ function GlobalSearchCommands({
                         address={searchResult.owner}
                       />
                     )}
-                    <p className={cn("text-sm font-medium", ellipsableStyles)}>
+                    <Typography ellipsable variant="body_s">
                       {searchResult.starknet_id ?? searchResult.owner}
-                    </p>
+                    </Typography>
                   </Link>
                 </CommandItem>
               );

@@ -6,6 +6,8 @@ import { X } from "lucide-react";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const Dialog = DialogPrimitive.Root;
 
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -88,7 +90,8 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "leading-none tracking-tight",
+      typographyVariants({ variant: "body_bold_m" }),
       className,
     )}
     {...props}

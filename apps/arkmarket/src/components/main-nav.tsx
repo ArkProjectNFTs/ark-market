@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn, focusableStyles } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import { Icons } from "~/components/icons";
 import { siteConfig } from "~/config/site";
@@ -40,12 +41,12 @@ export function MainNav({
               href={mainNavLink.href}
               key={mainNavLink.name}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                "transition-colors hover:text-primary",
                 isActiveLink ? "text-primary" : "text-muted-foreground",
                 focusableStyles,
               )}
             >
-              {mainNavLink.name}
+              <Typography variant="body_s">{mainNavLink.name}</Typography>
             </Link>
           );
         })}

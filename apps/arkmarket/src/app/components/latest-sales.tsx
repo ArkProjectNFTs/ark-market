@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
+import { Typography } from "@ark-market/ui/typography";
 
 import Media from "~/components/media";
 import { homepageConfig } from "~/config/homepage";
@@ -57,9 +58,12 @@ export default function LatestSales() {
                       width={112}
                     />
                     <div className="overflow-hidden whitespace-nowrap">
-                      <p className="overflow-hidden text-ellipsis text-base font-medium text-foreground">
+                      <Typography
+                        className="overflow-hidden text-ellipsis text-foreground"
+                        variant="body_bold_s"
+                      >
                         {sale.token.name}
-                      </p>
+                      </Typography>
                       <Link
                         href={`/collection/${sale.token.collection_address}`}
                       >

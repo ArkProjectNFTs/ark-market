@@ -7,8 +7,13 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-sm text-sm font-medium text-secondary-foreground ring-offset-background transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-primary data-[state=on]:text-background data-[state=off]:hover:text-accent-foreground",
+  cn(
+    "inline-flex items-center justify-center rounded-sm text-secondary-foreground ring-offset-background transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-primary data-[state=on]:text-background data-[state=off]:hover:text-accent-foreground",
+    typographyVariants({ variant: "body_s" }),
+  ),
   {
     variants: {
       variant: {

@@ -48,14 +48,13 @@ export default function TokenActionsTokenOverview({
             {token.metadata?.name ?? `#${token.token_id}`}
           </div>
           <div className="flex w-full items-center gap-1 sm:gap-2">
-            <p
-              className={cn(
-                "text-sm font-semibold text-muted-foreground sm:text-lg",
-                ellipsableStyles,
-              )}
+            <Typography
+              ellipsable
+              variant="button_text_s"
+              className="text-muted-foreground sm:text-lg"
             >
               {token.collection_name || "Unknown"}
-            </p>
+            </Typography>
             <VerifiedIcon className="size-4 flex-shrink-0 text-background sm:size-6" />
           </div>
           {small ?? (
@@ -79,9 +78,12 @@ export default function TokenActionsTokenOverview({
           <EthereumLogo2 className="size-6" />
           {formattedAmount || "---"} ETH
         </Typography>
-        <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">
+        <Typography
+          variant="button_text_s"
+          className="overflow-hidden text-clip text-right text-muted-foreground"
+        >
           ${ethAmountInUsd || "---"}
-        </div>
+        </Typography>
       </div>
     </div>
   );

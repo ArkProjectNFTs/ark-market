@@ -4,9 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
-import { cn, ellipsableStyles, getRoundedRemainingTime } from "@ark-market/ui";
+import { getRoundedRemainingTime } from "@ark-market/ui";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import { Separator } from "@ark-market/ui/separator";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -23,16 +24,16 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
   if (floor_difference < 0) {
     return (
-      <p className={cn("text-sm font-semibold text-red-500", ellipsableStyles)}>
+      <Typography ellipsable variant="button_text_s" className="text-red-500">
         {floor_difference}%
-      </p>
+      </Typography>
     );
   }
 
   return (
-    <p className={cn("text-sm font-semibold text-green-500", ellipsableStyles)}>
+    <Typography ellipsable variant="button_text_s" className="text-green-500">
       +{floor_difference}%
-    </p>
+    </Typography>
   );
 }
 
@@ -72,7 +73,7 @@ export default function TokenOffersMobileTable({
 
             <div className="mt-3.5 flex items-center justify-between ">
               <div className="flex items-center gap-3.5">
-                <p className="text-sm font-semibold">
+                <Typography variant="button_text_s">
                   from{" "}
                   <span className="text-muted-foreground">
                     <Link href={`/wallet/${offer.source}`}>
@@ -82,7 +83,7 @@ export default function TokenOffersMobileTable({
                       })}
                     </Link>
                   </span>
-                </p>
+                </Typography>
               </div>
               <p className="text-xs text-muted-foreground">
                 Expire in {getRoundedRemainingTime(offer.expire_at)}

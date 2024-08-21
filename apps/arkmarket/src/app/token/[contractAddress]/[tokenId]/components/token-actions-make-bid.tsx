@@ -193,14 +193,16 @@ export default function TokenActionsMakeBid({
                   {token.metadata?.name ?? `#${token.token_id}`}
                 </div>
                 <div className="flex w-full items-center gap-1 sm:gap-2">
-                  <p
+                  <Typography
+                    ellipsable
+                    variant="button_text_s"
                     className={cn(
-                      "text-sm font-semibold text-muted-foreground sm:text-lg",
+                      "text-muted-foreground sm:text-lg",
                       ellipsableStyles,
                     )}
                   >
                     {token.collection_name || "Unknown"}
-                  </p>
+                  </Typography>
                   <VerifiedIcon className="size-4 flex-shrink-0 text-background sm:size-6" />
                 </div>
               </div>
@@ -214,9 +216,12 @@ export default function TokenActionsMakeBid({
                 <EthereumLogo2 className="size-6" />
                 {price} ETH
               </Typography>
-              <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">
+              <Typography
+                variant="button_text_s"
+                className="overflow-hidden text-clip text-right text-muted-foreground"
+              >
                 Reserve {reservePrice} ETH
-              </div>
+              </Typography>
             </div>
           </div>
           <Form {...form}>

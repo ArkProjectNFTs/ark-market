@@ -16,6 +16,7 @@ import {
   NftCardContent,
   NftCardMedia,
 } from "@ark-market/ui/nft-card";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type { WalletToken } from "../queries/getWalletData";
@@ -105,29 +106,30 @@ export default function CollectionItemsDataGridView({
                     href={`/token/${token.collection_address}/${token.token_id}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
                   >
-                    <p
-                      className={cn(
-                        "text-sm font-semibold",
-                        viewType === "large-grid" && "sm:text-xl",
-                        ellipsableStyles,
-                      )}
+                    <Typography
+                      ellipsable
+                      variant="button_text_s"
+                      className={
+                        viewType === "large-grid" ? "sm:text-xl" : undefined
+                      }
                     >
                       {token.metadata?.name ?? token.token_id}
-                    </p>
+                    </Typography>
                   </Link>
                   <Link
                     href={`/collection/${token.collection_address}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
                   >
-                    <p
+                    <Typography
+                      ellipsable
+                      variant="button_text_s"
                       className={cn(
-                        "text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
+                        "text-muted-foreground transition-colors hover:text-foreground",
                         viewType === "large-grid" && "sm:text-lg",
-                        ellipsableStyles,
                       )}
                     >
                       {token.collection_name}
-                    </p>
+                    </Typography>
                     <VerifiedIcon className="size-6 flex-shrink-0 text-background" />
                   </Link>
 
@@ -136,15 +138,20 @@ export default function CollectionItemsDataGridView({
                       {formatUnits(token.list_price, 18)} ETH
                     </p>
                   ) : (
-                    <p className="mt-1 text-sm font-medium">Not for sale</p>
+                    <Typography className="mt-1" variant="body_s">
+                      Not for sale
+                    </Typography>
                   )}
                 </div>
               </div>
               <div className="mt-5 h-5">
                 {token.last_price ? (
-                  <p className="mt-5 text-sm font-medium text-secondary-foreground">
+                  <Typography
+                    className="mt-5 text-secondary-foreground"
+                    variant="body_s"
+                  >
                     Last sale {formatEther(BigInt(token.last_price))} ETH
-                  </p>
+                  </Typography>
                 ) : null}
               </div>
               {canListItem ? (

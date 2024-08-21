@@ -16,6 +16,7 @@ import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import WebsiteIcon from "@ark-market/ui/icons/website-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -60,9 +61,9 @@ export default function CollectionHeader({
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <div className="flex items-center gap-1">
-                  <p className="text-2xl font-semibold">
-                    {collection.name ?? "Unknown collection"}
-                  </p>
+                  <Typography asChild variant="h2">
+                    <h2>{collection.name ?? "Unknown collection"}</h2>
+                  </Typography>
                   {collection.is_verified && (
                     <VerifiedIcon className="text-background" />
                   )}

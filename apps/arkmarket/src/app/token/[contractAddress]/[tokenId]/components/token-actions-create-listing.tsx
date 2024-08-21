@@ -32,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
+import { Typography } from "@ark-market/ui/typography";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
@@ -261,9 +262,9 @@ export function TokenActionsCreateListing({
       </DialogTrigger>
       <DialogContent>
         <div className="flex flex-col gap-8">
-          <div className="mt-4 text-center text-xl font-semibold">
-            List for sale
-          </div>
+          <Typography className="mt-4 text-center" asChild variant="h4">
+            <h4>List for sale</h4>
+          </Typography>
           <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form
@@ -271,7 +272,9 @@ export function TokenActionsCreateListing({
               className="flex flex-col space-y-4"
             >
               <FormItem className="!mt-0">
-                <FormLabel className="text-lg">Type of sale</FormLabel>
+                <FormLabel>
+                  <Typography variant="body_m">Type of sale</Typography>
+                </FormLabel>
                 <div className="flex gap-6">
                   <Button
                     type="button"
@@ -298,8 +301,10 @@ export function TokenActionsCreateListing({
                 name="startAmount"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">
-                      Set {isAuction && "starting"} price
+                    <FormLabel>
+                      <Typography variant="body_m">
+                        Set {isAuction && "starting"} price
+                      </Typography>
                     </FormLabel>
                     <Button
                       type="button"
@@ -338,9 +343,12 @@ export function TokenActionsCreateListing({
                     {fieldState.error?.message ? (
                       <FormMessage />
                     ) : (
-                      <p className="!mt-1 ml-3 text-sm font-medium text-muted-foreground">
+                      <Typography
+                        className="!mt-1 ml-3 text-muted-foreground"
+                        variant="body_s"
+                      >
                         $<span>{startAmountInUsd}</span>
-                      </p>
+                      </Typography>
                     )}
                   </FormItem>
                 )}
@@ -351,8 +359,10 @@ export function TokenActionsCreateListing({
                   name="endAmount"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel className="text-lg">
-                        Set reserve price
+                      <FormLabel>
+                        <Typography variant="body_m">
+                          Set reserve price
+                        </Typography>
                       </FormLabel>
                       <FormControl>
                         <EthInput
@@ -376,8 +386,10 @@ export function TokenActionsCreateListing({
                 name="duration"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">
-                      Listing expiration
+                    <FormLabel>
+                      <Typography variant="body_m">
+                        Listing expiration
+                      </Typography>
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
@@ -402,18 +414,18 @@ export function TokenActionsCreateListing({
                   </FormItem>
                 )}
               />
-              <div className="!mt-8 text-xl font-semibold">
+              <div className="!mt-8">
                 <div className="flex items-center justify-between">
-                  <p>Earning details</p>
-                  <p>--- ETH</p>
+                  <Typography variant="h4">Earning details</Typography>
+                  <Typography variant="h4">--- ETH</Typography>
                 </div>
-                <div className="mt-2 flex items-center justify-between text-sm font-medium text-muted-foreground">
-                  <p>Arkmarket fees 2%</p>
-                  <p>-- ETH</p>
+                <div className="mt-2 flex items-center justify-between text-muted-foreground">
+                  <Typography variant="body_s">Arkmarket fees 2%</Typography>
+                  <Typography variant="body_s">-- ETH</Typography>
                 </div>
-                <div className="mt-0.5 flex items-center justify-between text-sm font-medium text-muted-foreground">
-                  <p>Creator royalties 2%</p>
-                  <p>-- ETH</p>
+                <div className="mt-0.5 flex items-center justify-between text-muted-foreground">
+                  <Typography variant="body_s">Creator royalties 2%</Typography>
+                  <Typography variant="body_s">-- ETH</Typography>
                 </div>
               </div>
               <div className="sticky bottom-0 !mt-8 flex w-full translate-y-5 items-center justify-center bg-background pb-5">

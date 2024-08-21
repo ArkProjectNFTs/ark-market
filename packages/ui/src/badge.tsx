@@ -4,8 +4,13 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@ark-market/ui";
 
+import { typographyVariants } from "./typography";
+
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1",
+  cn(
+    "inline-flex items-center rounded-full border px-2.5 py-0.5 transition-colors focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1",
+    typographyVariants({ variant: "button_text_s" }),
+  ),
   {
     variants: {
       variant: {
