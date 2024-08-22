@@ -11,20 +11,36 @@ const isUnframed = process.env.NEXT_PUBLIC_THEME === "unframed";
 const typographyVariants = cva("", {
   variants: {
     variant: {
-      h1: "text-5xl font-bold",
-      h2: "text-3xl font-semibold",
-      h3: "text-2xl font-semibold",
-      h4: "text-xl font-semibold",
+      h1: isUnframed ? "text-[3.4375rem] font-bold" : "text-5xl font-bold",
+      h2: isUnframed ? "text-4xl font-semibold" : "text-3xl font-semibold",
+      h3: isUnframed
+        ? "text-[1.6875rem] font-semibold"
+        : "text-2xl font-semibold",
+      h4: isUnframed
+        ? "text-[1.4375rem] font-semibold"
+        : "text-xl font-semibold",
 
-      body_s: "text-sm font-medium",
-      body_bold_s: "text-base font-medium",
-      body_m: "text-lg font-normal",
+      body_s: isUnframed ? "text-base font-medium" : "text-sm font-medium",
+      body_bold_s: isUnframed
+        ? "text-base font-semibold"
+        : "text-base font-medium",
+      body_m: isUnframed
+        ? "text-[1.1875rem] font-medium"
+        : "text-lg font-normal",
       body_bold_m: isUnframed
         ? "text-[1.1875rem] font-semibold"
         : "text-lg font-semibold",
 
-      button_text_s: "text-sm font-semibold",
-      button_text_m: "text-base font-semibold",
+      button_text_s: isUnframed
+        ? "text-[1.0625rem] font-semibold"
+        : "text-sm font-semibold",
+      button_text_m: isUnframed
+        ? "text-[1.1875rem] font-semibold"
+        : "text-base font-semibold",
+
+      number_l: isUnframed
+        ? "font-[Nitti] text-2xl font-normal"
+        : "text-2xl font-medium",
     },
   },
   defaultVariants: {

@@ -29,7 +29,7 @@ export default function CollectionHeaderStats({
         </Typography>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
-          <Typography variant="body_bold_s">
+          <Typography variant="number_l">
             {formatUnits(collection.floor ?? 0, 18)} ETH
           </Typography>
           {/* TODO @YohanTz: Proper color */}
@@ -53,7 +53,7 @@ export default function CollectionHeaderStats({
         </Typography>
         <div className="flex items-center ">
           <EthereumLogo2 className="size-5" />
-          <Typography variant="body_bold_s">
+          <Typography variant="number_l">
             {formatNumber(collection.total_volume)} ETH
           </Typography>
         </div>
@@ -66,9 +66,9 @@ export default function CollectionHeaderStats({
         </Typography>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
-          <p className="font-medium">
+          <Typography variant="number_l">
             {formatNumber(collection.volume_7d_eth)} ETH
-          </p>
+          </Typography>
         </div>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
@@ -77,7 +77,9 @@ export default function CollectionHeaderStats({
         <Typography className="text-muted-foreground" variant="body_s">
           Total Sales
         </Typography>
-        <p className="font-medium">{formatNumber(collection.total_sales)}</p>
+        <Typography variant="number_l">
+          {formatNumber(collection.total_sales)}
+        </Typography>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
@@ -85,7 +87,9 @@ export default function CollectionHeaderStats({
         <Typography className="text-muted-foreground" variant="body_s">
           Items
         </Typography>
-        <p className="font-medium">{formatNumber(collection.token_count)}</p>
+        <Typography variant="number_l">
+          {formatNumber(collection.token_count)}
+        </Typography>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
@@ -93,7 +97,9 @@ export default function CollectionHeaderStats({
         <Typography className="text-muted-foreground" variant="body_s">
           Owners
         </Typography>
-        <p className="font-medium">{formatNumber(collection.owner_count)}</p>
+        <Typography variant="number_l">
+          {formatNumber(collection.owner_count)}
+        </Typography>
       </div>
     </div>
   );
