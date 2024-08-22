@@ -5,7 +5,7 @@ import Link from "next/link";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 import { TimerReset } from "lucide-react";
 
-import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
 import {
   Carousel,
@@ -61,14 +61,9 @@ export default function LiveAuctions() {
                     </CardContent>
                     <CardFooter className="flex flex-col items-start p-5">
                       <div className="flex w-full items-center gap-1.5">
-                        <h4
-                          className={cn(
-                            "text-xl font-semibold",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {collection.name}
-                        </h4>
+                        <Typography asChild variant="h4" ellipsable>
+                          <h4>{collection.name}</h4>
+                        </Typography>
                       </div>
                       <p className="mt-2.5 flex gap-1.5 font-medium text-muted-foreground">
                         <TimerReset size={20} /> End in 2d 8h 56min 23s

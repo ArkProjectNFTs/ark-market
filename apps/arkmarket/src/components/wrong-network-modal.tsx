@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
+import { Typography } from "@ark-market/ui/typography";
 
 export default function WrongNetworkModal({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(false);
@@ -31,8 +32,8 @@ export default function WrongNetworkModal({ children }: PropsWithChildren) {
       <DialogContent className="max-w-[26.25rem] justify-items-center">
         <DialogHeader>
           <div className="mx-auto mb-3 mt-3 size-20 rounded-full bg-secondary" />
-          <DialogTitle className="mx-auto text-xl font-semibold">
-            Switch network
+          <DialogTitle className="mx-auto">
+            <Typography variant="h4">Switch network</Typography>
           </DialogTitle>
         </DialogHeader>
         <p className="text-center">

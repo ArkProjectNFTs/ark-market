@@ -2,7 +2,6 @@
 
 import { formatEther } from "viem";
 
-import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Typography } from "@ark-market/ui/typography";
 
 import usePrices from "~/hooks/usePrices";
@@ -41,13 +40,13 @@ export default function TokenActionsPrice({
 
   return (
     <div className="mb-6">
-      <div className="font-medium text-secondary-foreground">{label}</div>
+      <Typography variant="body_bold_s" className="text-secondary-foreground">
+        {label}
+      </Typography>
       <div className="flex items-end gap-3 lg:gap-6">
-        <div
-          className={cn("text-xl font-semibold lg:text-3xl", ellipsableStyles)}
-        >
+        <Typography variant="h4" className="lg:text-3xl" ellipsable>
           {amount} ETH
-        </div>
+        </Typography>
         <Typography
           className="text-muted-foreground lg:text-2xl"
           variant="body_bold_m"

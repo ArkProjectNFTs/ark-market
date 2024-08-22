@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { Meh } from "lucide-react";
 
+import { Typography } from "@ark-market/ui/typography";
+
 import type { Token } from "~/types";
 import TokenActionsBarEmpty from "./token-actions-bar-empty";
 import TokenActionsBarEmptyMobile from "./token-actions-bar-empty-mobile";
@@ -37,11 +39,11 @@ export default function TokenActionsEmpty({
       <div className="rounded-lg bg-card p-5 text-center lg:px-8 lg:pb-10 lg:pt-8">
         <div className="flex flex-col items-center pb-8 text-muted-foreground">
           <Meh size={42} className="flex-shrink-0" />
-          <p className="mt-3 text-center text-xl font-semibold">
+          <Typography className="mt-3 text-center" variant="h4">
             {isOwner
               ? "You have not assigned a price to your token yet."
               : "This token has not been listed yet."}
-          </p>
+          </Typography>
         </div>
         <div ref={ref}>
           {isOwner ? (

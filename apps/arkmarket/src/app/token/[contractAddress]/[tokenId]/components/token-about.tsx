@@ -6,7 +6,7 @@ import { useAccount, useStarkProfile } from "@starknet-react/core";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
+import { cn, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
@@ -76,7 +76,9 @@ export default function TokenAbout({
             src={token.collection_image}
           />
           <div>
-            <h4 className="text-xl font-semibold">{token.collection_name}</h4>
+            <Typography variant="h4">
+              <h4>{token.collection_name}</h4>
+            </Typography>
             <p className="mt-2 hidden text-sm lg:block">
               {`Everai is a pioneering web3 brand set to expand its universe powered
           by the collective creativity of its artistic partners and vibrant
@@ -109,39 +111,56 @@ export default function TokenAbout({
 
         <div className="mt-8 flex flex-col gap-4 pb-6">
           <div className="flex items-center justify-between">
-            <p className="font-medium">Contract Address</p>
-            <p className="text-muted-foreground">
+            <Typography variant="body_bold_s">Contract Address</Typography>
+            <Typography className="text-muted-foreground" variant="body_bold_s">
               <Link
                 href={`https://starkscan.co/nft-contract/${contractAddress}`}
                 target="_blank"
               >
                 {collectionShortenedAddress}
               </Link>
-            </p>
+            </Typography>
           </div>
           <div className="flex items-center justify-between gap-4">
-            <p className="whitespace-nowrap font-medium">Token ID</p>
-            <p className={cn("text-muted-foreground", ellipsableStyles)}>
+            <Typography className="whitespace-nowrap" variant="body_bold_s">
+              Token ID
+            </Typography>
+            <Typography
+              ellipsable
+              className="text-muted-foreground"
+              variant="body_bold_s"
+            >
               {tokenId}
-            </p>
+            </Typography>
           </div>
           <div className="flex items-center justify-between">
-            <p className="font-medium">Token Standard</p>
-            <p className="text-muted-foreground">ERC721</p>
+            <Typography variant="body_bold_s">Token Standard</Typography>
+            <Typography variant="body_bold_s" className="text-muted-foreground">
+              ERC721
+            </Typography>
           </div>
           <div className="flex items-center justify-between">
-            <p className="font-medium">Owner</p>
+            <Typography variant="body_bold_s">Owner</Typography>
             <Link href={`/wallet/${token.owner}`}>
-              <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+              <Typography
+                className="text-muted-foreground"
+                variant="body_bold_s"
+              >
+                {ownerShortenedAddress}
+              </Typography>
             </Link>
           </div>
           <div className="flex items-center justify-between">
-            <p className="font-medium">Royalty</p>
-            <p className="text-muted-foreground">_%</p>
+            <Typography variant="body_bold_s">Royalty</Typography>
+            <Typography variant="body_bold_s" className="text-muted-foreground">
+              _%
+            </Typography>
           </div>
           <div className="flex items-center justify-between">
-            <p className="font-medium">Chain</p>
-            <p className="text-muted-foreground">Starknet</p>
+            <Typography variant="body_bold_s">Chain</Typography>
+            <Typography variant="body_bold_s" className="text-muted-foreground">
+              Starknet
+            </Typography>
           </div>
         </div>
       </CollapsibleContent>

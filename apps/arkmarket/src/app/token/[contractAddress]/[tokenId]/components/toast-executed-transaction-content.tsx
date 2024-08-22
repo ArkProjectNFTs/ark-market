@@ -1,3 +1,5 @@
+import { Typography } from "@ark-market/ui/typography";
+
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { CollectionToken, Token } from "~/types";
 import Media from "~/components/media";
@@ -32,13 +34,13 @@ export default function ToastExecutedTransactionContent({
             width={84}
             className="size-10 rounded-xs object-contain"
           />
-          <p className="font-medium">
+          <Typography variant="body_bold_s">
             {token.metadata?.name ??
               `${token.collection_name} #${token.token_id}`}
-          </p>
+          </Typography>
         </div>
         <div className="text-end">
-          <p className="font-medium">{formattedPrice} ETH</p>
+          <Typography variant="body_bold_s">{formattedPrice} ETH</Typography>
           <p className="text-xs font-medium">${priceInUsd}</p>
         </div>
       </div>

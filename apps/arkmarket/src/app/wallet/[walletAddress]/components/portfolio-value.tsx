@@ -1,4 +1,5 @@
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Typography } from "@ark-market/ui/typography";
 
 import { ETH } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
@@ -21,10 +22,10 @@ export default function PortfolioValue() {
         <EthereumLogo2 />
         <div className="flex flex-col">
           <p className="text-sm text-secondary-foreground">Portfolio value</p>
-          <p className="text-xl font-semibold">
+          <Typography variant="h4">
             {ethBalance.rounded}{" "}
             <span className="text-secondary-foreground">ETH</span>
-          </p>
+          </Typography>
         </div>
       </div>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
-import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
 import {
   Carousel,
@@ -61,14 +61,9 @@ export default function LatestDrop() {
                     </CardContent>
                     <CardFooter className="flex flex-col items-start p-5">
                       <div className="flex w-full items-center gap-1.5">
-                        <h4
-                          className={cn(
-                            "text-xl font-semibold",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {collection.name}
-                        </h4>
+                        <Typography asChild variant="h4" ellipsable>
+                          <h4>{collection.name}</h4>
+                        </Typography>
                         <VerifiedIcon className="text-background" />
                       </div>
                       <Typography
@@ -77,7 +72,7 @@ export default function LatestDrop() {
                       >
                         Status
                       </Typography>
-                      <Typography variant="body_bold_s" className="font-medium">
+                      <Typography variant="body_bold_s">
                         Mint starts in 2 hours
                       </Typography>
                     </CardFooter>

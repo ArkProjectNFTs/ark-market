@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
+import { Typography } from "@ark-market/ui/typography";
 
 import type { TokenActivity } from "~/types";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -67,7 +68,7 @@ export default function DesktopTokenActivity({
         <TableBody className="table-caption">
           <div className="flex flex-col items-center gap-3 pt-10 text-muted-foreground">
             <Meh size={42} />
-            <p className="text-xl font-semibold">No activity yet!</p>
+            <Typography variant="h4">No activity yet!</Typography>
           </div>
         </TableBody>
       ) : (

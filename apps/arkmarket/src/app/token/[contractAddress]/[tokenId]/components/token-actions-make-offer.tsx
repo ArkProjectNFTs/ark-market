@@ -34,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@ark-market/ui/select";
+import { Typography } from "@ark-market/ui/typography";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token } from "~/types";
@@ -181,7 +182,9 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
           <div className="mx-auto size-20 rounded-full bg-secondary" />
-          <div className="text-center text-xl font-semibold">Make an offer</div>
+          <Typography variant="h4" className="text-center">
+            Make an offer
+          </Typography>
           <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form

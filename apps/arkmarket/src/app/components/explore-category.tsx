@@ -38,7 +38,9 @@ export default function ExploreCategory() {
                     className="transition-transform group-hover:scale-110"
                   />
                 </div>
-                <h4 className="text-xl font-semibold">{category.name}</h4>
+                <Typography asChild variant="h4">
+                  <h4>{category.name}</h4>
+                </Typography>
               </div>
               <div className="flex size-10 items-center justify-center rounded-xs border border-border transition-[border] group-hover:border-white">
                 <ArrowUpRight className="size-5" />

@@ -8,6 +8,7 @@ import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import DiscordIcon from "@ark-market/ui/icons/discord-icon";
 import XIcon from "@ark-market/ui/icons/x-icon";
+import { Typography } from "@ark-market/ui/typography";
 
 import { siteConfig } from "~/config/site";
 import { Icons } from "./icons";
@@ -54,13 +55,17 @@ export default function Footer() {
         </div>
         <div className="flex justify-between text-muted-foreground lg:gap-40">
           <div className="flex flex-col gap-6">
-            <h4 className="text-xl font-semibold text-foreground">About</h4>
+            <Typography asChild variant="h4" className="text-foreground">
+              <h4>About</h4>
+            </Typography>
             <p>Terms</p>
             <p>Privacy Policy</p>
             <p>Explore Collections</p>
           </div>
           <div className="flex flex-col gap-6 lg:mr-16">
-            <h4 className="text-xl font-semibold text-foreground">Contact</h4>
+            <Typography className="text-foreground" variant="h4">
+              Contact
+            </Typography>
             <p>Telegram</p>
             <p>Support</p>
           </div>

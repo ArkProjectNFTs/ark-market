@@ -168,7 +168,9 @@ export default function TokenActionsMakeBid({
         </DialogHeader>
         <div className="flex flex-col gap-6">
           <div className="mx-auto size-20 rounded-full bg-secondary" />
-          <div className="text-center text-xl font-semibold">Place a bid</div>
+          <Typography variant="h4">
+            <h4 className="text-center">Place a bid</h4>
+          </Typography>
 
           <div className="flex justify-between">
             <div className="flex items-center gap-4">
@@ -184,14 +186,9 @@ export default function TokenActionsMakeBid({
               />
 
               <div className="flex flex-col items-start justify-between overflow-hidden">
-                <div
-                  className={cn(
-                    "w-full text-xl font-semibold",
-                    ellipsableStyles,
-                  )}
-                >
+                <Typography asChild variant="h4" ellipsable className="w-full">
                   {token.metadata?.name ?? `#${token.token_id}`}
-                </div>
+                </Typography>
                 <div className="flex w-full items-center gap-1 sm:gap-2">
                   <Typography
                     ellipsable

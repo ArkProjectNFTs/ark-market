@@ -124,11 +124,11 @@ export default function TokenOffers({
         ) : (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
             <Meh size={42} className="flex-shrink-0" />
-            <p className="mt-3 text-center text-xl font-semibold">
+            <Typography className="mt-3 text-center" variant="h4">
               No offers yet!
               <br />
               Make the first offers!
-            </p>
+            </Typography>
           </div>
         )}
       </CollapsibleContent>

@@ -13,6 +13,7 @@ import {
   DialogTitle,
 } from "@ark-market/ui/dialog";
 import { Separator } from "@ark-market/ui/separator";
+import { Typography } from "@ark-market/ui/typography";
 
 import { useConnectWalletStore } from "~/app/stores/connect-wallet";
 
@@ -62,8 +63,8 @@ export default function ConnectWalletDialog() {
       <DialogContent className="my-auto sm:max-w-[26.25rem]">
         <DialogHeader>
           <div className="mx-auto mb-3 mt-3 size-20 rounded-full bg-secondary" />
-          <DialogTitle className="mx-auto text-xl font-semibold">
-            Connect to Unframed
+          <DialogTitle className="mx-auto">
+            <Typography variant="h4">Connect to Unframed</Typography>
           </DialogTitle>
         </DialogHeader>
         <div className="mt-4 flex flex-col gap-3.5">

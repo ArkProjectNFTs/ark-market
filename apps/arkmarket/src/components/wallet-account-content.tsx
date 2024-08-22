@@ -54,14 +54,14 @@ export default function WalletAccountContent({
         <div className="flex h-12 items-center gap-4">
           <ProfilePicture address={address} className="size-12 rounded-md" />
           <div className="flex h-full flex-col justify-between">
-            <p
-              className={cn(
-                "text-xl font-semibold",
-                starkProfile?.name === undefined && "my-auto",
-              )}
+            <Typography
+              className={
+                starkProfile?.name === undefined ? "my-auto" : undefined
+              }
+              variant="h4"
             >
               {nameOrShortAddress}
-            </p>
+            </Typography>
             {starkProfile?.name !== undefined && (
               <div className="text- flex items-center gap-2">
                 {connector !== undefined && (

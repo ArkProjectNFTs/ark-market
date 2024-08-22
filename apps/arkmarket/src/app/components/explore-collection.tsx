@@ -67,7 +67,9 @@ export default function ExploreCollection() {
                       height={124}
                       width={124}
                     />
-                    <h4 className="text-xl font-semibold">{collection.name}</h4>
+                    <Typography asChild variant="h4">
+                      <h4>{collection.name}</h4>
+                    </Typography>
                     <VerifiedIcon className="text-background" />
                   </div>
                 </div>

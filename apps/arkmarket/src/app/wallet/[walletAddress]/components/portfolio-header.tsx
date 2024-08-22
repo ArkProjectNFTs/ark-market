@@ -4,6 +4,7 @@ import { useStarkProfile } from "@starknet-react/core";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, shortAddress } from "@ark-market/ui";
+import { Typography } from "@ark-market/ui/typography";
 
 import CopyButton from "~/components/copy-button";
 import ProfilePicture from "~/components/profile-picture";
@@ -34,9 +35,9 @@ export default function PortfolioHeader({
         />
         <div className="h-full w-full">
           <div className="flex items-center justify-between sm:justify-start">
-            <p className="text-xl font-semibold">
+            <Typography variant="h4">
               {starkProfile?.name ?? shortenedAddress}
-            </p>
+            </Typography>
             <div className="ml-2.5 flex items-center gap-4 text-secondary-foreground">
               <CopyButton className="h-6 sm:h-4" textToCopy={walletAddress} />
             </div>
@@ -44,7 +45,9 @@ export default function PortfolioHeader({
 
           {starkProfile?.name !== undefined && (
             <div>
-              <p className="mt-2 hidden text-sm sm:block">{shortenedAddress}</p>
+              <Typography variant="body_s" className="mt-2 hidden sm:block">
+                {shortenedAddress}
+              </Typography>
             </div>
           )}
         </div>

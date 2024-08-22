@@ -57,9 +57,9 @@ function MobileGlobalSearch({
       <div className="pt-4">
         <div className="mb-8 flex flex-col items-center gap-3 text-muted-foreground">
           <Meh className="size-10" />
-          <p className="pl-3 text-center text-xl font-semibold">
+          <Typography className="pl-3 text-center" variant="h4">
             Sorry, there are no results for your search.
-          </p>
+          </Typography>
         </div>
 
         <MobileGlobalSearchSuggestions onClose={onClose} />

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
-import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 import {
   Carousel,
   CarouselContent,
@@ -97,23 +97,18 @@ export default function TrendingNow() {
                       />
                       <div className="flex flex-col justify-between gap-2 overflow-hidden">
                         <div className="flex items-center gap-2">
-                          <h4
-                            className={cn(
-                              "text-xl font-semibold",
-                              ellipsableStyles,
-                            )}
-                          >
-                            {collection.name}
-                          </h4>
+                          <Typography variant="h4" asChild ellipsable>
+                            <h4>{collection.name}</h4>
+                          </Typography>
                           <VerifiedIcon className="flex-shrink-0 text-background" />
                         </div>
 
-                        <p className="font-medium sm:hidden">
+                        <Typography variant="body_bold_s" className="sm:hidden">
                           1.6 ETH{" "}
                           <span className="font-bold text-green-500">
                             + 0,02%
                           </span>
-                        </p>
+                        </Typography>
                       </div>
                     </div>
                     <div className="hidden flex-shrink-0 flex-col items-end sm:flex">
@@ -123,12 +118,12 @@ export default function TrendingNow() {
                       >
                         Floor price
                       </Typography>
-                      <p className="text-end font-medium">
+                      <Typography className="text-end" variant="body_bold_s">
                         1.6 ETH{" "}
                         <span className="font-bold text-green-500">
                           + 0,02%
                         </span>
-                      </p>
+                      </Typography>
                     </div>
                   </div>
                 </Link>

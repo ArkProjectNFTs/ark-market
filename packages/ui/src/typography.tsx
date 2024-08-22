@@ -15,9 +15,10 @@ const typographyVariants = cva("", {
       h2: "text-3xl font-semibold",
       h3: "text-2xl font-semibold",
       h4: "text-xl font-semibold",
+
       body_s: "text-sm font-medium",
       body_bold_s: "text-base font-medium",
-      body_m: "font-base text-lg",
+      body_m: "text-lg font-normal",
       body_bold_m: isUnframed
         ? "text-[1.1875rem] font-semibold"
         : "text-lg font-semibold",

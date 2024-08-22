@@ -34,11 +34,11 @@ export default function BuyNowDialog({
         <div className="flex flex-col gap-10 sm:gap-8">
           <div className="flex flex-col gap-4">
             <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
-            <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
+            <Typography className="mb-5 text-center sm:mb-0" variant="h4">
               {isSuccess
                 ? "Congratulations for your purchase"
                 : "Confirm your purchase"}
-            </div>
+            </Typography>
             {isSuccess && (
               <div className="mb-4 text-center text-sm">
                 Nice purchase, this NFT is now in your wallet ;)
