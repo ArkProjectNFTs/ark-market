@@ -178,12 +178,12 @@ export default function CollectionActivityData({
               <TableCell>
                 <div className="flex items-center gap-4">
                   <Media
-                    alt={activity.token_metadata.name}
+                    alt={activity.token_metadata?.name ?? ""}
                     className="size-[3.75rem] rounded-xs object-contain"
                     height={120}
                     width={120}
-                    src={activity.token_metadata.image}
-                    mediaKey={activity.token_metadata.image_key}
+                    src={activity.token_metadata?.image ?? undefined}
+                    mediaKey={activity.token_metadata?.image_key ?? undefined}
                   />
 
                   <div className="w-full overflow-hidden">
@@ -195,7 +195,8 @@ export default function CollectionActivityData({
                       )}
                       href={`/token/${collectionAddress}/${activity.token_id}`}
                     >
-                      {activity.token_metadata.name}
+                      {activity.token_metadata?.name ??
+                        `${activity.name} #${activity.token_id}`}
                     </Link>
                     <div className="flex w-full items-center gap-1">
                       <p
