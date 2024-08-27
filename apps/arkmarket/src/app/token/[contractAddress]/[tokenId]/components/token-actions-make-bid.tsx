@@ -161,7 +161,11 @@ export default function TokenActionsMakeBid({
           Make a bid
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        onInteractOutside={(e) => {
+          e.preventDefault();
+        }}
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">Place a bid</DialogTitle>
         </DialogHeader>

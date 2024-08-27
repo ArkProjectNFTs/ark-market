@@ -259,7 +259,11 @@ export function TokenActionsCreateListing({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        onInteractOutside={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div className="flex flex-col gap-8">
           <div className="mt-4 text-center text-xl font-semibold">
             List for sale
