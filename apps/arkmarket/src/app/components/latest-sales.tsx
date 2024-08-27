@@ -42,7 +42,7 @@ export default function LatestSales() {
                 key={index}
                 className="group h-[5.75rem] text-muted-foreground"
               >
-                <TableCell className="text-white transition-colors group-hover:text-muted-foreground">
+                <TableCell className="text-foreground transition-colors group-hover:text-muted-foreground">
                   <div className="flex items-center gap-4 pl-3">
                     <ShoppingCart /> Sale
                   </div>
@@ -57,7 +57,7 @@ export default function LatestSales() {
                       width={112}
                     />
                     <div className="overflow-hidden whitespace-nowrap">
-                      <p className="overflow-hidden text-ellipsis text-base font-medium text-white">
+                      <p className="overflow-hidden text-ellipsis text-base font-medium text-foreground">
                         {sale.token.name}
                       </p>
                       <Link
@@ -68,12 +68,12 @@ export default function LatestSales() {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="text-white">
+                <TableCell className="text-foreground">
                   <PriceTag price={sale.price} />
                 </TableCell>
                 <TableCell>{sale.from}</TableCell>
                 <TableCell>{sale.to}</TableCell>
-                <TableCell className="text-white transition-colors group-hover:text-muted-foreground">
+                <TableCell className="text-foreground transition-colors group-hover:text-muted-foreground">
                   1min ago
                 </TableCell>
               </TableRow>

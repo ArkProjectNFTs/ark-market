@@ -16,6 +16,7 @@ import ConnectWalletDialog from "~/components/connect-wallet-dialog";
 import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
+import { env } from "~/env";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
@@ -58,7 +59,11 @@ const inter = Inter({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={env.NEXT_PUBLIC_THEME === "unframed" ? "unframed" : undefined}
+    >
       <body
         className={cn(
           // pb used as padding for DataFooter, which is position: fixed

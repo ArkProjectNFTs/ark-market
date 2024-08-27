@@ -84,7 +84,7 @@ export default function MainCarousel() {
                     className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
                   />
                   <div
-                    className="mt-5 flex flex-col justify-center gap-5 md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
+                    className="mt-5 flex flex-col justify-center gap-5 rounded-[1.5rem] md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
                     style={{
                       background:
                         "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 54.6%, rgba(0, 0, 0, 0.80) 107.55%)",

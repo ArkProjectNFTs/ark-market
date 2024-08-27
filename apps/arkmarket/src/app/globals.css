@@ -2,11 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @layer base {
+  :root {
+    --site-header-height: 3.75rem;
+    --radius: 0.75rem;
+
+
+    @media screen and (min-width: 768px) {
+      --site-header-height: 4.5rem;
+    }
+  }
+
+} */
+
 @layer base {
   :root {
     --site-header-height: 3.75rem;
     --radius: 0.75rem;
 
+    /* Default theme light variables */
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
     --card: 209, 39%, 96%;
@@ -32,6 +46,7 @@
     }
   }
 
+  /* Default theme dark variables */
   .dark {
     --accent-foreground: 0 0% 100%;
     --accent: 215, 24%, 26%;
@@ -52,6 +67,52 @@
     --ring: 0 0% 100%;
     --secondary-foreground: 215, 20%, 65%;
     --secondary: 217.2 32.6% 17.5%;
+  }
+
+  /* Unframed theme light variables */
+  .unframed {
+    --background: 0 0% 100%;
+    --foreground: 0, 0%, 0%;
+    --card: 222, 100%, 98%;
+    --card-foreground: 0, 0%, 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0, 0%, 0%;
+    --primary: 300, 100%, 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222, 18%, 89%;
+    --secondary-foreground: 0, 0%, 0%;
+    --muted: 222, 18%, 89%;
+    --muted-foreground: 228, 7%, 55%;
+    --accent: 222, 18%, 89%;
+    --accent-foreground: 228, 7%, 55%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: ;
+    --border: 224, 17%, 83%;
+    --input: 224, 17%, 83%;
+    --ring: 0, 0%, 0%;
+  }
+
+  /* Unframed theme dark variables */
+  .unframed.dark {
+    --background: 0 0% 0%;
+    --foreground: 0, 0%, 100%;
+    --card: 282, 20%, 6%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0, 0%, 0%;
+    --popover-foreground: 279, 1%, 70%;
+    --primary: 180, 100%, 50%;
+    --primary-foreground: 0, 0%, 0%;
+    --secondary: 279, 4%, 14%;
+    --secondary-foreground: 279, 1%, 70%;
+    --muted: 288, 2%, 34%;
+    --muted-foreground: 288, 2%, 34%;
+    --accent: 288, 2%, 34%;
+    --accent-foreground: 279, 1%, 70%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 300, 1%, 10%;
+    --input: 288, 2%, 34%;
+    --ring: 0 0% 100%;
   }
 }
 

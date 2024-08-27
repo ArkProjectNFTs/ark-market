@@ -29,6 +29,7 @@ export const env = createEnv({
     NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string(),
     NEXT_PUBLIC_IMAGE_CDN_URL: z.string().url(),
     NEXT_PUBLIC_IMAGE_PROXY_URL: z.string().url(),
+    NEXT_PUBLIC_THEME: z.enum(["unframed", "default"]),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -44,6 +45,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
     NEXT_PUBLIC_IMAGE_CDN_URL: process.env.NEXT_PUBLIC_IMAGE_CDN_URL,
     NEXT_PUBLIC_IMAGE_PROXY_URL: process.env.NEXT_PUBLIC_IMAGE_PROXY_URL,
+    NEXT_PUBLIC_THEME: process.env.NEXT_PUBLIC_THEME,
 
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
