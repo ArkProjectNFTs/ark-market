@@ -177,7 +177,11 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
           Make offer
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        onInteractOutside={(e) => {
+          e.preventDefault();
+        }}
+      >
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
           <div className="mx-auto size-20 rounded-full bg-secondary" />
