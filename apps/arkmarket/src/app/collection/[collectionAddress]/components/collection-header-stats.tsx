@@ -51,7 +51,7 @@ export default function CollectionHeaderStats({
         <Typography className="text-muted-foreground" variant="body_s">
           Total Volume
         </Typography>
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <EthereumLogo2 className="size-5" />
           <Typography variant="number_l">
             {formatNumber(collection.total_volume)} ETH

@@ -193,7 +193,7 @@ export default function MobileGlobalSearchWrapper() {
             </Typography>
           </button>
         </div>
-        <div className="mt-10 h-full pt-5 ">
+        <div className="mt-10 h-full pt-5">
           <MobileGlobalSearch
             inputDebouncedValue={inputDebouncedValue}
             inputValue={inputValue}
