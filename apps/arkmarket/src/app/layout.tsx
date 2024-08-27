@@ -13,6 +13,7 @@ import "~/app/globals.css";
 import type { PropsWithChildren } from "react";
 
 import ConnectWalletDialog from "~/components/connect-wallet-dialog";
+import CustomFonts from "~/components/custom-fonts";
 import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
@@ -24,8 +25,7 @@ export const revalidate = 0;
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    // eslint-disable-next-line no-restricted-properties
-    process.env.VERCEL_ENV === "production"
+    env.VERCEL_ENV === "production"
       ? "https://market.arkproject.dev"
       : "http://localhost:3000",
   ),
@@ -72,13 +72,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
     >
       <body
         className={cn(
-          // pb used as padding for DataFooter, which is position: fixed
-          "min-h-screen overscroll-y-none font-sans text-foreground antialiased lg:pb-10",
+          "min-h-screen overscroll-y-none bg-background font-sans text-foreground antialiased lg:pb-10",
           inter.variable,
         )}
       >
-        <link rel="stylesheet" href="https://use.typekit.net/tzw7xdb.css" />
-        <link rel="stylesheet" href="https://use.typekit.net/ucz5xlt.css" />
+        <CustomFonts />
         <Providers>
           <div className="flex-col md:flex">
             <SiteHeader />

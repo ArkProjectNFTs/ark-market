@@ -46,8 +46,13 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">
           Total Volume
+<<<<<<< HEAD
         </p>
         <div className="flex items-center font-numbers gap-2 text-xl">
+=======
+        </Typography>
+        <div className="flex items-center">
+>>>>>>> c8a1419 (fix(arkmarket): update tooling and fix custom font lint issue)
           <EthereumLogo2 className="size-5" />
           <p className="font-medium">
             {formatNumber(collection.total_volume)} ETH

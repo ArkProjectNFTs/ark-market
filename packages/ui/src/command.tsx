@@ -140,7 +140,7 @@ const CommandItem = React.forwardRef<
     ref={ref}
     disabled={disabled}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground ",
+      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground",
       /**
        * TODO @YohanTz: Fix disabled when fix available on shadcn side
        * https://github.com/pacocoursey/cmdk/issues/285

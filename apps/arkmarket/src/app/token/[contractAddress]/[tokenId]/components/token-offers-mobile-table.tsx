@@ -70,7 +70,7 @@ export default function TokenOffersMobileTable({
               />
             </div>
 
-            <div className="mt-3.5 flex items-center justify-between ">
+            <div className="mt-3.5 flex items-center justify-between">
               <div className="flex items-center gap-3.5">
                 <p className="text-sm font-semibold">
                   from{" "}

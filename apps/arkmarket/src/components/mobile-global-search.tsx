@@ -198,7 +198,7 @@ export default function MobileGlobalSearchWrapper() {
             Cancel
           </button>
         </div>
-        <div className="mt-10 h-full pt-5 ">
+        <div className="mt-10 h-full pt-5">
           <MobileGlobalSearch
             inputDebouncedValue={inputDebouncedValue}
             inputValue={inputValue}

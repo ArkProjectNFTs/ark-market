@@ -1,10 +1,9 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
-/* eslint-disable no-restricted-properties */
 import { createEnv } from "@t3-oss/env-nextjs";
+import { vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
 export const env = createEnv({
-  extends: [],
+  extends: [vercel()],
   shared: {
     NODE_ENV: z
       .enum(["development", "production", "test"])
@@ -27,7 +26,7 @@ export const env = createEnv({
     NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string(),
     NEXT_PUBLIC_IMAGE_CDN_URL: z.string().url(),
     NEXT_PUBLIC_IMAGE_PROXY_URL: z.string().url(),
-    NEXT_PUBLIC_THEME: z.enum(["unframed", "default"]),
+    NEXT_PUBLIC_THEME: z.enum(["unframed", "default"]).default("default"),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -44,11 +43,7 @@ export const env = createEnv({
     NEXT_PUBLIC_IMAGE_CDN_URL: process.env.NEXT_PUBLIC_IMAGE_CDN_URL,
     NEXT_PUBLIC_IMAGE_PROXY_URL: process.env.NEXT_PUBLIC_IMAGE_PROXY_URL,
     NEXT_PUBLIC_THEME: process.env.NEXT_PUBLIC_THEME,
-
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:
-    !!process.env.CI ||
-    !!process.env.SKIP_ENV_VALIDATION ||
-    process.env.npm_lifecycle_event === "lint",
+    !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
