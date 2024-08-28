@@ -22,7 +22,7 @@ export default function CollectionHeaderStats({
         className,
       )}
     >
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="flex items-center gap-1 font-medium">
           <EthereumLogo2 className="size-5" />
@@ -43,7 +43,7 @@ export default function CollectionHeaderStats({
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">
           Total Volume
         </p>
@@ -56,7 +56,7 @@ export default function CollectionHeaderStats({
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
         <div className="flex items-center gap-1">
           <EthereumLogo2 className="size-5" />
@@ -67,19 +67,19 @@ export default function CollectionHeaderStats({
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Total Sales</p>
         <p className="font-medium">{formatNumber(collection.total_sales)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Items</p>
         <p className="font-medium">{formatNumber(collection.token_count)}</p>
       </div>
       <Separator orientation="vertical" className={separatorCommonClassNames} />
 
-      <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
+      <div className="rounded-lg p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Owners</p>
         <p className="font-medium">{formatNumber(collection.owner_count)}</p>
       </div>

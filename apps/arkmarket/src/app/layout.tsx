@@ -8,7 +8,7 @@ import { Toaster } from "@ark-market/ui/toaster";
 
 import SiteHeader from "~/components/site-header";
 
-import "~/app/globals.css";
+import "@ark-market/ui/globals.css";
 
 import type { PropsWithChildren } from "react";
 
@@ -70,6 +70,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
       suppressHydrationWarning
       className={env.NEXT_PUBLIC_THEME === "unframed" ? "unframed" : undefined}
     >
+      <link rel="stylesheet" href="https://use.typekit.net/tzw7xdb.css" />
+      <link rel="stylesheet" href="https://use.typekit.net/ucz5xlt.css" />
       <body
         className={cn(
           // pb used as padding for DataFooter, which is position: fixed

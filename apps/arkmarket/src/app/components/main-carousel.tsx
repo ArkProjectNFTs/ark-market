@@ -69,7 +69,7 @@ export default function MainCarousel() {
   }
 
   return (
-    <div className="md:text-white">
+    <div className="text-white">
       <Carousel setApi={setApi}>
         <CarouselContent>
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
@@ -104,11 +104,11 @@ export default function MainCarousel() {
                         </h1>
                         <div className="flex items-center text-sm font-semibold">
                           <p className="mr-1">{carouselItem.itemsCount}</p>
-                          <p className="mr-1 text-muted-foreground">
+                          <p className="mr-1">
                             ITEMS
                           </p> | <EthereumLogo2 className="size-4" />
                           <p className="mr-1">{carouselItem.floorPrice}</p>
-                          <p className="text-muted-foreground">ETH</p>
+                          <p className="">ETH</p>
                         </div>
                       </div>
                     </div>

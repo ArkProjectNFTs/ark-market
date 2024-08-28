@@ -64,7 +64,7 @@ export default function CollectionHeader({
                     {collection.name ?? "Unknown collection"}
                   </p>
                   {collection.is_verified && (
-                    <VerifiedIcon className="text-background" />
+                    <VerifiedIcon className="text-primary" />
                   )}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function CollectionHeader({
                 <CollapsibleTrigger asChild>
                   <button
                     className={cn(
-                      "ml-1 flex items-center gap-1",
+                      "ml-1 flex items-center gap-1 hover:text-foreground",
                       focusableStyles,
                     )}
                   >

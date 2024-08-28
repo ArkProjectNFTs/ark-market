@@ -31,7 +31,7 @@ export default function CopyButton({
             onClick={() => copy(textToCopy)}
             className={cn("h-4", focusableStyles, className)}
           >
-            <Copy className="h-full w-auto text-muted-foreground" />
+            <Copy className="h-full w-auto text-muted-foreground hover:text-foreground" />
           </button>
         </TooltipTrigger>
         <TooltipContent>Copied</TooltipContent>

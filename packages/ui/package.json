@@ -4,11 +4,17 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
+    "./globals.css": "./src/globals.css",
+    "./globals-unframed.css": "./src/globals-unframed.css",
     ".": "./src/index.ts",
     "./*": [
       "./src/*.tsx",
-      "./src/*.ts"
-    ]
+      "./src/*.ts",
+      "./src/*.js",
+      "./src/*.jsx"
+    ],
+    "./tailwind.config": "./tailwind.config.ts",
+    "./tailwind.config.unframed": "./tailwind.config.unframed.ts"
   },
   "license": "MIT",
   "scripts": {
