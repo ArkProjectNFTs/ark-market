@@ -49,8 +49,7 @@
     "AUTH_DISCORD_SECRET",
     "AUTH_REDIRECT_PROXY_URL",
     "AUTH_SECRET",
-    "PORT",
-    "MOBULA_API_KEY"
+    "PORT"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
