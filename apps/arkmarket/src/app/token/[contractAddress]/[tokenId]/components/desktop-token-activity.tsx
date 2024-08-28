@@ -53,24 +53,17 @@ export default function DesktopTokenActivity({
   const { address } = useAccount();
 
   return (
-    <Table className={className}>
-      <TableHeader>
-        <TableRow className="hover:bg-background">
-          <TableHead className="pl-5">Event</TableHead>
-          <TableHead>Price</TableHead>
-          <TableHead>From</TableHead>
-          <TableHead>To</TableHead>
-          <TableHead className="text-end">Date</TableHead>
-        </TableRow>
-      </TableHeader>
-      {tokenActivity.length === 0 ? (
-        <TableBody className="table-caption">
-          <div className="flex flex-col items-center gap-3 pt-10 text-muted-foreground">
-            <Meh size={42} />
-            <p className="text-xl font-semibold">No activity yet!</p>
-          </div>
-        </TableBody>
-      ) : (
+    <>
+      <Table className={className}>
+        <TableHeader>
+          <TableRow className="hover:bg-background">
+            <TableHead className="pl-5">Event</TableHead>
+            <TableHead>Price</TableHead>
+            <TableHead>From</TableHead>
+            <TableHead>To</TableHead>
+            <TableHead className="text-end">Date</TableHead>
+          </TableRow>
+        </TableHeader>
         <TableBody className="text-sm font-semibold">
           {tokenActivity.map((activity, index) => {
             const activityItem = activityTypeToItem.get(activity.activity_type);
@@ -121,7 +114,13 @@ export default function DesktopTokenActivity({
             );
           })}
         </TableBody>
+      </Table>
+      {tokenActivity.length === 0 && (
+        <div className="flex flex-col items-center gap-3 pt-8 text-muted-foreground">
+          <Meh size={42} />
+          <p className="text-xl font-semibold">No activity yet!</p>
+        </div>
       )}
-    </Table>
+    </>
   );
 }
