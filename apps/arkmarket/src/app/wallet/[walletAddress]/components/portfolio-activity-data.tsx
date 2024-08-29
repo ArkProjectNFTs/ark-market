@@ -22,11 +22,10 @@ import {
   cn,
   ellipsableStyles,
   focusableStyles,
-  formatUnits,
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
 import {
   Table,
@@ -146,7 +145,7 @@ export default function PortfolioActivityData({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative text-sm font-semibold"
+        className="relative text-sm font-medium font-numbers"
         style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -224,13 +223,7 @@ export default function PortfolioActivityData({
               </TableCell>
               <TableCell>
                 {activity.price ? (
-                  <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
-                    <p className="font-semibold">
-                      {formatUnits(activity.price, 18)}{" "}
-                      <span className="text-muted-foreground">ETH</span>
-                    </p>
-                  </div>
+                  <PriceTag price={activity.price} />
                 ) : (
                   "_"
                 )}

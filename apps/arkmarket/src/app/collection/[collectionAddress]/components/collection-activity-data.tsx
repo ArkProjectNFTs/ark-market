@@ -22,12 +22,11 @@ import {
   cn,
   ellipsableStyles,
   focusableStyles,
-  formatUnits,
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,
@@ -146,7 +145,7 @@ export default function CollectionActivityData({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative text-sm font-semibold"
+        className="font-numbers relative text-sm font-medium"
         style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -171,7 +170,7 @@ export default function CollectionActivityData({
             >
               <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
                 <div className="flex items-center gap-4 whitespace-nowrap">
-                  {activityItem?.icon}
+                  <div className="w-4">{activityItem?.icon}</div>
                   <p>{activityItem?.title}</p>
                 </div>
               </TableCell>
@@ -215,17 +214,7 @@ export default function CollectionActivityData({
                 </div>
               </TableCell>
               <TableCell>
-                {activity.price ? (
-                  <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
-                    <p>
-                      {formatUnits(activity.price, 18)}{" "}
-                      <span className="text-muted-foreground">ETH</span>
-                    </p>
-                  </div>
-                ) : (
-                  "_"
-                )}
+                {activity.price ? <PriceTag price={activity.price} /> : "_"}
               </TableCell>
               <TableCell>
                 {activity.from ? (

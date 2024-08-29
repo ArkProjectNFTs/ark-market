@@ -29,12 +29,12 @@ function TokenFloorDifference({ floor_difference }: TokenFloorDifferenceProps) {
 
   if (floor_difference < 0) {
     return (
-      <p className="text-sm font-semibold text-red-500">{floor_difference}%</p>
+      <p className="text-sm font-medium text-red-500">{floor_difference}%</p>
     );
   }
 
   return (
-    <p className="text-sm font-semibold text-green-500">+{floor_difference}%</p>
+    <p className="text-sm font-medium text-green-500">+{floor_difference}%</p>
   );
 }
 
@@ -73,7 +73,7 @@ export default function TokenOffersTable({
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="block overflow-auto text-sm font-semibold">
+        <TableBody className="block overflow-auto text-sm font-medium font-numbers">
           {tokenOffers.map((offer) => {
             return (
               <TableRow

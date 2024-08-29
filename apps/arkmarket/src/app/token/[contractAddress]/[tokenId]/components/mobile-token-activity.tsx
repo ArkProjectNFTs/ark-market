@@ -23,7 +23,7 @@ export default function MobileTokenActivity({
 
   return (
     <div className={className}>
-      <p className="text-sm font-semibold text-muted-foreground">Event</p>
+      <p className="text-sm font-medium text-numbers text-muted-foreground">Event</p>
       <Separator className="my-4" />
 
       {tokenActivity.map((activity, index) => {

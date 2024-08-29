@@ -37,7 +37,7 @@ export default function ExploreCategory() {
                 </div>
                 <h4 className="text-xl font-semibold">{category.name}</h4>
               </div>
-              <div className="flex size-10 items-center justify-center rounded-xs border border-border transition-[border] group-hover:border-white">
+              <div className="flex size-10 items-center justify-center rounded-xs border border-border transition-[border] group-hover:border-input">
                 <ArrowUpRight className="size-5" />
               </div>
             </Link>

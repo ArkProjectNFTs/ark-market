@@ -102,11 +102,25 @@ export default function CollectionItemsDataGridView({
                         {token.metadata?.name ?? token.token_id}
                       </p>
                       {token.price ? (
-                        <p className={cn("text-sm font-medium", ellipsableStyles)}>
+                        <p
+                          className={cn(
+                            "font-medium",
+                            viewType === "large-grid" ? "text-sm" : "text-xs",
+                            ellipsableStyles,
+                          )}
+                        >
                           {formatUnits(token.price, 18)} ETH
                         </p>
                       ) : (
-                        <p className="text-sm font-medium">Not for sale</p>
+                        <p
+                          className={cn(
+                            "font-medium",
+                            viewType === "large-grid" ? "text-sm" : "text-xs",
+                            ellipsableStyles,
+                          )}
+                        >
+                          Not for sale
+                        </p>
                       )}
                     </div>
                   </div>

@@ -64,7 +64,7 @@ export default function DesktopTokenActivity({
             <TableHead className="text-end">Date</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="text-sm font-semibold">
+        <TableBody className="text-sm font-medium font-numbers">
           {tokenActivity.map((activity, index) => {
             const activityItem = activityTypeToItem.get(activity.activity_type);
 
