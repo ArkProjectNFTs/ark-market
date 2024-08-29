@@ -8,7 +8,7 @@ import { Toaster } from "@ark-market/ui/toaster";
 
 import SiteHeader from "~/components/site-header";
 
-import "./globals.css";
+import "~/app/globals.css";
 
 import type { PropsWithChildren } from "react";
 
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body
         className={cn(
           // pb used as padding for DataFooter, which is position: fixed
-          "min-h-screen overscroll-y-none font-sans text-foreground antialiased lg:pb-10",
+          "min-h-screen overscroll-y-none bg-background font-sans text-foreground antialiased lg:pb-10",
           inter.variable,
         )}
       >
