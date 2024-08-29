@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-import base from "@ark-market/tailwind-config/base";
+import base from "./base";
 
 const fontSizeMultiplier = 1.15; // Adjust this value to increase or decrease all font sizes
 

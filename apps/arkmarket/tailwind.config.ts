@@ -1,13 +1,18 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-import native from "@ark-market/tailwind-config/native";
-import unframed from "@ark-market/tailwind-config/unframed";
-
-const theme = process.env.NEXT_PUBLIC_THEME === "unframed" ? unframed : native
+import baseConfig from "@ark-market/tailwind-config/unframed";
 
 export default {
   // We need to append the path to the UI package to the content array so that
   // those classes are included correctly.
-  content: [...theme.content, "../../packages/ui/**/*.{ts,tsx}"],
-  presets: [theme],
+  content: [...baseConfig.content, "../../packages/ui/**/*.{ts,tsx}"],
+  presets: [baseConfig],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-inter-sans)", ...fontFamily.sans],
+      },
+    },
+  },
 } satisfies Config;
