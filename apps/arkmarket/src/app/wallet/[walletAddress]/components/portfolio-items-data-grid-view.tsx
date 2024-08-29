@@ -100,15 +100,15 @@ export default function CollectionItemsDataGridView({
             </Link>
             <NftCardContent>
               <div className="flex w-full justify-between">
-                <div className="w-full space-y-1 overflow-hidden">
+                <div className="w-full overflow-hidden">
                   <Link
                     href={`/token/${token.collection_address}/${token.token_id}`}
                     className={cn("flex items-center gap-1", focusableStyles)}
                   >
                     <p
                       className={cn(
-                        "text-sm font-semibold",
-                        viewType === "large-grid" && "sm:text-xl",
+                        "text-base font-bold leading-none",
+                        viewType === "large-grid" && "sm:text-xl font-bold",
                         ellipsableStyles,
                       )}
                     >
@@ -121,8 +121,8 @@ export default function CollectionItemsDataGridView({
                   >
                     <p
                       className={cn(
-                        "text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground",
-                        viewType === "large-grid" && "sm:text-lg",
+                        "mt-0.5 text-sm font-normal text-accent-foreground transition-colors hover:text-foreground leading-none",
+                        viewType === "large-grid" && "sm:text-base",
                         ellipsableStyles,
                       )}
                     >
@@ -132,11 +132,11 @@ export default function CollectionItemsDataGridView({
                   </Link>
 
                   {token.list_price ? (
-                    <p className={cn("mt-1 text-sm", ellipsableStyles)}>
+                    <p className={cn("mt-2 text-sm font-semibold", ellipsableStyles)}>
                       {formatUnits(token.list_price, 18)} ETH
                     </p>
                   ) : (
-                    <p className="mt-1 text-sm font-medium">Not for sale</p>
+                    <p className="mt-2 text-sm font-semibold">Not for sale</p>
                   )}
                 </div>
               </div>

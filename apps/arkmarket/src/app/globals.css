@@ -15,6 +15,11 @@
 
 } */
 
+@font-face {
+  font-family: 'UnframedIconFont';
+  src: url('/fonts/unframed-icons.ttf') format('truetype');
+}
+
 @layer base {
   :root {
     --site-header-height: 3.75rem;
@@ -23,16 +28,16 @@
     /* Default theme light variables */
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
-    --card: 209, 39%, 96%;
+    --card: 209 39% 96%;
     --card-foreground: 222.2 47.4% 11.2%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
     --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210, 40%, 98%;
+    --primary-foreground: 210 40% 98%;
     --secondary: 214.3 31.8% 91.4%;
-    --secondary-foreground: 215, 16%, 46%;
+    --secondary-foreground: 215 16% 46%;
     --muted: 214.3 31.8% 91.4%;
-    --muted-foreground: 215, 16%, 46%;
+    --muted-foreground: 215 16% 46%;
     --accent: 214.3 31.8% 91.4%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
@@ -49,69 +54,69 @@
   /* Default theme dark variables */
   .dark {
     --accent-foreground: 0 0% 100%;
-    --accent: 215, 24%, 26%;
+    --accent: 215 24% 26%;
     --background: 0 0% 0%;
     --border: 217.2 32.6% 17.5%;
-    --card-foreground: 210, 40%, 98%;
+    --card-foreground: 210 40% 98%;
     --card: 222.2 47.4% 11.2%;
     --destructive-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
-    --foreground: 210, 40%, 98%;
+    --foreground: 210 40% 98%;
     --input: 217.2 32.6% 17.5%;
-    --muted-foreground: 215, 20%, 65%;
+    --muted-foreground: 215 20% 65%;
     --muted: 217.2 32.6% 17.5%;
-    --popover-foreground: 210, 40%, 98%;
+    --popover-foreground: 210 40% 98%;
     --popover: 0 0% 0%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --primary: 0 0% 100%;
     --ring: 0 0% 100%;
-    --secondary-foreground: 215, 20%, 65%;
+    --secondary-foreground: 215 20% 65%;
     --secondary: 217.2 32.6% 17.5%;
   }
 
   /* Unframed theme light variables */
   .unframed {
     --background: 0 0% 100%;
-    --foreground: 0, 0%, 0%;
-    --card: 222, 100%, 98%;
-    --card-foreground: 0, 0%, 0%;
+    --foreground: 0 0% 0%;
+    --card: 222 100% 98%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0, 0%, 0%;
-    --primary: 300, 100%, 50%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 300 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 222, 18%, 89%;
-    --secondary-foreground: 0, 0%, 0%;
-    --muted: 222, 18%, 89%;
-    --muted-foreground: 228, 7%, 55%;
-    --accent: 222, 18%, 89%;
-    --accent-foreground: 228, 7%, 55%;
+    --secondary: 222 18% 89%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 222 18% 89%;
+    --muted-foreground: 228 7% 55%;
+    --accent: 222 18% 89%;
+    --accent-foreground: 228 7% 55%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: ;
-    --border: 224, 17%, 83%;
-    --input: 224, 17%, 83%;
-    --ring: 0, 0%, 0%;
+    --border: 224 17% 83%;
+    --input: 224 17% 83%;
+    --ring: 0 0% 0%;
   }
 
   /* Unframed theme dark variables */
   .unframed.dark {
     --background: 0 0% 0%;
-    --foreground: 0, 0%, 100%;
-    --card: 282, 20%, 6%;
+    --foreground: 0 0% 100%;
+    --card: 282 20% 6%;
     --card-foreground: 0 0% 100%;
-    --popover: 0, 0%, 0%;
-    --popover-foreground: 279, 1%, 70%;
-    --primary: 180, 100%, 50%;
-    --primary-foreground: 0, 0%, 0%;
-    --secondary: 279, 4%, 14%;
-    --secondary-foreground: 279, 1%, 70%;
-    --muted: 288, 2%, 34%;
-    --muted-foreground: 288, 2%, 34%;
-    --accent: 288, 2%, 34%;
-    --accent-foreground: 279, 1%, 70%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 279 1% 70%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 279 4% 14%;
+    --secondary-foreground: 279 1% 70%;
+    --muted: 280 4% 15%;
+    --muted-foreground: 283 3% 35%;
+    --accent: 288 2% 34%;
+    --accent-foreground: 279 1% 70%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 300, 1%, 10%;
-    --input: 288, 2%, 34%;
+    --border: 300 1% 10%;
+    --input: 288 2% 34%;
     --ring: 0 0% 100%;
   }
 }

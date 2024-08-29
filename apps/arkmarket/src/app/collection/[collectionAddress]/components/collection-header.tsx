@@ -82,7 +82,7 @@ export default function CollectionHeader({
                 <CollapsibleTrigger asChild>
                   <button
                     className={cn(
-                      "ml-1 flex items-center gap-1",
+                      "ml-1 flex items-center gap-1 hover:text-accent-foreground",
                       focusableStyles,
                     )}
                   >
