@@ -2,11 +2,12 @@ import Link from "next/link";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
-import { RefreshCw, Share2, VerifiedIcon } from "@ark-market/ui/icons";
+import { Share2, VerifiedIcon } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
+import RefreshMetadataButton from "./refresh-metadata-button";
 import TokenSummaryMobileActions from "./token-summary-mobile-actions";
 
 interface TokenSummaryProps {
@@ -64,9 +65,7 @@ export default function TokenSummary({
               className="size-6 text-muted-foreground"
               textToCopy={token.collection_address}
             />
-            <button>
-              <RefreshCw className="size-6 text-muted-foreground" />
-            </button>
+            <RefreshMetadataButton />
           </div>
           <div className="lg:hidden">
             <TokenSummaryMobileActions textToCopy={token.collection_address} />
