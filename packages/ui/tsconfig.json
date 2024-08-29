@@ -1,10 +1,20 @@
 {
   "extends": "@ark-market/tsconfig/internal-package.json",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "ES2022"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2022"
+    ],
     "jsx": "preserve",
-    "rootDir": "."
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "*.ts",
+    "*.tsx",
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

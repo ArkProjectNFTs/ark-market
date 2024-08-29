@@ -1,9 +1,8 @@
 {
   "extends": "@ark-market/tsconfig/base.json",
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+  },
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

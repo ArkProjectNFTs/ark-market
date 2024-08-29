@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./base": "./base.ts",
     "./native": "./native.ts",
     "./unframed": "./unframed.ts"
   },
