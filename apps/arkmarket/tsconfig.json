@@ -9,6 +9,7 @@
     },
     "plugins": [{ "name": "next" }],
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "module": "esnext"
   },
   "include": [".", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
