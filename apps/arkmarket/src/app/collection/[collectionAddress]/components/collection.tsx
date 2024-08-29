@@ -62,6 +62,8 @@ export default function Collection({
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((previous) => !previous);
 
+  console.log("dawda");
+
   return (
     <main className="flex min-h-[calc(100vh-var(--site-header-height))]">
       {activeTab === "items" && (

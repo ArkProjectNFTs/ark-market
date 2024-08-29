@@ -27,7 +27,7 @@ export const env = createEnv({
     NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string(),
     NEXT_PUBLIC_IMAGE_CDN_URL: z.string().url(),
     NEXT_PUBLIC_IMAGE_PROXY_URL: z.string().url(),
-    NEXT_PUBLIC_THEME: z.enum(["unframed", "default"]),
+    NEXT_PUBLIC_THEME: z.enum(["unframed", "default"]).default("default"),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.

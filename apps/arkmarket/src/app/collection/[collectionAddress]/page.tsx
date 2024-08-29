@@ -1,3 +1,5 @@
+import { Badge } from "@ark-market/ui/badge";
+
 import getCollection from "~/lib/getCollection";
 import Collection from "./components/collection";
 
@@ -31,10 +33,14 @@ export default async function CollectionPage({
   // }
 
   return (
-    <Collection
-      collectionAddress={collectionAddress}
-      collectionInitialData={collectionInitialData}
-      // collectionTokensInitialData={collectionTokensInitialData}
-    />
+    <>
+      <Badge>Hello</Badge>
+      <div className="text-red-500">dawdWA</div>
+      <Collection
+        collectionAddress={collectionAddress}
+        collectionInitialData={collectionInitialData}
+        // collectionTokensInitialData={collectionTokensInitialData}
+      />
+    </>
   );
 }
