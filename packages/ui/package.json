@@ -4,8 +4,6 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./globals.css": "./src/globals.css",
-    "./globals-unframed.css": "./src/globals-unframed.css",
     ".": "./src/index.ts",
     "./*": [
       "./src/*.tsx",
