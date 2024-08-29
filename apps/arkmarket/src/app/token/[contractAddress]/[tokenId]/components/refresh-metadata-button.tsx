@@ -5,19 +5,45 @@ import { RefreshCw } from "lucide-react";
 
 import { useToast } from "@ark-market/ui/use-toast";
 
-export default function RefreshMetadataButton() {
+import postTokenMetadataRefresh from "~/lib/postTokenMetadataRefresh";
+
+interface RefreshMetadataButtonProps {
+  contractAddress: string;
+  tokenId: string;
+}
+
+export default function RefreshMetadataButton({
+  contractAddress,
+  tokenId,
+}: RefreshMetadataButtonProps) {
   const { toast } = useToast();
 
-  // TODO: useMutation
+  const refreshMetadataMutation = useMutation({
+    mutationFn: async () => {
+      await postTokenMetadataRefresh({
+        contractAddress,
+        tokenId,
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Metadata is refreshing",
+        description:
+          "We've queued this item for an update! Check back in a minute...",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Failed to refresh metadata",
+        description: "Please try again later.",
+      });
+    },
+  });
 
   return (
     <button
-      onClick={() => {
-        toast({
-          title: "Metadata is refreshing",
-          description:
-            "We've queued this item for an update! Check back in a minute...",
-        });
+      onClick={async () => {
+        await refreshMetadataMutation.mutateAsync();
       }}
     >
       <RefreshCw className="size-6 text-muted-foreground" />

@@ -65,7 +65,10 @@ export default function TokenSummary({
               className="size-6 text-muted-foreground"
               textToCopy={token.collection_address}
             />
-            <RefreshMetadataButton />
+            <RefreshMetadataButton
+              contractAddress={token.collection_address}
+              tokenId={token.token_id}
+            />
           </div>
           <div className="lg:hidden">
             <TokenSummaryMobileActions textToCopy={token.collection_address} />
