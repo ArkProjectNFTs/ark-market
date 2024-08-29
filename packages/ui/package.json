@@ -9,9 +9,7 @@
     ".": "./src/index.ts",
     "./*": [
       "./src/*.tsx",
-      "./src/*.ts",
-      "./src/*.js",
-      "./src/*.jsx"
+      "./src/*.ts"
     ]
   },
   "license": "MIT",
