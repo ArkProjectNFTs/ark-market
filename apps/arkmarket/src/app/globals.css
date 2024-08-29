@@ -15,6 +15,11 @@
 
 } */
 
+@font-face {
+  font-family: 'UnframedIconFont';
+  src: url('/fonts/unframed-icons.ttf') format('truetype');
+}
+
 @layer base {
   :root {
     --site-header-height: 3.75rem;

@@ -12,9 +12,7 @@
       "./src/*.ts",
       "./src/*.js",
       "./src/*.jsx"
-    ],
-    "./tailwind.config": "./tailwind.config.ts",
-    "./tailwind.config.unframed": "./tailwind.config.unframed.ts"
+    ]
   },
   "license": "MIT",
   "scripts": {

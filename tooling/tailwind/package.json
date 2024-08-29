@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./base": "./base.ts"
+    "./base": "./base.ts",
+    "./native": "./native.ts",
+    "./unframed": "./unframed.ts"
   },
   "license": "MIT",
   "scripts": {
