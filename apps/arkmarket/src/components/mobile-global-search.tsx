@@ -105,7 +105,7 @@ function MobileGlobalSearch({
                         {searchResult.name}
                       </p>
                       {searchResult.is_verified && (
-                        <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+                        <VerifiedIcon className="size-3 flex-shrink-0 text-primary" />
                       )}
                     </div>
                     <div className="flex items-center">
@@ -198,7 +198,7 @@ export default function MobileGlobalSearchWrapper() {
             Cancel
           </button>
         </div>
-        <div className="mt-10 h-full pt-5 ">
+        <div className="mt-10 h-full pt-5">
           <MobileGlobalSearch
             inputDebouncedValue={inputDebouncedValue}
             inputValue={inputValue}

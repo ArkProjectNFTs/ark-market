@@ -59,12 +59,12 @@ export default function CollectionHeader({
 
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 text-xl">
                   <p className="text-2xl font-semibold">
                     {collection.name ?? "Unknown collection"}
                   </p>
                   {collection.is_verified && (
-                    <VerifiedIcon className="text-background" />
+                    <VerifiedIcon className="text-primary mt-1" />
                   )}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function CollectionHeader({
                 <CollapsibleTrigger asChild>
                   <button
                     className={cn(
-                      "ml-1 flex items-center gap-1",
+                      "ml-1 flex items-center gap-1 hover:text-accent-foreground",
                       focusableStyles,
                     )}
                   >

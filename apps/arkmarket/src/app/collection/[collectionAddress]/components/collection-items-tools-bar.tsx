@@ -51,7 +51,7 @@ export default function CollectionItemsToolsBar({
           </CollectionItemsFiltersModal>
           <Button
             onClick={toggleFiltersPanel}
-            variant="secondary"
+            variant="outline"
             size="xl"
             className="hidden sm:flex"
           >

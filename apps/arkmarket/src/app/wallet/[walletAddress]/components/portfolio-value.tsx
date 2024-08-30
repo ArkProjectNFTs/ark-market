@@ -16,14 +16,16 @@ export default function PortfolioValue() {
   }
 
   return (
-    <div className="flex rounded-lg bg-card py-2 pl-1 pr-4">
+    <div className="flex rounded-lg py-2 bg-card px-2.5">
       <div className="flex items-center gap-1">
-        <EthereumLogo2 />
         <div className="flex flex-col">
           <p className="text-sm text-secondary-foreground">Portfolio value</p>
-          <p className="text-xl font-semibold">
-            {ethBalance.rounded}{" "}
-            <span className="text-secondary-foreground">ETH</span>
+          <p className="flex items-center text-md font-semibold space-x-1.5">
+            <EthereumLogo2 />
+            <div className="text-xl">
+              {ethBalance.rounded}{" "}
+              <span className="text-secondary-foreground">ETH</span>
+            </div>
           </p>
         </div>
       </div>

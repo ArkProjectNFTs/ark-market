@@ -45,7 +45,7 @@ export default function TokenSummary({
               {token.collection_name}
             </h3>
           </Link>
-          <VerifiedIcon className="size-6 text-background" />
+          <VerifiedIcon className="size-6 text-primary" />
         </div>
         <div className="flex items-center justify-between">
           <p

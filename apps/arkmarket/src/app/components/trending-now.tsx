@@ -102,7 +102,7 @@ export default function TrendingNow() {
                           >
                             {collection.name}
                           </h4>
-                          <VerifiedIcon className="flex-shrink-0 text-background" />
+                          <VerifiedIcon className="flex-shrink-0 text-primary" />
                         </div>
 
                         <p className="font-medium sm:hidden">

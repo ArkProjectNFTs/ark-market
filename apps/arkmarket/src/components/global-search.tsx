@@ -65,7 +65,7 @@ function GlobalSearchCommands({
     searchResults.data.accounts.length === 0
   ) {
     return (
-      <div className=" px-4 pb-4 pt-5">
+      <div className="px-4 pb-4 pt-5">
         <div className="mb-8 flex flex-col items-center gap-3 text-muted-foreground">
           <Meh className="size-10" />
           <p className="pl-3 text-center text-xl font-semibold">
@@ -116,7 +116,7 @@ function GlobalSearchCommands({
                           {searchResult.name}
                         </p>
                         {searchResult.is_verified && (
-                          <VerifiedIcon className="size-3 text-background" />
+                          <VerifiedIcon className="size-3 text-primary" />
                         )}
                       </div>
                       <div className="flex items-center">

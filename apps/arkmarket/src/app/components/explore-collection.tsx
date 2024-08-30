@@ -66,7 +66,7 @@ export default function ExploreCollection() {
                       unoptimized={collection.image.endsWith(".gif")}
                     />
                     <h4 className="text-xl font-semibold">{collection.name}</h4>
-                    <VerifiedIcon className="text-background" />
+                    <VerifiedIcon className="text-primary" />
                   </div>
                 </div>
               </Link>

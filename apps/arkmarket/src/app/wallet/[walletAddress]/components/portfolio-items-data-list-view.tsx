@@ -74,7 +74,7 @@ export default function PortfolioItemsDataListView({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative"
+        className="font-numbers relative font-medium"
         style={{
           height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
         }}
@@ -110,7 +110,7 @@ export default function PortfolioItemsDataListView({
                     width={94}
                   />
 
-                  <p className={cn("w-full font-semibold", ellipsableStyles)}>
+                  <p className={cn("w-full", ellipsableStyles)}>
                     {token.metadata?.name ?? token.token_id}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export default function PortfolioItemsDataListView({
                 {token.list_price ? (
                   <div className="flex items-center">
                     <EthereumLogo2 className="size-4" />
-                    <p className="font-semibold">
+                    <p>
                       {formatUnits(token.list_price, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>
                     </p>
@@ -132,7 +132,7 @@ export default function PortfolioItemsDataListView({
                 {token.best_offer ? (
                   <div className="flex items-center">
                     <EthereumLogo2 className="size-4" />
-                    <p className="font-semibold">
+                    <p>
                       {formatUnits(token.best_offer, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>
                     </p>
@@ -145,7 +145,7 @@ export default function PortfolioItemsDataListView({
                 {token.floor ? (
                   <div className="flex items-center">
                     <EthereumLogo2 className="size-4" />
-                    <p className="font-semibold">
+                    <p>
                       {formatUnits(token.floor, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>
                     </p>

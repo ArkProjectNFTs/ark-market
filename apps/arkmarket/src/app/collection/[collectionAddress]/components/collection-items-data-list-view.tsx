@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { PriceTag } from "@ark-market/ui/price-tag";
 
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
@@ -76,7 +77,7 @@ export default function CollectionItemsDataListView({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative"
+        className="relative font-medium font-numbers"
         style={{
           height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
         }}
@@ -116,20 +117,14 @@ export default function CollectionItemsDataListView({
                       height={94}
                       width={94}
                     />
-                    <p className={cn("w-full font-semibold", ellipsableStyles)}>
+                    <p className={cn("w-full", ellipsableStyles)}>
                       {token.metadata?.name ?? token.token_id}
                     </p>
                   </div>
                 </TableCell>
                 <TableCell>
                   {token.price ? (
-                    <div className="flex items-center">
-                      <EthereumLogo2 className="size-4" />
-                      <p>
-                        {formatUnits(token.price, 18)}{" "}
-                        <span className="text-muted-foreground">ETH</span>
-                      </p>
-                    </div>
+                    <PriceTag price={token.price} />
                   ) : (
                     "_"
                   )}

@@ -59,7 +59,7 @@ export function UserNav() {
     <>
       <WalletAccountPopover>
         <Button
-          className="hidden gap-1.5 !pl-2 sm:inline-flex md:gap-3"
+          className="hidden gap-1.5 !pl-3.5 sm:inline-flex md:gap-3"
           variant="secondary"
           size="md"
         >

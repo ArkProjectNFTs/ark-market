@@ -66,7 +66,7 @@ export default function LatestDrop() {
                         >
                           {collection.name}
                         </h4>
-                        <VerifiedIcon className="text-background" />
+                        <VerifiedIcon className="text-primary" />
                       </div>
                       <span className="mt-5 text-sm font-medium text-muted-foreground">
                         Status
