@@ -10,12 +10,12 @@ interface IconProps {
 
 const calculateFontWeight = (fontSize: number): number => {
   if (fontSize <= 16) {
-    return 34;
+    return 42;
   } else if (fontSize >= 24) {
     return 11;
   } else {
     const t = (fontSize - 16) / (24 - 16);
-    return Math.round(34 + t * (11 - 34));
+    return Math.round(34 + t * (11 - 42));
   }
 };
 
