@@ -12,7 +12,7 @@ export function PriceTag({
   return (
     <div
       className={cn(
-        "inline-flex h-10 items-center gap-1 rounded-xs bg-secondary pl-1.5 pr-3 font-medium",
+        "inline-flex h-10 items-center gap-1 rounded-xs bg-secondary px-3 font-medium",
         className,
       )}
     >

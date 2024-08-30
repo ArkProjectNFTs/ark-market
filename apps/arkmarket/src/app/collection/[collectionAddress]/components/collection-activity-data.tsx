@@ -207,7 +207,7 @@ export default function CollectionActivityData({
                         {activity.name}
                       </p>
                       {activity.is_verified && (
-                        <VerifiedIcon className="size-4 text-background" />
+                        <VerifiedIcon className="size-4 text-primary" />
                       )}
                     </div>
                   </div>
