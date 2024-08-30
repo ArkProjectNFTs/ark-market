@@ -30,15 +30,13 @@ interface MobileCollectionHeaderProps {
 }
 
 export default function MobileCollectionHeader({
-  className,
   collectionAddress,
   collection,
-  style,
 }: PropsWithClassName<MobileCollectionHeaderProps>) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
   return (
-    <div className={cn("bg-background", className)} style={style}>
+    <div className="bg-background lg:hidden">
       <Collapsible
         className={cn("w-full px-5 pb-4 pt-3.5")}
         open={collapsibleOpen}
