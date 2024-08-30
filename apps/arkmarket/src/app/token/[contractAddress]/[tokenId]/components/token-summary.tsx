@@ -35,13 +35,13 @@ export default function TokenSummary({
         height={1000}
         width={1000}
       />
-      <div className="flex flex-col lg:gap-4">
+      <div className="flex flex-col lg:gap-0">
         <div className="flex items-center gap-1.5">
           <Link
             href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
-            <h3 className="text-lg text-muted-foreground">
+            <h3 className="text-xl text-primary leading-none">
               {token.collection_name}
             </h3>
           </Link>
