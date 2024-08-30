@@ -128,7 +128,7 @@ export default function CollectionItemsDataGridView({
                     >
                       {token.collection_name}
                     </p>
-                    <VerifiedIcon className="size-6 flex-shrink-0 text-background" />
+                    <VerifiedIcon className="size-6 flex-shrink-0 text-primary" />
                   </Link>
 
                   {token.list_price ? (

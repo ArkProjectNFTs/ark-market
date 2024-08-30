@@ -116,7 +116,7 @@ function GlobalSearchCommands({
                           {searchResult.name}
                         </p>
                         {searchResult.is_verified && (
-                          <VerifiedIcon className="size-3 text-background" />
+                          <VerifiedIcon className="size-3 text-primary" />
                         )}
                       </div>
                       <div className="flex items-center">

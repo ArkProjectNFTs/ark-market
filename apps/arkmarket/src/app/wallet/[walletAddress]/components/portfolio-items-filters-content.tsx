@@ -128,7 +128,7 @@ export default function PortfolioItemsFiltersContent({
                     >
                       {collection.name}
                     </p>
-                    <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+                    <VerifiedIcon className="size-3 flex-shrink-0 text-primary" />
                   </div>
                   <p
                     className={cn(

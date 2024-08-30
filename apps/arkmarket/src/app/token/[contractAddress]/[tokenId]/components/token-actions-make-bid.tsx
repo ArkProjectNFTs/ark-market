@@ -204,7 +204,7 @@ export default function TokenActionsMakeBid({
                   >
                     {token.collection_name || "Unknown"}
                   </p>
-                  <VerifiedIcon className="size-4 flex-shrink-0 text-background sm:size-6" />
+                  <VerifiedIcon className="size-4 flex-shrink-0 text-primary sm:size-6" />
                 </div>
               </div>
             </div>

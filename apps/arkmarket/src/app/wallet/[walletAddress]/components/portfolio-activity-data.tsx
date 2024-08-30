@@ -215,7 +215,7 @@ export default function PortfolioActivityData({
                         </p>
                       </Link>
                       {activity.collection_is_verified && (
-                        <VerifiedIcon className="size-4 text-background" />
+                        <VerifiedIcon className="size-4 text-primary" />
                       )}
                     </div>
                   </div>

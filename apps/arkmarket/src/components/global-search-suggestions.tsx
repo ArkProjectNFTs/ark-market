@@ -52,7 +52,7 @@ export default function GlobalSearchSuggestions({
                 <div>
                   <div className="flex items-center gap-1">
                     <p className="text-sm font-medium">{collection.name}</p>
-                    <VerifiedIcon className="size-3 text-background" />
+                    <VerifiedIcon className="size-3 text-primary" />
                   </div>
                   <div className="flex items-center">
                     <EthereumLogo2 className="-ml-1 size-4" />

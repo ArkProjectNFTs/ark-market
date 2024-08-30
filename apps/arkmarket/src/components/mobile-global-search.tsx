@@ -105,7 +105,7 @@ function MobileGlobalSearch({
                         {searchResult.name}
                       </p>
                       {searchResult.is_verified && (
-                        <VerifiedIcon className="size-3 flex-shrink-0 text-background" />
+                        <VerifiedIcon className="size-3 flex-shrink-0 text-primary" />
                       )}
                     </div>
                     <div className="flex items-center">
