@@ -4,7 +4,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Ethereum } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -118,7 +118,7 @@ export default function PortfolioItemsDataListView({
               <TableCell>
                 {token.list_price ? (
                   <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
+                    <Ethereum className="size-4" />
                     <p>
                       {formatUnits(token.list_price, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>
@@ -131,7 +131,7 @@ export default function PortfolioItemsDataListView({
               <TableCell>
                 {token.best_offer ? (
                   <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
+                    <Ethereum className="size-4" />
                     <p>
                       {formatUnits(token.best_offer, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>
@@ -144,7 +144,7 @@ export default function PortfolioItemsDataListView({
               <TableCell>
                 {token.floor ? (
                   <div className="flex items-center">
-                    <EthereumLogo2 className="size-4" />
+                    <Ethereum className="size-4" />
                     <p>
                       {formatUnits(token.floor, 18)}{" "}
                       <span className="text-muted-foreground">ETH</span>

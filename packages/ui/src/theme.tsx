@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "@ark-market/ui/icons";
 import { ThemeProvider, useTheme } from "next-themes";
 
 import type { PropsWithClassName } from ".";

@@ -1,7 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import FiltersIcon from "@ark-market/ui/icons/filters-icon";
+import { Filter } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 // import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
@@ -33,7 +33,7 @@ export default function PortfolioItemsToolsBar({
           // walletCollectionsInitialData={walletCollectionsInitialData}
         >
           <Button variant="secondary" size="icon-xl" className="sm:hidden">
-            <FiltersIcon />
+            <Filter />
           </Button>
         </PortfolioItemsFiltersModal>
         <Button
@@ -42,7 +42,7 @@ export default function PortfolioItemsToolsBar({
           size="xl"
           className="hidden sm:flex"
         >
-          <FiltersIcon />
+          <Filter />
           <span>Filters</span>
         </Button>
 

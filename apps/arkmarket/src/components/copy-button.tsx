@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Copy } from "@ark-market/ui/icons";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, focusableStyles } from "@ark-market/ui";

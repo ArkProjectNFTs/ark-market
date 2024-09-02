@@ -3,7 +3,7 @@
 import type { Connector } from "@starknet-react/core";
 import { useMemo, useState } from "react";
 import { argent, useConnect } from "@starknet-react/core";
-import { Loader2, Mail } from "lucide-react";
+import { Loader2, Mail } from "@ark-market/ui/icons";
 
 import { Button } from "@ark-market/ui/button";
 import {

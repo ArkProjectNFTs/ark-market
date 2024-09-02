@@ -1,8 +1,8 @@
 import { parseEther } from "viem";
 
 import { cn, ellipsableStyles } from "@ark-market/ui";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Ethereum } from "@ark-market/ui/icons";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { CollectionToken, Token } from "~/types";
@@ -71,8 +71,8 @@ export default function TokenActionsTokenOverview({
       </div>
 
       <div className="flex flex-col items-end gap-1">
-        <div className="flex whitespace-nowrap text-lg font-semibold sm:text-xl">
-          <EthereumLogo2 className="size-6" />
+        <div className="flex items-center justify-center whitespace-nowrap text-lg font-semibold sm:text-xl">
+          <Ethereum className="size-6" />
           {formattedAmount || "---"} ETH
         </div>
         <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">

@@ -1,7 +1,5 @@
 import type { PropsWithClassName } from "@ark-market/ui";
-import LargeGridIcon from "@ark-market/ui/icons/large-grid-icon";
-import ListIcon from "@ark-market/ui/icons/list-icon";
-import SmallGridIcon from "@ark-market/ui/icons/small-grid-icon";
+import { Grid2X2, Grid3X3, List } from "@ark-market/ui/icons";
 import { ToggleGroup, ToggleGroupItem } from "@ark-market/ui/toggle-group";
 
 export const viewTypes = ["large-grid", "small-grid", "list"] as const;
@@ -32,21 +30,21 @@ export default function ViewTypeToggleGroup({
           value="large-grid"
           aria-label="Toggle large grid view"
         >
-          <LargeGridIcon />
+          <Grid2X2 />
         </ToggleGroupItem>
         <ToggleGroupItem
           className="px-2.5 text-lg"
           value="small-grid"
           aria-label="Toggle small grid view"
         >
-          <SmallGridIcon />
+          <Grid3X3 />
         </ToggleGroupItem>
         <ToggleGroupItem
           className="px-2.5 text-lg"
           value="list"
           aria-label="Toggle list view"
         >
-          <ListIcon />
+          <List />
         </ToggleGroupItem>
       </ToggleGroup>
     </>

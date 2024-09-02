@@ -6,8 +6,7 @@ import { SiTelegram } from "react-icons/si";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import DiscordIcon from "@ark-market/ui/icons/discord-icon";
-import XIcon from "@ark-market/ui/icons/x-icon";
+import { Discord, XIcon } from "@ark-market/ui/icons";
 
 import { siteConfig } from "~/config/site";
 import { Icons } from "./icons";
@@ -44,7 +43,7 @@ export default function Footer() {
             </Button>
             <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Join us on</p>
-              <DiscordIcon className="size-4" />
+              <Discord className="size-4" />
             </Button>
             <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Chat with us on </p>

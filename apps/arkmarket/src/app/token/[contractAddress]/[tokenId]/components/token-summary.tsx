@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { RefreshCw, Share2 } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { RefreshCw, Share2, VerifiedIcon } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -58,12 +57,16 @@ export default function TokenSummary({
           </p>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <Share2 className="size-6 text-muted-foreground" />
+            <button>
+              <Share2 className="size-6 text-muted-foreground" />
+            </button>
             <CopyButton
               className="size-6 text-muted-foreground"
               textToCopy={token.collection_address}
             />
-            <RefreshCw className="size-6 text-muted-foreground" />
+            <button>
+              <RefreshCw className="size-6 text-muted-foreground" />
+            </button>
           </div>
           <div className="lg:hidden">
             <TokenSummaryMobileActions textToCopy={token.collection_address} />

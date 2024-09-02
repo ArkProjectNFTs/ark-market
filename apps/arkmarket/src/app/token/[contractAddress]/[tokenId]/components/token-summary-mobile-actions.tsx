@@ -1,7 +1,5 @@
 "use client";
 
-import { Copy, MoreHorizontal, RefreshCw } from "lucide-react";
-
 import { Button } from "@ark-market/ui/button";
 import {
   DropdownMenu,
@@ -9,8 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@ark-market/ui/dropdown-menu";
-import TelegramIcon from "@ark-market/ui/icons/telegram-icon";
-import XIcon from "@ark-market/ui/icons/x-icon";
+import {
+  Copy,
+  MoreHorizontal,
+  RefreshCw,
+  Telegram,
+  XIcon,
+} from "@ark-market/ui/icons";
 
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 
@@ -45,7 +48,7 @@ export default function TokenSummaryMobileActions({
         </DropdownMenuItem>
         <DropdownMenuItem>
           <div className="flex items-center gap-2">
-            <TelegramIcon className="size-4" />
+            <Telegram className="size-4" />
             <p>Share on Telegram</p>
           </div>
         </DropdownMenuItem>

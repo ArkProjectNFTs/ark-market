@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { List, LoaderCircle } from "lucide-react";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
@@ -24,7 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { CheckIcon } from "@ark-market/ui/icons/check-icon";
+import { Check, List, LoaderCircle } from "@ark-market/ui/icons";
 import {
   Select,
   SelectContent,
@@ -320,7 +319,7 @@ export function TokenActionsCreateListing({
                     >
                       <div className="absolute left-3 flex size-5 items-center justify-center rounded-xs bg-secondary">
                         {field.value === formattedCollectionFloor && (
-                          <CheckIcon />
+                          <Check />
                         )}
                       </div>
                       <p>

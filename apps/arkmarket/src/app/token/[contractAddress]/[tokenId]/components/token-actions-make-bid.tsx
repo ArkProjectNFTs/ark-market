@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
@@ -26,8 +26,8 @@ import {
   FormItem,
   FormLabel,
 } from "@ark-market/ui/form";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Ethereum } from "@ark-market/ui/icons";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -210,8 +210,8 @@ export default function TokenActionsMakeBid({
             </div>
 
             <div className="flex flex-col items-end gap-1">
-              <div className="flex whitespace-nowrap text-lg font-semibold sm:text-xl">
-                <EthereumLogo2 className="size-6" />
+              <div className="flex items-center justify-center whitespace-nowrap text-lg font-semibold sm:text-xl">
+                <Ethereum className="size-6" />
                 {price} ETH
               </div>
               <div className="overflow-hidden text-clip text-right text-sm font-semibold text-muted-foreground">

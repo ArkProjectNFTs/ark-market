@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Meh, Search } from "lucide-react";
+import { Meh, Search } from "@ark-market/ui/icons";
 import { useDebounceValue } from "usehooks-ts";
 
 import {
@@ -13,8 +13,8 @@ import {
   formatNumber,
 } from "@ark-market/ui";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Ethereum } from "@ark-market/ui/icons";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";
@@ -109,7 +109,7 @@ function MobileGlobalSearch({
                       )}
                     </div>
                     <div className="flex items-center">
-                      <EthereumLogo2 className="-ml-1 size-4" />
+                      <Ethereum className="-ml-1 size-4" />
                       <p className="text-xs font-medium text-muted-foreground">
                         {formatNumber(searchResult.token_count)} items
                       </p>

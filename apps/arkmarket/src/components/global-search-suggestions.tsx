@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
 import { CommandGroup, CommandItem } from "@ark-market/ui/command";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Ethereum } from "@ark-market/ui/icons";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import Media from "./media";
@@ -55,7 +55,7 @@ export default function GlobalSearchSuggestions({
                     <VerifiedIcon className="size-3 text-primary" />
                   </div>
                   <div className="flex items-center">
-                    <EthereumLogo2 className="-ml-1 size-4" />
+                    <Ethereum className="-ml-1 size-4" />
                     <p className="text-xs font-medium text-muted-foreground">
                       {formatNumber(collection.token_count)} items
                     </p>

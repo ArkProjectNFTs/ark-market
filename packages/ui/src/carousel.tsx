@@ -3,7 +3,7 @@
 import type { UseEmblaCarouselType } from "embla-carousel-react";
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
 

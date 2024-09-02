@@ -1,4 +1,4 @@
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Ethereum } from "@ark-market/ui/icons";
 
 import { ETH } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
@@ -20,8 +20,8 @@ export default function PortfolioValue() {
       <div className="flex items-center gap-1">
         <div className="flex flex-col">
           <p className="text-sm text-secondary-foreground">Portfolio value</p>
-          <p className="text-md flex items-center space-x-1.5 font-semibold">
-            <EthereumLogo2 />
+          <p className="flex items-center text-md font-semibold space-x-1.5">
+            <Ethereum />
             <div className="text-xl">
               {ethBalance.rounded}{" "}
               <span className="text-secondary-foreground">ETH</span>

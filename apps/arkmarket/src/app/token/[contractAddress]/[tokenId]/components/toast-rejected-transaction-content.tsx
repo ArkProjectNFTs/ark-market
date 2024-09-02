@@ -1,4 +1,4 @@
-import { FileSignature } from "lucide-react";
+import { FileSignature } from "@ark-market/ui/icons";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { CollectionToken, Token } from "~/types";

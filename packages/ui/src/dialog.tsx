@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import { X } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
 

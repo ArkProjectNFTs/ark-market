@@ -1,5 +1,5 @@
 import { Button } from "@ark-market/ui/button";
-import FiltersIcon from "@ark-market/ui/icons/filters-icon";
+import { Filter } from "@ark-market/ui/icons";
 
 import "@ark-market/ui/toggle-group";
 
@@ -59,7 +59,7 @@ export default function CollectionItemsToolbar({
           size="xl"
           onClick={isDesktop ? toggleFiltersPanel : openFiltersDialog}
         >
-          <FiltersIcon className="size-3" />
+          <Filter className="size-3" />
           <span className="hidden lg:block">Filters</span>
           {filtersCount > 0 && (
             <span className="flex aspect-square w-5 items-center justify-center rounded-full bg-white text-xs text-primary-foreground">

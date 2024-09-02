@@ -1,6 +1,6 @@
 import type { PropsWithClassName } from ".";
 import { cn, formatUnits } from ".";
-import EthereumLogo2 from "./icons/ethereum-logo-2";
+import { Ethereum } from "./icons";
 
 interface PriceTagProps {
   price: number | bigint | string;
@@ -16,7 +16,7 @@ export function PriceTag({
         className,
       )}
     >
-      <EthereumLogo2 className="size-5" />
+      <Ethereum className="size-5" />
       <p className="whitespace-nowrap">
         {formatUnits(price, 18)}
         <span className="text-muted-foreground"> ETH</span>

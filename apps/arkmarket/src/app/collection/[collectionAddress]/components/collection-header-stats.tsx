@@ -1,5 +1,5 @@
 import { formatNumber, formatUnits } from "@ark-market/ui";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { Ethereum } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import type { Collection } from "~/types";
@@ -16,7 +16,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="font-numbers flex items-center gap-2 text-sm font-medium lg:text-xl">
-          <EthereumLogo2 className="size-5" />
+          <Ethereum className="size-5" />
           <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default function CollectionHeaderStats({
           Total Volume
         </p>
         <div className="font-numbers flex items-center gap-2 text-sm lg:text-xl">
-          <EthereumLogo2 className="size-5" />
+          <Ethereum className="size-5" />
           <p className="font-medium">
             {formatNumber(collection.total_volume)} ETH
           </p>
@@ -38,7 +38,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
         <div className="font-numbers flex items-center gap-2 text-sm lg:text-xl">
-          <EthereumLogo2 className="size-5" />
+          <Ethereum className="size-5" />
           <p className="font-medium">
             {formatNumber(collection.volume_7d_eth)} ETH
           </p>

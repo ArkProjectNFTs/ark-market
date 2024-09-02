@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Command as CommandPrimitive } from "cmdk";
-import { Meh } from "lucide-react";
 import { useDebounceValue } from "usehooks-ts";
 
 import {
@@ -20,8 +19,7 @@ import {
   CommandItem,
   CommandList,
 } from "@ark-market/ui/command";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { Ethereum, NoResult, VerifiedIcon } from "@ark-market/ui/icons";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";
 import GlobalSearchSuggestions from "./global-search-suggestions";
@@ -67,7 +65,7 @@ function GlobalSearchCommands({
     return (
       <div className="px-4 pb-4 pt-5">
         <div className="mb-8 flex flex-col items-center gap-3 text-muted-foreground">
-          <Meh className="size-10" />
+          <NoResult className="size-10" />
           <p className="pl-3 text-center text-xl font-semibold">
             Sorry, there are no results for your search.
           </p>
@@ -120,7 +118,7 @@ function GlobalSearchCommands({
                         )}
                       </div>
                       <div className="flex items-center">
-                        <EthereumLogo2 className="-ml-1 size-4" />
+                        <Ethereum className="-ml-1 size-4" />
                         <p className="text-xs font-medium text-muted-foreground">
                           {formatNumber(searchResult.token_count)} items
                         </p>
