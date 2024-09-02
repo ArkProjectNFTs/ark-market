@@ -50,16 +50,15 @@ export async function getCollectionTokens({
     `items_per_page=${itemsPerPage}`,
     `sort=${sortBy}`,
     `direction=${sortDirection}`,
-    `filters=${encodeURIComponent(JSON.stringify(filters))}`,
   ];
+
+  if (Object.keys(filters.traits).length) {
+    queryParams.push(`filters=${encodeURIComponent(JSON.stringify(filters))}`);
+  }
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
   }
-
-  console.log(
-    `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`,
-  );
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;
   const response = await fetch(url, {
