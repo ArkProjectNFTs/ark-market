@@ -27,6 +27,7 @@ function CollectionItemsFiltersTrait({
   onChange,
 }: CollectionItemsFiltersTraitProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const count = Object.values(trait).reduce((acc, curr) => acc + curr, 0);
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -34,7 +35,7 @@ function CollectionItemsFiltersTrait({
         <div className="flex justify-between px-5">
           <div className="mb-2">{name}</div>
           <div className="flex gap-2">
-            <div className="text-muted-foreground">13</div>
+            <div className="text-muted-foreground">{count}</div>
             <ChevronDown
               className={cn(
                 "-mr-1 h-6 w-6 transition-all",
