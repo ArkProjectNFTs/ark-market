@@ -45,7 +45,8 @@ export default function CollectionItemsData({
       sortDirection,
       sortBy,
       collectionAddress,
-    ] as const,
+      filters,
+    ],
     refetchInterval: 10_000,
     getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
       lastPage.next_page,
