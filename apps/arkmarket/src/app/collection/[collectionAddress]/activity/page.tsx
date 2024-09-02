@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 
 import getCollection from "~/lib/getCollection";
-import CollectionBanner from "./components/collection-banner";
-import CollectionHeader from "./components/collection-header";
-import CollectionItems from "./components/collection-items";
-import MobileCollectionHeader from "./components/mobile-collection-header";
+import CollectionActivity from "../components/collection-activity";
+import CollectionBanner from "../components/collection-banner";
+import CollectionHeader from "../components/collection-header";
+import CollectionNav from "../components/collection-nav";
+import MobileCollectionHeader from "../components/mobile-collection-header";
 
 interface CollectionPageProps {
   params: {
@@ -12,7 +13,9 @@ interface CollectionPageProps {
   };
 }
 
-export default async function CollectionPage({ params }: CollectionPageProps) {
+export default async function CollectionActivityPage({
+  params,
+}: CollectionPageProps) {
   const { collectionAddress } = params;
   const collection = await getCollection({ collectionAddress });
 
@@ -34,7 +37,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         collectionAddress={collectionAddress}
         collection={collection}
       />
-      <CollectionItems
+      <CollectionNav collectionAddress={collectionAddress} />
+      <CollectionActivity
         collectionAddress={collectionAddress}
         collectionTokenCount={collection.token_count}
       />

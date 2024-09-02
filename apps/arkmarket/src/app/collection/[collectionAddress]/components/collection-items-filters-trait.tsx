@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@ark-market/ui";
@@ -10,8 +9,7 @@ import {
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
 
-import type { CollectionTrait, Filters } from "~/types";
-import getCollectionTraits from "~/lib/getCollectionTraits";
+import type { CollectionTrait } from "~/types";
 
 interface CollectionItemsFiltersTraitProps {
   name: string;
@@ -20,7 +18,7 @@ interface CollectionItemsFiltersTraitProps {
   onChange: (traitName: string, value: string) => void;
 }
 
-function CollectionItemsFiltersTrait({
+export default function CollectionItemsFiltersTrait({
   name,
   trait,
   selectedTraits = {},
@@ -67,65 +65,5 @@ function CollectionItemsFiltersTrait({
         </div>
       </CollapsibleContent>
     </Collapsible>
-  );
-}
-
-interface CollectionItemsFiltersPanelProps {
-  collectionAddress: string;
-  onFiltersChange: (newFilters: Filters) => Promise<void>;
-  filters: Filters;
-}
-
-export default function CollectionItemsFiltersPanel({
-  collectionAddress,
-  onFiltersChange,
-  filters,
-}: CollectionItemsFiltersPanelProps) {
-  const { data } = useQuery({
-    queryKey: ["collectionTraits", collectionAddress],
-    queryFn: () => getCollectionTraits({ collectionAddress }),
-  });
-
-  const handleTraitChange = async (name: string, value: string) => {
-    const values = filters.traits[name] ?? [];
-
-    const newValues = values.includes(value)
-      ? values.filter((v) => v !== value)
-      : [...values, value];
-
-    const traits = Object.fromEntries(
-      Object.entries({
-        ...filters.traits,
-        [name]: newValues,
-      }).filter(([_, v]) => v.length > 0),
-    );
-
-    await onFiltersChange({
-      ...filters,
-      traits,
-    });
-  };
-
-  if (!data) {
-    return null;
-  }
-
-  return (
-    <div className="no-scrollbar sticky top-[var(--site-header-height)] z-10 hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] w-64 flex-shrink-0 overflow-y-auto border-r border-border lg:block">
-      <div className="">
-        <div className="px-5 py-5 text-base font-bold">Traits</div>
-        <div className="flex flex-col gap-2">
-          {Object.keys(data).map((key: string) => (
-            <CollectionItemsFiltersTrait
-              key={key}
-              name={key}
-              trait={data[key] ?? {}}
-              selectedTraits={filters.traits}
-              onChange={handleTraitChange}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }

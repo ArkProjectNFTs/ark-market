@@ -73,7 +73,7 @@ export default function TokenOffersTable({
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="block overflow-auto text-sm font-medium font-numbers">
+        <TableBody className="font-numbers block overflow-auto text-sm font-medium">
           {tokenOffers.map((offer) => {
             return (
               <TableRow

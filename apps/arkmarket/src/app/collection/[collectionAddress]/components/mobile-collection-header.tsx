@@ -3,12 +3,10 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { validateAndParseAddress } from "starknet";
+import { BadgeCheckIcon, ChevronDown } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
@@ -30,65 +28,48 @@ interface MobileCollectionHeaderProps {
 }
 
 export default function MobileCollectionHeader({
-  className,
   collectionAddress,
   collection,
-  style,
 }: PropsWithClassName<MobileCollectionHeaderProps>) {
-  const [collapsibleOpen, setCollapsibleOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={cn("bg-background", className)} style={style}>
-      <Collapsible
-        className={cn("w-full px-5 pb-4 pt-3.5")}
-        open={collapsibleOpen}
-        onOpenChange={setCollapsibleOpen}
-      >
-        <div className="flex h-full items-center justify-between gap-0">
-          <div className="flex h-8 w-full flex-shrink-0 items-center justify-between">
-            <div className="flex h-full items-center gap-2">
-              {/* TODO @YohanTz: Remove */}
-              {validateAndParseAddress(collectionAddress) ===
-              validateAndParseAddress(
-                "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-              ) ? (
-                <img
-                  src="/collections/everai.png"
-                  className="aspect-square h-full flex-shrink-0 rounded-xs"
-                  alt="Everai profile"
-                />
-              ) : collection.image !== null ? (
+    <div className="border-b bg-background lg:hidden">
+      <Collapsible className="" open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger className="w-full px-5 py-4">
+          <div className="flex justify-between">
+            <div className="flex items-center gap-2">
+              {collection.image ? (
                 <img
                   src={collection.image}
-                  className="aspect-square h-full flex-shrink-0 rounded-xs"
+                  className="aspect-square h-8 rounded-xs"
                   alt={collection.name}
                 />
               ) : (
-                <div className="aspect-square h-full flex-shrink-0 rounded-xs bg-secondary" />
+                <div className="aspect-square h-8 rounded-xs bg-secondary" />
               )}
-              <div className="flex flex-shrink-0">
-                <p className="text-lg font-semibold">
-                  {collection.name ?? "Unknown collection"}
-                </p>
-              </div>
+              <p className="-mt-1 text-lg font-semibold">
+                {collection.name ?? "Unknown collection"}
+              </p>
+              <BadgeCheckIcon size={18} className="text-primary" />
             </div>
-            <CollapsibleTrigger asChild>
-              <Button variant="outline" size="icon-sm">
-                <ChevronDown size={14} />
-              </Button>
-            </CollapsibleTrigger>
+            <div className="flex size-8 items-center justify-center rounded-xs border border-input">
+              <ChevronDown
+                size={14}
+                className={cn("transition-all", isOpen && "rotate-180")}
+              />
+            </div>
           </div>
-        </div>
+        </CollapsibleTrigger>
         <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-          <div className="pt-4 text-sm">
-            <p className="flex items-center gap-2">
+          <div className="flex flex-col gap-3 px-5 pb-4">
+            <p className="flex items-center gap-2 text-sm">
               Created
               <span className="text-muted-foreground"> Feb 2000</span>
               Creator earnings
               <span className="text-muted-foreground"> 1000%</span>
             </p>
-
-            <div className="mt-4 flex items-center gap-4 text-muted-foreground">
+            <div className="flex items-center gap-4 text-muted-foreground">
               <CopyButton textToCopy={collectionAddress} className="h-6" />
               <ExternalLink href="/">
                 <XIcon className="h-6 w-auto" />
@@ -100,8 +81,7 @@ export default function MobileCollectionHeader({
                 <WebsiteIcon className="h-6 w-auto" />
               </ExternalLink>
             </div>
-
-            <CollectionHeaderStats collection={collection} className="mt-6" />
+            <CollectionHeaderStats collection={collection} />
           </div>
         </CollapsibleContent>
       </Collapsible>

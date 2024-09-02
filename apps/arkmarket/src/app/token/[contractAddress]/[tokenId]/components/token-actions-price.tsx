@@ -43,14 +43,17 @@ export default function TokenActionsPrice({
       <div className="font-medium text-secondary-foreground">{label}</div>
       <div className="flex items-end gap-3 lg:gap-6">
         <div
-          className={cn("text-xl font-semibold lg:text-3xl leading-none", ellipsableStyles)}
+          className={cn(
+            "text-xl font-semibold leading-none lg:text-3xl",
+            ellipsableStyles,
+          )}
         >
           {amount} ETH
         </div>
-        <div className="text-lg font-semibold text-muted-foreground lg:text-2xl leading-none">
+        <div className="text-lg font-semibold leading-none text-muted-foreground lg:text-2xl">
           ${amountInUsd}
         </div>
-        <div className="px-2 py-1 flex items-center whitespace-nowrap rounded-full bg-secondary px-3 text-xs text-secondary-foreground lg:text-sm font-semibold">
+        <div className="flex items-center whitespace-nowrap rounded-full bg-secondary px-2 px-3 py-1 text-xs font-semibold text-secondary-foreground lg:text-sm">
           Royalties 5%
         </div>
       </div>

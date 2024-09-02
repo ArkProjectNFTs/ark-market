@@ -31,11 +31,11 @@ export function UserNav() {
     return (
       <ConnectWalletModal>
         <Button variant="default" size="md">
-          <div className="hidden items-center gap-2.5 md:flex">
+          <div className="hidden items-center gap-2.5 lg:flex">
             <WalletIcon />
             Connect wallet
           </div>
-          <p className="md:hidden">Connect</p>
+          <p className="lg:hidden">Connect</p>
         </Button>
       </ConnectWalletModal>
     );
@@ -45,11 +45,11 @@ export function UserNav() {
     return (
       <WrongNetworkModal>
         <Button variant="default" size="md">
-          <div className="hidden items-center gap-2.5 md:flex">
+          <div className="hidden items-center gap-2.5 lg:flex">
             <WalletIcon />
             Wrong network
           </div>
-          <p className="md:hidden">Wrong network</p>
+          <p className="lg:hidden">Wrong network</p>
         </Button>
       </WrongNetworkModal>
     );
@@ -59,20 +59,17 @@ export function UserNav() {
     <>
       <WalletAccountPopover>
         <Button
-          className="hidden gap-1.5 !pl-3.5 sm:inline-flex md:gap-3"
+          className="hidden gap-1.5 !pl-3.5 sm:inline-flex lg:gap-3"
           variant="secondary"
           size="md"
         >
-          <EthereumLogo className="size-6 flex-shrink-0 md:size-8" />
+          <EthereumLogo className="size-6 flex-shrink-0 lg:size-8" />
           <p>
             {roundedEthBalance}
             <span className="text-muted-foreground"> ETH</span>
           </p>
           <Separator orientation="vertical" className="bg-background" />
-          <ProfilePicture
-            className="size-6 rounded-full md:size-8"
-            address={address}
-          />
+          <ProfilePicture address={address} />
           {nameOrShortAddress}
         </Button>
       </WalletAccountPopover>
@@ -83,7 +80,7 @@ export function UserNav() {
           size="md"
           variant="secondary"
         >
-          <ProfilePicture className="size-6 rounded-full" address={address} />
+          <ProfilePicture address={address} />
           <span className={cn("max-w-16 sm:max-w-none", ellipsableStyles)}>
             {nameOrShortAddress}
           </span>

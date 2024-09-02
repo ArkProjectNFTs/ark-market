@@ -108,7 +108,7 @@ export default function CollectionItemsDataGridView({
                     <p
                       className={cn(
                         "text-base font-bold leading-none",
-                        viewType === "large-grid" && "sm:text-xl font-bold",
+                        viewType === "large-grid" && "font-bold sm:text-xl",
                         ellipsableStyles,
                       )}
                     >
@@ -121,7 +121,7 @@ export default function CollectionItemsDataGridView({
                   >
                     <p
                       className={cn(
-                        "mt-0.5 text-sm font-normal text-accent-foreground transition-colors hover:text-foreground leading-none",
+                        "mt-0.5 text-sm font-normal leading-none text-accent-foreground transition-colors hover:text-foreground",
                         viewType === "large-grid" && "sm:text-base",
                         ellipsableStyles,
                       )}
@@ -132,7 +132,12 @@ export default function CollectionItemsDataGridView({
                   </Link>
 
                   {token.list_price ? (
-                    <p className={cn("mt-2 text-sm font-semibold", ellipsableStyles)}>
+                    <p
+                      className={cn(
+                        "mt-2 text-sm font-semibold",
+                        ellipsableStyles,
+                      )}
+                    >
                       {formatUnits(token.list_price, 18)} ETH
                     </p>
                   ) : (

@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 "use client";
 
-import type { HTMLAttributes } from "react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 
-import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, focusableStyles } from "@ark-market/ui";
 import {
   Collapsible,
@@ -20,51 +18,55 @@ import XIcon from "@ark-market/ui/icons/x-icon";
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
+import getCollection from "~/lib/getCollection";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
   collectionAddress: string;
   collection: Collection;
-  style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function CollectionHeader({
-  className,
   collectionAddress,
   collection,
-  style,
-}: PropsWithClassName<CollectionHeaderProps>) {
+}: CollectionHeaderProps) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
+  const { data } = useQuery({
+    queryKey: ["collection", collectionAddress],
+    queryFn: () => getCollection({ collectionAddress }),
+    initialData: collection,
+    refetchInterval: 15_000,
+  });
+
+  if (!data) {
+    return null;
+  }
+
   return (
-    <div className={className} style={style}>
+    <div className="hidden lg:block">
       <Collapsible
-        className={cn(
-          "min-h-[6.875rem] w-full border-b border-border p-5 transition-[height]",
-        )}
+        className="min-h-[6.875rem] w-full border-b border-border p-5 transition-[height]"
         open={collapsibleOpen}
         onOpenChange={setCollapsibleOpen}
       >
         <div className="flex h-full items-center justify-between gap-0">
           <div className="flex h-[3.875rem] flex-shrink-0 items-center gap-4 transition-[height]">
-            {collection.image !== null ? (
+            {data.image ? (
               <img
-                src={collection.image}
+                src={data.image}
                 className="aspect-square h-full flex-shrink-0 rounded-lg"
-                alt={collection.name}
+                alt={data.name}
               />
             ) : (
               <div className="aspect-square h-full flex-shrink-0 rounded-lg bg-secondary" />
             )}
-
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <div className="flex items-center gap-1 text-xl">
-                  <p className="text-2xl font-semibold">
-                    {collection.name ?? "Unknown collection"}
-                  </p>
+                  <p className="text-2xl font-semibold">{collection.name}</p>
                   {collection.is_verified && (
-                    <VerifiedIcon className="text-primary mt-1" />
+                    <VerifiedIcon className="mt-1 text-primary" />
                   )}
                 </div>
               </div>
@@ -93,10 +95,9 @@ export default function CollectionHeader({
               </div>
             </div>
           </div>
-          <CollectionHeaderStats
-            collection={collection}
-            className="hidden md:hidden xl:flex"
-          />
+          <div className="hidden lg:block">
+            <CollectionHeaderStats collection={collection} />
+          </div>
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <p className="flex items-center gap-2 pt-8">
@@ -108,17 +109,16 @@ export default function CollectionHeader({
             Creator earnings
             <span className="text-muted-foreground"> 1000%</span>
           </p>
-          <p className="max-w-lg pt-4 text-sm">
+          <p className="mb-6 max-w-lg pt-4 text-sm">
             Everai is a pioneering web3 brand set to expand its universe powered
             by the collective creativity of its artistic partners and vibrant
             community. In the Everai Universe, the Everais stand as the
             mightiest heroes of Shodai&apos;s civilization… Get yours now to
             join us in this collaborative journey to shape the Everai Universe!
           </p>
-          <CollectionHeaderStats
-            collection={collection}
-            className="mt-8 xl:hidden"
-          />
+          <div className="block lg:hidden">
+            <CollectionHeaderStats collection={data} />
+          </div>
         </CollapsibleContent>
       </Collapsible>
     </div>

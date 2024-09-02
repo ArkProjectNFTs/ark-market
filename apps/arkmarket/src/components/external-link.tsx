@@ -12,7 +12,7 @@ export default function ExternalLink({
   return (
     <a
       className={cn(
-        "transition-colors hover:text-accent-foreground leading-none",
+        "leading-none transition-colors hover:text-accent-foreground",
         focusableStyles,
         className,
       )}

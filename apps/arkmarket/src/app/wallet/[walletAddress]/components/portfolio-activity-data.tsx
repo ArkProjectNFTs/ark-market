@@ -25,8 +25,8 @@ import {
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { PriceTag } from "@ark-market/ui/price-tag";
 import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,
@@ -145,7 +145,7 @@ export default function PortfolioActivityData({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative text-sm font-medium font-numbers"
+        className="font-numbers relative text-sm font-medium"
         style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -222,11 +222,7 @@ export default function PortfolioActivityData({
                 </div>
               </TableCell>
               <TableCell>
-                {activity.price ? (
-                  <PriceTag price={activity.price} />
-                ) : (
-                  "_"
-                )}
+                {activity.price ? <PriceTag price={activity.price} /> : "_"}
               </TableCell>
               <TableCell>
                 {activity.from ? (
