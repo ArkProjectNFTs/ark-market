@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, ShoppingBag } from "lucide-react";
+import { LoaderCircle, ShoppingBag, Wallet } from "lucide-react";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
@@ -115,7 +115,9 @@ export default function TokenActionsBuyNow({
         >
           <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
-              <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
+              <div className="mx-auto mt-6 flex size-20 items-center justify-center rounded-full bg-slate-800">
+                <Wallet className="size-8" />
+              </div>
               <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                 {isSuccess
                   ? "Congratulations for your purchase"
