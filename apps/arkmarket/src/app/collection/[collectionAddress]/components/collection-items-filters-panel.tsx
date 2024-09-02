@@ -49,7 +49,7 @@ function CollectionItemsFiltersTrait({
         <div className="flex flex-col gap-2 px-3">
           {Object.keys(trait).map((key) => (
             <label
-              key={`${name}-${trait[key]}`}
+              key={`${name}-${key}`}
               htmlFor={`${name}-${key}`}
               className="flex cursor-pointer justify-between rounded p-2 transition-all hover:bg-muted"
             >
