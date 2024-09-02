@@ -28,19 +28,19 @@ export default function SiteHeader() {
   return (
     <div
       className={cn(
-        "sticky top-0 z-30 flex h-[var(--site-header-height)] w-full items-center justify-between bg-background px-5 transition-transform duration-300 lg:border-b",
+        "sticky top-0 z-30 flex h-[var(--site-header-height)] w-full items-center justify-between border-b bg-background px-5 transition-transform duration-300 lg:border-b",
         !showHeader && isTokenPage
           ? "lg:-translate-y-full"
           : "lg:translate-y-0",
       )}
     >
       <MainNav />
-      <div className="hidden justify-center md:flex">
+      <div className="hidden justify-center lg:flex">
         <GlobalSearch />
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center lg:hidden">
           <MobileGlobalSearch />
         </div>
 

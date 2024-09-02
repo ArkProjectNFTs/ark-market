@@ -44,7 +44,7 @@ export default function CollectionHeader({
   }
 
   return (
-    <div className="hidden md:block">
+    <div className="hidden lg:block">
       <Collapsible
         className="min-h-[6.875rem] w-full border-b border-border p-5 transition-[height]"
         open={collapsibleOpen}

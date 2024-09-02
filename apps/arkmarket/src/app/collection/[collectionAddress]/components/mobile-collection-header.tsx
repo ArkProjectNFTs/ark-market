@@ -36,7 +36,7 @@ export default function MobileCollectionHeader({
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
   return (
-    <div className="bg-background lg:hidden">
+    <div className="border-b bg-background lg:hidden">
       <Collapsible
         className={cn("w-full px-5 pb-4 pt-3.5")}
         open={collapsibleOpen}
@@ -86,7 +86,7 @@ export default function MobileCollectionHeader({
               <span className="text-muted-foreground"> 1000%</span>
             </p>
 
-            <div className="mt-4 flex items-center gap-4 text-muted-foreground">
+            <div className="mb-4 mt-4 flex items-center gap-4 text-muted-foreground">
               <CopyButton textToCopy={collectionAddress} className="h-6" />
               <ExternalLink href="/">
                 <XIcon className="h-6 w-auto" />
