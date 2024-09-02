@@ -9,7 +9,7 @@ import {
   focusableStyles,
   formatUnits,
 } from "@ark-market/ui";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 import {
   NftCard,
   NftCardAction,
@@ -117,18 +117,18 @@ export default function CollectionItemsDataGridView({
                   </Link>
                   <Link
                     href={`/collection/${token.collection_address}`}
-                    className={cn("flex items-center gap-1", focusableStyles)}
+                    className={cn("flex items-center gap-1 mt-1", focusableStyles)}
                   >
                     <p
                       className={cn(
-                        "mt-0.5 text-sm font-normal leading-none text-accent-foreground transition-colors hover:text-foreground",
+                        "text-sm font-normal text-accent-foreground transition-colors hover:text-foreground leading-none",
                         viewType === "large-grid" && "sm:text-base",
                         ellipsableStyles,
                       )}
                     >
                       {token.collection_name}
                     </p>
-                    <VerifiedIcon className="size-6 flex-shrink-0 text-primary" />
+                    <VerifiedIcon className="size-4 flex-shrink-0 text-primary" />
                   </Link>
 
                   {token.list_price ? (

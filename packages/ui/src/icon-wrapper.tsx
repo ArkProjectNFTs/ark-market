@@ -47,7 +47,7 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
 
       // Adjust marginTop based on the effective size
       if (clampedSize <= 16) {
-        setMarginTop("0.1875em"); // 3px for 16px font size
+        setMarginTop('0.1275em'); // 3px for 16px font size
       } else if (clampedSize >= 24) {
         setMarginTop("0.1em"); // 3px for 24px font size
       } else {

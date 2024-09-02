@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 

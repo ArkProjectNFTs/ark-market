@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";

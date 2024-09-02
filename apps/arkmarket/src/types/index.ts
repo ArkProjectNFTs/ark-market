@@ -157,7 +157,7 @@ export interface PortfolioActivity {
   collection_is_verified: boolean;
   collection_name: string;
   from: string;
-  metadata: TokenMetadata;
+  metadata?: TokenMetadata;
   price: string;
   time_stamp: number;
   to: string;

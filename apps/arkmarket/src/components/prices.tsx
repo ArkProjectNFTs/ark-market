@@ -1,7 +1,6 @@
 "use client";
 
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
-import StarknetLogo2 from "@ark-market/ui/icons/starknet-logo-2";
+import { Starknet, Ethereum } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import usePrices from "~/hooks/usePrices";
@@ -15,13 +14,13 @@ export default function Prices() {
 
   return (
     <div className="flex h-full items-center gap-4">
-      <div className="flex items-center gap-0.5">
-        <EthereumLogo2 className="size-6" />
+      <div className="flex items-center gap-2">
+        <Ethereum className="size-4" />
         <p>ETH Price: ${data.ethereumFormatted}</p>
       </div>
       <Separator orientation="vertical" />
       <div className="flex items-center gap-2">
-        <StarknetLogo2 className="size-4" />
+        <Starknet className="size-4" />
         <p>STRK Price: ${data.starknetFormatted}</p>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useInView } from "framer-motion";
-import { Meh } from "lucide-react";
+import { Meh } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
 import TokenActionsBarEmpty from "./token-actions-bar-empty";

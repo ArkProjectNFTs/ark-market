@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, ShoppingBag, Wallet } from "lucide-react";
+import { LoaderCircle, ShoppingBag, Wallet } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";

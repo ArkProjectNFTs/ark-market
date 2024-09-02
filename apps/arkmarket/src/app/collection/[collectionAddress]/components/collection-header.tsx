@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown } from "lucide-react";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import {
@@ -10,10 +9,13 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
-import DiscordIcon from "@ark-market/ui/icons/discord-icon";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
-import WebsiteIcon from "@ark-market/ui/icons/website-icon";
-import XIcon from "@ark-market/ui/icons/x-icon";
+import {
+  ChevronDown,
+  Discord,
+  Globe,
+  VerifiedIcon,
+  XIcon,
+} from "@ark-market/ui/icons";
 
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -70,16 +72,16 @@ export default function CollectionHeader({
                   )}
                 </div>
               </div>
-              <div className="mb-1 flex h-6 items-center gap-4 text-muted-foreground">
+              <div className="mb-1 flex h-6 items-center gap-2 text-sm text-muted-foreground">
                 <CopyButton textToCopy={collectionAddress} />
                 <ExternalLink href="/">
-                  <XIcon />
+                  <XIcon className="h-4" />
                 </ExternalLink>
                 <ExternalLink href="/">
-                  <DiscordIcon />
+                  <Discord className="h-4" />
                 </ExternalLink>
                 <ExternalLink href="/">
-                  <WebsiteIcon />
+                  <Globe className="h-4" />
                 </ExternalLink>
                 <CollapsibleTrigger asChild>
                   <button

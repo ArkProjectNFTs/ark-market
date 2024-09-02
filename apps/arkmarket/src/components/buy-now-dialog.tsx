@@ -1,4 +1,4 @@
-import { LoaderCircle, Wallet } from "lucide-react";
+import { LoaderCircle, Wallet } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";

@@ -5,18 +5,6 @@ import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import {
-  ArrowLeftRight,
-  ArrowUpRight,
-  CircleDot,
-  Flame,
-  Gavel,
-  List,
-  ListX,
-  ShoppingCart,
-  Tag,
-  X,
-} from "lucide-react";
 
 import {
   cn,
@@ -25,7 +13,19 @@ import {
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import {
+  ActivityCancelOffer,
+  ActivityDelist,
+  ActivityList,
+  ActivityOffer,
+  ArrowLeftRight,
+  ArrowUpRight,
+  CircleDot,
+  Flame,
+  Gavel,
+  ShoppingCart,
+  VerifiedIcon,
+} from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -48,17 +48,20 @@ interface CollectionActivityDataProps {
 }
 
 export const activityTypeToItem = new Map([
-  ["FULFILL", { icon: <ShoppingCart size={24} />, title: "Sale in progress" }],
-  ["EXECUTED", { icon: <ShoppingCart size={24} />, title: "Sale" }],
-  ["SALE", { icon: <ShoppingCart size={24} />, title: "Sale" }],
-  ["TRANSFER", { icon: <ArrowLeftRight size={24} />, title: "Transfer" }],
-  ["LISTING", { icon: <List size={24} />, title: "List" }],
-  ["OFFER", { icon: <Tag size={24} />, title: "Offer" }],
-  ["CANCELLED", { icon: <X size={24} />, title: "Cancel Offer" }],
-  ["MINT", { icon: <CircleDot size={24} />, title: "Mint" }],
-  ["AUCTION", { icon: <Gavel size={24} />, title: "Put in auction" }],
-  ["DELISTING", { icon: <ListX size={24} />, title: "Delist" }],
-  ["BURN", { icon: <Flame size={24} />, title: "Burn" }],
+  ["FULFILL", { icon: <ShoppingCart size={16} />, title: "Sale in progress" }],
+  ["EXECUTED", { icon: <ShoppingCart size={16} />, title: "Sale" }],
+  ["SALE", { icon: <ShoppingCart size={16} />, title: "Sale" }],
+  ["TRANSFER", { icon: <ArrowLeftRight size={16} />, title: "Transfer" }],
+  ["LISTING", { icon: <ActivityList size={16} />, title: "List" }],
+  ["OFFER", { icon: <ActivityOffer size={16} />, title: "Offer" }],
+  [
+    "CANCELLED",
+    { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
+  ],
+  ["MINT", { icon: <CircleDot size={16} />, title: "Mint" }],
+  ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
+  ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
+  ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
 ]);
 
 const gridTemplateColumnValue =
@@ -170,7 +173,7 @@ export default function CollectionActivityData({
             >
               <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
                 <div className="flex items-center gap-4 whitespace-nowrap">
-                  <div className="w-4">{activityItem?.icon}</div>
+                  {activityItem?.icon}
                   <p>{activityItem?.title}</p>
                 </div>
               </TableCell>

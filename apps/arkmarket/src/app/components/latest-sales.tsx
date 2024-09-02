@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "@ark-market/ui/icons";
 
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {

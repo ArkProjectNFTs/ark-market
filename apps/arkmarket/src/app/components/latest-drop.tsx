@@ -11,7 +11,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import LatestDropStatus from "./latest-drop-status";

@@ -6,8 +6,8 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
 import { PriceTag } from "@ark-market/ui/price-tag";
+import { Ethereum } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -128,7 +128,7 @@ export default function CollectionItemsDataListView({
                 <TableCell>
                   {token.last_price ? (
                     <div className="flex items-center">
-                      <EthereumLogo2 className="size-4" />
+                      <Ethereum className="size-4" />
                       <p>
                         {formatUnits(token.last_price, 18)}{" "}
                         <span className="text-muted-foreground">ETH</span>

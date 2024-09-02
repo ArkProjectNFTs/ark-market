@@ -1,7 +1,6 @@
 import type { PropsWithClassName } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import LargeGridIcon from "@ark-market/ui/icons/large-grid-icon";
-import ListIcon from "@ark-market/ui/icons/list-icon";
+import { Grid3X3, List } from "@ark-market/ui/icons";
 
 import type { ViewType } from "./view-type-toggle-group";
 
@@ -31,9 +30,9 @@ export default function ViewTypeToggleButton({
       onClick={onButtonClick}
     >
       {viewType === "large-grid" || viewType === "small-grid" ? (
-        <LargeGridIcon />
+        <Grid3X3 />
       ) : (
-        <ListIcon />
+        <List />
       )}
     </Button>
   );

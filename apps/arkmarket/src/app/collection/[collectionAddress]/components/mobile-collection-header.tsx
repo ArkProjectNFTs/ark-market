@@ -3,7 +3,6 @@
 
 import type { HTMLAttributes } from "react";
 import { useState } from "react";
-import { BadgeCheckIcon, ChevronDown } from "lucide-react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -12,9 +11,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
-import DiscordIcon from "@ark-market/ui/icons/discord-icon";
-import WebsiteIcon from "@ark-market/ui/icons/website-icon";
-import XIcon from "@ark-market/ui/icons/x-icon";
+import { ChevronDown, Discord, Globe, VerifiedIcon, XIcon } from "@ark-market/ui/icons";
 
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -51,7 +48,7 @@ export default function MobileCollectionHeader({
               <p className="-mt-1 text-lg font-semibold">
                 {collection.name ?? "Unknown collection"}
               </p>
-              <BadgeCheckIcon size={18} className="text-primary" />
+              <VerifiedIcon size={18} className="text-primary" />
             </div>
             <div className="flex size-8 items-center justify-center rounded-xs border border-input">
               <ChevronDown
@@ -75,10 +72,10 @@ export default function MobileCollectionHeader({
                 <XIcon className="h-6 w-auto" />
               </ExternalLink>
               <ExternalLink href="/">
-                <DiscordIcon className="h-6 w-auto" />
+                <Discord className="h-6 w-auto" />
               </ExternalLink>
               <ExternalLink href="/">
-                <WebsiteIcon className="h-6 w-auto" />
+                <Globe className="h-6 w-auto" />
               </ExternalLink>
             </div>
             <CollectionHeaderStats collection={collection} />

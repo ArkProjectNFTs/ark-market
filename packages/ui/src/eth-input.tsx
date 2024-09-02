@@ -4,7 +4,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
 import type { NumericalInputProps } from "./numerical-input";
-import EthereumLogo2 from "./icons/ethereum-logo-2";
+import { Ethereum } from "./icons";
 import { NumericalInput } from "./numerical-input";
 
 export default function EthInput({
@@ -22,7 +22,7 @@ export default function EthInput({
         {...props}
       />
       <div className="pointer-events-none absolute right-2 top-1/2 flex h-[1.875rem] -translate-y-1/2 transform items-center justify-center gap-1 rounded-xs bg-secondary px-2">
-        <EthereumLogo2 className="size-4" />
+        <Ethereum className="size-4" />
         <span
           className={cn(
             "font-medium",

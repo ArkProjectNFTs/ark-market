@@ -1,6 +1,6 @@
 "use client";
 
-import { TimerReset } from "lucide-react";
+import { TimerReset } from "@ark-market/ui/icons";
 import moment from "moment";
 
 interface TokenActionsListingExpirationProps {

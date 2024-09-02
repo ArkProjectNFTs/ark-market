@@ -13,7 +13,7 @@ import {
   formatNumber,
   formatUnits,
 } from "@ark-market/ui";
-import VerifiedIcon from "@ark-market/ui/icons/verified-icon";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 import { Input } from "@ark-market/ui/input";
 
 import type { WalletCollectionsApiResponse } from "../queries/getWalletData";

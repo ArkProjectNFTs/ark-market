@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, Tag } from "lucide-react";
+import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";

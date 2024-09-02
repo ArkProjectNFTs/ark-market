@@ -4,11 +4,16 @@ import {
   useDisconnect,
   useStarkProfile,
 } from "@starknet-react/core";
-import { HelpCircle, Power, User, Wallet } from "lucide-react";
 
 import { cn, focusableStyles, shortAddress } from "@ark-market/ui";
-import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
-import StarknetLogo from "@ark-market/ui/icons/starknet-logo";
+import {
+  Ethereum,
+  HelpCircle,
+  Power,
+  Starknet,
+  User,
+  Wallet,
+} from "@ark-market/ui/icons";
 import { ThemeTabs } from "@ark-market/ui/theme";
 
 import { ETH, STRK } from "~/constants/tokens";
@@ -112,7 +117,7 @@ export default function WalletAccountContent({
         </div>
         <div className="flex h-16 items-center justify-between rounded-t-lg bg-card p-4">
           <div className="flex items-center gap-2.5">
-            <EthereumLogo />
+            <Ethereum />
             <span className="font-bold">ETH</span>
           </div>
           <div className="flex flex-col items-end gap-1">
@@ -124,7 +129,7 @@ export default function WalletAccountContent({
         </div>
         <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-card p-4">
           <div className="flex items-center gap-2.5">
-            <StarknetLogo />
+            <Starknet />
             <span className="font-bold">STRK</span>
           </div>
           <div className="flex flex-col items-end gap-1">

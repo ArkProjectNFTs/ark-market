@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useCancel } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { ListX, LoaderCircle } from "lucide-react";
+import { ListX, LoaderCircle } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";

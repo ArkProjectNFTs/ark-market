@@ -4,8 +4,7 @@ import { useAccount, useNetwork, useStarkProfile } from "@starknet-react/core";
 
 import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import EthereumLogo from "@ark-market/ui/icons/ethereum-logo";
-import WalletIcon from "@ark-market/ui/icons/wallet-icon";
+import { Ethereum, Wallet } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import { ETH } from "~/constants/tokens";
@@ -31,8 +30,8 @@ export function UserNav() {
     return (
       <ConnectWalletModal>
         <Button variant="default" size="md">
-          <div className="hidden items-center gap-2.5 lg:flex">
-            <WalletIcon />
+          <div className="hidden items-center gap-2.5 md:flex">
+            <Wallet />
             Connect wallet
           </div>
           <p className="lg:hidden">Connect</p>
@@ -45,8 +44,8 @@ export function UserNav() {
     return (
       <WrongNetworkModal>
         <Button variant="default" size="md">
-          <div className="hidden items-center gap-2.5 lg:flex">
-            <WalletIcon />
+          <div className="hidden items-center gap-2.5 md:flex">
+            <Wallet />
             Wrong network
           </div>
           <p className="lg:hidden">Wrong network</p>
@@ -63,7 +62,7 @@ export function UserNav() {
           variant="secondary"
           size="md"
         >
-          <EthereumLogo className="size-6 flex-shrink-0 lg:size-8" />
+          <Ethereum className="size-6 flex-shrink-0 md:size-8" />
           <p>
             {roundedEthBalance}
             <span className="text-muted-foreground"> ETH</span>

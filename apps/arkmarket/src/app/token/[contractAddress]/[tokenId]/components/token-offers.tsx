@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp, Meh } from "lucide-react";
+import { ChevronDown, ChevronUp, Meh } from "@ark-market/ui/icons";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
