@@ -33,9 +33,9 @@ function CollectionItemsFiltersTrait({
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
         <div className="flex justify-between px-5">
-          <div className="mb-2">{name}</div>
+          <div className="mb-2 font-semibold">{name}</div>
           <div className="flex gap-2">
-            <div className="text-muted-foreground">{count}</div>
+            <div className="font-semibold text-muted-foreground">{count}</div>
             <ChevronDown
               className={cn(
                 "-mr-1 h-6 w-6 transition-all",
@@ -51,7 +51,7 @@ function CollectionItemsFiltersTrait({
             <label
               key={`${name}-${key}`}
               htmlFor={`${name}-${key}`}
-              className="flex cursor-pointer justify-between rounded p-2 transition-all hover:bg-muted"
+              className="flex cursor-pointer justify-between rounded p-2 leading-none transition-all hover:bg-muted"
             >
               <div className="flex items-center gap-2">
                 <Checkbox
@@ -113,7 +113,7 @@ export default function CollectionItemsFiltersPanel({
   return (
     <div className="no-scrollbar sticky top-[var(--site-header-height)] z-10 hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] w-64 flex-shrink-0 overflow-y-auto border-r border-border sm:block">
       <div className="">
-        <div className="px-5 py-5 font-bold">Traits</div>
+        <div className="px-5 py-5 text-base font-bold">Traits</div>
         <div className="flex flex-col gap-2">
           {Object.keys(data).map((key: string) => (
             <CollectionItemsFiltersTrait
