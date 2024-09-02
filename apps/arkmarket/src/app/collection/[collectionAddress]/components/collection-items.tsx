@@ -12,6 +12,7 @@ import {
   collectionSortDirectionsParser,
 } from "~/lib/getCollectionTokens";
 import CollectionItemsData from "./collection-items-data";
+import CollectionItemsFiltersDialog from "./collection-items-filters-dialog";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsFiltersTraits from "./collection-items-filters-traits";
 import CollectionItemsToolbar from "./collection-items-toolbar";
@@ -27,6 +28,7 @@ export default function CollectionItems({
   collectionTokenCount,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
+  const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
   const [viewType, setViewType] = useState<ViewType>("large-grid");
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
@@ -87,11 +89,18 @@ export default function CollectionItems({
           filters={filters}
         />
       )}
+      <CollectionItemsFiltersDialog
+        collectionAddress={collectionAddress}
+        filters={filters}
+        onFiltersChange={handlerFiltersChange}
+        resetFilters={resetFiltersTraits}
+        open={filtersDialogOpen}
+        setOpen={setFiltersDialogOpen}
+      />
       <div className="w-full">
         <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
           <CollectionNav collectionAddress={collectionAddress} />
           <CollectionItemsToolbar
-            toggleFiltersPanel={toggleFiltersPanel}
             sortDirection={sortDirection}
             setSortDirection={setSortDirection}
             sortBy={sortBy}
@@ -99,7 +108,10 @@ export default function CollectionItems({
             viewType={viewType}
             setViewType={setViewType}
             totalTokensCount={collectionTokenCount}
+            toggleFiltersPanel={toggleFiltersPanel}
             filtersPanelOpen={filtersPanelOpen}
+            openFiltersDialog={() => setFiltersDialogOpen(true)}
+            filtersDialogOpen={filtersDialogOpen}
             filtersCount={filtersCount}
           />
           <CollectionItemsFiltersTraits
@@ -110,7 +122,6 @@ export default function CollectionItems({
         </div>
         <CollectionItemsData
           collectionAddress={collectionAddress}
-          totalTokensCount={collectionTokenCount}
           sortDirection={sortDirection}
           sortBy={sortBy}
           viewType={viewType}

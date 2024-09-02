@@ -14,13 +14,11 @@ import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionTokens } from "~/lib/getCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
-import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsDataProps {
   collectionAddress: string;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
-  totalTokensCount: number;
   viewType: ViewType;
   filters: Filters;
 }
@@ -29,7 +27,6 @@ export default function CollectionItemsData({
   collectionAddress,
   sortBy,
   sortDirection,
-  totalTokensCount,
   viewType,
   filters,
 }: CollectionItemsDataProps) {
@@ -78,10 +75,6 @@ export default function CollectionItemsData({
 
   return (
     <>
-      <LiveResultsIndicator
-        className="p-6 lg:hidden"
-        totalCount={totalTokensCount}
-      />
       {viewType === "list" ? (
         <CollectionItemsDataListView collectionTokens={collectionTokens} />
       ) : (

@@ -3,6 +3,8 @@ import FiltersIcon from "@ark-market/ui/icons/filters-icon";
 
 import "@ark-market/ui/toggle-group";
 
+import { useMediaQuery } from "usehooks-ts";
+
 import { cn } from "@ark-market/ui";
 import { SearchInput } from "@ark-market/ui/search-input";
 
@@ -14,7 +16,8 @@ import type {
 import ViewTypeToggleButton from "../../../../components/view-type-toggle-button";
 import ViewTypeToggleGroup from "../../../../components/view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
-import LiveResultsIndicator from "./live-results-indicator";
+
+// import LiveResultsIndicator from "./live-results-indicator";
 
 interface CollectionItemsToolbarProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
@@ -26,6 +29,8 @@ interface CollectionItemsToolbarProps {
   setViewType: (viewType: ViewType) => void;
   totalTokensCount: number;
   filtersPanelOpen: boolean;
+  filtersDialogOpen: boolean;
+  openFiltersDialog: () => void;
   filtersCount: number;
 }
 
@@ -37,31 +42,32 @@ export default function CollectionItemsToolbar({
   toggleFiltersPanel,
   viewType,
   setViewType,
-  totalTokensCount,
+  // totalTokensCount,
   filtersPanelOpen,
+  // filtersDialogOpen,
+  openFiltersDialog,
   filtersCount,
 }: CollectionItemsToolbarProps) {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
   return (
     <div className="bg-background px-5 pb-5">
       <div className="flex items-center gap-2 md:gap-6">
         <Button
-          className={cn("hidden sm:flex", filtersPanelOpen && "bg-muted")}
+          className={cn("", filtersPanelOpen && "bg-muted")}
           variant="outline"
           size="xl"
-          onClick={toggleFiltersPanel}
+          onClick={isDesktop ? toggleFiltersPanel : openFiltersDialog}
         >
           <FiltersIcon className="size-3" />
-          <span>Filters</span>
+          <span className="hidden lg:block">Filters</span>
           {filtersCount > 0 && (
             <span className="flex aspect-square w-5 items-center justify-center rounded-full bg-white text-xs text-primary-foreground">
               {filtersCount}
             </span>
           )}
         </Button>
-        <LiveResultsIndicator
-          totalCount={totalTokensCount}
-          className="hidden lg:flex"
-        />
+        {/* <LiveResultsIndicator totalCount={totalTokensCount} /> */}
         <SearchInput className="flex-1" placeholder="Search item" />
         <CollectionItemsSortingSelect
           className="hidden lg:block"

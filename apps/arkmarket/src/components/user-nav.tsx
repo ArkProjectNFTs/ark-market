@@ -69,10 +69,7 @@ export function UserNav() {
             <span className="text-muted-foreground"> ETH</span>
           </p>
           <Separator orientation="vertical" className="bg-background" />
-          <ProfilePicture
-            className="size-6 rounded-full lg:size-8"
-            address={address}
-          />
+          <ProfilePicture address={address} />
           {nameOrShortAddress}
         </Button>
       </WalletAccountPopover>
@@ -83,7 +80,7 @@ export function UserNav() {
           size="md"
           variant="secondary"
         >
-          <ProfilePicture className="size-6 rounded-full" address={address} />
+          <ProfilePicture address={address} />
           <span className={cn("max-w-16 sm:max-w-none", ellipsableStyles)}>
             {nameOrShortAddress}
           </span>
