@@ -41,7 +41,7 @@ export default function TokenSummary({
             href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
-            <h3 className="text-xl text-primary leading-none">
+            <h3 className="text-xl leading-none text-primary">
               {token.collection_name}
             </h3>
           </Link>

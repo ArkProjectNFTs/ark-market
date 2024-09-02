@@ -9,7 +9,7 @@ import type {
   CollectionSortDirection,
   CollectionTokensApiResponse,
 } from "~/lib/getCollectionTokens";
-import type { CollectionToken } from "~/types";
+import type { CollectionToken, Filters } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionTokens } from "~/lib/getCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
@@ -22,6 +22,7 @@ interface CollectionItemsDataProps {
   sortDirection: CollectionSortDirection;
   totalTokensCount: number;
   viewType: ViewType;
+  filters: Filters;
 }
 
 export default function CollectionItemsData({
@@ -30,6 +31,7 @@ export default function CollectionItemsData({
   sortDirection,
   totalTokensCount,
   viewType,
+  filters,
 }: CollectionItemsDataProps) {
   const {
     data: infiniteData,
@@ -54,6 +56,7 @@ export default function CollectionItemsData({
         page: pageParam,
         sortDirection,
         sortBy,
+        filters,
       }),
   });
 

@@ -1,6 +1,6 @@
 import { createSearchParamsCache, parseAsStringLiteral } from "nuqs/server";
 
-import type { CollectionToken } from "~/types";
+import type { CollectionToken, Filters } from "~/types";
 import { env } from "~/env";
 
 export const itemsPerPage = 50;
@@ -36,6 +36,7 @@ interface GetCollectionTokensParams {
   page?: number;
   sortDirection: CollectionSortDirection;
   sortBy: CollectionSortBy;
+  filters: Filters;
 }
 
 export async function getCollectionTokens({
@@ -43,16 +44,22 @@ export async function getCollectionTokens({
   page,
   sortDirection,
   sortBy,
+  filters,
 }: GetCollectionTokensParams) {
   const queryParams = [
     `items_per_page=${itemsPerPage}`,
     `sort=${sortBy}`,
     `direction=${sortDirection}`,
+    `filters=${encodeURIComponent(JSON.stringify(filters))}`,
   ];
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
   }
+
+  console.log(
+    `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`,
+  );
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;
   const response = await fetch(url, {

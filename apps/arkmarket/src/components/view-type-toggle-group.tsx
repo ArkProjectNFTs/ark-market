@@ -27,13 +27,25 @@ export default function ViewTypeToggleGroup({
         }
         className={className}
       >
-        <ToggleGroupItem className="px-2.5 text-lg" value="large-grid" aria-label="Toggle large grid view">
+        <ToggleGroupItem
+          className="px-2.5 text-lg"
+          value="large-grid"
+          aria-label="Toggle large grid view"
+        >
           <LargeGridIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem className="px-2.5 text-lg" value="small-grid" aria-label="Toggle small grid view">
+        <ToggleGroupItem
+          className="px-2.5 text-lg"
+          value="small-grid"
+          aria-label="Toggle small grid view"
+        >
           <SmallGridIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem className="px-2.5 text-lg" value="list" aria-label="Toggle list view">
+        <ToggleGroupItem
+          className="px-2.5 text-lg"
+          value="list"
+          aria-label="Toggle list view"
+        >
           <ListIcon />
         </ToggleGroupItem>
       </ToggleGroup>

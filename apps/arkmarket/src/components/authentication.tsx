@@ -37,7 +37,7 @@ export default function Authentication() {
         />
       </div>
       <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex ">
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900 bg-[url('/login.png')] bg-[length:auto_500px] bg-left bg-no-repeat" />
           <div className="relative z-20 flex items-center space-x-4 text-lg font-medium">
             <svg width="30" height="24" viewBox="0 0 30 24" fill="none">

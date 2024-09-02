@@ -99,7 +99,7 @@ export default function MobileCollectionHeader({
               </ExternalLink>
             </div>
 
-            <CollectionHeaderStats collection={collection} className="mt-6" />
+            <CollectionHeaderStats collection={collection} />
           </div>
         </CollapsibleContent>
       </Collapsible>

@@ -15,6 +15,10 @@ export interface Collection {
   volume_7d_eth: number;
 }
 
+export type CollectionTrait = Record<string, number>;
+
+export type CollectionTraits = Record<string, CollectionTrait>;
+
 export interface PortfolioCollection {
   address: string;
   image?: string;
@@ -264,4 +268,8 @@ export interface TokenActivity {
   time_stamp: number;
   to: string | null;
   transaction_hash: string | null;
+}
+
+export interface Filters {
+  traits: Record<string, string[]>;
 }

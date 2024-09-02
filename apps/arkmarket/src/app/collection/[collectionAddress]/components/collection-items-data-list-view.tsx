@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { PriceTag } from "@ark-market/ui/price-tag";
 
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import EthereumLogo2 from "@ark-market/ui/icons/ethereum-logo-2";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,
@@ -77,7 +77,7 @@ export default function CollectionItemsDataListView({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="relative font-medium font-numbers"
+        className="font-numbers relative font-medium"
         style={{
           height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
         }}
@@ -123,11 +123,7 @@ export default function CollectionItemsDataListView({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {token.price ? (
-                    <PriceTag price={token.price} />
-                  ) : (
-                    "_"
-                  )}
+                  {token.price ? <PriceTag price={token.price} /> : "_"}
                 </TableCell>
                 <TableCell>
                   {token.last_price ? (

@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 
 import getCollection from "~/lib/getCollection";
-import Collection from "./components/collection";
 import CollectionBanner from "./components/collection-banner";
 import CollectionHeader from "./components/collection-header";
+import CollectionItems from "./components/collection-items";
 import MobileCollectionHeader from "./components/mobile-collection-header";
 
 interface CollectionPageProps {
@@ -34,7 +34,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         collectionAddress={collectionAddress}
         collection={collection}
       />
-      <Collection
+      <CollectionItems
         collectionAddress={collectionAddress}
         collectionTokenCount={collection.token_count}
       />
