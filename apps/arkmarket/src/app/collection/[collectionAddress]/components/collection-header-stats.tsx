@@ -1,5 +1,4 @@
-import type { PropsWithClassName } from "@ark-market/ui";
-import { cn, formatNumber, formatUnits } from "@ark-market/ui";
+import { formatNumber, formatUnits } from "@ark-market/ui";
 import { Ethereum } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 

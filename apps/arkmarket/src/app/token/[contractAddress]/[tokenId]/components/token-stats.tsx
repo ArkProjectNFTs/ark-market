@@ -65,11 +65,9 @@ export default function TokenStats({
         <p className="text-sm font-medium text-muted-foreground">
           Collection Floor
         </p>
-        <div className="flex min-h-6 items-center gap-1 font-medium font-numbers text-xl">
+        <div className="font-numbers flex min-h-6 items-center gap-1 text-xl font-medium">
           <Ethereum className="size-5" />
-          {isLoading || (
-            <>{formatEther(BigInt(collection?.data.floor ?? 0))} ETH</>
-          )}
+          {isLoading || <>{formatEther(BigInt(collection?.floor ?? 0))} ETH</>}
           {/* TODO @YohanTz: Proper color */}
           {/* <p className={cn("text-sm font-semibold text-green-500")}>+ {"_"}%</p> */}
         </div>
@@ -77,7 +75,7 @@ export default function TokenStats({
       <Separator orientation="vertical" className="hidden lg:block" />
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
-        <div className="flex items-center gap-1 font-numbers text-xl">
+        <div className="font-numbers flex items-center gap-1 text-xl">
           <Ethereum className="size-5" />
           <p className="font-medium">
             {formatEther(BigInt(data?.last_price ?? 0))} ETH
@@ -87,7 +85,7 @@ export default function TokenStats({
       <Separator orientation="vertical" className="hidden lg:block" />
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3.5 lg:bg-inherit lg:p-0">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
-        <div className="flex items-center gap-1 font-numbers text-xl">
+        <div className="font-numbers flex items-center gap-1 text-xl">
           <Ethereum className="size-5" />
           <p className="font-medium">
             {formatEther(BigInt(data?.top_offer.amount ?? 0))} ETH
