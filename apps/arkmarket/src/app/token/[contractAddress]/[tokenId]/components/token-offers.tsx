@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp, Meh } from "@ark-market/ui/icons";
+import { ChevronDown, ChevronUp, NoOffer } from "@ark-market/ui/icons";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -120,7 +120,7 @@ export default function TokenOffers({
           </>
         ) : (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
-            <Meh size={42} className="flex-shrink-0" />
+            <NoOffer size={42} className="flex-shrink-0" />
             <p className="mt-3 text-center text-xl font-semibold">
               No offers yet!
               <br />

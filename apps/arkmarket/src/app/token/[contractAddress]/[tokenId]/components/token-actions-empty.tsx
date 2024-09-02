@@ -2,7 +2,8 @@
 
 import { useRef } from "react";
 import { useInView } from "framer-motion";
-import { Meh } from "@ark-market/ui/icons";
+
+import { NoListing } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
 import TokenActionsBarEmpty from "./token-actions-bar-empty";
@@ -36,7 +37,7 @@ export default function TokenActionsEmpty({
       />
       <div className="rounded-lg bg-card p-5 text-center lg:px-8 lg:pb-10 lg:pt-8">
         <div className="flex flex-col items-center pb-8 text-muted-foreground">
-          <Meh size={42} className="flex-shrink-0" />
+          <NoListing size={42} className="flex-shrink-0" />
           <p className="mt-3 text-center text-xl font-semibold">
             {isOwner
               ? "You have not assigned a price to your token yet."

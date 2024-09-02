@@ -12,7 +12,7 @@ import {
   CircleDot,
   Flame,
   Gavel,
-  Meh,
+  NoActivity,
   ShoppingCart,
 } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
@@ -120,7 +120,7 @@ export default function DesktopTokenActivity({
       </Table>
       {tokenActivity.length === 0 && (
         <div className="flex flex-col items-center gap-3 pt-8 text-muted-foreground">
-          <Meh size={42} />
+          <NoActivity size={42} />
           <p className="text-xl font-semibold">No activity yet!</p>
         </div>
       )}
