@@ -1,4 +1,4 @@
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, Wallet } from "lucide-react";
 import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";
@@ -32,7 +32,9 @@ export default function BuyNowDialog({
       >
         <div className="flex flex-col gap-10 sm:gap-8">
           <div className="flex flex-col gap-4">
-            <div className="mx-auto mt-6 size-20 rounded-full bg-slate-800" />
+            <div className="mx-auto mt-6 flex size-20 items-center justify-center rounded-full bg-slate-800">
+              <Wallet className="size-8" />
+            </div>
             <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
               {isSuccess
                 ? "Congratulations for your purchase"
