@@ -46,7 +46,7 @@ function CollectionItemsFiltersTrait({
         </div>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="flex flex-col gap-2 px-3">
+        <div className="flex flex-col gap-1 px-3">
           {Object.keys(trait).map((key) => (
             <label
               key={`${name}-${key}`}
@@ -59,7 +59,7 @@ function CollectionItemsFiltersTrait({
                   checked={!!selectedTraits[name]?.includes(key)}
                   onClick={() => onChange(name, key)}
                 />
-                <div className="">{key}</div>
+                <div className="max-w-40 truncate leading-tight">{key}</div>
               </div>
               <div className="text-muted-foreground">{trait[key]}</div>
             </label>
