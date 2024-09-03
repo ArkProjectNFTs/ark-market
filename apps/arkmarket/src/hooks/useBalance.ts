@@ -1,52 +1,51 @@
-import { useAccount, useContractRead } from "@starknet-react/core";
+import { useContract } from "@starknet-react/core";
+import { useQuery } from "@tanstack/react-query";
 import { formatEther } from "viem";
 
-const abi = [
-  {
-    name: "balance_of",
-    type: "function",
-    inputs: [
-      {
-        name: "account",
-        type: "core::starknet::contract_address::ContractAddress",
-      },
-    ],
-    outputs: [
-      {
-        type: "core::integer::u256",
-      },
-    ],
-    state_mutability: "view",
-  },
-];
+import { erc20Abi } from "~/constants/abis";
 
 interface UseBalanceProps {
+  address?: string;
   token: string;
 }
 
-export default function useBalance({ token }: UseBalanceProps) {
-  const { address } = useAccount();
-  const { data, isError, isLoading, error } = useContractRead({
-    functionName: "balance_of",
-    // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
-    args: [address as string],
-    abi,
+export default function useBalance({ address, token }: UseBalanceProps) {
+  const { contract } = useContract({
+    abi: erc20Abi,
     address: token,
-    watch: true,
-    enabled: !!address,
-    refetchInterval: 5_000,
   });
 
-  const formatted = data ? formatEther(data as bigint) : undefined;
+  const { data, isError, isLoading, error, isPending } = useQuery({
+    queryKey: ["balance", address, token],
+    queryFn: async () => {
+      if (!address) {
+        throw new Error("address is required");
+      }
+
+      if (!contract) {
+        throw new Error("contract is required");
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      const balance = (await contract.balanceOf(address)) as bigint;
+      const formatted = formatEther(balance);
+
+      return {
+        value: balance,
+        formatted,
+        rounded: parseFloat(formatEther(balance)).toFixed(4),
+      };
+    },
+    enabled: !!address,
+    refetchInterval: 15_000,
+    structuralSharing: false,
+  });
 
   return {
-    data: {
-      value: data as bigint,
-      formatted,
-      rounded: formatted ? parseFloat(formatted).toFixed(4) : "0.0",
-    },
+    data,
     isError,
     isLoading,
+    isPending,
     error,
   };
 }

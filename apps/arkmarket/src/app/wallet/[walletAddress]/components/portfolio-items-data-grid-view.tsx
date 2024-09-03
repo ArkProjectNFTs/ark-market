@@ -73,7 +73,7 @@ export default function CollectionItemsDataGridView({
       }}
       itemContent={(index) => {
         const token = walletTokens[index];
-        console.log(token);
+
         if (token === undefined) {
           return null;
         }

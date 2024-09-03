@@ -4,14 +4,16 @@ import { ETH } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
 import usePrices from "~/hooks/usePrices";
 
-export default function PortfolioValue() {
-  const { convertInUsd, isLoading: isLoadingPrices } = usePrices();
-  const { data: ethBalance, isLoading: isLoadingBalance } = useBalance({
-    token: ETH,
-  });
-  const ethBalanceInUsd = convertInUsd({ amount: ethBalance.value });
+interface PortfolioValueProps {
+  address?: string;
+}
 
-  if (isLoadingPrices || isLoadingBalance) {
+export default function PortfolioValue({ address }: PortfolioValueProps) {
+  const { data: ethBalance, isPending } = useBalance({ address, token: ETH });
+  const { convertInUsd, isLoading: isLoadingPrices } = usePrices();
+  const ethBalanceInUsd = convertInUsd({ amount: ethBalance?.value });
+
+  if (isLoadingPrices || isPending) {
     return null;
   }
 
@@ -20,10 +22,10 @@ export default function PortfolioValue() {
       <div className="flex items-center gap-1">
         <div className="flex flex-col">
           <p className="text-sm text-secondary-foreground">Portfolio value</p>
-          <p className="flex items-center text-md font-semibold space-x-1.5">
+          <p className="text-md flex items-center space-x-1.5 font-semibold">
             <Ethereum />
             <div className="text-xl">
-              {ethBalance.rounded}{" "}
+              {ethBalance?.rounded}{" "}
               <span className="text-secondary-foreground">ETH</span>
             </div>
           </p>

@@ -34,8 +34,7 @@
   "prettier": "@ark-market/prettier-config",
   "lint-staged": {
     "(apps|packages)/**/*.{js,ts,jsx,tsx}": [
-      "pnpm lint:fix",
-      "pnpm format:fix"
+      "pnpm lint:fix"
     ]
   }
 }

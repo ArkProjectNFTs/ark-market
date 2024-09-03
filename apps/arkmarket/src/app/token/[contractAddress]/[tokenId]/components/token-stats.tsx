@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useAccount, useStarkProfile } from "@starknet-react/core";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { formatEther } from "viem";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -27,29 +27,25 @@ export default function TokenStats({
   tokenMarketData,
 }: PropsWithClassName<TokenStatsProps>) {
   const { address } = useAccount();
-  const { data } = useQuery(
-    ["tokenMarketData", token.collection_address, token.token_id],
-    () =>
+  const { data } = useQuery({
+    queryKey: ["tokenMarketData", token.collection_address, token.token_id],
+    queryFn: () =>
       getTokenMarketData({
         contractAddress: token.collection_address,
         tokenId: token.token_id,
       }),
-    {
-      refetchInterval: 5_000,
-      initialData: tokenMarketData,
-    },
-  );
+    refetchInterval: 5_000,
+    initialData: tokenMarketData,
+  });
 
-  const { data: collection, isLoading } = useQuery(
-    ["collection", token.collection_address],
-    () =>
+  const { data: collection, isLoading } = useQuery({
+    queryKey: ["collection", token.collection_address],
+    queryFn: () =>
       getCollection({
         collectionAddress: token.collection_address,
       }),
-    {
-      refetchInterval: 5_000,
-    },
-  );
+    refetchInterval: 5_000,
+  });
   const { data: starkProfile } = useStarkProfile({
     address: data?.owner ?? tokenMarketData.owner,
   });

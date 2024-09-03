@@ -40,7 +40,10 @@ export default function TokenActionsBuyNow({
   const { toast } = useToast();
 
   const buy = async () => {
-    if (data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)) {
+    if (
+      !data ||
+      data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)
+    ) {
       sonner.error("Insufficient balance");
       return;
     }
