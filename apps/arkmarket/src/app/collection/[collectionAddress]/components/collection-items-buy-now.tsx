@@ -31,7 +31,7 @@ export default function CollectionItemsBuyNow({
   const [isOpen, setIsOpen] = useState(false);
   const { fulfillListing, status } = useFulfillListing();
   const { account, address } = useAccount();
-  const { data } = useBalance({ token: ETH });
+  const { data } = useBalance({ address, token: ETH });
   const { toast } = useToast();
   const isOwner = areAddressesEqual(token.owner, address);
   const queryClient = useQueryClient();

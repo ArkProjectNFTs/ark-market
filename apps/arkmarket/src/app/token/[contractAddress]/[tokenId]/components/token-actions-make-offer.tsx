@@ -15,6 +15,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
 import EthInput from "@ark-market/ui/eth-input";
@@ -52,12 +53,13 @@ interface TokenActionsMakeOfferProps {
 }
 
 function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
+  const { address } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
   const { toast } = useToast();
-  const { data } = useBalance({ token: ETH });
+  const { data: ethBalance } = useBalance({ address, token: ETH });
   const { ensureConnect } = useConnectWallet({
     account,
     onConnect: () => {
@@ -80,7 +82,8 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       .refine(
         (val) => {
           const num = parseEther(val);
-          return data && data.value >= num;
+
+          return ethBalance && ethBalance.value >= num;
         },
         {
           message: "You don't have enough funds in your wallet",
@@ -177,6 +180,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
           Make offer
         </Button>
       </DialogTrigger>
+      <DialogTitle className="hidden">Make an offer</DialogTitle>
       <DialogContent
         onInteractOutside={(e) => {
           e.preventDefault();
@@ -184,7 +188,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       >
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
-          <div className="mx-auto size-20 rounded-full bg-secondary flex items-center justify-center text-2xl">
+          <div className="mx-auto flex size-20 items-center justify-center rounded-full bg-secondary text-2xl">
             <ActivityOffer />
           </div>
           <div className="text-center text-xl font-semibold">Make an offer</div>
