@@ -4,7 +4,6 @@ import { memo, useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
@@ -27,6 +26,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
+import { ActivityOffer, LoaderCircle, Tag } from "@ark-market/ui/icons";
 import {
   Select,
   SelectContent,
@@ -184,7 +184,9 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       >
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
-          <div className="mx-auto size-20 rounded-full bg-secondary" />
+          <div className="mx-auto size-20 rounded-full bg-secondary flex items-center justify-center text-2xl">
+            <ActivityOffer />
+          </div>
           <div className="text-center text-xl font-semibold">Make an offer</div>
           <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
