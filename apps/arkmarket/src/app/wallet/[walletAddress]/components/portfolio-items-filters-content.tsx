@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
@@ -63,6 +63,35 @@ export default function PortfolioItemsFiltersContent({
       }),
   });
 
+  const isCollectionSelected = useCallback(
+    (collectionAddress: string): boolean => {
+      try {
+        const parsedCollectionAddress =
+          validateAndParseAddress(collectionAddress);
+        const parsedFilterAddress = validateAndParseAddress(
+          collectionFilter ?? "",
+        );
+        return parsedCollectionAddress === parsedFilterAddress;
+      } catch (error) {
+        console.error("Error parsing addresses:", error);
+        return false;
+      }
+    },
+    [collectionFilter],
+  );
+
+  const handleCollectionClick = useCallback(
+    (collectionAddress: string): void => {
+      if (isCollectionSelected(collectionAddress)) {
+        void setCollectionFilter(null);
+      } else {
+        void setCollectionFilter(collectionAddress);
+      }
+      onFilterChange?.();
+    },
+    [isCollectionSelected, setCollectionFilter, onFilterChange],
+  );
+
   const walletCollections = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
@@ -89,28 +118,16 @@ export default function PortfolioItemsFiltersContent({
 
       <div className="mt-4 flex flex-col gap-2.5">
         {walletCollections.map((collection) => {
-          const isSelected =
-            validateAndParseAddress(collection.address) ===
-            validateAndParseAddress(collectionFilter ?? 0);
+          const isSelected = isCollectionSelected(collection.address);
           return (
             <button
               key={collection.address}
               className={cn(
-                "flex h-11 justify-between gap-1 rounded-xs px-2 py-1 font-medium transition-colors hover:bg-card",
+                "flex justify-between gap-1 rounded-xs px-2 py-1 font-medium transition-colors hover:bg-card",
                 isSelected && "bg-card",
                 focusableStyles,
               )}
-              onClick={() => {
-                if (
-                  validateAndParseAddress(collection.address) ===
-                  validateAndParseAddress(collectionFilter ?? "")
-                ) {
-                  void setCollectionFilter(null);
-                } else {
-                  void setCollectionFilter(collection.address);
-                }
-                onFilterChange?.();
-              }}
+              onClick={() => handleCollectionClick(collection.address)}
             >
               <div className="flex h-full items-center gap-2 overflow-hidden">
                 <Media
