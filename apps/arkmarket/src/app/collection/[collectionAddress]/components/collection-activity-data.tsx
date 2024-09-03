@@ -207,7 +207,7 @@ export default function CollectionActivityData({
                     <div className="flex w-full items-center gap-1">
                       <Link
                         className={focusableStyles}
-                        href={`/collection/${activity.collection_address}`}
+                        href={`/collection/${activity.address}`}
                       >
                       <p
                         className={cn(

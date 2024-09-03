@@ -177,6 +177,7 @@ export type CollectionActivityType =
 
 export interface CollectionActivity {
   activity_type: CollectionActivityType;
+  address: string;
   from: string;
   is_verified: boolean;
   name: string;
