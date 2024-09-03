@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, ShoppingBag, Wallet } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
+import { LoaderCircle, ShoppingBag, Wallet } from "@ark-market/ui/icons";
 import { toast as sonner } from "@ark-market/ui/sonner";
 import { useToast } from "@ark-market/ui/use-toast";
 
@@ -36,7 +36,7 @@ export default function TokenActionsBuyNow({
   const { fulfillListing, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
-  const { data } = useBalance({ token: ETH });
+  const { data } = useBalance({ address, token: ETH });
   const { toast } = useToast();
 
   const buy = async () => {

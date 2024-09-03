@@ -5,7 +5,7 @@ import { formatEther } from "viem";
 import { erc20Abi } from "~/constants/abis";
 
 interface UseBalanceProps {
-  address?: string;
+  address: string | undefined;
   token: string;
 }
 
