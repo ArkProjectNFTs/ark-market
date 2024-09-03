@@ -14,18 +14,19 @@ import {
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
+  ActivityCancelOffer,
+  ActivityDelist,
+  ActivityList,
+  ActivityOffer,
   ArrowLeftRight,
   ArrowUpRight,
   CircleDot,
   Flame,
   Gavel,
-  ActivityCancelOffer,
-  ActivityDelist,
-  ActivityList,
-  ActivityOffer,
   ShoppingCart,
+  TimerReset,
+  VerifiedIcon,
 } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -62,6 +63,14 @@ export const activityTypeToItem = new Map([
   ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
   ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
   ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
+  ["CANCEL_AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
+  ["CANCELLED", { icon: <ActivityDelist size={16} />, title: "Delist" }],
+  ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
+  [
+    "CANCEL_OFFER",
+    { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
+  ],
+  ["EXPIRED_OFFER", { icon: <TimerReset size={16} />, title: "Expired Offer" }],
 ]);
 
 const gridTemplateColumnValue =
@@ -187,12 +196,10 @@ export default function PortfolioActivityData({
                     src={activity.metadata?.image ?? ""}
                     mediaKey={activity.metadata?.image_key ?? ""}
                   />
-
                   <div className="w-full overflow-hidden">
                     <Link
                       className={focusableStyles}
-                      // TODO @YohanTz: Update token ID when available
-                      href={`/token/${activity.collection_address}/0}`}
+                      href={`/token/${activity.collection_address}/${activity.token_id}`}
                     >
                       <p
                         className={cn(

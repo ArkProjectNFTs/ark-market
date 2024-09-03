@@ -14,6 +14,7 @@ import {
   Gavel,
   NoActivity,
   ShoppingCart,
+  TimerReset
 } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
@@ -43,6 +44,14 @@ export const activityTypeToItem = new Map([
   ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
   ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
   ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
+  ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
+  ["CANCEL_AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
+  ["CANCELLED", { icon: <ActivityDelist size={16} />, title: "Delist" }],
+  [
+    "CANCEL_OFFER",
+    { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
+  ],
+  ["EXPIRED_OFFER", { icon: <TimerReset size={16} />, title: "Expired Offer" }],
 ]);
 
 interface DesktopTokenActivityProps {

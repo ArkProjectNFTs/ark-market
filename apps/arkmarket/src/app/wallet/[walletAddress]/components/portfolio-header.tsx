@@ -30,7 +30,7 @@ export default function PortfolioHeader({
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}
-          className="size-8 rounded-xs sm:size-16 sm:rounded-lg"
+          className="size-8 rounded-xs lg:size-16 sm:rounded-lg"
         />
         <div className="h-full w-full">
           <div className="flex items-center justify-between sm:justify-start">

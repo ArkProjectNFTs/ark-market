@@ -24,6 +24,7 @@ import {
   Flame,
   Gavel,
   ShoppingCart,
+  TimerReset,
   VerifiedIcon,
 } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
@@ -55,11 +56,17 @@ export const activityTypeToItem = new Map([
   ["LISTING", { icon: <ActivityList size={16} />, title: "List" }],
   ["OFFER", { icon: <ActivityOffer size={16} />, title: "Offer" }],
   [
-    "CANCELLED",
+    "CANCEL_OFFER",
     { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
+  ],
+  [
+    "EXPIRED_OFFER",
+    { icon: <TimerReset size={16} />, title: "Expired Offer" },
   ],
   ["MINT", { icon: <CircleDot size={16} />, title: "Mint" }],
   ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
+  ["CANCEL_AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
+  ["CANCELLED", { icon: <ActivityDelist size={16} />, title: "Delist" }],
   ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
   ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
 ]);

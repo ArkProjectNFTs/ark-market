@@ -162,6 +162,7 @@ export interface PortfolioActivity {
   time_stamp: number;
   to: string;
   transaction_hash: string | null;
+  token_id: string;
 }
 
 export type CollectionActivityType =
