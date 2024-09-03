@@ -1,13 +1,14 @@
-import { useAccount } from "@starknet-react/core";
-
 import { Ethereum } from "@ark-market/ui/icons";
 
 import { ETH } from "~/constants/tokens";
 import useBalance from "~/hooks/useBalance";
 import usePrices from "~/hooks/usePrices";
 
-export default function PortfolioValue() {
-  const { address } = useAccount();
+interface PortfolioValueProps {
+  address?: string;
+}
+
+export default function PortfolioValue({ address }: PortfolioValueProps) {
   const { data: ethBalance, isPending } = useBalance({ address, token: ETH });
   const { convertInUsd, isLoading: isLoadingPrices } = usePrices();
   const ethBalanceInUsd = convertInUsd({ amount: ethBalance?.value });

@@ -6,6 +6,7 @@ import { shortAddress } from "@ark-market/ui";
 
 import CopyButton from "~/components/copy-button";
 import ProfilePicture from "~/components/profile-picture";
+import PortfolioValue from "./portfolio-value";
 
 interface PortfolioHeaderProps {
   walletAddress: string;
@@ -41,6 +42,7 @@ export default function PortfolioHeader({
           )}
         </div>
       </div>
+      <PortfolioValue address={walletAddress} />
     </div>
   );
 }
