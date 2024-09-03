@@ -59,10 +59,7 @@ export const activityTypeToItem = new Map([
     "CANCEL_OFFER",
     { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
   ],
-  [
-    "EXPIRED_OFFER",
-    { icon: <TimerReset size={16} />, title: "Expired Offer" },
-  ],
+  ["EXPIRED_OFFER", { icon: <TimerReset size={16} />, title: "Expired Offer" }],
   ["MINT", { icon: <CircleDot size={16} />, title: "Mint" }],
   ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
   ["CANCEL_AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
@@ -208,6 +205,10 @@ export default function CollectionActivityData({
                         `${activity.name} #${activity.token_id}`}
                     </Link>
                     <div className="flex w-full items-center gap-1">
+                      <Link
+                        className={focusableStyles}
+                        href={`/collection/${activity.collection_address}`}
+                      >
                       <p
                         className={cn(
                           "text-muted-foreground",
@@ -216,6 +217,7 @@ export default function CollectionActivityData({
                       >
                         {activity.name}
                       </p>
+                      </Link>
                       {activity.is_verified && (
                         <VerifiedIcon className="size-4 text-primary" />
                       )}
