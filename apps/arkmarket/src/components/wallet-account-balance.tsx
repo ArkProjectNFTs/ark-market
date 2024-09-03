@@ -38,7 +38,7 @@ export default function WalletAccountBalance({
         <div className="flex flex-col items-end gap-1">
           <p className="text-sm font-medium">{ethBalance?.rounded}</p>
           <p className="text-xs text-secondary-foreground">
-            {ethBalanceInUsd}$
+            ${ethBalanceInUsd}
           </p>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function WalletAccountBalance({
         <div className="flex flex-col items-end gap-1">
           <p className="text-sm font-medium">{strkBalance?.rounded}</p>
           <p className="text-xs text-secondary-foreground">
-            {strkBalanceInUsd}$
+            ${strkBalanceInUsd}
           </p>
         </div>
       </div>

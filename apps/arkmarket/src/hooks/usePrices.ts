@@ -21,25 +21,31 @@ export default function usePrices() {
     amount = BigInt(0),
   }: ConvertInUsdParams) => {
     if (!data) {
-      return 0;
+      return "0.00";
     }
 
     const amountInEther = parseFloat(formatEther(amount));
     const price = data[token].price;
     const amountInUsd = amountInEther * price;
 
-    return amountInUsd.toLocaleString("en-us", {
-      notation: "compact",
-      minimumFractionDigits: 2,
+    return amountInUsd.toLocaleString("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
     });
   };
 
   return {
     data: {
       ethereum: data?.ethereum.price,
-      ethereumFormatted: data?.ethereum.price.toFixed(2),
+      ethereumFormatted: data?.ethereum.price.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }),
       starknet: data?.starknet.price,
-      starknetFormatted: data?.starknet.price.toFixed(2),
+      starknetFormatted: data?.starknet.price.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }),
     },
     isLoading,
     isError,
