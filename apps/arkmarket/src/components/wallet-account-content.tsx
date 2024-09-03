@@ -6,22 +6,13 @@ import {
 } from "@starknet-react/core";
 
 import { cn, focusableStyles, shortAddress } from "@ark-market/ui";
-import {
-  Ethereum,
-  HelpCircle,
-  Power,
-  Starknet,
-  User,
-  Wallet,
-} from "@ark-market/ui/icons";
+import { HelpCircle, Power, User, Wallet } from "@ark-market/ui/icons";
 import { ThemeTabs } from "@ark-market/ui/theme";
 
-import { ETH, STRK } from "~/constants/tokens";
-import useBalance from "~/hooks/useBalance";
-import usePrices from "~/hooks/usePrices";
 import CopyButton from "./copy-button";
 import ExternalLink from "./external-link";
 import ProfilePicture from "./profile-picture";
+import WalletAccountBalance from "./wallet-account-balance";
 
 const itemCommonClassName = cn(
   "flex items-center gap-2 rounded-xs px-1.5 py-2 transition-colors hover:bg-card",
@@ -38,12 +29,6 @@ export default function WalletAccountContent({
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: starkProfile } = useStarkProfile({ address });
-  const { convertInUsd } = usePrices();
-  const { data: ethBalance } = useBalance({ token: ETH });
-  const { data: strkBalance } = useBalance({ token: STRK });
-
-  const ethBalanceInUsd = convertInUsd({ amount: ethBalance.value });
-  const strkBalanceInUsd = convertInUsd({ amount: strkBalance.value });
   const isWebWallet = connector?.id === "argentWebWallet";
   const shortenedAddress = shortAddress(address ?? "0x");
   const nameOrShortAddress = starkProfile?.name ?? shortenedAddress;
@@ -91,7 +76,7 @@ export default function WalletAccountContent({
             prefetch
           >
             <User size={24} />
-            <p className="font-bold">My items</p>
+            <p className="font-bold">Portfolio</p>
           </Link>
           {isWebWallet && (
             <ExternalLink
@@ -115,30 +100,7 @@ export default function WalletAccountContent({
             <p className="font-bold">Log out</p>
           </button>
         </div>
-        <div className="flex h-16 items-center justify-between rounded-t-lg bg-card p-4">
-          <div className="flex items-center gap-2.5">
-            <Ethereum />
-            <span className="font-bold">ETH</span>
-          </div>
-          <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{ethBalance.rounded}</p>
-            <p className="text-xs text-secondary-foreground">
-              {ethBalanceInUsd}$
-            </p>
-          </div>
-        </div>
-        <div className="mt-0.5 flex h-16 items-center justify-between rounded-b-lg bg-card p-4">
-          <div className="flex items-center gap-2.5">
-            <Starknet />
-            <span className="font-bold">STRK</span>
-          </div>
-          <div className="flex flex-col items-end gap-1">
-            <p className="text-sm font-medium">{strkBalance.rounded}</p>
-            <p className="text-xs text-secondary-foreground">
-              {strkBalanceInUsd}$
-            </p>
-          </div>
-        </div>
+        <WalletAccountBalance address={address} />
       </div>
       <ThemeTabs className="mt-5" />
     </div>

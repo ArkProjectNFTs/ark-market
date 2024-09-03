@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { cn } from "@ark-market/ui";
 import {
@@ -28,12 +28,14 @@ const statuses = {
 };
 
 export default function SystemStatus() {
-  const { isLoading, error, data } = useQuery("systemStatus", getSystemStatus, {
+  const { error, data } = useQuery({
+    queryKey: ["systemStatus"],
+    queryFn: getSystemStatus,
     refetchInterval: 15_000,
     initialData: { status: "ok" },
   });
 
-  if (isLoading || error || !data) {
+  if (error) {
     return null;
   }
 

@@ -16,15 +16,13 @@ import WalletAccountPopover from "./wallet-account-popover";
 import WrongNetworkModal from "./wrong-network-modal";
 
 export function UserNav() {
-  const { address, chainId } = useAccount();
-  const { data: ethBalance } = useBalance({ token: ETH });
   const { chain } = useNetwork();
+  const { address, chainId } = useAccount();
+  const { data: ethBalance } = useBalance({ address, token: ETH });
   const { data: starkProfile } = useStarkProfile({ address });
-
-  const isWrongNetwork = chainId !== chain.id && chainId !== undefined;
+  const isWrongNetwork = chainId && chainId !== chain.id;
   const nameOrShortAddress =
     starkProfile?.name ?? shortAddress(address ?? "0x");
-  const roundedEthBalance = parseFloat(ethBalance.formatted ?? "0").toFixed(4);
 
   if (!address) {
     return (
@@ -64,7 +62,7 @@ export function UserNav() {
         >
           <Ethereum className="size-6 flex-shrink-0 md:size-8" />
           <p>
-            {roundedEthBalance}
+            {ethBalance?.rounded}
             <span className="text-muted-foreground"> ETH</span>
           </p>
           <Separator orientation="vertical" className="bg-background" />

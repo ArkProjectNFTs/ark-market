@@ -1,6 +1,6 @@
 "use client";
 
-import { Starknet, Ethereum } from "@ark-market/ui/icons";
+import { Ethereum, Starknet } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import usePrices from "~/hooks/usePrices";

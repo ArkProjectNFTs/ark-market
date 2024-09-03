@@ -80,7 +80,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       .refine(
         (val) => {
           const num = parseEther(val);
-          return num <= data.value;
+          return data && data.value >= num;
         },
         {
           message: "You don't have enough funds in your wallet",

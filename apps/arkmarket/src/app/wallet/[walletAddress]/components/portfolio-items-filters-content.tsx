@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
@@ -171,7 +171,7 @@ export default function PortfolioItemsFiltersContent({
                     ellipsableStyles,
                   )}
                 >
-                  Floor: {formatUnits(collection.floor ?? 0, 18)}
+                  Floor: {formatUnits(collection.floor ?? 0n, 18)}
                 </p>
               </div>
             </button>

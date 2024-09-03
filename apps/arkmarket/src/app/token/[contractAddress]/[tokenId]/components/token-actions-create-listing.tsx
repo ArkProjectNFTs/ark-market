@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
@@ -57,16 +57,14 @@ export function TokenActionsCreateListing({
   const { account } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
-  const { data: collection } = useQuery(
-    ["collection", token.collection_address],
-    () =>
+  const { data: collection } = useQuery({
+    queryKey: ["collection", token.collection_address],
+    queryFn: () =>
       getCollection({
         collectionAddress: token.collection_address,
       }),
-    {
-      refetchInterval: 5_000,
-    },
-  );
+    refetchInterval: 5_000,
+  });
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
   const { toast } = useToast();
@@ -318,9 +316,7 @@ export function TokenActionsCreateListing({
                       }}
                     >
                       <div className="absolute left-3 flex size-5 items-center justify-center rounded-xs bg-secondary">
-                        {field.value === formattedCollectionFloor && (
-                          <Check />
-                        )}
+                        {field.value === formattedCollectionFloor && <Check />}
                       </div>
                       <p>
                         Choose floor price of{" "}

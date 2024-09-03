@@ -1,7 +1,7 @@
 "use client";
 
 import { useAccount } from "@starknet-react/core";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
@@ -25,18 +25,16 @@ export default function TokenActions({
   className,
 }: TokenActionsProps) {
   const { address } = useAccount();
-  const { data } = useQuery(
-    ["tokenMarketData", token.collection_address, token.token_id],
-    () =>
+  const { data } = useQuery({
+    queryKey: ["tokenMarketData", token.collection_address, token.token_id],
+    queryFn: () =>
       getTokenMarketData({
         contractAddress: token.collection_address,
         tokenId: token.token_id,
       }),
-    {
-      refetchInterval: 5_000,
-      initialData: tokenMarketData,
-    },
-  );
+    refetchInterval: 5_000,
+    initialData: tokenMarketData,
+  });
 
   const isOwner = areAddressesEqual(address, data?.owner);
 
