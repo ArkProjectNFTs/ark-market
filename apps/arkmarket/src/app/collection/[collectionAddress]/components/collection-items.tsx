@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { parseAsJson, useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
@@ -23,6 +23,9 @@ interface CollectionProps {
   collectionTokenCount: number;
 }
 
+const isValidViewType = (value: string): value is ViewType =>
+  ["large-grid", "small-grid", "list"].includes(value);
+
 export default function CollectionItems({
   collectionAddress,
   collectionTokenCount,
@@ -30,6 +33,14 @@ export default function CollectionItems({
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
   const [viewType, setViewType] = useState<ViewType>("large-grid");
+
+  useEffect(() => {
+    const savedViewType = localStorage.getItem("viewType");
+    if (savedViewType && isValidViewType(savedViewType)) {
+      setViewType(savedViewType);
+    }
+  }, []);
+
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
     collectionSortDirectionsParser,
@@ -44,6 +55,11 @@ export default function CollectionItems({
       traits: {},
     }),
   );
+
+  const handleViewTypeChange = useCallback((newViewType: ViewType) => {
+    setViewType(newViewType);
+    localStorage.setItem("viewType", newViewType);
+  }, []);
 
   const toggleFiltersPanel = () => setFiltersPanelOpen((open) => !open);
 
@@ -106,7 +122,7 @@ export default function CollectionItems({
             sortBy={sortBy}
             setSortBy={setSortBy}
             viewType={viewType}
-            setViewType={setViewType}
+            setViewType={handleViewTypeChange}
             totalTokensCount={collectionTokenCount}
             toggleFiltersPanel={toggleFiltersPanel}
             filtersPanelOpen={filtersPanelOpen}

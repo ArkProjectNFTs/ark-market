@@ -73,23 +73,23 @@ export default function CollectionItemsDataGridView({
           }
 
           return (
-            <Link
-              href={`/token/${token.collection_address}/${token.token_id}`}
-              key={`${token.collection_address}-${token.token_id}`}
-              prefetch={false}
-            >
-              <NftCard>
-                <NftCardMedia>
-                  <Media
-                    src={token.metadata?.image}
-                    mediaKey={token.metadata?.image_key}
-                    alt={token.metadata?.name ?? "Empty"}
-                    className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
-                    height={viewType === "large-grid" ? 540 : 340}
-                    width={viewType === "large-grid" ? 540 : 340}
-                  />
-                </NftCardMedia>
-                <NftCardContent>
+            <NftCard>
+              <NftCardMedia>
+                <Media
+                  src={token.metadata?.image}
+                  mediaKey={token.metadata?.image_key}
+                  alt={token.metadata?.name ?? "Empty"}
+                  className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
+                  height={viewType === "large-grid" ? 540 : 340}
+                  width={viewType === "large-grid" ? 540 : 340}
+                />
+              </NftCardMedia>
+              <NftCardContent>
+                <Link
+                  href={`/token/${token.collection_address}/${token.token_id}`}
+                  key={`${token.collection_address}-${token.token_id}`}
+                  prefetch={false}
+                >
                   <div className="flex w-full justify-between">
                     <div className="w-full">
                       <p
@@ -130,20 +130,20 @@ export default function CollectionItemsDataGridView({
                       <>Last sale {formatUnits(token.last_price, 18)} ETH</>
                     ) : null}
                   </p>
-                  {token.is_listed && !token.listing.is_auction ? (
-                    <CollectionItemsBuyNow token={token} />
-                  ) : (
-                    <NftCardAction asChild>
-                      <Link
-                        href={`/token/${token.collection_address}/${token.token_id}`}
-                      >
-                        Details
-                      </Link>
-                    </NftCardAction>
-                  )}
-                </NftCardContent>
-              </NftCard>
-            </Link>
+                </Link>
+              </NftCardContent>
+              {token.is_listed && !token.listing.is_auction ? (
+                <CollectionItemsBuyNow token={token} />
+              ) : (
+                <NftCardAction asChild>
+                  <Link
+                    href={`/token/${token.collection_address}/${token.token_id}`}
+                  >
+                    Details
+                  </Link>
+                </NftCardAction>
+              )}
+            </NftCard>
           );
         }}
       />

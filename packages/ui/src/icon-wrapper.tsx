@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
 import { cn } from "@ark-market/ui";
 
 interface IconProps {
-  icon: string; // The character code or name for the icon
+  icon: string;
   className?: string;
 }
 
@@ -21,22 +20,26 @@ const calculateFontWeight = (fontSize: number): number => {
 };
 
 export const Icon: React.FC<IconProps> = ({ icon, className }) => {
-  const [fontWeight, setFontWeight] = useState(20);
-  const [iconSize, setIconSize] = useState("1em");
-  const [marginTop, setMarginTop] = useState("0.15em");
+  const [fontWeight, setFontWeight] = useState<number>(20);
+  const [iconSize, setIconSize] = useState<string>("1em");
+  const [marginTop, setMarginTop] = useState<string>("0.15em");
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (ref.current) {
       const computedStyle = window.getComputedStyle(ref.current);
       const fontSize = parseFloat(computedStyle.fontSize);
+      if (isNaN(fontSize)) {
+        return;
+      }
+      
       const minSize = 16;
       const maxSize = 24;
 
       const clampedSize = Math.min(Math.max(fontSize, minSize), maxSize);
-      setFontWeight(calculateFontWeight(clampedSize));
+      const calculatedWeight = calculateFontWeight(clampedSize);
+      setFontWeight(isNaN(calculatedWeight) ? 20 : calculatedWeight);
 
-      // Set icon size, ensuring it's between 16px and 24px
       if (fontSize < minSize) {
         setIconSize(`${minSize / fontSize}em`);
       } else if (fontSize > maxSize) {
@@ -45,13 +48,12 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
         setIconSize("1em");
       }
 
-      // Adjust marginTop based on the effective size
       if (clampedSize <= 16) {
-        setMarginTop('0.1275em'); // 3px for 16px font size
+        setMarginTop("0.1275em");
       } else if (clampedSize >= 24) {
-        setMarginTop("0.1em"); // 3px for 24px font size
+        setMarginTop("0.1em");
       } else {
-        setMarginTop("0.1em"); // 3px for 20px font size
+        setMarginTop("0.1em");
       }
     }
   }, []);
