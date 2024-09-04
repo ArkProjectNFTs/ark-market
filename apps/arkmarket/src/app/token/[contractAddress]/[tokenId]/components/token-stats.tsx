@@ -53,7 +53,7 @@ export default function TokenStats({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 items-center justify-between gap-2 md:grid-cols-4 lg:flex lg:h-14 lg:gap-4",
+        "grid grid-cols-1 items-center justify-between gap-2 md:grid-cols-2 lg:flex lg:h-14 lg:gap-4",
         className,
       )}
     >
