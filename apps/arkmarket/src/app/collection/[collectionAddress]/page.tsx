@@ -16,7 +16,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   const { collectionAddress } = params;
   const collection = await getCollection({ collectionAddress });
 
-  if (!collection) {
+  if (!collection?.name) {
     return notFound();
   }
 
