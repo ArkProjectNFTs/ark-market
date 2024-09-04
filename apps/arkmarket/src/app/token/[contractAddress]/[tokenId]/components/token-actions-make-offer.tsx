@@ -27,7 +27,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@ark-market/ui/form";
-import { ActivityOffer, LoaderCircle, Tag } from "@ark-market/ui/icons";
+import { ActivityOffer, LoaderCircle, NoOffer } from "@ark-market/ui/icons";
 import {
   Select,
   SelectContent,
@@ -173,10 +173,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
           variant="secondary"
           onClick={ensureConnect}
         >
-          <Tag
-            size={small ? 20 : 24}
-            className={cn(small ?? "absolute left-4")}
-          />
+          <ActivityOffer />
           Make offer
         </Button>
       </DialogTrigger>
@@ -188,10 +185,12 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       >
         <DialogHeader className="items-center"></DialogHeader>
         <div className="flex flex-col gap-6">
-          <div className="mx-auto flex size-20 items-center justify-center rounded-full bg-secondary text-2xl">
-            <ActivityOffer />
+          <div className="mx-auto flex flex-col items-center justify-center rounded-full text-2xl">
+            <NoOffer />
+            <div className="text-center text-xl font-semibold">
+              Make an offer
+            </div>
           </div>
-          <div className="text-center text-xl font-semibold">Make an offer</div>
           <TokenActionsTokenOverview token={token} amount={startAmount} small />
           <Form {...form}>
             <form
