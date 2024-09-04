@@ -73,10 +73,10 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       .refine(
         (val) => {
           const num = parseFloat(val);
-          return !isNaN(num) && num > 0.0015;
+          return !isNaN(num) && num > 0.00001;
         },
         {
-          message: "Must be a valid amount and greater than 0.0015",
+          message: "Must be a valid amount and greater than 0.00001",
         },
       )
       .refine(
