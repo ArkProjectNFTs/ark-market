@@ -1,17 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 "use client";
 
-import type { HTMLAttributes } from "react";
 import { useState } from "react";
 
-import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
-import { ChevronDown, Discord, Globe, VerifiedIcon, XIcon } from "@ark-market/ui/icons";
+import {
+  ChevronDown,
+  Discord,
+  Globe,
+  VerifiedIcon,
+  XIcon,
+} from "@ark-market/ui/icons";
 
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
@@ -21,13 +24,12 @@ import CollectionHeaderStats from "./collection-header-stats";
 interface MobileCollectionHeaderProps {
   collectionAddress: string;
   collection: Collection;
-  style?: HTMLAttributes<HTMLDivElement>["style"];
 }
 
 export default function MobileCollectionHeader({
   collectionAddress,
   collection,
-}: PropsWithClassName<MobileCollectionHeaderProps>) {
+}: MobileCollectionHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -45,9 +47,7 @@ export default function MobileCollectionHeader({
               ) : (
                 <div className="aspect-square h-8 rounded-xs bg-secondary" />
               )}
-              <p className="-mt-1 text-lg font-semibold">
-                {collection.name ?? "Unknown collection"}
-              </p>
+              <p className="-mt-1 text-lg font-semibold">{collection.name}</p>
               <VerifiedIcon size={18} className="text-primary" />
             </div>
             <div className="flex size-8 items-center justify-center rounded-xs border border-input">

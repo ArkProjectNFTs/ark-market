@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useEffect } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { parseAsJson, useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
@@ -33,14 +33,6 @@ export default function CollectionItems({
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
   const [viewType, setViewType] = useState<ViewType>("large-grid");
-
-  useEffect(() => {
-    const savedViewType = localStorage.getItem("viewType");
-    if (savedViewType && isValidViewType(savedViewType)) {
-      setViewType(savedViewType);
-    }
-  }, []);
-
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
     collectionSortDirectionsParser,
@@ -55,6 +47,14 @@ export default function CollectionItems({
       traits: {},
     }),
   );
+
+  useEffect(() => {
+    const savedViewType = localStorage.getItem("viewType");
+
+    if (savedViewType && isValidViewType(savedViewType)) {
+      setViewType(savedViewType);
+    }
+  }, []);
 
   const handleViewTypeChange = useCallback((newViewType: ViewType) => {
     setViewType(newViewType);
@@ -98,13 +98,14 @@ export default function CollectionItems({
 
   return (
     <div className="flex">
-      {filtersPanelOpen && (
+      <Suspense>
         <CollectionItemsFiltersPanel
           collectionAddress={collectionAddress}
-          onFiltersChange={handlerFiltersChange}
           filters={filters}
+          onFiltersChange={handlerFiltersChange}
+          isOpen={filtersPanelOpen}
         />
-      )}
+      </Suspense>
       <CollectionItemsFiltersDialog
         collectionAddress={collectionAddress}
         filters={filters}

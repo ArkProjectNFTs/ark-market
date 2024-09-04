@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@ark-market/ui";
@@ -72,16 +72,18 @@ function CollectionItemsFiltersTrait({
 
 interface CollectionItemsFiltersPanelProps {
   collectionAddress: string;
-  onFiltersChange: (newFilters: Filters) => Promise<void>;
   filters: Filters;
+  onFiltersChange: (newFilters: Filters) => Promise<void>;
+  isOpen: boolean;
 }
 
 export default function CollectionItemsFiltersPanel({
   collectionAddress,
-  onFiltersChange,
   filters,
+  onFiltersChange,
+  isOpen,
 }: CollectionItemsFiltersPanelProps) {
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["collectionTraits", collectionAddress],
     queryFn: () => getCollectionTraits({ collectionAddress }),
   });
@@ -106,7 +108,7 @@ export default function CollectionItemsFiltersPanel({
     });
   };
 
-  if (!data) {
+  if (!isOpen) {
     return null;
   }
 
