@@ -8,7 +8,7 @@ import { formatEther } from "viem";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent } from "@ark-market/ui/dialog";
-import { LoaderCircle, ShoppingBag, Wallet } from "@ark-market/ui/icons";
+import { ActivityList, LoaderCircle, NoListing } from "@ark-market/ui/icons";
 import { toast as sonner } from "@ark-market/ui/sonner";
 import { useToast } from "@ark-market/ui/use-toast";
 
@@ -118,8 +118,8 @@ export default function TokenActionsBuyNow({
         >
           <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
-              <div className="mx-auto mt-6 flex items-center justify-center rounded-full text-2xl text-foreground">
-                <Wallet className="size-8" />
+              <div className="mx-auto mt-6 flex flex-col items-center justify-center text-2xl text-foreground">
+                <NoListing />
                 <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                   {isSuccess
                     ? "Congratulations for your purchase"
@@ -185,10 +185,7 @@ export default function TokenActionsBuyNow({
           </>
         ) : (
           <>
-            <ShoppingBag
-              size={small ? 20 : 24}
-              className={cn("left-4", small ? "" : "absolute")}
-            />
+            <ActivityList />
             {"Buy now for "}
             {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
           </>
