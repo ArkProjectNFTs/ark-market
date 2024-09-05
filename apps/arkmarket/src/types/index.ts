@@ -256,13 +256,14 @@ export interface SystemStatus {
 }
 
 export type TokenActivityType =
-  | "LISTING"
-  | "OFFER"
   | "CANCELLED"
-  | "FULFILL"
-  | "TRANSFER"
+  | "DELISTING"
   | "EXECUTED"
-  | "MINT";
+  | "FULFILL"
+  | "LISTING"
+  | "MINT"
+  | "OFFER"
+  | "TRANSFER";
 
 export interface TokenActivity {
   activity_type: TokenActivityType;

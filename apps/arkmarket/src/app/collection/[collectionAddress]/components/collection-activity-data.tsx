@@ -13,20 +13,7 @@ import {
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import {
-  ActivityCancelOffer,
-  ActivityDelist,
-  ActivityList,
-  ActivityOffer,
-  ArrowLeftRight,
-  ArrowUpRight,
-  CircleDot,
-  Flame,
-  Gavel,
-  ShoppingCart,
-  TimerReset,
-  VerifiedIcon,
-} from "@ark-market/ui/icons";
+import { ArrowUpRight, VerifiedIcon } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -40,6 +27,7 @@ import {
 import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
 import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
+import activityTypeMetadata from "~/constants/activity-type-metadata";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionActivity } from "~/lib/getCollectionActivity";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -47,26 +35,6 @@ import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 interface CollectionActivityDataProps {
   collectionAddress: string;
 }
-
-export const activityTypeToItem = new Map([
-  ["FULFILL", { icon: <ShoppingCart size={16} />, title: "Sale in progress" }],
-  ["EXECUTED", { icon: <ShoppingCart size={16} />, title: "Sale" }],
-  ["SALE", { icon: <ShoppingCart size={16} />, title: "Sale" }],
-  ["TRANSFER", { icon: <ArrowLeftRight size={16} />, title: "Transfer" }],
-  ["LISTING", { icon: <ActivityList size={16} />, title: "List" }],
-  ["OFFER", { icon: <ActivityOffer size={16} />, title: "Offer" }],
-  [
-    "CANCEL_OFFER",
-    { icon: <ActivityCancelOffer size={16} />, title: "Cancel Offer" },
-  ],
-  ["EXPIRED_OFFER", { icon: <TimerReset size={16} />, title: "Expired Offer" }],
-  ["MINT", { icon: <CircleDot size={16} />, title: "Mint" }],
-  ["AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
-  ["CANCEL_AUCTION", { icon: <Gavel size={16} />, title: "Put in auction" }],
-  ["CANCELLED", { icon: <ActivityDelist size={16} />, title: "Delist" }],
-  ["DELISTING", { icon: <ActivityDelist size={16} />, title: "Delist" }],
-  ["BURN", { icon: <Flame size={16} />, title: "Burn" }],
-]);
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(8rem,1fr)_minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
@@ -160,7 +128,6 @@ export default function CollectionActivityData({
           if (activity === undefined) {
             return null;
           }
-          const activityItem = activityTypeToItem.get(activity.activity_type);
 
           return (
             <TableRow
@@ -177,8 +144,8 @@ export default function CollectionActivityData({
             >
               <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
                 <div className="flex items-center gap-4 whitespace-nowrap">
-                  {activityItem?.icon}
-                  <p>{activityItem?.title}</p>
+                  {activityTypeMetadata[activity.activity_type].icon}
+                  <p>{activityTypeMetadata[activity.activity_type].title}</p>
                 </div>
               </TableCell>
               <TableCell>
@@ -209,14 +176,14 @@ export default function CollectionActivityData({
                         className={focusableStyles}
                         href={`/collection/${activity.address}`}
                       >
-                      <p
-                        className={cn(
-                          "text-muted-foreground",
-                          ellipsableStyles,
-                        )}
-                      >
-                        {activity.name}
-                      </p>
+                        <p
+                          className={cn(
+                            "text-muted-foreground",
+                            ellipsableStyles,
+                          )}
+                        >
+                          {activity.name}
+                        </p>
                       </Link>
                       {activity.is_verified && (
                         <VerifiedIcon className="size-4 text-primary" />
