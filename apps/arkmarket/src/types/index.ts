@@ -141,18 +141,25 @@ export interface PortfolioToken {
   metadata?: TokenMetadata;
 }
 
-export type PortfolioActivityType =
-  | "LISTING"
-  | "OFFER"
+export type ActivityType =
+  | "AUCTION"
+  | "BURN"
+  | "CANCEL_AUCTION"
+  | "CANCEL_OFFER"
   | "CANCELLED"
-  | "FULFILL"
-  | "TRANSFER"
+  | "DELISTING"
   | "EXECUTED"
+  | "EXPIRED_OFFER"
+  | "EXPIRED_LISTING"
+  | "FULFILL"
+  | "LISTING"
   | "MINT"
-  | "BURN";
+  | "OFFER"
+  | "SALE"
+  | "TRANSFER";
 
 export interface PortfolioActivity {
-  activity_type: PortfolioActivityType;
+  activity_type: ActivityType;
   collection_address: string;
   collection_is_verified: boolean;
   collection_name: string;
@@ -165,18 +172,8 @@ export interface PortfolioActivity {
   token_id: string;
 }
 
-export type CollectionActivityType =
-  | "LISTING"
-  | "OFFER"
-  | "CANCELLED"
-  | "FULFILL"
-  | "TRANSFER"
-  | "EXECUTED"
-  | "MINT"
-  | "BURN";
-
 export interface CollectionActivity {
-  activity_type: CollectionActivityType;
+  activity_type: ActivityType;
   address: string;
   collection_address: string;
   from: string;
@@ -255,18 +252,8 @@ export interface SystemStatus {
   status: string;
 }
 
-export type TokenActivityType =
-  | "CANCELLED"
-  | "DELISTING"
-  | "EXECUTED"
-  | "FULFILL"
-  | "LISTING"
-  | "MINT"
-  | "OFFER"
-  | "TRANSFER";
-
 export interface TokenActivity {
-  activity_type: TokenActivityType;
+  activity_type: ActivityType;
   from: string | null;
   price: string | null;
   time_stamp: number;
