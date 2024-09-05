@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useEffect } from "react";
 import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
@@ -14,17 +14,26 @@ interface AcceptOfferProps {
   offer: TokenOffer;
   token: Token;
   tokenMarketData: TokenMarketData;
+  onSuccess: () => void;
 }
 
 const AcceptOffer: React.FC<AcceptOfferProps> = ({
   offer,
   token,
   tokenMarketData,
+  onSuccess,
 }) => {
   const { account } = useAccount();
   const { fulfillOffer, status } = useFulfillOffer();
   const { fulfill: fulfillAuction, status: statusAuction } =
     useFulfillAuction();
+
+  useEffect(() => {
+    if (status === "success") {
+      onSuccess();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   const handleClick = async () => {
     if (tokenMarketData.is_listed && tokenMarketData.listing.is_auction) {
