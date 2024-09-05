@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp, NoOffer } from "@ark-market/ui/icons";
+import { useMediaQuery } from "usehooks-ts";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -12,11 +12,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
+import { ChevronDown, ChevronUp, NoOffer } from "@ark-market/ui/icons";
 
 import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
 import type { Token, TokenMarketData } from "~/types";
 import { getTokenOffers } from "~/lib/getTokenOffers";
-import TokenOffersMobileTable from "./token-offers-mobile-table";
+import TokenOfferList from "./token-offers-list";
 import TokenOffersTable from "./token-offers-table";
 
 interface TokenOffersProps {
@@ -76,6 +77,8 @@ export default function TokenOffers({
     fetchMoreOnBottomReached(tableContainerRef.current);
   }, [fetchMoreOnBottomReached]);
 
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
   return (
     <Collapsible
       className={cn(
@@ -105,20 +108,7 @@ export default function TokenOffers({
           fetchMoreOnBottomReached(event.target as HTMLDivElement)
         }
       >
-        {tokenOffers.length > 0 ? (
-          <>
-            <TokenOffersTable
-              tokenOffers={tokenOffers}
-              token={token}
-              tokenMarketData={tokenMarketData}
-            />
-            <TokenOffersMobileTable
-              tokenOffers={tokenOffers}
-              token={token}
-              tokenMarketData={tokenMarketData}
-            />
-          </>
-        ) : (
+        {tokenOffers.length === 0 ? (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
             <NoOffer size={42} className="flex-shrink-0" />
             <p className="mt-3 text-center text-xl font-semibold">
@@ -127,6 +117,22 @@ export default function TokenOffers({
               Make the first offers!
             </p>
           </div>
+        ) : (
+          <>
+            {isDesktop ? (
+              <TokenOffersTable
+                tokenOffers={tokenOffers}
+                token={token}
+                tokenMarketData={tokenMarketData}
+              />
+            ) : (
+              <TokenOfferList
+                tokenOffers={tokenOffers}
+                token={token}
+                tokenMarketData={tokenMarketData}
+              />
+            )}
+          </>
         )}
       </CollapsibleContent>
     </Collapsible>

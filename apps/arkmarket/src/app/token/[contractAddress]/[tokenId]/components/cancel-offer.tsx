@@ -14,11 +14,13 @@ import ToastExecutedTransactionContent from "./toast-executed-transaction-conten
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface CancelOfferProps {
+  address: string;
   token: Token;
   offer: TokenOffer;
+  onSuccess: () => void;
 }
 
-const CancelOffer = ({ offer, token }: CancelOfferProps) => {
+const CancelOffer = ({ offer, token, onSuccess }: CancelOfferProps) => {
   const { account } = useAccount();
   const { cancel, status } = useCancel();
   const { toast } = useToast();
@@ -37,6 +39,7 @@ const CancelOffer = ({ offer, token }: CancelOfferProps) => {
         ),
       });
     } else if (status === "success") {
+      onSuccess();
       toast({
         variant: "success",
         title: "Your offer is successfully canceled",
@@ -64,10 +67,6 @@ const CancelOffer = ({ offer, token }: CancelOfferProps) => {
       orderHash: BigInt(offer.hash),
     });
   };
-
-  if (!account || status === "success") {
-    return;
-  }
 
   const isLoading = ["loading", "cancelling"].includes(status);
 
