@@ -3,11 +3,11 @@
 import { useEffect } from "react";
 import { useCancel } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { ListX, LoaderCircle } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { ListX, LoaderCircle } from "@ark-market/ui/icons";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -76,10 +76,15 @@ export default function TokenActionsCancelListing({
     });
   };
 
+  const isDisabled =
+    tokenMarketData.buy_in_progress ||
+    status === "loading" ||
+    status === "success";
+
   return (
     <Button
       onClick={handleClick}
-      disabled={status === "loading"}
+      disabled={isDisabled}
       className={cn(small ?? "relative w-full lg:max-w-[50%]")}
       size={small ? "xl" : "xxl"}
       variant="secondary"

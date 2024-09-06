@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import type { Token, TokenMarketData } from "~/types";
 import getToken from "~/lib/getToken";
 import getTokenMarketData from "~/lib/getTokenMarketData";
 import TokenAbout from "./components/token-about";
@@ -20,16 +21,25 @@ interface TokenPageProps {
 export default async function TokenPage({
   params: { contractAddress, tokenId },
 }: TokenPageProps) {
-  const token = await getToken({
-    contractAddress,
-    tokenId,
-  });
-  const tokenMarketData = await getTokenMarketData({
-    contractAddress,
-    tokenId,
-  });
+  let token: Token;
+  let tokenMarketData: TokenMarketData;
 
-  if (!token?.owner || !tokenMarketData) {
+  try {
+    token = await getToken({
+      contractAddress,
+      tokenId,
+    });
+
+    tokenMarketData = await getTokenMarketData({
+      contractAddress,
+      tokenId,
+    });
+  } catch (error) {
+    console.log(error);
+    return notFound();
+  }
+
+  if (!token.owner) {
     return notFound();
   }
 

@@ -15,16 +15,10 @@ export default async function getToken({
   tokenId,
 }: GetCollectionTokenProps) {
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}`;
-
-  const response = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(url);
 
   if (!response.ok) {
-    console.log("Failed to fetch token");
-    return null;
+    throw new Error("Failed to fetch token");
   }
 
   const { data } = (await response.json()) as TokenApiResponse;
