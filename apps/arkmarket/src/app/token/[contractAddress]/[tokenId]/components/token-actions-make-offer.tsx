@@ -53,10 +53,9 @@ interface TokenActionsMakeOfferProps {
 }
 
 function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
-  const { address } = useAccount();
+  const { account, address } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { account } = useAccount();
   const { createOffer, status } = useCreateOffer();
   const { toast } = useToast();
   const { data: ethBalance } = useBalance({ address, token: ETH });
@@ -158,9 +157,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
 
   const isLoading = status === "loading";
   const isDisabled =
-    !form.formState.isValid ||
-    form.formState.isSubmitting ||
-    status === "loading";
+    !form.formState.isValid || form.formState.isSubmitting || isLoading;
   const startAmount = form.watch("startAmount");
   const formattedStartAmount = formatAmount(startAmount);
 
@@ -216,7 +213,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
                           }
                         />
                       </FormControl>
-                      {formattedStartAmount !== "-" && <FormMessage />}
+                      <FormMessage />
                     </FormItem>
                   );
                 }}
