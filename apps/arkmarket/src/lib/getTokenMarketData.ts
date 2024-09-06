@@ -16,16 +16,10 @@ export default async function getTokenMarketData({
 }: GetTokenMarketParams) {
   const response = await fetch(
     `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}/marketdata`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
 
   if (!response.ok) {
-    console.log("Failed to fetch data");
-    return null;
+    throw new Error("Failed to fetch tokenMarketData");
   }
 
   const { data } = (await response.json()) as TokenMarketDataApiResponse;
