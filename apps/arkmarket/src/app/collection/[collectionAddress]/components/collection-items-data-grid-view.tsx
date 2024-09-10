@@ -72,6 +72,8 @@ export default function CollectionItemsDataGridView({
             return null;
           }
 
+          console.log(token);
+
           return (
             <NftCard>
               <Link
@@ -83,6 +85,7 @@ export default function CollectionItemsDataGridView({
                   <Media
                     src={token.metadata?.image}
                     mediaKey={token.metadata?.image_key}
+                    thumbnailKey={token.metadata?.image_key_540_540}
                     alt={token.metadata?.name ?? "Empty"}
                     className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
                     height={viewType === "large-grid" ? 540 : 340}

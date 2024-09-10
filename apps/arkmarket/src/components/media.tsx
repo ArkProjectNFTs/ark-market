@@ -12,6 +12,7 @@ import { env } from "~/env";
 interface MediaProps {
   // key used to access the image proxy / CDN
   mediaKey?: string | null;
+  thumbnailKey?: string | null;
   alt: string;
   src?: string | null;
   width?: number;
@@ -20,13 +21,18 @@ interface MediaProps {
 
 function getMediaSrc(
   src?: string | null,
-  media_key?: string | null,
+  mediaKey?: string | null,
+  thumbnailKey?: string | null,
   width?: number,
   height?: number,
 ) {
-  if (media_key && width && height) {
+  if (thumbnailKey) {
+    return `${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${thumbnailKey}`;
+  }
+
+  if (mediaKey && width && height) {
     const resolutionParam = `:${width}:${height}`;
-    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${media_key}`;
+    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${mediaKey}`;
   }
   return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
 }
@@ -74,6 +80,7 @@ function MediaPlaceholder({ className }: PropsWithClassName) {
 
 export default function Media({
   mediaKey,
+  thumbnailKey,
   alt,
   className,
   src,
@@ -83,7 +90,7 @@ export default function Media({
   const [status, setStatus] = useState<"loading" | "error" | "loaded">(
     "loading",
   );
-  const mediaSrc = getMediaSrc(src, mediaKey, width, height);
+  const mediaSrc = getMediaSrc(src, mediaKey, thumbnailKey, width, height);
   const mediaFormat = mediaSrc?.split(".").pop() === "mp4" ? "video" : "image";
 
   if (!mediaSrc || status === "error") {

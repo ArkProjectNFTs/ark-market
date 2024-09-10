@@ -93,6 +93,7 @@ export default function CollectionItemsDataGridView({
                   className="aspect-square w-full object-contain transition-transform group-hover:scale-110"
                   src={token.metadata?.image}
                   mediaKey={token.metadata?.image_key}
+                  thumbnailKey={token.metadata?.image_key_540_540}
                   height={viewType === "large-grid" ? 540 : 340}
                   width={viewType === "large-grid" ? 540 : 340}
                 />
@@ -117,11 +118,14 @@ export default function CollectionItemsDataGridView({
                   </Link>
                   <Link
                     href={`/collection/${token.collection_address}`}
-                    className={cn("flex items-center gap-1 mt-1", focusableStyles)}
+                    className={cn(
+                      "mt-1 flex items-center gap-1",
+                      focusableStyles,
+                    )}
                   >
                     <p
                       className={cn(
-                        "text-sm font-normal text-accent-foreground transition-colors hover:text-foreground leading-none",
+                        "text-sm font-normal leading-none text-accent-foreground transition-colors hover:text-foreground",
                         viewType === "large-grid" && "sm:text-base",
                         ellipsableStyles,
                       )}
