@@ -433,12 +433,18 @@ export function TokenActionsCreateListing({
                                 <SelectItem value="72">3 days</SelectItem>
                                 <SelectItem value="168">7 days</SelectItem>
                                 <SelectItem value="719">1 month</SelectItem>
+                                <SelectItem value="custom">Custom</SelectItem>
                               </SelectContent>
                             </Select>
-
                             <DateTimePicker
                               hourCycle={12}
-                              value={endDateTimeField.value}
+                              value={
+                                durationField.value === "custom"
+                                  ? endDateTimeField.value
+                                  : moment()
+                                      .add(form.getValues("duration"), "hours")
+                                      .toDate()
+                              }
                               onChange={(value) => {
                                 endDateTimeField.onChange(value);
                                 durationField.onChange("custom");
