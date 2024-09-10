@@ -13,12 +13,7 @@ import {
   timeSince,
 } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import {
-  ArrowUpRight,
-  NoActivity,
-  NoResult,
-  VerifiedIcon,
-} from "@ark-market/ui/icons";
+import { ArrowUpRight, NoActivity, VerifiedIcon } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,

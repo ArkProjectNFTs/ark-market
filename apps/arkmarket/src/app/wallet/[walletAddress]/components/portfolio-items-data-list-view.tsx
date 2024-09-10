@@ -4,7 +4,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Ethereum, NoActivity, NoResult } from "@ark-market/ui/icons";
+import { Ethereum, NoResult } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
