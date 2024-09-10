@@ -76,7 +76,8 @@ export default function TokenActionsCancelListing({
     });
   };
 
-  const isDisabled = status === "loading" || status === "success";
+  const isLoading = status === "loading" || status === "success";
+  const isDisabled = isLoading || tokenMarketData.buy_in_progress;
 
   return (
     <Button
@@ -86,7 +87,7 @@ export default function TokenActionsCancelListing({
       size={small ? "xl" : "xxl"}
       variant="secondary"
     >
-      {status === "loading" ? (
+      {isLoading ? (
         <LoaderCircle
           className={cn("animate-spin", small ?? "absolute left-4")}
           size={small ? 20 : 24}
