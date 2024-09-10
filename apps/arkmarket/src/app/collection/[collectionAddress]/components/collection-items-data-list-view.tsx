@@ -6,8 +6,8 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { PriceTag } from "@ark-market/ui/price-tag";
 import { Ethereum } from "@ark-market/ui/icons";
+import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,

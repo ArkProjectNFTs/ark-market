@@ -8,6 +8,7 @@ export interface Metadata {
   animation_key: string | null;
   animation_url: string | null;
   image_key: string | null;
+  image_key_540_540?: string | null;
 }
 
 export interface WalletToken {
