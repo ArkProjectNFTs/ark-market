@@ -3,7 +3,6 @@
 import type { Connector } from "@starknet-react/core";
 import { useMemo, useState } from "react";
 import { argent, useConnect } from "@starknet-react/core";
-import { Loader2, Mail } from "@ark-market/ui/icons";
 
 import { Button } from "@ark-market/ui/button";
 import {
@@ -12,9 +11,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@ark-market/ui/dialog";
+import { Loader2, Mail } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import { useConnectWalletStore } from "~/app/stores/connect-wallet";
+import { env } from "~/env";
 
 const walletIdToName = new Map([
   ["argentX", "Argent X"],
@@ -132,8 +133,9 @@ export default function ConnectWalletDialog() {
           )}
 
           <p className="text-sm text-muted-foreground">
-            By using “marketplace_name”, you agree to our Terms of Service and
-            our Privacy Policy.
+            By using{" "}
+            {env.NEXT_PUBLIC_THEME === "unframed" ? "Unframed" : "ArkMarket"},
+            you agree to our Terms of Service and our Privacy Policy.
           </p>
         </div>
       </DialogContent>
