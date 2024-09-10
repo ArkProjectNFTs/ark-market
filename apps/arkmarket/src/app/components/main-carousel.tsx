@@ -138,7 +138,7 @@ export default function MainCarousel() {
               <button
                 className={cn(
                   "relative h-1.5 w-24 overflow-hidden rounded-full",
-                  "bg-card",
+                  "bg-secondary",
                 )}
                 key={index}
                 onClick={() => {
@@ -150,7 +150,7 @@ export default function MainCarousel() {
                 }}
               >
                 <div
-                  className="absolute bottom-0 left-0 top-0 bg-accent transition-[width]"
+                  className="absolute bottom-0 left-0 top-0 bg-primary transition-[width]"
                   style={{ width: progressWidth }}
                 ></div>
               </button>
