@@ -69,7 +69,9 @@ export default function TokenOffersTableItem({
         )}
       </TableCell>
       <TableCell>
-        <Link href={`/wallet/${offer.source}`}>{formattedSource}</Link>
+        <Link href={`/wallet/${offer.source}`} className="text-primary">
+          {formattedSource}
+        </Link>
       </TableCell>
       <TableCell>In {expiresIn}</TableCell>
       <TableCell className="text-end">
