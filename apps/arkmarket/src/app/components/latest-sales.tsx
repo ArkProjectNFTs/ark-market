@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ShoppingCart } from "@ark-market/ui/icons";
 
+import { ShoppingCart } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -71,8 +71,8 @@ export default function LatestSales() {
                 <TableCell className="text-foreground">
                   <PriceTag price={sale.price} />
                 </TableCell>
-                <TableCell>{sale.from}</TableCell>
-                <TableCell>{sale.to}</TableCell>
+                <TableCell className="text-primary">{sale.from}</TableCell>
+                <TableCell className="text-primary">{sale.to}</TableCell>
                 <TableCell className="text-foreground transition-colors group-hover:text-muted-foreground">
                   1min ago
                 </TableCell>

@@ -197,7 +197,10 @@ export default function CollectionActivityData({
               </TableCell>
               <TableCell>
                 {activity.from ? (
-                  <Link href={`/wallet/${activity.from}`}>
+                  <Link
+                    href={`/wallet/${activity.from}`}
+                    className="text-primary"
+                  >
                     {ownerOrShortAddress({
                       ownerAddress: activity.from,
                       address,
@@ -209,7 +212,10 @@ export default function CollectionActivityData({
               </TableCell>
               <TableCell>
                 {activity.to ? (
-                  <Link href={`/wallet/${activity.to}`}>
+                  <Link
+                    href={`/wallet/${activity.to}`}
+                    className="text-primary"
+                  >
                     {ownerOrShortAddress({
                       ownerAddress: activity.to,
                       address,
