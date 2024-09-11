@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import Link from "next/link";
+import { LoaderCircle } from "lucide-react";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -72,8 +73,6 @@ export default function CollectionItemsDataGridView({
             return null;
           }
 
-          console.log(token);
-
           return (
             <NftCard>
               <Link
@@ -95,7 +94,7 @@ export default function CollectionItemsDataGridView({
                 <NftCardContent>
                   <div className="flex w-full justify-between">
                     <div className="w-full">
-                      <p
+                      <div
                         className={cn(
                           "font-bold",
                           viewType === "large-grid" ? "text-xl" : "text-sm",
@@ -103,19 +102,20 @@ export default function CollectionItemsDataGridView({
                         )}
                       >
                         {token.metadata?.name ?? token.token_id}
-                      </p>
+                      </div>
                       {token.price ? (
-                        <p
+                        <div
                           className={cn(
                             "font-medium",
                             viewType === "large-grid" ? "text-sm" : "text-xs",
                             ellipsableStyles,
                           )}
                         >
-                          {formatUnits(token.price, 18)} ETH
-                        </p>
+                          {formatUnits(token.price, 18)}{" "}
+                          <span className="text-muted-foreground">ETH</span>
+                        </div>
                       ) : (
-                        <p
+                        <div
                           className={cn(
                             "font-medium",
                             viewType === "large-grid" ? "text-sm" : "text-xs",
@@ -123,19 +123,31 @@ export default function CollectionItemsDataGridView({
                           )}
                         >
                           Not for sale
-                        </p>
+                        </div>
                       )}
                     </div>
                   </div>
-
                   <p className="mt-5 h-5 text-sm font-medium text-secondary-foreground">
                     {token.last_price ? (
-                      <>Last sale {formatUnits(token.last_price, 18)} ETH</>
+                      <>
+                        Last {viewType === "large-grid" ? "sale" : ""}{" "}
+                        {formatUnits(token.last_price, 18)} ETH
+                      </>
                     ) : null}
                   </p>
                 </NftCardContent>
               </Link>
-              {token.is_listed && !token.listing.is_auction ? (
+              {token.buy_in_progress ? (
+                <div
+                  className={cn(
+                    "absolute bottom-0 left-0 flex h-10 w-full items-center justify-between gap-2 bg-primary px-3 font-medium text-background",
+                    viewType === "large-grid" ? "text-sm" : "text-sm",
+                  )}
+                >
+                  <span className="leading-none">Buy in progress</span>
+                  <LoaderCircle className="left-4 size-4 animate-spin" />
+                </div>
+              ) : token.is_listed && !token.listing.is_auction ? (
                 <CollectionItemsBuyNow token={token} />
               ) : (
                 <NftCardAction asChild>
