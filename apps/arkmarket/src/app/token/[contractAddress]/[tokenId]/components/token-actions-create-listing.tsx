@@ -36,6 +36,7 @@ import { useToast } from "@ark-market/ui/use-toast";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
+import durations from "~/constants/durations";
 import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
 import formatAmount from "~/lib/formatAmount";
@@ -49,16 +50,6 @@ interface TokenActionsCreateListingProps {
   small?: boolean;
   children?: ReactNode;
 }
-
-const durationValueToName = {
-  "1": "1 hour",
-  "3": "3 hours",
-  "6": "6 hours",
-  "24": "1 day",
-  "72": "3 days",
-  "168": "7 days",
-  "719": "1 month",
-} as Record<string, string>;
 
 export function TokenActionsCreateListing({
   token,
@@ -215,7 +206,7 @@ export function TokenActionsCreateListing({
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
       endDate: values.endDateTime
-        ? values.endDateTime.getTime() / 1000
+        ? moment(values.endDateTime).unix()
         : moment().add(values.duration, "hours").unix(),
     };
 
@@ -412,16 +403,13 @@ export function TokenActionsCreateListing({
                                   ? undefined
                                   : durationField.value
                               }
-                              // value={durationField.value.toString()}
                             >
                               <FormControl>
                                 <SelectTrigger className="">
                                   <SelectValue placeholder="Custom">
                                     {durationField.value === "custom"
                                       ? "Custom"
-                                      : durationValueToName[
-                                          durationField.value
-                                        ]}
+                                      : durations[durationField.value]}
                                   </SelectValue>
                                 </SelectTrigger>
                               </FormControl>
