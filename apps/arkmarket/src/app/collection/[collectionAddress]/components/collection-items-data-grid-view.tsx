@@ -72,8 +72,6 @@ export default function CollectionItemsDataGridView({
             return null;
           }
 
-          console.log(token);
-
           return (
             <NftCard>
               <Link

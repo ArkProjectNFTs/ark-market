@@ -250,7 +250,7 @@ export const Discord =
         <svg
           stroke="currentColor"
           fill="none"
-          stroke-width="0"
+          strokeWidth="0"
           viewBox="0 0 15 15"
           height="24px"
           width="24px"
