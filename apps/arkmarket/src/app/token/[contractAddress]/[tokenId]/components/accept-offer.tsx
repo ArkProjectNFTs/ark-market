@@ -38,21 +38,21 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   const handleClick = async () => {
     if (tokenMarketData.is_listed && tokenMarketData.listing.is_auction) {
       await fulfillAuction({
-        starknetAccount: account,
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        tokenAddress: token.collection_address,
-        tokenId: token.token_id,
         orderHash: tokenMarketData.listing.order_hash,
         relatedOrderHash: offer.hash,
+        starknetAccount: account,
         startAmount: offer.price,
+        tokenAddress: token.collection_address,
+        tokenId: token.token_id,
       });
     } else {
       await fulfillOffer({
-        starknetAccount: account,
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
+        orderHash: offer.hash,
+        starknetAccount: account,
         tokenAddress: token.collection_address,
         tokenId: token.token_id,
-        orderHash: offer.hash,
       });
     }
   };

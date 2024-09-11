@@ -1,18 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
-import { useAccount } from "@starknet-react/core";
 import { formatEther } from "viem";
 
-import { areAddressesEqual, cn } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { LoaderCircle, Tag } from "@ark-market/ui/icons";
+import { Tag } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import type { Token, TokenMarketData } from "~/types";
-import { env } from "~/env";
-import AcceptOfferDialog from "./accept-offer-dialog";
+import AcceptTopOfferDialog from "./accept-top-offer-dialog";
 
 interface TokenActionsAcceptBestOfferProps {
   token: Token;
@@ -32,7 +29,7 @@ export default function TokenActionsAcceptBestOffer({
   }
 
   return (
-    <AcceptOfferDialog
+    <AcceptTopOfferDialog
       token={token}
       tokenMarketData={tokenMarketData}
       isAuction={isAuction}
@@ -52,6 +49,6 @@ export default function TokenActionsAcceptBestOffer({
         />
         {formatEther(BigInt(tokenMarketData.top_offer.amount))} ETH
       </Button>
-    </AcceptOfferDialog>
+    </AcceptTopOfferDialog>
   );
 }

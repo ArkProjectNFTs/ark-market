@@ -19,18 +19,18 @@ import { Token, TokenMarketData } from "~/types";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
-interface AcceptOfferDialogProps {
+interface AcceptTopOfferDialogProps {
   token: Token;
   isAuction: boolean;
   tokenMarketData: TokenMarketData;
 }
 
-export default function AcceptOfferDialog({
+export default function AcceptTopOfferDialog({
   token,
   tokenMarketData,
   isAuction,
   children,
-}: PropsWithChildren<AcceptOfferDialogProps>) {
+}: PropsWithChildren<AcceptTopOfferDialogProps>) {
   const [isOpen, setIsOpen] = useState(true);
   const { convertInUsd } = usePrices();
   const { fulfill: fulfillAuction, status: statusAuction } =
@@ -60,20 +60,20 @@ export default function AcceptOfferDialog({
     try {
       if (isAuction) {
         await fulfillAuction({
-          starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          tokenAddress: token.collection_address,
-          tokenId: token.token_id,
           orderHash: tokenMarketData.top_offer.order_hash,
           relatedOrderHash: tokenMarketData.listing.order_hash,
+          starknetAccount: account,
+          tokenAddress: token.collection_address,
+          tokenId: token.token_id,
         });
       } else {
         await fulfillOffer({
-          starknetAccount: account,
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
+          orderHash: tokenMarketData.top_offer.order_hash,
+          starknetAccount: account,
           tokenAddress: token.collection_address,
           tokenId: token.token_id,
-          orderHash: tokenMarketData.top_offer.order_hash,
         });
       }
     } catch (error) {
