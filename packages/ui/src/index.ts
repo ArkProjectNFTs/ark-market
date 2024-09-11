@@ -48,6 +48,28 @@ export function shortAddress(address: string): string {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
+export function timeSinceShort(timestamp: number): string {
+  const now = new Date().getTime();
+  const secondsPast = Math.floor((now - timestamp * 1000) / 1000); // Convert timestamp to milliseconds
+
+  if (secondsPast < 60) {
+    return `${secondsPast}s ago`;
+  }
+
+  const minutesPast = Math.floor(secondsPast / 60);
+  if (minutesPast < 60) {
+    return `${minutesPast}m ago`;
+  }
+
+  const hoursPast = Math.floor(minutesPast / 60);
+  if (hoursPast < 24) {
+    return `${hoursPast}h ago`;
+  }
+
+  const daysPast = Math.floor(hoursPast / 24);
+  return `${daysPast}d ago`;
+}
+
 export function timeSince(timestamp: number): string {
   const now = new Date().getTime();
   const secondsPast = Math.floor((now - timestamp * 1000) / 1000); // Convert timestamp to milliseconds
