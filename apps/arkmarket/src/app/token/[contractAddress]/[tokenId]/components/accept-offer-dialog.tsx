@@ -1,120 +1,46 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useState } from "react";
-import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
-import { useAccount } from "@starknet-react/core";
-import { formatEther, parseEther } from "viem";
+import { PropsWithChildren } from "react";
+import { parseEther } from "viem";
 
-import { areAddressesEqual, cn, ellipsableStyles } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import { LoaderCircle, VerifiedIcon } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
-import { useToast } from "@ark-market/ui/use-toast";
 
 import Media from "~/components/media";
-import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
-import { Token, TokenMarketData } from "~/types";
-import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
-import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
+import { Token } from "~/types";
 
-interface AcceptTopOfferDialogProps {
+interface AcceptOfferDialogProps {
   token: Token;
-  isAuction: boolean;
-  tokenMarketData: TokenMarketData;
+
+  onConfirm: () => Promise<void>;
+  formattedAmount: string;
+  isLoading: boolean;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  floorDifference: bigint;
 }
 
-export default function AcceptTopOfferDialog({
+export default function AcceptOfferDialog({
   token,
-  tokenMarketData,
-  isAuction,
+  onConfirm,
   children,
-}: PropsWithChildren<AcceptTopOfferDialogProps>) {
-  const [isOpen, setIsOpen] = useState(true);
+  formattedAmount,
+  isLoading,
+  floorDifference,
+  isOpen,
+  setIsOpen,
+}: PropsWithChildren<AcceptOfferDialogProps>) {
   const { convertInUsd } = usePrices();
-  const { fulfill: fulfillAuction, status: statusAuction } =
-    useFulfillAuction();
-  const { fulfillOffer, status } = useFulfillOffer();
 
-  const { address, account } = useAccount();
-  const isOwner = areAddressesEqual(tokenMarketData?.owner, address);
-
-  const { toast } = useToast();
-
-  const isLoading = status === "loading" || statusAuction === "loading";
-
-  const formattedAmount = formatEther(BigInt(tokenMarketData.top_offer.amount));
   const ethAmountInUsd = convertInUsd({
     amount: parseEther(formattedAmount),
   });
 
-  const floorDifference =
-    ((BigInt(tokenMarketData.top_offer.amount) -
-      BigInt(tokenMarketData.floor)) *
-      100n) /
-    BigInt(tokenMarketData.floor);
   const isHigherOfferThanFloor = floorDifference >= 0n;
-
-  const handleClick = async () => {
-    try {
-      if (isAuction) {
-        await fulfillAuction({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          relatedOrderHash: tokenMarketData.listing.order_hash,
-          starknetAccount: account,
-          tokenAddress: token.collection_address,
-          tokenId: token.token_id,
-        });
-      } else {
-        await fulfillOffer({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          starknetAccount: account,
-          tokenAddress: token.collection_address,
-          tokenId: token.token_id,
-        });
-      }
-    } catch (error) {
-      console.log("Error accepting offer", error);
-    }
-  };
-
-  useEffect(() => {
-    if (status === "error" || statusAuction === "error") {
-      setIsOpen(false);
-      toast({
-        variant: "canceled",
-        title: "Offer not accepted",
-        additionalContent: (
-          <ToastRejectedTransactionContent
-            token={token}
-            price={BigInt(tokenMarketData.top_offer.amount)}
-            formattedPrice={formattedAmount}
-          />
-        ),
-      });
-    } else if (status === "success" || statusAuction === "success") {
-      setIsOpen(false);
-      toast({
-        variant: "success",
-        title: "Offer successfully accepted",
-        additionalContent: (
-          <ToastExecutedTransactionContent
-            token={token}
-            price={BigInt(tokenMarketData.top_offer.amount)}
-            formattedPrice={formattedAmount}
-          />
-        ),
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, statusAuction]);
-
-  if (!account || !isOwner) {
-    return null;
-  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -193,7 +119,7 @@ export default function AcceptTopOfferDialog({
           <div className="flex justify-center">
             <Button
               size="xl"
-              onClick={handleClick}
+              onClick={onConfirm}
               disabled={isLoading}
               className="mx-auto"
             >
