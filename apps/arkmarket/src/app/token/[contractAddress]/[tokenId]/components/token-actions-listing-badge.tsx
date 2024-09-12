@@ -13,24 +13,29 @@ export default function TokenActionsListingBadge({
   isListed,
   isAuction,
 }: ListingBadgeProps) {
+  const borderClass = isListed
+    ? isAuction
+      ? isUnframed
+        ? "border-primary text-primary"
+        : "border-green-500 text-green-500"
+      : isUnframed
+        ? "border-primary text-primary"
+        : "border-blue-500 text-blue-500"
+    : isUnframed
+      ? "border-[#CCD0DB] text-[#CCD0DB]"
+      : "border-orange-500 text-orange-500";
+
+  const statusText = isListed
+    ? isAuction
+      ? "Up for auction"
+      : "For sale"
+    : "Not for sale";
+
   return (
     <div
-      className={cn(
-        "w-fit rounded-xl border border-blue-500 px-4 py-2 text-sm text-blue-500",
-        isListed
-          ? isAuction
-            ? isUnframed
-              ? "border-primary text-primary"
-              : "border-green-500 text-green-500"
-            : isUnframed
-              ? "border-primary text-primary"
-              : "border-blue-500 text-blue-500"
-          : isUnframed
-            ? "border-[#CCD0DB] text-[#CCD0DB]"
-            : "border-orange-500 text-orange-500",
-      )}
+      className={cn("w-fit rounded-xl border px-4 py-2 text-sm", borderClass)}
     >
-      {isListed ? (isAuction ? "Up for auction" : "For sale") : "Not for sale"}
+      {statusText}
     </div>
   );
 }

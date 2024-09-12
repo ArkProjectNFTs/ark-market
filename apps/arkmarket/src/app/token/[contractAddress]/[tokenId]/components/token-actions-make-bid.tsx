@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useConfig, useCreateOffer } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
 import * as z from "zod";
 
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { DateTimePicker } from "@ark-market/ui/date-time-picker";
 import {
   Dialog,
   DialogContent,
@@ -36,6 +38,7 @@ import {
 import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
+import durations from "~/constants/durations";
 import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
@@ -92,6 +95,7 @@ export default function TokenActionsMakeBid({
         },
       ),
     duration: z.string(),
+    endDateTime: z.date().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -102,6 +106,7 @@ export default function TokenActionsMakeBid({
         BigInt(tokenMarketData.listing.start_amount ?? 0),
       ),
       duration: "719",
+      endDateTime: moment().add(1, "month").toDate(),
     },
   });
 
@@ -151,6 +156,9 @@ export default function TokenActionsMakeBid({
       tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
+      endDate: values.endDateTime
+        ? moment(values.endDateTime).unix()
+        : moment().add(values.duration, "hours").unix(),
     };
 
     await createOffer({
@@ -234,32 +242,71 @@ export default function TokenActionsMakeBid({
               <FormField
                 control={form.control}
                 name="duration"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex justify-between">
-                      <FormLabel>Offer expiration</FormLabel>
-                    </div>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value.toString()}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="">
-                          <SelectValue placeholder="Theme" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="1">1 hour</SelectItem>
-                        <SelectItem value="3">3 hours</SelectItem>
-                        <SelectItem value="6">6 hours</SelectItem>
-                        <SelectItem value="24">1 day</SelectItem>
-                        <SelectItem value="72">3 days</SelectItem>
-                        <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="719">1 month</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
+                render={({ field: durationField }) => (
+                  <FormField
+                    control={form.control}
+                    name="endDateTime"
+                    render={({ field: endDateTimeField }) => {
+                      return (
+                        <FormItem>
+                          <FormLabel className="text-lg">
+                            Offer expiration
+                          </FormLabel>
+                          <div className="grid grid-cols-[1fr_2fr] gap-4">
+                            <Select
+                              onValueChange={(value) => {
+                                if (value.length === 0) {
+                                  return;
+                                }
+                                durationField.onChange(value);
+                                endDateTimeField.onChange(undefined);
+                              }}
+                              value={
+                                durationField.value === "custom"
+                                  ? undefined
+                                  : durationField.value
+                              }
+                            >
+                              <FormControl>
+                                <SelectTrigger className="">
+                                  <SelectValue placeholder="Custom">
+                                    {durationField.value === "custom"
+                                      ? "Custom"
+                                      : durations[durationField.value]}
+                                  </SelectValue>
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="1">1 hour</SelectItem>
+                                <SelectItem value="3">3 hours</SelectItem>
+                                <SelectItem value="6">6 hours</SelectItem>
+                                <SelectItem value="24">1 day</SelectItem>
+                                <SelectItem value="72">3 days</SelectItem>
+                                <SelectItem value="168">7 days</SelectItem>
+                                <SelectItem value="719">1 month</SelectItem>
+                                <SelectItem value="custom">Custom</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <DateTimePicker
+                              hourCycle={12}
+                              value={
+                                durationField.value === "custom"
+                                  ? endDateTimeField.value
+                                  : moment()
+                                      .add(form.getValues("duration"), "hours")
+                                      .toDate()
+                              }
+                              onChange={(value) => {
+                                endDateTimeField.onChange(value);
+                                durationField.onChange("custom");
+                              }}
+                            />
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      );
+                    }}
+                  />
                 )}
               />
               <Button

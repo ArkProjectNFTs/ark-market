@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useFulfillListing } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
 import { useQueryClient } from "@tanstack/react-query";
+import { LoaderCircle } from "lucide-react";
 import { formatEther } from "viem";
 
 import { areAddressesEqual } from "@ark-market/ui";
@@ -142,6 +143,9 @@ export default function CollectionItemsBuyNow({
             }
           }}
         >
+          {status === "loading" && (
+            <LoaderCircle className="absolute left-4 animate-spin" size={20} />
+          )}
           Buy now
         </Button>
       </div>

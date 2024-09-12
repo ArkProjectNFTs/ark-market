@@ -13,6 +13,7 @@ import * as z from "zod";
 
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { DateTimePicker } from "@ark-market/ui/date-time-picker";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import { EthInput } from "@ark-market/ui/eth-input";
 import {
@@ -35,6 +36,7 @@ import { useToast } from "@ark-market/ui/use-toast";
 
 import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
 import type { Token } from "~/types";
+import durations from "~/constants/durations";
 import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
 import formatAmount from "~/lib/formatAmount";
@@ -89,7 +91,8 @@ export function TokenActionsCreateListing({
           message: "Must be a valid amount and greater than 0.00001",
         },
       ),
-      duration: z.string(),
+      duration: z.string().optional(),
+      endDateTime: z.date().optional(),
     })
     .refine(
       (data) => {
@@ -115,6 +118,7 @@ export function TokenActionsCreateListing({
       startAmount: "",
       endAmount: "",
       duration: "719",
+      endDateTime: undefined,
       username: "",
     },
   });
@@ -201,7 +205,9 @@ export function TokenActionsCreateListing({
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
       endAmount: values.endAmount ? parseEther(values.endAmount) : BigInt(0),
-      endDate: moment().add(values.duration, "hours").unix(),
+      endDate: values.endDateTime
+        ? moment(values.endDateTime).unix()
+        : moment().add(values.duration, "hours").unix(),
     };
 
     try {
@@ -373,34 +379,74 @@ export function TokenActionsCreateListing({
               <FormField
                 control={form.control}
                 name="duration"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lg">
-                      Listing expiration
-                    </FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value.toString()}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="">
-                          <SelectValue placeholder="Theme" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="1">1 hour</SelectItem>
-                        <SelectItem value="3">3 hours</SelectItem>
-                        <SelectItem value="6">6 hours</SelectItem>
-                        <SelectItem value="24">1 day</SelectItem>
-                        <SelectItem value="72">3 days</SelectItem>
-                        <SelectItem value="168">7 days</SelectItem>
-                        <SelectItem value="719">1 month</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
+                render={({ field: durationField }) => (
+                  <FormField
+                    control={form.control}
+                    name="endDateTime"
+                    render={({ field: endDateTimeField }) => {
+                      return (
+                        <FormItem>
+                          <FormLabel className="text-lg">
+                            Listing expiration
+                          </FormLabel>
+                          <div className="grid grid-cols-[1fr_2fr] gap-4">
+                            <Select
+                              onValueChange={(value) => {
+                                if (value.length === 0) {
+                                  return;
+                                }
+                                durationField.onChange(value);
+                                endDateTimeField.onChange(undefined);
+                              }}
+                              value={
+                                durationField.value === "custom"
+                                  ? undefined
+                                  : durationField.value
+                              }
+                            >
+                              <FormControl>
+                                <SelectTrigger className="">
+                                  <SelectValue placeholder="Custom">
+                                    {durationField.value === "custom"
+                                      ? "Custom"
+                                      : durations[durationField.value]}
+                                  </SelectValue>
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="1">1 hour</SelectItem>
+                                <SelectItem value="3">3 hours</SelectItem>
+                                <SelectItem value="6">6 hours</SelectItem>
+                                <SelectItem value="24">1 day</SelectItem>
+                                <SelectItem value="72">3 days</SelectItem>
+                                <SelectItem value="168">7 days</SelectItem>
+                                <SelectItem value="719">1 month</SelectItem>
+                                <SelectItem value="custom">Custom</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <DateTimePicker
+                              hourCycle={12}
+                              value={
+                                durationField.value === "custom"
+                                  ? endDateTimeField.value
+                                  : moment()
+                                      .add(form.getValues("duration"), "hours")
+                                      .toDate()
+                              }
+                              onChange={(value) => {
+                                endDateTimeField.onChange(value);
+                                durationField.onChange("custom");
+                              }}
+                            />
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      );
+                    }}
+                  />
                 )}
               />
+
               <div className="!mt-8 text-xl font-semibold">
                 <div className="flex items-center justify-between">
                   <p>Earning details</p>
