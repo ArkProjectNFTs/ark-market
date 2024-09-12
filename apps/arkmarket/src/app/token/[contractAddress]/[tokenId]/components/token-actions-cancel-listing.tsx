@@ -76,10 +76,7 @@ export default function TokenActionsCancelListing({
     });
   };
 
-  const isDisabled =
-    tokenMarketData.buy_in_progress ||
-    status === "loading" ||
-    status === "success";
+  const isDisabled = status === "loading" || status === "success";
 
   return (
     <Button
