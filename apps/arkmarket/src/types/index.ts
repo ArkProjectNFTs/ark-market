@@ -174,6 +174,18 @@ export interface PortfolioActivity {
   token_id: string;
 }
 
+export interface PortfolioOffers {
+  currency_address: string;
+  expire_at: number;
+  floor_difference: string;
+  from_address: string;
+  hash: string;
+  offer_id: number;
+  price: string;
+  to_address: string | null;
+  token_id: string;
+}
+
 export interface CollectionActivity {
   activity_type: ActivityType;
   address: string;

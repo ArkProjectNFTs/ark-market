@@ -18,6 +18,7 @@ import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
+import PortfolioOffersData from "./portfolio-offers-data";
 import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
 
 interface PortfolioProps {
@@ -122,6 +123,9 @@ export default function Portfolio({
               isFetchingNextPage={isFetchingNextPage}
               isOwner={isOwner}
             />
+          )}
+          {selectedTab === "offers" && (
+            <PortfolioOffersData walletAddress={walletAddress} />
           )}
           {selectedTab === "activity" && (
             <PortfolioActivityData walletAddress={walletAddress} />
