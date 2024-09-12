@@ -166,7 +166,7 @@ export default function TokenActionsBuyNow({
       <Button
         className={cn(small ?? "relative w-full lg:max-w-[50%]")}
         size={small ? "xl" : "xxl"}
-        disabled={status === "loading" || tokenMarketData.buy_in_progress}
+        disabled={status === "loading"}
         onClick={(e) => {
           ensureConnect(e);
 
@@ -175,21 +175,9 @@ export default function TokenActionsBuyNow({
           }
         }}
       >
-        {tokenMarketData.buy_in_progress ? (
-          <>
-            <LoaderCircle
-              className={cn("animate-spin", small ?? "absolute left-4")}
-              size={small ? 20 : 24}
-            />
-            Buy in progress
-          </>
-        ) : (
-          <>
-            <ActivityList />
-            {"Buy now for "}
-            {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
-          </>
-        )}
+        <ActivityList />
+        {"Buy now for "}
+        {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
       </Button>
     </>
   );

@@ -2,6 +2,9 @@
 
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { LoaderCircle } from "lucide-react";
+
+import { Button } from "@ark-market/ui/button";
 
 import type { Token, TokenMarketData } from "~/types";
 import TokenActionsAcceptBestOffer from "./token-actions-accept-best-offer";
@@ -32,6 +35,20 @@ export default function TokenActionsButtons({
 }: TokenActionsButtonsProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isActionItemsInView = useInView(ref, { margin: "-72px 0px 0px 0px" });
+
+  if (tokenMarketData.buy_in_progress) {
+    return (
+      <Button
+        disabled
+        className="relative w-full lg:max-w-[50%]"
+        size="xxl"
+        variant="secondary"
+      >
+        Buy in progress
+        <LoaderCircle className="absolute left-4 animate-spin" size={24} />
+      </Button>
+    );
+  }
 
   return (
     <>
