@@ -50,7 +50,7 @@ export default function AcceptOfferDialog({
           <div className="flex flex-col gap-6">
             <div className="mt-5 flex flex-col items-center gap-4">
               <div className="hidden size-20 place-items-center rounded-full bg-secondary sm:grid">
-                <Tag className="size-8" />
+                <Tag className="!size-8 !text-3xl" />
               </div>
               <h2 className="text-center text-xl font-semibold">
                 Approve sale
