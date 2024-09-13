@@ -10,10 +10,9 @@ import {
   cn,
   ellipsableStyles,
   focusableStyles,
-  timeSince,
+  getRoundedRemainingTime,
 } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
-import { ArrowUpRight, NoActivity, VerifiedIcon } from "@ark-market/ui/icons";
+import { NoActivity, VerifiedIcon } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -24,15 +23,13 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
-import ExternalLink from "~/components/external-link";
-import Media from "~/components/media";
-import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import {
-  getPortfolioOffers,
+import type {
   PortfolioOffersApiResponse,
   PortfolioOffersTypeValues,
 } from "~/lib/getPortfolioOffers";
+import Media from "~/components/media";
+import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
+import { getPortfolioOffers } from "~/lib/getPortfolioOffers";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface PortfolioActivityDataProps {
@@ -94,6 +91,7 @@ export default function PortfolioOffersData({
     overscan: 5,
     scrollMargin: tableRef.current?.offsetTop ?? 0,
   });
+  console.log(portfolioOffers);
 
   return (
     <>
@@ -187,7 +185,7 @@ export default function PortfolioOffersData({
                             {offer.collection_name}
                           </p>
                         </Link>
-                        {offer.collection_is_verified && (
+                        {offer.is_verified && (
                           <VerifiedIcon className="size-4 text-primary" />
                         )}
                       </div>
@@ -228,7 +226,9 @@ export default function PortfolioOffersData({
                   )}
                 </TableCell>
                 <TableCell>
-                  {offer.expire_at ? timeSince(offer.expire_at) : "_"}
+                  {offer.expire_at
+                    ? getRoundedRemainingTime(offer.expire_at)
+                    : "_"}
                 </TableCell>
                 <TableCell className="pr-5">
                   {/* {offerType === "made" ? <CancelOffer /> : <></>} */}
