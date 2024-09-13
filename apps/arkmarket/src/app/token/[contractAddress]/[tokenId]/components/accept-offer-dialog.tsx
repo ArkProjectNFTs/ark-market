@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { parseEther } from "viem";
 
 import { cn, ellipsableStyles } from "@ark-market/ui";
@@ -9,9 +9,9 @@ import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
 import { LoaderCircle, Tag, VerifiedIcon } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
+import type { Token } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
-import { Token } from "~/types";
 
 interface AcceptOfferDialogProps {
   token: Token;

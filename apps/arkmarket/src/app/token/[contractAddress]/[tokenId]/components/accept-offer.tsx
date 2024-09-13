@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAccount } from "@starknet-react/core";
 import { formatEther } from "viem";
 

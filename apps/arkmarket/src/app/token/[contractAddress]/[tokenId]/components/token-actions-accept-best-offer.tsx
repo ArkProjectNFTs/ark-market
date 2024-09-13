@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { formatEther, parseEther } from "viem";
+import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
@@ -13,7 +13,6 @@ import { useToast } from "@ark-market/ui/use-toast";
 
 import type { Token, TokenMarketData } from "~/types";
 import { env } from "~/env";
-import usePrices from "~/hooks/usePrices";
 import AcceptOfferDialog from "./accept-offer-dialog";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
@@ -32,13 +31,12 @@ export default function TokenActionsAcceptBestOffer({
   small,
 }: TokenActionsAcceptBestOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { convertInUsd } = usePrices();
   const { fulfill: fulfillAuction, status: statusAuction } =
     useFulfillAuction();
   const { fulfillOffer, status } = useFulfillOffer();
 
   const { address, account } = useAccount();
-  const isOwner = areAddressesEqual(tokenMarketData?.owner, address);
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
 
   const { toast } = useToast();
 
