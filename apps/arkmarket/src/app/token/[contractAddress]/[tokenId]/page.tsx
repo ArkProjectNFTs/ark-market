@@ -70,6 +70,7 @@ export default async function TokenPage({
           />
           <TokenTraits
             className="-mx-5 lg:mx-0"
+            contractAddress={contractAddress}
             tokenAttributes={token.metadata?.attributes ?? []}
           />
           <TokenAbout
