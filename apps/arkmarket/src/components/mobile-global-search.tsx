@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Meh, Search } from "@ark-market/ui/icons";
 import { useDebounceValue } from "usehooks-ts";
 
 import {
@@ -13,8 +12,7 @@ import {
   formatNumber,
 } from "@ark-market/ui";
 import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
-import { Ethereum } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import { Ethereum, Meh, Search, VerifiedIcon } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";

@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDown } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { ChevronDown } from "@ark-market/ui/icons";
 
 const Accordion = AccordionPrimitive.Root;
 

@@ -3,11 +3,11 @@
 import * as React from "react";
 import { useFulfillAuction, useFulfillOffer } from "@ark-project/react";
 import { useAccount } from "@starknet-react/core";
-import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { LoaderCircle, Tag } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import type { Token, TokenMarketData } from "~/types";

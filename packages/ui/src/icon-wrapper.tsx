@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+
 import { cn } from "@ark-market/ui";
 
 interface IconProps {
@@ -32,7 +33,7 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
       if (isNaN(fontSize)) {
         return;
       }
-      
+
       const minSize = 16;
       const maxSize = 24;
 

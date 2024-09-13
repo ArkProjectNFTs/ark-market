@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { Check, ChevronRight, Circle } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { Check, ChevronRight, Circle } from "@ark-market/ui/icons";
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

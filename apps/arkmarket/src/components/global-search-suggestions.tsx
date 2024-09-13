@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
 import { CommandGroup, CommandItem } from "@ark-market/ui/command";
-import { Ethereum } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import { Ethereum, VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import Media from "./media";

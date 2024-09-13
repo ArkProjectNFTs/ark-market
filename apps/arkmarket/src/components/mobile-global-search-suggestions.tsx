@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
-import { Ethereum } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import { Ethereum, VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import Media from "./media";

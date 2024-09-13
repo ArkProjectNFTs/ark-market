@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { X } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { X } from "@ark-market/ui/icons";
 
 const Dialog = DialogPrimitive.Root;
 

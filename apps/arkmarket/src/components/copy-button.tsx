@@ -1,9 +1,8 @@
 "use client";
 
-import { Copy } from "@ark-market/ui/icons";
-
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, focusableStyles } from "@ark-market/ui";
+import { Copy } from "@ark-market/ui/icons";
 import {
   Tooltip,
   TooltipContent,

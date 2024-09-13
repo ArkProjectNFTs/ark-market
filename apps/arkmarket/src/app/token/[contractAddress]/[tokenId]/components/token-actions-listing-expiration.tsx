@@ -1,7 +1,8 @@
 "use client";
 
-import { TimerReset } from "@ark-market/ui/icons";
 import moment from "moment";
+
+import { TimerReset } from "@ark-market/ui/icons";
 
 interface TokenActionsListingExpirationProps {
   expiresAt: number | null;

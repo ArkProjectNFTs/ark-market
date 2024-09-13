@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
-import { TimerReset } from "@ark-market/ui/icons";
 
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
@@ -12,6 +11,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
+import { TimerReset } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 

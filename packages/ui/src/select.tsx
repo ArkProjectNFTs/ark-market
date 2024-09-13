@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Check, ChevronDown, ChevronUp } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { Check, ChevronDown, ChevronUp } from "@ark-market/ui/icons";
 
 const Select = SelectPrimitive.Root;
 
