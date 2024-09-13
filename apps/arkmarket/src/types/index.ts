@@ -101,6 +101,7 @@ export interface Token {
 }
 
 export interface CollectionToken {
+  buy_in_progress: boolean;
   collection_address: string;
   collection_name: string;
   floor_difference: number | null;

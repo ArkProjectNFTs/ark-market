@@ -4,9 +4,13 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
-import { Ethereum } from "@ark-market/ui/icons";
+import {
+  cn,
+  ellipsableStyles,
+  formatUnits,
+  timeSinceShort,
+} from "@ark-market/ui";
+import { Ethereum, LoaderCircle } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -19,9 +23,6 @@ import {
 
 import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
-
-const gridTemplateColumnValue =
-  "grid-cols-[minmax(10rem,2fr)_repeat(5,minmax(7.25rem,1fr))]";
 
 interface CollectionItemsDataListViewProps {
   collectionTokens: CollectionToken[];
@@ -48,30 +49,25 @@ export default function CollectionItemsDataListView({
   });
 
   return (
-    <Table ref={tableRef}>
-      <TableHeader className="h-12">
-        <TableRow
-          className={cn(
-            "absolute grid w-full items-center",
-            gridTemplateColumnValue,
-          )}
-        >
-          <TableHead className="sticky top-0 flex items-center bg-background pl-5">
+    <Table ref={tableRef} className="w-full min-w-[1024px] table-auto">
+      <TableHeader className="sticky top-0 h-10 bg-green-500/20">
+        <TableRow className="flex">
+          <TableHead className="sticky left-0 top-0 flex min-w-[240px] flex-grow items-center bg-background pl-5">
             Item
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="flex w-[25%] items-center bg-background">
             Current price
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="flex w-[20%] items-center bg-background">
             Last sold
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="flex w-[15%] items-center bg-background">
             Floor difference
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="flex w-[10%] items-center bg-background">
             Owner
           </TableHead>
-          <TableHead className="flex items-center bg-background">
+          <TableHead className="flex w-[10%] items-center bg-background">
             Time listed
           </TableHead>
         </TableRow>
@@ -91,63 +87,79 @@ export default function CollectionItemsDataListView({
 
           return (
             <TableRow
-              data-index={virtualRow.index} // Needed for dynamic row height measurement
-              ref={(node) => rowVirtualizer.measureElement(node)} // Measure dynamic row height
-              className="absolute h-[4.6875rem] w-full"
+              data-index={virtualRow.index}
+              key={`${token.collection_address}-${token.token_id}`}
+              ref={(node) => rowVirtualizer.measureElement(node)}
+              className="group absolute flex w-full items-center"
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}
-              key={`${token.collection_address}-${token.token_id}`}
             >
-              <Link
-                prefetch={false}
-                href={`/token/${token.collection_address}/${token.token_id}`}
-                className={cn(
-                  "grid h-full w-full items-center",
-                  gridTemplateColumnValue,
+              {/* avatar / name */}
+              <TableCell className="sticky left-0 min-w-[240px] flex-grow pl-5 backdrop-blur-3xl transition-colors">
+                <Link
+                  prefetch={false}
+                  href={`/token/${token.collection_address}/${token.token_id}`}
+                  className="flex items-center gap-4"
+                >
+                  <Media
+                    src={token.metadata?.image}
+                    mediaKey={token.metadata?.image_key}
+                    alt={token.metadata?.name ?? "Empty NFT"}
+                    className="size-10 rounded-md object-contain"
+                  />
+                  <div className={cn("w-full", ellipsableStyles)}>
+                    {token.metadata?.name ?? token.token_id}
+                  </div>
+                </Link>
+              </TableCell>
+
+              {/* price */}
+              <TableCell className="flex w-[25%]">
+                {token.buy_in_progress ? (
+                  <div className="flex h-10 items-center justify-center text-nowrap rounded bg-primary px-3 text-sm text-background">
+                    Buy in progress
+                    <LoaderCircle className="ml-4 size-4 animate-spin" />
+                  </div>
+                ) : token.price ? (
+                  <PriceTag price={token.price} />
+                ) : (
+                  "_"
                 )}
-              >
-                <TableCell className="pl-5">
-                  <div className="flex items-center gap-4">
-                    <Media
-                      src={token.metadata?.image}
-                      mediaKey={token.metadata?.image_key}
-                      alt={token.metadata?.name ?? "Empty NFT"}
-                      className="h-[2.625rem] w-[2.625rem] rounded-md object-contain"
-                      height={94}
-                      width={94}
-                    />
-                    <p className={cn("w-full", ellipsableStyles)}>
-                      {token.metadata?.name ?? token.token_id}
+              </TableCell>
+
+              {/* last sold */}
+              <TableCell className="flex w-[20%]">
+                {token.last_price ? (
+                  <div className="flex items-center">
+                    <Ethereum className="size-4" />
+                    <p>
+                      {formatUnits(token.last_price, 18)}{" "}
+                      <span className="text-muted-foreground">ETH</span>
                     </p>
                   </div>
-                </TableCell>
-                <TableCell>
-                  {token.price ? <PriceTag price={token.price} /> : "_"}
-                </TableCell>
-                <TableCell>
-                  {token.last_price ? (
-                    <div className="flex items-center">
-                      <Ethereum className="size-4" />
-                      <p>
-                        {formatUnits(token.last_price, 18)}{" "}
-                        <span className="text-muted-foreground">ETH</span>
-                      </p>
-                    </div>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>_</TableCell>
-                <TableCell>
-                  <Button asChild variant="link" className="px-0" size="xl">
-                    <Link href={`/wallet/${token.owner}`}>
-                      {token.owner ? `${token.owner.slice(0, 6)}...` : "_"}
-                    </Link>
-                  </Button>
-                </TableCell>
-                <TableCell>_</TableCell>
-              </Link>
+                ) : (
+                  "_"
+                )}
+              </TableCell>
+
+              {/* floor difference */}
+              <TableCell className="flex w-[15%]">_</TableCell>
+
+              {/* owner */}
+              <TableCell className="flex w-[10%] whitespace-nowrap">
+                <Link
+                  href={`/wallet/${token.owner}`}
+                  className="hover:text-primary"
+                >
+                  {token.owner ? token.owner.slice(0, 6) : "_"}
+                </Link>
+              </TableCell>
+
+              {/* time listed */}
+              <TableCell className="flex w-[10%] whitespace-nowrap">
+                {token.listed_at ? timeSinceShort(token.listed_at) : "_"}
+              </TableCell>
             </TableRow>
           );
         })}
