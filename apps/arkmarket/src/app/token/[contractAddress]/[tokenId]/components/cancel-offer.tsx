@@ -14,7 +14,6 @@ import ToastExecutedTransactionContent from "./toast-executed-transaction-conten
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface CancelOfferProps {
-  address: string;
   token: Token;
   offer: TokenOffer;
   onSuccess: () => void;

@@ -184,6 +184,12 @@ export interface PortfolioOffers {
   price: string;
   to_address: string | null;
   token_id: string;
+
+  // TODO: Remove ? when implemented in API
+  collection_address: string;
+  collection_is_verified: boolean;
+  collection_name: string;
+  metadata?: TokenMetadata;
 }
 
 export interface CollectionActivity {

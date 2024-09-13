@@ -23,7 +23,7 @@
 @layer base {
   :root {
     --site-header-height: 3.75rem;
-    --site-footer-height: 40px;
+    --site-footer-height: 2.5rem;
     --radius: 0.75rem;
 
     /* Default theme light variables */

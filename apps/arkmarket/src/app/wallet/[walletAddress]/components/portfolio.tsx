@@ -8,6 +8,7 @@ import { validateAndParseAddress } from "starknet";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import { portfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
@@ -19,6 +20,7 @@ import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
 import PortfolioOffersData from "./portfolio-offers-data";
+import PortfolioOffersFiltersPanel from "./portfolio-offers-filters-panel";
 import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
 
 interface PortfolioProps {
@@ -38,6 +40,11 @@ export default function Portfolio({
   const [selectedTab, setSelectedTab] = useQueryState(
     "activeTab",
     parseAsStringLiteral(portfolioTabsValues).withDefault("items"),
+  );
+
+  const [offerType, setOfferType] = useQueryState(
+    "offerType",
+    parseAsStringLiteral(portfolioOffersTypeValues).withDefault("made"),
   );
   const { address } = useAccount();
 
@@ -87,7 +94,15 @@ export default function Portfolio({
         <PortfolioItemsFiltersPanel
           walletAddress={walletAddress}
           filtersOpen={itemsFiltersOpen}
-          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] sm:block"
+          // walletCollectionsInitialData={walletCollectionsInitialData}
+        />
+      )}
+      {selectedTab === "offers" && (
+        <PortfolioOffersFiltersPanel
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] sm:block"
+          value={offerType}
+          onValueChange={setOfferType}
           // walletCollectionsInitialData={walletCollectionsInitialData}
         />
       )}
@@ -125,7 +140,10 @@ export default function Portfolio({
             />
           )}
           {selectedTab === "offers" && (
-            <PortfolioOffersData walletAddress={walletAddress} />
+            <PortfolioOffersData
+              walletAddress={walletAddress}
+              offerType={offerType}
+            />
           )}
           {selectedTab === "activity" && (
             <PortfolioActivityData walletAddress={walletAddress} />

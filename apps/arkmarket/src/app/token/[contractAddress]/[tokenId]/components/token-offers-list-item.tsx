@@ -78,7 +78,6 @@ export default function TokenOffersListItem({
               )}
               {isOfferer && (
                 <CancelOffer
-                  address={address}
                   offer={offer}
                   token={token}
                   onSuccess={() => setIsSuccess(true)}

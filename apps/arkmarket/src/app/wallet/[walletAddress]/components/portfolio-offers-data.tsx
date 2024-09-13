@@ -24,23 +24,28 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { PortfolioActivityApiResponse } from "~/lib/getPortfolioActivity";
+import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
 import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
-import activityTypeMetadata from "~/constants/activity-type-metadata";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getPortfolioActivity } from "~/lib/getPortfolioActivity";
+import {
+  getPortfolioOffers,
+  PortfolioOffersApiResponse,
+  PortfolioOffersTypeValues,
+} from "~/lib/getPortfolioOffers";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface PortfolioActivityDataProps {
   walletAddress: string;
+  offerType: PortfolioOffersTypeValues;
 }
 
 const gridTemplateColumnValue =
-  "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
+  "grid-cols-[minmax(11rem,2fr)_repeat(5,minmax(7.5rem,1fr))]";
 
 export default function PortfolioOffersData({
   walletAddress,
+  offerType,
 }: PortfolioActivityDataProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
   const { address } = useAccount();
@@ -51,16 +56,17 @@ export default function PortfolioOffersData({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["walletActivity", walletAddress],
+    queryKey: ["walletOffers", walletAddress, offerType],
     refetchInterval: 10_000,
     placeholderData: keepPreviousData,
-    getNextPageParam: (lastPage: PortfolioActivityApiResponse) =>
+    getNextPageParam: (lastPage: PortfolioOffersApiResponse) =>
       lastPage.next_page,
     initialPageParam: undefined,
     queryFn: ({ pageParam }) =>
-      getPortfolioActivity({
+      getPortfolioOffers({
         page: pageParam,
         walletAddress,
+        offerType,
       }),
   });
 
@@ -70,7 +76,7 @@ export default function PortfolioOffersData({
     isFetchingNextPage,
   });
 
-  const portfolioActivity = useMemo(
+  const portfolioOffers = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
     [infiniteData],
   );
@@ -78,7 +84,7 @@ export default function PortfolioOffersData({
   const rowVirtualizer = useWindowVirtualizer({
     // Approximate initial rect for SSR
     initialRect: { height: 1080, width: 1920 },
-    count: portfolioActivity.length,
+    count: portfolioOffers.length,
     estimateSize: () => 75, // Estimation of row height for accurate scrollbar dragging
     // Measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
@@ -106,15 +112,17 @@ export default function PortfolioOffersData({
               Price
             </TableHead>
             <TableHead className="sticky top-0 flex items-center bg-background">
-              From
+              Floor difference
             </TableHead>
             <TableHead className="sticky top-0 flex items-center bg-background">
-              To
+              {offerType === "made" ? "To" : "From"}
             </TableHead>
             <TableHead className="sticky top-0 flex items-center bg-background">
-              Date
+              Expiration
             </TableHead>
-            <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Action
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody
@@ -122,9 +130,9 @@ export default function PortfolioOffersData({
           style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
         >
           {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const activity = portfolioActivity[virtualRow.index];
+            const offer = portfolioOffers[virtualRow.index];
 
-            if (activity === undefined) {
+            if (offer === undefined) {
               return null;
             }
 
@@ -135,7 +143,7 @@ export default function PortfolioOffersData({
                   gridTemplateColumnValue,
                 )}
                 data-index={virtualRow.index}
-                key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
+                key={`${virtualRow.index}-${offer.hash}-${offer.offer_id}`}
                 ref={(node) => rowVirtualizer.measureElement(node)}
                 style={{
                   transform: `translateY(${virtualRow.start}px)`,
@@ -147,14 +155,14 @@ export default function PortfolioOffersData({
                       className="size-[3.75rem] rounded-xs object-contain"
                       height={120}
                       width={120}
-                      alt={activity.metadata?.name ?? "Unnamed Token"}
-                      src={activity.metadata?.image ?? ""}
-                      mediaKey={activity.metadata?.image_key ?? ""}
+                      alt={offer.metadata?.name ?? "Unnamed Token"}
+                      src={offer.metadata?.image ?? ""}
+                      mediaKey={offer.metadata?.image_key ?? ""}
                     />
                     <div className="w-full overflow-hidden">
                       <Link
                         className={focusableStyles}
-                        href={`/token/${activity.collection_address}/${activity.token_id}`}
+                        href={`/token/${offer.collection_address}/${offer.token_id}`}
                       >
                         <p
                           className={cn(
@@ -162,13 +170,13 @@ export default function PortfolioOffersData({
                             ellipsableStyles,
                           )}
                         >
-                          {activity.metadata?.name ?? "Unnamed Token"}
+                          {offer.metadata?.name ?? "Unnamed Token"}
                         </p>
                       </Link>
                       <div className="flex w-full items-center gap-1">
                         <Link
                           className={focusableStyles}
-                          href={`/collection/${activity.collection_address}`}
+                          href={`/collection/${offer.collection_address}`}
                         >
                           <p
                             className={cn(
@@ -176,10 +184,10 @@ export default function PortfolioOffersData({
                               ellipsableStyles,
                             )}
                           >
-                            {activity.collection_name}
+                            {offer.collection_name}
                           </p>
                         </Link>
-                        {activity.collection_is_verified && (
+                        {offer.collection_is_verified && (
                           <VerifiedIcon className="size-4 text-primary" />
                         )}
                       </div>
@@ -187,16 +195,31 @@ export default function PortfolioOffersData({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {activity.price ? <PriceTag price={activity.price} /> : "_"}
+                  {offer.price ? <PriceTag price={offer.price} /> : "_"}
                 </TableCell>
+                <TableCell>{offer.floor_difference}%</TableCell>
                 <TableCell>
-                  {activity.from ? (
+                  {offerType === "made" ? (
+                    offer.to_address ? (
+                      <Link
+                        href={`/wallet/${offer.to_address}`}
+                        className="text-primary"
+                      >
+                        {ownerOrShortAddress({
+                          ownerAddress: offer.to_address,
+                          address,
+                        })}
+                      </Link>
+                    ) : (
+                      "_"
+                    )
+                  ) : offer.from_address ? (
                     <Link
-                      href={`/wallet/${activity.from}`}
+                      href={`/wallet/${offer.from_address}`}
                       className="text-primary"
                     >
                       {ownerOrShortAddress({
-                        ownerAddress: activity.from,
+                        ownerAddress: offer.from_address,
                         address,
                       })}
                     </Link>
@@ -205,39 +228,20 @@ export default function PortfolioOffersData({
                   )}
                 </TableCell>
                 <TableCell>
-                  {activity.to ? (
-                    <Link
-                      href={`/wallet/${activity.to}`}
-                      className="text-primary"
-                    >
-                      {ownerOrShortAddress({
-                        ownerAddress: activity.to,
-                        address,
-                      })}
-                    </Link>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
+                  {offer.expire_at ? timeSince(offer.expire_at) : "_"}
                 </TableCell>
                 <TableCell className="pr-5">
-                  <Button asChild size="icon" variant="outline">
-                    <ExternalLink href="/">
-                      <ArrowUpRight className="size-5" />
-                    </ExternalLink>
-                  </Button>
+                  {/* {offerType === "made" ? <CancelOffer /> : <></>} */}
                 </TableCell>
               </TableRow>
             );
           })}
         </TableBody>
       </Table>
-      {portfolioActivity.length === 0 && (
+      {portfolioOffers.length === 0 && (
         <div className="flex flex-col items-center gap-3 pt-8 text-muted-foreground">
           <NoActivity size={42} />
-          <p className="text-xl font-semibold">No activity yet!</p>
+          <p className="text-xl font-semibold">No offers {offerType} yet!</p>
         </div>
       )}
     </>
