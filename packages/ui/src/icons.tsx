@@ -2,7 +2,6 @@
 import {
   ArrowDownRight,
   ArrowUpLeft,
-  ArrowUpRight,
   Circle,
   FileSignature,
   Flame,
@@ -13,6 +12,7 @@ import {
   ArrowLeft as LucideArrowLeft,
   ArrowLeftRight as LucideArrowLeftRight,
   ArrowRight as LucideArrowRight,
+  ArrowUpRight as LucideArrowUpRight,
   BarChart3 as LucideChart,
   Check as LucideCheck,
   ChevronDown as LucideChevronDown,
@@ -27,6 +27,7 @@ import {
   Grid2X2 as LucideGrid2X2,
   Grid3X3 as LucideGrid3X3,
   List as LucideList,
+  Mail as LucideMail,
   Moon as LucideMoon,
   RefreshCw as LucideRefreshCw,
   Search as LucideSearch,
@@ -35,15 +36,14 @@ import {
   Sun as LucideSun,
   Tag as LucideTag,
   TimerReset as LucideTimerReset,
+  User as LucideUser,
   VerifiedIcon as LucideVerifiedIcon,
   Wallet as LucideWallet,
-  Mail,
   Meh,
   MoreHorizontal,
   Power,
   ShoppingBag,
   Slash,
-  User,
   X,
 } from "lucide-react";
 
@@ -54,7 +54,6 @@ import { Icon } from "./icon-wrapper";
 export {
   ArrowDownRight,
   ArrowUpLeft,
-  ArrowUpRight,
   Circle,
   FileSignature,
   Flame,
@@ -62,15 +61,34 @@ export {
   ListX,
   Loader2,
   LoaderCircle,
-  Mail,
   Meh,
   MoreHorizontal,
   Power,
   ShoppingBag,
   Slash,
-  User,
   X,
 };
+
+export const User =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="1" />
+      )
+    : LucideUser;
+
+export const Mail =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="z" />
+      )
+    : LucideMail;
+
+export const ArrowUpRight =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="x" />
+      )
+    : LucideArrowUpRight;
 
 export const CircleDot =
   process.env.NEXT_PUBLIC_THEME === "unframed"
@@ -404,7 +422,7 @@ export const Starknet =
 export const Telegram =
   process.env.NEXT_PUBLIC_THEME === "unframed"
     ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="U" />
+        <Icon className={className} icon="Z" />
       )
     : ({ className }: PropsWithClassName) => (
         <svg

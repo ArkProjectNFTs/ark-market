@@ -107,7 +107,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 size="xl"
               >
                 <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
-                  <Mail size={20} />
+                  <Mail className="size-5" />
                 </div>
                 <div>
                   <p>

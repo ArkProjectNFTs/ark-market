@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SiTelegram } from "react-icons/si";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Discord, XIcon } from "@ark-market/ui/icons";
+import { Discord, Telegram, XIcon } from "@ark-market/ui/icons";
 
 import { siteConfig } from "~/config/site";
 import { Icons } from "./icons";
@@ -47,7 +46,7 @@ export default function Footer() {
             </Button>
             <Button variant="outline" className="w-full lg:w-auto" size="xl">
               <p className="hidden lg:block">Chat with us on </p>
-              <SiTelegram size={16} />
+              <Telegram />
             </Button>
           </div>
         </div>
