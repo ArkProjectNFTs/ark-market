@@ -28,7 +28,8 @@ export function MainNav({
         href="/"
         className={cn("flex items-center space-x-2", focusableStyles)}
       >
-        <Icons.logo className="h-5 w-auto lg:h-8" />
+        {/* <Icons.logo className="h-5 w-auto lg:h-8" /> */}
+        <Icons.logo />
         <span className="sr-only font-bold">{siteConfig.name}</span>
       </Link>
       <div className="hidden items-center gap-2 lg:flex">

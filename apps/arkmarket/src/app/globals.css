@@ -20,6 +20,40 @@
   src: url("/fonts/unframed-icons.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "UnframedLogoFont";
+  src: url("/fonts/unframed-logo.ttf") format("truetype");
+}
+
+/* Unframed Logo animation */
+@keyframes LogoAnim {
+  0% {
+    font-variation-settings:
+      "SWAP" 0,
+      "ANGL" 100,
+      "INNR" 23,
+      "INTR" 73;
+  }
+  50% {
+    font-variation-settings:
+      "SWAP" 100,
+      "ANGL" 0,
+      "INNR" 23,
+      "INTR" 73;
+  }
+  100% {
+    font-variation-settings:
+      "SWAP" 0,
+      "ANGL" 100,
+      "INNR" 23,
+      "INTR" 73;
+  }
+}
+
+.unframed-animate:hover {
+  animation: LogoAnim 1s ease-in-out alternate infinite;
+}
+
 @layer base {
   :root {
     --site-header-height: 3.75rem;
@@ -119,6 +153,8 @@
     --border: 300 1% 10%;
     --input: 288 2% 17%;
     --ring: 0 0% 100%;
+
+    font-variation-settings: "NGTV" 1;
   }
 }
 
