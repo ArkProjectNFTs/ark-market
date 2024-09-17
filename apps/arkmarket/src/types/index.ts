@@ -13,6 +13,7 @@ export interface Collection {
   total_sales: number;
   total_volume: number;
   volume_7d_eth: number;
+  floor_7d_percentage: string;
 }
 
 export type CollectionTrait = Record<string, number>;
