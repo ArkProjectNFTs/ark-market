@@ -5,7 +5,12 @@ import { parseEther } from "viem";
 
 import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 import { LoaderCircle, Tag, VerifiedIcon } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
@@ -46,6 +51,7 @@ export default function AcceptOfferDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
+        <DialogTitle className="sr-only">Accept offer</DialogTitle>
         <div className="flex h-full flex-col justify-between">
           <div className="flex flex-col gap-6">
             <div className="mt-5 flex flex-col items-center gap-4">
