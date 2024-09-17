@@ -1,4 +1,7 @@
+"use client";
+
 import * as React from "react";
+import { useState } from "react";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
@@ -39,10 +42,26 @@ export const Icons = {
 };
 
 function UnframedLogo({ className }: PropsWithClassName) {
+  const [active, setActive] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <p
+      onMouseEnter={() => {
+        setActive(true);
+        setIsHovering(true);
+      }}
+      onMouseLeave={() => {
+        setIsHovering(false);
+      }}
+      onAnimationIteration={() => {
+        if (!isHovering) {
+          setActive(false);
+        }
+      }}
       className={cn(
-        "unframed-animate font-[UnframedLogoFont] text-[26px]",
+        "font-[UnframedLogoFont] text-[26px]",
+        active && "unframed-animate",
         className,
       )}
     >

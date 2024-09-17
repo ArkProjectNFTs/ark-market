@@ -30,27 +30,26 @@
   0% {
     font-variation-settings:
       "SWAP" 0,
-      "ANGL" 100,
+      "ANGL" 0,
       "INNR" 23,
       "INTR" 73;
   }
   50% {
     font-variation-settings:
       "SWAP" 100,
-      "ANGL" 0,
+      "ANGL" 100,
       "INNR" 23,
       "INTR" 73;
   }
   100% {
     font-variation-settings:
       "SWAP" 0,
-      "ANGL" 100,
+      "ANGL" 0,
       "INNR" 23,
       "INTR" 73;
   }
 }
-
-.unframed-animate:hover {
+.unframed-animate {
   animation: LogoAnim 1s ease-in-out alternate infinite;
 }
 
