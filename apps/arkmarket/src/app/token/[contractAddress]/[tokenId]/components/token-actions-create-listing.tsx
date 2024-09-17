@@ -14,7 +14,12 @@ import * as z from "zod";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { DateTimePicker } from "@ark-market/ui/date-time-picker";
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
@@ -267,6 +272,7 @@ export function TokenActionsCreateListing({
           e.preventDefault();
         }}
       >
+        <DialogTitle className="sr-only">Create listing</DialogTitle>
         <div className="flex flex-col gap-8">
           <div className="mt-4 text-center text-xl font-semibold">
             List for sale
