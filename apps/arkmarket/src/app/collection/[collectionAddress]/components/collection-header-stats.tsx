@@ -1,4 +1,4 @@
-import { formatNumber, formatUnits } from "@ark-market/ui";
+import { cn, formatNumber, formatUnits } from "@ark-market/ui";
 import { Ethereum } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
@@ -11,6 +11,9 @@ interface CollectionHeaderStatsProps {
 export default function CollectionHeaderStats({
   collection,
 }: CollectionHeaderStatsProps) {
+  const parsedCollectionFloor7dPercentage = parseFloat(
+    collection.floor_7d_percentage,
+  );
   return (
     <div className="hidden grid-cols-2 items-center justify-between gap-2 md:flex md:h-12 md:gap-6 md:pr-5 xl:flex">
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
@@ -18,6 +21,17 @@ export default function CollectionHeaderStats({
         <div className="font-numbers flex items-center gap-2 text-sm font-medium lg:text-xl">
           <Ethereum className="size-5" />
           <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
+          <p
+            className={cn(
+              "text-base font-semibold",
+              parsedCollectionFloor7dPercentage < 0
+                ? "text-red-500"
+                : "text-green-500",
+            )}
+          >
+            {parsedCollectionFloor7dPercentage >= 0 && "+"}
+            {formatNumber(parsedCollectionFloor7dPercentage)}%
+          </p>
         </div>
       </div>
       <Separator orientation="vertical" className="hidden md:block" />
