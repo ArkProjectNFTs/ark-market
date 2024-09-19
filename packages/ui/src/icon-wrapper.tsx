@@ -72,7 +72,7 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
         fontWeight: fontWeight,
       }}
     >
-      <span style={{ paddingTop: marginTop }}>{icon}</span>
+      <span style={{ marginTop }}>{icon}</span>
     </span>
   );
 };
