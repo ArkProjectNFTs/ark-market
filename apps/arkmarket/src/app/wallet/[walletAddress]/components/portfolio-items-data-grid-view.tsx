@@ -131,7 +131,7 @@ export default function CollectionItemsDataGridView({
                     >
                       <p
                         className={cn(
-                          "text-sm font-normal leading-none text-accent-foreground transition-colors hover:text-foreground",
+                          "text-sm font-normal text-accent-foreground transition-colors hover:text-foreground",
                           viewType === "large-grid" && "sm:text-base",
                           ellipsableStyles,
                         )}
