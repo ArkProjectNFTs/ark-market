@@ -15,6 +15,7 @@ import {
   XIcon,
 } from "@ark-market/ui/icons";
 
+import ExternalLink from "~/components/external-link";
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 
 interface TokenSummaryMobileActionsProps {
@@ -41,16 +42,24 @@ export default function TokenSummaryMobileActions({
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <div className="flex items-center gap-2">
-            <XIcon className="size-4" />
-            <p> Share on X</p>
-          </div>
+          <ExternalLink
+            href={`https://x.com/intent/post?text=${window.location.href}`}
+          >
+            <div className="flex items-center gap-2">
+              <XIcon className="size-4" />
+              <p> Share on X</p>
+            </div>
+          </ExternalLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <div className="flex items-center gap-2">
-            <Telegram className="size-4" />
-            <p>Share on Telegram</p>
-          </div>
+          <ExternalLink
+            href={`https://t.me/share/url?url=${window.location.href}`}
+          >
+            <div className="flex items-center gap-2">
+              <Telegram className="size-4" />
+              <p>Share on Telegram</p>
+            </div>
+          </ExternalLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <div className="flex items-center gap-2">
