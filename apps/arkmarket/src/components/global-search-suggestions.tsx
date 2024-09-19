@@ -53,8 +53,10 @@ export default function GlobalSearchSuggestions({
                     <p className="text-sm font-medium">{collection.name}</p>
                     <VerifiedIcon className="size-3 text-primary" />
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Ethereum className="-ml-1 size-4" />
+                  <div className="flex items-center">
+                    <p className="flex items-center text-[0.625rem]">
+                      <Ethereum className="-ml-1 size-4" />
+                    </p>
                     <p className="text-xs font-medium text-muted-foreground">
                       {formatNumber(collection.token_count)} items
                     </p>
