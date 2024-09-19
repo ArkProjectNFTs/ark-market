@@ -7,7 +7,7 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
 import type { Token, TokenMarketData } from "~/types";
-import getTokenMarketData from "~/lib/getTokenMarketData";
+import getTokenMarketData from "~/queries/getTokenMarketData";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
 import TokenActionsHeader from "./token-actions-header";

@@ -20,7 +20,7 @@ import {
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
-import getCollection from "~/lib/getCollection";
+import getCollection from "~/queries/getCollection";
 import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
@@ -103,12 +103,12 @@ export default function CollectionHeader({
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           {/* <p className="flex items-center gap-2 pt-8"> */}
-            {/* Created
+          {/* Created
             <span className="text-muted-foreground"> Feb 2000</span> */}
-            {/* <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
+          {/* <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
               <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
             </svg> */}
-            {/* Creator earnings
+          {/* Creator earnings
             <span className="text-muted-foreground"> 1000%</span> */}
           {/* </p> */}
           <p className="mb-6 max-w-lg pt-4 text-sm">

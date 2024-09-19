@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
 import { ScrollArea } from "@ark-market/ui/scroll-area";
 
 import type { Filters } from "~/types";
-import getCollectionTraits from "~/lib/getCollectionTraits";
+import getCollectionTraits from "~/queries/getCollectionTraits";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
 
 interface CollectionItemsFiltersDialogProps {

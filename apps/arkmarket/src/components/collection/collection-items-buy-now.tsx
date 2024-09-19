@@ -18,7 +18,7 @@ import { ETH } from "~/constants/tokens";
 import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
-import getTokenMarketData from "~/lib/getTokenMarketData";
+import getTokenMarketData from "~/queries/getTokenMarketData";
 import ToastExecutedTransactionContent from "../token/toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "../token/toast-rejected-transaction-content";
 

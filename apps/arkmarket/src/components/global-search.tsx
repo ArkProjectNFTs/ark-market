@@ -21,7 +21,7 @@ import {
 } from "@ark-market/ui/command";
 import { Ethereum, NoResult, VerifiedIcon } from "@ark-market/ui/icons";
 
-import getCollectionSearch from "~/lib/getCollectionSearch";
+import getCollectionSearch from "~/queries/getCollectionSearch";
 import GlobalSearchSuggestions from "./global-search-suggestions";
 import Media from "./media";
 import ProfilePicture from "./profile-picture";

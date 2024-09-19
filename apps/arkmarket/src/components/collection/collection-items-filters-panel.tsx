@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 import type { Filters } from "~/types";
-import getCollectionTraits from "~/lib/getCollectionTraits";
+import getCollectionTraits from "~/queries/getCollectionTraits";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
 
 interface CollectionItemsFiltersPanelProps {

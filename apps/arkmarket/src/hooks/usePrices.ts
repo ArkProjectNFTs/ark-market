@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { formatEther } from "viem";
 
-import getPrices from "~/lib/getPrices";
+import getPrices from "~/queries/getPrices";
 
 interface ConvertInUsdParams {
   token?: "ethereum" | "starknet";

@@ -12,7 +12,7 @@ import type { ViewType } from "../view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-} from "~/lib/getCollectionTokens";
+} from "~/queries/getCollectionTokens";
 import ViewTypeToggleButton from "../view-type-toggle-button";
 import ViewTypeToggleGroup from "../view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";

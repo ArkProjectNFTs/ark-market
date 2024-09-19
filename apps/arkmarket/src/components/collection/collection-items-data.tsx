@@ -8,10 +8,10 @@ import type {
   CollectionSortBy,
   CollectionSortDirection,
   CollectionTokensApiResponse,
-} from "~/lib/getCollectionTokens";
+} from "~/queries/getCollectionTokens";
 import type { CollectionToken, Filters } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionTokens } from "~/lib/getCollectionTokens";
+import { getCollectionTokens } from "~/queries/getCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
 

@@ -20,7 +20,7 @@ import {
 import { Ethereum, Meh, Search, VerifiedIcon } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
-import getCollectionSearch from "~/lib/getCollectionSearch";
+import getCollectionSearch from "~/queries/getCollectionSearch";
 import Media from "./media";
 import MobileGlobalSearchSuggestions from "./mobile-global-search-suggestions";
 import ProfilePicture from "./profile-picture";

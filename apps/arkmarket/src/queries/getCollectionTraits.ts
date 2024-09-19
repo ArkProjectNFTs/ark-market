@@ -1,6 +1,6 @@
 import type { CollectionTraits } from "~/types";
 import { env } from "~/env";
-import { sortTraitsByCountAsc } from "./sortTraitsByCountAsc";
+import { sortTraitsByCountAsc } from "~/lib/sortTraitsByCountAsc";
 
 interface GetCollectionParams {
   collectionAddress: string;

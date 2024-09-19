@@ -4,7 +4,7 @@ import CollectionBanner from "~/components/collection/collection-banner";
 import CollectionHeader from "~/components/collection/collection-header";
 import CollectionItems from "~/components/collection/collection-items";
 import MobileCollectionHeader from "~/components/collection/mobile-collection-header";
-import getCollection from "~/lib/getCollection";
+import getCollection from "~/queries/getCollection";
 
 interface CollectionPageProps {
   params: {

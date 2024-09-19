@@ -4,7 +4,7 @@ import { parseEther } from "viem";
 import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Ethereum, VerifiedIcon } from "@ark-market/ui/icons";
 
-import type { WalletToken } from "~/lib/getWalletData";
+import type { WalletToken } from "~/queries/getWalletData";
 import type { CollectionToken, Token } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";

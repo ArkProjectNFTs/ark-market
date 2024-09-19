@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@ark-market/ui/tooltip";
 
-import getSystemStatus from "~/lib/getSystemStatus";
+import getSystemStatus from "~/queries/getSystemStatus";
 
 const statuses = {
   ok: {

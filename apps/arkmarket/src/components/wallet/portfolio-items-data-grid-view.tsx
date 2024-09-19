@@ -19,7 +19,7 @@ import {
 } from "@ark-market/ui/nft-card";
 
 import type { ViewType } from "../view-type-toggle-group";
-import type { WalletToken } from "~/lib/getWalletData";
+import type { WalletToken } from "~/queries/getWalletData";
 import Media from "~/components/media";
 import { TokenActionsCreateListing } from "~/components/token/token-actions-create-listing";
 

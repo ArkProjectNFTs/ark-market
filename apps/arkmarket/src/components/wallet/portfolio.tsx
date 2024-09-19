@@ -7,12 +7,12 @@ import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
-import type { WalletTokensApiResponse } from "~/lib/getWalletData";
-import { getWalletTokens } from "~/lib/getWalletData";
+import type { WalletTokensApiResponse } from "~/queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
 } from "~/lib/wallet-search-params";
+import { getWalletTokens } from "~/queries/getWalletData";
 import PortfolioActivityData from "./portfolio-activity-data";
 import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";

@@ -6,9 +6,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
-import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
+import type { TokenActivityApiResponse } from "~/queries/getTokenActivity";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import getTokenActivity from "~/lib/getTokenActivity";
+import getTokenActivity from "~/queries/getTokenActivity";
 import DesktopTokenActivity from "./desktop-token-activity";
 import MobileTokenActivity from "./mobile-token-activity";
 

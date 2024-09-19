@@ -10,7 +10,7 @@ import {
   collectionSortByParser,
   collectionSortDirectionKey,
   collectionSortDirectionsParser,
-} from "~/lib/getCollectionTokens";
+} from "~/queries/getCollectionTokens";
 import CollectionItemsData from "./collection-items-data";
 import { CollectionItemsDataFallback } from "./collection-items-data-fallback";
 import CollectionItemsFiltersDialog from "./collection-items-filters-dialog";

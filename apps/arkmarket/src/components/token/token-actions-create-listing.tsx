@@ -39,13 +39,13 @@ import {
 } from "@ark-market/ui/select";
 import { useToast } from "@ark-market/ui/use-toast";
 
-import type { WalletToken } from "~/lib/getWalletData";
+import type { WalletToken } from "~/queries/getWalletData";
 import type { Token } from "~/types";
 import durations from "~/constants/durations";
 import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
 import formatAmount from "~/lib/formatAmount";
-import getCollection from "~/lib/getCollection";
+import getCollection from "~/queries/getCollection";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";

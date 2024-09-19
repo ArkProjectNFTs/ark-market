@@ -7,7 +7,7 @@ interface TokenParams {
   tokenId: string;
 }
 
-export default async function postTokenMetadataRefresh({
+export default async function refreshTokenMetada({
   contractAddress,
   tokenId,
 }: TokenParams) {

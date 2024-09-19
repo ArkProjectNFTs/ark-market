@@ -14,9 +14,9 @@ import {
 } from "@ark-market/ui/collapsible";
 import { ChevronDown, ChevronUp, NoOffer } from "@ark-market/ui/icons";
 
-import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
+import type { TokenOffersApiResponse } from "~/queries/getTokenOffers";
 import type { Token, TokenMarketData } from "~/types";
-import { getTokenOffers } from "~/lib/getTokenOffers";
+import { getTokenOffers } from "~/queries/getTokenOffers";
 import TokenOfferList from "./token-offers-list";
 import TokenOffersTable from "./token-offers-table";
 

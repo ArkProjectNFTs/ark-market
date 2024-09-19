@@ -24,13 +24,13 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { PortfolioActivityApiResponse } from "~/lib/getPortfolioActivity";
+import type { PortfolioActivityApiResponse } from "~/queries/getPortfolioActivity";
 import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
 import activityTypeMetadata from "~/constants/activity-type-metadata";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getPortfolioActivity } from "~/lib/getPortfolioActivity";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import { getPortfolioActivity } from "~/queries/getPortfolioActivity";
 
 interface PortfolioActivityDataProps {
   walletAddress: string;

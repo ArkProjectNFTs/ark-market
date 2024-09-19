@@ -24,13 +24,13 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
+import type { CollectionActivityApiResponse } from "~/queries/getCollectionActivity";
 import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
 import activityTypeMetadata from "~/constants/activity-type-metadata";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionActivity } from "~/lib/getCollectionActivity";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import { getCollectionActivity } from "~/queries/getCollectionActivity";
 
 interface CollectionActivityDataProps {
   collectionAddress: string;

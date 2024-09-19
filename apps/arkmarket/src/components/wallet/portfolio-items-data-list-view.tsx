@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { WalletToken } from "~/lib/getWalletData";
+import type { WalletToken } from "~/queries/getWalletData";
 import Media from "~/components/media";
 import { TokenActionsCreateListing } from "~/components/token/token-actions-create-listing";
 

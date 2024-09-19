@@ -5,7 +5,7 @@ import { RefreshCw } from "lucide-react";
 
 import { useToast } from "@ark-market/ui/use-toast";
 
-import postTokenMetadataRefresh from "~/lib/postTokenMetadataRefresh";
+import refreshTokenMetadata from "~/queries/refreshTokenMetadata";
 
 interface RefreshMetadataButtonProps {
   contractAddress: string;
@@ -20,7 +20,7 @@ export default function RefreshMetadataButton({
 
   const refreshMetadataMutation = useMutation({
     mutationFn: async () => {
-      await postTokenMetadataRefresh({
+      await refreshTokenMetadata({
         contractAddress,
         tokenId,
       });
