@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import getCollection from "~/lib/getCollection";
+import getCollection from "~/queries/getCollection";
 
 interface UseCollectionProps {
   address: string;

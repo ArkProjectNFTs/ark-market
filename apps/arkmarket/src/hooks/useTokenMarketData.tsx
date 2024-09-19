@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import type { TokenMarketData } from "~/types";
-import getTokenMarketData from "~/lib/getTokenMarketData";
+import getTokenMarketData from "~/queries/getTokenMarketData";
 
 interface UseTokenMarketdataProps {
   collectionAddress: string;

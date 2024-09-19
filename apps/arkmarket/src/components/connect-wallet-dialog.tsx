@@ -14,8 +14,8 @@ import {
 import { Loader2, Mail } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
-import { useConnectWalletStore } from "~/app/stores/connect-wallet";
 import { env } from "~/env";
+import { useConnectWalletStore } from "~/stores/connect-wallet";
 
 const walletIdToName = new Map([
   ["argentX", "Argent X"],
