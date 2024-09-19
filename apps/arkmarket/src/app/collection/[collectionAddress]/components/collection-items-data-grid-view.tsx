@@ -3,7 +3,6 @@ import Link from "next/link";
 import { LoaderCircle } from "lucide-react";
 import { VirtuosoGrid } from "react-virtuoso";
 
-import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, formatUnits } from "@ark-market/ui";
 import {
   NftCard,
@@ -52,20 +51,19 @@ interface CollectionItemsDataGridViewProps {
 
 export default function CollectionItemsDataGridView({
   collectionTokens,
-  className,
   viewType,
-}: PropsWithClassName<CollectionItemsDataGridViewProps>) {
+}: CollectionItemsDataGridViewProps) {
+  const components = {
+    List: viewType === "large-grid" ? LargeGridContainer : SmallGridContainer,
+  };
+
   return (
-    <div className={className}>
+    <div className="mb-6">
       <VirtuosoGrid
-        // initialItemCount same as totalCount but needed for SSR
         initialItemCount={collectionTokens.length}
         totalCount={collectionTokens.length}
         useWindowScroll
-        components={{
-          List:
-            viewType === "large-grid" ? LargeGridContainer : SmallGridContainer,
-        }}
+        components={components}
         itemContent={(index) => {
           const token = collectionTokens[index];
 

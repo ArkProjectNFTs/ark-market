@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
@@ -35,8 +35,7 @@ export default function CollectionItemsData({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     queryKey: [
       "collectionTokens",
       sortDirection,
@@ -65,25 +64,16 @@ export default function CollectionItemsData({
   });
 
   const collectionTokens: CollectionToken[] = useMemo(
-    () => infiniteData?.pages.flatMap((page) => page.data) ?? [],
+    () => infiniteData.pages.flatMap((page) => page.data),
     [infiniteData],
   );
 
-  if (isLoading) {
-    return null;
-  }
-
-  return (
-    <>
-      {viewType === "list" ? (
-        <CollectionItemsDataListView collectionTokens={collectionTokens} />
-      ) : (
-        <CollectionItemsDataGridView
-          className="mb-6"
-          collectionTokens={collectionTokens}
-          viewType={viewType}
-        />
-      )}
-    </>
+  return viewType === "list" ? (
+    <CollectionItemsDataListView collectionTokens={collectionTokens} />
+  ) : (
+    <CollectionItemsDataGridView
+      collectionTokens={collectionTokens}
+      viewType={viewType}
+    />
   );
 }
