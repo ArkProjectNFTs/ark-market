@@ -8,7 +8,7 @@ import type { WalletToken } from "~/queries/getWalletData";
 import type { CollectionToken, Token } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
-import formatAmount from "~/lib/formatAmount";
+import formatAmount from "~/utils/formatAmount";
 
 interface tokenActionsTokenOverviewProps {
   token: Token | CollectionToken | WalletToken;

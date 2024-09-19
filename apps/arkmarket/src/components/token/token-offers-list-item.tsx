@@ -12,7 +12,7 @@ import { Separator } from "@ark-market/ui/separator";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
 import ConnectWalletModal from "~/components/connect-wallet-modal";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 import AcceptOffer from "./accept-offer";
 import CancelOffer from "./cancel-offer";
 

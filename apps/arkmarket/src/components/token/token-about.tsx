@@ -22,7 +22,7 @@ import {
 
 import type { Token } from "~/types";
 import Media from "~/components/media";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 
 interface TokenAboutProps {
   contractAddress: string;

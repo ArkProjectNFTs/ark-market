@@ -9,7 +9,7 @@ import { Separator } from "@ark-market/ui/separator";
 
 import type { TokenActivity } from "~/types";
 import activityTypeMetadata from "~/constants/activity-type-metadata";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 
 interface MobileTokenActivityProps {
   tokenActivity: TokenActivity[];

@@ -11,7 +11,7 @@ import { Ethereum } from "@ark-market/ui/icons";
 import type { Token, TokenMarketData } from "~/types";
 import ProfilePicture from "~/components/profile-picture";
 import useTokenMarketdata from "~/hooks/useTokenMarketData";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 
 interface TokenStatsProps {
   token: Token;

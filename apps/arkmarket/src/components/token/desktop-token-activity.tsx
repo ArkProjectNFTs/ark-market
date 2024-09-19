@@ -15,7 +15,7 @@ import {
 
 import type { TokenActivity } from "~/types";
 import activityTypeMetadata from "~/constants/activity-type-metadata";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 
 interface DesktopTokenActivityProps {
   tokenActivity: TokenActivity[];

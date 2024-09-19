@@ -18,11 +18,11 @@ import { Input } from "@ark-market/ui/input";
 
 import type { WalletCollectionsApiResponse } from "~/queries/getWalletData";
 import Media from "~/components/media";
+import { getWalletCollections } from "~/queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
-} from "~/lib/wallet-search-params";
-import { getWalletCollections } from "~/queries/getWalletData";
+} from "~/utils/walletSearchParams";
 
 interface PortfolioItemsFiltersContentProps {
   walletAddress: string;

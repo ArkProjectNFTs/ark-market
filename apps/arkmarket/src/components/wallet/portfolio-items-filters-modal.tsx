@@ -14,7 +14,7 @@ import {
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
-} from "~/lib/wallet-search-params";
+} from "~/utils/walletSearchParams";
 import PortfolioItemsFiltersContent from "./portfolio-items-filters-content";
 
 interface PortfolioItemsFiltersModal {

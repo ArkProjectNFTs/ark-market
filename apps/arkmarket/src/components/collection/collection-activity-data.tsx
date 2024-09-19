@@ -29,8 +29,8 @@ import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
 import activityTypeMetadata from "~/constants/activity-type-metadata";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import { getCollectionActivity } from "~/queries/getCollectionActivity";
+import ownerOrShortAddress from "~/utils/ownerOrShortAddress";
 
 interface CollectionActivityDataProps {
   collectionAddress: string;
