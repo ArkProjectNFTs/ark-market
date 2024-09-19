@@ -3,13 +3,13 @@ import { notFound } from "next/navigation";
 import type { Token, TokenMarketData } from "~/types";
 import getToken from "~/lib/getToken";
 import getTokenMarketData from "~/lib/getTokenMarketData";
-import TokenAbout from "./components/token-about";
-import TokenActions from "./components/token-actions";
-import TokenActivity from "./components/token-activity";
-import TokenOffers from "./components/token-offers";
-import TokenStats from "./components/token-stats";
-import TokenSummary from "./components/token-summary";
-import TokenTraits from "./components/token-traits";
+import TokenAbout from "../../../../components/token/token-about";
+import TokenActions from "../../../../components/token/token-actions";
+import TokenActivity from "../../../../components/token/token-activity";
+import TokenOffers from "../../../../components/token/token-offers";
+import TokenStats from "../../../../components/token/token-stats";
+import TokenSummary from "../../../../components/token/token-summary";
+import TokenTraits from "../../../../components/token/token-traits";
 
 interface TokenPageProps {
   params: {

@@ -1,4 +1,4 @@
-import Portfolio from "./components/portfolio";
+import Portfolio from "~/components/wallet/portfolio";
 
 interface WalletPageProps {
   params: {

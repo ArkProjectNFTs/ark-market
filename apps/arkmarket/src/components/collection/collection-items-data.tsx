@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { ViewType } from "../view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,

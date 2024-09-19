@@ -11,7 +11,7 @@ import {
   NftCardMedia,
 } from "@ark-market/ui/nft-card";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { ViewType } from "../view-type-toggle-group";
 import type { CollectionToken } from "~/types";
 import Media from "~/components/media";
 import CollectionItemsBuyNow from "./collection-items-buy-now";

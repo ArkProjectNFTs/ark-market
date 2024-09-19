@@ -6,13 +6,13 @@ import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { parseAsStringLiteral, useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
-import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
-import { getWalletTokens } from "../queries/getWalletData";
+import type { WalletTokensApiResponse } from "~/lib/getWalletData";
+import { getWalletTokens } from "~/lib/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
-} from "../search-params";
+} from "~/lib/wallet-search-params";
 import PortfolioActivityData from "./portfolio-activity-data";
 import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";

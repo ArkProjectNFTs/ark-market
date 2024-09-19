@@ -1,6 +1,6 @@
 import { FileSignature } from "@ark-market/ui/icons";
 
-import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
+import type { WalletToken } from "~/lib/getWalletData";
 import type { CollectionToken, Token } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";

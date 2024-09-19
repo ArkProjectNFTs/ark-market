@@ -16,13 +16,13 @@ import {
 import { VerifiedIcon } from "@ark-market/ui/icons";
 import { Input } from "@ark-market/ui/input";
 
-import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
+import type { WalletCollectionsApiResponse } from "~/lib/getWalletData";
 import Media from "~/components/media";
-import { getWalletCollections } from "../queries/getWalletData";
+import { getWalletCollections } from "~/lib/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
-} from "../search-params";
+} from "~/lib/wallet-search-params";
 
 interface PortfolioItemsFiltersContentProps {
   walletAddress: string;

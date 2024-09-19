@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 
+import CollectionActivity from "~/components/collection/collection-activity";
+import CollectionBanner from "~/components/collection/collection-banner";
+import CollectionHeader from "~/components/collection/collection-header";
+import CollectionNav from "~/components/collection/collection-nav";
+import MobileCollectionHeader from "~/components/collection/mobile-collection-header";
 import getCollection from "~/lib/getCollection";
-import CollectionActivity from "../components/collection-activity";
-import CollectionBanner from "../components/collection-banner";
-import CollectionHeader from "../components/collection-header";
-import CollectionNav from "../components/collection-nav";
-import MobileCollectionHeader from "../components/mobile-collection-header";
 
 interface CollectionPageProps {
   params: {

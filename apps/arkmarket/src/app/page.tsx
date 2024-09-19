@@ -1,12 +1,12 @@
 import { Button } from "@ark-market/ui/button";
 
-import ExploreCategory from "./components/explore-category";
-import ExploreCollection from "./components/explore-collection";
-import LatestDrop from "./components/latest-drop";
-import LatestSales from "./components/latest-sales";
-import LiveAuctions from "./components/live-auctions";
-import MainCarousel from "./components/main-carousel";
-import TrendingNow from "./components/trending-now";
+import ExploreCategory from "../components/home/explore-category";
+import ExploreCollection from "../components/home/explore-collection";
+import LatestDrop from "../components/home/latest-drop";
+import LatestSales from "../components/home/latest-sales";
+import LiveAuctions from "../components/home/live-auctions";
+import MainCarousel from "../components/home/main-carousel";
+import TrendingNow from "../components/home/trending-now";
 
 export default function HomePage() {
   return (

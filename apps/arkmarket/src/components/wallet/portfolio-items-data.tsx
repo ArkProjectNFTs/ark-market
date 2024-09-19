@@ -1,7 +1,7 @@
 "use client";
 
-import type { WalletToken } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import type { WalletToken } from "~/lib/getWalletData";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import PortfolioItemsDataGridView from "./portfolio-items-data-grid-view";
 import PortfolioItemsDataListView from "./portfolio-items-data-list-view";

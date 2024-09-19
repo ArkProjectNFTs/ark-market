@@ -19,8 +19,8 @@ import { env } from "~/env";
 import useBalance from "~/hooks/useBalance";
 import useConnectWallet from "~/hooks/useConnectWallet";
 import getTokenMarketData from "~/lib/getTokenMarketData";
-import ToastExecutedTransactionContent from "../../../token/[contractAddress]/[tokenId]/components/toast-executed-transaction-content";
-import ToastRejectedTransactionContent from "../../../token/[contractAddress]/[tokenId]/components/toast-rejected-transaction-content";
+import ToastExecutedTransactionContent from "../token/toast-executed-transaction-content";
+import ToastRejectedTransactionContent from "../token/toast-rejected-transaction-content";
 
 interface CollectionItemsBuyNowProps {
   token: CollectionToken;

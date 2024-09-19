@@ -8,13 +8,13 @@ import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@ark-market/ui";
 import { SearchInput } from "@ark-market/ui/search-input";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { ViewType } from "../view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
 } from "~/lib/getCollectionTokens";
-import ViewTypeToggleButton from "../../../../components/view-type-toggle-button";
-import ViewTypeToggleGroup from "../../../../components/view-type-toggle-group";
+import ViewTypeToggleButton from "../view-type-toggle-button";
+import ViewTypeToggleGroup from "../view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
 
 // import LiveResultsIndicator from "./live-results-indicator";

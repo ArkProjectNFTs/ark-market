@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
 import { LoaderCircle, Wallet } from "@ark-market/ui/icons";
 
 import type { CollectionToken, Token } from "~/types";
-import TokenActionsTokenOverview from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-token-overview";
+import TokenActionsTokenOverview from "~/components/token/token-actions-token-overview";
 
 interface BuyNowDialogProps {
   isOpen: boolean;

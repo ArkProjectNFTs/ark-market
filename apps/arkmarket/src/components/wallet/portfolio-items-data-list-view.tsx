@@ -14,9 +14,9 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { WalletToken } from "../queries/getWalletData";
-import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
+import type { WalletToken } from "~/lib/getWalletData";
 import Media from "~/components/media";
+import { TokenActionsCreateListing } from "~/components/token/token-actions-create-listing";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(6.5rem,1fr))_minmax(6.5rem,8rem)]";

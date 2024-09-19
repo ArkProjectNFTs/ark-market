@@ -18,10 +18,10 @@ import {
   NftCardMedia,
 } from "@ark-market/ui/nft-card";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
-import type { WalletToken } from "../queries/getWalletData";
-import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
+import type { ViewType } from "../view-type-toggle-group";
+import type { WalletToken } from "~/lib/getWalletData";
 import Media from "~/components/media";
+import { TokenActionsCreateListing } from "~/components/token/token-actions-create-listing";
 
 const LargeGridContainer: Components["List"] = React.forwardRef(
   ({ style, children }, ref) => {

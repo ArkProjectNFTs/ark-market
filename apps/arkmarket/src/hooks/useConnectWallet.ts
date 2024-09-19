@@ -2,7 +2,7 @@ import type { MouseEvent } from "react";
 import type { AccountInterface } from "starknet";
 import { useEffect, useState } from "react";
 
-import { useConnectWalletStore } from "~/app/stores/connect-wallet";
+import { useConnectWalletStore } from "~/stores/connect-wallet";
 
 interface UseConnectWalletParams {
   account?: AccountInterface;

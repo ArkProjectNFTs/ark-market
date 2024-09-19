@@ -39,7 +39,7 @@ import {
 } from "@ark-market/ui/select";
 import { useToast } from "@ark-market/ui/use-toast";
 
-import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
+import type { WalletToken } from "~/lib/getWalletData";
 import type { Token } from "~/types";
 import durations from "~/constants/durations";
 import { env } from "~/env";

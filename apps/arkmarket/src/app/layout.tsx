@@ -8,7 +8,7 @@ import { Toaster } from "@ark-market/ui/toaster";
 
 import SiteHeader from "~/components/site-header";
 
-import "~/app/globals.css";
+import "~/styles/globals.css";
 
 import type { PropsWithChildren } from "react";
 
