@@ -178,7 +178,7 @@ export default function CollectionActivityData({
                       >
                         <p
                           className={cn(
-                            "text-muted-foreground",
+                            "text-muted-foreground transition-colors hover:text-primary",
                             ellipsableStyles,
                           )}
                         >

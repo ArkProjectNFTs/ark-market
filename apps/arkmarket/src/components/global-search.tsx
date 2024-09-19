@@ -118,7 +118,9 @@ function GlobalSearchCommands({
                         )}
                       </div>
                       <div className="flex items-center">
-                        <Ethereum className="-ml-1 size-4" />
+                        <p className="flex items-center text-[0.625rem]">
+                          <Ethereum className="-ml-1 size-4" />
+                        </p>
                         <p className="text-xs font-medium text-muted-foreground">
                           {formatNumber(searchResult.token_count)} items
                         </p>
