@@ -2,14 +2,10 @@
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
     "topo": {
-      "dependsOn": [
-        "^topo"
-      ]
+      "dependsOn": ["^topo"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
@@ -24,28 +20,16 @@
       "cache": false
     },
     "format": {
-      "outputs": [
-        "node_modules/.cache/.prettiercache"
-      ],
+      "outputs": ["node_modules/.cache/.prettiercache"],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": [
-        "^topo",
-        "^build"
-      ],
-      "outputs": [
-        "node_modules/.cache/.eslintcache"
-      ]
+      "dependsOn": ["^topo", "^build"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
     },
     "typecheck": {
-      "dependsOn": [
-        "^topo",
-        "^build"
-      ],
-      "outputs": [
-        "node_modules/.cache/tsbuildinfo.json"
-      ]
+      "dependsOn": ["^topo", "^build"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false
@@ -58,16 +42,7 @@
       "interactive": true
     }
   },
-  "globalEnv": [
-    "DATABASE_URL",
-    "POSTGRES_URL",
-    "AUTH_DISCORD_ID",
-    "AUTH_DISCORD_SECRET",
-    "AUTH_REDIRECT_PROXY_URL",
-    "AUTH_SECRET",
-    "PORT",
-    "NEXT_PUBLIC_THEME"
-  ],
+  "globalEnv": ["PORT", "NEXT_PUBLIC_THEME"],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",
