@@ -17,8 +17,6 @@ import ViewTypeToggleButton from "../../../../components/view-type-toggle-button
 import ViewTypeToggleGroup from "../../../../components/view-type-toggle-group";
 import CollectionItemsSortingSelect from "./collection-item-sorting-select";
 
-// import LiveResultsIndicator from "./live-results-indicator";
-
 interface CollectionItemsToolbarProps {
   setSortBy: (sortBy: CollectionSortBy) => void;
   setSortDirection: (sortDirection: CollectionSortDirection) => void;
@@ -32,6 +30,8 @@ interface CollectionItemsToolbarProps {
   filtersDialogOpen: boolean;
   openFiltersDialog: () => void;
   filtersCount: number;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 export default function CollectionItemsToolbar({
@@ -47,8 +47,12 @@ export default function CollectionItemsToolbar({
   // filtersDialogOpen,
   openFiltersDialog,
   filtersCount,
+  searchQuery,
+  setSearchQuery,
 }: CollectionItemsToolbarProps) {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  console.log("CollectionItemsToolbar.render");
 
   return (
     <div className="bg-background px-5 pb-5">
@@ -67,8 +71,13 @@ export default function CollectionItemsToolbar({
             </span>
           )}
         </Button>
-        {/* <LiveResultsIndicator totalCount={totalTokensCount} /> */}
-        <SearchInput className="flex-1" placeholder="Search item" />
+        <SearchInput
+          className="flex-1"
+          placeholder="Search item"
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.currentTarget.value)}
+        />
         <CollectionItemsSortingSelect
           className="hidden lg:block"
           sortBy={sortBy}

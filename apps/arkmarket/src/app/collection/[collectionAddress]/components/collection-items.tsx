@@ -2,6 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { parseAsJson, useQueryState } from "nuqs";
+import { useDebounceValue } from "usehooks-ts";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
 import type { Filters } from "~/types";
@@ -33,6 +34,8 @@ export default function CollectionItems({
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery] = useDebounceValue(searchQuery, 500);
   const [viewType, setViewType] = useState<ViewType>("large-grid");
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
@@ -97,6 +100,11 @@ export default function CollectionItems({
     0,
   );
 
+  console.log("CollectionItems.render", {
+    searchQuery,
+    collectionTokenCount,
+  });
+
   return (
     <div className="flex">
       <Suspense>
@@ -131,6 +139,8 @@ export default function CollectionItems({
             openFiltersDialog={() => setFiltersDialogOpen(true)}
             filtersDialogOpen={filtersDialogOpen}
             filtersCount={filtersCount}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
           <CollectionItemsFiltersTraits
             traits={filters.traits}
@@ -147,6 +157,7 @@ export default function CollectionItems({
             sortBy={sortBy}
             viewType={viewType}
             filters={filters}
+            searchQuery={debouncedSearchQuery}
           />
         </Suspense>
       </div>
