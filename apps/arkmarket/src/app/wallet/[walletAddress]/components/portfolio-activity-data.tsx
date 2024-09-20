@@ -37,7 +37,7 @@ interface PortfolioActivityDataProps {
 }
 
 const gridTemplateColumnValue =
-  "grid-cols-[minmax(7rem,1fr)_minmax(11rem,2fr)_repeat(4,minmax(7.5rem,1fr))_minmax(4.5rem,4.5rem)]";
+  "grid-cols-[minmax(14rem,1fr)_minmax(15rem,2fr)_repeat(4,minmax(11rem,1fr))_minmax(4.5rem,4.5rem)]";
 
 export default function PortfolioActivityData({
   walletAddress,
@@ -121,7 +121,7 @@ export default function PortfolioActivityData({
           </TableRow>
         </TableHeader>
         <TableBody
-          className="font-numbers relative text-sm font-medium"
+          className="font-numbers relative block text-sm font-medium"
           style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
         >
           {rowVirtualizer.getVirtualItems().map((virtualRow) => {
@@ -176,7 +176,7 @@ export default function PortfolioActivityData({
                       </Link>
                       <div className="flex w-full items-center gap-1">
                         <Link
-                          className={focusableStyles}
+                          className={cn(focusableStyles, ellipsableStyles)}
                           href={`/collection/${activity.collection_address}`}
                         >
                           <p
@@ -196,7 +196,11 @@ export default function PortfolioActivityData({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {activity.price ? <PriceTag price={activity.price} /> : "_"}
+                  {activity.price ? (
+                    <PriceTag price={activity.price} className="max-w-full" />
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell>
                   {activity.from ? (
@@ -229,7 +233,9 @@ export default function PortfolioActivityData({
                   )}
                 </TableCell>
                 <TableCell>
-                  {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
+                  <p className="whitespace-nowrap">
+                    {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
+                  </p>
                 </TableCell>
                 <TableCell className="pr-5">
                   <Button asChild size="icon" variant="outline">
