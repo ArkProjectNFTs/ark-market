@@ -63,6 +63,7 @@ function UnframedLogo({ className }: PropsWithClassName) {
         "font-[UnframedLogoFont] text-[26px]",
         active && "unframed-animate",
         className,
+        "!h-auto",
       )}
     >
       #Unframed
