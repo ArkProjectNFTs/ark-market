@@ -1,39 +1,43 @@
-import { Ethereum } from "@ark-market/ui/icons";
+"use client";
 
-import { ETH } from "~/constants/tokens";
-import useBalance from "~/hooks/useBalance";
+import { parseEther } from "viem";
+
+import { Skeleton } from "@ark-market/ui/skeleton";
+
+import usePortfolioStats from "~/hooks/usePortfolioStats";
 import usePrices from "~/hooks/usePrices";
 
 interface PortfolioValueProps {
-  address?: string;
+  address: string;
 }
 
 export default function PortfolioValue({ address }: PortfolioValueProps) {
-  const { data: ethBalance, isPending } = useBalance({ address, token: ETH });
-  const { convertInUsd, isLoading: isLoadingPrices } = usePrices();
-  const ethBalanceInUsd = convertInUsd({ amount: ethBalance?.value });
+  const { data } = usePortfolioStats({ address });
+  const { convertInUsd, isLoading } = usePrices();
 
-  if (isLoadingPrices || isPending) {
-    return null;
-  }
+  const totalValueInUsd = convertInUsd({
+    amount: parseEther(data.total_value),
+  });
 
   return (
-    <div className="flex rounded-lg bg-card px-2.5 py-2">
-      <div className="flex items-center gap-1">
-        <div className="flex flex-col">
-          <p className="text-sm text-secondary-foreground">Portfolio value</p>
-          <p className="text-md flex items-center space-x-1.5 font-semibold">
-            <Ethereum />
-            <div className="text-xl">
-              {ethBalance?.rounded}{" "}
-              <span className="text-secondary-foreground">ETH</span>
-            </div>
-          </p>
+    <div className="flex h-16 min-w-64 items-center rounded-lg bg-card px-3.5">
+      <div className="flex w-full flex-col gap-1">
+        <div className="text-sm leading-none text-secondary-foreground">
+          Portfolio value
         </div>
-      </div>
-
-      <div className="ml-10 hidden items-end sm:flex">
-        <span className="text-muted-foreground">${ethBalanceInUsd}</span>
+        <div className="flex items-end justify-between gap-5">
+          <div className="text-md flex gap-1 text-lg font-semibold leading-none">
+            {data.total_value}{" "}
+            <div className="text-secondary-foreground">ETH</div>
+          </div>
+          {isLoading ? (
+            <Skeleton className="h-4 w-20" />
+          ) : (
+            <div className="leading-none text-muted-foreground">
+              ${totalValueInUsd}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
