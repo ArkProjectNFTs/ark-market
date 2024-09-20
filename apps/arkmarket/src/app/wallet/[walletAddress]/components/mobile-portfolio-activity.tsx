@@ -41,14 +41,17 @@ export default function MobilePortfolioActivity({
               width={84}
               src={activity.metadata?.image}
               mediaKey={activity.metadata?.image_key}
-              className="size-11 rounded-xs"
+              className="size-10 rounded-xs"
             />
 
             <div className="w-full">
               <div className="flex w-full items-center justify-between">
-                <p className="text-base font-medium">
+                <Link
+                  className={cn("text-base font-medium", focusableStyles)}
+                  href={`/token/${activity.collection_address}/${activity.token_id}`}
+                >
                   {activity.metadata?.name ?? activity.collection_name}
-                </p>
+                </Link>
 
                 <div className="flex items-center gap-2.5">
                   {activityTypeMetadata[activity.activity_type].icon}
