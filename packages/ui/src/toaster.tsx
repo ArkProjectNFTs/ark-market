@@ -1,5 +1,6 @@
 "use client";
 
+import { ActivityDelist, Check } from "./icons";
 import {
   Toast,
   ToastClose,
@@ -21,12 +22,21 @@ export function Toaster() {
         description,
         action,
         additionalContent,
+        variant,
         ...props
       }) {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} variant={variant} {...props}>
             <div className="grid w-full gap-1">
-              {title && <ToastTitle>{title}</ToastTitle>}
+              <div className="flex items-center gap-2.5 text-lg font-semibold">
+                {variant === "canceled" && (
+                  <ActivityDelist className="size-6 text-[#EF4444]" />
+                )}
+                {variant === "success" && (
+                  <Check className="size-6 text-[#1DD76C]" />
+                )}
+                {title && <ToastTitle>{title}</ToastTitle>}
+              </div>
               {description && (
                 <ToastDescription>{description}</ToastDescription>
               )}

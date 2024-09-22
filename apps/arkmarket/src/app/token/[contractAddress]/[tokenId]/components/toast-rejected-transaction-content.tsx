@@ -1,5 +1,3 @@
-import { FileSignature } from "@ark-market/ui/icons";
-
 import type { TokenMetadata } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
@@ -23,9 +21,9 @@ export default function ToastRejectedTransactionContent({
   const priceInUsd = convertInUsd({ amount: price });
 
   return (
-    <div className="mt-5 flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-5">
+    <div className="mt-5 flex flex-col gap-2">
+      <div className="font-numbers flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
           <Media
             src={tokenMetadata?.animation_url ?? tokenMetadata?.image}
             alt={tokenMetadata?.name ?? `${collectionName} #${tokenId}`}
@@ -34,21 +32,20 @@ export default function ToastRejectedTransactionContent({
             width={84}
             className="size-10 rounded-xs object-contain"
           />
-          <p className="font-medium">
+          <p className="text-base font-medium">
             {tokenMetadata?.name ?? `${collectionName} #${tokenId}`}
           </p>
         </div>
         <div className="text-end">
-          <p className="font-medium">{formattedPrice} ETH</p>
-          <p className="text-xs font-medium">${priceInUsd}</p>
+          <p className="text-base font-medium">{formattedPrice} ETH</p>
+          <p className="text-xs font-medium text-muted-foreground">
+            ${priceInUsd}
+          </p>
         </div>
       </div>
-      <div className="flex h-10 w-full items-center rounded-xs bg-slate-600 px-4 text-white opacity-50">
-        <FileSignature className="size-4" />
-        <p className="w-full text-center text-sm">
-          You didn't sign the transaction in your wallet
-        </p>
-      </div>
+      <p className="text-sm text-[#EF4444]">
+        You didn't sign the transaction in your wallet
+      </p>
     </div>
   );
 }

@@ -4,9 +4,9 @@ import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva } from "class-variance-authority";
-import { X } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { X } from "@ark-market/ui/icons";
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -17,7 +17,7 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[432px]",
       className,
     )}
     {...props}
@@ -30,9 +30,8 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        // TODO: Update when colors from the theme are chosen by Nolo
-        canceled: "bg-slate-400 text-black",
-        success: "bg-emerald-500 text-black",
+        canceled: "bg-muted text-foreground",
+        success: "bg-muted text-foreground",
         default: "border bg-background text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",

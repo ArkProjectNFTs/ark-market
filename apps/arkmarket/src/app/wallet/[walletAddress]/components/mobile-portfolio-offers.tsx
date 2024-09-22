@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
@@ -31,7 +32,7 @@ export default function MobilePortfolioOffers({
       {portfolioOffers.map((offer) => {
         const parsedFloorDifference = parseFloat(offer.floor_difference ?? "");
         return (
-          <>
+          <React.Fragment key={offer.hash}>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-4">
                 <Media
@@ -125,7 +126,7 @@ export default function MobilePortfolioOffers({
               </div>
             </div>
             <Separator />
-          </>
+          </React.Fragment>
         );
       })}
     </div>
