@@ -246,6 +246,7 @@ export default function PortfolioOffersData({
                         collectionAddress={offer.collection_address}
                         offerHash={offer.hash}
                         offerPrice={offer.price}
+                        // eslint-disable-next-line @typescript-eslint/no-empty-function
                         onSuccess={() => {}}
                         collectionName={offer.collection_name}
                         tokenId={offer.token_id}
