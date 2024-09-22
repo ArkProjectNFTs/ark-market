@@ -19,7 +19,7 @@ import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenI
 import Media from "~/components/media";
 
 const gridTemplateColumnValue =
-  "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(6.5rem,1fr))_minmax(6.5rem,8rem)]";
+  "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(10rem,1fr))_minmax(6.5rem,8rem)]";
 
 interface PortfolioItemsDataListViewProps {
   walletTokens: WalletToken[];
@@ -75,7 +75,7 @@ export default function PortfolioItemsDataListView({
           </TableRow>
         </TableHeader>
         <TableBody
-          className="font-numbers relative font-medium"
+          className="font-numbers relative block font-medium"
           style={{
             height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
           }}
@@ -118,9 +118,9 @@ export default function PortfolioItemsDataListView({
                 </TableCell>
                 <TableCell>
                   {token.list_price ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-1 whitespace-nowrap">
                       <Ethereum className="size-4" />
-                      <p>
+                      <p className={ellipsableStyles}>
                         {formatUnits(token.list_price, 18)}{" "}
                         <span className="text-muted-foreground">ETH</span>
                       </p>
@@ -131,9 +131,9 @@ export default function PortfolioItemsDataListView({
                 </TableCell>
                 <TableCell>
                   {token.best_offer ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-1 whitespace-nowrap">
                       <Ethereum className="size-4" />
-                      <p>
+                      <p className={ellipsableStyles}>
                         {formatUnits(token.best_offer, 18)}{" "}
                         <span className="text-muted-foreground">ETH</span>
                       </p>
@@ -144,9 +144,9 @@ export default function PortfolioItemsDataListView({
                 </TableCell>
                 <TableCell>
                   {token.floor ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-1 whitespace-nowrap">
                       <Ethereum className="size-4" />
-                      <p>
+                      <p className={ellipsableStyles}>
                         {formatUnits(token.floor, 18)}{" "}
                         <span className="text-muted-foreground">ETH</span>
                       </p>
@@ -156,7 +156,9 @@ export default function PortfolioItemsDataListView({
                   )}
                 </TableCell>
                 <TableCell>
-                  {token.received_at ? timeSince(token.received_at) : "_"}
+                  <p className={ellipsableStyles}>
+                    {token.received_at ? timeSince(token.received_at) : "_"}
+                  </p>
                 </TableCell>
                 <TableCell>
                   {canListItem ? (

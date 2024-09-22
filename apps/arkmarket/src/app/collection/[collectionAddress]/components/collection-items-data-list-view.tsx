@@ -73,7 +73,7 @@ export default function CollectionItemsDataListView({
         </TableRow>
       </TableHeader>
       <TableBody
-        className="font-numbers relative font-medium"
+        className="font-numbers relative block font-medium"
         style={{
           height: `${rowVirtualizer.getTotalSize() + 2}px`, // Tells scrollbar how big the table is
         }}
