@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import getCollection from "~/lib/getCollection";
-import CollectionActivity from "../components/collection-activity";
+import CollectionActivityData from "../components/collection-activity-data";
 import CollectionBanner from "../components/collection-banner";
 import CollectionHeader from "../components/collection-header";
 import CollectionNav from "../components/collection-nav";
@@ -38,7 +38,7 @@ export default async function CollectionActivityPage({
         collection={collection}
       />
       <CollectionNav collectionAddress={collectionAddress} />
-      <CollectionActivity
+      <CollectionActivityData
         collectionAddress={collectionAddress}
         collectionTokenCount={collection.token_count}
       />

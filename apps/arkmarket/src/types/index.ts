@@ -171,8 +171,8 @@ export interface PortfolioActivity {
   price: string;
   time_stamp: number;
   to: string;
-  transaction_hash: string | null;
   token_id: string;
+  transaction_hash: string | null;
 }
 
 export interface CollectionActivity {
