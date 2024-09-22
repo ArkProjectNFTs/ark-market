@@ -19,6 +19,7 @@ export default function EthInput({
         className="pr-20"
         value={value}
         status={status}
+        placeholder="Price"
         {...props}
       />
       <div className="pointer-events-none absolute right-2 top-1/2 flex h-[1.875rem] -translate-y-1/2 transform items-center justify-center gap-1 rounded-xs bg-secondary px-2">

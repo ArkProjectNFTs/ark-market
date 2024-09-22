@@ -3,7 +3,12 @@
 import type { PropsWithChildren } from "react";
 import { useState } from "react";
 
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 
 import WalletAccountContent from "./wallet-account-content";
 
@@ -19,6 +24,7 @@ export default function WalletAccountModal({ children }: PropsWithChildren) {
         {children}
       </DialogTrigger>
       <DialogContent>
+        <DialogTitle className="sr-only">Account</DialogTitle>
         <WalletAccountContent onClose={closeModal} />
       </DialogContent>
     </Dialog>

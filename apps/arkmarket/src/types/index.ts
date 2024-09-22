@@ -13,6 +13,7 @@ export interface Collection {
   total_sales: number;
   total_volume: number;
   volume_7d_eth: number;
+  floor_7d_percentage: string;
 }
 
 export type CollectionTrait = Record<string, number>;
@@ -170,8 +171,8 @@ export interface PortfolioActivity {
   price: string;
   time_stamp: number;
   to: string;
-  transaction_hash: string | null;
   token_id: string;
+  transaction_hash: string | null;
 }
 
 export interface PortfolioOffers {
@@ -221,6 +222,10 @@ export interface TokenApiResponse {
 
 export interface OwnersTokensApiResponse {
   result: Token[];
+}
+
+export interface PortfolioStats {
+  total_value: string;
 }
 
 export interface TokenMarketData {

@@ -1,8 +1,7 @@
 import Link from "next/link";
 
 import { cn, focusableStyles, formatNumber } from "@ark-market/ui";
-import { Ethereum } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import { Ethereum, VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import Media from "./media";
@@ -44,7 +43,7 @@ export default function MobileGlobalSearchSuggestions({
                   <p className="text-sm font-medium">{collection.name}</p>
                   <VerifiedIcon className="size-3 text-primary" />
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center gap-1">
                   <Ethereum className="-ml-1 size-4" />
                   <p className="text-xs font-medium text-muted-foreground">
                     {formatNumber(collection.token_count)} items

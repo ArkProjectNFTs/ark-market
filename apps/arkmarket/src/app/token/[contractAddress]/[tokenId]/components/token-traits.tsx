@@ -1,25 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "@ark-market/ui/icons";
+import Link from "next/link";
 
 import type { PropsWithClassName } from "@ark-market/ui";
-import { cn } from "@ark-market/ui";
+import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
+import { ChevronDown, ChevronUp } from "@ark-market/ui/icons";
 
 import type { TokenMetadata } from "~/types";
 
 interface TokenTraitsProps {
+  contractAddress: string;
   tokenAttributes: TokenMetadata["attributes"];
 }
 
 export default function TokenTraits({
   className,
+  contractAddress,
   tokenAttributes,
 }: PropsWithClassName<TokenTraitsProps>) {
   const [open, setOpen] = useState(true);
@@ -48,10 +51,19 @@ export default function TokenTraits({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="grid grid-cols-2 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
+        <div className="grid grid-cols-1 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
           {tokenAttributes.map((tokenAttribute, index) => {
+            const collectionFilter = {
+              traits: {
+                [tokenAttribute.trait_type ?? ""]: [tokenAttribute.value],
+              },
+            };
             return (
-              <div className="rounded-lg bg-card p-3.5" key={index}>
+              <Link
+                className={cn("rounded-lg bg-card p-3.5", focusableStyles)}
+                key={index}
+                href={`/collection/${contractAddress}?filters=${encodeURIComponent(JSON.stringify(collectionFilter))}`}
+              >
                 <p className="text-sm font-medium text-muted-foreground">
                   {tokenAttribute.trait_type}
                 </p>
@@ -60,7 +72,7 @@ export default function TokenTraits({
                   {formatUnits(data.price, 18)}{" "}
                   <span className="text-muted-foreground">ETH</span>
                 </p> */}
-              </div>
+              </Link>
             );
           })}
         </div>

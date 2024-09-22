@@ -58,11 +58,11 @@ export default function TokenSummary({
           </p>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <button>
+            <button className="size-6 text-[1.5rem]">
               <Share2 className="size-6 text-muted-foreground" />
             </button>
             <CopyButton
-              className="size-6 text-muted-foreground"
+              className="size-6 text-[1.5rem] text-muted-foreground"
               textToCopy={token.collection_address}
             />
             <RefreshMetadataButton

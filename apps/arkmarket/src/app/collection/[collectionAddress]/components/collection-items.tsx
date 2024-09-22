@@ -12,6 +12,7 @@ import {
   collectionSortDirectionsParser,
 } from "~/lib/getCollectionTokens";
 import CollectionItemsData from "./collection-items-data";
+import { CollectionItemsDataFallback } from "./collection-items-data-fallback";
 import CollectionItemsFiltersDialog from "./collection-items-filters-dialog";
 import CollectionItemsFiltersPanel from "./collection-items-filters-panel";
 import CollectionItemsFiltersTraits from "./collection-items-filters-traits";
@@ -137,13 +138,17 @@ export default function CollectionItems({
             onReset={resetFiltersTraits}
           />
         </div>
-        <CollectionItemsData
-          collectionAddress={collectionAddress}
-          sortDirection={sortDirection}
-          sortBy={sortBy}
-          viewType={viewType}
-          filters={filters}
-        />
+        <Suspense
+          fallback={<CollectionItemsDataFallback viewType={viewType} />}
+        >
+          <CollectionItemsData
+            collectionAddress={collectionAddress}
+            sortDirection={sortDirection}
+            sortBy={sortBy}
+            viewType={viewType}
+            filters={filters}
+          />
+        </Suspense>
       </div>
     </div>
   );

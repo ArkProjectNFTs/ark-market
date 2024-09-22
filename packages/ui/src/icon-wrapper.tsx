@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+
 import { cn } from "@ark-market/ui";
 
 interface IconProps {
@@ -32,8 +33,8 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
       if (isNaN(fontSize)) {
         return;
       }
-      
-      const minSize = 16;
+
+      const minSize = 14;
       const maxSize = 24;
 
       const clampedSize = Math.min(Math.max(fontSize, minSize), maxSize);
@@ -61,7 +62,7 @@ export const Icon: React.FC<IconProps> = ({ icon, className }) => {
   return (
     <span
       ref={ref}
-      className={cn("items-bottom inline-flex justify-center", className)}
+      className={cn("inline-flex items-center justify-center", className)}
       style={{
         fontFamily: "UnframedIconFont",
         fontSize: iconSize,

@@ -28,6 +28,10 @@ function CollectionItemsFiltersTrait({
   const isActive = selectedTraits[name]?.length;
   const count = Object.values(trait).length;
 
+  if (!count) {
+    return null;
+  }
+
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
