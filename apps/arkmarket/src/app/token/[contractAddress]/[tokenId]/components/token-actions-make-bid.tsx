@@ -122,9 +122,11 @@ export default function TokenActionsMakeBid({
         title: "Your bid could not be submitted",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -135,9 +137,11 @@ export default function TokenActionsMakeBid({
         title: "Your bid has been sucessfullly sent",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

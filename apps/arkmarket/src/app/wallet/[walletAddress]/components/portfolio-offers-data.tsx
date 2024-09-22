@@ -27,6 +27,7 @@ import type {
   PortfolioOffersApiResponse,
   PortfolioOffersTypeValues,
 } from "~/lib/getPortfolioOffers";
+import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
 import Media from "~/components/media";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getPortfolioOffers } from "~/lib/getPortfolioOffers";
@@ -35,14 +36,16 @@ import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 interface PortfolioActivityDataProps {
   walletAddress: string;
   offerType: PortfolioOffersTypeValues;
+  isOwner: boolean;
 }
 
 const gridTemplateColumnValue =
-  "grid-cols-[minmax(11rem,2fr)_repeat(5,minmax(7.5rem,1fr))]";
+  "grid-cols-[minmax(14rem,2fr)_repeat(5,minmax(10rem,1fr))]";
 
 export default function PortfolioOffersData({
   walletAddress,
   offerType,
+  isOwner,
 }: PortfolioActivityDataProps) {
   const tableRef = useRef<HTMLTableElement | null>(null);
   const { address } = useAccount();
@@ -118,9 +121,11 @@ export default function PortfolioOffersData({
             <TableHead className="sticky top-0 flex items-center bg-background">
               Expiration
             </TableHead>
-            <TableHead className="sticky top-0 flex items-center bg-background">
-              Action
-            </TableHead>
+            {isOwner && (
+              <TableHead className="sticky top-0 flex items-center bg-background">
+                Action
+              </TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody
@@ -173,12 +178,12 @@ export default function PortfolioOffersData({
                       </Link>
                       <div className="flex w-full items-center gap-1">
                         <Link
-                          className={focusableStyles}
+                          className={cn(focusableStyles, ellipsableStyles)}
                           href={`/collection/${offer.collection_address}`}
                         >
                           <p
                             className={cn(
-                              "text-muted-foreground",
+                              "text-muted-foreground transition-colors hover:text-primary",
                               ellipsableStyles,
                             )}
                           >
@@ -193,7 +198,11 @@ export default function PortfolioOffersData({
                   </div>
                 </TableCell>
                 <TableCell>
-                  {offer.price ? <PriceTag price={offer.price} /> : "_"}
+                  {offer.price ? (
+                    <PriceTag price={offer.price} className="max-w-full" />
+                  ) : (
+                    "_"
+                  )}
                 </TableCell>
                 <TableCell>{offer.floor_difference}%</TableCell>
                 <TableCell>
@@ -230,9 +239,23 @@ export default function PortfolioOffersData({
                     ? getRoundedRemainingTime(offer.expire_at)
                     : "_"}
                 </TableCell>
-                <TableCell className="pr-5">
-                  {/* {offerType === "made" ? <CancelOffer /> : <></>} */}
-                </TableCell>
+                {isOwner && (
+                  <TableCell className="pr-5">
+                    {offerType === "made" ? (
+                      <CancelOffer
+                        collectionAddress={offer.collection_address}
+                        offerHash={offer.hash}
+                        offerPrice={offer.price}
+                        onSuccess={() => {}}
+                        collectionName={offer.collection_name}
+                        tokenId={offer.token_id}
+                        tokenMetadata={offer.metadata}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </TableCell>
+                )}
               </TableRow>
             );
           })}

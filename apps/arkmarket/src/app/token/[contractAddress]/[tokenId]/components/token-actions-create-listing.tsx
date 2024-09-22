@@ -136,9 +136,11 @@ export function TokenActionsCreateListing({
         title: "Listing canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -150,9 +152,11 @@ export function TokenActionsCreateListing({
         title: "Your token is successfully listed!",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -168,9 +172,11 @@ export function TokenActionsCreateListing({
         title: "Auction canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -182,9 +188,11 @@ export function TokenActionsCreateListing({
         title: "Auction successfully launched",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

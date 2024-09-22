@@ -87,9 +87,13 @@ export default function TokenOffersTableItem({
             )}
             {isOfferer && (
               <CancelOffer
-                offer={offer}
-                token={token}
                 onSuccess={() => setIsSuccess(true)}
+                tokenId={token.token_id}
+                offerHash={offer.hash}
+                collectionAddress={token.collection_address}
+                offerPrice={offer.price}
+                collectionName={token.collection_name}
+                tokenMetadata={token.metadata}
               />
             )}
           </>

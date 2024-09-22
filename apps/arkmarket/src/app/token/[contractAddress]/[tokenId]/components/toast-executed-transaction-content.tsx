@@ -1,18 +1,21 @@
-import type { WalletToken } from "~/app/wallet/[walletAddress]/queries/getWalletData";
-import type { CollectionToken, Token } from "~/types";
+import type { TokenMetadata } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
 
 interface ToastExecutedTransactionContentProps {
-  price: bigint;
-  token: Token | CollectionToken | WalletToken;
+  collectionName: string;
   formattedPrice: string;
+  price: bigint;
+  tokenId: string;
+  tokenMetadata?: TokenMetadata;
 }
 
 export default function ToastExecutedTransactionContent({
-  token,
-  price,
+  collectionName,
   formattedPrice,
+  price,
+  tokenId,
+  tokenMetadata,
 }: ToastExecutedTransactionContentProps) {
   const { convertInUsd } = usePrices();
   const priceInUsd = convertInUsd({ amount: price });
@@ -22,19 +25,15 @@ export default function ToastExecutedTransactionContent({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-5">
           <Media
-            src={token.metadata?.animation_url ?? token.metadata?.image}
-            alt={
-              token.metadata?.name ??
-              `${token.collection_name} #${token.token_id}`
-            }
-            mediaKey={token.metadata?.image_key}
+            src={tokenMetadata?.animation_url ?? tokenMetadata?.image}
+            alt={tokenMetadata?.name ?? `${collectionName} #${tokenId}`}
+            mediaKey={tokenMetadata?.image_key}
             height={84}
             width={84}
             className="size-10 rounded-xs object-contain"
           />
           <p className="font-medium">
-            {token.metadata?.name ??
-              `${token.collection_name} #${token.token_id}`}
+            {tokenMetadata?.name ?? `${collectionName} #${tokenId}`}
           </p>
         </div>
         <div className="text-end">

@@ -143,6 +143,7 @@ export default function Portfolio({
             <PortfolioOffersData
               walletAddress={walletAddress}
               offerType={offerType}
+              isOwner={isOwner}
             />
           )}
           {selectedTab === "activity" && (

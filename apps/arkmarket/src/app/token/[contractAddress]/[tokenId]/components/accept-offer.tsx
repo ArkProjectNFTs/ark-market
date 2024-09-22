@@ -21,6 +21,20 @@ interface AcceptOfferProps {
   onSuccess: () => void;
 }
 
+function computeFloorDifference(
+  tokenMarketData: TokenMarketData,
+  offerPrice: string,
+) {
+  if (tokenMarketData.floor === null) {
+    return BigInt("0");
+  }
+
+  return (
+    ((BigInt(offerPrice) - BigInt(tokenMarketData.floor)) * 100n) /
+    BigInt(tokenMarketData.floor)
+  );
+}
+
 const AcceptOffer: React.FC<AcceptOfferProps> = ({
   offer,
   token,
@@ -36,9 +50,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   const { toast } = useToast();
   const formattedAmount = formatEther(BigInt(offer.price));
 
-  const floorDifference =
-    ((BigInt(offer.price) - BigInt(tokenMarketData.floor)) * 100n) /
-    BigInt(tokenMarketData.floor);
+  const floorDifference = computeFloorDifference(tokenMarketData, offer.price);
 
   useEffect(() => {
     if (status === "success") {
@@ -79,9 +91,11 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         title: "Offer not accepted",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={BigInt(offer.price)}
             formattedPrice={formattedAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -92,9 +106,11 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         title: "Offer successfully accepted",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={BigInt(offer.price)}
             formattedPrice={formattedAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

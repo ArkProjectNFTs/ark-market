@@ -9,17 +9,29 @@ import { formatEther } from "viem";
 import { Button } from "@ark-market/ui/button";
 import { useToast } from "@ark-market/ui/use-toast";
 
-import type { Token, TokenOffer } from "~/types";
+import type { TokenMetadata } from "~/types";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
 interface CancelOfferProps {
-  token: Token;
-  offer: TokenOffer;
+  collectionAddress: string;
+  collectionName: string;
+  offerHash: string;
+  offerPrice: string;
   onSuccess: () => void;
+  tokenId: string;
+  tokenMetadata?: TokenMetadata;
 }
 
-const CancelOffer = ({ offer, token, onSuccess }: CancelOfferProps) => {
+const CancelOffer = ({
+  collectionAddress,
+  collectionName,
+  offerHash,
+  offerPrice,
+  onSuccess,
+  tokenId,
+  tokenMetadata,
+}: CancelOfferProps) => {
   const { account } = useAccount();
   const { cancel, status } = useCancel();
   const { toast } = useToast();
@@ -31,9 +43,11 @@ const CancelOffer = ({ offer, token, onSuccess }: CancelOfferProps) => {
         title: "The offer could not be canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
-            price={BigInt(offer.price)}
-            formattedPrice={formatEther(BigInt(offer.price))}
+            price={BigInt(offerPrice)}
+            formattedPrice={formatEther(BigInt(offerPrice))}
+            collectionName={collectionName}
+            tokenId={tokenId}
+            tokenMetadata={tokenMetadata}
           />
         ),
       });
@@ -44,9 +58,11 @@ const CancelOffer = ({ offer, token, onSuccess }: CancelOfferProps) => {
         title: "Your offer is successfully canceled",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
-            price={BigInt(offer.price)}
-            formattedPrice={formatEther(BigInt(offer.price))}
+            price={BigInt(offerPrice)}
+            formattedPrice={formatEther(BigInt(offerPrice))}
+            collectionName={collectionName}
+            tokenId={tokenId}
+            tokenMetadata={tokenMetadata}
           />
         ),
       });
@@ -61,9 +77,9 @@ const CancelOffer = ({ offer, token, onSuccess }: CancelOfferProps) => {
 
     await cancel({
       starknetAccount: account,
-      tokenAddress: token.collection_address,
-      tokenId: BigInt(token.token_id),
-      orderHash: BigInt(offer.hash),
+      tokenAddress: collectionAddress,
+      tokenId: BigInt(tokenId),
+      orderHash: BigInt(offerHash),
     });
   };
 

@@ -24,6 +24,19 @@ interface TokenActionsAcceptBestOfferProps {
   small?: boolean;
 }
 
+function computeFloorDifference(tokenMarketData: TokenMarketData) {
+  if (tokenMarketData.floor === null) {
+    return BigInt("0");
+  }
+
+  return (
+    ((BigInt(tokenMarketData.top_offer.amount) -
+      BigInt(tokenMarketData.floor)) *
+      100n) /
+    BigInt(tokenMarketData.floor)
+  );
+}
+
 export default function TokenActionsAcceptBestOffer({
   token,
   tokenMarketData,
@@ -44,11 +57,7 @@ export default function TokenActionsAcceptBestOffer({
 
   const formattedAmount = formatEther(BigInt(tokenMarketData.top_offer.amount));
 
-  const floorDifference =
-    ((BigInt(tokenMarketData.top_offer.amount) -
-      BigInt(tokenMarketData.floor)) *
-      100n) /
-    BigInt(tokenMarketData.floor);
+  const floorDifference = computeFloorDifference(tokenMarketData);
 
   const onConfirm = async () => {
     try {
@@ -83,9 +92,11 @@ export default function TokenActionsAcceptBestOffer({
         title: "Offer not accepted",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={BigInt(tokenMarketData.top_offer.amount)}
             formattedPrice={formattedAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -96,9 +107,11 @@ export default function TokenActionsAcceptBestOffer({
         title: "Offer successfully accepted",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={BigInt(tokenMarketData.top_offer.amount)}
             formattedPrice={formattedAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
