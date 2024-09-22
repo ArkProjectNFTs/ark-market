@@ -207,6 +207,10 @@ export interface OwnersTokensApiResponse {
   result: Token[];
 }
 
+export interface PortfolioStats {
+  total_value: string;
+}
+
 export interface TokenMarketData {
   buy_in_progress: boolean;
   created_timestamp: number | null;
