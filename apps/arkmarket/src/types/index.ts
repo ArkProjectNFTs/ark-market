@@ -178,7 +178,7 @@ export interface PortfolioActivity {
 export interface PortfolioOffers {
   currency_address: string;
   expire_at: number;
-  floor_difference: string;
+  floor_difference: string | null;
   from_address: string;
   hash: string;
   offer_id: number;

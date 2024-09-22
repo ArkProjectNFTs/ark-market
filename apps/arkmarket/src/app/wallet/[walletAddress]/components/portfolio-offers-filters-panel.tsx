@@ -5,7 +5,7 @@ import { cn } from "@ark-market/ui";
 import { Label } from "@ark-market/ui/label";
 import { RadioGroup, RadioGroupItem } from "@ark-market/ui/radio-group";
 
-import { PortfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
+import type { PortfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 
 interface PortfolioOffersFiltersPanelProps {
   value: PortfolioOffersTypeValues;

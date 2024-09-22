@@ -21,6 +21,7 @@ import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
 import PortfolioOffersData from "./portfolio-offers-data";
 import PortfolioOffersFiltersPanel from "./portfolio-offers-filters-panel";
+import PortfolioOffersMobileFilters from "./portfolio-offers-mobile-filters";
 import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
 
 interface PortfolioProps {
@@ -100,7 +101,7 @@ export default function Portfolio({
       )}
       {selectedTab === "offers" && (
         <PortfolioOffersFiltersPanel
-          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] sm:block"
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] lg:block"
           value={offerType}
           onValueChange={setOfferType}
           // walletCollectionsInitialData={walletCollectionsInitialData}
@@ -126,6 +127,16 @@ export default function Portfolio({
                 setViewType={setViewType}
                 viewType={viewType}
               />
+            )}
+            {selectedTab === "offers" && (
+              <>
+                <div className="pb-2.5 pt-6 lg:hidden">
+                  <PortfolioOffersMobileFilters
+                    value={offerType}
+                    onValueChange={setOfferType}
+                  />
+                </div>
+              </>
             )}
           </div>
           {selectedTab === "items" && (

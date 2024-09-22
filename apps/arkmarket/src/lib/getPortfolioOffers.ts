@@ -32,7 +32,6 @@ export async function getPortfolioOffers({
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/portfolio/${walletAddress}/offers?${queryParams.join("&")}`;
-  console.log(url);
 
   const response = await fetch(url, {
     headers: {
