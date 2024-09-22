@@ -43,7 +43,7 @@ export default function ToastRejectedTransactionContent({
           </p>
         </div>
       </div>
-      <p className="text-sm text-[#EF4444]">
+      <p className="text-sm font-medium text-[#EF4444]">
         You didn't sign the transaction in your wallet
       </p>
     </div>
