@@ -130,15 +130,18 @@ export default function DesktopCollectionActivity({
 
                   <div className="w-full overflow-hidden">
                     <Link
-                      className={cn(
-                        "w-full text-base font-medium",
-                        focusableStyles,
-                        ellipsableStyles,
-                      )}
+                      className={focusableStyles}
                       href={`/token/${collectionAddress}/${activity.token_id}`}
                     >
-                      {activity.token_metadata?.name ??
-                        `${activity.name} #${activity.token_id}`}
+                      <p
+                        className={cn(
+                          "w-full text-base font-medium",
+                          ellipsableStyles,
+                        )}
+                      >
+                        {activity.token_metadata?.name ??
+                          `${activity.name} #${activity.token_id}`}
+                      </p>
                     </Link>
                     <div className="flex w-full items-center gap-1">
                       <Link
