@@ -176,20 +176,19 @@ export interface PortfolioActivity {
 }
 
 export interface PortfolioOffers {
+  collection_address: string;
+  collection_name: string;
   currency_address: string;
   expire_at: number;
   floor_difference: string | null;
   from_address: string;
   hash: string;
+  is_verified: boolean;
+  metadata?: TokenMetadata;
   offer_id: number;
   price: string;
   to_address: string | null;
   token_id: string;
-
-  collection_address: string;
-  is_verified: boolean;
-  collection_name: string;
-  metadata?: TokenMetadata;
 }
 
 export interface CollectionActivity {
