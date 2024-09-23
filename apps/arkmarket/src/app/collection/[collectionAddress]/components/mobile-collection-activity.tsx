@@ -25,7 +25,6 @@ export default function MobileCollectionActivity({
   collectionActivity,
 }: MobileCollectionActivityProps) {
   const { address } = useAccount();
-  console.log(collectionActivity);
 
   return (
     <div className="px-5">
