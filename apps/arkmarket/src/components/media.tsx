@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -17,6 +17,7 @@ interface MediaProps {
   src?: string | null;
   width?: number;
   height?: number;
+  priority?: boolean;
 }
 
 function getMediaSrc(
@@ -86,6 +87,7 @@ export default function Media({
   src,
   width = 600,
   height = 600,
+  priority = false,
 }: PropsWithClassName<MediaProps>) {
   const [status, setStatus] = useState<"loading" | "error" | "loaded">(
     "loading",
@@ -114,6 +116,7 @@ export default function Media({
         )}
         <Image
           unoptimized
+          priority={priority}
           alt={alt}
           className={cn("flex-shrink-0", className)}
           onError={() => setStatus("error")}
