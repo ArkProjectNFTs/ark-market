@@ -1,17 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useMemo } from "react";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { ViewType } from "~/components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-  CollectionTokensApiResponse,
 } from "~/lib/getCollectionTokens";
 import type { CollectionToken, Filters } from "~/types";
-import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionTokens } from "~/lib/getCollectionTokens";
+import useCollectionTokens from "~/hooks/useCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
 
@@ -21,59 +18,78 @@ interface CollectionItemsDataProps {
   sortDirection: CollectionSortDirection;
   viewType: ViewType;
   filters: Filters;
+  searchQuery: string;
 }
 
-export default function CollectionItemsData({
+function CollectionItemsData({
   collectionAddress,
   sortBy,
   sortDirection,
   viewType,
   filters,
+  searchQuery,
 }: CollectionItemsDataProps) {
-  const {
-    data: infiniteData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useSuspenseInfiniteQuery({
-    queryKey: [
-      "collectionTokens",
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useCollectionTokens({
+      collectionAddress,
       sortDirection,
       sortBy,
-      collectionAddress,
       filters,
-    ],
-    refetchInterval: 10_000,
-    getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
-      lastPage.next_page,
-    initialPageParam: undefined as number | undefined,
-    queryFn: ({ pageParam }) =>
-      getCollectionTokens({
-        collectionAddress,
-        page: pageParam,
-        sortDirection,
-        sortBy,
-        filters,
-      }),
-  });
+    });
 
-  useInfiniteWindowScroll({
-    fetchNextPage,
-    hasNextPage: !!hasNextPage,
-    isFetchingNextPage,
-  });
-
-  const collectionTokens: CollectionToken[] = useMemo(
-    () => infiniteData.pages.flatMap((page) => page.data),
-    [infiniteData],
+  const items: CollectionToken[] = useMemo(
+    () =>
+      data.pages
+        .flatMap((page) => page.data)
+        .filter((token) => token.token_id.includes(searchQuery)),
+    [data.pages, searchQuery],
   );
 
+  console.log("isFetchingNextPage", isFetchingNextPage);
+
+  useEffect(() => {
+    if (items.length > 0 || !hasNextPage || isFetchingNextPage) {
+      return;
+    }
+
+    const run = async () => {
+      console.log("fetchNextPage 1");
+      await fetchNextPage();
+    };
+
+    void run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
+
+  const handleEndReached = async () => {
+    if (isFetchingNextPage || !hasNextPage) {
+      return;
+    }
+
+    console.log("fetchNextPage 2");
+    await fetchNextPage();
+  };
+
+  if (items.length === 0) {
+    return (
+      <div className="p-5">
+        <div className="text-xl font-semibold">No items found.</div>
+        <div className="mb-5 text-muted-foreground">
+          Try updating your search criteria to find what you're looking for.
+        </div>
+      </div>
+    );
+  }
+
   return viewType === "list" ? (
-    <CollectionItemsDataListView collectionTokens={collectionTokens} />
+    <CollectionItemsDataListView collectionTokens={items} />
   ) : (
     <CollectionItemsDataGridView
-      collectionTokens={collectionTokens}
+      items={items}
+      onEndReached={handleEndReached}
       viewType={viewType}
     />
   );
 }
+
+export default CollectionItemsData;

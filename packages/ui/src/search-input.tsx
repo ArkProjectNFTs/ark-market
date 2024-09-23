@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Search } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { Search } from "@ark-market/ui/icons";
 
 import type { InputProps } from "./input";
 import { Input } from "./input";
 
 const SearchInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, type = "search", ...props }, ref) => {
     return (
       <div className="relative w-full flex-1">
         <Search
@@ -16,7 +16,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, InputProps>(
         />
         <Input
           ref={ref}
-          type="search"
+          type={type}
           className={cn("pl-10", className)}
           {...props}
         />

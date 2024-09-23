@@ -45,13 +45,15 @@ const SmallGridContainer = forwardRef<
 SmallGridContainer.displayName = "SmallGridContainer";
 
 interface CollectionItemsDataGridViewProps {
-  collectionTokens: CollectionToken[];
+  items: CollectionToken[];
   viewType: ViewType;
+  onEndReached: () => void;
 }
 
 export default function CollectionItemsDataGridView({
-  collectionTokens,
+  items,
   viewType,
+  onEndReached,
 }: CollectionItemsDataGridViewProps) {
   const components = {
     List: viewType === "large-grid" ? LargeGridContainer : SmallGridContainer,
@@ -60,12 +62,14 @@ export default function CollectionItemsDataGridView({
   return (
     <div className="mb-6">
       <VirtuosoGrid
-        initialItemCount={collectionTokens.length}
-        totalCount={collectionTokens.length}
+        initialTopMostItemIndex={0}
+        overscan={400}
+        totalCount={items.length}
         useWindowScroll
         components={components}
+        endReached={onEndReached}
         itemContent={(index) => {
-          const token = collectionTokens[index];
+          const token = items[index];
 
           if (!token) {
             return null;

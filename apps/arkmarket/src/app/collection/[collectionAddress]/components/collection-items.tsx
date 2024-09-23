@@ -2,6 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { parseAsJson, useQueryState } from "nuqs";
+import { useDebounceValue } from "usehooks-ts";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
 import type { Filters } from "~/types";
@@ -29,10 +30,11 @@ const isValidViewType = (value: string): value is ViewType =>
 
 export default function CollectionItems({
   collectionAddress,
-  collectionTokenCount,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery] = useDebounceValue(searchQuery, 500);
   const [viewType, setViewType] = useState<ViewType>("large-grid");
   const [sortDirection, setSortDirection] = useQueryState(
     collectionSortDirectionKey,
@@ -125,12 +127,12 @@ export default function CollectionItems({
             setSortBy={setSortBy}
             viewType={viewType}
             setViewType={handleViewTypeChange}
-            totalTokensCount={collectionTokenCount}
             toggleFiltersPanel={toggleFiltersPanel}
             filtersPanelOpen={filtersPanelOpen}
             openFiltersDialog={() => setFiltersDialogOpen(true)}
-            filtersDialogOpen={filtersDialogOpen}
             filtersCount={filtersCount}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
           <CollectionItemsFiltersTraits
             traits={filters.traits}
@@ -147,6 +149,7 @@ export default function CollectionItems({
             sortBy={sortBy}
             viewType={viewType}
             filters={filters}
+            searchQuery={debouncedSearchQuery}
           />
         </Suspense>
       </div>
