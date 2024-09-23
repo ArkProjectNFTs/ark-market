@@ -1,16 +1,14 @@
 "use client";
 
-import { memo, useEffect, useMemo } from "react";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useMemo } from "react";
 
-import type { ViewType } from "../../../../components/view-type-toggle-group";
+import type { ViewType } from "~/components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-  CollectionTokensApiResponse,
 } from "~/lib/getCollectionTokens";
 import type { CollectionToken, Filters } from "~/types";
-import { getCollectionTokens } from "~/lib/getCollectionTokens";
+import useCollectionTokens from "~/hooks/useCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
 
@@ -31,77 +29,48 @@ function CollectionItemsData({
   filters,
   searchQuery,
 }: CollectionItemsDataProps) {
-  const {
-    data: infiniteData,
-    fetchNextPage,
-    hasNextPage,
-    // isFetchingNextPage,
-    isRefetching,
-  } = useSuspenseInfiniteQuery({
-    queryKey: [
-      "collectionTokens",
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useCollectionTokens({
+      collectionAddress,
       sortDirection,
       sortBy,
-      collectionAddress,
       filters,
-    ],
-    refetchInterval: 10_000,
-    getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
-      lastPage.next_page,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getCollectionTokens({
-        collectionAddress,
-        page: pageParam,
-        sortDirection,
-        sortBy,
-        filters,
-      }),
-  });
+    });
 
-  // useInfiniteWindowScroll({
-  //   fetchNextPage,
-  //   hasNextPage: !!hasNextPage,
-  //   isFetchingNextPage,
-  // });
-
-  const collectionTokens: CollectionToken[] = useMemo(
+  const items: CollectionToken[] = useMemo(
     () =>
-      infiniteData.pages
+      data.pages
         .flatMap((page) => page.data)
         .filter((token) => token.token_id.includes(searchQuery)),
-    [infiniteData, searchQuery],
+    [data.pages, searchQuery],
   );
 
-  const totalTokensCount = collectionTokens.length;
+  console.log("isFetchingNextPage", isFetchingNextPage);
 
   useEffect(() => {
-    const run = async () => {
-      // console.log("totalTokensCount", totalTokensCount);
-      if (
-        isRefetching ||
-        !hasNextPage ||
-        !searchQuery ||
-        !totalTokensCount ||
-        totalTokensCount > 50
-      ) {
-        return;
-      }
+    if (items.length > 0 || !hasNextPage || isFetchingNextPage) {
+      return;
+    }
 
-      console.log("fetchNextPage > ", searchQuery, totalTokensCount);
-      // if (searchQuery && totalTokensCount < 10 && hasNextPage) {
-      await fetchNextPage({ cancelRefetch: false });
-      // }
+    const run = async () => {
+      console.log("fetchNextPage 1");
+      await fetchNextPage();
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    run();
+    void run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, totalTokensCount]);
+  }, [items]);
 
-  console.log("CollectionItemsData.render");
+  const handleEndReached = async () => {
+    if (isFetchingNextPage || !hasNextPage) {
+      return;
+    }
 
-  if (collectionTokens.length === 0) {
+    console.log("fetchNextPage 2");
+    await fetchNextPage();
+  };
+
+  if (items.length === 0) {
     return (
       <div className="p-5">
         <div className="text-xl font-semibold">No items found.</div>
@@ -113,13 +82,14 @@ function CollectionItemsData({
   }
 
   return viewType === "list" ? (
-    <CollectionItemsDataListView collectionTokens={collectionTokens} />
+    <CollectionItemsDataListView collectionTokens={items} />
   ) : (
     <CollectionItemsDataGridView
-      collectionTokens={collectionTokens}
+      items={items}
+      onEndReached={handleEndReached}
       viewType={viewType}
     />
   );
 }
 
-export default memo(CollectionItemsData);
+export default CollectionItemsData;

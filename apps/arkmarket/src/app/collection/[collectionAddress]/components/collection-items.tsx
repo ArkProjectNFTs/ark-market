@@ -30,7 +30,6 @@ const isValidViewType = (value: string): value is ViewType =>
 
 export default function CollectionItems({
   collectionAddress,
-  collectionTokenCount,
 }: CollectionProps) {
   const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
   const [filtersDialogOpen, setFiltersDialogOpen] = useState(false);
@@ -100,11 +99,6 @@ export default function CollectionItems({
     0,
   );
 
-  console.log("CollectionItems.render", {
-    searchQuery,
-    collectionTokenCount,
-  });
-
   return (
     <div className="flex">
       <Suspense>
@@ -133,11 +127,9 @@ export default function CollectionItems({
             setSortBy={setSortBy}
             viewType={viewType}
             setViewType={handleViewTypeChange}
-            totalTokensCount={collectionTokenCount}
             toggleFiltersPanel={toggleFiltersPanel}
             filtersPanelOpen={filtersPanelOpen}
             openFiltersDialog={() => setFiltersDialogOpen(true)}
-            filtersDialogOpen={filtersDialogOpen}
             filtersCount={filtersCount}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}

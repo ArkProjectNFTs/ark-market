@@ -25,9 +25,7 @@ interface CollectionItemsToolbarProps {
   toggleFiltersPanel: () => void;
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
-  totalTokensCount: number;
   filtersPanelOpen: boolean;
-  filtersDialogOpen: boolean;
   openFiltersDialog: () => void;
   filtersCount: number;
   searchQuery: string;
@@ -42,17 +40,13 @@ export default function CollectionItemsToolbar({
   toggleFiltersPanel,
   viewType,
   setViewType,
-  // totalTokensCount,
   filtersPanelOpen,
-  // filtersDialogOpen,
   openFiltersDialog,
   filtersCount,
   searchQuery,
   setSearchQuery,
 }: CollectionItemsToolbarProps) {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-
-  console.log("CollectionItemsToolbar.render");
 
   return (
     <div className="bg-background px-5 pb-5">

@@ -376,7 +376,7 @@ importers:
         version: 7.35.0(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-3dfd5d9e-20240910(eslint@9.9.1(jiti@1.21.6))
+        version: 5.1.0-rc-e4953922-20240919(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.13
         version: 2.1.0(eslint@9.9.1(jiti@1.21.6))
@@ -2690,8 +2690,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-3dfd5d9e-20240910:
-    resolution: {integrity: sha512-bB2mPM2fKSgb+rrHtksYrawCribuatIBq8t1gZTyEwNbrWTDFc1H0r7FWZVgqOvR9n5hwOxF16KVXkgFwvGQMw==}
+  eslint-plugin-react-hooks@5.1.0-rc-e4953922-20240919:
+    resolution: {integrity: sha512-W/CJVTs49Wn34P3RTMGb5jx7JW8ftUIUzNqYDsWqO/tz26DU3fXrou44jxAvu1HR5VH9DutXgxq7DCgDM2MBGQ==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -7614,7 +7614,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-3dfd5d9e-20240910(eslint@9.9.1(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-e4953922-20240919(eslint@9.9.1(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.1(jiti@1.21.6)
 
