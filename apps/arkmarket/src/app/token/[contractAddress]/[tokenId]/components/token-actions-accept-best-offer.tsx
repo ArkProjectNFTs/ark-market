@@ -136,6 +136,7 @@ export default function TokenActionsAcceptBestOffer({
       <Button
         className={cn(small ?? "relative w-full lg:max-w-[50%]")}
         size={small ? "xl" : "xxl"}
+        variant="secondary"
       >
         <Tag
           className={cn(small ?? "absolute left-4")}
