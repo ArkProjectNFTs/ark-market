@@ -25,6 +25,7 @@ export default function MobileCollectionActivity({
   collectionActivity,
 }: MobileCollectionActivityProps) {
   const { address } = useAccount();
+  console.log(collectionActivity);
 
   return (
     <div className="px-5">
@@ -48,7 +49,7 @@ export default function MobileCollectionActivity({
               <div className="flex w-full items-center justify-between">
                 <Link
                   className={cn("text-base font-medium", focusableStyles)}
-                  href={`/token/${activity.collection_address}/${activity.token_id}`}
+                  href={`/token/${activity.address}/${activity.token_id}`}
                 >
                   {activity.token_metadata?.name ?? activity.name}
                 </Link>
@@ -61,7 +62,7 @@ export default function MobileCollectionActivity({
 
               <div className="flex w-full items-center justify-between">
                 <Link
-                  href={`/collection/${activity.collection_address}`}
+                  href={`/collection/${activity.address}`}
                   className={cn(
                     "flex items-center gap-1 text-muted-foreground",
                     focusableStyles,
