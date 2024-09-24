@@ -1,5 +1,5 @@
 import type { PropsWithClassName } from ".";
-import { cn, formatUnits } from ".";
+import { cn, ellipsableStyles, formatUnits } from ".";
 import { Ethereum } from "./icons";
 
 interface PriceTagProps {
@@ -17,7 +17,7 @@ export function PriceTag({
       )}
     >
       <Ethereum className="size-5" />
-      <p className="whitespace-nowrap">
+      <p className={ellipsableStyles}>
         {formatUnits(price, 18)}
         <span className="text-muted-foreground"> ETH</span>
       </p>

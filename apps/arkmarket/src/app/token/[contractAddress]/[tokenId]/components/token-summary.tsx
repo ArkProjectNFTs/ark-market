@@ -34,6 +34,7 @@ export default function TokenSummary({
         className="aspect-square w-full rounded-lg object-contain"
         height={1000}
         width={1000}
+        priority
       />
       <div className="flex flex-col lg:gap-0">
         <div className="flex items-center gap-1.5">
@@ -58,11 +59,11 @@ export default function TokenSummary({
           </p>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <button>
+            <button className="size-6 text-[1.5rem]">
               <Share2 className="size-6 text-muted-foreground" />
             </button>
             <CopyButton
-              className="size-6 text-muted-foreground"
+              className="size-6 text-[1.5rem] text-muted-foreground"
               textToCopy={token.collection_address}
             />
             <RefreshMetadataButton

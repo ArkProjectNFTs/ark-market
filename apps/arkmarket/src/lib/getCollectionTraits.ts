@@ -1,5 +1,6 @@
 import type { CollectionTraits } from "~/types";
 import { env } from "~/env";
+import { sortTraitsByCountAsc } from "./sortTraitsByCountAsc";
 
 interface GetCollectionParams {
   collectionAddress: string;
@@ -17,12 +18,11 @@ export default async function getCollectionTraits({
   );
 
   if (!response.ok) {
-    console.error("Failed to fetch collection data");
-
+    console.error("Failed to fetch traits data");
     return {};
   }
 
   const { data } = (await response.json()) as CollectionTraitsApiResponse;
 
-  return data;
+  return sortTraitsByCountAsc(data);
 }

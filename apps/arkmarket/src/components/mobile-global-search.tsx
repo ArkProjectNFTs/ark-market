@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Meh, Search } from "@ark-market/ui/icons";
 import { useDebounceValue } from "usehooks-ts";
 
 import {
@@ -12,9 +11,13 @@ import {
   focusableStyles,
   formatNumber,
 } from "@ark-market/ui";
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
-import { Ethereum } from "@ark-market/ui/icons";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
+import { Ethereum, Meh, Search, VerifiedIcon } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 import getCollectionSearch from "~/lib/getCollectionSearch";
@@ -181,6 +184,7 @@ export default function MobileGlobalSearchWrapper() {
         <Search className="size-6" />
       </DialogTrigger>
       <DialogContent className="bg-secondary">
+        <DialogTitle className="sr-only">Search</DialogTitle>
         <div className="absolute left-0 right-0 top-0 z-50 flex h-[var(--site-header-height)] w-full items-center gap-2.5 bg-background px-2.5">
           <SearchInput
             value={inputValue}

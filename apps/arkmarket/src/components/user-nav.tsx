@@ -32,7 +32,7 @@ export function UserNav() {
             <Wallet />
             Connect wallet
           </div>
-          <p className="lg:hidden">Connect</p>
+          <p className="md:hidden">Connect</p>
         </Button>
       </ConnectWalletModal>
     );

@@ -14,7 +14,12 @@ import * as z from "zod";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { DateTimePicker } from "@ark-market/ui/date-time-picker";
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 import { EthInput } from "@ark-market/ui/eth-input";
 import {
   Form,
@@ -39,6 +44,7 @@ import type { Token } from "~/types";
 import durations from "~/constants/durations";
 import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
+import useTokenMarketdata from "~/hooks/useTokenMarketData";
 import formatAmount from "~/lib/formatAmount";
 import getCollection from "~/lib/getCollection";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
@@ -57,6 +63,10 @@ export function TokenActionsCreateListing({
   children,
 }: TokenActionsCreateListingProps) {
   const { account } = useAccount();
+  const { data: tokenMarketData } = useTokenMarketdata({
+    collectionAddress: token.collection_address,
+    tokenId: token.token_id,
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
   const { data: collection } = useQuery({
@@ -237,7 +247,6 @@ export function TokenActionsCreateListing({
   }
 
   const startAmount = form.watch("startAmount");
-  const isLoading = status === "loading" || auctionStatus === "loading";
 
   const formattedCollectionFloor = formatEther(BigInt(collection?.floor ?? 0));
 
@@ -248,6 +257,10 @@ export function TokenActionsCreateListing({
     auctionStatus === "loading";
 
   const startAmountInUsd = convertInUsd({ amount: parseEther(startAmount) });
+  const isLoading = status === "loading" || auctionStatus === "loading";
+  const isTriggerLoading = status === "success" || auctionStatus === "success";
+  const isTriggerDisabled =
+    isTriggerLoading || tokenMarketData?.buy_in_progress;
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -256,8 +269,19 @@ export function TokenActionsCreateListing({
           <Button
             className={cn(small ?? "relative w-full lg:max-w-[50%]")}
             size={small ? "xl" : "xxl"}
+            disabled={isTriggerDisabled}
           >
-            <List size={24} className={cn("left-4", small ? "" : "absolute")} />
+            {isTriggerLoading ? (
+              <LoaderCircle
+                className={cn("animate-spin", small ?? "absolute left-4")}
+                size={small ? 20 : 24}
+              />
+            ) : (
+              <List
+                size={small ? 20 : 24}
+                className={cn("left-4", small ? "" : "absolute")}
+              />
+            )}
             List for sale
           </Button>
         )}
@@ -267,6 +291,7 @@ export function TokenActionsCreateListing({
           e.preventDefault();
         }}
       >
+        <DialogTitle className="sr-only">Create listing</DialogTitle>
         <div className="flex flex-col gap-8">
           <div className="mt-4 text-center text-xl font-semibold">
             List for sale

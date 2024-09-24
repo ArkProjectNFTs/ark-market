@@ -3,7 +3,12 @@ import { useState } from "react";
 import { useQueryState } from "nuqs";
 
 import { Button } from "@ark-market/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@ark-market/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@ark-market/ui/dialog";
 
 // import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import {
@@ -32,6 +37,7 @@ export default function PortfolioItemsFiltersModal({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
+        <DialogTitle className="sr-only">Filters</DialogTitle>
         <div className="flex h-full flex-col justify-between overflow-auto">
           <PortfolioItemsFiltersContent
             walletAddress={walletAddress}
