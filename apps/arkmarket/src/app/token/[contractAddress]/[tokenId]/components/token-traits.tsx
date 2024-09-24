@@ -51,8 +51,7 @@ export default function TokenTraits({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        {true ? (
-          // {TokenTraits.length === 0 ? (
+        {tokenAttributes.length === 0 ? (
           <div className="flex flex-col items-center pb-8 text-muted-foreground">
             <NoTraits size={42} className="flex-shrink-0" />
             <p className="mt-3 text-center text-xl font-semibold">
