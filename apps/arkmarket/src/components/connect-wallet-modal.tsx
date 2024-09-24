@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@ark-market/ui/dialog";
-import { Loader2, Mail } from "@ark-market/ui/icons";
+import { ConnectWallet, Loader2, Mail } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import { env } from "~/env";
@@ -58,7 +58,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="my-auto sm:max-w-[26.25rem]">
         <DialogHeader>
-          <div className="mx-auto mb-3 mt-3 size-20 rounded-full bg-secondary" />
+          <ConnectWallet className="mx-auto mb-3 mt-3" />
           <DialogTitle className="mx-auto text-xl font-semibold">
             Connect to Unframed
           </DialogTitle>
@@ -107,7 +107,7 @@ export default function ConnectWalletModal({ children }: PropsWithChildren) {
                 size="xl"
               >
                 <div className="absolute left-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-xs bg-background">
-                  <Mail size={20} />
+                  <Mail className="size-5" />
                 </div>
                 <div>
                   <p>

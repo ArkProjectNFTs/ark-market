@@ -1,8 +1,8 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { RefreshCw } from "lucide-react";
 
+import { RefreshCw } from "@ark-market/ui/icons";
 import { useToast } from "@ark-market/ui/use-toast";
 
 import postTokenMetadataRefresh from "~/lib/postTokenMetadataRefresh";

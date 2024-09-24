@@ -75,7 +75,7 @@ export default function WalletAccountContent({
             onClick={onClose}
             prefetch
           >
-            <User size={24} />
+            <User className="!size-6 !text-xl" />
             <p className="font-bold">Profile</p>
           </Link>
           {isWebWallet && (
