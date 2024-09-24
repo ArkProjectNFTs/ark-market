@@ -25,6 +25,7 @@ import {
   Gavel as LucideGavel,
   Globe as LucideGlobe,
   Grid2X2 as LucideGrid2X2,
+  Grid2x2X as LucideGrid2x2X,
   Grid3X3 as LucideGrid3X3,
   List as LucideList,
   Mail as LucideMail,
@@ -710,3 +711,10 @@ export const Success =
         </svg>
       )
     : LucideWallet;
+
+export const ViewMore =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="2" />
+      )
+    : LucideGrid2x2X;
