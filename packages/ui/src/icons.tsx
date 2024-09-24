@@ -28,6 +28,7 @@ import {
   Grid3X3 as LucideGrid3X3,
   List as LucideList,
   Moon as LucideMoon,
+  PartyPopper as LucidePartyPopper,
   RefreshCw as LucideRefreshCw,
   Search as LucideSearch,
   Share2 as LucideShare2,
@@ -71,6 +72,13 @@ export {
   User,
   X,
 };
+
+export const Congratulations =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="3" />
+      )
+    : LucidePartyPopper;
 
 export const CircleDot =
   process.env.NEXT_PUBLIC_THEME === "unframed"
