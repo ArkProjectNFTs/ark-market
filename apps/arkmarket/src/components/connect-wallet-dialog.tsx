@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@ark-market/ui/dialog";
-import { Loader2, Mail } from "@ark-market/ui/icons";
+import { ConnectWallet, Loader2, Mail } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
 import { useConnectWalletStore } from "~/app/stores/connect-wallet";
@@ -62,7 +62,7 @@ export default function ConnectWalletDialog() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="my-auto sm:max-w-[26.25rem]">
         <DialogHeader>
-          <div className="mx-auto mb-3 mt-3 size-20 rounded-full bg-secondary" />
+          <ConnectWallet className="mx-auto mb-3 mt-3" />
           <DialogTitle className="mx-auto text-xl font-semibold">
             Connect to Unframed
           </DialogTitle>

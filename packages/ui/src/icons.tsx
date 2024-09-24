@@ -48,6 +48,7 @@ import {
 } from "lucide-react";
 
 import type { PropsWithClassName } from ".";
+import { cn } from ".";
 import { Icon } from "./icon-wrapper";
 
 // Updated exports
@@ -579,3 +580,28 @@ export const NoActivity =
         </svg>
       )
     : Meh;
+
+export const ConnectWallet =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          className={cn("text-foreground", className)}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M25.3312 53.5L49.9622 66.8888V53.5H25.3312ZM20.5 50.8739V28.2112L5.62939 42.7907L20.5 50.8739ZM30.405 18.5L42.2642 6.87305L49.9622 9.49982V18.5H30.405Z"
+            fill="currentColor"
+            fill-opacity="0.1"
+          />
+          <path
+            d="M30.2209 18.5H50.1792V23.5H48.9292V19.75H30.7209L21.4292 29.0417L20.1792 28.5L30.2209 18.5ZM55.1792 28.5V53.5H20.1792V28.5L21.4292 29.0417V52.25H53.9292V29.75H28.8875V28.5H55.1792ZM45.1792 43.5C44.4848 43.5 43.8875 43.2639 43.3875 42.7917C42.9153 42.2917 42.6792 41.6944 42.6792 41C42.6792 40.2778 42.9153 39.6806 43.3875 39.2083C43.8875 38.7361 44.4848 38.5 45.1792 38.5C45.9014 38.5 46.4986 38.7361 46.9709 39.2083C47.4431 39.6806 47.6792 40.2778 47.6792 41C47.6792 41.6944 47.4431 42.2917 46.9709 42.7917C46.4986 43.2639 45.9014 43.5 45.1792 43.5Z"
+            fill="currentColor"
+          />
+        </svg>
+      )
+    : LucideWallet;
