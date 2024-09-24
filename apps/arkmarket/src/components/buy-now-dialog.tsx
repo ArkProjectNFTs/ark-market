@@ -2,7 +2,7 @@ import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
-import { LoaderCircle, NoListing, Success, Wallet } from "@ark-market/ui/icons";
+import { LoaderCircle, NoListing, Success } from "@ark-market/ui/icons";
 
 import type { CollectionToken, Token } from "~/types";
 import TokenActionsTokenOverview from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-token-overview";
