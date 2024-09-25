@@ -189,6 +189,16 @@ export interface PortfolioOffers {
   price: string;
   to_address: string | null;
   token_id: string;
+  is_listed: boolean;
+  listing: {
+    currency_address: string | null;
+    end_amount: string | null;
+    end_date: number | null;
+    is_auction: boolean;
+    order_hash: string;
+    start_amount: string | null;
+    start_date: number | null;
+  };
 }
 
 export interface CollectionActivity {
