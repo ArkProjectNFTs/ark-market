@@ -14,7 +14,7 @@ export default function usePortfolioStats({ address }: UsePortfolioStatsProps) {
     queryFn: () => getPortfolioStats({ address }),
     refetchInterval: REFETCH_INTERVAL,
     initialData: {
-      total_value: null,
+      total_value: "0",
     },
     enabled: !!address,
   });
