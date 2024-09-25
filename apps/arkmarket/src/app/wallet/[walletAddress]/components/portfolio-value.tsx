@@ -15,12 +15,8 @@ interface PortfolioValueProps {
 export default function PortfolioValue({ address }: PortfolioValueProps) {
   const { data } = usePortfolioStats({ address });
   const { convertInUsd, isLoading } = usePrices();
-
-  const totalValue = formatUnits(data.total_value ?? "0", 18);
-
-  const totalValueInUsd = convertInUsd({
-    amount: parseEther(totalValue),
-  });
+  const totalValue = formatUnits(data.total_value, 18);
+  const totalValueInUsd = convertInUsd({ amount: parseEther(totalValue) });
 
   return (
     <div className="flex h-16 min-w-64 items-center rounded-lg bg-card px-3.5">
