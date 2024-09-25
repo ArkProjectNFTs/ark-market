@@ -14,23 +14,22 @@ import {
 import { LoaderCircle, Tag, VerifiedIcon } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { Token } from "~/types";
+import type { TokenMetadata } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
 
 interface AcceptOfferDialogProps {
-  token: Token;
-
   onConfirm: () => Promise<void>;
   formattedAmount: string;
   isLoading: boolean;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   floorDifference: bigint;
+  tokenMetadata?: TokenMetadata;
+  collectionName: string;
 }
 
 export default function AcceptOfferDialog({
-  token,
   onConfirm,
   children,
   formattedAmount,
@@ -38,6 +37,8 @@ export default function AcceptOfferDialog({
   floorDifference,
   isOpen,
   setIsOpen,
+  collectionName,
+  tokenMetadata,
 }: PropsWithChildren<AcceptOfferDialogProps>) {
   const { convertInUsd } = usePrices();
 
@@ -64,11 +65,11 @@ export default function AcceptOfferDialog({
             </div>
             <div className="flex items-center gap-4">
               <Media
-                alt={token.metadata?.name ?? "Empty"}
+                alt={tokenMetadata?.name ?? "Empty"}
                 className="aspect-square size-16 flex-shrink-0 rounded-xl object-contain"
                 height={192}
-                mediaKey={token.metadata?.image_key}
-                src={token.metadata?.image}
+                mediaKey={tokenMetadata?.image_key}
+                src={tokenMetadata?.image}
                 width={192}
               />
               <div>
@@ -78,7 +79,7 @@ export default function AcceptOfferDialog({
                     ellipsableStyles,
                   )}
                 >
-                  {token.metadata?.name}
+                  {tokenMetadata?.name}
                 </p>
                 <div className="flex w-full items-center gap-2">
                   <p
@@ -87,7 +88,7 @@ export default function AcceptOfferDialog({
                       ellipsableStyles,
                     )}
                   >
-                    {token.collection_name}
+                    {collectionName}
                   </p>
 
                   <VerifiedIcon className="size-4 flex-shrink-0 text-primary sm:size-6" />

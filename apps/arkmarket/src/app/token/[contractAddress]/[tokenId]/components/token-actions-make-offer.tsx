@@ -116,9 +116,11 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         title: "Offer canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -129,9 +131,11 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
         title: "Your offer is successfully sent",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={parseEther(startAmount)}
             formattedPrice={startAmount}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

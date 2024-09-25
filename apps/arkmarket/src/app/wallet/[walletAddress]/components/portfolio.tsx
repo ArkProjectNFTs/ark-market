@@ -8,6 +8,7 @@ import { validateAndParseAddress } from "starknet";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import { portfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
@@ -18,6 +19,9 @@ import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
 import PortfolioItemsToolsBar from "./portfolio-items-tools-bar";
+import PortfolioOffersData from "./portfolio-offers-data";
+import PortfolioOffersFiltersPanel from "./portfolio-offers-filters-panel";
+import PortfolioOffersMobileFilters from "./portfolio-offers-mobile-filters";
 import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
 
 interface PortfolioProps {
@@ -37,6 +41,11 @@ export default function Portfolio({
   const [selectedTab, setSelectedTab] = useQueryState(
     "activeTab",
     parseAsStringLiteral(portfolioTabsValues).withDefault("items"),
+  );
+
+  const [offerType, setOfferType] = useQueryState(
+    "offerType",
+    parseAsStringLiteral(portfolioOffersTypeValues).withDefault("made"),
   );
   const { address } = useAccount();
 
@@ -86,7 +95,15 @@ export default function Portfolio({
         <PortfolioItemsFiltersPanel
           walletAddress={walletAddress}
           filtersOpen={itemsFiltersOpen}
-          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height))] sm:block"
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] sm:block"
+          // walletCollectionsInitialData={walletCollectionsInitialData}
+        />
+      )}
+      {selectedTab === "offers" && (
+        <PortfolioOffersFiltersPanel
+          className="sticky top-[var(--site-header-height)] hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] lg:block"
+          value={offerType}
+          onValueChange={setOfferType}
           // walletCollectionsInitialData={walletCollectionsInitialData}
         />
       )}
@@ -111,6 +128,16 @@ export default function Portfolio({
                 viewType={viewType}
               />
             )}
+            {selectedTab === "offers" && (
+              <>
+                <div className="pb-2.5 pt-6 lg:hidden">
+                  <PortfolioOffersMobileFilters
+                    value={offerType}
+                    onValueChange={setOfferType}
+                  />
+                </div>
+              </>
+            )}
           </div>
           {selectedTab === "items" && (
             <PortfolioItemsData
@@ -120,6 +147,13 @@ export default function Portfolio({
               fetchNextPage={fetchNextPage}
               hasNextPage={hasNextPage}
               isFetchingNextPage={isFetchingNextPage}
+              isOwner={isOwner}
+            />
+          )}
+          {selectedTab === "offers" && (
+            <PortfolioOffersData
+              walletAddress={walletAddress}
+              offerType={offerType}
               isOwner={isOwner}
             />
           )}

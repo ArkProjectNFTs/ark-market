@@ -70,18 +70,27 @@ export default function TokenOffersListItem({
             <>
               {isOwner && (
                 <AcceptOffer
-                  offer={offer}
-                  token={token}
-                  tokenMarketData={tokenMarketData}
                   onSuccess={() => setIsSuccess(true)}
+                  collectionAddress={token.collection_address}
+                  collectionName={token.collection_name}
+                  tokenId={token.token_id}
+                  tokenMetadata={token.metadata}
+                  offerOrderHash={offer.hash}
+                  offerPrice={offer.price}
+                  isListed={tokenMarketData.is_listed}
+                  listing={tokenMarketData.listing}
+                  floor={tokenMarketData.floor}
                 />
               )}
               {isOfferer && (
                 <CancelOffer
-                  address={address}
-                  offer={offer}
-                  token={token}
                   onSuccess={() => setIsSuccess(true)}
+                  tokenId={token.token_id}
+                  offerOrderHash={offer.hash}
+                  collectionAddress={token.collection_address}
+                  offerPrice={offer.price}
+                  collectionName={token.collection_name}
+                  tokenMetadata={token.metadata}
                 />
               )}
             </>

@@ -175,6 +175,32 @@ export interface PortfolioActivity {
   transaction_hash: string | null;
 }
 
+export interface PortfolioOffers {
+  collection_address: string;
+  collection_name: string;
+  currency_address: string;
+  expire_at: number;
+  floor_difference: string | null;
+  from_address: string;
+  hash: string;
+  is_verified: boolean;
+  metadata?: TokenMetadata;
+  offer_id: number;
+  price: string;
+  to_address: string | null;
+  token_id: string;
+  is_listed: boolean;
+  listing: {
+    currency_address: string | null;
+    end_amount: string | null;
+    end_date: number | null;
+    is_auction: boolean;
+    order_hash: string;
+    start_amount: string | null;
+    start_date: number | null;
+  };
+}
+
 export interface CollectionActivity {
   activity_type: ActivityType;
   address: string;
@@ -213,7 +239,7 @@ export interface PortfolioStats {
 export interface TokenMarketData {
   buy_in_progress: boolean;
   created_timestamp: number | null;
-  floor: string;
+  floor: string | null;
   has_offer: boolean;
   is_listed: boolean;
   last_price: string | null;

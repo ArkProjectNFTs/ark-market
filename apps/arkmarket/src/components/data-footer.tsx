@@ -12,7 +12,7 @@ export default function DataFooter({ className }: PropsWithClassName) {
   return (
     <footer
       className={cn(
-        "font-numbers z-10 h-10 items-center justify-between border-t border-border bg-background px-5 text-xs",
+        "font-numbers z-10 h-[var(--site-footer-height)] items-center justify-between border-t border-border bg-background px-5 text-xs",
         className,
       )}
     >

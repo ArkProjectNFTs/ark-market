@@ -84,7 +84,9 @@ export default function TokenActionsBuyNow({
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
-            token={token}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -94,11 +96,13 @@ export default function TokenActionsBuyNow({
         title: "Your purchase is confirmed",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
             formattedPrice={formatEther(
               BigInt(tokenMarketData.listing.start_amount ?? 0),
             )}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

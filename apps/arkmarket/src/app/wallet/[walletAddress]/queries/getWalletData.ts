@@ -1,15 +1,7 @@
+import type { TokenMetadata } from "~/types";
 import { env } from "~/env";
 
 const itemsPerPage = 50;
-
-export interface Metadata {
-  image: string;
-  name: string;
-  animation_key: string | null;
-  animation_url: string | null;
-  image_key: string | null;
-  image_key_540_540?: string | null;
-}
 
 export interface WalletToken {
   last_price: string | null;
@@ -21,7 +13,7 @@ export interface WalletToken {
   owner: string;
   received_at: number | null;
   token_id: string;
-  metadata: Metadata | null;
+  metadata?: TokenMetadata;
 }
 
 export interface WalletTokensApiResponse {

@@ -30,7 +30,7 @@ export default function PortfolioTabs({
             {formatNumber(portfolioItemsCount)}
           </p>
         </TabsTriggerV2>
-        {/* <TabsTriggerV2 value="offers">Offers</TabsTriggerV2> */}
+        <TabsTriggerV2 value="offers">Offers</TabsTriggerV2>
         <TabsTriggerV2 value="activity">Activity</TabsTriggerV2>
       </TabsListV2>
     </TabsV2>

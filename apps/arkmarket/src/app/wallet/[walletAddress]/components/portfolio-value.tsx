@@ -2,6 +2,7 @@
 
 import { parseEther } from "viem";
 
+import { formatUnits } from "@ark-market/ui";
 import { Skeleton } from "@ark-market/ui/skeleton";
 
 import usePortfolioStats from "~/hooks/usePortfolioStats";
@@ -15,8 +16,10 @@ export default function PortfolioValue({ address }: PortfolioValueProps) {
   const { data } = usePortfolioStats({ address });
   const { convertInUsd, isLoading } = usePrices();
 
+  const totalValue = formatUnits(data.total_value, 18);
+
   const totalValueInUsd = convertInUsd({
-    amount: parseEther(data.total_value),
+    amount: parseEther(totalValue),
   });
 
   return (
@@ -27,8 +30,7 @@ export default function PortfolioValue({ address }: PortfolioValueProps) {
         </div>
         <div className="flex items-end justify-between gap-5">
           <div className="text-md flex gap-1 text-lg font-semibold leading-none">
-            {data.total_value}{" "}
-            <div className="text-secondary-foreground">ETH</div>
+            {totalValue} <div className="text-secondary-foreground">ETH</div>
           </div>
           {isLoading ? (
             <Skeleton className="h-4 w-20" />

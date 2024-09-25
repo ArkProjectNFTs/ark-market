@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useStarkProfile } from "@starknet-react/core";
 import { validateAndParseAddress } from "starknet";
 
-import { cn } from "@ark-market/ui";
-
 import useBlockies from "~/hooks/useBlockies";
 
 interface ProfilePictureProps {
@@ -32,7 +30,7 @@ export default function ProfilePicture({
   ) {
     return (
       <img
-        className={cn("size-6 rounded-full lg:size-8", className)}
+        className={className}
         alt="Starknet Id profile"
         src={starkProfile.profilePicture}
         onError={() => setHasImageFailed(true)}
@@ -40,11 +38,5 @@ export default function ProfilePicture({
     );
   }
 
-  return (
-    <img
-      className={cn("size-6 rounded-full lg:size-8", className)}
-      alt="Blockies"
-      src={blockiesImageSrc}
-    />
-  );
+  return <img className={className} alt="Blockies" src={blockiesImageSrc} />;
 }

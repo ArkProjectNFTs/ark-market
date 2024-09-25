@@ -94,9 +94,11 @@ export default function CollectionItemsBuyNow({
         title: "Purchase canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            token={token}
             price={BigInt(token.price ?? 0)}
             formattedPrice={formatEther(BigInt(token.price ?? 0))}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });
@@ -106,9 +108,11 @@ export default function CollectionItemsBuyNow({
         title: "Your purchase is confirmed",
         additionalContent: (
           <ToastExecutedTransactionContent
-            token={token}
             price={BigInt(token.price ?? 0)}
             formattedPrice={formatEther(BigInt(token.price ?? 0))}
+            collectionName={token.collection_name}
+            tokenId={token.token_id}
+            tokenMetadata={token.metadata}
           />
         ),
       });

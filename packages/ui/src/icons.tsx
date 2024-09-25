@@ -30,6 +30,7 @@ import {
   List as LucideList,
   Mail as LucideMail,
   Moon as LucideMoon,
+  PartyPopper as LucidePartyPopper,
   RefreshCw as LucideRefreshCw,
   Search as LucideSearch,
   Share2 as LucideShare2,
@@ -71,6 +72,12 @@ export {
   X,
 };
 
+export const Congratulations =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="3" />
+      )
+    : LucidePartyPopper;
 export const User =
   process.env.NEXT_PUBLIC_THEME === "unframed"
     ? ({ className }: PropsWithClassName) => (
