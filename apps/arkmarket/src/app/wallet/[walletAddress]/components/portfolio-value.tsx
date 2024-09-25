@@ -15,7 +15,7 @@ interface PortfolioValueProps {
 export default function PortfolioValue({ address }: PortfolioValueProps) {
   const { data } = usePortfolioStats({ address });
   const { convertInUsd, isLoading } = usePrices();
-  const totalValue = formatUnits(data.total_value, 18);
+  const totalValue = formatUnits(data.total_value ?? "0", 18);
   const totalValueInUsd = convertInUsd({ amount: parseEther(totalValue) });
 
   return (
