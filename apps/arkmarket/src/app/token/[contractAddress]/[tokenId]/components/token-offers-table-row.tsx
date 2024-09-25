@@ -52,7 +52,7 @@ export default function TokenOffersTableItem({
       className="grid h-[4.625rem] w-full grid-cols-5 items-center"
     >
       <TableCell>
-        <PriceTag price={offer.price} />
+        <PriceTag price={offer.price} className="max-w-full" />
       </TableCell>
       <TableCell>
         {offer.floor_difference ? (
