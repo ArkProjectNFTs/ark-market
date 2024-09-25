@@ -234,6 +234,7 @@ export default function DesktopPortfolioOffers({
                       <AcceptOffer
                         collectionAddress={offer.collection_address}
                         collectionName={offer.collection_name}
+                        // eslint-disable-next-line @typescript-eslint/no-empty-function
                         onSuccess={() => {}}
                         tokenId={offer.token_id}
                         tokenMetadata={offer.metadata}

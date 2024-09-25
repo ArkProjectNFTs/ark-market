@@ -14,7 +14,7 @@ import {
 import { LoaderCircle, Tag, VerifiedIcon } from "@ark-market/ui/icons";
 import { Separator } from "@ark-market/ui/separator";
 
-import type { Token, TokenMetadata } from "~/types";
+import type { TokenMetadata } from "~/types";
 import Media from "~/components/media";
 import usePrices from "~/hooks/usePrices";
 
