@@ -123,7 +123,8 @@ export default function TokenActionsAcceptBestOffer({
 
   return (
     <AcceptOfferDialog
-      token={token}
+      collectionName={token.collection_name}
+      tokenMetadata={token.metadata}
       onConfirm={onConfirm}
       formattedAmount={formattedAmount}
       isLoading={isLoading}
