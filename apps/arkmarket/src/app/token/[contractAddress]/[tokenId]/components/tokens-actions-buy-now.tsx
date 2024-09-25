@@ -8,7 +8,12 @@ import { formatEther } from "viem";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
-import { ActivityList, LoaderCircle, NoListing } from "@ark-market/ui/icons";
+import {
+  ActivityList,
+  LoaderCircle,
+  NoListing,
+  Success,
+} from "@ark-market/ui/icons";
 import { toast as sonner } from "@ark-market/ui/sonner";
 import { useToast } from "@ark-market/ui/use-toast";
 
@@ -124,7 +129,7 @@ export default function TokenActionsBuyNow({
           <div className="flex flex-col gap-10 sm:gap-8">
             <div className="flex flex-col gap-4">
               <div className="mx-auto mt-6 flex flex-col items-center justify-center text-2xl text-foreground">
-                <NoListing />
+                {isSuccess ? <Success /> : <NoListing />}
                 <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
                   {isSuccess
                     ? "Congratulations for your purchase"

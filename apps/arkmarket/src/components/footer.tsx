@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SiTelegram } from "react-icons/si";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Discord, XIcon } from "@ark-market/ui/icons";
+import { Discord, Telegram, XIcon } from "@ark-market/ui/icons";
 
 import { siteConfig } from "~/config/site";
 import ExternalLink from "./external-link";
@@ -74,7 +73,7 @@ export default function Footer() {
               >
                 <ExternalLink href={siteConfig.links.telegram}>
                   <p className="hidden lg:block">Chat with us on </p>
-                  <SiTelegram size={16} />
+                  <Telegram className="size-4" />
                 </ExternalLink>
               </Button>
             )}

@@ -2,7 +2,6 @@
 import {
   ArrowDownRight,
   ArrowUpLeft,
-  ArrowUpRight,
   Circle,
   FileSignature,
   Flame,
@@ -13,6 +12,7 @@ import {
   ArrowLeft as LucideArrowLeft,
   ArrowLeftRight as LucideArrowLeftRight,
   ArrowRight as LucideArrowRight,
+  ArrowUpRight as LucideArrowUpRight,
   BarChart3 as LucideChart,
   Check as LucideCheck,
   ChevronDown as LucideChevronDown,
@@ -25,8 +25,10 @@ import {
   Gavel as LucideGavel,
   Globe as LucideGlobe,
   Grid2X2 as LucideGrid2X2,
+  Grid2x2X as LucideGrid2x2X,
   Grid3X3 as LucideGrid3X3,
   List as LucideList,
+  Mail as LucideMail,
   Moon as LucideMoon,
   PartyPopper as LucidePartyPopper,
   RefreshCw as LucideRefreshCw,
@@ -36,26 +38,25 @@ import {
   Sun as LucideSun,
   Tag as LucideTag,
   TimerReset as LucideTimerReset,
+  User as LucideUser,
   VerifiedIcon as LucideVerifiedIcon,
   Wallet as LucideWallet,
-  Mail,
   Meh,
   MoreHorizontal,
   Power,
   ShoppingBag,
   Slash,
-  User,
   X,
 } from "lucide-react";
 
 import type { PropsWithClassName } from ".";
+import { cn } from ".";
 import { Icon } from "./icon-wrapper";
 
 // Updated exports
 export {
   ArrowDownRight,
   ArrowUpLeft,
-  ArrowUpRight,
   Circle,
   FileSignature,
   Flame,
@@ -63,13 +64,11 @@ export {
   ListX,
   Loader2,
   LoaderCircle,
-  Mail,
   Meh,
   MoreHorizontal,
   Power,
   ShoppingBag,
   Slash,
-  User,
   X,
 };
 
@@ -79,6 +78,26 @@ export const Congratulations =
         <Icon className={className} icon="3" />
       )
     : LucidePartyPopper;
+export const User =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="1" />
+      )
+    : LucideUser;
+
+export const Mail =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="z" />
+      )
+    : LucideMail;
+
+export const ArrowUpRight =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="x" />
+      )
+    : LucideArrowUpRight;
 
 export const CircleDot =
   process.env.NEXT_PUBLIC_THEME === "unframed"
@@ -412,7 +431,7 @@ export const Starknet =
 export const Telegram =
   process.env.NEXT_PUBLIC_THEME === "unframed"
     ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="U" />
+        <Icon className={className} icon="Z" />
       )
     : ({ className }: PropsWithClassName) => (
         <svg
@@ -495,6 +514,31 @@ export const NoOffer =
       )
     : Meh;
 
+export const NoTraits =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          className={cn("text-foreground", className)}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M53.7199 53.5L27.5003 66.0001L27.3845 53.5H53.7199ZM55.0002 52.8896L70.4998 45.5002L55.0002 26.6904V52.8896ZM48.6631 19H27.0649L27 12.0001L38.2643 6.38037L48.6631 19Z"
+            fill="currentColor"
+            fill-opacity="0.15"
+          />
+          <path
+            d="M47.6792 47.25V19.75H21.4292V38.5L20.1792 39.75V18.5H48.9292V47.25H47.6792ZM20.1792 38.9583L27.8042 31.3333V33.1667L20.1792 40.7917V38.9583ZM27.8042 33.1667V31.3333L43.7209 47.25H41.8875L27.8042 33.1667ZM40.1792 29.75C39.4848 29.75 38.8875 29.5139 38.3875 29.0417C37.9153 28.5417 37.6792 27.9444 37.6792 27.25C37.6792 26.5278 37.9153 25.9306 38.3875 25.4583C38.8875 24.9861 39.4848 24.75 40.1792 24.75C40.9014 24.75 41.4986 24.9861 41.9709 25.4583C42.4431 25.9306 42.6792 26.5278 42.6792 27.25C42.6792 27.9444 42.4431 28.5417 41.9709 29.0417C41.4986 29.5139 40.9014 29.75 40.1792 29.75ZM27.6792 52.25H53.9292V26H55.1792V53.5H27.6792V52.25ZM48.9292 46V47.25H43.3459L42.0959 46H48.9292Z"
+            fill="currentColor"
+          />
+        </svg>
+      )
+    : Meh;
+
 export const NoListing =
   process.env.NEXT_PUBLIC_THEME === "unframed"
     ? ({ className }: PropsWithClassName) => (
@@ -569,3 +613,115 @@ export const NoActivity =
         </svg>
       )
     : Meh;
+
+export const ConnectWallet =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          className={cn("text-foreground", className)}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M25.3312 53.5L49.9622 66.8888V53.5H25.3312ZM20.5 50.8739V28.2112L5.62939 42.7907L20.5 50.8739ZM30.405 18.5L42.2642 6.87305L49.9622 9.49982V18.5H30.405Z"
+            fill="currentColor"
+            fill-opacity="0.1"
+          />
+          <path
+            d="M30.2209 18.5H50.1792V23.5H48.9292V19.75H30.7209L21.4292 29.0417L20.1792 28.5L30.2209 18.5ZM55.1792 28.5V53.5H20.1792V28.5L21.4292 29.0417V52.25H53.9292V29.75H28.8875V28.5H55.1792ZM45.1792 43.5C44.4848 43.5 43.8875 43.2639 43.3875 42.7917C42.9153 42.2917 42.6792 41.6944 42.6792 41C42.6792 40.2778 42.9153 39.6806 43.3875 39.2083C43.8875 38.7361 44.4848 38.5 45.1792 38.5C45.9014 38.5 46.4986 38.7361 46.9709 39.2083C47.4431 39.6806 47.6792 40.2778 47.6792 41C47.6792 41.6944 47.4431 42.2917 46.9709 42.7917C46.4986 43.2639 45.9014 43.5 45.1792 43.5Z"
+            fill="currentColor"
+          />
+        </svg>
+      )
+    : LucideWallet;
+
+export const NoImage =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          className={cn(className, "text-foreground")}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M53.7199 53.5L27.5003 66.0001L27.3845 53.5H53.7199ZM55.0002 52.8896L70.4998 45.5002L55.0002 26.6904V52.8896ZM48.6631 19H27.0649L27 12.0001L38.2643 6.38037L48.6631 19Z"
+            fill="currentColor"
+            fill-opacity="0.1"
+          />
+          <path
+            d="M47.6792 47.25V19.75H21.4292V38.5L20.1792 39.75V18.5H48.9292V47.25H47.6792ZM20.1792 38.9583L27.8042 31.3333V33.1667L20.1792 40.7917V38.9583ZM27.8042 33.1667V31.3333L43.7209 47.25H41.8875L27.8042 33.1667ZM40.1792 29.75C39.4848 29.75 38.8875 29.5139 38.3875 29.0417C37.9153 28.5417 37.6792 27.9444 37.6792 27.25C37.6792 26.5278 37.9153 25.9306 38.3875 25.4583C38.8875 24.9861 39.4848 24.75 40.1792 24.75C40.9014 24.75 41.4986 24.9861 41.9709 25.4583C42.4431 25.9306 42.6792 26.5278 42.6792 27.25C42.6792 27.9444 42.4431 28.5417 41.9709 29.0417C41.4986 29.5139 40.9014 29.75 40.1792 29.75ZM27.6792 52.25H53.9292V26H55.1792V53.5H27.6792V52.25ZM48.9292 46V47.25H43.3459L42.0959 46H48.9292Z"
+            fill="currentColor"
+          />
+        </svg>
+      )
+    : ({ className }: PropsWithClassName) => (
+        <svg
+          width="79"
+          height="79"
+          viewBox="0 0 79 79"
+          fill="none"
+          className={cn(className, "text-background")}
+        >
+          <path
+            d="M62.3462 10.2844H16.7915C13.1973 10.2844 10.2837 13.1981 10.2837 16.7922V62.3469C10.2837 65.9411 13.1973 68.8547 16.7915 68.8547H62.3462C65.9403 68.8547 68.854 65.9411 68.854 62.3469V16.7922C68.854 13.1981 65.9403 10.2844 62.3462 10.2844Z"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M29.8076 36.3159C33.4018 36.3159 36.3154 33.4023 36.3154 29.8081C36.3154 26.2139 33.4018 23.3003 29.8076 23.3003C26.2134 23.3003 23.2998 26.2139 23.2998 29.8081C23.2998 33.4023 26.2134 36.3159 29.8076 36.3159Z"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M68.854 49.3312L58.8124 39.2897C57.592 38.0696 55.9371 37.3843 54.2114 37.3843C52.4858 37.3843 50.8308 38.0696 49.6104 39.2897L20.0454 68.8547"
+            stroke="currentColor"
+            strokeWidth="3.90469"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
+export const Success =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <svg
+          width="72"
+          height="72"
+          viewBox="0 0 72 72"
+          fill="none"
+          className={cn("text-foreground", className)}
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M38.1105 27.6961L57.0151 19.9785L60.8861 60.7699L53.5729 63.7393L27.2753 53.0001H43.9998C45.6665 52.8334 49.2998 52.1001 50.4998 50.5001C51.4998 49.6667 52.6998 46.6001 49.4998 41.0001C47.2916 37.1358 43.1027 31.7479 38.1105 27.6961ZM20.9998 34.6814L1.70557 42.5581L20.9998 50.4373V34.6814Z"
+            fill="currentColor"
+            fill-opacity="0.15"
+          />
+          <path
+            d="M51.5542 50.4167C50.6653 51.3056 49.207 51.4861 47.1792 50.9583C45.1792 50.4028 42.8736 49.2639 40.2625 47.5417C37.6514 45.7917 35.0681 43.6389 32.5125 41.0833C29.957 38.5556 27.8181 36 26.0959 33.4167C24.3736 30.8056 23.2486 28.5 22.7209 26.5C22.1931 24.4722 22.3736 23.0139 23.2625 22.125C24.0681 21.3194 25.3459 21.0972 27.0959 21.4583C28.8459 21.8194 30.8598 22.6944 33.1375 24.0833L32.5959 25.125C30.5681 23.875 28.8042 23.0556 27.3042 22.6667C25.832 22.2778 24.7764 22.3889 24.1375 23C23.4153 23.7222 23.3459 24.9861 23.9292 26.7917C24.5125 28.5972 25.6375 30.6944 27.3042 33.0833C28.9709 35.4444 30.9986 37.8194 33.3875 40.2083C35.8042 42.625 38.207 44.6667 40.5959 46.3333C42.9848 48 45.082 49.1389 46.8875 49.75C48.6931 50.3333 49.957 50.2639 50.6792 49.5417C51.2903 48.9028 51.4014 47.8472 51.0125 46.375C50.6236 44.875 49.8042 43.1111 48.5542 41.0833L49.5542 40.5417C50.9431 42.8194 51.8181 44.8333 52.1792 46.5833C52.5681 48.3333 52.3598 49.6111 51.5542 50.4167ZM20.1792 30.8333C20.1792 28.8611 20.4292 27.1806 20.9292 25.7917C21.4292 24.4028 22.207 23.1806 23.2625 22.125L24.1375 23C23.2209 23.9167 22.5403 25 22.0959 26.25C21.6514 27.5 21.4292 29.0278 21.4292 30.8333V52.25H42.8459C44.6514 52.25 46.1792 52.0278 47.4292 51.5833C48.6792 51.1389 49.7625 50.4583 50.6792 49.5417L51.5542 50.4167C50.4986 51.4722 49.2764 52.25 47.8875 52.75C46.4986 53.25 44.8181 53.5 42.8459 53.5H20.1792V30.8333ZM33.0542 33.5417C35.6098 31.0139 37.8181 28.2222 39.6792 25.1667C41.5403 22.0833 42.7903 19.0278 43.4292 16H44.8042C44.0542 19.25 42.707 22.4861 40.7625 25.7083C38.8181 28.9306 36.5264 31.8472 33.8875 34.4583L33.0542 33.5417ZM39.2209 39.625C41.9153 36.9028 44.8459 34.5972 48.0125 32.7083C51.1792 30.7917 54.4014 29.4583 57.6792 28.7083V30.0833C54.6514 30.7222 51.6236 31.9583 48.5959 33.7917C45.5681 35.5972 42.7486 37.8194 40.1375 40.4583L39.2209 39.625Z"
+            fill="currentColor"
+          />
+        </svg>
+      )
+    : LucideWallet;
+
+export const ViewMore =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="2" />
+      )
+    : LucideGrid2x2X;

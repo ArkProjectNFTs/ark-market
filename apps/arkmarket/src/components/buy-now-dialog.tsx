@@ -2,7 +2,7 @@ import { formatEther } from "viem";
 
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
-import { LoaderCircle, Wallet } from "@ark-market/ui/icons";
+import { LoaderCircle, NoListing, Success } from "@ark-market/ui/icons";
 
 import type { CollectionToken, Token } from "~/types";
 import TokenActionsTokenOverview from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-token-overview";
@@ -34,7 +34,7 @@ export default function BuyNowDialog({
         <div className="flex flex-col gap-10 sm:gap-8">
           <div className="flex flex-col gap-4">
             <div className="mx-auto mt-6 flex size-20 items-center justify-center rounded-full bg-slate-800 text-2xl text-foreground">
-              <Wallet className="size-8" />
+              {isSuccess ? <Success /> : <NoListing />}
             </div>
             <div className="mb-5 text-center text-xl font-semibold sm:mb-0">
               {isSuccess

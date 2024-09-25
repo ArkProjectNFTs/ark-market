@@ -6,7 +6,7 @@ import getTokenMarketData from "~/lib/getTokenMarketData";
 interface UseTokenMarketdataProps {
   collectionAddress: string;
   tokenId: string;
-  initialData: TokenMarketData;
+  initialData?: TokenMarketData;
 }
 
 const REFETCH_INTERVAL = 5_000;

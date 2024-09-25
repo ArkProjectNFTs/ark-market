@@ -47,42 +47,12 @@ export default function TokenActionsAcceptBestOffer({
   const { fulfill: fulfillAuction, status: statusAuction } =
     useFulfillAuction();
   const { fulfillOffer, status } = useFulfillOffer();
-
   const { address, account } = useAccount();
-  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
-
   const { toast } = useToast();
-
-  const isLoading = status === "loading" || statusAuction === "loading";
-
+  const isOwner = areAddressesEqual(tokenMarketData.owner, address);
   const formattedAmount = formatEther(BigInt(tokenMarketData.top_offer.amount));
 
   const floorDifference = computeFloorDifference(tokenMarketData);
-
-  const onConfirm = async () => {
-    try {
-      if (isAuction) {
-        await fulfillAuction({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          relatedOrderHash: tokenMarketData.listing.order_hash,
-          starknetAccount: account,
-          tokenAddress: token.collection_address,
-          tokenId: token.token_id,
-        });
-      } else {
-        await fulfillOffer({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          starknetAccount: account,
-          tokenAddress: token.collection_address,
-          tokenId: token.token_id,
-        });
-      }
-    } catch (error) {
-      console.log("Error accepting offer", error);
-    }
-  };
 
   useEffect(() => {
     if (status === "error" || statusAuction === "error") {
@@ -119,9 +89,37 @@ export default function TokenActionsAcceptBestOffer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, statusAuction]);
 
+  const onConfirm = async () => {
+    try {
+      if (isAuction) {
+        await fulfillAuction({
+          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+          orderHash: tokenMarketData.top_offer.order_hash,
+          relatedOrderHash: tokenMarketData.listing.order_hash,
+          starknetAccount: account,
+          tokenAddress: token.collection_address,
+          tokenId: token.token_id,
+        });
+      } else {
+        await fulfillOffer({
+          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+          orderHash: tokenMarketData.top_offer.order_hash,
+          starknetAccount: account,
+          tokenAddress: token.collection_address,
+          tokenId: token.token_id,
+        });
+      }
+    } catch (error) {
+      console.log("Error accepting offer", error);
+    }
+  };
+
   if (!account || !isOwner) {
     return null;
   }
+
+  const isLoading = status === "loading" || statusAuction === "loading";
+  const isDisabled = isLoading || tokenMarketData.buy_in_progress;
 
   return (
     <AcceptOfferDialog
@@ -137,6 +135,7 @@ export default function TokenActionsAcceptBestOffer({
         className={cn(small ?? "relative w-full lg:max-w-[50%]")}
         size={small ? "xl" : "xxl"}
         variant="secondary"
+        disabled={isDisabled}
       >
         <Tag
           className={cn(small ?? "absolute left-4")}

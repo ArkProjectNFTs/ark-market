@@ -194,7 +194,6 @@ export interface PortfolioOffers {
 export interface CollectionActivity {
   activity_type: ActivityType;
   address: string;
-  collection_address: string;
   from: string;
   is_verified: boolean;
   name: string;
