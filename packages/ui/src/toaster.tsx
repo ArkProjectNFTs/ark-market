@@ -33,7 +33,7 @@ export function Toaster() {
                   <ActivityDelist className="size-6 text-[#EF4444]" />
                 )}
                 {variant === "success" && (
-                  <Congratulations className="size-6 text-[#1DD76C]" />
+                  <Congratulations className="size-6 text-foreground" />
                 )}
                 {title && <ToastTitle>{title}</ToastTitle>}
               </div>

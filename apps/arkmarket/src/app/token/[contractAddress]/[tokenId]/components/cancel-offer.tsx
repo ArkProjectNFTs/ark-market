@@ -39,7 +39,7 @@ const CancelOffer = ({
   useEffect(() => {
     if (status === "error") {
       toast({
-        variant: "success",
+        variant: "canceled",
         title: "The offer could not be canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
