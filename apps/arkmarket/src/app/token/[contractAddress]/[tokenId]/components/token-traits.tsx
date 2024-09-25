@@ -11,7 +11,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@ark-market/ui/collapsible";
-import { ChevronDown, ChevronUp } from "@ark-market/ui/icons";
+import { ChevronDown, ChevronUp, NoTraits } from "@ark-market/ui/icons";
 
 import type { TokenMetadata } from "~/types";
 
@@ -51,31 +51,42 @@ export default function TokenTraits({
       </div>
 
       <CollapsibleContent className="data-[state=closed]:animate-[collapsible-up_150ms_ease] data-[state=open]:animate-[collapsible-down_150ms_ease]">
-        <div className="grid grid-cols-1 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
-          {tokenAttributes.map((tokenAttribute, index) => {
-            const collectionFilter = {
-              traits: {
-                [tokenAttribute.trait_type ?? ""]: [tokenAttribute.value],
-              },
-            };
-            return (
-              <Link
-                className={cn("rounded-lg bg-card p-3.5", focusableStyles)}
-                key={index}
-                href={`/collection/${contractAddress}?filters=${encodeURIComponent(JSON.stringify(collectionFilter))}`}
-              >
-                <p className="text-sm font-medium text-muted-foreground">
-                  {tokenAttribute.trait_type}
-                </p>
-                <p className="text-lg font-semibold">{tokenAttribute.value}</p>
-                {/* <p className="mt-2 text-sm font-medium">
+        {tokenAttributes.length === 0 ? (
+          <div className="flex flex-col items-center pb-8 text-muted-foreground">
+            <NoTraits size={42} className="flex-shrink-0" />
+            <p className="mt-3 text-center text-xl font-semibold">
+              No metadata!
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-2 pb-6 sm:grid-cols-[repeat(auto-fill,_minmax(12rem,1fr))]">
+            {tokenAttributes.map((tokenAttribute, index) => {
+              const collectionFilter = {
+                traits: {
+                  [tokenAttribute.trait_type ?? ""]: [tokenAttribute.value],
+                },
+              };
+              return (
+                <Link
+                  className={cn("rounded-lg bg-card p-3.5", focusableStyles)}
+                  key={index}
+                  href={`/collection/${contractAddress}?filters=${encodeURIComponent(JSON.stringify(collectionFilter))}`}
+                >
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {tokenAttribute.trait_type}
+                  </p>
+                  <p className="text-lg font-semibold">
+                    {tokenAttribute.value}
+                  </p>
+                  {/* <p className="mt-2 text-sm font-medium">
                   {formatUnits(data.price, 18)}{" "}
                   <span className="text-muted-foreground">ETH</span>
                 </p> */}
-              </Link>
-            );
-          })}
-        </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </CollapsibleContent>
     </Collapsible>
   );

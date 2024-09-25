@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { VerifiedIcon } from "@ark-market/ui/icons";
+import { VerifiedIcon, ViewMore } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -76,7 +76,8 @@ export default function ExploreCollection() {
       <div className="mt-16 flex justify-center">
         {canShowMoreExploreCollectionsItems ? (
           <Button variant="outline" onClick={showMoreCollectionsToExplore}>
-            View more
+            <ViewMore />
+            <p>View more</p>
           </Button>
         ) : (
           <Button variant="outline" onClick={showLessCollectionsToExplore}>

@@ -34,6 +34,7 @@ export default function TokenSummary({
         className="aspect-square w-full rounded-lg object-contain"
         height={1000}
         width={1000}
+        priority
       />
       <div className="flex flex-col lg:gap-0">
         <div className="flex items-center gap-1.5">

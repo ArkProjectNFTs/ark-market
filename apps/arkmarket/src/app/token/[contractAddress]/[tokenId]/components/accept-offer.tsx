@@ -8,38 +8,46 @@ import { formatEther } from "viem";
 import { Button } from "@ark-market/ui/button";
 import { useToast } from "@ark-market/ui/use-toast";
 
-import type { Token, TokenMarketData, TokenOffer } from "~/types";
+import type { TokenMarketData, TokenMetadata } from "~/types";
 import { env } from "~/env";
 import AcceptOfferDialog from "./accept-offer-dialog";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 
-interface AcceptOfferProps {
-  offer: TokenOffer;
-  token: Token;
-  tokenMarketData: TokenMarketData;
-  onSuccess: () => void;
-}
-
-function computeFloorDifference(
-  tokenMarketData: TokenMarketData,
-  offerPrice: string,
-) {
-  if (tokenMarketData.floor === null) {
+function computeFloorDifference(offerPrice: string, floor?: string | null) {
+  if (!floor) {
     return BigInt("0");
   }
 
-  return (
-    ((BigInt(offerPrice) - BigInt(tokenMarketData.floor)) * 100n) /
-    BigInt(tokenMarketData.floor)
-  );
+  return ((BigInt(offerPrice) - BigInt(floor)) * 100n) / BigInt(floor);
+}
+
+interface AcceptOfferProps {
+  onSuccess: () => void;
+  collectionAddress: string;
+  tokenId: string;
+  collectionName: string;
+  tokenMetadata?: TokenMetadata;
+  offerPrice: string;
+  offerOrderHash: string;
+  isListed: boolean;
+  listing: TokenMarketData["listing"];
+  floor?: string | null;
+  computedFloorDifference?: string | null;
 }
 
 const AcceptOffer: React.FC<AcceptOfferProps> = ({
-  offer,
-  token,
-  tokenMarketData,
   onSuccess,
+  collectionAddress,
+  collectionName,
+  tokenId,
+  tokenMetadata,
+  offerOrderHash,
+  offerPrice,
+  isListed,
+  listing,
+  floor,
+  computedFloorDifference,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { account } = useAccount();
@@ -48,9 +56,11 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
     useFulfillAuction();
 
   const { toast } = useToast();
-  const formattedAmount = formatEther(BigInt(offer.price));
+  const formattedAmount = formatEther(BigInt(offerPrice));
 
-  const floorDifference = computeFloorDifference(tokenMarketData, offer.price);
+  const floorDifference = !computedFloorDifference
+    ? computeFloorDifference(offerPrice, floor)
+    : BigInt(parseInt(computedFloorDifference));
 
   useEffect(() => {
     if (status === "success") {
@@ -60,23 +70,23 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   }, [status]);
 
   const onConfirm = async () => {
-    if (tokenMarketData.is_listed && tokenMarketData.listing.is_auction) {
+    if (isListed && listing.is_auction) {
       await fulfillAuction({
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        orderHash: tokenMarketData.listing.order_hash,
-        relatedOrderHash: offer.hash,
+        orderHash: listing.order_hash,
+        relatedOrderHash: offerOrderHash,
         starknetAccount: account,
-        startAmount: offer.price,
-        tokenAddress: token.collection_address,
-        tokenId: token.token_id,
+        startAmount: offerPrice,
+        tokenAddress: collectionAddress,
+        tokenId: tokenId,
       });
     } else {
       await fulfillOffer({
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        orderHash: offer.hash,
+        orderHash: offerOrderHash,
         starknetAccount: account,
-        tokenAddress: token.collection_address,
-        tokenId: token.token_id,
+        tokenAddress: collectionAddress,
+        tokenId: tokenId,
       });
     }
   };
@@ -91,11 +101,11 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         title: "Offer not accepted",
         additionalContent: (
           <ToastRejectedTransactionContent
-            price={BigInt(offer.price)}
+            price={BigInt(offerPrice)}
             formattedPrice={formattedAmount}
-            collectionName={token.collection_name}
-            tokenId={token.token_id}
-            tokenMetadata={token.metadata}
+            collectionName={collectionName}
+            tokenId={tokenId}
+            tokenMetadata={tokenMetadata}
           />
         ),
       });
@@ -106,11 +116,11 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         title: "Offer successfully accepted",
         additionalContent: (
           <ToastExecutedTransactionContent
-            price={BigInt(offer.price)}
+            price={BigInt(offerPrice)}
             formattedPrice={formattedAmount}
-            collectionName={token.collection_name}
-            tokenId={token.token_id}
-            tokenMetadata={token.metadata}
+            collectionName={collectionName}
+            tokenId={tokenId}
+            tokenMetadata={tokenMetadata}
           />
         ),
       });
@@ -120,7 +130,8 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
 
   return (
     <AcceptOfferDialog
-      token={token}
+      collectionName={collectionName}
+      tokenMetadata={tokenMetadata}
       onConfirm={onConfirm}
       formattedAmount={formattedAmount}
       isLoading={isLoading}

@@ -54,6 +54,8 @@ export default function PortfolioOffersData({
     [infiniteData],
   );
 
+  console.log(portfolioOffers);
+
   return (
     <div>
       <div className="hidden md:block">

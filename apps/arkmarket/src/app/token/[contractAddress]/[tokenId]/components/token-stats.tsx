@@ -24,18 +24,37 @@ export default function TokenStats({
   tokenMarketData,
 }: PropsWithClassName<TokenStatsProps>) {
   const { address } = useAccount();
-  const { data } = useTokenMarketdata({
+  const { data, isError } = useTokenMarketdata({
     collectionAddress: token.collection_address,
     tokenId: token.token_id,
     initialData: tokenMarketData,
   });
-  const { data: starkProfile } = useStarkProfile({ address: data.owner });
-  const owner =
-    starkProfile?.name ??
-    ownerOrShortAddress({
-      ownerAddress: data.owner,
-      address,
-    });
+  const { data: starkProfile } = useStarkProfile({ address: data?.owner });
+
+  if (isError) {
+    return null;
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const owner = starkProfile?.name
+    ? starkProfile.name
+    : data.owner
+      ? ownerOrShortAddress({
+          ownerAddress: data.owner,
+          address,
+        })
+      : "";
+
+  const floor = data.floor ? formatEther(BigInt(data.floor)) : "_";
+  const lastPrice = data.last_price
+    ? formatEther(BigInt(data.last_price))
+    : "_";
+  const topOffer = data.has_offer
+    ? formatEther(BigInt(data.top_offer.amount))
+    : "_";
 
   return (
     <div
@@ -50,28 +69,21 @@ export default function TokenStats({
         </p>
         <div className="font-numbers flex items-center gap-1 text-lg font-medium">
           <Ethereum className="size-5 flex-shrink-0" />
-          <div className="min-w-0 flex-1 truncate">
-            {data.floor ? formatEther(BigInt(data.floor)) : "_"} ETH
-          </div>
+          <div className="min-w-0 flex-1 truncate">{floor} ETH</div>
         </div>
       </div>
       <div className="flex flex-col justify-between p-2 lg:border-l lg:px-4">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
         <div className="font-numbers flex items-center gap-1 text-lg">
           <Ethereum className="size-5 flex-shrink-0" />
-          <div className="min-w-0 flex-1 truncate">
-            {data.last_price ? formatEther(BigInt(data.last_price)) : "_"} ETH
-          </div>
+          <div className="min-w-0 flex-1 truncate">{lastPrice} ETH</div>
         </div>
       </div>
       <div className="flex flex-col justify-between p-2 lg:border-l lg:px-4">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
         <div className="font-numbers flex items-center gap-1 text-lg">
           <Ethereum className="size-5 flex-shrink-0" />
-          <div className="min-w-0 flex-1 truncate">
-            {data.has_offer ? formatEther(BigInt(data.top_offer.amount)) : "_"}{" "}
-            ETH
-          </div>
+          <div className="min-w-0 flex-1 truncate">{topOffer} ETH</div>
         </div>
       </div>
       <div className="flex flex-col justify-between p-2 lg:border-l lg:pl-4">

@@ -22,6 +22,7 @@ import {
 
 import type { PortfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 import type { PortfolioOffers } from "~/types";
+import AcceptOffer from "~/app/token/[contractAddress]/[tokenId]/components/accept-offer";
 import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
 import Media from "~/components/media";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
@@ -221,7 +222,7 @@ export default function DesktopPortfolioOffers({
                     {offerType === "made" ? (
                       <CancelOffer
                         collectionAddress={offer.collection_address}
-                        offerHash={offer.hash}
+                        offerOrderHash={offer.hash}
                         offerPrice={offer.price}
                         // eslint-disable-next-line @typescript-eslint/no-empty-function
                         onSuccess={() => {}}
@@ -230,7 +231,19 @@ export default function DesktopPortfolioOffers({
                         tokenMetadata={offer.metadata}
                       />
                     ) : (
-                      <></>
+                      <AcceptOffer
+                        collectionAddress={offer.collection_address}
+                        collectionName={offer.collection_name}
+                        // eslint-disable-next-line @typescript-eslint/no-empty-function
+                        onSuccess={() => {}}
+                        tokenId={offer.token_id}
+                        tokenMetadata={offer.metadata}
+                        offerOrderHash={offer.hash}
+                        offerPrice={offer.price}
+                        isListed={offer.is_listed}
+                        listing={offer.listing}
+                        computedFloorDifference={offer.floor_difference}
+                      />
                     )}
                   </TableCell>
                 )}

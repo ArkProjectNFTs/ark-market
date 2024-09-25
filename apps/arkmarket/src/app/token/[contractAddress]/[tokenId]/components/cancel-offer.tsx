@@ -16,7 +16,7 @@ import ToastRejectedTransactionContent from "./toast-rejected-transaction-conten
 interface CancelOfferProps {
   collectionAddress: string;
   collectionName: string;
-  offerHash: string;
+  offerOrderHash: string;
   offerPrice: string;
   onSuccess: () => void;
   tokenId: string;
@@ -26,7 +26,7 @@ interface CancelOfferProps {
 const CancelOffer = ({
   collectionAddress,
   collectionName,
-  offerHash,
+  offerOrderHash,
   offerPrice,
   onSuccess,
   tokenId,
@@ -79,7 +79,7 @@ const CancelOffer = ({
       starknetAccount: account,
       tokenAddress: collectionAddress,
       tokenId: BigInt(tokenId),
-      orderHash: BigInt(offerHash),
+      orderHash: BigInt(offerOrderHash),
     });
   };
 
