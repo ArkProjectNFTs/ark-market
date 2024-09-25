@@ -233,7 +233,7 @@ export interface OwnersTokensApiResponse {
 }
 
 export interface PortfolioStats {
-  total_value: string;
+  total_value: string | null;
 }
 
 export interface TokenMarketData {
