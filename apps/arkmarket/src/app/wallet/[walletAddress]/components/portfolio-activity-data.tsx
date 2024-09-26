@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import type { PortfolioActivityApiResponse } from "~/lib/getPortfolioActivity";
+import type { ActivityType } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getPortfolioActivity } from "~/lib/getPortfolioActivity";
 import DesktopPortfolioActivity from "./desktop-portfolio-activity";
@@ -11,10 +12,12 @@ import MobilePortfolioActivity from "./mobile-portfolio-activity";
 
 interface PortfolioActivityDataProps {
   walletAddress: string;
+  activityFilters: ActivityType[];
 }
 
 export default function PortfolioActivityData({
   walletAddress,
+  activityFilters,
 }: PortfolioActivityDataProps) {
   const {
     data: infiniteData,
@@ -22,7 +25,7 @@ export default function PortfolioActivityData({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["walletActivity", walletAddress],
+    queryKey: ["walletActivity", walletAddress, ...activityFilters],
     refetchInterval: 10_000,
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage: PortfolioActivityApiResponse) =>
@@ -32,6 +35,7 @@ export default function PortfolioActivityData({
       getPortfolioActivity({
         page: pageParam,
         walletAddress,
+        activityFilters,
       }),
   });
 

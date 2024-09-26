@@ -3,18 +3,22 @@
 import { useMemo, useState } from "react";
 import { useAccount } from "@starknet-react/core";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
-import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
 import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
+import CollectionActivityFiltersModal from "~/app/collection/[collectionAddress]/components/collection-activity-filters-modal";
+import CollectionActivityFiltersToggle from "~/app/collection/[collectionAddress]/components/collection-activity-filters-toggle";
 import { portfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
+import { activityTypes } from "~/types";
 import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
 } from "../search-params";
 import PortfolioActivityData from "./portfolio-activity-data";
+import PortfolioActivityFiltersPanel from "./portfolio-activity-filters-panel";
 import PortfolioHeader from "./portfolio-header";
 import PortfolioItemsData from "./portfolio-items-data";
 import PortfolioItemsFiltersPanel from "./portfolio-items-filters-panel";
@@ -47,6 +51,18 @@ export default function Portfolio({
     "offerType",
     parseAsStringLiteral(portfolioOffersTypeValues).withDefault("made"),
   );
+
+  const [activityFilters, setActivityFilters] = useQueryState(
+    "filters",
+    parseAsArrayOf(parseAsStringLiteral(activityTypes)).withDefault([]),
+  );
+
+  const [filtersPanelOpen, setFiltersPanelOpen] = useState(false);
+  const [filtersModalOpen, setFiltersModalOpen] = useState(false);
+
+  const toggleFiltersPanel = () => setFiltersPanelOpen((open) => !open);
+  const toggleFiltersModal = () => setFiltersModalOpen((open) => !open);
+
   const { address } = useAccount();
 
   const [collectionFilter, _] = useQueryState(
@@ -107,6 +123,21 @@ export default function Portfolio({
           // walletCollectionsInitialData={walletCollectionsInitialData}
         />
       )}
+      {selectedTab === "activity" && (
+        <>
+          <PortfolioActivityFiltersPanel
+            filters={activityFilters}
+            open={filtersPanelOpen}
+            setFilters={setActivityFilters}
+          />
+          <CollectionActivityFiltersModal
+            open={filtersModalOpen}
+            setOpen={setFiltersModalOpen}
+            filters={activityFilters}
+            setFilters={setActivityFilters}
+          />
+        </>
+      )}
       <div className="flex-1">
         <PortfolioHeader walletAddress={walletAddress} />
         <div className="w-full">
@@ -138,6 +169,24 @@ export default function Portfolio({
                 </div>
               </>
             )}
+            {selectedTab === "activity" && (
+              <div className="pt-5">
+                <div className="hidden md:block">
+                  <CollectionActivityFiltersToggle
+                    open={filtersPanelOpen}
+                    toggleOpen={toggleFiltersPanel}
+                    filtersCount={activityFilters.length}
+                  />
+                </div>
+                <div className="md:hidden">
+                  <CollectionActivityFiltersToggle
+                    open={filtersModalOpen}
+                    toggleOpen={toggleFiltersModal}
+                    filtersCount={activityFilters.length}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           {selectedTab === "items" && (
             <PortfolioItemsData
@@ -158,7 +207,10 @@ export default function Portfolio({
             />
           )}
           {selectedTab === "activity" && (
-            <PortfolioActivityData walletAddress={walletAddress} />
+            <PortfolioActivityData
+              walletAddress={walletAddress}
+              activityFilters={activityFilters}
+            />
           )}
         </div>
       </div>
