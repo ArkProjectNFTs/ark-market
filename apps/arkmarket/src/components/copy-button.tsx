@@ -1,9 +1,8 @@
 "use client";
 
-import { Copy } from "@ark-market/ui/icons";
-
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, focusableStyles } from "@ark-market/ui";
+import { Copy } from "@ark-market/ui/icons";
 import {
   Tooltip,
   TooltipContent,
@@ -29,7 +28,7 @@ export default function CopyButton({
         <TooltipTrigger asChild>
           <button
             onClick={() => copy(textToCopy)}
-            className={cn("h-4", focusableStyles, className)}
+            className={cn("flex h-4", focusableStyles, className)}
           >
             <Copy className="h-full w-auto text-muted-foreground hover:text-accent-foreground" />
           </button>

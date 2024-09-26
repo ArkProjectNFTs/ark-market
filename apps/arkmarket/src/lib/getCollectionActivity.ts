@@ -12,7 +12,7 @@ export interface CollectionActivityApiResponse {
 interface GetCollectionActivityParams {
   page?: number;
   collectionAddress: string;
-  activityFilters: Array<ActivityType>;
+  activityFilters: ActivityType[];
 }
 
 export async function getCollectionActivity({
@@ -27,7 +27,10 @@ export async function getCollectionActivity({
   }
 
   if (activityFilters.length > 0) {
-    queryParams.push(`types[]=${activityFilters}`);
+    activityFilters.map((filter) => {
+      queryParams.push(`types[]=${filter}`);
+    });
+    // queryParams.push(`types[]=${activityFilters}`);
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/activity?${queryParams.join("&")}`;
