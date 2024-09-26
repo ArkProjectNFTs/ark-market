@@ -144,22 +144,25 @@ export interface PortfolioToken {
   metadata?: TokenMetadata;
 }
 
-export type ActivityType =
-  | "AUCTION"
-  | "BURN"
-  | "CANCEL_AUCTION"
-  | "CANCEL_OFFER"
-  | "CANCELLED"
-  | "DELISTING"
-  | "EXECUTED"
-  | "EXPIRED_OFFER"
-  | "EXPIRED_LISTING"
-  | "FULFILL"
-  | "LISTING"
-  | "MINT"
-  | "OFFER"
-  | "SALE"
-  | "TRANSFER";
+export const activityTypes = [
+  "AUCTION",
+  "BURN",
+  "CANCEL_AUCTION",
+  "CANCEL_OFFER",
+  "CANCELLED",
+  "DELISTING",
+  "EXECUTED",
+  "EXPIRED_OFFER",
+  "EXPIRED_LISTING",
+  "FULFILL",
+  "LISTING",
+  "MINT",
+  "OFFER",
+  "SALE",
+  "TRANSFER",
+] as const;
+
+export type ActivityType = (typeof activityTypes)[number];
 
 export interface PortfolioActivity {
   activity_type: ActivityType;
