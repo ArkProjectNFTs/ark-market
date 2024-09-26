@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
+import type { ActivityType } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
 import { getCollectionActivity } from "~/lib/getCollectionActivity";
 import DesktopCollectionActivityData from "./desktop-collection-activity";
@@ -12,10 +13,12 @@ import MobileCollectionActivity from "./mobile-collection-activity";
 interface CollectionProps {
   collectionAddress: string;
   collectionTokenCount: number;
+  filters: ActivityType[];
 }
 
 export default function CollectionActivityData({
   collectionAddress,
+  filters,
 }: CollectionProps) {
   const {
     data: infiniteData,
@@ -23,7 +26,7 @@ export default function CollectionActivityData({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["collectionActivity", collectionAddress],
+    queryKey: ["collectionActivity", collectionAddress, ...filters],
     refetchInterval: 10_000,
     placeholderData: keepPreviousData,
     getNextPageParam: (lastPage: CollectionActivityApiResponse) =>
@@ -33,9 +36,9 @@ export default function CollectionActivityData({
       getCollectionActivity({
         page: pageParam,
         collectionAddress,
+        activityFilters: filters,
       }),
   });
-
   useInfiniteWindowScroll({
     fetchNextPage,
     hasNextPage,

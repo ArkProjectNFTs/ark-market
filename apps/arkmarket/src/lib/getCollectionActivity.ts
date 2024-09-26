@@ -1,4 +1,4 @@
-import type { CollectionActivity } from "~/types";
+import type { ActivityType, CollectionActivity } from "~/types";
 import { env } from "~/env";
 
 const itemsPerPage = 10;
@@ -12,16 +12,24 @@ export interface CollectionActivityApiResponse {
 interface GetCollectionActivityParams {
   page?: number;
   collectionAddress: string;
+  activityFilters: ActivityType[];
 }
 
 export async function getCollectionActivity({
   page,
   collectionAddress,
+  activityFilters,
 }: GetCollectionActivityParams) {
   const queryParams = [`items_per_page=${itemsPerPage}`];
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+
+  if (activityFilters.length > 0) {
+    activityFilters.map((filter) => {
+      queryParams.push(`types[]=${filter}`);
+    });
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/activity?${queryParams.join("&")}`;
