@@ -15,7 +15,7 @@ export default function NotFoundPage() {
         height="846"
         viewBox="0 0 1302 846"
         fill="none"
-        className="text-foreground"
+        className="max-h-full text-foreground"
       >
         <g clipPath="url(#clip0_644_9932)">
           <rect
