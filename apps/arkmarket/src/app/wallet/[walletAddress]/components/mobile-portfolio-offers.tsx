@@ -58,7 +58,7 @@ export default function MobilePortfolioOffers({
                   <PriceTag price={offer.price} className="h-7 text-xs" />{" "}
                   <p
                     className={cn(
-                      "text-sm font-semibold",
+                      "text-sm font-medium",
                       parsedFloorDifference < 0
                         ? "text-red-500"
                         : "text-green-500",
