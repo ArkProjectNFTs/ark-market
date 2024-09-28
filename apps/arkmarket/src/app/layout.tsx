@@ -18,6 +18,7 @@ import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
 import { env } from "~/env";
+import ErrorBoundary from "./error-boundary";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           inter.variable,
         )}
       >
+        <ErrorBoundary>
         <CustomFonts />
         <Providers>
           <div className="flex-col md:flex">
@@ -89,6 +91,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Sonner richColors />
           <ConnectWalletDialog />
         </Providers>
+        </ErrorBoundary>
       </body>
     </html>
   );
