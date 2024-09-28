@@ -206,7 +206,7 @@ export default function DesktopCollectionActivity({
               </TableCell>
               <TableCell className="pr-5">
                 <Button asChild size="icon" variant="outline">
-                  <ExternalLink href="/">
+                  <ExternalLink href={`https://starkscan.co/nft/${activity.address}/${activity.token_id}`}>
                     <ArrowUpRight className="size-5" />
                   </ExternalLink>
                 </Button>

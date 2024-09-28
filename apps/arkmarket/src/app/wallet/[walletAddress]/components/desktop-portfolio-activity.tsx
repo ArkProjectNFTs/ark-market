@@ -206,7 +206,7 @@ export default function DesktopPortfolioActivity({
                 </TableCell>
                 <TableCell className="pr-5">
                   <Button asChild size="icon" variant="outline">
-                    <ExternalLink href="/">
+                    <ExternalLink href={`https://starkscan.co/tx/${activity.transaction_hash}`}>
                       <ArrowUpRight className="size-5" />
                     </ExternalLink>
                   </Button>
