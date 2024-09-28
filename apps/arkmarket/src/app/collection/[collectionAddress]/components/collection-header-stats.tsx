@@ -24,7 +24,7 @@ export default function CollectionHeaderStats({
           <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
           <p
             className={cn(
-              "text-base font-semibold",
+              "text-base font-medium",
               parsedCollectionFloor7dPercentage < 0
                 ? "text-red-500"
                 : "text-green-500",
