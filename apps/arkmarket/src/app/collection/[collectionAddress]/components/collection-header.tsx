@@ -72,7 +72,7 @@ export default function CollectionHeader({
                   )}
                 </div>
               </div>
-              <div className="mb-1 flex h-6 items-center gap-2 text-sm text-muted-foreground">
+              <div className="mb-1 flex h-6 items-center gap-4 text-sm text-muted-foreground">
                 <CopyButton textToCopy={collectionAddress} />
                 <ExternalLink href="/">
                   <XIcon className="h-4" />
@@ -86,12 +86,16 @@ export default function CollectionHeader({
                 <CollapsibleTrigger asChild>
                   <button
                     className={cn(
-                      "ml-1 flex items-center gap-1 hover:text-accent-foreground",
+                      "ml-1 flex items-center gap-1 hover:text-foreground",
                       focusableStyles,
                     )}
                   >
-                    {collapsibleOpen ? "Less Info" : "More Info"}
-                    <ChevronDown size={16} />
+                    <p className="flex items-center">
+                      {collapsibleOpen ? "Less Info" : "More Info"}
+                    </p>
+                    <p className="flex items-center text-xs">
+                      <ChevronDown size={16} />
+                    </p>
                   </button>
                 </CollapsibleTrigger>
               </div>
