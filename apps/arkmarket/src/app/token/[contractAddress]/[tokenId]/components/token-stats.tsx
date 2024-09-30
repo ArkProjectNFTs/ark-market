@@ -95,7 +95,9 @@ export default function TokenStats({
           />
           <div className="min-w-0 flex-1">
             <Link href={`/wallet/${data.owner}`} className="block">
-              <p className="truncate font-medium">{owner}</p>
+              <p className="truncate font-medium transition-colors hover:text-primary">
+                {owner}
+              </p>
             </Link>
           </div>
         </div>

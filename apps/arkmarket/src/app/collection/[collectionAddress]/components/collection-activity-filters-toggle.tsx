@@ -1,6 +1,6 @@
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { ArrowLeft, ArrowRight, Filter } from "@ark-market/ui/icons";
+import { ArrowLeft, Filter } from "@ark-market/ui/icons";
 
 interface CollectionActivityFiltersToggleProps {
   open: boolean;
@@ -20,9 +20,7 @@ export default function CollectionActivityFiltersToggle({
       onClick={toggleOpen}
       className={cn("w-full md:w-auto", open && "bg-muted")}
     >
-      <div className="hidden md:block">
-        {open ? <ArrowLeft /> : <ArrowRight />}
-      </div>
+      <div className="hidden md:block">{open ? <ArrowLeft /> : <Filter />}</div>
       <div className="md:hidden">{<Filter />}</div>
       Filters
       {filtersCount > 0 && (

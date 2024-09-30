@@ -1,7 +1,7 @@
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Filter } from "@ark-market/ui/icons";
+import { ArrowLeft, Filter } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
 // import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
@@ -15,6 +15,7 @@ interface PortfolioItemsToolsBarProps {
   viewType: ViewType;
   setViewType: (viewType: ViewType) => void;
   walletAddress: string;
+  filtersOpen: boolean;
   // walletCollectionsInitialData: WalletCollectionsApiResponse;
 }
 export default function PortfolioItemsToolsBar({
@@ -23,6 +24,7 @@ export default function PortfolioItemsToolsBar({
   viewType,
   setViewType,
   walletAddress,
+  filtersOpen,
   // walletCollectionsInitialData,
 }: PropsWithClassName<PortfolioItemsToolsBarProps>) {
   return (
@@ -33,7 +35,7 @@ export default function PortfolioItemsToolsBar({
           // walletCollectionsInitialData={walletCollectionsInitialData}
         >
           <Button variant="secondary" size="icon-xl" className="sm:hidden">
-            <Filter />
+            {filtersOpen ? <ArrowLeft /> : <Filter />}
           </Button>
         </PortfolioItemsFiltersModal>
         <Button
@@ -42,7 +44,7 @@ export default function PortfolioItemsToolsBar({
           size="xl"
           className="hidden sm:flex"
         >
-          <Filter />
+          {filtersOpen ? <ArrowLeft /> : <Filter />}
           <span>Filters</span>
         </Button>
 

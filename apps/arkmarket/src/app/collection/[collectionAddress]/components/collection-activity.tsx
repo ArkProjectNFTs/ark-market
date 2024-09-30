@@ -47,7 +47,7 @@ export default function CollectionActivity({
         <div className="w-full">
           <div className="sticky top-[var(--site-header-height)] z-20 bg-background">
             <CollectionNav collectionAddress={collectionAddress} />
-            <div className="px-5 pb-5">
+            <div className="mb-6 border-b border-border px-5 pb-5 md:mb-0 md:border-none">
               <div className="hidden md:block">
                 <CollectionActivityFiltersToggle
                   open={filtersPanelOpen}
