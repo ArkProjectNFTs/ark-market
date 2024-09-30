@@ -205,8 +205,14 @@ export default function DesktopCollectionActivity({
                 {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
               </TableCell>
               <TableCell className="pr-5">
-                <Button asChild size="icon" variant="outline">
-                  <ExternalLink href={`https://starkscan.co/nft/${activity.address}/${activity.token_id}`}>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  disabled={!activity.transaction_hash}
+                >
+                  <ExternalLink
+                    href={`https://starkscan.co/tx/${activity.transaction_hash}`}
+                  >
                     <ArrowUpRight className="size-5" />
                   </ExternalLink>
                 </Button>
