@@ -2,9 +2,9 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { cn, ellipsableStyles, formatUnits, timeSince } from "@ark-market/ui";
+import { cn, ellipsableStyles, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { Ethereum, NoResult } from "@ark-market/ui/icons";
+import {  NoResult } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -17,6 +17,8 @@ import {
 import type { WalletToken } from "../queries/getWalletData";
 import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
 import Media from "~/components/media";
+import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
+import ActivityTime from "~/components/cells/activity-time-cell";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(10rem,1fr))_minmax(6.5rem,8rem)]";
@@ -116,50 +118,19 @@ export default function PortfolioItemsDataListView({
                     </p>
                   </div>
                 </TableCell>
-                <TableCell>
-                  {token.list_price ? (
-                    <div className="flex items-center gap-1 whitespace-nowrap">
-                      <Ethereum className="size-4" />
-                      <p className={ellipsableStyles}>
-                        {formatUnits(token.list_price, 18)}{" "}
-                        <span className="text-muted-foreground">ETH</span>
-                      </p>
-                    </div>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {token.best_offer ? (
-                    <div className="flex items-center gap-1 whitespace-nowrap">
-                      <Ethereum className="size-4" />
-                      <p className={ellipsableStyles}>
-                        {formatUnits(token.best_offer, 18)}{" "}
-                        <span className="text-muted-foreground">ETH</span>
-                      </p>
-                    </div>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {token.floor ? (
-                    <div className="flex items-center gap-1 whitespace-nowrap">
-                      <Ethereum className="size-4" />
-                      <p className={ellipsableStyles}>
-                        {formatUnits(token.floor, 18)}{" "}
-                        <span className="text-muted-foreground">ETH</span>
-                      </p>
-                    </div>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
+                
+                <TokenLastSoldCell price={token.list_price ?? 0} />
+            
+                <TokenLastSoldCell price={token.best_offer ?? 0} />
+                
+                <TokenLastSoldCell price={token.floor ?? 0} />
+
                 <TableCell>
                   <p className={ellipsableStyles}>
                     {token.received_at ? timeSince(token.received_at) : "_"}
                   </p>
                 </TableCell>
+                <ActivityTime time_stamp={token.received_at} />
                 <TableCell>
                   {canListItem ? (
                     <TokenActionsCreateListing token={token}>

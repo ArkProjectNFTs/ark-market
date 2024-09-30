@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 
 import { timeSince } from "@ark-market/ui";
@@ -14,8 +13,8 @@ import {
 } from "@ark-market/ui/table";
 
 import type { TokenActivity } from "~/types";
-import activityTypeMetadata from "~/constants/activity-type-metadata";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import EventCell from "~/components/cells/activity-event-cell";
+import ActivityToFromCell from "~/components/cells/activity-from-cell";
 
 interface DesktopTokenActivityProps {
   tokenActivity: TokenActivity[];
@@ -44,45 +43,16 @@ export default function DesktopTokenActivity({
               className="group h-[4.6875rem]"
               key={`activity-${activity.time_stamp}`}
             >
-              <TableCell className="pl-5 transition-colors group-hover:text-muted-foreground">
-                <div className="flex items-center gap-4 whitespace-nowrap">
-                  {activityTypeMetadata[activity.activity_type].icon}
-                  <p>{activityTypeMetadata[activity.activity_type].title}</p>
-                </div>
-              </TableCell>
+
+              <EventCell activity={activity} />
               <TableCell>
                 {activity.price ? <PriceTag price={activity.price} /> : "_"}
               </TableCell>
-              <TableCell>
-                {activity.from ? (
-                  <Link
-                    href={`/wallet/${activity.from}`}
-                    className="text-primary"
-                  >
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.from,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.to ? (
-                  <Link
-                    href={`/wallet/${activity.to}`}
-                    className="text-primary"
-                  >
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.to,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
+
+                <ActivityToFromCell ownerAddress={activity.from ?? ""} address={address} />
+
+                <ActivityToFromCell ownerAddress={activity.to ?? ""} address={address} />
+
               <TableCell className="text-end">
                 {timeSince(activity.time_stamp)}
               </TableCell>

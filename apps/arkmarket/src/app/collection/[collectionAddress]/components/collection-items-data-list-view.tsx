@@ -1,17 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import TokenInfosCell from "~/components/cells/token-infos-cell";
+import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
+import TokenPriceCell from "~/components/cells/token-price-cell";
+import TokenOwnerCell from "~/components/cells/token-owner-cell";
+import TokenTimeListedCell from "~/components/cells/token-time-listed-cell";
 
-import {
-  cn,
-  ellipsableStyles,
-  formatUnits,
-  timeSinceShort,
-} from "@ark-market/ui";
-import { Ethereum, LoaderCircle } from "@ark-market/ui/icons";
-import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
   TableBody,
@@ -22,7 +18,6 @@ import {
 } from "@ark-market/ui/table";
 
 import type { CollectionToken } from "~/types";
-import Media from "~/components/media";
 
 interface CollectionItemsDataListViewProps {
   collectionTokens: CollectionToken[];
@@ -96,70 +91,22 @@ export default function CollectionItemsDataListView({
               }}
             >
               {/* avatar / name */}
-              <TableCell className="sticky left-0 min-w-[240px] flex-grow pl-5 backdrop-blur-3xl transition-colors">
-                <Link
-                  prefetch={false}
-                  href={`/token/${token.collection_address}/${token.token_id}`}
-                  className="flex items-center gap-4"
-                >
-                  <Media
-                    src={token.metadata?.image}
-                    mediaKey={token.metadata?.image_key}
-                    alt={token.metadata?.name ?? "Empty NFT"}
-                    className="size-10 rounded-md object-contain"
-                  />
-                  <div className={cn("w-full", ellipsableStyles)}>
-                    {token.metadata?.name ?? token.token_id}
-                  </div>
-                </Link>
-              </TableCell>
+              <TokenInfosCell token={token}/>
 
               {/* price */}
-              <TableCell className="flex w-[25%]">
-                {token.buy_in_progress ? (
-                  <div className="flex h-10 items-center justify-center text-nowrap rounded bg-primary px-3 text-sm text-background">
-                    Buy in progress
-                    <LoaderCircle className="ml-4 size-4 animate-spin" />
-                  </div>
-                ) : token.price ? (
-                  <PriceTag price={token.price} />
-                ) : (
-                  "_"
-                )}
-              </TableCell>
+              <TokenPriceCell token={token}/>
 
               {/* last sold */}
-              <TableCell className="flex w-[20%]">
-                {token.last_price ? (
-                  <div className="flex items-center">
-                    <Ethereum className="size-4" />
-                    <p>
-                      {formatUnits(token.last_price, 18)}{" "}
-                      <span className="text-muted-foreground">ETH</span>
-                    </p>
-                  </div>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
+              <TokenLastSoldCell price={token.last_price}/>
 
               {/* floor difference */}
               <TableCell className="flex w-[15%]">_</TableCell>
 
               {/* owner */}
-              <TableCell className="flex w-[10%] whitespace-nowrap">
-                <Link
-                  href={`/wallet/${token.owner}`}
-                  className="hover:text-primary"
-                >
-                  {token.owner ? token.owner.slice(0, 6) : "_"}
-                </Link>
-              </TableCell>
+              <TokenOwnerCell token={token}/>
 
               {/* time listed */}
-              <TableCell className="flex w-[10%] whitespace-nowrap">
-                {token.listed_at ? timeSinceShort(token.listed_at) : "_"}
-              </TableCell>
+              <TokenTimeListedCell token={token}/>
             </TableRow>
           );
         })}

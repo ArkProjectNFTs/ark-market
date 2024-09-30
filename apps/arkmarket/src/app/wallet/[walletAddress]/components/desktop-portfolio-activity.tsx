@@ -1,33 +1,28 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import {
   cn,
-  ellipsableStyles,
-  focusableStyles,
-  timeSince,
 } from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
-import { ArrowUpRight, NoActivity, VerifiedIcon } from "@ark-market/ui/icons";
-import { PriceTag } from "@ark-market/ui/price-tag";
+import {  NoActivity } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
 
-import type { PortfolioActivity } from "~/types";
-import ExternalLink from "~/components/external-link";
-import Media from "~/components/media";
-import activityTypeMetadata from "~/constants/activity-type-metadata";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import type { PortfolioActivity, TokenMetadata } from "~/types";
+import EventCell from "~/components/cells/activity-event-cell";
+import TokenCell from "~/components/cells/activity-token-cell";
+import PriceCell from "~/components/cells/activity-price-cell";
+import ActivityToFromCell from "~/components/cells/activity-from-cell";
+import ActivityTime from "~/components/cells/activity-time-cell";
+import ActivityUp from "~/components/cells/activity-up-cell";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(14rem,1fr)_minmax(15rem,2fr)_repeat(4,minmax(11rem,1fr))_minmax(4.5rem,4.5rem)]";
@@ -111,106 +106,20 @@ export default function DesktopPortfolioActivity({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
-                  <div className="flex items-center gap-4 whitespace-nowrap">
-                    {activityTypeMetadata[activity.activity_type].icon}
-                    <p>{activityTypeMetadata[activity.activity_type].title}</p>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-4">
-                    <Media
-                      className="size-[3.75rem] rounded-xs object-contain"
-                      height={120}
-                      width={120}
-                      alt={activity.metadata?.name ?? "Unnamed Token"}
-                      src={activity.metadata?.image ?? ""}
-                      mediaKey={activity.metadata?.image_key ?? ""}
-                    />
-                    <div className="w-full overflow-hidden">
-                      <Link
-                        className={focusableStyles}
-                        href={`/token/${activity.collection_address}/${activity.token_id}`}
-                      >
-                        <p
-                          className={cn(
-                            "w-full text-base font-medium",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {activity.metadata?.name ?? "Unnamed Token"}
-                        </p>
-                      </Link>
-                      <div className="flex w-full items-center gap-1">
-                        <Link
-                          className={cn(focusableStyles, ellipsableStyles)}
-                          href={`/collection/${activity.collection_address}`}
-                        >
-                          <p
-                            className={cn(
-                              "text-muted-foreground transition-colors hover:text-primary",
-                              ellipsableStyles,
-                            )}
-                          >
-                            {activity.collection_name}
-                          </p>
-                        </Link>
-                        {activity.collection_is_verified && (
-                          <VerifiedIcon className="size-4 text-primary" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  {activity.price ? (
-                    <PriceTag price={activity.price} className="max-w-full" />
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {activity.from ? (
-                    <Link
-                      href={`/wallet/${activity.from}`}
-                      className="text-primary"
-                    >
-                      {ownerOrShortAddress({
-                        ownerAddress: activity.from,
-                        address,
-                      })}
-                    </Link>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  {activity.to ? (
-                    <Link
-                      href={`/wallet/${activity.to}`}
-                      className="text-primary"
-                    >
-                      {ownerOrShortAddress({
-                        ownerAddress: activity.to,
-                        address,
-                      })}
-                    </Link>
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
-                <TableCell>
-                  <p className="whitespace-nowrap">
-                    {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
-                  </p>
-                </TableCell>
-                <TableCell className="pr-5">
-                  <Button asChild size="icon" variant="outline">
-                    <ExternalLink href="/">
-                      <ArrowUpRight className="size-5" />
-                    </ExternalLink>
-                  </Button>
-                </TableCell>
+                <EventCell activity={activity} />
+
+                <TokenCell address={activity.collection_address} collectionAddress={activity.collection_address} is_verified={activity.collection_is_verified} metadata={activity.metadata as TokenMetadata | null} name={activity.collection_name} token_id={activity.token_id} />
+
+                <PriceCell activity={activity}/>
+
+                <ActivityToFromCell ownerAddress={activity.from} address={address} />
+
+                <ActivityToFromCell ownerAddress={activity.to} address={address} />
+
+                <ActivityTime time_stamp={activity.time_stamp} />
+                
+                <ActivityUp/>
+
               </TableRow>
             );
           })}

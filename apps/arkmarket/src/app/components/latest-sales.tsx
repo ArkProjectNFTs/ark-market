@@ -13,6 +13,7 @@ import {
 
 import Media from "~/components/media";
 import { homepageConfig } from "~/config/homepage";
+import TextCell from "~/components/cells/text-cell";
 
 export default function LatestSales() {
   if (homepageConfig.latestSales.length === 0) {
@@ -37,6 +38,7 @@ export default function LatestSales() {
         <TableBody className="text-sm font-semibold">
           {homepageConfig.latestSales.map((sale, index) => {
             // TOOD @YohanTz: Proper key when real data
+            
             return (
               <TableRow
                 key={index}
@@ -71,8 +73,8 @@ export default function LatestSales() {
                 <TableCell className="text-foreground">
                   <PriceTag price={sale.price} />
                 </TableCell>
-                <TableCell className="text-primary">{sale.from}</TableCell>
-                <TableCell className="text-primary">{sale.to}</TableCell>
+                <TextCell text={sale.from} />
+                <TextCell text={sale.to} />
                 <TableCell className="text-foreground transition-colors group-hover:text-muted-foreground">
                   1min ago
                 </TableCell>

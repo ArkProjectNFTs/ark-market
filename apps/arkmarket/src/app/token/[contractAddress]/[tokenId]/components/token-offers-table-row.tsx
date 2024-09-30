@@ -4,9 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { validateAndParseAddress } from "starknet";
 
-import { cn, getRoundedRemainingTime } from "@ark-market/ui";
+import { getRoundedRemainingTime } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import { PriceTag } from "@ark-market/ui/price-tag";
 import { TableCell, TableRow } from "@ark-market/ui/table";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
@@ -14,6 +13,8 @@ import ConnectWalletModal from "~/components/connect-wallet-modal";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import AcceptOffer from "./accept-offer";
 import CancelOffer from "./cancel-offer";
+import OfferPriceCell from "~/components/cells/offer-price-cell";
+import OfferFloorDiffCell from "~/components/cells/offer-floor-diff-cell";
 
 interface TokenOffersTableProps {
   address?: string;
@@ -51,23 +52,8 @@ export default function TokenOffersTableItem({
       key={offer.offer_id}
       className="grid h-[4.625rem] w-full grid-cols-5 items-center"
     >
-      <TableCell>
-        <PriceTag price={offer.price} className="max-w-full" />
-      </TableCell>
-      <TableCell>
-        {offer.floor_difference ? (
-          <p
-            className={cn(
-              "text-sm font-medium",
-              offer.floor_difference >= 0 ? "text-green-500" : "text-red-500",
-            )}
-          >
-            {offer.floor_difference}%
-          </p>
-        ) : (
-          "_"
-        )}
-      </TableCell>
+      <OfferPriceCell offer={offer} />
+      <OfferFloorDiffCell offer={offer} />
       <TableCell>
         <Link href={`/wallet/${offer.source}`} className="text-primary">
           {formattedSource}
