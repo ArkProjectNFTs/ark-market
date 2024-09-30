@@ -150,6 +150,7 @@ export default function Portfolio({
             />
             {selectedTab === "items" && (
               <PortfolioItemsToolsBar
+                filtersOpen={itemsFiltersOpen}
                 walletAddress={walletAddress}
                 // walletCollectionsInitialData={walletCollectionsInitialData}
                 toggleFiltersOpen={() =>

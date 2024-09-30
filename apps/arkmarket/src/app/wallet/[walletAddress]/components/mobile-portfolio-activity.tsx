@@ -77,19 +77,17 @@ export default function MobilePortfolioActivity({
 
                 {activity.price ? (
                   <PriceTag price={activity.price} className="h-7 text-xs" />
-                ) : (
-                  "_"
-                )}
+                ) : null}
               </div>
             </div>
           </div>
 
           <div className="mt-3 flex items-center justify-between text-sm font-semibold">
             <div className="flex items-center gap-2">
-              <p>
-                by{" "}
-                <span className="text-muted-foreground">
-                  {activity.from ? (
+              {activity.from ? (
+                <p>
+                  by{" "}
+                  <span className="text-muted-foreground">
                     <Link
                       href={`/wallet/${activity.from}`}
                       className="text-muted-foreground"
@@ -99,15 +97,13 @@ export default function MobilePortfolioActivity({
                         address,
                       })}
                     </Link>
-                  ) : (
-                    "-"
-                  )}
-                </span>
-              </p>
-              <p>
-                for{" "}
-                <span className="text-muted-foreground">
-                  {activity.to ? (
+                  </span>
+                </p>
+              ) : null}
+              {activity.to ? (
+                <p>
+                  for{" "}
+                  <span className="text-muted-foreground">
                     <Link
                       href={`/wallet/${activity.to}`}
                       className="text-muted-foreground"
@@ -117,11 +113,9 @@ export default function MobilePortfolioActivity({
                         address,
                       })}
                     </Link>
-                  ) : (
-                    "-"
-                  )}
-                </span>
-              </p>
+                  </span>
+                </p>
+              ) : null}
             </div>
             <p className="text-xs text-muted-foreground">
               {timeSince(activity.time_stamp)}

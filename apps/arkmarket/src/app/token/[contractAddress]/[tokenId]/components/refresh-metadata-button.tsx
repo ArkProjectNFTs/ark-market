@@ -45,8 +45,9 @@ export default function RefreshMetadataButton({
       onClick={async () => {
         await refreshMetadataMutation.mutateAsync();
       }}
+      className="flex text-[1.5rem]"
     >
-      <RefreshCw className="size-6 text-muted-foreground" />
+      <RefreshCw className="size-6 text-muted-foreground transition-colors hover:text-foreground" />
     </button>
   );
 }
