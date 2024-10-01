@@ -9,12 +9,12 @@ import { Button } from "@ark-market/ui/button";
 import { TableCell, TableRow } from "@ark-market/ui/table";
 
 import type { Token, TokenMarketData, TokenOffer } from "~/types";
+import OfferFloorDiffCell from "~/components/cells/offer-floor-diff-cell";
+import OfferPriceCell from "~/components/cells/offer-price-cell";
 import ConnectWalletModal from "~/components/connect-wallet-modal";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 import AcceptOffer from "./accept-offer";
 import CancelOffer from "./cancel-offer";
-import OfferPriceCell from "~/components/cells/offer-price-cell";
-import OfferFloorDiffCell from "~/components/cells/offer-floor-diff-cell";
 
 interface TokenOffersTableProps {
   address?: string;

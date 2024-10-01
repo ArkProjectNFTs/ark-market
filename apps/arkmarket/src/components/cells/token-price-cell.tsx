@@ -1,7 +1,8 @@
 import { LoaderCircle } from "@ark-market/ui/icons";
 import { PriceTag } from "@ark-market/ui/price-tag";
-import type { CollectionToken } from "~/types";
 import { TableCell } from "@ark-market/ui/table";
+
+import type { CollectionToken } from "~/types";
 
 interface PriceCellProps {
   token: CollectionToken;

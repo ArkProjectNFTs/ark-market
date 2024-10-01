@@ -1,9 +1,9 @@
-import { Ethereum } from "@ark-market/ui/icons";
 import { formatUnits } from "@ark-market/ui";
+import { Ethereum } from "@ark-market/ui/icons";
 import { TableCell } from "@ark-market/ui/table";
 
 interface TokenLastSoldCellProps {
-  price: number | string | undefined
+  price: number | string | undefined;
 }
 
 export default function TokenLastSoldCell({ price }: TokenLastSoldCellProps) {

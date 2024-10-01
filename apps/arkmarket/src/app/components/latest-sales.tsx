@@ -11,9 +11,9 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
+import TextCell from "~/components/cells/text-cell";
 import Media from "~/components/media";
 import { homepageConfig } from "~/config/homepage";
-import TextCell from "~/components/cells/text-cell";
 
 export default function LatestSales() {
   if (homepageConfig.latestSales.length === 0) {
@@ -38,7 +38,7 @@ export default function LatestSales() {
         <TableBody className="text-sm font-semibold">
           {homepageConfig.latestSales.map((sale, index) => {
             // TOOD @YohanTz: Proper key when real data
-            
+
             return (
               <TableRow
                 key={index}

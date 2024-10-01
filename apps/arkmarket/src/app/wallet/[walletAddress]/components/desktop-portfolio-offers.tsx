@@ -3,10 +3,7 @@ import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import {
-  cn,
-  getRoundedRemainingTime,
-} from "@ark-market/ui";
+import { cn, getRoundedRemainingTime } from "@ark-market/ui";
 import { NoActivity } from "@ark-market/ui/icons";
 import {
   Table,
@@ -21,9 +18,9 @@ import type { PortfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 import type { PortfolioOffers, TokenMetadata } from "~/types";
 import AcceptOffer from "~/app/token/[contractAddress]/[tokenId]/components/accept-offer";
 import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
-import TokenCell from "~/components/cells/activity-token-cell";
 import PriceCell from "~/components/cells/activity-price-cell";
+import TokenCell from "~/components/cells/activity-token-cell";
+import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(14rem,2fr)_repeat(5,minmax(10rem,1fr))]";
@@ -116,8 +113,14 @@ export default function DesktopPortfolioOffers({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-
-                <TokenCell address={offer.collection_address} collectionAddress={offer.collection_address} is_verified={offer.is_verified} metadata={offer.metadata as TokenMetadata | null} name={offer.collection_name} token_id={offer.offer_id} />
+                <TokenCell
+                  address={offer.collection_address}
+                  collectionAddress={offer.collection_address}
+                  isVerified={offer.is_verified}
+                  metadata={offer.metadata as TokenMetadata | null}
+                  name={offer.collection_name}
+                  tokenId={offer.offer_id}
+                />
                 <PriceCell activity={offer} />
                 <TableCell>
                   <p

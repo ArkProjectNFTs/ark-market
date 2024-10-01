@@ -1,8 +1,10 @@
 import Link from "next/link";
+
 import { cn, ellipsableStyles } from "@ark-market/ui";
-import Media from "~/components/media";
-import type { CollectionToken } from "~/types";
 import { TableCell } from "@ark-market/ui/table";
+
+import type { CollectionToken } from "~/types";
+import Media from "~/components/media";
 
 interface TokenNameCellProps {
   token: CollectionToken;

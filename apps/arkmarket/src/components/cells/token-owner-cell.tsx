@@ -1,6 +1,8 @@
 import Link from "next/link";
-import type { CollectionToken } from "~/types";
+
 import { TableCell } from "@ark-market/ui/table";
+
+import type { CollectionToken } from "~/types";
 
 interface TokenOwnerCellProps {
   token: CollectionToken;

@@ -1,16 +1,16 @@
-import { TableCell } from "@ark-market/ui/table";
 import { timeSince } from "@ark-market/ui";
+import { TableCell } from "@ark-market/ui/table";
 
 interface ActivityProps {
-   time_stamp: number | null;
+  timeStamp: number | null;
 }
 
-export default function ActivityTime({time_stamp}: ActivityProps) {
-    return (
-        <TableCell>
-            <p className="whitespace-nowrap">
-                {time_stamp ? timeSince(time_stamp) : "_"}
-            </p>
-        </TableCell>
-    )
+export default function ActivityTime({ timeStamp }: ActivityProps) {
+  return (
+    <TableCell>
+      <p className="whitespace-nowrap">
+        {timeStamp ? timeSince(timeStamp) : "_"}
+      </p>
+    </TableCell>
+  );
 }

@@ -43,15 +43,20 @@ export default function DesktopTokenActivity({
               className="group h-[4.6875rem]"
               key={`activity-${activity.time_stamp}`}
             >
-
               <EventCell activity={activity} />
               <TableCell>
                 {activity.price ? <PriceTag price={activity.price} /> : "_"}
               </TableCell>
 
-                <ActivityToFromCell ownerAddress={activity.from ?? ""} address={address} />
+              <ActivityToFromCell
+                ownerAddress={activity.from ?? ""}
+                address={address}
+              />
 
-                <ActivityToFromCell ownerAddress={activity.to ?? ""} address={address} />
+              <ActivityToFromCell
+                ownerAddress={activity.to ?? ""}
+                address={address}
+              />
 
               <TableCell className="text-end">
                 {timeSince(activity.time_stamp)}

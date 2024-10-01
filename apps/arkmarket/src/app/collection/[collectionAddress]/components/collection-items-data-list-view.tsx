@@ -2,11 +2,6 @@
 
 import { useRef } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import TokenInfosCell from "~/components/cells/token-infos-cell";
-import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
-import TokenPriceCell from "~/components/cells/token-price-cell";
-import TokenOwnerCell from "~/components/cells/token-owner-cell";
-import TokenTimeListedCell from "~/components/cells/token-time-listed-cell";
 
 import {
   Table,
@@ -18,6 +13,11 @@ import {
 } from "@ark-market/ui/table";
 
 import type { CollectionToken } from "~/types";
+import TokenInfosCell from "~/components/cells/token-infos-cell";
+import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
+import TokenOwnerCell from "~/components/cells/token-owner-cell";
+import TokenPriceCell from "~/components/cells/token-price-cell";
+import TokenTimeListedCell from "~/components/cells/token-time-listed-cell";
 
 interface CollectionItemsDataListViewProps {
   collectionTokens: CollectionToken[];
@@ -91,22 +91,22 @@ export default function CollectionItemsDataListView({
               }}
             >
               {/* avatar / name */}
-              <TokenInfosCell token={token}/>
+              <TokenInfosCell token={token} />
 
               {/* price */}
-              <TokenPriceCell token={token}/>
+              <TokenPriceCell token={token} />
 
               {/* last sold */}
-              <TokenLastSoldCell price={token.last_price}/>
+              <TokenLastSoldCell price={token.last_price} />
 
               {/* floor difference */}
               <TableCell className="flex w-[15%]">_</TableCell>
 
               {/* owner */}
-              <TokenOwnerCell token={token}/>
+              <TokenOwnerCell token={token} />
 
               {/* time listed */}
-              <TokenTimeListedCell token={token}/>
+              <TokenTimeListedCell token={token} />
             </TableRow>
           );
         })}

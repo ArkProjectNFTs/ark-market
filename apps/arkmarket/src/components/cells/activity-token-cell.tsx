@@ -1,20 +1,29 @@
-import { TableCell } from "@ark-market/ui/table";
 import Link from "next/link";
+
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
-import Media from "~/components/media";
 import { VerifiedIcon } from "@ark-market/ui/icons";
+import { TableCell } from "@ark-market/ui/table";
+
 import type { TokenMetadata } from "~/types";
+import Media from "~/components/media";
 
 interface TokenCellProps {
   metadata: TokenMetadata | null;
   collectionAddress: string;
-  token_id: string | number;
+  tokenId: string | number;
   name: string;
   address: string;
-  is_verified: boolean;
+  isVerified: boolean;
 }
 
-export default function TokenCell({ metadata, collectionAddress, token_id, name, address, is_verified }: TokenCellProps) {
+export default function TokenCell({
+  metadata,
+  collectionAddress,
+  tokenId,
+  name,
+  address,
+  isVerified,
+}: TokenCellProps) {
   return (
     <TableCell>
       <div className="flex items-center gap-4">
@@ -27,18 +36,29 @@ export default function TokenCell({ metadata, collectionAddress, token_id, name,
           mediaKey={metadata?.image_key ?? undefined}
         />
         <div className="w-full overflow-hidden">
-          <Link className={focusableStyles} href={`/token/${collectionAddress}/${token_id}`}>
+          <Link
+            className={focusableStyles}
+            href={`/token/${collectionAddress}/${tokenId}`}
+          >
             <p className={cn("w-full text-base font-medium", ellipsableStyles)}>
-              {metadata?.name ?? `${name} #${token_id}`}
+              {metadata?.name ?? `${name} #${tokenId}`}
             </p>
           </Link>
           <div className="flex w-full items-center gap-1">
-            <Link className={cn(focusableStyles, ellipsableStyles)} href={`/collection/${address}`}>
-              <p className={cn("text-muted-foreground transition-colors hover:text-primary", ellipsableStyles)}>
+            <Link
+              className={cn(focusableStyles, ellipsableStyles)}
+              href={`/collection/${address}`}
+            >
+              <p
+                className={cn(
+                  "text-muted-foreground transition-colors hover:text-primary",
+                  ellipsableStyles,
+                )}
+              >
                 {name}
               </p>
             </Link>
-            {is_verified && <VerifiedIcon className="size-4 text-primary" />}
+            {isVerified && <VerifiedIcon className="size-4 text-primary" />}
           </div>
         </div>
       </div>

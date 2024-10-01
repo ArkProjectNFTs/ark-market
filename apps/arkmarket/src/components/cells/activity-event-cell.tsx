@@ -1,9 +1,10 @@
 import { TableCell } from "@ark-market/ui/table";
-import activityTypeMetadata from "~/constants/activity-type-metadata";
+
 import type { CollectionActivity, TokenActivity } from "~/types";
+import activityTypeMetadata from "~/constants/activity-type-metadata";
 
 interface EventCellProps {
-  activity: CollectionActivity | TokenActivity ;
+  activity: CollectionActivity | TokenActivity;
 }
 
 export default function EventCell({ activity }: EventCellProps) {

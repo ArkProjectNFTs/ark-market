@@ -4,7 +4,7 @@ import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn, ellipsableStyles, timeSince } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
-import {  NoResult } from "@ark-market/ui/icons";
+import { NoResult } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -16,9 +16,9 @@ import {
 
 import type { WalletToken } from "../queries/getWalletData";
 import { TokenActionsCreateListing } from "~/app/token/[contractAddress]/[tokenId]/components/token-actions-create-listing";
-import Media from "~/components/media";
-import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
 import ActivityTime from "~/components/cells/activity-time-cell";
+import TokenLastSoldCell from "~/components/cells/token-last-price-cell";
+import Media from "~/components/media";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(11rem,2fr)_repeat(4,minmax(10rem,1fr))_minmax(6.5rem,8rem)]";
@@ -118,11 +118,11 @@ export default function PortfolioItemsDataListView({
                     </p>
                   </div>
                 </TableCell>
-                
+
                 <TokenLastSoldCell price={token.list_price ?? 0} />
-            
+
                 <TokenLastSoldCell price={token.best_offer ?? 0} />
-                
+
                 <TokenLastSoldCell price={token.floor ?? 0} />
 
                 <TableCell>
@@ -130,7 +130,7 @@ export default function PortfolioItemsDataListView({
                     {token.received_at ? timeSince(token.received_at) : "_"}
                   </p>
                 </TableCell>
-                <ActivityTime time_stamp={token.received_at} />
+                <ActivityTime timeStamp={token.received_at} />
                 <TableCell>
                   {canListItem ? (
                     <TokenActionsCreateListing token={token}>

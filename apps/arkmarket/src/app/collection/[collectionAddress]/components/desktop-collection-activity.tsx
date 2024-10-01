@@ -4,9 +4,7 @@ import { useRef } from "react";
 import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import {
-  cn,
-} from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import {
   Table,
   TableBody,
@@ -17,11 +15,11 @@ import {
 
 import type { CollectionActivity } from "~/types";
 import EventCell from "~/components/cells/activity-event-cell";
+import ActivityToFromCell from "~/components/cells/activity-from-cell";
 import PriceCell from "~/components/cells/activity-price-cell";
 import ActivityTime from "~/components/cells/activity-time-cell";
 import TokenCell from "~/components/cells/activity-token-cell";
 import ActivityUp from "~/components/cells/activity-up-cell";
-import ActivityToFromCell from "~/components/cells/activity-from-cell";
 
 interface DesktopCollectionActivityProps {
   collectionAddress: string;
@@ -106,19 +104,31 @@ export default function DesktopCollectionActivity({
               }}
             >
               <EventCell activity={activity} />
-              
-              <TokenCell address={activity.address} is_verified={activity.is_verified} metadata={activity.token_metadata} name={activity.name} token_id={activity.token_id} collectionAddress={collectionAddress} />
-              
-              <PriceCell activity={activity}/>
 
-              <ActivityToFromCell ownerAddress={activity.from} address={address} />
+              <TokenCell
+                address={activity.address}
+                isVerified={activity.is_verified}
+                metadata={activity.token_metadata}
+                name={activity.name}
+                tokenId={activity.token_id}
+                collectionAddress={collectionAddress}
+              />
 
-              <ActivityToFromCell ownerAddress={activity.to} address={address} />
+              <PriceCell activity={activity} />
 
-              <ActivityTime time_stamp={activity.time_stamp} />
+              <ActivityToFromCell
+                ownerAddress={activity.from}
+                address={address}
+              />
+
+              <ActivityToFromCell
+                ownerAddress={activity.to}
+                address={address}
+              />
+
+              <ActivityTime timeStamp={activity.time_stamp} />
 
               <ActivityUp />
-
             </TableRow>
           );
         })}
