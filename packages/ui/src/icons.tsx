@@ -725,3 +725,17 @@ export const ViewMore =
         <Icon className={className} icon="2" />
       )
     : LucideGrid2x2X;
+
+export const Support =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="P" />
+      )
+    : HelpCircle;
+
+export const LogOut =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className }: PropsWithClassName) => (
+        <Icon className={className} icon="R" />
+      )
+    : HelpCircle;

@@ -120,6 +120,7 @@ export default function DesktopPortfolioActivity({
                 
                 <ActivityUp/>
 
+
               </TableRow>
             );
           })}

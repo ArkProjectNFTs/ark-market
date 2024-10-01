@@ -118,6 +118,7 @@ export default function DesktopCollectionActivity({
               <ActivityTime time_stamp={activity.time_stamp} />
 
               <ActivityUp />
+
             </TableRow>
           );
         })}
