@@ -213,9 +213,7 @@ export default function DesktopCollectionActivity({
                       <ArrowUpRight className="size-5" />
                     </ExternalLink>
                   </Button>
-                ) : (
-                  "_"
-                )}
+                ) : null}
               </TableCell>
             </TableRow>
           );

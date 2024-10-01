@@ -205,11 +205,15 @@ export default function DesktopPortfolioActivity({
                   </p>
                 </TableCell>
                 <TableCell className="pr-5">
-                  <Button asChild size="icon" variant="outline">
-                    <ExternalLink href={`https://starkscan.co/tx/${activity.transaction_hash}`}>
-                      <ArrowUpRight className="size-5" />
-                    </ExternalLink>
-                  </Button>
+                  {activity.transaction_hash ? (
+                    <Button asChild size="icon" variant="outline">
+                      <ExternalLink
+                        href={`https://starkscan.co/tx/${activity.transaction_hash}`}
+                      >
+                        <ArrowUpRight className="size-5" />
+                      </ExternalLink>
+                    </Button>
+                  ) : null}
                 </TableCell>
               </TableRow>
             );
