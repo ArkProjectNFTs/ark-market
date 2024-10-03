@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { shortAddress, timeSinceShort } from "@ark-market/ui";
 import { ShoppingCart, VerifiedIcon } from "@ark-market/ui/icons";
+import { Marquee } from "@ark-market/ui/marquee";
 import { PriceTag } from "@ark-market/ui/price-tag";
 import {
   Table,
@@ -31,6 +32,34 @@ export default function LatestSales() {
 
   return (
     <section>
+      <div className="relative w-full overflow-hidden">
+        <Marquee className="[--duration:20s]">
+          <p className="whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem]">
+            Latest sale
+          </p>
+          <p
+            className="whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem] text-transparent dark:hidden"
+            style={{
+              WebkitTextFillColor: "transparent",
+              WebkitTextStrokeWidth: "1px",
+              WebkitTextStrokeColor: "black",
+            }}
+          >
+            Latest sale
+          </p>
+          <p
+            className="hidden whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem] text-transparent dark:block"
+            style={{
+              WebkitTextFillColor: "transparent",
+              WebkitTextStrokeWidth: "1px",
+              WebkitTextStrokeColor: "white",
+            }}
+          >
+            Latest sale
+          </p>
+        </Marquee>
+      </div>
+
       <div className="h-[34rem] overflow-auto rounded-[32px] border border-foreground md:mt-12">
         <Table>
           <TableHeader>
