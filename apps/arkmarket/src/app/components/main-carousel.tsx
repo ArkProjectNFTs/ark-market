@@ -16,7 +16,8 @@ import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
-const AUTO_SLIDE_INTERVAL = 8_000;
+// const AUTO_SLIDE_INTERVAL = 8_000;
+const AUTO_SLIDE_INTERVAL = 8_000_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -100,13 +101,7 @@ export default function MainCarousel() {
                       />
                     )}
                   </div>
-                  <div
-                    className="mt-5 flex flex-1 items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0"
-                    style={{
-                      background:
-                        "linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.00) 100%)",
-                    }}
-                  >
+                  <div className="mt-5 flex flex-1 items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0 md:bg-[linear-gradient(0deg,_#fff_0%,_#ffffff00_40%)] dark:md:bg-[linear-gradient(0deg,_#000_0%,_#00000000_100%)]">
                     <div className="flex h-full flex-col justify-center gap-5 md:items-start md:gap-8 md:p-12">
                       <div className="flex gap-4 md:flex-col md:gap-8">
                         <Image
@@ -124,13 +119,17 @@ export default function MainCarousel() {
                             <p className="mr-1">
                               {formatNumber(carouselItem.itemsCount)}
                             </p>
-                            <p className="mr-1 text-muted-foreground">ITEMS</p>{" "}
+                            <p className="mr-1 text-white dark:text-muted-foreground">
+                              ITEMS
+                            </p>{" "}
                             |{" "}
                             <p className="flex items-center justify-center text-[0.75rem]">
                               <Ethereum className="size-4" />
                             </p>
                             <p className="mr-1">{carouselItem.floorPrice}</p>
-                            <p className="text-muted-foreground">ETH</p>
+                            <p className="text-white dark:text-muted-foreground">
+                              ETH
+                            </p>
                           </div>
                         </div>
                       </div>
