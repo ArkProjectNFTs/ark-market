@@ -118,7 +118,7 @@ export default function MainCarousel() {
                             <p className="mr-1">
                               {formatNumber(carouselItem.itemsCount)}
                             </p>
-                            <p className="mr-1 text-white dark:text-muted-foreground">
+                            <p className="mr-1 text-muted-foreground dark:text-muted-foreground md:text-white">
                               ITEMS
                             </p>{" "}
                             |{" "}
@@ -126,7 +126,7 @@ export default function MainCarousel() {
                               <Ethereum className="size-4" />
                             </p>
                             <p className="mr-1">{carouselItem.floorPrice}</p>
-                            <p className="text-white dark:text-muted-foreground">
+                            <p className="text-muted-foreground dark:text-muted-foreground md:text-white">
                               ETH
                             </p>
                           </div>
