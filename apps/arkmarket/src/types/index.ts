@@ -326,5 +326,5 @@ export interface TrendingNow {
 
 export interface LiveAuctions {
   end_timestamp: number;
-  metadata: TokenMetadata;
+  metadata?: TokenMetadata;
 }

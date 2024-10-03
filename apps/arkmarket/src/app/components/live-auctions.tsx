@@ -48,7 +48,8 @@ export default function LiveAuctions() {
                 )}
                 <CarouselItem className="basis-[calc(100%-3rem)] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
                   <Link
-                    href=""
+                    // href={`/token/${}/${auction.metadata?.}`}
+                    href="/"
                     key={index}
                     className={cn("group", focusableStyles)}
                   >
@@ -56,11 +57,11 @@ export default function LiveAuctions() {
                       <CardContent className="p-0">
                         <div className="aspect-square w-full overflow-hidden">
                           <Media
-                            src={auction.metadata.image}
-                            mediaKey={auction.metadata.image_key}
+                            src={auction.metadata?.image}
+                            mediaKey={auction.metadata?.image_key}
                             height={500}
                             width={500}
-                            alt={auction.metadata.name}
+                            alt={auction.metadata?.name ?? "Unknown"}
                             className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
                           />
                         </div>
@@ -73,7 +74,7 @@ export default function LiveAuctions() {
                               ellipsableStyles,
                             )}
                           >
-                            {auction.metadata.name}
+                            {auction.metadata?.name ?? "Unknown Token"}
                           </h4>
                         </div>
                         <p className="mt-2.5 flex items-center gap-1.5 font-medium text-muted-foreground">
