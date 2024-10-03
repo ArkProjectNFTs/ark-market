@@ -16,8 +16,7 @@ import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
-// const AUTO_SLIDE_INTERVAL = 8_000;
-const AUTO_SLIDE_INTERVAL = 800_000;
+const AUTO_SLIDE_INTERVAL = 8_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -76,7 +75,7 @@ export default function MainCarousel() {
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
               <CarouselItem className="basis-full" key={index}>
-                <div className="relative overflow-hidden rounded-t-[1.5rem] md:rounded-[1.5rem]">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-t-[1.5rem] md:rounded-[1.5rem]">
                   <div className="relative overflow-hidden rounded-[1.5rem]">
                     {carouselItem.nftSrc !== undefined && (
                       <div className="absolute inset-0 flex items-center justify-center pr-6 pt-6 md:hidden">
@@ -102,13 +101,13 @@ export default function MainCarousel() {
                     )}
                   </div>
                   <div
-                    className="mt-5 flex items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0"
+                    className="mt-5 flex flex-1 items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0"
                     style={{
                       background:
                         "linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.00) 100%)",
                     }}
                   >
-                    <div className="flex flex-col justify-center gap-5 md:items-start md:gap-8 md:p-12">
+                    <div className="flex h-full flex-col justify-center gap-5 md:items-start md:gap-8 md:p-12">
                       <div className="flex gap-4 md:flex-col md:gap-8">
                         <Image
                           src={carouselItem.collectionSrc}
@@ -138,7 +137,11 @@ export default function MainCarousel() {
                       <p className="text-base md:max-w-lg md:text-xl">
                         {carouselItem.description}
                       </p>
-                      <Button size="xxl" asChild className="flex-shrink-0">
+                      <Button
+                        size="xxl"
+                        asChild
+                        className="mt-auto flex-shrink-0"
+                      >
                         <Link href={`/collection/${carouselItem.address}`}>
                           View collection
                         </Link>
