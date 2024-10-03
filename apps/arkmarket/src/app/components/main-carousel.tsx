@@ -16,8 +16,7 @@ import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
-// const AUTO_SLIDE_INTERVAL = 8_000;
-const AUTO_SLIDE_INTERVAL = 8_000_000;
+const AUTO_SLIDE_INTERVAL = 8_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
