@@ -72,7 +72,7 @@ export default function ExploreCollection() {
                       <h4 className="text-xl font-semibold">
                         {collection.name}
                       </h4>
-                      <VerifiedIcon className="text-primary" />
+                      <VerifiedIcon className="mt-2 text-primary" />
                     </div>
                   </div>
                 </Link>

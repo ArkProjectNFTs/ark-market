@@ -16,7 +16,8 @@ import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
-const AUTO_SLIDE_INTERVAL = 8_000;
+// const AUTO_SLIDE_INTERVAL = 8_000;
+const AUTO_SLIDE_INTERVAL = 8_000_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -75,7 +76,7 @@ export default function MainCarousel() {
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
               <CarouselItem className="basis-full" key={index}>
-                <div className="relative flex h-full flex-col overflow-hidden rounded-t-[1.5rem] md:rounded-[1.5rem]">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-t-[1.5rem]">
                   <div className="relative overflow-hidden rounded-[1.5rem]">
                     {carouselItem.nftSrc !== undefined && (
                       <div className="absolute inset-0 flex items-center justify-center pr-6 pt-6 md:hidden">
@@ -102,7 +103,7 @@ export default function MainCarousel() {
                   </div>
                   <div className="mt-5 flex flex-1 items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0 md:bg-[linear-gradient(0deg,_#fff_0%,_#ffffff00_40%)] dark:md:bg-[linear-gradient(0deg,_#000_0%,_#00000000_100%)]">
                     <div className="flex h-full flex-col justify-center gap-5 md:items-start md:gap-8 md:p-12">
-                      <div className="flex gap-4 md:flex-col md:gap-8">
+                      <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-8">
                         <Image
                           src={carouselItem.collectionSrc}
                           height={120}
@@ -111,7 +112,7 @@ export default function MainCarousel() {
                           className="size-16 rounded-lg border border-white"
                         />
                         <div className="flex flex-col gap-2 md:gap-8">
-                          <h1 className="text-3xl font-extrabold md:text-5xl">
+                          <h1 className="text-2xl font-extrabold sm:text-3xl md:text-5xl">
                             {carouselItem.name}
                           </h1>
                           <div className="font-numbers flex items-center text-base font-medium">
