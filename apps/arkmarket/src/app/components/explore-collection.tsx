@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,9 +9,10 @@ import { Button } from "@ark-market/ui/button";
 import { VerifiedIcon, ViewMore } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
+import ExploreCollectionCard from "./explore-collection-card";
 
 export default function ExploreCollection() {
-  const [exploreCollectionsToShow, setExploreCollectionsToShow] = useState(6);
+  const [exploreCollectionsToShow, setExploreCollectionsToShow] = useState(5);
   const canShowMoreExploreCollectionsItems =
     exploreCollectionsToShow < homepageConfig.exploreCollections.length;
 
@@ -31,45 +32,51 @@ export default function ExploreCollection() {
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Explore Collections</h2>
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {homepageConfig.exploreCollections
           .slice(0, exploreCollectionsToShow)
           .map((collection, index) => {
             return (
-              <Link
-                href={`/collection/${collection.address}`}
-                key={index}
-                className={cn("group", focusableStyles)}
-              >
-                <div>
-                  {collection.banner_image !== undefined ? (
-                    <div className="aspect-video w-full overflow-hidden rounded-lg">
-                      <Image
-                        src={collection.banner_image}
-                        className="aspect-video transition-transform group-hover:scale-110"
-                        alt={collection.name}
-                        height={512}
-                        width={932}
-                      />
-                    </div>
-                  ) : (
-                    <div className="aspect-video rounded-lg bg-secondary" />
+              <React.Fragment key={index}>
+                {index === 1 && <ExploreCollectionCard />}
+                <Link
+                  href={`/collection/${collection.address}`}
+                  className={cn(
+                    "group overflow-hidden rounded-lg border border-border bg-card transition-transform hover:scale-[1.02]",
+                    focusableStyles,
                   )}
-                  <div className="mt-4 flex items-center gap-2">
-                    <Image
-                      className="aspect-square w-16 rounded-sm"
-                      src={collection.image}
-                      alt={collection.name}
-                      height={124}
-                      width={124}
-                      unoptimized={collection.image.endsWith(".gif")}
-                    />
-                    <h4 className="text-xl font-semibold">{collection.name}</h4>
-                    <VerifiedIcon className="text-primary" />
+                >
+                  <div>
+                    {collection.banner_image !== undefined ? (
+                      <div className="aspect-video w-full overflow-hidden">
+                        <Image
+                          src={collection.banner_image}
+                          className="aspect-video transition-transform group-hover:scale-110"
+                          alt={collection.name}
+                          height={512}
+                          width={932}
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-video rounded-lg bg-secondary" />
+                    )}
+                    <div className="flex items-center gap-2 px-3 py-4">
+                      <Image
+                        className="aspect-square w-16 rounded-sm"
+                        src={collection.image}
+                        alt={collection.name}
+                        height={124}
+                        width={124}
+                        unoptimized={collection.image.endsWith(".gif")}
+                      />
+                      <h4 className="text-xl font-semibold">
+                        {collection.name}
+                      </h4>
+                      <VerifiedIcon className="text-primary" />
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </React.Fragment>
             );
           })}
       </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { CarouselApi } from "@ark-market/ui/carousel";
-import { cn } from "@ark-market/ui";
+import { cn, formatNumber } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Carousel,
@@ -16,7 +16,8 @@ import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
-const AUTO_SLIDE_INTERVAL = 8_000;
+// const AUTO_SLIDE_INTERVAL = 8_000;
+const AUTO_SLIDE_INTERVAL = 800_000;
 
 export default function MainCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -75,61 +76,86 @@ export default function MainCarousel() {
           {homepageConfig.mainCarousel.map((carouselItem, index) => {
             return (
               <CarouselItem className="basis-full" key={index}>
-                <div className="relative">
-                  <Image
-                    src={carouselItem.bannerSrc}
-                    height={555}
-                    width={1448}
-                    alt={carouselItem.name}
-                    className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
-                  />
+                <div className="relative overflow-hidden rounded-t-[1.5rem] md:rounded-[1.5rem]">
+                  <div className="relative overflow-hidden rounded-[1.5rem]">
+                    {carouselItem.nftSrc !== undefined && (
+                      <div className="absolute inset-0 flex items-center justify-center pr-6 pt-6 md:hidden">
+                        <NftCards nftSrc={carouselItem.nftSrc} />
+                      </div>
+                    )}
+                    {carouselItem.bannerSrc !== undefined ? (
+                      <Image
+                        src={carouselItem.bannerSrc}
+                        height={555}
+                        width={1448}
+                        alt={carouselItem.name}
+                        className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
+                      />
+                    ) : (
+                      <Image
+                        src={carouselItem.nftSrc}
+                        height={555}
+                        width={1448}
+                        alt={carouselItem.name}
+                        className="h-[22.5rem] w-full rounded-[1.5rem] object-cover blur-2xl md:h-[35rem]"
+                      />
+                    )}
+                  </div>
                   <div
-                    className="mt-5 flex flex-col justify-center gap-5 rounded-[1.5rem] md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
+                    className="mt-5 flex items-center justify-between rounded-[1.5rem] md:absolute md:inset-0 md:mt-0"
                     style={{
                       background:
-                        "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 54.6%, rgba(0, 0, 0, 0.80) 107.55%)",
+                        "linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.00) 100%)",
                     }}
                   >
-                    <div className="flex gap-4 md:flex-col md:gap-8">
-                      <Image
-                        src={carouselItem.collectionSrc}
-                        height={120}
-                        width={120}
-                        alt={carouselItem.name}
-                        className="size-16 rounded-lg"
-                      />
-                      <div className="flex flex-col gap-2 md:gap-8">
-                        <h1 className="text-3xl font-extrabold md:text-5xl">
-                          {carouselItem.name}
-                        </h1>
-                        <div className="flex items-center text-sm font-semibold">
-                          <p className="mr-1">{carouselItem.itemsCount}</p>
-                          <p className="mr-1 text-muted-foreground">
-                            ITEMS
-                          </p> |{" "}
-                          <p className="flex items-center justify-center text-[0.75rem]">
-                            <Ethereum className="size-4" />
-                          </p>
-                          <p className="mr-1">{carouselItem.floorPrice}</p>
-                          <p className="text-muted-foreground">ETH</p>
+                    <div className="flex flex-col justify-center gap-5 md:items-start md:gap-8 md:p-12">
+                      <div className="flex gap-4 md:flex-col md:gap-8">
+                        <Image
+                          src={carouselItem.collectionSrc}
+                          height={120}
+                          width={120}
+                          alt={carouselItem.name}
+                          className="size-16 rounded-lg border border-white"
+                        />
+                        <div className="flex flex-col gap-2 md:gap-8">
+                          <h1 className="text-3xl font-extrabold md:text-5xl">
+                            {carouselItem.name}
+                          </h1>
+                          <div className="font-numbers flex items-center text-base font-medium">
+                            <p className="mr-1">
+                              {formatNumber(carouselItem.itemsCount)}
+                            </p>
+                            <p className="mr-1 text-muted-foreground">ITEMS</p>{" "}
+                            |{" "}
+                            <p className="flex items-center justify-center text-[0.75rem]">
+                              <Ethereum className="size-4" />
+                            </p>
+                            <p className="mr-1">{carouselItem.floorPrice}</p>
+                            <p className="text-muted-foreground">ETH</p>
+                          </div>
                         </div>
                       </div>
+                      <p className="text-base md:max-w-lg md:text-xl">
+                        {carouselItem.description}
+                      </p>
+                      <Button size="xxl" asChild className="flex-shrink-0">
+                        <Link href={`/collection/${carouselItem.address}`}>
+                          View collection
+                        </Link>
+                      </Button>
                     </div>
-                    <p className="text-base md:max-w-lg md:text-xl">
-                      {carouselItem.description}
-                    </p>
-                    <Button size="xxl" asChild className="flex-shrink-0">
-                      <Link href={`/collection/${carouselItem.address}`}>
-                        View collection
-                      </Link>
-                    </Button>
+                    {carouselItem.nftSrc !== undefined && (
+                      <div className="mx-auto hidden w-full justify-center lg:flex">
+                        <NftCards nftSrc={carouselItem.nftSrc} />
+                      </div>
+                    )}
                   </div>
                 </div>
               </CarouselItem>
             );
           })}
         </CarouselContent>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="mt-8 flex justify-center gap-4 md:mt-0">
           {homepageConfig.mainCarousel.map((_, index) => {
             const isSelected = selectedItem === index;
             const progressWidth =
@@ -161,6 +187,38 @@ export default function MainCarousel() {
           })}
         </div>
       </Carousel>
+    </div>
+  );
+}
+
+interface NftCardsProps {
+  nftSrc: string;
+}
+
+function NftCards({ nftSrc }: NftCardsProps) {
+  return (
+    <div className="relative max-h-full max-w-full">
+      <Image
+        src={nftSrc}
+        height={800}
+        width={800}
+        alt=""
+        className="relative z-30 aspect-square size-56 origin-bottom-left -rotate-6 rounded-[1.5rem] border border-white object-cover md:size-96"
+      />
+      <Image
+        src={nftSrc}
+        height={800}
+        width={800}
+        alt=""
+        className="absolute inset-0 z-10 aspect-square size-56 origin-bottom-left -translate-y-10 translate-x-8 rotate-6 rounded-[1.5rem] border border-white object-cover opacity-25 md:size-96"
+      />
+      <Image
+        src={nftSrc}
+        height={800}
+        width={800}
+        alt=""
+        className="absolute inset-0 z-20 aspect-square size-56 -translate-y-5 translate-x-4 rounded-[1.5rem] border border-white object-cover opacity-50 md:size-96"
+      />
     </div>
   );
 }

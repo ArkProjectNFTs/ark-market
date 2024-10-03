@@ -26,7 +26,7 @@ export default function GlobalSearchSuggestions({
         Best Collections
       </p>
       <div className="mt-4 flex flex-col gap-2.5">
-        {homepageConfig.trendingNow.slice(0, 3).map((collection) => {
+        {homepageConfig.trendingNow.map((collection) => {
           return (
             <CommandItem
               key={`${collection.address}-${collection.name}`}
