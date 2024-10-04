@@ -33,7 +33,16 @@ export default function TrendingNow() {
         {data.data.map((collection, index) => {
           return (
             <React.Fragment key={index}>
-              {index === 2 && <TrendingNowCard />}
+              {index === 0 && (
+                <div className="md:hidden">
+                  <TrendingNowCard />
+                </div>
+              )}
+              {index === 2 && (
+                <div className="hidden md:block">
+                  <TrendingNowCard />
+                </div>
+              )}
               <div>
                 <Link
                   href={`/collection/${collection.collection_address}`}

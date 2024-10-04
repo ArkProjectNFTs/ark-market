@@ -38,7 +38,16 @@ export default function ExploreCollection() {
           .map((collection, index) => {
             return (
               <React.Fragment key={index}>
-                {index === 1 && <ExploreCollectionCard />}
+                {index === 0 && (
+                  <div className="sm:hidden">
+                    <ExploreCollectionCard />
+                  </div>
+                )}
+                {index === 1 && (
+                  <div className="hidden sm:block">
+                    <ExploreCollectionCard />
+                  </div>
+                )}
                 <Link
                   href={`/collection/${collection.address}`}
                   className={cn(
