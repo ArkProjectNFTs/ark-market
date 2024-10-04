@@ -17,6 +17,7 @@ import CustomFonts from "~/components/custom-fonts";
 import DataFooter from "~/components/data-footer";
 import Footer from "~/components/footer";
 import Providers from "~/components/providers";
+import UnframedFooter from "~/components/unframed-footer";
 import { env } from "~/env";
 
 export const dynamic = "force-dynamic";
@@ -83,7 +84,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
             {children}
             <SpeedInsights />
           </div>
-          <Footer />
+          {env.NEXT_PUBLIC_THEME === "unframed" ? (
+            <UnframedFooter />
+          ) : (
+            <Footer />
+          )}
           <DataFooter className="fixed bottom-0 hidden w-full lg:flex" />
           <Toaster />
           <Sonner richColors />
