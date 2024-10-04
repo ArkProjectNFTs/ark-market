@@ -1,6 +1,6 @@
 export default function LatestDropCard() {
   return (
-    <div className="relative h-full w-full rounded-lg border border-border px-7 py-5">
+    <div className="relative aspect-[252/359] h-full w-full rounded-lg border border-border px-7 py-5">
       <LatestDropCardBackground />
       <p className="relative z-10 text-7xl font-bold leading-[64px] tracking-[-4px]">
         Latest

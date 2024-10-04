@@ -21,9 +21,7 @@ export default function LatestDropStatus({ status }: LatestDropStatus) {
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
         <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
       </span>
-      <p className="dark text-sm font-semibold text-muted-foreground">
-        Upcoming
-      </p>
+      <p className="dark text-sm font-semibold text-white">Upcoming</p>
     </div>
   );
 }
