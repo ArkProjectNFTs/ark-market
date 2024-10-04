@@ -22,23 +22,12 @@ export default function UnframedFooter() {
   return (
     <footer className="mx-8 mb-12 overflow-hidden rounded-[2.625rem] border-border bg-card px-8 py-11">
       <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center">
-        <div className="flex flex-col gap-14">
-          <p className="text-4xl font-bold lg:text-7xl lg:leading-[4.5rem]">
+        <div className="flex flex-col gap-6 md:gap-14">
+          <p className="text-4xl font-bold leading-[2.475rem] lg:text-7xl lg:leading-[4.5rem]">
             Sell, Buy, Trade
             <br />
             on Starknet
           </p>
-          {/* <Link
-            href="/"
-            className={cn("flex items-center space-x-2", focusableStyles)}
-          >
-            <Icons.logo className="h-8 w-auto" />
-            <span className="sr-only font-bold">{siteConfig.name}</span>
-          </Link> */}
-          {/* <p className="font-medium text-muted-foreground">
-            Welcome to the largest NFT marketplace based on Starknet Make
-            yourself at home among other NFT enthusiasts.
-          </p> */}
           <div className="flex items-center gap-4">
             {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
             {siteConfig.links.twitter !== undefined && (
@@ -49,7 +38,7 @@ export default function UnframedFooter() {
                 asChild
               >
                 <ExternalLink href={siteConfig.links.twitter}>
-                  <p className="hidden lg:block">Follow us on</p>
+                  <p>Follow us on</p>
                   <XIcon className="size-4" />
                 </ExternalLink>
               </Button>
