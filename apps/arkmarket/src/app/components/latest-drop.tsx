@@ -14,7 +14,6 @@ import {
 import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
-import LatestDropCard from "./latest-drop-card";
 import LatestDropStatus from "./latest-drop-status";
 
 export default function LatestDrop() {
@@ -25,64 +24,58 @@ export default function LatestDrop() {
   return (
     <section>
       <Carousel plugins={[WheelGesturesPlugin()]} opts={{ skipSnaps: true }}>
-        <div className="flex items-center gap-4">
-          <div className="h-full basis-[calc(100%-3rem)] sm:basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
-            <LatestDropCard />
-          </div>
-
-          <CarouselContent>
-            {homepageConfig.latestDropCollections.map((collection, index) => {
-              return (
-                <CarouselItem
+        <CarouselContent className="relative">
+          {homepageConfig.latestDropCollections.map((collection, index) => {
+            return (
+              <CarouselItem
+                key={index}
+                className="basis-[calc(100%-3rem)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
+              >
+                <Link
+                  href={`/collection/${collection.address}`}
                   key={index}
-                  className="basis-[calc(100%-3rem)] sm:basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
+                  className={cn("group", focusableStyles)}
                 >
-                  <Link
-                    href={`/collection/${collection.address}`}
-                    key={index}
-                    className={cn("group", focusableStyles)}
-                  >
-                    <Card className="overflow-hidden">
-                      <CardContent className="p-0">
-                        <div className="relative aspect-square w-full overflow-hidden">
-                          <div className="absolute right-5 top-5 z-10">
-                            <LatestDropStatus status={collection.status} />
-                          </div>
-                          <Image
-                            src={collection.image}
-                            height={500}
-                            width={500}
-                            alt={collection.name}
-                            className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
-                          />
+                  <Card className="overflow-hidden">
+                    <CardContent className="p-0">
+                      <div className="relative aspect-square w-full overflow-hidden">
+                        <div className="absolute right-5 top-5 z-10">
+                          <LatestDropStatus status={collection.status} />
                         </div>
-                      </CardContent>
-                      <CardFooter className="flex flex-col items-start p-5">
-                        <div className="flex w-full items-center gap-1.5">
-                          <h4
-                            className={cn(
-                              "text-xl font-semibold",
-                              ellipsableStyles,
-                            )}
-                          >
-                            {collection.name}
-                          </h4>
-                          <VerifiedIcon className="mt-1 text-primary" />
-                        </div>
-                        <span className="mt-5 text-sm font-semibold text-muted-foreground">
-                          Status
-                        </span>
-                        <p className="font-semibold text-primary">
-                          Mint starts in 2 hours
-                        </p>
-                      </CardFooter>
-                    </Card>
-                  </Link>
-                </CarouselItem>
-              );
-            })}
-          </CarouselContent>
-        </div>
+                        <Image
+                          src={collection.image}
+                          height={500}
+                          width={500}
+                          alt={collection.name}
+                          className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
+                        />
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex flex-col items-start p-5">
+                      <div className="flex w-full items-center gap-1.5">
+                        <h4
+                          className={cn(
+                            "text-xl font-semibold",
+                            ellipsableStyles,
+                          )}
+                        >
+                          {collection.name}
+                        </h4>
+                        <VerifiedIcon className="mt-1 text-primary" />
+                      </div>
+                      <span className="mt-5 text-sm font-semibold text-muted-foreground">
+                        Status
+                      </span>
+                      <p className="font-semibold text-primary">
+                        Mint starts in 2 hours
+                      </p>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
       </Carousel>
     </section>
   );

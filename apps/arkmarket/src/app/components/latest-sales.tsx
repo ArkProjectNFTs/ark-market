@@ -98,7 +98,7 @@ export default function LatestSales() {
                   <TableCell>
                     <div className="flex min-w-44 items-center gap-4">
                       <Media
-                        className="size-14 rounded-xs"
+                        className="size-14 rounded-xs object-contain"
                         alt={sale.metadata?.name ?? "Unknown"}
                         src={sale.metadata?.image}
                         mediaKey={sale.metadata?.image_key}
