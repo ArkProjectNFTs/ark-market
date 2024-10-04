@@ -36,17 +36,19 @@ export default function LiveAuctions() {
 
   return (
     <section>
-      <Carousel plugins={[WheelGesturesPlugin()]} opts={{ skipSnaps: true }}>
-        <CarouselContent>
+      <Carousel
+        plugins={[WheelGesturesPlugin()]}
+        opts={{ skipSnaps: true }}
+        className="-mr-8"
+      >
+        <CarouselContent className="mr-12">
+          <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+            <LiveAuctionsCard />
+          </CarouselItem>
           {data.data.map((auction, index) => {
             return (
               <React.Fragment key={index}>
-                {index === 0 && (
-                  <CarouselItem className="basis-[calc(100%-3rem)] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
-                    <LiveAuctionsCard />
-                  </CarouselItem>
-                )}
-                <CarouselItem className="basis-[calc(100%-3rem)] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+                <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
                   <Link
                     // href={`/token/${}/${auction.metadata?.}`}
                     href="/"
