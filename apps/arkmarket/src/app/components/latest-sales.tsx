@@ -33,12 +33,10 @@ export default function LatestSales() {
   return (
     <section>
       <div className="relative w-full overflow-hidden">
-        <Marquee className="[--duration:20s]">
-          <p className="whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem]">
-            Latest sale
-          </p>
+        <Marquee className="text-5xl font-bold leading-[3.3rem] [--duration:20s] sm:text-[5rem] sm:leading-[5rem] md:text-[7.5rem] md:leading-[7.5rem] lg:text-[12.15rem] lg:leading-[12.15rem]">
+          <p className="whitespace-nowrap">Latest sale</p>
           <p
-            className="whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem] text-transparent dark:hidden"
+            className="whitespace-nowrap text-transparent dark:hidden"
             style={{
               WebkitTextFillColor: "transparent",
               WebkitTextStrokeWidth: "1px",
@@ -48,7 +46,7 @@ export default function LatestSales() {
             Latest sale
           </p>
           <p
-            className="hidden whitespace-nowrap text-[12.15rem] font-bold leading-[12.15rem] text-transparent dark:block"
+            className="hidden whitespace-nowrap text-transparent dark:block"
             style={{
               WebkitTextFillColor: "transparent",
               WebkitTextStrokeWidth: "1px",
@@ -60,7 +58,7 @@ export default function LatestSales() {
         </Marquee>
       </div>
 
-      <div className="h-[34rem] overflow-auto rounded-[32px] border border-foreground md:mt-12">
+      <div className="mt-4 h-[34rem] overflow-auto rounded-[32px] border border-foreground md:mt-12">
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-background">
