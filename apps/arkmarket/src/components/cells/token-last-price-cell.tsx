@@ -10,7 +10,7 @@ export default function TokenLastSoldCell({ price }: TokenLastSoldCellProps) {
   return (
     <TableCell className="flex w-[20%]">
       {price ? (
-        <div className="flex items-center">
+        <div className="flex items-center gap-1 whitespace-nowrap">
           <Ethereum className="size-4" />
           <p>
             {formatUnits(price, 18)}{" "}

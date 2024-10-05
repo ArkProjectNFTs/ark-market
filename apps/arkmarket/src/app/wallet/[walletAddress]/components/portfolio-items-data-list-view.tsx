@@ -2,7 +2,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import { cn, ellipsableStyles, timeSince } from "@ark-market/ui";
+import { cn, ellipsableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { NoResult } from "@ark-market/ui/icons";
 import {
@@ -125,11 +125,6 @@ export default function PortfolioItemsDataListView({
 
                 <TokenLastSoldCell price={token.floor ?? 0} />
 
-                <TableCell>
-                  <p className={ellipsableStyles}>
-                    {token.received_at ? timeSince(token.received_at) : "_"}
-                  </p>
-                </TableCell>
                 <ActivityTime timeStamp={token.received_at} />
                 <TableCell>
                   {canListItem ? (
