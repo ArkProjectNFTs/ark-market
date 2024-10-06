@@ -26,7 +26,7 @@ export default function ExploreCollection() {
   }
 
   if (homepageConfig.exploreCollections.length === 0) {
-    return;
+    return null;
   }
 
   return (
@@ -51,6 +51,10 @@ export default function ExploreCollection() {
                         alt={collection.name}
                         height={512}
                         width={932}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 
+                               (max-width: 1200px) 50vw, 
+                               33vw"
                       />
                     </div>
                   ) : (
@@ -63,7 +67,11 @@ export default function ExploreCollection() {
                       alt={collection.name}
                       height={124}
                       width={124}
+                      loading="lazy"
                       unoptimized={collection.image.endsWith(".gif")}
+                      sizes="(max-width: 768px) 10vw, 
+                             (max-width: 1200px) 5vw, 
+                             4vw"
                     />
                     <h4 className="text-xl font-semibold">{collection.name}</h4>
                     <VerifiedIcon className="text-primary" />

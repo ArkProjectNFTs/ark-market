@@ -82,7 +82,8 @@ export default function MainCarousel() {
                     width={1448}
                     alt={carouselItem.name}
                     className="h-[22.5rem] w-full rounded-[1.5rem] object-cover md:h-[35rem]"
-                    loading="eager"
+                    priority
+                    layout="responsive"
                   />
                   <div
                     className="mt-5 flex flex-col justify-center gap-5 rounded-[1.5rem] md:absolute md:inset-0 md:mt-0 md:items-start md:gap-8 md:p-12"
@@ -97,6 +98,7 @@ export default function MainCarousel() {
                         height={120}
                         width={120}
                         alt={carouselItem.name}
+                        loading="lazy"
                         className="size-16 rounded-lg"
                       />
                       <div className="flex flex-col gap-2 md:gap-8">

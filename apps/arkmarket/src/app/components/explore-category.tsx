@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "@ark-market/ui/icons";
-
 import { cn, focusableStyles } from "@ark-market/ui";
-
 import { homepageConfig } from "~/config/homepage";
 
 export default function ExploreCategory() {
+
   if (homepageConfig.exploreCategory.length === 0) {
     return null;
   }
@@ -33,6 +32,10 @@ export default function ExploreCategory() {
                     width={64}
                     alt={category.name}
                     className="transition-transform group-hover:scale-110"
+                    loading="lazy" 
+                    sizes="(max-width: 768px) 100vw, 
+                           (max-width: 1200px) 50vw, 
+                           33vw" 
                   />
                 </div>
                 <h4 className="text-xl font-semibold">{category.name}</h4>
