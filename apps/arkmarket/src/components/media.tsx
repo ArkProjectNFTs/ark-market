@@ -88,7 +88,7 @@ export default function Media({
           <Skeleton className="absolute inset-0 flex-shrink-0" />
         )}
         <Image
-          unutilized
+          unoptimized
           priority={priority}
           alt={alt}
           className={cn("flex-shrink-0", className)}
