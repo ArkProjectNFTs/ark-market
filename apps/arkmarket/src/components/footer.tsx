@@ -11,13 +11,12 @@ import { siteConfig } from "~/config/site";
 import ExternalLink from "./external-link";
 import { Icons } from "./icons";
 
+const HIDDEN_PATHS = ["/wallet", "/collection", "/token", "/collections"];
+
 export default function Footer() {
   const pathname = usePathname();
-  if (
-    pathname.includes("/wallet/") ||
-    pathname.includes("/collection/") ||
-    pathname.includes("/token/")
-  ) {
+
+  if (HIDDEN_PATHS.some((path) => pathname.startsWith(path))) {
     return null;
   }
 

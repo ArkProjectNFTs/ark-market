@@ -17,6 +17,7 @@ export default function CollectionsTimeranges({
     <ToggleGroup type="single" value={timerange} onValueChange={onChange}>
       {TIMERANGES.map((t) => (
         <ToggleGroupItem
+          key={t}
           value={t}
           aria-label={t}
           className="w-10 uppercase"

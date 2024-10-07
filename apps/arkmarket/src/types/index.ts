@@ -1,20 +1,37 @@
+// "address": "0x00001401c6ef90c718b912ca8e5965501889924a47b1fecb5dc0f71b7b9b4000",
+// "floor": null,
+// "floor_percentage": null,
+// "image": null,
+// "is_verified": false,
+// "listed_items": 0,
+// "listed_percentage": 0,
+// "marketcap": null,
+// "name": "szwmprincqt",
+// "owner_count": 1,
+// "sales": null,
+// "token_count": 1,
+// "top_offer": null,
+// "total_sales": 0,
+// "total_volume": 0,
+// "volume": null
+
 export interface CollectionStats {
   address: string;
-  floor: string;
+  floor: string | null;
   floor_percentage: string;
   image: string;
   is_verified: boolean;
   listed_items: number;
   listed_percentage: number;
-  marketcap: string;
+  marketcap: string | null;
   name: string;
   owner_count: number;
-  sales: number;
+  sales: number | null;
   token_count: number;
+  top_offer: string | null;
   total_sales: number;
   total_volume: number;
   volume: number;
-  top_offer: string;
 }
 
 export interface Collection {

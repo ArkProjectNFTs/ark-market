@@ -36,7 +36,6 @@ export default function CollectionsContainer({
   };
 
   const handleTimerangeChange = async (timerange: CollectionTimerange) => {
-    console.log("CollectionsContainer.handleTimerangeChange", timerange);
     await setTimerange(timerange);
   };
 
