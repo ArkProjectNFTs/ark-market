@@ -16,7 +16,6 @@ import {
   TableRow,
 } from "@ark-market/ui/table";
 
-import TextCell from "~/components/cells/text-cell";
 import Media from "~/components/media";
 import getHomepageLatestSales from "~/lib/getHomepageLatestSales";
 
@@ -33,7 +32,6 @@ export default function LatestSales() {
 
   return (
     <section>
-
       <div className="relative w-full overflow-hidden">
         <Marquee className="text-5xl font-bold leading-[3.3rem] [--duration:20s] sm:text-[5rem] sm:leading-[5rem] md:text-[7.5rem] md:leading-[7.5rem] lg:text-[12.15rem] lg:leading-[12.15rem]">
           <p className="whitespace-nowrap">Latest sale</p>
