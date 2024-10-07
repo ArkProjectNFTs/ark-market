@@ -84,3 +84,21 @@ export async function getCollectionTokens({
 
   return result;
 }
+
+export function getMediaSrc(
+  src?: string | null,
+  mediaKey?: string | null,
+  thumbnailKey?: string | null,
+  width?: number,
+  height?: number,
+) {
+  if (thumbnailKey) {
+    return `${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${thumbnailKey}`;
+  }
+
+  if (mediaKey && width && height) {
+    const resolutionParam = `:${width}:${height}`;
+    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${mediaKey}`;
+  }
+  return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
+}
