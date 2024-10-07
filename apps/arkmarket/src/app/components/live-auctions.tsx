@@ -50,8 +50,7 @@ export default function LiveAuctions() {
               <React.Fragment key={index}>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
                   <Link
-                    // href={`/token/${}/${auction.metadata?.}`}
-                    href="/"
+                    href={`/token/${auction.collection_address}/${auction.token_id}`}
                     key={index}
                     className={cn("group", focusableStyles)}
                   >
