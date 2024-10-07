@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import type {
   CollectionSortBy,
   CollectionSortDirection,
@@ -17,6 +19,7 @@ interface CollectionsContainerProps {
 export default function CollectionsContainer({
   initialData,
 }: CollectionsContainerProps) {
+  const [searchQuery, setSearchQuery] = useState("");
   const {
     data,
     sortBy,
@@ -39,18 +42,23 @@ export default function CollectionsContainer({
     await setTimerange(timerange);
   };
 
+  const items = data.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
-    <div className="">
+    <>
       <CollectionsToolbar
         timerange={timerange}
         onTimerangeChange={handleTimerangeChange}
+        onSearchChange={(query) => setSearchQuery(query)}
       />
       <CollectionList
-        items={data}
+        items={items}
         onSortChange={onSortChange}
         sortBy={sortBy}
         sortDirection={sortDirection}
       />
-    </div>
+    </>
   );
 }

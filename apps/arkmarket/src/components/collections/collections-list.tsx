@@ -5,6 +5,7 @@ import { formatEther } from "viem";
 
 import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
+import { NoResult } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -80,6 +81,19 @@ export default function CollectionsList({
   sortDirection,
   onSortChange,
 }: CollectionsListProps) {
+  if (!items.length) {
+    return (
+      <div className="mt-10 flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <NoResult className="size-12" />
+          <p className="pl-3 text-center text-xl font-semibold text-muted-foreground">
+            No collections found, try another search.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <TableVirtuoso
       data={items}
