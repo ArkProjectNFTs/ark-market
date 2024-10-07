@@ -21,23 +21,30 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-var(--site-header-height))] flex-col">
-      <CollectionBanner
-        className="hidden md:block"
-        collectionAddress={collectionAddress}
+    <>
+      <meta
+        property="og:image"
+        content={`https://ark-market-unframed.vercel.app/api/og/collection?collection_address=${collectionAddress}`}
       />
-      <CollectionHeader
-        collectionAddress={collectionAddress}
-        collection={collection}
-      />
-      <MobileCollectionHeader
-        collectionAddress={collectionAddress}
-        collection={collection}
-      />
-      <CollectionItems
-        collectionAddress={collectionAddress}
-        collectionTokenCount={collection.token_count}
-      />
-    </div>
+
+      <div className="flex min-h-[calc(100vh-var(--site-header-height))] flex-col">
+        <CollectionBanner
+          className="hidden md:block"
+          collectionAddress={collectionAddress}
+        />
+        <CollectionHeader
+          collectionAddress={collectionAddress}
+          collection={collection}
+        />
+        <MobileCollectionHeader
+          collectionAddress={collectionAddress}
+          collection={collection}
+        />
+        <CollectionItems
+          collectionAddress={collectionAddress}
+          collectionTokenCount={collection.token_count}
+        />
+      </div>
+    </>
   );
 }
