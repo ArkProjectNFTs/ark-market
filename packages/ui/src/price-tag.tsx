@@ -20,7 +20,7 @@ export function PriceTag({
     >
       <Ethereum className="size-5" />
       <p className={ellipsableStyles}>
-        {isNaN(parsedPrice) ? formatUnits(price, 18) : parsedPrice.toFixed(4)}
+        {isNaN(parsedPrice) ? formatUnits(price, 18) : parsedPrice.toFixed(5)}
         <span className="text-muted-foreground"> ETH</span>
       </p>
     </div>
