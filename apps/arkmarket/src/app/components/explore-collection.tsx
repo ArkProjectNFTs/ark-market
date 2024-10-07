@@ -10,6 +10,7 @@ import { VerifiedIcon, ViewMore } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 import ExploreCollectionCard from "./explore-collection-card";
+import ExploreCollectionImage from "./explore-collection-image";
 
 export default function ExploreCollection() {
   const [exploreCollectionsToShow, setExploreCollectionsToShow] = useState(5);
@@ -56,22 +57,14 @@ export default function ExploreCollection() {
                   )}
                 >
                   <div>
-                    {collection.banner_image !== undefined ? (
-                      <div className="aspect-video w-full overflow-hidden">
-                        <Image
-                          src={collection.banner_image}
-                          className="aspect-video transition-transform group-hover:scale-110"
-                          alt={collection.name}
-                          height={512}
-                          width={932}
-                        />
-                      </div>
-                    ) : (
-                      <div className="aspect-video rounded-lg bg-secondary" />
-                    )}
+                    <ExploreCollectionImage
+                      collectionAddress={collection.address}
+                      bannerImage={collection.banner_image}
+                      collectionName={collection.name}
+                    />
                     <div className="flex items-center gap-2 px-3 py-4">
                       <Image
-                        className="aspect-square w-16 rounded-sm"
+                        className="aspect-square w-16 rounded-sm object-contain"
                         src={collection.image}
                         alt={collection.name}
                         height={124}
