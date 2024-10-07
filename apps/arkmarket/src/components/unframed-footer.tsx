@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Discord, Telegram, XIcon } from "@ark-market/ui/icons";
 
@@ -11,7 +9,7 @@ import { siteConfig } from "~/config/site";
 import ExternalLink from "./external-link";
 import { Icons } from "./icons";
 
-export default function Footer() {
+export default function UnframedFooter() {
   const pathname = usePathname();
   if (
     pathname.includes("/wallet/") ||
@@ -22,19 +20,13 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-border px-8 py-11">
+    <footer className="mx-8 mb-12 overflow-hidden rounded-[2.625rem] border-border bg-card px-8 py-11">
       <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center">
-        <div className="flex flex-col gap-6 lg:max-w-lg">
-          <Link
-            href="/"
-            className={cn("flex items-center space-x-2", focusableStyles)}
-          >
-            <Icons.logo className="h-8 w-auto" />
-            <span className="sr-only font-bold">{siteConfig.name}</span>
-          </Link>
-          <p className="font-medium text-muted-foreground">
-            Welcome to the largest NFT marketplace based on Starknet Make
-            yourself at home among other NFT enthusiasts.
+        <div className="flex flex-col gap-6 md:gap-14">
+          <p className="text-4xl font-bold leading-[2.475rem] lg:text-7xl lg:leading-[4.5rem]">
+            Sell, Buy, Trade
+            <br />
+            on Starknet
           </p>
           <div className="flex items-center gap-4">
             {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
@@ -46,7 +38,7 @@ export default function Footer() {
                 asChild
               >
                 <ExternalLink href={siteConfig.links.twitter}>
-                  <p className="hidden lg:block">Follow us on</p>
+                  <p>Follow us on</p>
                   <XIcon className="size-4" />
                 </ExternalLink>
               </Button>
@@ -92,6 +84,9 @@ export default function Footer() {
             <p>Support</p>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center">
+        <Icons.logo className="-mb-[10rem] mt-16 w-auto text-secondary lg:!text-[12rem]" />
       </div>
     </footer>
   );

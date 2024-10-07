@@ -11,7 +11,10 @@
     "lint": "eslint",
     "start": "pnpm with-env next start",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@ark-market/ui": "workspace:*",
@@ -54,15 +57,22 @@
     "@ark-market/prettier-config": "workspace:*",
     "@ark-market/tailwind-config": "workspace:*",
     "@ark-market/tsconfig": "workspace:*",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
     "@types/node": "^20.14.15",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/coverage-v8": "2.1.2",
     "dotenv-cli": "^7.4.2",
     "eslint": "catalog:",
     "jiti": "^1.21.6",
+    "jsdom": "^25.0.1",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^2.1.2"
   },
   "prettier": "@ark-market/prettier-config"
 }
