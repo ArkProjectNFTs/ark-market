@@ -9,6 +9,8 @@ export function PriceTag({
   className,
   price,
 }: PropsWithClassName<PriceTagProps>) {
+  const parsedPrice = parseFloat(formatUnits(price, 18));
+
   return (
     <div
       className={cn(
@@ -18,7 +20,7 @@ export function PriceTag({
     >
       <Ethereum className="size-5" />
       <p className={ellipsableStyles}>
-        {formatUnits(price, 18)}
+        {isNaN(parsedPrice) ? formatUnits(price, 18) : parsedPrice.toFixed(4)}
         <span className="text-muted-foreground"> ETH</span>
       </p>
     </div>
