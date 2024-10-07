@@ -195,9 +195,7 @@ function CollectionData({
       <Divider />
       <div style={{ display: "flex", flexDirection: "column" }}>
         <p style={{ fontSize: "40px" }}>Owners</p>
-        <p style={{ fontSize: "80px", fontFamily: "nitti" }}>
-          {formatNumber(ownerCount)}
-        </p>
+        <p style={{ fontSize: "80px" }}>{formatNumber(ownerCount)}</p>
       </div>
     </div>
   );
