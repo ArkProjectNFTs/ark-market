@@ -34,9 +34,9 @@ export interface CollectionTokensApiResponse {
 interface GetCollectionTokensParams {
   collectionAddress: string;
   page?: number;
-  sortDirection: CollectionSortDirection;
-  sortBy: CollectionSortBy;
-  filters: Filters;
+  sortDirection?: CollectionSortDirection;
+  sortBy?: CollectionSortBy;
+  filters?: Filters;
 }
 
 export async function getCollectionTokens({
@@ -46,18 +46,21 @@ export async function getCollectionTokens({
   sortBy,
   filters,
 }: GetCollectionTokensParams) {
-  const queryParams = [
-    `items_per_page=${itemsPerPage}`,
-    `sort=${sortBy}`,
-    `direction=${sortDirection}`,
-  ];
+  const queryParams = [`items_per_page=${itemsPerPage}`];
 
-  if (Object.keys(filters.traits).length) {
+  if (Object.keys(filters?.traits ?? {}).length) {
     queryParams.push(`filters=${encodeURIComponent(JSON.stringify(filters))}`);
   }
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+
+  if (sortBy !== undefined) {
+    queryParams.push(`sort=${sortBy}`);
+  }
+  if (sortBy !== undefined) {
+    queryParams.push(`direction=${sortDirection}`);
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;

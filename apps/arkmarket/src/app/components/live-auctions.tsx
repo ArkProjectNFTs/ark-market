@@ -36,13 +36,16 @@ export default function LiveAuctions() {
 
   return (
     <section>
+      <div className="mb-6 sm:mb-0 sm:hidden">
+        <LiveAuctionsCard />
+      </div>
       <Carousel
         plugins={[WheelGesturesPlugin()]}
         opts={{ skipSnaps: true }}
         className="-mr-8"
       >
         <CarouselContent className="mr-12">
-          <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+          <CarouselItem className="hidden basis-full sm:block sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
             <LiveAuctionsCard />
           </CarouselItem>
           {data.data.map((auction, index) => {

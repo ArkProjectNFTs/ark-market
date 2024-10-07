@@ -135,13 +135,6 @@ export const homepageConfig = {
       banner_image: "/banners/everai.png",
     },
     {
-      name: "Starkurabu",
-      address:
-        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
-      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
-      banner_image: "/banners/starkurabu.png",
-    },
-    {
       name: "Blobert",
       address:
         "0x00539f522b29ae9251dbf7443c7a950cf260372e69efab3710a11bf17a9599f1",
@@ -170,12 +163,6 @@ export const homepageConfig = {
       banner_image: "/banners/alternova.png",
     },
     {
-      name: "Grails",
-      address:
-        "0x02a819b93cc69b45ee5d1a1bfc16954c16f6d35c3873a06c97b95c009bfe502b",
-      image: "/collections/grail.png",
-    },
-    {
       name: "Argent: Xplorer",
       address:
         "0x01b22f7a9d18754c994ae0ee9adb4628d414232e3ebd748c386ac286f86c3066",
@@ -193,18 +180,18 @@ export const homepageConfig = {
         "0x05dbdedc203e92749e2e746e2d40a768d966bd243df04a6b712e222bc040a9af",
       image: "/collections/59685ea9-aeae-4784-82a1-5aa9364cea9b.png",
     },
-    {
-      name: "Carbonable - KARATHURU",
-      address:
-        "0x05a667adc04676fba78a29371561a0bf91dab25847d5dc4709a93a4cfb5ff293",
-      image: "/collections/carbonable.jpeg",
-    },
-    {
-      name: "Flex storefront",
-      address:
-        "0x02e6c908da3d1ced80d81085ed9374b7c5048f86799e1f35e54daca4d70832d7",
-      image: "/collections/flex-store.png",
-    },
+    // {
+    //   name: "Carbonable - KARATHURU",
+    //   address:
+    //     "0x05a667adc04676fba78a29371561a0bf91dab25847d5dc4709a93a4cfb5ff293",
+    //   image: "/collections/carbonable.jpeg",
+    // },
+    // {
+    //   name: "Flex storefront",
+    //   address:
+    //     "0x02e6c908da3d1ced80d81085ed9374b7c5048f86799e1f35e54daca4d70832d7",
+    //   image: "/collections/flex-store.png",
+    // },
     {
       name: "Flex evo",
       address:
@@ -235,24 +222,24 @@ export const homepageConfig = {
         "0x01335defa219c2d0911a75ff85245200932501d6975d6178eabfa544e7d82b07",
       image: "/collections/mad-ape.png",
     },
-    {
-      name: "Pyramid store",
-      address:
-        "0x42e7815d9e90b7ea53f4550f74dc12207ed6a0faaef57ba0dbf9a66f3762d82",
-      image: "/collections/pyramid.png",
-    },
+    // {
+    //   name: "Pyramid store",
+    //   address:
+    //     "0x42e7815d9e90b7ea53f4550f74dc12207ed6a0faaef57ba0dbf9a66f3762d82",
+    //   image: "/collections/pyramid.png",
+    // },
     {
       name: "Lotus Project",
       address:
         "0x61ccf82a5628c0dbe3d0cc10e904882f1e9bc8adbb9456bdba155341bf430e5",
       image: "/collections/lotus.webp",
     },
-    {
-      name: "Fibrous Arena",
-      address:
-        "0x1d2eac1bcddde10b595fd4e6247aa105ec69fef308c94fe612f435fe5798d19",
-      image: "/collections/fibrous.webp",
-    },
+    // {
+    //   name: "Fibrous Arena",
+    //   address:
+    //     "0x1d2eac1bcddde10b595fd4e6247aa105ec69fef308c94fe612f435fe5798d19",
+    //   image: "/collections/fibrous.webp",
+    // },
     {
       name: "The starks",
       address:
@@ -289,12 +276,12 @@ export const homepageConfig = {
         "0x007ca74fd0a9239678cc6355e38ac1e7820141501727ae37f9c733e5ed1c3592",
       image: "/collections/metacube-genesis.gif",
     },
-    {
-      name: "Dreambotty",
-      address:
-        "0x3859bf9178b48a4ba330d6872ab5a6d3895b64d6631197beefde6293bc172cd",
-      image: "/collections/dreambotty.webp",
-    },
+    // {
+    //   name: "Dreambotty",
+    //   address:
+    //     "0x3859bf9178b48a4ba330d6872ab5a6d3895b64d6631197beefde6293bc172cd",
+    //   image: "/collections/dreambotty.webp",
+    // },
     {
       name: "The Crown of Stark",
       address:

@@ -2,7 +2,7 @@ export default function TrendingNowCard() {
   return (
     <div className="relative h-full w-full rounded-lg border border-border p-5">
       <TrendingNowCardBackground />
-      <p className="relative z-10 text-7xl font-bold leading-[64px] tracking-[-4px]">
+      <p className="relative z-10 text-5xl font-bold leading-[64px] tracking-[-4px] sm:text-7xl">
         Trending
         <br />
         Now

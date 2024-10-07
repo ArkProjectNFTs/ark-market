@@ -24,13 +24,16 @@ export default function LatestDrop() {
 
   return (
     <section>
+      <div className="mb-6 sm:mb-0 sm:hidden">
+        <LatestDropCard />
+      </div>
       <Carousel
         plugins={[WheelGesturesPlugin()]}
         opts={{ skipSnaps: true }}
         className="-mr-8"
       >
         <CarouselContent className="mr-12">
-          <CarouselItem className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6">
+          <CarouselItem className="hidden basis-full sm:block sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6">
             <LatestDropCard />
           </CarouselItem>
           {homepageConfig.latestDropCollections.map((collection, index) => {

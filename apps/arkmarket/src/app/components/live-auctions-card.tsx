@@ -2,7 +2,7 @@ export default function LiveAuctionsCard() {
   return (
     <div className="relative h-full w-full rounded-lg border border-border p-5">
       <LiveAuctionsCardBackground />
-      <p className="relative z-10 text-6xl font-bold leading-[64px] tracking-[-4px]">
+      <p className="relative z-10 text-5xl font-bold leading-[64px] tracking-[-4px] sm:text-6xl">
         Live
         <br />
         Auctions
