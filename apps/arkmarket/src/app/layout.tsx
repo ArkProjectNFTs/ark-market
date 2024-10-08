@@ -30,13 +30,19 @@ export const metadata: Metadata = {
       ? "https://market.arkproject.dev"
       : "http://localhost:3000",
   ),
-  title: "Ark Market",
-  description: "Simple monorepo with starknet marketplace",
+  title: env.NEXT_PUBLIC_THEME === "unframed" ? "Unframed" : "Ark Market",
+  description:
+    env.NEXT_PUBLIC_THEME === "unframed"
+      ? "Buy and sell NFTs on Starknet"
+      : "Simple monorepo with starknet marketplace",
   openGraph: {
-    title: "Ark Market",
-    description: "Simple monorepo with starknet marketplace",
+    title: env.NEXT_PUBLIC_THEME === "unframed" ? "Unframed" : "Ark Market",
+    description:
+      env.NEXT_PUBLIC_THEME === "unframed"
+        ? "Buy and sell NFTs on Starknet"
+        : "Simple monorepo with starknet marketplace",
     url: "https://market.arkproject.dev",
-    siteName: "Ark Market",
+    siteName: env.NEXT_PUBLIC_THEME === "unframed" ? "Unframed" : "Ark Market",
   },
   twitter: {
     card: "summary_large_image",

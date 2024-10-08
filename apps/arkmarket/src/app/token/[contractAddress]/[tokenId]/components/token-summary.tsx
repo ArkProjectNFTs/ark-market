@@ -48,7 +48,7 @@ export default function TokenSummary({
           </Link>
           <VerifiedIcon className="size-6 text-primary" />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <p
             className={cn(
               "w-full overflow-hidden text-2xl lg:text-3xl",

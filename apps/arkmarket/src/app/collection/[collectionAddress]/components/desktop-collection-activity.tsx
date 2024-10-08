@@ -5,6 +5,7 @@ import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { cn } from "@ark-market/ui";
+import { NoActivity } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -19,7 +20,7 @@ import ActivityToFromCell from "~/components/cells/activity-from-cell";
 import PriceCell from "~/components/cells/activity-price-cell";
 import ActivityTime from "~/components/cells/activity-time-cell";
 import TokenCell from "~/components/cells/activity-token-cell";
-import ActivityUp from "~/components/cells/activity-up-cell";
+import ActivityUp from "~/components/cells/activity-transaction-cell";
 
 interface DesktopCollectionActivityProps {
   collectionAddress: string;
@@ -51,88 +52,96 @@ export default function DesktopCollectionActivity({
   });
 
   return (
-    <Table ref={tableRef}>
-      <TableHeader className="h-12">
-        <TableRow
-          className={cn(
-            "absolute grid w-full items-center",
-            gridTemplateColumnValue,
-          )}
+    <>
+      <Table ref={tableRef}>
+        <TableHeader className="h-12">
+          <TableRow
+            className={cn(
+              "absolute grid w-full items-center",
+              gridTemplateColumnValue,
+            )}
+          >
+            <TableHead className="sticky top-0 flex items-center bg-background pl-5">
+              Event
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Token
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Price
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              From
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              To
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Date
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody
+          className="font-numbers relative block text-sm font-medium"
+          style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
         >
-          <TableHead className="sticky top-0 flex items-center bg-background pl-5">
-            Event
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Token
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Price
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            From
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            To
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Date
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody
-        className="font-numbers relative block text-sm font-medium"
-        style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const activity = collectionActivity[virtualRow.index];
-          if (activity === undefined) {
-            return null;
-          }
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            const activity = collectionActivity[virtualRow.index];
+            if (activity === undefined) {
+              return null;
+            }
 
-          return (
-            <TableRow
-              className={cn(
-                "group absolute grid h-[6.25rem] w-full items-center",
-                gridTemplateColumnValue,
-              )}
-              data-index={virtualRow.index}
-              key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
-              ref={(node) => rowVirtualizer.measureElement(node)}
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
-            >
-              <EventCell activity={activity} />
+            return (
+              <TableRow
+                className={cn(
+                  "group absolute grid h-[6.25rem] w-full items-center",
+                  gridTemplateColumnValue,
+                )}
+                data-index={virtualRow.index}
+                key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
+                ref={(node) => rowVirtualizer.measureElement(node)}
+                style={{
+                  transform: `translateY(${virtualRow.start}px)`,
+                }}
+              >
+                <EventCell activity={activity} />
 
-              <TokenCell
-                address={activity.address}
-                isVerified={activity.is_verified}
-                metadata={activity.token_metadata}
-                name={activity.name}
-                tokenId={activity.token_id}
-                collectionAddress={collectionAddress}
-              />
+                <TokenCell
+                  address={activity.address}
+                  isVerified={activity.is_verified}
+                  metadata={activity.token_metadata}
+                  name={activity.name}
+                  tokenId={activity.token_id}
+                  collectionAddress={collectionAddress}
+                />
 
-              <PriceCell activity={activity} />
+                <PriceCell activity={activity} />
 
-              <ActivityToFromCell
-                ownerAddress={activity.from}
-                address={address}
-              />
+                <ActivityToFromCell
+                  ownerAddress={activity.from}
+                  address={address}
+                />
 
-              <ActivityToFromCell
-                ownerAddress={activity.to}
-                address={address}
-              />
+                <ActivityToFromCell
+                  ownerAddress={activity.to}
+                  address={address}
+                />
 
-              <ActivityTime timeStamp={activity.time_stamp} />
+                <ActivityTime timeStamp={activity.time_stamp} />
 
-              <ActivityUp />
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+                <ActivityUp transactionHash={activity.transaction_hash} />
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+      {collectionActivity.length === 0 && (
+        <div className="flex flex-col items-center gap-3 pt-8 text-muted-foreground">
+          <NoActivity size={42} />
+          <p className="text-xl font-semibold">No activity yet!</p>
+        </div>
+      )}
+    </>
   );
 }

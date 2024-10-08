@@ -71,13 +71,15 @@ export default function CollectionItemsFiltersPanel({
       <div className="">
         <div className="px-5 py-4 text-base font-bold">Traits</div>
         <div className="px-4 pb-4">
-          <SearchInput
-            value={searchQuery}
-            className="h-10 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-            placeholder="Search"
-            type="text"
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          {hasTraits && (
+            <SearchInput
+              value={searchQuery}
+              className="h-10 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              placeholder="Search"
+              type="text"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          )}
         </div>
         <div className="flex flex-col gap-2">
           {searchQuery.length > 0 && !hasTraits && (

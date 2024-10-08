@@ -110,7 +110,7 @@ export default function TokenAbout({
         <div className="mt-8 flex flex-col gap-4 pb-6">
           <div className="flex items-center justify-between">
             <p className="font-medium">Contract Address</p>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground transition-colors hover:text-primary">
               <Link
                 href={`https://starkscan.co/nft-contract/${contractAddress}`}
                 target="_blank"
@@ -132,7 +132,9 @@ export default function TokenAbout({
           <div className="flex items-center justify-between">
             <p className="font-medium">Owner</p>
             <Link href={`/wallet/${token.owner}`}>
-              <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+              <p className="text-muted-foreground transition-colors hover:text-primary">
+                {ownerShortenedAddress}
+              </p>
             </Link>
           </div>
           <div className="flex items-center justify-between">
