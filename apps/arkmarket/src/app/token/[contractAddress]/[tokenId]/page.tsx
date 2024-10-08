@@ -1,3 +1,5 @@
+"use server";
+
 import { notFound } from "next/navigation";
 
 import type { Token, TokenMarketData } from "~/types";
@@ -45,10 +47,12 @@ export default async function TokenPage({
 
   return (
     <>
-      <meta
-        property="og:image"
-        content={`https://ark-market-unframed.vercel.app/api/og/token?collection_address=${contractAddress}&token_id=${tokenId}`}
-      />
+      <head>
+        <meta
+          property="og:image"
+          content={`https://ark-market-unframed.vercel.app/api/og/token?collection_address=${contractAddress}&token_id=${tokenId}`}
+        />
+      </head>
       <main className="mx-auto max-w-[120rem] p-5 pt-0 lg:p-8">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8">
           <TokenSummary
