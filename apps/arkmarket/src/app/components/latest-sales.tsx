@@ -33,7 +33,7 @@ export default function LatestSales() {
   return (
     <section>
       <div className="relative w-full overflow-hidden">
-        <Marquee className="text-5xl font-bold leading-[3.3rem] tracking-normal [--duration:20s] sm:text-[5rem] sm:leading-[5rem] md:text-[7.5rem] md:leading-[7.5rem] lg:text-[12.15rem] lg:leading-[12.15rem]">
+        <Marquee className="font-display text-5xl font-bold leading-[3.3rem] tracking-normal [--duration:20s] sm:text-[5rem] sm:leading-[5rem] md:text-[7.5rem] md:leading-[7.5rem] lg:text-[12.15rem] lg:leading-[12.15rem]">
           <p className="whitespace-nowrap">Latest sale</p>
           <p
             className="whitespace-nowrap text-transparent dark:hidden"

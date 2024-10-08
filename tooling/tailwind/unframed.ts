@@ -17,6 +17,7 @@ export default {
     fontFamily: {
       numbers: ["nitti", ...fontFamily.sans],
       sans: ["degular-text", ...fontFamily.sans],
+      display: ["degular-display", ...fontFamily.sans],
     },
     fontSize: {
       xs: [scaleFontSize("0.75"), { letterSpacing: "0.05em" }],

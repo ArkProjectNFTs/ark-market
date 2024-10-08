@@ -58,7 +58,7 @@ export default function TokenAbout({
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <h3 className="text-2xl font-semibold">About & details</h3>
+        <h3 className="font-display text-2xl font-semibold">About & details</h3>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-sm">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

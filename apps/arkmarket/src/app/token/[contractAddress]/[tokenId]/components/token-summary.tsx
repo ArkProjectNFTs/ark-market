@@ -42,7 +42,7 @@ export default function TokenSummary({
             href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
-            <h3 className="text-xl leading-none text-primary">
+            <h3 className="font-display text-xl leading-none text-primary">
               {token.collection_name}
             </h3>
           </Link>
@@ -51,7 +51,7 @@ export default function TokenSummary({
         <div className="flex items-center justify-between gap-4">
           <p
             className={cn(
-              "w-full overflow-hidden text-2xl lg:text-3xl",
+              "font-display w-full overflow-hidden text-2xl lg:text-3xl",
               ellipsableStyles,
             )}
           >
