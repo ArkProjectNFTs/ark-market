@@ -74,7 +74,7 @@ export default function CollectionItemsFiltersPanel({
           {hasTraits && (
             <SearchInput
               value={searchQuery}
-              className="h-10 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="h-10"
               placeholder="Search"
               type="text"
               onChange={(e) => setSearchQuery(e.target.value)}
