@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { useAccount } from "@starknet-react/core";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
@@ -12,7 +11,6 @@ import CollectionActivityFiltersModal from "~/app/collection/[collectionAddress]
 import CollectionActivityFiltersToggle from "~/app/collection/[collectionAddress]/components/collection-activity-filters-toggle";
 import { portfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
 import { activityTypes } from "~/types";
-import { getWalletTokens } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
@@ -27,6 +25,7 @@ import PortfolioOffersData from "./portfolio-offers-data";
 import PortfolioOffersFiltersPanel from "./portfolio-offers-filters-panel";
 import PortfolioOffersMobileFilters from "./portfolio-offers-mobile-filters";
 import PortfolioTabs, { portfolioTabsValues } from "./portfolio-tabs";
+import useWalletTokens from "~/hooks/useWalletTokens";
 
 interface PortfolioProps {
   walletAddress: string;
@@ -79,25 +78,7 @@ export default function Portfolio({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["walletTokens", collectionFilter, walletAddress],
-    refetchInterval: 10_000,
-    placeholderData: keepPreviousData,
-    getNextPageParam: (lastPage: WalletTokensApiResponse) => lastPage.next_page,
-    // initialData: isSSR
-    //   ? {
-    //       pages: [walletTokensInitialData],
-    //       pageParams: [],
-    //     }
-    //   : undefined,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getWalletTokens({
-        page: pageParam,
-        walletAddress,
-        collectionAddress: collectionFilter,
-      }),
-  });
+  } = useWalletTokens({ collectionFilter, walletAddress })
   const portoflioItemsCount = infiniteData?.pages[0]?.token_count ?? 0;
 
   const walletTokens = useMemo(

@@ -5,7 +5,6 @@ import type {
   CollectionSortDirection,
   CollectionTokensApiResponse,
 } from "~/lib/getCollectionTokens";
-import type { ViewType } from "~/components/view-type-toggle-group";
 import type { Filters } from "~/types";
 
 import { getCollectionTokens } from "~/lib/getCollectionTokens";
@@ -14,13 +13,13 @@ interface useCollectionTokensProps {
   collectionAddress: string;
   sortBy: CollectionSortBy;
   sortDirection: CollectionSortDirection;
-  viewType: ViewType;
   filters: Filters;
+  buyNow:boolean;
 }
 
 const REFETCH_INTERVAL = 10_000;
 
-export default function useCollectionTokens({ collectionAddress, sortDirection, sortBy, filters }: useCollectionTokensProps) {
+export default function useCollectionTokens({ collectionAddress, sortDirection, sortBy, filters, buyNow }: useCollectionTokensProps) {
   const result = useSuspenseInfiniteQuery({
     queryKey: [
       "collectionTokens",
@@ -28,6 +27,7 @@ export default function useCollectionTokens({ collectionAddress, sortDirection, 
       sortBy,
       collectionAddress,
       filters,
+      buyNow
     ],
     refetchInterval: REFETCH_INTERVAL,
     getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
@@ -40,6 +40,7 @@ export default function useCollectionTokens({ collectionAddress, sortDirection, 
         sortDirection,
         sortBy,
         filters,
+        buyNow
       }),
   });
   return result;

@@ -10,7 +10,6 @@ import { getPortfolioOffers } from "~/lib/getPortfolioOffers";
 interface useWalletOffersProps {
   walletAddress: string;
   offerType: PortfolioOffersTypeValues;
-  isOwner: boolean;
 }
 
 const REFETCH_INTERVAL = 10_000;

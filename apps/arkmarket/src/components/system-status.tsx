@@ -1,7 +1,5 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-
 import { cn } from "@ark-market/ui";
 import {
   Tooltip,
@@ -10,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@ark-market/ui/tooltip";
 
-import getSystemStatus from "~/lib/getSystemStatus";
+import useSystemStatus from "~/hooks/useSystemStatus";
 
 const statuses = {
   ok: {
@@ -28,12 +26,7 @@ const statuses = {
 };
 
 export default function SystemStatus() {
-  const { error, data } = useQuery({
-    queryKey: ["systemStatus"],
-    queryFn: getSystemStatus,
-    refetchInterval: 15_000,
-    initialData: { status: "ok" },
-  });
+  const { error, data } = useSystemStatus({})
 
   if (error) {
     return null;

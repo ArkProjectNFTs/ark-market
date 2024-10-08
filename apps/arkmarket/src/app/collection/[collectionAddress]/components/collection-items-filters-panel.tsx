@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { SearchInput } from "@ark-market/ui/search-input";
 
 import type { Filters } from "~/types";
-import getCollectionTraits from "~/lib/getCollectionTraits";
 import CollectionItemsFiltersContent from "./collection-items-filters-content";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
+
+import useCollectionTraitsSuspense from "~/hooks/useCollectionTraitsSuspense";
 
 interface CollectionItemsFiltersPanelProps {
   collectionAddress: string;
@@ -25,10 +25,7 @@ export default function CollectionItemsFiltersPanel({
   buyNow,
   setBuyNow,
 }: CollectionItemsFiltersPanelProps) {
-  const { data } = useSuspenseQuery({
-    queryKey: ["collectionTraits", collectionAddress],
-    queryFn: () => getCollectionTraits({ collectionAddress }),
-  });
+  const { data } = useCollectionTraitsSuspense({ collectionAddress })
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleTraitChange = async (name: string, value: string) => {

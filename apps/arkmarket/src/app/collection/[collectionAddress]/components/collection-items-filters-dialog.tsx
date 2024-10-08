@@ -8,6 +8,8 @@ import type { Filters } from "~/types";
 import getCollectionTraits from "~/lib/getCollectionTraits";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
 
+import useCollectionTraits from "~/hooks/useCollectionTraits";
+
 interface CollectionItemsFiltersDialogProps {
   collectionAddress: string;
   filters: Filters;
@@ -25,10 +27,7 @@ export default function CollectionItemsFiltersDialog({
   open,
   setOpen,
 }: CollectionItemsFiltersDialogProps) {
-  const { data } = useQuery({
-    queryKey: ["collectionTraits", collectionAddress],
-    queryFn: () => getCollectionTraits({ collectionAddress }),
-  });
+  const { data } = useCollectionTraits({ address:collectionAddress })
 
   const handleTraitChange = async (name: string, value: string) => {
     const values = filters.traits[name] ?? [];

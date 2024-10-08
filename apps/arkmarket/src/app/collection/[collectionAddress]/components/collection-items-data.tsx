@@ -1,19 +1,17 @@
 "use client";
 
 import { useMemo } from "react";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 import type { ViewType } from "../../../../components/view-type-toggle-group";
 import type {
   CollectionSortBy,
   CollectionSortDirection,
-  CollectionTokensApiResponse,
 } from "~/lib/getCollectionTokens";
 import type { CollectionToken, Filters } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionTokens } from "~/lib/getCollectionTokens";
 import CollectionItemsDataGridView from "./collection-items-data-grid-view";
 import CollectionItemsDataListView from "./collection-items-data-list-view";
+import useCollectionTokens from "~/hooks/useCollectionTokens";
 
 interface CollectionItemsDataProps {
   collectionAddress: string;
@@ -37,29 +35,7 @@ export default function CollectionItemsData({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useSuspenseInfiniteQuery({
-    queryKey: [
-      "collectionTokens",
-      sortDirection,
-      sortBy,
-      collectionAddress,
-      filters,
-      buyNow,
-    ],
-    refetchInterval: 10_000,
-    getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
-      lastPage.next_page,
-    initialPageParam: undefined as number | undefined,
-    queryFn: ({ pageParam }) =>
-      getCollectionTokens({
-        collectionAddress,
-        page: pageParam,
-        sortDirection,
-        sortBy,
-        filters,
-        buyNow,
-      }),
-  });
+  } = useCollectionTokens({ collectionAddress, filters, sortBy, sortDirection, buyNow })
 
   useInfiniteWindowScroll({
     fetchNextPage,
