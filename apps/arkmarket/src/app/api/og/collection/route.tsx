@@ -7,9 +7,20 @@ import getCollection from "~/lib/getCollection";
 import { getCollectionTokens, getMediaSrc } from "~/lib/getCollectionTokens";
 
 const IMAGE_GLOBAL_MARGIN = "50px";
+export const runtime = "edge";
 
 export async function GET(request: Request) {
   try {
+    const degularFontData = await fetch(
+      new URL(
+        "../../../../../assets/DegularDisplay-SemiBold.otf",
+        import.meta.url,
+      ),
+    ).then((res) => res.arrayBuffer());
+    const nittiFontData = await fetch(
+      new URL("../../../../../assets/Nitti-Regular.otf", import.meta.url),
+    ).then((res) => res.arrayBuffer());
+
     const { searchParams } = new URL(request.url);
 
     const hasCollection = searchParams.has("collection_address");
@@ -116,6 +127,8 @@ export async function GET(request: Request) {
                     fontWeight: 600,
                     fontSize: "135px",
                     marginLeft: IMAGE_GLOBAL_MARGIN,
+                    fontFamily: "degular",
+                    lineHeight: "115px",
                   }}
                 >
                   {collection.name}
@@ -135,6 +148,10 @@ export async function GET(request: Request) {
       {
         width: 1500,
         height: 844,
+        fonts: [
+          { name: "nitti", data: nittiFontData, style: "normal" },
+          { name: "degular", data: degularFontData, style: "normal" },
+        ],
       },
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -169,7 +186,8 @@ function CollectionData({
         padding: IMAGE_GLOBAL_MARGIN,
         display: "flex",
         alignItems: "center",
-        gap: "50px",
+        gap: "40px",
+        fontFamily: "nitti",
       }}
     >
       <div style={{ display: "flex", flexDirection: "column" }}>

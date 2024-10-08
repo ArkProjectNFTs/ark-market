@@ -5,9 +5,17 @@ import { getMediaSrc } from "~/lib/getCollectionTokens";
 import getToken from "~/lib/getToken";
 
 const IMAGE_GLOBAL_MARGIN = "50px";
+export const runtime = "edge";
 
 export async function GET(request: Request) {
   try {
+    const degularFontData = await fetch(
+      new URL(
+        "../../../../../assets/DegularDisplay-SemiBold.otf",
+        import.meta.url,
+      ),
+    ).then((res) => res.arrayBuffer());
+
     const { searchParams } = new URL(request.url);
 
     const hasCollection = searchParams.has("collection_address");
@@ -49,6 +57,7 @@ export async function GET(request: Request) {
             width: "100%",
             height: "100%",
             textAlign: "center",
+            fontFamily: "degular",
           }}
         >
           {tokenMediaSrc !== undefined && (
@@ -115,6 +124,7 @@ export async function GET(request: Request) {
       {
         width: 1500,
         height: 844,
+        fonts: [{ name: "degular", data: degularFontData, style: "normal" }],
       },
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
