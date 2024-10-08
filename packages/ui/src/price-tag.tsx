@@ -9,6 +9,10 @@ export function PriceTag({
   className,
   price,
 }: PropsWithClassName<PriceTagProps>) {
+  if (!price) {
+    return null;
+  }
+
   const parsedPrice = parseFloat(formatUnits(price, 18));
 
   return (
