@@ -50,6 +50,7 @@ import {
 } from "lucide-react";
 
 import type { PropsWithClassName } from ".";
+import type { IconWeightProps } from "./icon-wrapper";
 import { cn } from ".";
 import { Icon } from "./icon-wrapper";
 
@@ -74,206 +75,206 @@ export {
 
 export const Congratulations =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="3" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="3" {...props} />
       )
     : LucidePartyPopper;
 export const User =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="1" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="1" {...props} />
       )
     : LucideUser;
 
 export const Mail =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="z" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="z" {...props} />
       )
     : LucideMail;
 
 export const ArrowUpRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="x" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="x" {...props} />
       )
     : LucideArrowUpRight;
 
 export const CircleDot =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="k" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="k" {...props} />
       )
     : LucideCircleDot;
 
 export const ActivityList =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="g" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="g" {...props} />
       )
     : LucideList;
 
 export const ActivityDelist =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="h" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="h" {...props} />
       )
     : ListX;
 
 export const ActivityOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="i" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="i" {...props} />
       )
     : LucideTag;
 
 export const ActivityCancelOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="j" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="j" {...props} />
       )
     : X;
 
 export const Tag =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="g" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="g" {...props} />
       )
     : LucideTag;
 
 export const ChevronRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="I" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="I" {...props} />
       )
     : LucideChevronRight;
 
 export const ChevronDown =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="J" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="J" {...props} />
       )
     : LucideChevronDown;
 
 export const ChevronLeft =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="K" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="K" {...props} />
       )
     : LucideChevronLeft;
 
 export const ChevronUp =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="L" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="L" {...props} />
       )
     : LucideChevronUp;
 
 export const ArrowRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="M" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="M" {...props} />
       )
     : LucideArrowRight;
 
 export const ArrowLeft =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="N" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="N" {...props} />
       )
     : LucideArrowLeft;
 
 export const ArrowLeftRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="f" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="f" {...props} />
       )
     : LucideArrowLeftRight;
 
 export const Moon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="W" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="W" {...props} />
       )
     : LucideMoon;
 
 export const Sun =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="V" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="V" {...props} />
       )
     : LucideSun;
 
 export const ShoppingCart =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="e" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="e" {...props} />
       )
     : LucideShoppingCart;
 
 export const Chart =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="r" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="r" {...props} />
       )
     : LucideChart;
 
 export const RefreshCw =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="G" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="G" {...props} />
       )
     : LucideRefreshCw;
 
 export const Gavel =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="l" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="l" {...props} />
       )
     : LucideGavel;
 
 export const Share2 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="v" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="v" {...props} />
       )
     : LucideShare2;
 
 export const TimerReset =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="T" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="T" {...props} />
       )
     : LucideTimerReset;
 
 // Conditional exports
 export const Check =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="p" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="p" {...props} />
       )
     : LucideCheck;
 
 export const Copy =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="F" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="F" {...props} />
       )
     : LucideCopy;
 
 export const Search =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="D" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="D" {...props} />
       )
     : LucideSearch;
 
 export const Discord =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="c" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="c" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           stroke="currentColor"
           fill="none"
@@ -295,10 +296,10 @@ export const Discord =
 
 export const Ethereum =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="X" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="X" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -330,13 +331,17 @@ export const Ethereum =
         </svg>
       );
 
-export const Ethereum2 = ({ className }: PropsWithClassName) => (
+export const Ethereum2 = ({
+  className,
+  ...props
+}: PropsWithClassName<IconWeightProps>) => (
   <svg
     width="24"
     height="24"
     viewBox="0 0 32 32"
     fill="none"
     className={className}
+    {...props}
   >
     <circle cx="16" cy="16" r="16" fill="white" />
     <path
@@ -364,38 +369,38 @@ export const Ethereum2 = ({ className }: PropsWithClassName) => (
 
 export const Filter =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="E" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="E" {...props} />
       )
     : LucideFilter;
 
 export const Grid2X2 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="B" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="B" {...props} />
       )
     : LucideGrid2X2;
 
 export const List =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="A" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="A" {...props} />
       )
     : LucideList;
 
 export const Grid3X3 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="C" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="C" {...props} />
       )
     : LucideGrid3X3;
 
 export const Starknet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="Y" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="Y" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={className}
           width="24"
@@ -527,10 +532,10 @@ export const Starknet2 = ({ className }: PropsWithClassName) => (
 
 export const Telegram =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="Z" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="Z" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -547,31 +552,31 @@ export const Telegram =
 
 export const VerifiedIcon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="U" />
       )
     : LucideVerifiedIcon;
 
 export const Wallet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="O" />
       )
     : LucideWallet;
 
 export const Globe =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="b" />
       )
     : LucideGlobe;
 
 export const XIcon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="a" />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -588,7 +593,7 @@ export const XIcon =
 
 export const NoOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="73"
@@ -613,7 +618,7 @@ export const NoOffer =
 
 export const NoTraits =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -638,7 +643,7 @@ export const NoTraits =
 
 export const NoListing =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -663,7 +668,7 @@ export const NoListing =
 
 export const NoResult =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="72"
@@ -688,7 +693,7 @@ export const NoResult =
 
 export const NoActivity =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="72"
@@ -713,7 +718,7 @@ export const NoActivity =
 
 export const ConnectWallet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -738,7 +743,7 @@ export const ConnectWallet =
 
 export const NoImage =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -759,7 +764,7 @@ export const NoImage =
           />
         </svg>
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="79"
           height="79"
@@ -793,7 +798,7 @@ export const NoImage =
 
 export const Success =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -818,21 +823,21 @@ export const Success =
 
 export const ViewMore =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="2" />
       )
     : LucideGrid2x2X;
 
 export const Support =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="P" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="P" {...props} />
       )
     : HelpCircle;
 
 export const LogOut =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="R" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="R" {...props} />
       )
     : HelpCircle;

@@ -14,11 +14,13 @@ import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 
 interface CopyButtonProps {
   textToCopy: string;
+  iconWeight?: number;
 }
 
 export default function CopyButton({
   className,
   textToCopy,
+  iconWeight,
 }: PropsWithClassName<CopyButtonProps>) {
   const [copiedText, copy] = useCopyToClipboard();
 
@@ -30,7 +32,10 @@ export default function CopyButton({
             onClick={() => copy(textToCopy)}
             className={cn("flex h-4", focusableStyles, className)}
           >
-            <Copy className="h-full w-auto text-muted-foreground hover:text-foreground" />
+            <Copy
+              className="h-full w-auto text-muted-foreground hover:text-foreground"
+              weight={iconWeight}
+            />
           </button>
         </TooltipTrigger>
         <TooltipContent>Copied</TooltipContent>

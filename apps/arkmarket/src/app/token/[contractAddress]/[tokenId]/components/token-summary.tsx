@@ -60,15 +60,20 @@ export default function TokenSummary({
 
           <div className="hidden items-center gap-6 lg:flex">
             <button className="flex size-6 text-[1.5rem]">
-              <Share2 className="size-6 text-muted-foreground transition-colors hover:text-foreground" />
+              <Share2
+                className="size-6 text-muted-foreground transition-colors hover:text-foreground"
+                weight={45}
+              />
             </button>
             <CopyButton
               className="size-6 text-[1.5rem] text-muted-foreground transition-colors hover:text-foreground"
               textToCopy={token.collection_address}
+              iconWeight={45}
             />
             <RefreshMetadataButton
               contractAddress={token.collection_address}
               tokenId={token.token_id}
+              iconWeight={45}
             />
           </div>
           <div className="lg:hidden">
