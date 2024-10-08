@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 
 import { formatNumber, formatUnits } from "@ark-market/ui";
 
-import CustomFonts from "~/components/custom-fonts";
 import { env } from "~/env";
 import getCollection from "~/lib/getCollection";
 import { getCollectionTokens, getMediaSrc } from "~/lib/getCollectionTokens";
@@ -15,7 +14,7 @@ export async function GET(request: Request) {
 
     const hasCollection = searchParams.has("collection_address");
     if (!hasCollection) {
-      throw new Error("Missing collection address");
+      throw new Error("Missing collection_address param");
     }
     const collectionAddress = searchParams.get("collection_address") ?? "";
 
@@ -36,7 +35,7 @@ export async function GET(request: Request) {
         ? getMediaSrc(
             token.metadata.image,
             token.metadata.image_key,
-            undefined,
+            token.metadata.image_key_540_540,
             300,
             300,
           )
@@ -55,7 +54,6 @@ export async function GET(request: Request) {
             textAlign: "center",
           }}
         >
-          <CustomFonts />
           {tokenMediaSrc !== undefined && (
             <img
               src={tokenMediaSrc}
@@ -139,8 +137,10 @@ export async function GET(request: Request) {
         height: 844,
       },
     );
-  } catch {
-    return new Response("Failed to generate og collection image", {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    return new Response(e.message, {
       status: 500,
     });
   }
