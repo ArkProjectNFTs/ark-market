@@ -22,10 +22,12 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <>
-      <meta
-        property="og:image"
-        content={`https://ark-market-unframed.vercel.app/api/og/collection?collection_address=${collectionAddress}`}
-      />
+      <head>
+        <meta
+          property="og:image"
+          content={`https://ark-market-unframed.vercel.app/api/og/collection?collection_address=${collectionAddress}`}
+        />
+      </head>
 
       <div className="flex min-h-[calc(100vh-var(--site-header-height))] flex-col">
         <CollectionBanner
