@@ -111,7 +111,7 @@ export default function MainCarousel() {
                           className="size-16 rounded-lg border border-white"
                         />
                         <div className="flex flex-col gap-2 md:gap-4">
-                          <h1 className="text-2xl font-extrabold sm:text-3xl md:text-5xl">
+                          <h1 className="font-display text-2xl font-extrabold sm:text-3xl md:text-5xl">
                             {carouselItem.name}
                           </h1>
                           <div className="font-numbers flex items-center text-base font-medium">

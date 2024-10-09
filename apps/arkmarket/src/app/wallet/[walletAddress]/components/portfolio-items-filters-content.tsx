@@ -161,7 +161,8 @@ export default function PortfolioItemsFiltersContent({
               <div className="flex h-full flex-col items-end justify-between">
                 <p className="text-sm">
                   {formatUnits(
-                    collection.user_token_count * (collection.floor ?? 0),
+                    BigInt(collection.user_token_count) *
+                      BigInt(collection.floor ?? "0"),
                     18,
                   )}
                 </p>

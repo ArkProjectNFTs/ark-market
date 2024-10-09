@@ -15,6 +15,7 @@ import {
 import type { TokenActivity } from "~/types";
 import EventCell from "~/components/cells/activity-event-cell";
 import ActivityToFromCell from "~/components/cells/activity-from-cell";
+import ActivityTransaction from "~/components/cells/activity-transaction-cell";
 
 interface DesktopTokenActivityProps {
   tokenActivity: TokenActivity[];
@@ -24,7 +25,6 @@ export default function DesktopTokenActivity({
   tokenActivity,
 }: DesktopTokenActivityProps) {
   const { address } = useAccount();
-
   return (
     <>
       <Table>
@@ -34,7 +34,8 @@ export default function DesktopTokenActivity({
             <TableHead>Price</TableHead>
             <TableHead>From</TableHead>
             <TableHead>To</TableHead>
-            <TableHead className="text-end">Date</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead className="text-end"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="font-numbers text-sm font-medium">
@@ -58,9 +59,10 @@ export default function DesktopTokenActivity({
                 address={address}
               />
 
-              <TableCell className="text-end">
-                {timeSince(activity.time_stamp)}
-              </TableCell>
+              <TableCell>{timeSince(activity.time_stamp)}</TableCell>
+              <ActivityTransaction
+                transactionHash={activity.transaction_hash}
+              />
             </TableRow>
           ))}
         </TableBody>

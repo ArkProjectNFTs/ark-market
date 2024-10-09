@@ -37,6 +37,7 @@ interface GetCollectionTokensParams {
   sortDirection?: CollectionSortDirection;
   sortBy?: CollectionSortBy;
   filters?: Filters;
+  buyNow?: boolean;
 }
 
 export async function getCollectionTokens({
@@ -45,6 +46,7 @@ export async function getCollectionTokens({
   sortDirection,
   sortBy,
   filters,
+  buyNow,
 }: GetCollectionTokensParams) {
   const queryParams = [`items_per_page=${itemsPerPage}`];
 
@@ -54,6 +56,10 @@ export async function getCollectionTokens({
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+
+  if (buyNow) {
+    queryParams.push("buy_now=true");
   }
 
   if (sortBy !== undefined) {

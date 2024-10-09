@@ -66,7 +66,9 @@ export default function CollectionHeader({
             <div className="flex h-full flex-shrink-0 flex-col items-start justify-between">
               <div>
                 <div className="flex items-center gap-1 text-xl">
-                  <p className="text-2xl font-semibold">{collection.name}</p>
+                  <p className="font-display text-2xl font-semibold">
+                    {collection.name}
+                  </p>
                   {collection.is_verified && (
                     <VerifiedIcon className="mt-1 text-primary" />
                   )}

@@ -23,7 +23,7 @@ export default function UnframedFooter() {
     <footer className="mx-8 mb-12 overflow-hidden rounded-[2.625rem] border-border bg-card px-8 py-11">
       <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-center">
         <div className="flex flex-col gap-6 md:gap-14">
-          <p className="text-4xl font-bold leading-[2.475rem] lg:text-7xl lg:leading-[4.5rem]">
+          <p className="font-display text-4xl font-bold leading-[2.475rem] lg:text-7xl lg:leading-[4.5rem]">
             Sell, Buy, Trade
             <br />
             on Starknet

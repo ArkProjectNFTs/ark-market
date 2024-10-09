@@ -75,7 +75,7 @@ export default function WalletAccountContent({
             onClick={onClose}
             prefetch
           >
-            <User className="!size-6 !text-xl" />
+            <User className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Profile</p>
           </Link>
           {isWebWallet && (
@@ -89,14 +89,14 @@ export default function WalletAccountContent({
             </ExternalLink>
           )}
           <Link href="/" className={itemCommonClassName} onClick={onClose}>
-            <Support size={24} className="!size-6 !text-xl" />
+            <Support size={24} className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Support</p>
           </Link>
           <button
             className={cn(itemCommonClassName)}
             onClick={() => disconnect()}
           >
-            <LogOut size={24} className="!size-6 !text-xl" />
+            <LogOut size={24} className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Log out</p>
           </button>
         </div>

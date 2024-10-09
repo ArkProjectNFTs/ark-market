@@ -20,7 +20,7 @@ import ActivityToFromCell from "~/components/cells/activity-from-cell";
 import PriceCell from "~/components/cells/activity-price-cell";
 import ActivityTime from "~/components/cells/activity-time-cell";
 import TokenCell from "~/components/cells/activity-token-cell";
-import ActivityUp from "~/components/cells/activity-up-cell";
+import ActivityUp from "~/components/cells/activity-transaction-cell";
 
 const gridTemplateColumnValue =
   "grid-cols-[minmax(14rem,1fr)_minmax(15rem,2fr)_repeat(4,minmax(11rem,1fr))_minmax(4.5rem,4.5rem)]";
@@ -129,7 +129,7 @@ export default function DesktopPortfolioActivity({
 
                 <ActivityTime timeStamp={activity.time_stamp} />
 
-                <ActivityUp />
+                <ActivityUp transactionHash={activity.transaction_hash} />
               </TableRow>
             );
           })}

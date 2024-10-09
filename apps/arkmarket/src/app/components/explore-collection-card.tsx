@@ -2,7 +2,7 @@ export default function ExploreCollectionCard() {
   return (
     <div className="relative h-full w-full rounded-lg border border-border">
       <ExploreCollectionCardBackground />
-      <p className="relative z-10 aspect-video w-full px-7 py-5 text-5xl font-bold leading-[3.3rem] tracking-[-4px] md:text-6xl md:leading-[64px]">
+      <p className="font-display relative z-10 aspect-video w-full px-7 py-5 text-5xl font-bold leading-[3.3rem] tracking-[-4px] md:text-6xl md:leading-[64px]">
         Explore
         <br />
         Collections

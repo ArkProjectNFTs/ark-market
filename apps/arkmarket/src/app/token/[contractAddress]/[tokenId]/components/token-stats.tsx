@@ -68,21 +68,21 @@ export default function TokenStats({
           Collection Floor
         </p>
         <div className="font-numbers flex items-center gap-1 text-lg font-medium">
-          <Ethereum className="size-5 flex-shrink-0" />
+          <Ethereum className="size-5 flex-shrink-0" weight={45} />
           <div className="min-w-0 flex-1 truncate">{floor} ETH</div>
         </div>
       </div>
       <div className="flex flex-col justify-between p-2 lg:border-l lg:px-4">
         <p className="text-sm font-medium text-muted-foreground">Last sale</p>
         <div className="font-numbers flex items-center gap-1 text-lg">
-          <Ethereum className="size-5 flex-shrink-0" />
+          <Ethereum className="size-5 flex-shrink-0" weight={45} />
           <div className="min-w-0 flex-1 truncate">{lastPrice} ETH</div>
         </div>
       </div>
       <div className="flex flex-col justify-between p-2 lg:border-l lg:px-4">
         <p className="text-sm font-medium text-muted-foreground">Top offer</p>
         <div className="font-numbers flex items-center gap-1 text-lg">
-          <Ethereum className="size-5 flex-shrink-0" />
+          <Ethereum className="size-5 flex-shrink-0" weight={45} />
           <div className="min-w-0 flex-1 truncate">{topOffer} ETH</div>
         </div>
       </div>

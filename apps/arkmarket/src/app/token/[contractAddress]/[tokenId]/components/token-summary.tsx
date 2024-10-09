@@ -2,13 +2,14 @@ import Link from "next/link";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
-import { Share2, VerifiedIcon } from "@ark-market/ui/icons";
+import { VerifiedIcon } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
 import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
 import RefreshMetadataButton from "./refresh-metadata-button";
 import TokenSummaryMobileActions from "./token-summary-mobile-actions";
+import TokenSummaryShareDropdown from "./token-summary-share-dropdown";
 
 interface TokenSummaryProps {
   token: Token;
@@ -42,16 +43,16 @@ export default function TokenSummary({
             href={`/collection/${token.collection_address}`}
             className={focusableStyles}
           >
-            <h3 className="text-xl leading-none text-primary">
+            <h3 className="font-display text-xl leading-none text-primary">
               {token.collection_name}
             </h3>
           </Link>
           <VerifiedIcon className="size-6 text-primary" />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <p
             className={cn(
-              "w-full overflow-hidden text-2xl lg:text-3xl",
+              "font-display w-full overflow-hidden text-2xl lg:text-3xl",
               ellipsableStyles,
             )}
           >
@@ -59,16 +60,16 @@ export default function TokenSummary({
           </p>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <button className="flex size-6 text-[1.5rem]">
-              <Share2 className="size-6 text-muted-foreground transition-colors hover:text-foreground" />
-            </button>
+            <TokenSummaryShareDropdown />
             <CopyButton
               className="size-6 text-[1.5rem] text-muted-foreground transition-colors hover:text-foreground"
               textToCopy={token.collection_address}
+              iconWeight={45}
             />
             <RefreshMetadataButton
               contractAddress={token.collection_address}
               tokenId={token.token_id}
+              iconWeight={45}
             />
           </div>
           <div className="lg:hidden">
