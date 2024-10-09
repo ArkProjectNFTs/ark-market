@@ -9,6 +9,7 @@ import CopyButton from "~/components/copy-button";
 import Media from "~/components/media";
 import RefreshMetadataButton from "./refresh-metadata-button";
 import TokenSummaryMobileActions from "./token-summary-mobile-actions";
+import TokenSummaryShareDropdown from "./token-summary-share-dropdown";
 
 interface TokenSummaryProps {
   token: Token;
@@ -59,12 +60,7 @@ export default function TokenSummary({
           </p>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <button className="flex size-6 text-[1.5rem]">
-              <Share2
-                className="size-6 text-muted-foreground transition-colors hover:text-foreground"
-                weight={45}
-              />
-            </button>
+            <TokenSummaryShareDropdown />
             <CopyButton
               className="size-6 text-[1.5rem] text-muted-foreground transition-colors hover:text-foreground"
               textToCopy={token.collection_address}

@@ -236,7 +236,7 @@ export const Gavel =
 export const Share2 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
     ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
-        <Icon className={className} icon="v" {...props} />
+        <Icon className={className} icon="H" {...props} />
       )
     : LucideShare2;
 
