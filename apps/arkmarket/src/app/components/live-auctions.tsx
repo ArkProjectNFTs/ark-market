@@ -1,79 +1,96 @@
 "use client";
 
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
-import { TimerReset } from "@ark-market/ui/icons";
 
-import { cn, ellipsableStyles, focusableStyles } from "@ark-market/ui";
+import {
+  cn,
+  ellipsableStyles,
+  focusableStyles,
+  getRoundedRemainingTime,
+} from "@ark-market/ui";
 import { Card, CardContent, CardFooter } from "@ark-market/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
+import { TimerReset } from "@ark-market/ui/icons";
 
-import { homepageConfig } from "~/config/homepage";
+import Media from "~/components/media";
+import getHomepageLiveAuctions from "~/lib/getHomepageLiveAuctions";
+import LiveAuctionsCard from "./live-auctions-card";
 
 export default function LiveAuctions() {
-  if (homepageConfig.liveAuctions.length === 0) {
+  const { data } = useQuery({
+    queryKey: ["home-page-live-auctions"],
+    queryFn: () => getHomepageLiveAuctions(),
+    refetchInterval: 10_000,
+  });
+
+  if (data === undefined || data.data.length === 0) {
     return null;
   }
 
   return (
     <section>
-      <h2 className="text-3xl font-semibold">Live auctions</h2>
+      <div className="mb-6 sm:mb-0 sm:hidden">
+        <LiveAuctionsCard />
+      </div>
       <Carousel
-        className="mt-8"
         plugins={[WheelGesturesPlugin()]}
         opts={{ skipSnaps: true }}
+        className="-mr-8"
       >
-        <CarouselContent>
-          {homepageConfig.liveAuctions.map((collection, index) => {
+        <CarouselContent className="mr-12">
+          <CarouselItem className="hidden basis-full sm:block sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+            <LiveAuctionsCard />
+          </CarouselItem>
+          {data.data.map((auction, index) => {
             return (
-              <CarouselItem
-                key={index}
-                className="basis-[calc(100%-3rem)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 2xl:basis-1/6"
-              >
-                <Link
-                  href=""
-                  key={index}
-                  className={cn("group", focusableStyles)}
-                >
-                  <Card className="overflow-hidden border-none">
-                    <CardContent className="p-0">
-                      {collection.image ? (
+              <React.Fragment key={index}>
+                <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5">
+                  <Link
+                    href={`/token/${auction.collection_address}/${auction.token_id}`}
+                    key={index}
+                    className={cn("group", focusableStyles)}
+                  >
+                    <Card className="overflow-hidden">
+                      <CardContent className="p-0">
                         <div className="aspect-square w-full overflow-hidden">
-                          <Image
-                            src={collection.image}
+                          <Media
+                            src={auction.metadata?.image}
+                            mediaKey={auction.metadata?.image_key}
                             height={500}
                             width={500}
-                            alt={collection.name}
+                            alt={auction.metadata?.name ?? "Unknown"}
                             className="aspect-square w-full object-cover transition-transform group-hover:scale-110"
                           />
                         </div>
-                      ) : (
-                        <div className="aspect-square bg-secondary" />
-                      )}
-                    </CardContent>
-                    <CardFooter className="flex flex-col items-start p-5">
-                      <div className="flex w-full items-center gap-1.5">
-                        <h4
-                          className={cn(
-                            "text-xl font-semibold",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {collection.name}
-                        </h4>
-                      </div>
-                      <p className="mt-2.5 flex gap-1.5 font-medium text-muted-foreground">
-                        <TimerReset size={20} /> End in 2d 8h 56min 23s
-                      </p>
-                    </CardFooter>
-                  </Card>
-                </Link>
-              </CarouselItem>
+                      </CardContent>
+                      <CardFooter className="flex flex-col items-start px-4 pb-6 pt-4">
+                        <div className="flex w-full items-center gap-1.5">
+                          <h4
+                            className={cn(
+                              "text-xl font-semibold",
+                              ellipsableStyles,
+                            )}
+                          >
+                            {auction.metadata?.name ?? "Unknown Token"}
+                          </h4>
+                        </div>
+                        <p className="mt-2.5 flex items-center gap-1.5 font-medium text-muted-foreground">
+                          <TimerReset size={20} />
+                          End in{" "}
+                          {getRoundedRemainingTime(auction.end_timestamp)}
+                        </p>
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                </CarouselItem>
+              </React.Fragment>
             );
           })}
         </CarouselContent>

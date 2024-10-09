@@ -20,7 +20,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">Floor</p>
         <div className="font-numbers flex items-center gap-2 text-sm font-medium lg:text-xl">
-          <Ethereum className="size-5" />
+          <Ethereum className="size-5" weight={45} />
           <p>{formatUnits(collection.floor ?? 0, 18)} ETH</p>
           <p
             className={cn(
@@ -42,7 +42,7 @@ export default function CollectionHeaderStats({
           Total Volume
         </p>
         <div className="font-numbers flex items-center gap-2 text-sm lg:text-xl">
-          <Ethereum className="size-5" />
+          <Ethereum className="size-5" weight={45} />
           <p className="font-medium">
             {formatNumber(collection.total_volume)} ETH
           </p>
@@ -53,7 +53,7 @@ export default function CollectionHeaderStats({
       <div className="rounded-lg bg-card p-3.5 md:bg-transparent md:p-0">
         <p className="text-sm font-medium text-muted-foreground">7D Volume</p>
         <div className="font-numbers flex items-center gap-2 text-sm lg:text-xl">
-          <Ethereum className="size-5" />
+          <Ethereum className="size-5" weight={45} />
           <p className="font-medium">
             {formatNumber(collection.volume_7d_eth)} ETH
           </p>

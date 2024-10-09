@@ -34,32 +34,34 @@ export default function MobileCollectionActivity({
       <Separator className="my-5" />
       {collectionActivity.map((activity, index) => (
         <Fragment key={index}>
-          <div className="flex items-center gap-4">
-            <Media
-              alt={activity.token_metadata?.name ?? ""}
-              height={84}
-              width={84}
-              src={activity.token_metadata?.image}
-              mediaKey={activity.token_metadata?.image_key}
-              className="size-10 rounded-xs"
-            />
+          <div>
+            <div className="mb-3 flex items-center gap-2.5">
+              {activityTypeMetadata[activity.activity_type].icon}
+              <p>{activityTypeMetadata[activity.activity_type].title}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Media
+                alt={activity.token_metadata?.name ?? ""}
+                height={84}
+                width={84}
+                src={activity.token_metadata?.image}
+                mediaKey={activity.token_metadata?.image_key}
+                className="size-10 rounded-xs"
+              />
 
-            <div className="w-full">
-              <div className="flex w-full items-center justify-between">
-                <Link
-                  className={cn("text-base font-medium", focusableStyles)}
-                  href={`/token/${activity.address}/${activity.token_id}`}
-                >
-                  {activity.token_metadata?.name ?? activity.name}
-                </Link>
-
-                <div className="flex items-center gap-2.5">
-                  {activityTypeMetadata[activity.activity_type].icon}
-                  <p>{activityTypeMetadata[activity.activity_type].title}</p>
+              <div className="w-full">
+                <div className="flex w-full items-center justify-between">
+                  <Link
+                    className={cn("text-base font-medium", focusableStyles)}
+                    href={`/token/${activity.address}/${activity.token_id}`}
+                  >
+                    {activity.token_metadata?.name ?? activity.name}
+                  </Link>
+                  {activity.price ? (
+                    <PriceTag price={activity.price} className="h-7 text-xs" />
+                  ) : null}
                 </div>
-              </div>
 
-              <div className="flex w-full items-center justify-between">
                 <Link
                   href={`/collection/${activity.address}`}
                   className={cn(
@@ -74,58 +76,48 @@ export default function MobileCollectionActivity({
                     <VerifiedIcon className="size-4 flex-shrink-0 text-primary" />
                   )}
                 </Link>
-
-                {activity.price ? (
-                  <PriceTag price={activity.price} className="h-7 text-xs" />
-                ) : (
-                  "_"
-                )}
               </div>
             </div>
-          </div>
 
-          <div className="mt-3 flex items-center justify-between text-sm font-semibold">
-            <div className="flex items-center gap-2">
-              <p>
-                by{" "}
-                <span className="text-muted-foreground">
-                  {activity.from ? (
-                    <Link
-                      href={`/wallet/${activity.from}`}
-                      className="text-muted-foreground"
-                    >
-                      {ownerOrShortAddress({
-                        ownerAddress: activity.from,
-                        address,
-                      })}
-                    </Link>
-                  ) : (
-                    "-"
-                  )}
-                </span>
-              </p>
-              <p>
-                for{" "}
-                <span className="text-muted-foreground">
-                  {activity.to ? (
-                    <Link
-                      href={`/wallet/${activity.to}`}
-                      className="text-muted-foreground"
-                    >
-                      {ownerOrShortAddress({
-                        ownerAddress: activity.to,
-                        address,
-                      })}
-                    </Link>
-                  ) : (
-                    "-"
-                  )}
-                </span>
+            <div className="mt-3 flex items-center justify-between text-sm font-semibold">
+              <div className="flex items-center gap-2">
+                {activity.from ? (
+                  <p>
+                    by{" "}
+                    <span className="text-muted-foreground">
+                      <Link
+                        href={`/wallet/${activity.from}`}
+                        className="text-muted-foreground"
+                      >
+                        {ownerOrShortAddress({
+                          ownerAddress: activity.from,
+                          address,
+                        })}
+                      </Link>
+                    </span>
+                  </p>
+                ) : null}
+                {activity.to ? (
+                  <p>
+                    for{" "}
+                    <span className="text-muted-foreground">
+                      <Link
+                        href={`/wallet/${activity.to}`}
+                        className="text-muted-foreground"
+                      >
+                        {ownerOrShortAddress({
+                          ownerAddress: activity.to,
+                          address,
+                        })}
+                      </Link>
+                    </span>
+                  </p>
+                ) : null}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {timeSince(activity.time_stamp)}
               </p>
             </div>
-            <p className="text-xs text-muted-foreground">
-              {timeSince(activity.time_stamp)}
-            </p>
           </div>
           <Separator className="my-5" />
         </Fragment>

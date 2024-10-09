@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Search } from "@ark-market/ui/icons";
 
 import { cn } from "@ark-market/ui";
+import { Search } from "@ark-market/ui/icons";
 
 import type { InputProps } from "./input";
 import { Input } from "./input";

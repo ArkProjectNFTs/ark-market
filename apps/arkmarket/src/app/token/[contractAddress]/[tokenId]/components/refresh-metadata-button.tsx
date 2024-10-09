@@ -10,11 +10,13 @@ import postTokenMetadataRefresh from "~/lib/postTokenMetadataRefresh";
 interface RefreshMetadataButtonProps {
   contractAddress: string;
   tokenId: string;
+  iconWeight?: number;
 }
 
 export default function RefreshMetadataButton({
   contractAddress,
   tokenId,
+  iconWeight,
 }: RefreshMetadataButtonProps) {
   const { toast } = useToast();
 
@@ -45,8 +47,12 @@ export default function RefreshMetadataButton({
       onClick={async () => {
         await refreshMetadataMutation.mutateAsync();
       }}
+      className="flex text-[1.5rem]"
     >
-      <RefreshCw className="size-6 text-muted-foreground" />
+      <RefreshCw
+        className="size-6 text-muted-foreground transition-colors hover:text-foreground"
+        weight={iconWeight}
+      />
     </button>
   );
 }

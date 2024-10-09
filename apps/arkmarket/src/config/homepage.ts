@@ -12,26 +12,30 @@ export const homepageConfig = {
       floorPrice: 0.12,
     },
     {
-      bannerSrc: "/carousel_banner/everai.png",
-      collectionSrc: "/collections/everai.png",
-      name: "Everai 2",
+      nftSrc:
+        "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/1f82bcc2cd2640ce18e8c4932581489acf69cd42670c198860ffad6bcc637843.png",
+      collectionSrc:
+        "https://media.arkproject.dev/contracts/0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003/avatar.jpg",
+      name: "DucksEverywhere",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
+        "Ducks Everywhere is an NFT collection of handcrafted ducks made from briqs. Each duck is uniquely created and selected by the community, sold through auctions.",
       address:
-        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 923,
-      floorPrice: 0.12,
+        "0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003",
+      itemsCount: 726,
+      floorPrice: 0.0525,
     },
     {
-      bannerSrc: "/carousel_banner/everai.png",
-      collectionSrc: "/collections/everai.png",
-      name: "Everai 3",
+      nftSrc:
+        "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/2c91748f2dbcac64a83ec754fbb7770325ffcce8ec51653b8b669f850546a465.png",
+      collectionSrc:
+        "https://img.starkurabu.com/15576896767724894447561965312147459.png",
+      name: "Starkurabu",
       description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
+        "Starkurabu is the first Generative art PFP collection on Starknet where you can customize every trait.",
       address:
-        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 923,
-      floorPrice: 0.12,
+        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
+      itemsCount: 10_000,
+      floorPrice: 0.0075,
     },
   ],
   exploreCategory: [
@@ -81,27 +85,6 @@ export const homepageConfig = {
       image: "/medias/influence.png",
       status: "upcoming",
     },
-    {
-      name: "Influence CrewMate",
-      address:
-        "0x0241b9c4ce12c06f49fee2ec7c16337386fa5185168f538a7631aacecdf3df74",
-      image: "/medias/crewmates.png",
-      status: "upcoming",
-    },
-    {
-      name: "Dragark",
-      address:
-        "0x051d0844f96f86c7363cc7eb3ab939e0ef5b70939dcbc17895b2fa178d9af420",
-      image: "/medias/dragark.png",
-      status: "upcoming",
-    },
-    {
-      name: "Dragark Element NFT",
-      address:
-        "0x0537fa10cefbb8ff7e61e86e950746809f95faa7398f250f0063069b29bb7933",
-      image: "/medias/dragark-2.png",
-      status: "upcoming",
-    },
   ] as {
     name: string;
     address: string;
@@ -142,16 +125,6 @@ export const homepageConfig = {
       third_nft: "/nfts/crewmates_3.png",
       token_count: 18_926,
     },
-    {
-      name: "Everai",
-      address:
-        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      image: "/collections/everai.png",
-      first_nft: "/nfts/everai_1.png",
-      second_nft: "/nfts/everai_2.png",
-      third_nft: "/nfts/everai_3.png",
-      token_count: 919,
-    },
   ],
   exploreCollections: [
     {
@@ -160,13 +133,6 @@ export const homepageConfig = {
         "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
       image: "/collections/everai.png",
       banner_image: "/banners/everai.png",
-    },
-    {
-      name: "Starkurabu",
-      address:
-        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
-      image: "/collections/7d9903ba-ec50-4474-b2b1-7eb4fbc264bd.png",
-      banner_image: "/banners/starkurabu.png",
     },
     {
       name: "Blobert",
@@ -197,12 +163,6 @@ export const homepageConfig = {
       banner_image: "/banners/alternova.png",
     },
     {
-      name: "Grails",
-      address:
-        "0x02a819b93cc69b45ee5d1a1bfc16954c16f6d35c3873a06c97b95c009bfe502b",
-      image: "/collections/grail.png",
-    },
-    {
       name: "Argent: Xplorer",
       address:
         "0x01b22f7a9d18754c994ae0ee9adb4628d414232e3ebd748c386ac286f86c3066",
@@ -220,18 +180,18 @@ export const homepageConfig = {
         "0x05dbdedc203e92749e2e746e2d40a768d966bd243df04a6b712e222bc040a9af",
       image: "/collections/59685ea9-aeae-4784-82a1-5aa9364cea9b.png",
     },
-    {
-      name: "Carbonable - KARATHURU",
-      address:
-        "0x05a667adc04676fba78a29371561a0bf91dab25847d5dc4709a93a4cfb5ff293",
-      image: "/collections/carbonable.jpeg",
-    },
-    {
-      name: "Flex storefront",
-      address:
-        "0x02e6c908da3d1ced80d81085ed9374b7c5048f86799e1f35e54daca4d70832d7",
-      image: "/collections/flex-store.png",
-    },
+    // {
+    //   name: "Carbonable - KARATHURU",
+    //   address:
+    //     "0x05a667adc04676fba78a29371561a0bf91dab25847d5dc4709a93a4cfb5ff293",
+    //   image: "/collections/carbonable.jpeg",
+    // },
+    // {
+    //   name: "Flex storefront",
+    //   address:
+    //     "0x02e6c908da3d1ced80d81085ed9374b7c5048f86799e1f35e54daca4d70832d7",
+    //   image: "/collections/flex-store.png",
+    // },
     {
       name: "Flex evo",
       address:
@@ -262,24 +222,24 @@ export const homepageConfig = {
         "0x01335defa219c2d0911a75ff85245200932501d6975d6178eabfa544e7d82b07",
       image: "/collections/mad-ape.png",
     },
-    {
-      name: "Pyramid store",
-      address:
-        "0x42e7815d9e90b7ea53f4550f74dc12207ed6a0faaef57ba0dbf9a66f3762d82",
-      image: "/collections/pyramid.png",
-    },
+    // {
+    //   name: "Pyramid store",
+    //   address:
+    //     "0x42e7815d9e90b7ea53f4550f74dc12207ed6a0faaef57ba0dbf9a66f3762d82",
+    //   image: "/collections/pyramid.png",
+    // },
     {
       name: "Lotus Project",
       address:
         "0x61ccf82a5628c0dbe3d0cc10e904882f1e9bc8adbb9456bdba155341bf430e5",
       image: "/collections/lotus.webp",
     },
-    {
-      name: "Fibrous Arena",
-      address:
-        "0x1d2eac1bcddde10b595fd4e6247aa105ec69fef308c94fe612f435fe5798d19",
-      image: "/collections/fibrous.webp",
-    },
+    // {
+    //   name: "Fibrous Arena",
+    //   address:
+    //     "0x1d2eac1bcddde10b595fd4e6247aa105ec69fef308c94fe612f435fe5798d19",
+    //   image: "/collections/fibrous.webp",
+    // },
     {
       name: "The starks",
       address:
@@ -316,12 +276,12 @@ export const homepageConfig = {
         "0x007ca74fd0a9239678cc6355e38ac1e7820141501727ae37f9c733e5ed1c3592",
       image: "/collections/metacube-genesis.gif",
     },
-    {
-      name: "Dreambotty",
-      address:
-        "0x3859bf9178b48a4ba330d6872ab5a6d3895b64d6631197beefde6293bc172cd",
-      image: "/collections/dreambotty.webp",
-    },
+    // {
+    //   name: "Dreambotty",
+    //   address:
+    //     "0x3859bf9178b48a4ba330d6872ab5a6d3895b64d6631197beefde6293bc172cd",
+    //   image: "/collections/dreambotty.webp",
+    // },
     {
       name: "The Crown of Stark",
       address:
@@ -381,78 +341,6 @@ export const homepageConfig = {
       address:
         "0x0602c301f6a1c2ef174bafaab7389c3f6165df34736befcf2ca3df7764934caf",
       image: "/collections/20240602033225e51b51e85e60446eaa5f53421b0ebd98.gif",
-    },
-  ],
-  liveAuctions: [
-    {
-      name: "Nounsters #23",
-      image: "/nfts/nounsters_23.png",
-    },
-    {
-      name: "Masked Duck",
-      image: "/nfts/masked_duck.png",
-    },
-    {
-      name: "Nounsters #67",
-      image: "/nfts/nounsters_67.png",
-    },
-    {
-      name: "Canadian Rapper Duck",
-      image: "/nfts/canadian_rapper_duck.png",
-    },
-    {
-      name: "Nounsters #23",
-      image: "/nfts/nounsters_23.png",
-    },
-    {
-      name: "Masked Duck",
-      image: "/nfts/masked_duck.png",
-    },
-    {
-      name: "Nounsters #67",
-      image: "/nfts/nounsters_67.png",
-    },
-    {
-      name: "Canadian Rapper Duck",
-      image: "/nfts/canadian_rapper_duck.png",
-    },
-  ],
-  latestSales: [
-    {
-      token: {
-        name: "Everai #2345",
-        collection_name: "Everai",
-        collection_address:
-          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-        image: "/nfts/everai_1.png",
-      },
-      price: "52500000000000000",
-      from: "0x7689b5",
-      to: "kwiss.stark",
-    },
-    {
-      token: {
-        name: "Everai #2345",
-        collection_name: "Everai",
-        collection_address:
-          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-        image: "/nfts/everai_2.png",
-      },
-      price: "52500000000000000",
-      from: "0x7689b5",
-      to: "kwiss.stark",
-    },
-    {
-      token: {
-        name: "Everai #2345",
-        collection_name: "Everai",
-        collection_address:
-          "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-        image: "/nfts/everai_3.png",
-      },
-      price: "52500000000000000",
-      from: "0x7689b5",
-      to: "kwiss.stark",
     },
   ],
 };

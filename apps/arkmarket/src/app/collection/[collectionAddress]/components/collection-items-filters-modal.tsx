@@ -20,7 +20,7 @@ export default function CollectionItemsFiltersModal({
       <DialogContent>
         <DialogTitle className="sr-only">Filters</DialogTitle>
         <div className="flex h-full flex-col justify-between">
-          <CollectionItemsFiltersContent />
+          <CollectionItemsFiltersContent buyNow={false} setBuyNow={() => 1} />
           <div>
             <Button className="w-full" size="xl">
               Done

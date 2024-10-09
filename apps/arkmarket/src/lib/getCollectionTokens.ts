@@ -34,9 +34,10 @@ export interface CollectionTokensApiResponse {
 interface GetCollectionTokensParams {
   collectionAddress: string;
   page?: number;
-  sortDirection: CollectionSortDirection;
-  sortBy: CollectionSortBy;
-  filters: Filters;
+  sortDirection?: CollectionSortDirection;
+  sortBy?: CollectionSortBy;
+  filters?: Filters;
+  buyNow?: boolean;
 }
 
 export async function getCollectionTokens({
@@ -45,19 +46,27 @@ export async function getCollectionTokens({
   sortDirection,
   sortBy,
   filters,
+  buyNow,
 }: GetCollectionTokensParams) {
-  const queryParams = [
-    `items_per_page=${itemsPerPage}`,
-    `sort=${sortBy}`,
-    `direction=${sortDirection}`,
-  ];
+  const queryParams = [`items_per_page=${itemsPerPage}`];
 
-  if (Object.keys(filters.traits).length) {
+  if (Object.keys(filters?.traits ?? {}).length) {
     queryParams.push(`filters=${encodeURIComponent(JSON.stringify(filters))}`);
   }
 
   if (page !== undefined) {
     queryParams.push(`page=${page}`);
+  }
+
+  if (buyNow) {
+    queryParams.push("buy_now=true");
+  }
+
+  if (sortBy !== undefined) {
+    queryParams.push(`sort=${sortBy}`);
+  }
+  if (sortBy !== undefined) {
+    queryParams.push(`direction=${sortDirection}`);
   }
 
   const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;
@@ -80,4 +89,22 @@ export async function getCollectionTokens({
   const result = (await response.json()) as CollectionTokensApiResponse;
 
   return result;
+}
+
+export function getMediaSrc(
+  src?: string | null,
+  mediaKey?: string | null,
+  thumbnailKey?: string | null,
+  width?: number,
+  height?: number,
+) {
+  if (thumbnailKey) {
+    return `${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${thumbnailKey}`;
+  }
+
+  if (mediaKey && width && height) {
+    const resolutionParam = `:${width}:${height}`;
+    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${mediaKey}`;
+  }
+  return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
 }

@@ -21,6 +21,7 @@ interface CollectionItemsDataProps {
   sortDirection: CollectionSortDirection;
   viewType: ViewType;
   filters: Filters;
+  buyNow: boolean;
 }
 
 export default function CollectionItemsData({
@@ -29,6 +30,7 @@ export default function CollectionItemsData({
   sortDirection,
   viewType,
   filters,
+  buyNow,
 }: CollectionItemsDataProps) {
   const {
     data: infiniteData,
@@ -42,6 +44,7 @@ export default function CollectionItemsData({
       sortBy,
       collectionAddress,
       filters,
+      buyNow,
     ],
     refetchInterval: 10_000,
     getNextPageParam: (lastPage: CollectionTokensApiResponse) =>
@@ -54,6 +57,7 @@ export default function CollectionItemsData({
         sortDirection,
         sortBy,
         filters,
+        buyNow,
       }),
   });
 

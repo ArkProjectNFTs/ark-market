@@ -58,7 +58,7 @@ export default function TokenAbout({
       onOpenChange={setOpen}
     >
       <div className="flex h-[4.5rem] items-center justify-between">
-        <h3 className="text-2xl font-semibold">About & details</h3>
+        <h3 className="font-display text-2xl font-semibold">About & details</h3>
         <CollapsibleTrigger asChild>
           <Button variant="outline" size="icon-sm">
             {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -110,7 +110,7 @@ export default function TokenAbout({
         <div className="mt-8 flex flex-col gap-4 pb-6">
           <div className="flex items-center justify-between">
             <p className="font-medium">Contract Address</p>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground transition-colors hover:text-primary">
               <Link
                 href={`https://starkscan.co/nft-contract/${contractAddress}`}
                 target="_blank"
@@ -132,7 +132,9 @@ export default function TokenAbout({
           <div className="flex items-center justify-between">
             <p className="font-medium">Owner</p>
             <Link href={`/wallet/${token.owner}`}>
-              <p className="text-muted-foreground">{ownerShortenedAddress}</p>
+              <p className="text-muted-foreground transition-colors hover:text-primary">
+                {ownerShortenedAddress}
+              </p>
             </Link>
           </div>
           <div className="flex items-center justify-between">
