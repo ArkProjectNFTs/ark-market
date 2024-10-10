@@ -39,12 +39,12 @@ export function PriceTag({
         className,
       )}
     >
-      <CurrencyIcon symbol={currency?.symbol || "ETH"} />
+      <CurrencyIcon symbol={currency?.symbol ?? "ETH"} />
       <p className={ellipsableStyles}>
         {isNaN(parsedPrice)
-          ? formatUnits(price, currency?.decimals || 18)
+          ? formatUnits(price, currency?.decimals ?? 18)
           : parsedPrice.toFixed(5)}
-        <span className="text-muted-foreground">{` ${currency?.symbol || "ETH"}`}</span>
+        <span className="text-muted-foreground">{` ${currency?.symbol ?? "ETH"}`}</span>
       </p>
     </div>
   );
