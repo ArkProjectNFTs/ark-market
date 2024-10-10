@@ -309,6 +309,11 @@ export interface LatestSales {
   timestamp: number;
   to: string;
   transaction_hash: string | null;
+  currency: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
 
 export interface TrendingNow {

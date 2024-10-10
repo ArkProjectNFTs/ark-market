@@ -120,7 +120,7 @@ export default function LatestSales() {
                     </div>
                   </TableCell>
                   <TableCell className="text-foreground">
-                    <PriceTag price={sale.price} />
+                    <PriceTag price={sale.price} currency={sale.currency} />
                   </TableCell>
                   <TableCell className="text-primary">
                     <Link href={`/wallet/${sale.from}`}>
