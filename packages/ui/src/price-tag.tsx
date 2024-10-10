@@ -1,5 +1,3 @@
-import { Star } from "lucide-react";
-
 import type { PropsWithClassName } from ".";
 import { cn, ellipsableStyles, formatUnits } from ".";
 import { Ethereum, Starknet } from "./icons";
@@ -42,9 +40,10 @@ export function PriceTag({
       )}
     >
       <CurrencyIcon symbol={currency?.symbol || "ETH"} />
-
       <p className={ellipsableStyles}>
-        {isNaN(parsedPrice) ? formatUnits(price, 18) : parsedPrice.toFixed(5)}
+        {isNaN(parsedPrice)
+          ? formatUnits(price, currency?.decimals || 18)
+          : parsedPrice.toFixed(5)}
         <span className="text-muted-foreground">{` ${currency?.symbol || "ETH"}`}</span>
       </p>
     </div>
