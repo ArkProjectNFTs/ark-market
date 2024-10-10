@@ -4,7 +4,7 @@ import { Ethereum, Starknet } from "./icons";
 
 interface PriceTagProps {
   price: number | bigint | string;
-  currency: {
+  currency?: {
     contract: string;
     decimals: number;
     symbol: string;
