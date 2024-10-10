@@ -1,13 +1,32 @@
+import { Star } from "lucide-react";
+
 import type { PropsWithClassName } from ".";
 import { cn, ellipsableStyles, formatUnits } from ".";
-import { Ethereum } from "./icons";
+import { Ethereum, Starknet } from "./icons";
 
 interface PriceTagProps {
   price: number | bigint | string;
+  currency: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
+
+function CurrencyIcon({ symbol }: { symbol: string }) {
+  switch (symbol) {
+    case "STRK":
+      return <Starknet className="size-5" />;
+    default:
+    case "ETH":
+      return <Ethereum className="size-5" />;
+  }
+}
+
 export function PriceTag({
   className,
   price,
+  currency,
 }: PropsWithClassName<PriceTagProps>) {
   if (!price) {
     return null;
@@ -22,10 +41,11 @@ export function PriceTag({
         className,
       )}
     >
-      <Ethereum className="size-5" />
+      <CurrencyIcon symbol={currency?.symbol || "ETH"} />
+
       <p className={ellipsableStyles}>
         {isNaN(parsedPrice) ? formatUnits(price, 18) : parsedPrice.toFixed(5)}
-        <span className="text-muted-foreground"> ETH</span>
+        <span className="text-muted-foreground">{` ${currency?.symbol || "ETH"}`}</span>
       </p>
     </div>
   );
