@@ -58,7 +58,11 @@ export default function MobileCollectionActivity({
                     {activity.token_metadata?.name ?? activity.name}
                   </Link>
                   {activity.price ? (
-                    <PriceTag price={activity.price} className="h-7 text-xs" />
+                    <PriceTag
+                      price={activity.price}
+                      currency={activity.currency}
+                      className="h-7 text-xs"
+                    />
                   ) : null}
                 </div>
 

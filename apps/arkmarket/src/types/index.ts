@@ -176,6 +176,11 @@ export interface PortfolioActivity {
   to: string;
   token_id: string;
   transaction_hash: string | null;
+  currency?: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
 
 export interface PortfolioOffers {
@@ -202,6 +207,11 @@ export interface PortfolioOffers {
     start_amount: string | null;
     start_date: number | null;
   };
+  currency?: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
 
 export interface CollectionActivity {
@@ -216,6 +226,11 @@ export interface CollectionActivity {
   token_id: string;
   token_metadata: TokenMetadata | null;
   transaction_hash: string | null;
+  currency?: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
 
 export interface TokenOffer {
@@ -294,6 +309,11 @@ export interface TokenActivity {
   time_stamp: number;
   to: string | null;
   transaction_hash: string | null;
+  currency?: {
+    contract: string;
+    decimals: number;
+    symbol: string;
+  } | null;
 }
 
 export interface Filters {
