@@ -15,9 +15,10 @@ function CurrencyIcon({ symbol }: { symbol: string }) {
   switch (symbol) {
     case "STRK":
       return <Starknet className="size-5" />;
-    default:
     case "ETH":
       return <Ethereum className="size-5" />;
+    default:
+      return null;
   }
 }
 
