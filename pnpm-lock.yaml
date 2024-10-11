@@ -82,11 +82,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@ark-project/core':
-        specifier: ^2.1.1
-        version: 2.1.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
+        specifier: 3.0.0-beta.1
+        version: 3.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@ark-project/react':
-        specifier: ^1.1.1
-        version: 1.1.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
+        specifier: 2.0.0-beta.1
+        version: 2.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@hookform/error-message':
         specifier: ^2.0.1
         version: 2.0.1(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.52.1(react@18.3.1))(react@18.3.1)
@@ -397,7 +397,7 @@ importers:
         version: 7.35.0(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-459fd418-20241001(eslint@9.9.1(jiti@1.21.6))
+        version: 5.1.0-rc-09111202-20241011(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.13
         version: 2.1.0(eslint@9.9.1(jiti@1.21.6))
@@ -494,8 +494,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@ark-project/core@2.1.1':
-    resolution: {integrity: sha512-qA4eYtRrHgJlE5SdhbJxIQsRDcHZ46wdt/+61GfprmEAfT3LZTW1nzZW/nnI7/Bmvcj6uHgsQQjnkBLSHGS6iQ==}
+  '@ark-project/core@3.0.0-beta.1':
+    resolution: {integrity: sha512-KqisqFQxYHFq5cdnRy8dz/RjHiqFXUTuOx/gkn1iRBKP1gcrUvBQYJZaZIXl8xSIhI2lhI+/6Boa+JFv50MHIw==}
     peerDependencies:
       typescript: '>=5.0.4'
       viem: '>=0.3.35'
@@ -503,8 +503,8 @@ packages:
       typescript:
         optional: true
 
-  '@ark-project/react@1.1.1':
-    resolution: {integrity: sha512-YCN0+9RexyDjgidEqv6hnoVeVmKPqqYFWKEZTg19jx/t+JmvminACbUHqWWjArMjbCYbe/v/fYLA1+GsaOWpAA==}
+  '@ark-project/react@2.0.0-beta.1':
+    resolution: {integrity: sha512-PwkiiTWJmKcvrpo6yiA5IjGAP7fKITTUnT/ihzlpuKpp/7lw/bsRn6h2n3gsjG7fRtTW76x3Pt7iyDgRVTposg==}
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -2051,8 +2051,16 @@ packages:
   '@tanstack/query-core@5.53.3':
     resolution: {integrity: sha512-ZfjAgd7NpqDx0e4aYBt7EmS2enbulPrJwowTy+mayRE93WUUH+sIYHun1TdRjpGwDPMNNZ5D6goh7n3CwoO+HA==}
 
+  '@tanstack/query-core@5.59.10':
+    resolution: {integrity: sha512-XxvnKeBWqDTHstyjA1qmSD5VS/FZ2g/qYvPMhFM7IZF0JnMqMxtzbiUkiTFaZ4YZo/Q84LS0hZi0UncKJ3vIhg==}
+
   '@tanstack/react-query@5.53.3':
     resolution: {integrity: sha512-286mN/91CeM7vC6CZFLKYDHSw+WyMX6ekIvzoTbpM4xyPb99VSyCKPLyPgaOatKqYm6ooMBquSq9NGRdKgsJfg==}
+    peerDependencies:
+      react: ^18 || ^19
+
+  '@tanstack/react-query@5.59.11':
+    resolution: {integrity: sha512-m5I4+4NHy6p0uzKLiq30EdRGk37CHHjXJsfMT0bty/Z/aO11LgXUgDBCq/xma4eO5RlV95sFVmi2QB9nVaLlxg==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -3184,8 +3192,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-459fd418-20241001:
-    resolution: {integrity: sha512-vBUzji1JDwLxFAsmVtdbWQBo6LMnN7J2ZpDrGWo/ve4NnJGDeNFQOGqMJM1j0uDzLC1/sgQcFEOHofb8BsvJUQ==}
+  eslint-plugin-react-hooks@5.1.0-rc-09111202-20241011:
+    resolution: {integrity: sha512-HLdP3Qpr9KUckSEhxwWHqpXGJYKlZV+P9gqdOwPa45Ka3qhY1kuflvtwRMMA9dd7p8AL/lRLU3UUfNcDVh5DGw==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -5731,7 +5739,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@ark-project/core@2.1.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
+  '@ark-project/core@3.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
     dependencies:
       '@scure/starknet': 0.3.0
       starknet: 6.11.0
@@ -5741,11 +5749,12 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@ark-project/react@1.1.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
+  '@ark-project/react@2.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
     dependencies:
-      '@ark-project/core': 2.1.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
+      '@ark-project/core': 3.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@starknet-react/chains': 0.1.7
       '@starknet-react/core': 2.8.3(get-starknet-core@3.3.2(starknet@6.11.0))(react@18.3.1)(starknet@6.11.0)
+      '@tanstack/react-query': 5.59.11(react@18.3.1)
       get-starknet-core: 3.3.2(starknet@6.11.0)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -7325,9 +7334,16 @@ snapshots:
 
   '@tanstack/query-core@5.53.3': {}
 
+  '@tanstack/query-core@5.59.10': {}
+
   '@tanstack/react-query@5.53.3(react@18.3.1)':
     dependencies:
       '@tanstack/query-core': 5.53.3
+      react: 18.3.1
+
+  '@tanstack/react-query@5.59.11(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.59.10
       react: 18.3.1
 
   '@tanstack/react-table@8.19.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -8801,7 +8817,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-459fd418-20241001(eslint@9.9.1(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-09111202-20241011(eslint@9.9.1(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.1(jiti@1.21.6)
 
