@@ -59,7 +59,11 @@ export default function MobilePortfolioActivity({
                   </Link>
 
                   {activity.price ? (
-                    <PriceTag price={activity.price} className="h-7 text-xs" />
+                    <PriceTag
+                      price={activity.price}
+                      currency={activity.currency}
+                      className="h-7 text-xs"
+                    />
                   ) : null}
                 </div>
 

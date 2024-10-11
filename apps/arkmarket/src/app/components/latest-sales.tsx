@@ -43,7 +43,7 @@ export default function LatestSales() {
               WebkitTextStrokeColor: "black",
             }}
           >
-            Latest sale
+            Latest sales
           </p>
           <p
             className="hidden whitespace-nowrap text-transparent dark:block"
@@ -53,7 +53,7 @@ export default function LatestSales() {
               WebkitTextStrokeColor: "white",
             }}
           >
-            Latest sale
+            Latest sales
           </p>
         </Marquee>
       </div>

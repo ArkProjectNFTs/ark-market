@@ -36,7 +36,11 @@ export default function MobileTokenActivity({
                 <p>{activityTypeMetadata[activity.activity_type].title}</p>
               </div>
               {activity.price ? (
-                <PriceTag price={activity.price} className="h-7 text-xs" />
+                <PriceTag
+                  price={activity.price}
+                  currency={activity.currency}
+                  className="h-7 text-xs"
+                />
               ) : (
                 "_"
               )}

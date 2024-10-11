@@ -46,7 +46,14 @@ export default function DesktopTokenActivity({
             >
               <EventCell activity={activity} />
               <TableCell>
-                {activity.price ? <PriceTag price={activity.price} /> : "_"}
+                {activity.price ? (
+                  <PriceTag
+                    price={activity.price}
+                    currency={activity.currency}
+                  />
+                ) : (
+                  "_"
+                )}
               </TableCell>
 
               <ActivityToFromCell

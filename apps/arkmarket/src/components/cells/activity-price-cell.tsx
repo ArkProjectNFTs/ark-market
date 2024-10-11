@@ -15,7 +15,11 @@ export default function PriceCell({ activity }: PriceCellProps) {
   return (
     <TableCell className="flex">
       {activity.price ? (
-        <PriceTag price={activity.price} className="max-w-full" />
+        <PriceTag
+          price={activity.price}
+          currency={activity.currency}
+          className="max-w-full"
+        />
       ) : (
         "_"
       )}
