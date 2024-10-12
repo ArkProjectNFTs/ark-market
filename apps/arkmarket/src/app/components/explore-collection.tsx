@@ -68,7 +68,7 @@ export default function ExploreCollection() {
                       height={124}
                       width={124}
                       loading="lazy"
-                      unoptimized={collection.image.endsWith(".gif")}
+                      unutilized={collection.image.endsWith(".gif")}
                       sizes="(max-width: 768px) 10vw, 
                              (max-width: 1200px) 5vw, 
                              4vw"
