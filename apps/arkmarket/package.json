@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@ark-market/ui": "workspace:*",
-    "@ark-project/core": "^2.1.1",
-    "@ark-project/react": "^1.1.1",
+    "@ark-project/core": "3.0.0-beta.1",
+    "@ark-project/react": "2.0.0-beta.2",
     "@hookform/error-message": "^2.0.1",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.0.0",
