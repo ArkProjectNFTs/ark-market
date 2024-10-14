@@ -323,6 +323,7 @@ export interface Filters {
 export interface LatestSales {
   collection_address: string;
   collection_name: string;
+  token_id: string;
   from: string;
   metadata: TokenMetadata | null;
   price: string;
