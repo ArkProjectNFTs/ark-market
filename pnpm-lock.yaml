@@ -85,8 +85,8 @@ importers:
         specifier: 3.0.0-beta.1
         version: 3.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@ark-project/react':
-        specifier: 2.0.0-beta.1
-        version: 2.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
+        specifier: 2.0.0-beta.2
+        version: 2.0.0-beta.2(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@hookform/error-message':
         specifier: ^2.0.1
         version: 2.0.1(react-dom@18.3.1(react@18.3.1))(react-hook-form@7.52.1(react@18.3.1))(react@18.3.1)
@@ -397,7 +397,7 @@ importers:
         version: 7.35.0(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-09111202-20241011(eslint@9.9.1(jiti@1.21.6))
+        version: 5.1.0-rc-cd22717c-20241013(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.13
         version: 2.1.0(eslint@9.9.1(jiti@1.21.6))
@@ -503,8 +503,8 @@ packages:
       typescript:
         optional: true
 
-  '@ark-project/react@2.0.0-beta.1':
-    resolution: {integrity: sha512-PwkiiTWJmKcvrpo6yiA5IjGAP7fKITTUnT/ihzlpuKpp/7lw/bsRn6h2n3gsjG7fRtTW76x3Pt7iyDgRVTposg==}
+  '@ark-project/react@2.0.0-beta.2':
+    resolution: {integrity: sha512-QmnL2Y5ondgYpMWaIcm8nva7/7HPKonHg7QrAXIsVU2N63pwbCbK6sNrksPoZ4PKUFgPUBRbF7/kOwKvwG/uKA==}
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -3192,8 +3192,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-09111202-20241011:
-    resolution: {integrity: sha512-HLdP3Qpr9KUckSEhxwWHqpXGJYKlZV+P9gqdOwPa45Ka3qhY1kuflvtwRMMA9dd7p8AL/lRLU3UUfNcDVh5DGw==}
+  eslint-plugin-react-hooks@5.1.0-rc-cd22717c-20241013:
+    resolution: {integrity: sha512-p4gcOd9uRugj0w+23DAcb1quxz0RLLQrebiQ2wQ3+LbRlSic5SwixqdZmMsuQLkKdWYYftVIH6gsBoUBHNdsZg==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -5749,7 +5749,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@ark-project/react@2.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
+  '@ark-project/react@2.0.0-beta.2(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))':
     dependencies:
       '@ark-project/core': 3.0.0-beta.1(typescript@5.5.4)(viem@2.17.3(typescript@5.5.4)(zod@3.23.8))
       '@starknet-react/chains': 0.1.7
@@ -8817,7 +8817,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-09111202-20241011(eslint@9.9.1(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-cd22717c-20241013(eslint@9.9.1(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.1(jiti@1.21.6)
 
