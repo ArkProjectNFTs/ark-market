@@ -106,9 +106,14 @@ export default function LatestSales() {
                         width={112}
                       />
                       <div className="overflow-hidden whitespace-nowrap">
-                        <p className="overflow-hidden text-ellipsis text-base font-medium text-foreground">
-                          {sale.metadata?.name ?? "Unknown"}
-                        </p>
+                        <Link
+                          href={`/token/${sale.collection_address}/${sale.token_id}`}
+                          className="flex items-center gap-1 transition-colors hover:text-primary"
+                        >
+                          <p className="overflow-hidden text-ellipsis text-base font-medium text-foreground">
+                            {sale.metadata?.name ?? "Unknown"}
+                          </p>
+                        </Link>
                         <Link
                           href={`/collection/${sale.collection_address}`}
                           className="flex items-center gap-1 transition-colors hover:text-primary"
