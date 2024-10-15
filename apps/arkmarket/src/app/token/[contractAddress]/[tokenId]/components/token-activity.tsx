@@ -6,7 +6,6 @@ import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import getTokenActivity from "~/lib/getTokenActivity";
 import DesktopTokenActivity from "./desktop-token-activity";
 import MobileTokenActivity from "./mobile-token-activity";
 import useTokenActivity from "~/hooks/useTokenActivity";

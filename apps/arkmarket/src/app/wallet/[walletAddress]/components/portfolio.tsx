@@ -5,7 +5,6 @@ import { useAccount } from "@starknet-react/core";
 import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
-import type { WalletTokensApiResponse } from "../queries/getWalletData";
 import type { ViewType } from "~/components/view-type-toggle-group";
 import CollectionActivityFiltersModal from "~/app/collection/[collectionAddress]/components/collection-activity-filters-modal";
 import CollectionActivityFiltersToggle from "~/app/collection/[collectionAddress]/components/collection-activity-filters-toggle";

@@ -26,7 +26,7 @@ const statuses = {
 };
 
 export default function SystemStatus() {
-  const { error, data } = useSystemStatus({})
+  const { error, data } = useSystemStatus()
 
   if (error) {
     return null;

@@ -1,11 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 
 import { Button } from "@ark-market/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@ark-market/ui/dialog";
 import { ScrollArea } from "@ark-market/ui/scroll-area";
 
 import type { Filters } from "~/types";
-import getCollectionTraits from "~/lib/getCollectionTraits";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
 
 import useCollectionTraits from "~/hooks/useCollectionTraits";

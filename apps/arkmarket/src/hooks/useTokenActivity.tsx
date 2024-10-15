@@ -1,4 +1,4 @@
-import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
 
