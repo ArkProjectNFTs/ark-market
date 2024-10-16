@@ -1,16 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import type {
-  PortfolioOffersApiResponse,
   PortfolioOffersTypeValues,
 } from "~/lib/getPortfolioOffers";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getPortfolioOffers } from "~/lib/getPortfolioOffers";
 import DesktopPortfolioOffers from "./desktop-portfolio-offers";
 import MobilePortfolioOffers from "./mobile-portfolio-offers";
+import useWalletOffers from "~/hooks/useWalletOffers";
 
 interface PortfolioActivityDataProps {
   walletAddress: string;
@@ -28,20 +26,7 @@ export default function PortfolioOffersData({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["walletOffers", walletAddress, offerType],
-    refetchInterval: 10_000,
-    placeholderData: keepPreviousData,
-    getNextPageParam: (lastPage: PortfolioOffersApiResponse) =>
-      lastPage.next_page,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getPortfolioOffers({
-        page: pageParam,
-        walletAddress,
-        offerType,
-      }),
-  });
+  } = useWalletOffers({ offerType, walletAddress })
 
   useInfiniteWindowScroll({
     fetchNextPage,

@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useCreateAuction, useCreateListing } from "@ark-project/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAccount } from "@starknet-react/core";
-import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { formatEther, parseEther } from "viem";
@@ -46,10 +45,11 @@ import { env } from "~/env";
 import usePrices from "~/hooks/usePrices";
 import useTokenMarketdata from "~/hooks/useTokenMarketData";
 import formatAmount from "~/lib/formatAmount";
-import getCollection from "~/lib/getCollection";
 import ToastExecutedTransactionContent from "./toast-executed-transaction-content";
 import ToastRejectedTransactionContent from "./toast-rejected-transaction-content";
 import TokenActionsTokenOverview from "./token-actions-token-overview";
+
+import useCollection from "~/hooks/useCollection";
 
 interface TokenActionsCreateListingProps {
   token: Token | WalletToken;
@@ -69,14 +69,7 @@ export function TokenActionsCreateListing({
   });
   const [isOpen, setIsOpen] = useState(false);
   const [isAuction, setIsAuction] = useState(false);
-  const { data: collection } = useQuery({
-    queryKey: ["collection", token.collection_address],
-    queryFn: () =>
-      getCollection({
-        collectionAddress: token.collection_address,
-      }),
-    refetchInterval: 5_000,
-  });
+  const { data: collection } = useCollection({ address:token.collection_address })
   const { createListing, status } = useCreateListing();
   const { create: createAuction, status: auctionStatus } = useCreateAuction();
   const { toast } = useToast();

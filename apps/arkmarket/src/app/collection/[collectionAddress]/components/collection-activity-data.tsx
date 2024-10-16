@@ -1,14 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
-import type { CollectionActivityApiResponse } from "~/lib/getCollectionActivity";
 import type { ActivityType } from "~/types";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import { getCollectionActivity } from "~/lib/getCollectionActivity";
 import DesktopCollectionActivityData from "./desktop-collection-activity";
 import MobileCollectionActivity from "./mobile-collection-activity";
+import useCollectionActivity from "~/hooks/useCollectionActivity";
 
 interface CollectionProps {
   collectionAddress: string;
@@ -25,20 +23,7 @@ export default function CollectionActivityData({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["collectionActivity", collectionAddress, ...filters],
-    refetchInterval: 10_000,
-    placeholderData: keepPreviousData,
-    getNextPageParam: (lastPage: CollectionActivityApiResponse) =>
-      lastPage.next_page,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getCollectionActivity({
-        page: pageParam,
-        collectionAddress,
-        activityFilters: filters,
-      }),
-  });
+  } = useCollectionActivity({ collectionAddress, filters })
   useInfiniteWindowScroll({
     fetchNextPage,
     hasNextPage,

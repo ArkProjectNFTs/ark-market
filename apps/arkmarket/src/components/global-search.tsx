@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Command as CommandPrimitive } from "cmdk";
 import { useDebounceValue } from "usehooks-ts";
 
@@ -21,10 +20,11 @@ import {
 } from "@ark-market/ui/command";
 import { Ethereum, NoResult, VerifiedIcon } from "@ark-market/ui/icons";
 
-import getCollectionSearch from "~/lib/getCollectionSearch";
 import GlobalSearchSuggestions from "./global-search-suggestions";
 import Media from "./media";
 import ProfilePicture from "./profile-picture";
+
+import useSearchCollection from "~/hooks/useSearchCollection";
 
 interface GlobalSearchCommandsProps {
   inputValue: string;
@@ -37,13 +37,8 @@ function GlobalSearchCommands({
   inputDebouncedValue,
   onClose,
 }: GlobalSearchCommandsProps) {
-  const { data: searchResults } = useQuery({
-    queryKey: ["searchCollection", inputDebouncedValue],
-    refetchInterval: false,
-    placeholderData: keepPreviousData,
-    queryFn: () => getCollectionSearch({ searchQuery: inputDebouncedValue }),
-    enabled: inputDebouncedValue.length >= 3,
-  });
+  const { data: searchResults } = useSearchCollection({ inputDebouncedValue })
+  
   const router = useRouter();
 
   if (

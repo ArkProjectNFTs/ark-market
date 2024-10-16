@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useMediaQuery } from "usehooks-ts";
 
 import type { PropsWithClassName } from "@ark-market/ui";
@@ -14,11 +13,10 @@ import {
 } from "@ark-market/ui/collapsible";
 import { ChevronDown, ChevronUp, NoOffer } from "@ark-market/ui/icons";
 
-import type { TokenOffersApiResponse } from "~/lib/getTokenOffers";
 import type { Token, TokenMarketData } from "~/types";
-import { getTokenOffers } from "~/lib/getTokenOffers";
 import TokenOfferList from "./token-offers-list";
 import TokenOffersTable from "./token-offers-table";
+import useTokenOffers from "~/hooks/useTokenOffers";
 
 interface TokenOffersProps {
   token: Token;
@@ -38,19 +36,9 @@ export default function TokenOffers({
     isFetching,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["tokenOffers", token.collection_address, token.token_id],
-    refetchInterval: 10_000,
-    getNextPageParam: (lastPage: TokenOffersApiResponse) => lastPage.next_page,
-    placeholderData: keepPreviousData,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getTokenOffers({
-        contractAddress: token.collection_address,
-        tokenId: token.token_id,
-        page: pageParam,
-      }),
-  });
+  } = useTokenOffers({ token })
+   
+    
   const offersCount = infiniteData?.pages[0]?.count ?? 0;
   const tokenOffers = useMemo(
     () => infiniteData?.pages.flatMap((page) => page.data) ?? [],

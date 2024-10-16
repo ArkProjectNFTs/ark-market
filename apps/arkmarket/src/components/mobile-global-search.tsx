@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounceValue } from "usehooks-ts";
 
 import {
@@ -20,10 +19,11 @@ import {
 import { Ethereum, Meh, Search, VerifiedIcon } from "@ark-market/ui/icons";
 import { SearchInput } from "@ark-market/ui/search-input";
 
-import getCollectionSearch from "~/lib/getCollectionSearch";
 import Media from "./media";
 import MobileGlobalSearchSuggestions from "./mobile-global-search-suggestions";
 import ProfilePicture from "./profile-picture";
+
+import useSearchCollection from "~/hooks/useSearchCollection";
 
 interface MobileGlobalSearchProps {
   inputValue: string;
@@ -36,18 +36,12 @@ function MobileGlobalSearch({
   inputDebouncedValue,
   onClose,
 }: MobileGlobalSearchProps) {
-  const { data: searchResults } = useQuery({
-    queryKey: ["searchCollection", inputDebouncedValue],
-    refetchInterval: false,
-    placeholderData: keepPreviousData,
-    queryFn: () => getCollectionSearch({ searchQuery: inputDebouncedValue }),
-    enabled: inputDebouncedValue.length >= 3,
-  });
+  const { data: searchResults } = useSearchCollection({ inputDebouncedValue })
 
   if (
     searchResults === undefined ||
     inputValue.length < 3 ||
-    inputDebouncedValue.length < 3
+    inputDebouncedValue.length < 3 
   ) {
     return (
       <div>

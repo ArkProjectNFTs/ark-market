@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 import { validateAndParseAddress } from "starknet";
 
@@ -16,13 +15,12 @@ import {
 import { VerifiedIcon } from "@ark-market/ui/icons";
 import { Input } from "@ark-market/ui/input";
 
-import type { WalletCollectionsApiResponse } from "../queries/getWalletData";
 import Media from "~/components/media";
-import { getWalletCollections } from "../queries/getWalletData";
 import {
   walletCollectionFilterKey,
   walletCollectionFilterParser,
 } from "../search-params";
+import useWalletCollections from "~/hooks/useWalletCollections";
 
 interface PortfolioItemsFiltersContentProps {
   walletAddress: string;
@@ -46,22 +44,7 @@ export default function PortfolioItemsFiltersContent({
     // fetchNextPage,
     // hasNextPage,
     // isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["walletCollections", walletAddress],
-    refetchInterval: 10_000,
-    getNextPageParam: (lastPage: WalletCollectionsApiResponse) =>
-      lastPage.next_page,
-    // initialData: {
-    //   pages: [walletCollectionsInitialData],
-    //   pageParams: [],
-    // },
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getWalletCollections({
-        page: pageParam,
-        walletAddress,
-      }),
-  });
+  } = useWalletCollections({ walletAddress })
 
   const isCollectionSelected = useCallback(
     (collectionAddress: string): boolean => {
