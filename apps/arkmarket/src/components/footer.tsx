@@ -1,23 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import { Discord, Telegram, XIcon } from "@ark-market/ui/icons";
 
 import { siteConfig } from "~/config/site";
+import useFooterVisibility from "~/hooks/useFooterVisibility";
 import ExternalLink from "./external-link";
 import { Icons } from "./icons";
 
 export default function Footer() {
-  const pathname = usePathname();
-  if (
-    pathname.includes("/wallet/") ||
-    pathname.includes("/collection/") ||
-    pathname.includes("/token/")
-  ) {
+  const isVisible = useFooterVisibility();
+
+  if (!isVisible) {
     return null;
   }
 

@@ -1,21 +1,17 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 import { Button } from "@ark-market/ui/button";
 import { Discord, Telegram, XIcon } from "@ark-market/ui/icons";
 
 import { siteConfig } from "~/config/site";
+import useFooterVisibility from "~/hooks/useFooterVisibility";
 import ExternalLink from "./external-link";
 import { Icons } from "./icons";
 
 export default function UnframedFooter() {
-  const pathname = usePathname();
-  if (
-    pathname.includes("/wallet/") ||
-    pathname.includes("/collection/") ||
-    pathname.includes("/token/")
-  ) {
+  const isVisible = useFooterVisibility();
+
+  if (!isVisible) {
     return null;
   }
 

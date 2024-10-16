@@ -1,6 +1,43 @@
+// "address": "0x00001401c6ef90c718b912ca8e5965501889924a47b1fecb5dc0f71b7b9b4000",
+// "floor": null,
+// "floor_percentage": null,
+// "image": null,
+// "is_verified": false,
+// "listed_items": 0,
+// "listed_percentage": 0,
+// "marketcap": null,
+// "name": "szwmprincqt",
+// "owner_count": 1,
+// "sales": null,
+// "token_count": 1,
+// "top_offer": null,
+// "total_sales": 0,
+// "total_volume": 0,
+// "volume": null
+
+export interface CollectionStats {
+  address: string;
+  floor: string | null;
+  floor_percentage: string;
+  image: string;
+  is_verified: boolean;
+  listed_items: number;
+  listed_percentage: number;
+  marketcap: string | null;
+  name: string;
+  owner_count: number;
+  sales: number | null;
+  token_count: number;
+  top_offer: string | null;
+  total_sales: number;
+  total_volume: number;
+  volume: number;
+}
+
 export interface Collection {
   address: string;
   floor?: string;
+  floor_percentage?: string;
   image?: string;
   is_verified: boolean;
   listed_items: number;
@@ -356,3 +393,16 @@ export interface LiveAuctions {
   end_timestamp: number;
   metadata?: TokenMetadata;
 }
+export type CollectionTimerange = "10m" | "1h" | "6h" | "1d" | "7d" | "30d";
+
+export type CollectionSortBy =
+  | "floor_price"
+  | "total_volume"
+  | "floor_percentage"
+  | "volume"
+  | "top_bid"
+  | "number_of_sales"
+  | "marketcap"
+  | "listed";
+
+export type CollectionSortDirection = "asc" | "desc";
