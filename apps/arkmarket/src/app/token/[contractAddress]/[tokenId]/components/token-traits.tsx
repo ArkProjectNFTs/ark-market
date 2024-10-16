@@ -38,7 +38,7 @@ export default function TokenTraits({
     >
       <div className="flex h-[4.5rem] items-center justify-between">
         <div className="flex items-center gap-1.5">
-          <h3 className="text-2xl font-semibold">Traits</h3>
+          <h3 className="font-display text-2xl font-semibold">Traits</h3>
           <div className="flex h-6 items-center rounded-full bg-secondary px-3 text-sm text-secondary-foreground">
             {tokenAttributes.length}
           </div>

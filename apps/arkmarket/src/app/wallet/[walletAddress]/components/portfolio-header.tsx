@@ -19,7 +19,7 @@ export default function PortfolioHeader({
   const shortenedAddress = shortAddress(walletAddress);
 
   return (
-    <div className="flex flex-col gap-4 border-border bg-background px-5 pb-5 pt-3.5 sm:flex-row sm:items-center sm:justify-between sm:border-b sm:pb-6 sm:pt-6 md:justify-start md:gap-4">
+    <div className="flex flex-col gap-4 border-border bg-background px-5 pb-0 pt-3.5 sm:flex-row sm:items-center sm:justify-between sm:border-b sm:pb-6 sm:pt-6 md:justify-start md:gap-4">
       <div className="flex items-center gap-4">
         <ProfilePicture
           address={walletAddress}

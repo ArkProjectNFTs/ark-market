@@ -3,9 +3,9 @@
 import type { DialogProps } from "@radix-ui/react-dialog";
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
-import { Search, Slash, X } from "@ark-market/ui/icons";
 
 import { cn, focusableStyles } from "@ark-market/ui";
+import { Search, Slash, X } from "@ark-market/ui/icons";
 
 import { Dialog, DialogContent } from "./dialog";
 
@@ -43,7 +43,7 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, value, onValueChange, ...props }, ref) => (
   <div
-    className="flex items-center rounded-lg border border-input pl-3 pr-2 focus-within:ring-1 focus-within:ring-offset-1"
+    className="flex items-center rounded-lg border border-input pl-3 pr-2 focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1"
     cmdk-input-wrapper=""
   >
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />

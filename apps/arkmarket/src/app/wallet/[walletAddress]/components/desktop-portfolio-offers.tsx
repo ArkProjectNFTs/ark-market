@@ -3,14 +3,8 @@ import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import {
-  cn,
-  ellipsableStyles,
-  focusableStyles,
-  getRoundedRemainingTime,
-} from "@ark-market/ui";
-import { NoActivity, VerifiedIcon } from "@ark-market/ui/icons";
-import { PriceTag } from "@ark-market/ui/price-tag";
+import { cn, getRoundedRemainingTime } from "@ark-market/ui";
+import { NoActivity } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
@@ -21,10 +15,11 @@ import {
 } from "@ark-market/ui/table";
 
 import type { PortfolioOffersTypeValues } from "~/lib/getPortfolioOffers";
-import type { PortfolioOffers } from "~/types";
+import type { PortfolioOffers, TokenMetadata } from "~/types";
 import AcceptOffer from "~/app/token/[contractAddress]/[tokenId]/components/accept-offer";
 import CancelOffer from "~/app/token/[contractAddress]/[tokenId]/components/cancel-offer";
-import Media from "~/components/media";
+import PriceCell from "~/components/cells/activity-price-cell";
+import TokenCell from "~/components/cells/activity-token-cell";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 const gridTemplateColumnValue =
@@ -118,58 +113,15 @@ export default function DesktopPortfolioOffers({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <TableCell>
-                  <div className="flex items-center gap-4 pl-5">
-                    <Media
-                      className="size-[3.75rem] rounded-xs object-contain"
-                      height={120}
-                      width={120}
-                      alt={offer.metadata?.name ?? "Unnamed Token"}
-                      src={offer.metadata?.image ?? ""}
-                      mediaKey={offer.metadata?.image_key ?? ""}
-                    />
-                    <div className="w-full overflow-hidden">
-                      <Link
-                        className={focusableStyles}
-                        href={`/token/${offer.collection_address}/${offer.token_id}`}
-                      >
-                        <p
-                          className={cn(
-                            "w-full text-base font-medium",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {offer.metadata?.name ?? "Unnamed Token"}
-                        </p>
-                      </Link>
-                      <div className="flex w-full items-center gap-1">
-                        <Link
-                          className={cn(focusableStyles, ellipsableStyles)}
-                          href={`/collection/${offer.collection_address}`}
-                        >
-                          <p
-                            className={cn(
-                              "text-muted-foreground transition-colors hover:text-primary",
-                              ellipsableStyles,
-                            )}
-                          >
-                            {offer.collection_name}
-                          </p>
-                        </Link>
-                        {offer.is_verified && (
-                          <VerifiedIcon className="size-4 text-primary" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  {offer.price ? (
-                    <PriceTag price={offer.price} className="max-w-full" />
-                  ) : (
-                    "_"
-                  )}
-                </TableCell>
+                <TokenCell
+                  address={offer.collection_address}
+                  collectionAddress={offer.collection_address}
+                  isVerified={offer.is_verified}
+                  metadata={offer.metadata as TokenMetadata | null}
+                  name={offer.collection_name}
+                  tokenId={offer.offer_id}
+                />
+                <PriceCell activity={offer} />
                 <TableCell>
                   <p
                     className={cn(

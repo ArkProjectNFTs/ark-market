@@ -6,7 +6,7 @@ import {
 } from "@starknet-react/core";
 
 import { cn, focusableStyles, shortAddress } from "@ark-market/ui";
-import { HelpCircle, Power, User, Wallet } from "@ark-market/ui/icons";
+import { LogOut, Support, User, Wallet } from "@ark-market/ui/icons";
 import { ThemeTabs } from "@ark-market/ui/theme";
 
 import CopyButton from "./copy-button";
@@ -75,7 +75,7 @@ export default function WalletAccountContent({
             onClick={onClose}
             prefetch
           >
-            <User className="!size-6 !text-xl" />
+            <User className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Profile</p>
           </Link>
           {isWebWallet && (
@@ -89,14 +89,14 @@ export default function WalletAccountContent({
             </ExternalLink>
           )}
           <Link href="/" className={itemCommonClassName} onClick={onClose}>
-            <HelpCircle size={24} />
+            <Support size={24} className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Support</p>
           </Link>
           <button
             className={cn(itemCommonClassName)}
             onClick={() => disconnect()}
           >
-            <Power size={24} />
+            <LogOut size={24} className="!size-6 !text-xl" weight={45} />
             <p className="font-bold">Log out</p>
           </button>
         </div>

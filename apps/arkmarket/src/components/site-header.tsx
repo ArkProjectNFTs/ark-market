@@ -15,6 +15,7 @@ import MobileGlobalSearch from "./mobile-global-search";
 export default function SiteHeader() {
   const pathname = usePathname();
   const isTokenPage = pathname.includes("token/");
+  const isHomePage = pathname === "/";
   const [showHeader, setShowHeader] = useState(true);
 
   const { scrollY } = useScroll();
@@ -25,13 +26,15 @@ export default function SiteHeader() {
       setShowHeader(true);
     }
   });
+
   return (
     <div
       className={cn(
-        "sticky top-0 z-30 flex h-[var(--site-header-height)] w-full items-center justify-between border-b bg-background px-5 transition-transform duration-300 lg:border-b",
+        "sticky top-0 z-30 flex h-[var(--site-header-height)] w-full items-center justify-between bg-background px-5 transition-transform duration-300",
         !showHeader && isTokenPage
           ? "lg:-translate-y-full"
           : "lg:translate-y-0",
+        !isHomePage && "border-b",
       )}
     >
       <MainNav />

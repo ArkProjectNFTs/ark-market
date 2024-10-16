@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 import { Discord, XIcon } from "@ark-market/ui/icons";
@@ -19,12 +20,16 @@ export default function DataFooter({ className }: PropsWithClassName) {
       <div className="flex h-full items-center gap-4">
         <SystemStatus />
         <Separator orientation="vertical" />
-        <ExternalLink href={siteConfig.links.twitter}>
-          <XIcon />
-        </ExternalLink>
-        <ExternalLink href="/">
-          <Discord />
-        </ExternalLink>
+        {siteConfig.links.twitter !== undefined && (
+          <ExternalLink href={siteConfig.links.twitter}>
+            <XIcon />
+          </ExternalLink>
+        )}
+        {siteConfig.links.discord !== undefined && (
+          <ExternalLink href={siteConfig.links.discord}>
+            <Discord />
+          </ExternalLink>
+        )}
         <Separator orientation="vertical" />
       </div>
       <Prices />

@@ -8,7 +8,7 @@ import { cn } from "@ark-market/ui";
 import { NoImage } from "@ark-market/ui/icons";
 import { Skeleton } from "@ark-market/ui/skeleton";
 
-import { env } from "~/env";
+import { getMediaSrc } from "~/lib/getCollectionTokens";
 
 interface MediaProps {
   // key used to access the image proxy / CDN
@@ -19,24 +19,6 @@ interface MediaProps {
   width?: number;
   height?: number;
   priority?: boolean;
-}
-
-function getMediaSrc(
-  src?: string | null,
-  mediaKey?: string | null,
-  thumbnailKey?: string | null,
-  width?: number,
-  height?: number,
-) {
-  if (thumbnailKey) {
-    return `${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${thumbnailKey}`;
-  }
-
-  if (mediaKey && width && height) {
-    const resolutionParam = `:${width}:${height}`;
-    return `${env.NEXT_PUBLIC_IMAGE_PROXY_URL}/_/rs:fit${resolutionParam}/plain/${env.NEXT_PUBLIC_IMAGE_CDN_URL}/${mediaKey}`;
-  }
-  return src?.replace("ipfs://", env.NEXT_PUBLIC_IPFS_GATEWAY);
 }
 
 function MediaPlaceholder({ className }: PropsWithClassName) {

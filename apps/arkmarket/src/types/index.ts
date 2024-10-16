@@ -299,3 +299,34 @@ export interface TokenActivity {
 export interface Filters {
   traits: Record<string, string[]>;
 }
+
+export interface LatestSales {
+  collection_address: string;
+  collection_name: string;
+  from: string;
+  metadata: TokenMetadata | null;
+  price: string;
+  timestamp: number;
+  to: string;
+  transaction_hash: string | null;
+}
+
+export interface TrendingNow {
+  collection_address: string;
+  collection_image: string;
+  collection_name: string;
+  floor_difference: number;
+  floor_price: string | null;
+  preview_nfts: [
+    { metadata?: TokenMetadata },
+    { metadata?: TokenMetadata },
+    { metadata?: TokenMetadata },
+  ];
+}
+
+export interface LiveAuctions {
+  collection_address: string;
+  token_id: string;
+  end_timestamp: number;
+  metadata?: TokenMetadata;
+}

@@ -1,33 +1,26 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import { useAccount } from "@starknet-react/core";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
-import {
-  cn,
-  ellipsableStyles,
-  focusableStyles,
-  timeSince,
-} from "@ark-market/ui";
-import { Button } from "@ark-market/ui/button";
-import { ArrowUpRight, VerifiedIcon } from "@ark-market/ui/icons";
-import { PriceTag } from "@ark-market/ui/price-tag";
+import { cn } from "@ark-market/ui";
+import { NoActivity } from "@ark-market/ui/icons";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@ark-market/ui/table";
 
 import type { CollectionActivity } from "~/types";
-import ExternalLink from "~/components/external-link";
-import Media from "~/components/media";
-import activityTypeMetadata from "~/constants/activity-type-metadata";
-import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
+import EventCell from "~/components/cells/activity-event-cell";
+import ActivityToFromCell from "~/components/cells/activity-from-cell";
+import PriceCell from "~/components/cells/activity-price-cell";
+import ActivityTime from "~/components/cells/activity-time-cell";
+import TokenCell from "~/components/cells/activity-token-cell";
+import ActivityUp from "~/components/cells/activity-transaction-cell";
 
 interface DesktopCollectionActivityProps {
   collectionAddress: string;
@@ -59,162 +52,96 @@ export default function DesktopCollectionActivity({
   });
 
   return (
-    <Table ref={tableRef}>
-      <TableHeader className="h-12">
-        <TableRow
-          className={cn(
-            "absolute grid w-full items-center",
-            gridTemplateColumnValue,
-          )}
+    <>
+      <Table ref={tableRef}>
+        <TableHeader className="h-12">
+          <TableRow
+            className={cn(
+              "absolute grid w-full items-center",
+              gridTemplateColumnValue,
+            )}
+          >
+            <TableHead className="sticky top-0 flex items-center bg-background pl-5">
+              Event
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Token
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Price
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              From
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              To
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background">
+              Date
+            </TableHead>
+            <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody
+          className="font-numbers relative block text-sm font-medium"
+          style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
         >
-          <TableHead className="sticky top-0 flex items-center bg-background pl-5">
-            Event
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Token
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Price
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            From
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            To
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background">
-            Date
-          </TableHead>
-          <TableHead className="sticky top-0 flex items-center bg-background"></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody
-        className="font-numbers relative block text-sm font-medium"
-        style={{ height: `${rowVirtualizer.getTotalSize() + 2}px` }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const activity = collectionActivity[virtualRow.index];
-          if (activity === undefined) {
-            return null;
-          }
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            const activity = collectionActivity[virtualRow.index];
+            if (activity === undefined) {
+              return null;
+            }
 
-          return (
-            <TableRow
-              className={cn(
-                "group absolute grid h-[6.25rem] w-full items-center",
-                gridTemplateColumnValue,
-              )}
-              data-index={virtualRow.index}
-              key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
-              ref={(node) => rowVirtualizer.measureElement(node)}
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
-            >
-              <TableCell className="items-center gap-4 whitespace-nowrap pl-5">
-                <div className="flex items-center gap-4 whitespace-nowrap">
-                  {activityTypeMetadata[activity.activity_type].icon}
-                  <p>{activityTypeMetadata[activity.activity_type].title}</p>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-4">
-                  <Media
-                    alt={activity.token_metadata?.name ?? ""}
-                    className="size-[3.75rem] rounded-xs object-contain"
-                    height={120}
-                    width={120}
-                    src={activity.token_metadata?.image ?? undefined}
-                    mediaKey={activity.token_metadata?.image_key ?? undefined}
-                  />
+            return (
+              <TableRow
+                className={cn(
+                  "group absolute grid h-[6.25rem] w-full items-center",
+                  gridTemplateColumnValue,
+                )}
+                data-index={virtualRow.index}
+                key={`${virtualRow.index}-${activity.time_stamp}-${activity.transaction_hash}`}
+                ref={(node) => rowVirtualizer.measureElement(node)}
+                style={{
+                  transform: `translateY(${virtualRow.start}px)`,
+                }}
+              >
+                <EventCell activity={activity} />
 
-                  <div className="w-full overflow-hidden">
-                    <Link
-                      className={focusableStyles}
-                      href={`/token/${collectionAddress}/${activity.token_id}`}
-                    >
-                      <p
-                        className={cn(
-                          "w-full text-base font-medium",
-                          ellipsableStyles,
-                        )}
-                      >
-                        {activity.token_metadata?.name ??
-                          `${activity.name} #${activity.token_id}`}
-                      </p>
-                    </Link>
-                    <div className="flex w-full items-center gap-1">
-                      <Link
-                        className={cn(focusableStyles, ellipsableStyles)}
-                        href={`/collection/${activity.address}`}
-                      >
-                        <p
-                          className={cn(
-                            "text-muted-foreground transition-colors hover:text-primary",
-                            ellipsableStyles,
-                          )}
-                        >
-                          {activity.name}
-                        </p>
-                      </Link>
-                      {activity.is_verified && (
-                        <VerifiedIcon className="size-4 text-primary" />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell>
-                {activity.price ? (
-                  <PriceTag price={activity.price} className="max-w-full" />
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.from ? (
-                  <Link
-                    href={`/wallet/${activity.from}`}
-                    className="text-primary"
-                  >
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.from,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.to ? (
-                  <Link
-                    href={`/wallet/${activity.to}`}
-                    className="text-primary"
-                  >
-                    {ownerOrShortAddress({
-                      ownerAddress: activity.to,
-                      address,
-                    })}
-                  </Link>
-                ) : (
-                  "_"
-                )}
-              </TableCell>
-              <TableCell>
-                {activity.time_stamp ? timeSince(activity.time_stamp) : "_"}
-              </TableCell>
-              <TableCell className="pr-5">
-                <Button asChild size="icon" variant="outline">
-                  <ExternalLink href="/">
-                    <ArrowUpRight className="size-5" />
-                  </ExternalLink>
-                </Button>
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+                <TokenCell
+                  address={activity.address}
+                  isVerified={activity.is_verified}
+                  metadata={activity.token_metadata}
+                  name={activity.name}
+                  tokenId={activity.token_id}
+                  collectionAddress={collectionAddress}
+                />
+
+                <PriceCell activity={activity} />
+
+                <ActivityToFromCell
+                  ownerAddress={activity.from}
+                  address={address}
+                />
+
+                <ActivityToFromCell
+                  ownerAddress={activity.to}
+                  address={address}
+                />
+
+                <ActivityTime timeStamp={activity.time_stamp} />
+
+                <ActivityUp transactionHash={activity.transaction_hash} />
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+      {collectionActivity.length === 0 && (
+        <div className="flex flex-col items-center gap-3 pt-8 text-muted-foreground">
+          <NoActivity size={42} />
+          <p className="text-xl font-semibold">No activity yet!</p>
+        </div>
+      )}
+    </>
   );
 }

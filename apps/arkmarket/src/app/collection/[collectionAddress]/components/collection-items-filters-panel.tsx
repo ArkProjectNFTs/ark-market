@@ -5,6 +5,7 @@ import { SearchInput } from "@ark-market/ui/search-input";
 
 import type { Filters } from "~/types";
 import getCollectionTraits from "~/lib/getCollectionTraits";
+import CollectionItemsFiltersContent from "./collection-items-filters-content";
 import CollectionItemsFiltersTrait from "./collection-items-filters-trait";
 
 interface CollectionItemsFiltersPanelProps {
@@ -12,6 +13,8 @@ interface CollectionItemsFiltersPanelProps {
   filters: Filters;
   onFiltersChange: (newFilters: Filters) => Promise<void>;
   isOpen: boolean;
+  buyNow: boolean;
+  setBuyNow: (buyNow: boolean) => void;
 }
 
 export default function CollectionItemsFiltersPanel({
@@ -19,6 +22,8 @@ export default function CollectionItemsFiltersPanel({
   filters,
   onFiltersChange,
   isOpen,
+  buyNow,
+  setBuyNow,
 }: CollectionItemsFiltersPanelProps) {
   const { data } = useSuspenseQuery({
     queryKey: ["collectionTraits", collectionAddress],
@@ -66,38 +71,43 @@ export default function CollectionItemsFiltersPanel({
     (trait) => Object.keys(trait).length > 0,
   );
 
+  const showTraitsSection = Object.keys(data).length > 0;
+
   return (
     <div className="no-scrollbar sticky top-[var(--site-header-height)] z-10 hidden h-[calc(100vh-var(--site-header-height)-var(--site-footer-height))] w-64 flex-shrink-0 overflow-y-auto border-r border-border lg:block">
-      <div className="">
-        <div className="px-5 py-4 text-base font-bold">Traits</div>
-        <div className="px-4 pb-4">
-          <SearchInput
-            value={searchQuery}
-            className="h-10 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-            placeholder="Search"
-            type="text"
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          {searchQuery.length > 0 && !hasTraits && (
-            <div className="px-5">
-              <div className="mb-2 text-sm text-muted-foreground">
-                No traits found for "{searchQuery}"
-              </div>
-            </div>
-          )}
-          {Object.keys(filteredData).map((key: string) => (
-            <CollectionItemsFiltersTrait
-              key={key}
-              name={key}
-              trait={filteredData[key] ?? {}}
-              selectedTraits={filters.traits}
-              onChange={handleTraitChange}
+      <CollectionItemsFiltersContent buyNow={buyNow} setBuyNow={setBuyNow} />
+      {showTraitsSection && (
+        <div className="">
+          <div className="px-5 pb-4 text-base font-bold">Traits</div>
+          <div className="px-4 pb-4">
+            <SearchInput
+              value={searchQuery}
+              className="h-10"
+              placeholder="Search"
+              type="text"
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-          ))}
+          </div>
+          <div className="flex flex-col gap-2">
+            {searchQuery.length > 0 && !hasTraits && (
+              <div className="px-5">
+                <div className="mb-2 text-sm text-muted-foreground">
+                  No traits found for "{searchQuery}"
+                </div>
+              </div>
+            )}
+            {Object.keys(filteredData).map((key: string) => (
+              <CollectionItemsFiltersTrait
+                key={key}
+                name={key}
+                trait={filteredData[key] ?? {}}
+                selectedTraits={filters.traits}
+                onChange={handleTraitChange}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

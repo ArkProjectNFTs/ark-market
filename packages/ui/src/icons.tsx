@@ -50,6 +50,7 @@ import {
 } from "lucide-react";
 
 import type { PropsWithClassName } from ".";
+import type { IconWeightProps } from "./icon-wrapper";
 import { cn } from ".";
 import { Icon } from "./icon-wrapper";
 
@@ -74,206 +75,206 @@ export {
 
 export const Congratulations =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="3" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="3" {...props} />
       )
     : LucidePartyPopper;
 export const User =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="1" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="1" {...props} />
       )
     : LucideUser;
 
 export const Mail =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="z" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="z" {...props} />
       )
     : LucideMail;
 
 export const ArrowUpRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="x" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="x" {...props} />
       )
     : LucideArrowUpRight;
 
 export const CircleDot =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="k" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="k" {...props} />
       )
     : LucideCircleDot;
 
 export const ActivityList =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="g" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="g" {...props} />
       )
     : LucideList;
 
 export const ActivityDelist =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="h" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="h" {...props} />
       )
     : ListX;
 
 export const ActivityOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="i" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="i" {...props} />
       )
     : LucideTag;
 
 export const ActivityCancelOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="j" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="j" {...props} />
       )
     : X;
 
 export const Tag =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="g" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="g" {...props} />
       )
     : LucideTag;
 
 export const ChevronRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="I" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="I" {...props} />
       )
     : LucideChevronRight;
 
 export const ChevronDown =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="J" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="J" {...props} />
       )
     : LucideChevronDown;
 
 export const ChevronLeft =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="K" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="K" {...props} />
       )
     : LucideChevronLeft;
 
 export const ChevronUp =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="L" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="L" {...props} />
       )
     : LucideChevronUp;
 
 export const ArrowRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="M" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="M" {...props} />
       )
     : LucideArrowRight;
 
 export const ArrowLeft =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="N" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="N" {...props} />
       )
     : LucideArrowLeft;
 
 export const ArrowLeftRight =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="f" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="f" {...props} />
       )
     : LucideArrowLeftRight;
 
 export const Moon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="W" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="W" {...props} />
       )
     : LucideMoon;
 
 export const Sun =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="V" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="V" {...props} />
       )
     : LucideSun;
 
 export const ShoppingCart =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="e" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="e" {...props} />
       )
     : LucideShoppingCart;
 
 export const Chart =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="r" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="r" {...props} />
       )
     : LucideChart;
 
 export const RefreshCw =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="G" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="G" {...props} />
       )
     : LucideRefreshCw;
 
 export const Gavel =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="l" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="l" {...props} />
       )
     : LucideGavel;
 
 export const Share2 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="v" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="H" {...props} />
       )
     : LucideShare2;
 
 export const TimerReset =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="T" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="T" {...props} />
       )
     : LucideTimerReset;
 
 // Conditional exports
 export const Check =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="p" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="p" {...props} />
       )
     : LucideCheck;
 
 export const Copy =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="F" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="F" {...props} />
       )
     : LucideCopy;
 
 export const Search =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="D" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="D" {...props} />
       )
     : LucideSearch;
 
 export const Discord =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="c" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="c" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           stroke="currentColor"
           fill="none"
@@ -295,10 +296,10 @@ export const Discord =
 
 export const Ethereum =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="X" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="X" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -330,40 +331,76 @@ export const Ethereum =
         </svg>
       );
 
+export const Ethereum2 = ({
+  className,
+  ...props
+}: PropsWithClassName<IconWeightProps>) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 32 32"
+    fill="none"
+    className={className}
+    {...props}
+  >
+    <circle cx="16" cy="16" r="16" fill="white" />
+    <path
+      d="M15.9547 22.0532L9 17.9962L15.9539 27.6772L22.9135 17.9962L15.9523 22.0532H15.9547ZM16 5L9.08891 15.5L16 19.875L23 15.5037L16 5Z"
+      fill="#64698C"
+    />
+    <path
+      d="M9 17.9961L15.9547 22.0532L15.9539 27.6771L9 17.9961Z"
+      fill="#8C93AF"
+    />
+    <path
+      d="M16.0776 19.5857L9.12207 15.5249L15.9999 5L16.0776 19.5857Z"
+      fill="#8C94AF"
+    />
+    <path
+      d="M16.0776 19.5856L9.12207 15.5248L16.0776 12.4375L16.0776 19.5856Z"
+      fill="#64688C"
+    />
+    <path
+      d="M16.0006 19.875L22.9727 15.5248L16.0171 12.4375L16.0006 19.875Z"
+      fill="#474A73"
+    />
+  </svg>
+);
+
 export const Filter =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="E" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="E" {...props} />
       )
     : LucideFilter;
 
 export const Grid2X2 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="B" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="B" {...props} />
       )
     : LucideGrid2X2;
 
 export const List =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="A" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="A" {...props} />
       )
     : LucideList;
 
 export const Grid3X3 =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="C" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="C" {...props} />
       )
     : LucideGrid3X3;
 
 export const Starknet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="Y" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="Y" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={className}
           width="24"
@@ -428,12 +465,77 @@ export const Starknet =
         </svg>
       );
 
+export const Starknet2 = ({ className }: PropsWithClassName) => (
+  <svg
+    className={className}
+    width="24"
+    height="24"
+    viewBox="0 0 36 36"
+    fill="none"
+  >
+    <path
+      d="M17.9998 34.6245C8.81807 34.6245 1.375 27.1815 1.375 17.9998C1.375 8.81807 8.81807 1.375 17.9998 1.375C27.1814 1.375 34.625 8.81805 34.625 17.9998C34.625 27.1815 27.1814 34.6245 17.9998 34.6245Z"
+      fill="#163349"
+      stroke="#334155"
+      strokeWidth="1.25"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.1929 15.5032L11.6804 13.3385C11.7795 13.0321 12.0213 12.7937 12.3287 12.6997L14.4971 12.2343C14.7066 12.1703 14.7083 11.8747 14.5005 11.8073L12.3389 11.3197C12.0331 11.2206 11.7948 10.9788 11.7002 10.6713L11.2353 8.49972C11.1713 8.29077 10.8757 8.2885 10.8084 8.49689L10.3208 10.6611C10.2217 10.9669 9.97995 11.2053 9.67248 11.2999L7.71226 11.8322C7.50275 11.8967 7.50049 12.1918 7.70887 12.2591L9.66229 12.6793C9.96806 12.7784 10.2064 13.0208 10.301 13.3283L10.7659 15.4998C10.8299 15.7093 11.1255 15.7115 11.1929 15.5032Z"
+      fill="#FAFAFA"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M30.3237 13.5198C29.8182 12.9545 29.0292 12.6363 28.2622 12.5058C27.4891 12.3804 26.6785 12.3921 25.9152 12.5276C24.371 12.7889 22.968 13.4283 21.7444 14.2171C21.109 14.6043 20.5671 15.0523 20.0056 15.5085C19.7351 15.7392 19.4885 15.9849 19.2317 16.2271L18.5299 16.9254C17.7673 17.7225 17.0156 18.4485 16.2884 19.0503C15.5582 19.6493 14.8755 20.1043 14.2027 20.422C13.5304 20.7413 12.811 20.9291 11.8733 20.9592C10.9438 20.992 9.84417 20.8242 8.6679 20.5473C7.48531 20.2717 6.24348 19.8787 4.85576 19.5406C5.33997 20.8839 6.06913 22.071 7.00528 23.1562C7.95242 24.2225 9.13511 25.1944 10.6544 25.8335C12.1518 26.4869 14.0335 26.7214 15.793 26.3676C17.5571 26.028 19.1053 25.2117 20.3566 24.2676C21.6112 23.3138 22.6262 22.2274 23.4819 21.0979C23.7181 20.7859 23.843 20.6112 24.014 20.3673L24.4864 19.6675C24.8148 19.2346 25.1136 18.7417 25.4386 18.3128C26.0758 17.4145 26.7039 16.5173 27.4339 15.6907C27.8014 15.2714 28.1887 14.8704 28.6461 14.485C28.8742 14.2969 29.1207 14.1128 29.3936 13.9469C29.6707 13.7681 29.9633 13.6281 30.3237 13.5198Z"
+      fill="url(#paint0_linear_1117_72106)"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M30.3244 13.5206C29.7812 12.1503 28.7717 10.9968 27.4166 10.1456C26.0698 9.30376 24.1991 8.87414 22.3454 9.24037C21.4296 9.41747 20.5424 9.75845 19.7639 10.2125C18.9888 10.6648 18.2943 11.2093 17.693 11.7933C17.3929 12.0864 17.1204 12.392 16.8498 12.6994L16.1482 13.5938L15.0647 15.0336C13.6834 16.886 12.1959 19.057 9.75482 19.7002C7.35839 20.3317 6.31902 19.7725 4.85641 19.5414C5.12384 20.2319 5.45512 20.9024 5.90421 21.4923C6.34494 22.0941 6.86551 22.6594 7.51273 23.1439C7.8398 23.3766 8.18512 23.6063 8.56864 23.8011C8.95041 23.9892 9.36213 24.1549 9.80159 24.2796C10.6757 24.5192 11.6598 24.6031 12.6127 24.4743C13.566 24.3471 14.4772 24.0449 15.2736 23.6437C16.076 23.2463 16.7749 22.7622 17.399 22.2514C18.6396 21.2211 19.6046 20.0828 20.4198 18.9321C20.8298 18.3568 21.2019 17.7706 21.5461 17.1843L21.9513 16.4862C22.0751 16.2822 22.2004 16.0769 22.3276 15.8857C22.8409 15.1175 23.343 14.5015 23.9528 14.0392C24.5542 13.5649 25.3916 13.2145 26.5106 13.1331C27.625 13.0507 28.9114 13.2029 30.3244 13.5206Z"
+      fill="#FAFAFA"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M24 25C24 26.1043 24.8959 27 26.0005 27C27.1052 27 28 26.1043 28 25C28 23.8957 27.1052 23 26.0005 23C24.8959 23 24 23.8957 24 25Z"
+      fill="url(#paint1_linear_1117_72106)"
+    />
+    <defs>
+      <linearGradient
+        id="paint0_linear_1117_72106"
+        x1="30.1874"
+        y1="13.039"
+        x2="-11.4333"
+        y2="34.6935"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#EC796B" />
+        <stop offset="1" stopColor="#D672EF" />
+      </linearGradient>
+      <linearGradient
+        id="paint1_linear_1117_72106"
+        x1="27.9986"
+        y1="23.597"
+        x2="20.7086"
+        y2="24.2805"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#EC796B" />
+        <stop offset="1" stopColor="#D672EF" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
 export const Telegram =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
-        <Icon className={className} icon="Z" />
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="Z" {...props} />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -450,31 +552,31 @@ export const Telegram =
 
 export const VerifiedIcon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="U" />
       )
     : LucideVerifiedIcon;
 
 export const Wallet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="O" />
       )
     : LucideWallet;
 
 export const Globe =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="b" />
       )
     : LucideGlobe;
 
 export const XIcon =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="a" />
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="24"
           height="24"
@@ -491,7 +593,7 @@ export const XIcon =
 
 export const NoOffer =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="73"
@@ -516,7 +618,7 @@ export const NoOffer =
 
 export const NoTraits =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -525,11 +627,11 @@ export const NoTraits =
           className={cn("text-foreground", className)}
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M53.7199 53.5L27.5003 66.0001L27.3845 53.5H53.7199ZM55.0002 52.8896L70.4998 45.5002L55.0002 26.6904V52.8896ZM48.6631 19H27.0649L27 12.0001L38.2643 6.38037L48.6631 19Z"
             fill="currentColor"
-            fill-opacity="0.15"
+            fillOpacity="0.15"
           />
           <path
             d="M47.6792 47.25V19.75H21.4292V38.5L20.1792 39.75V18.5H48.9292V47.25H47.6792ZM20.1792 38.9583L27.8042 31.3333V33.1667L20.1792 40.7917V38.9583ZM27.8042 33.1667V31.3333L43.7209 47.25H41.8875L27.8042 33.1667ZM40.1792 29.75C39.4848 29.75 38.8875 29.5139 38.3875 29.0417C37.9153 28.5417 37.6792 27.9444 37.6792 27.25C37.6792 26.5278 37.9153 25.9306 38.3875 25.4583C38.8875 24.9861 39.4848 24.75 40.1792 24.75C40.9014 24.75 41.4986 24.9861 41.9709 25.4583C42.4431 25.9306 42.6792 26.5278 42.6792 27.25C42.6792 27.9444 42.4431 28.5417 41.9709 29.0417C41.4986 29.5139 40.9014 29.75 40.1792 29.75ZM27.6792 52.25H53.9292V26H55.1792V53.5H27.6792V52.25ZM48.9292 46V47.25H43.3459L42.0959 46H48.9292Z"
@@ -541,7 +643,7 @@ export const NoTraits =
 
 export const NoListing =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -566,7 +668,7 @@ export const NoListing =
 
 export const NoResult =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="72"
@@ -591,7 +693,7 @@ export const NoResult =
 
 export const NoActivity =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           className={`${className} text-black text-opacity-10 dark:text-white dark:text-opacity-10`}
           width="72"
@@ -616,7 +718,7 @@ export const NoActivity =
 
 export const ConnectWallet =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -625,11 +727,11 @@ export const ConnectWallet =
           className={cn("text-foreground", className)}
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M25.3312 53.5L49.9622 66.8888V53.5H25.3312ZM20.5 50.8739V28.2112L5.62939 42.7907L20.5 50.8739ZM30.405 18.5L42.2642 6.87305L49.9622 9.49982V18.5H30.405Z"
             fill="currentColor"
-            fill-opacity="0.1"
+            fillOpacity="0.1"
           />
           <path
             d="M30.2209 18.5H50.1792V23.5H48.9292V19.75H30.7209L21.4292 29.0417L20.1792 28.5L30.2209 18.5ZM55.1792 28.5V53.5H20.1792V28.5L21.4292 29.0417V52.25H53.9292V29.75H28.8875V28.5H55.1792ZM45.1792 43.5C44.4848 43.5 43.8875 43.2639 43.3875 42.7917C42.9153 42.2917 42.6792 41.6944 42.6792 41C42.6792 40.2778 42.9153 39.6806 43.3875 39.2083C43.8875 38.7361 44.4848 38.5 45.1792 38.5C45.9014 38.5 46.4986 38.7361 46.9709 39.2083C47.4431 39.6806 47.6792 40.2778 47.6792 41C47.6792 41.6944 47.4431 42.2917 46.9709 42.7917C46.4986 43.2639 45.9014 43.5 45.1792 43.5Z"
@@ -641,7 +743,7 @@ export const ConnectWallet =
 
 export const NoImage =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -650,11 +752,11 @@ export const NoImage =
           className={cn(className, "text-foreground")}
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M53.7199 53.5L27.5003 66.0001L27.3845 53.5H53.7199ZM55.0002 52.8896L70.4998 45.5002L55.0002 26.6904V52.8896ZM48.6631 19H27.0649L27 12.0001L38.2643 6.38037L48.6631 19Z"
             fill="currentColor"
-            fill-opacity="0.1"
+            fillOpacity="0.1"
           />
           <path
             d="M47.6792 47.25V19.75H21.4292V38.5L20.1792 39.75V18.5H48.9292V47.25H47.6792ZM20.1792 38.9583L27.8042 31.3333V33.1667L20.1792 40.7917V38.9583ZM27.8042 33.1667V31.3333L43.7209 47.25H41.8875L27.8042 33.1667ZM40.1792 29.75C39.4848 29.75 38.8875 29.5139 38.3875 29.0417C37.9153 28.5417 37.6792 27.9444 37.6792 27.25C37.6792 26.5278 37.9153 25.9306 38.3875 25.4583C38.8875 24.9861 39.4848 24.75 40.1792 24.75C40.9014 24.75 41.4986 24.9861 41.9709 25.4583C42.4431 25.9306 42.6792 26.5278 42.6792 27.25C42.6792 27.9444 42.4431 28.5417 41.9709 29.0417C41.4986 29.5139 40.9014 29.75 40.1792 29.75ZM27.6792 52.25H53.9292V26H55.1792V53.5H27.6792V52.25ZM48.9292 46V47.25H43.3459L42.0959 46H48.9292Z"
@@ -662,7 +764,7 @@ export const NoImage =
           />
         </svg>
       )
-    : ({ className }: PropsWithClassName) => (
+    : ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="79"
           height="79"
@@ -696,7 +798,7 @@ export const NoImage =
 
 export const Success =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <svg
           width="72"
           height="72"
@@ -705,11 +807,11 @@ export const Success =
           className={cn("text-foreground", className)}
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M38.1105 27.6961L57.0151 19.9785L60.8861 60.7699L53.5729 63.7393L27.2753 53.0001H43.9998C45.6665 52.8334 49.2998 52.1001 50.4998 50.5001C51.4998 49.6667 52.6998 46.6001 49.4998 41.0001C47.2916 37.1358 43.1027 31.7479 38.1105 27.6961ZM20.9998 34.6814L1.70557 42.5581L20.9998 50.4373V34.6814Z"
             fill="currentColor"
-            fill-opacity="0.15"
+            fillOpacity="0.15"
           />
           <path
             d="M51.5542 50.4167C50.6653 51.3056 49.207 51.4861 47.1792 50.9583C45.1792 50.4028 42.8736 49.2639 40.2625 47.5417C37.6514 45.7917 35.0681 43.6389 32.5125 41.0833C29.957 38.5556 27.8181 36 26.0959 33.4167C24.3736 30.8056 23.2486 28.5 22.7209 26.5C22.1931 24.4722 22.3736 23.0139 23.2625 22.125C24.0681 21.3194 25.3459 21.0972 27.0959 21.4583C28.8459 21.8194 30.8598 22.6944 33.1375 24.0833L32.5959 25.125C30.5681 23.875 28.8042 23.0556 27.3042 22.6667C25.832 22.2778 24.7764 22.3889 24.1375 23C23.4153 23.7222 23.3459 24.9861 23.9292 26.7917C24.5125 28.5972 25.6375 30.6944 27.3042 33.0833C28.9709 35.4444 30.9986 37.8194 33.3875 40.2083C35.8042 42.625 38.207 44.6667 40.5959 46.3333C42.9848 48 45.082 49.1389 46.8875 49.75C48.6931 50.3333 49.957 50.2639 50.6792 49.5417C51.2903 48.9028 51.4014 47.8472 51.0125 46.375C50.6236 44.875 49.8042 43.1111 48.5542 41.0833L49.5542 40.5417C50.9431 42.8194 51.8181 44.8333 52.1792 46.5833C52.5681 48.3333 52.3598 49.6111 51.5542 50.4167ZM20.1792 30.8333C20.1792 28.8611 20.4292 27.1806 20.9292 25.7917C21.4292 24.4028 22.207 23.1806 23.2625 22.125L24.1375 23C23.2209 23.9167 22.5403 25 22.0959 26.25C21.6514 27.5 21.4292 29.0278 21.4292 30.8333V52.25H42.8459C44.6514 52.25 46.1792 52.0278 47.4292 51.5833C48.6792 51.1389 49.7625 50.4583 50.6792 49.5417L51.5542 50.4167C50.4986 51.4722 49.2764 52.25 47.8875 52.75C46.4986 53.25 44.8181 53.5 42.8459 53.5H20.1792V30.8333ZM33.0542 33.5417C35.6098 31.0139 37.8181 28.2222 39.6792 25.1667C41.5403 22.0833 42.7903 19.0278 43.4292 16H44.8042C44.0542 19.25 42.707 22.4861 40.7625 25.7083C38.8181 28.9306 36.5264 31.8472 33.8875 34.4583L33.0542 33.5417ZM39.2209 39.625C41.9153 36.9028 44.8459 34.5972 48.0125 32.7083C51.1792 30.7917 54.4014 29.4583 57.6792 28.7083V30.0833C54.6514 30.7222 51.6236 31.9583 48.5959 33.7917C45.5681 35.5972 42.7486 37.8194 40.1375 40.4583L39.2209 39.625Z"
@@ -721,7 +823,21 @@ export const Success =
 
 export const ViewMore =
   process.env.NEXT_PUBLIC_THEME === "unframed"
-    ? ({ className }: PropsWithClassName) => (
+    ? ({ className }: PropsWithClassName<IconWeightProps>) => (
         <Icon className={className} icon="2" />
       )
     : LucideGrid2x2X;
+
+export const Support =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="P" {...props} />
+      )
+    : HelpCircle;
+
+export const LogOut =
+  process.env.NEXT_PUBLIC_THEME === "unframed"
+    ? ({ className, ...props }: PropsWithClassName<IconWeightProps>) => (
+        <Icon className={className} icon="R" {...props} />
+      )
+    : HelpCircle;

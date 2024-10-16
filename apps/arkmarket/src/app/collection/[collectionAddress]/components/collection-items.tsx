@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useCallback, useEffect, useState } from "react";
-import { parseAsJson, useQueryState } from "nuqs";
+import { parseAsBoolean, parseAsJson, useQueryState } from "nuqs";
 
 import type { ViewType } from "~/components/view-type-toggle-group";
 import type { Filters } from "~/types";
@@ -47,6 +47,10 @@ export default function CollectionItems({
     parseAsJson<Filters>().withDefault({
       traits: {},
     }),
+  );
+  const [buyNow, setBuyNow] = useQueryState(
+    "buy_now",
+    parseAsBoolean.withDefault(false),
   );
 
   useEffect(() => {
@@ -105,6 +109,8 @@ export default function CollectionItems({
           filters={filters}
           onFiltersChange={handlerFiltersChange}
           isOpen={filtersPanelOpen}
+          buyNow={buyNow}
+          setBuyNow={setBuyNow}
         />
       </Suspense>
       <CollectionItemsFiltersDialog
@@ -147,6 +153,7 @@ export default function CollectionItems({
             sortBy={sortBy}
             viewType={viewType}
             filters={filters}
+            buyNow={buyNow}
           />
         </Suspense>
       </div>
