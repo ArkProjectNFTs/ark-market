@@ -28,7 +28,7 @@ export default function ExploreCollection() {
   }
 
   if (homepageConfig.exploreCollections.length === 0) {
-    return;
+    return null;
   }
 
   return (
@@ -67,6 +67,12 @@ export default function ExploreCollection() {
                         className="aspect-square w-16 rounded-sm object-contain"
                         src={collection.image}
                         alt={collection.name}
+                        height={512}
+                        width={932}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 
+                               (max-width: 1200px) 50vw, 
+                               33vw"
                         height={124}
                         width={124}
                         unoptimized={collection.image.endsWith(".gif")}
@@ -76,6 +82,24 @@ export default function ExploreCollection() {
                       </h4>
                       <VerifiedIcon className="mt-2 text-primary" />
                     </div>
+                  ) : (
+                    <div className="aspect-video rounded-lg bg-secondary" />
+                  )}
+                  <div className="mt-4 flex items-center gap-2">
+                    <Image
+                      className="aspect-square w-16 rounded-sm"
+                      src={collection.image}
+                      alt={collection.name}
+                      height={124}
+                      width={124}
+                      loading="lazy"
+                      unutilized={collection.image.endsWith(".gif")}
+                      sizes="(max-width: 768px) 10vw, 
+                             (max-width: 1200px) 5vw, 
+                             4vw"
+                    />
+                    <h4 className="text-xl font-semibold">{collection.name}</h4>
+                    <VerifiedIcon className="text-primary" />
                   </div>
                 </Link>
               </React.Fragment>

@@ -1,7 +1,12 @@
-interface LatestDropStatus {
+import { memo } from "react";
+
+interface LatestDropStatusProps {
   status: "live" | "upcoming";
 }
 
+function LatestDropStatus({ status }: LatestDropStatusProps) {
+  const isLive = status === "live";
+  
 export default function LatestDropStatus({ status }: LatestDropStatus) {
   if (status === "live") {
     return (
@@ -18,6 +23,18 @@ export default function LatestDropStatus({ status }: LatestDropStatus) {
   return (
     <div className="z-10 flex h-8 items-center gap-2.5 rounded-full bg-[#00000080] px-2.5 text-white">
       <span className="relative flex h-2.5 w-2.5">
+        <span
+          className={`absolute inline-flex h-full w-full animate-ping rounded-full ${
+            isLive ? "bg-green-400 opacity-75" : "bg-accent opacity-75 scale-[2]"
+          }`}
+        />
+        <span
+          className={`relative inline-flex h-2.5 w-2.5 rounded-full ${
+            isLive ? "bg-green-500" : "bg-foreground"
+          }`}
+        />
+      </span>
+      <p className="text-sm font-semibold">{isLive ? "Live" : "Upcoming"}</p>
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
         <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
       </span>
@@ -25,3 +42,5 @@ export default function LatestDropStatus({ status }: LatestDropStatus) {
     </div>
   );
 }
+
+export default memo(LatestDropStatus);
