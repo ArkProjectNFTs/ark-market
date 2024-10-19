@@ -1,16 +1,14 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn } from "@ark-market/ui";
 
-import type { TokenActivityApiResponse } from "~/lib/getTokenActivity";
 import useInfiniteWindowScroll from "~/hooks/useInfiniteWindowScroll";
-import getTokenActivity from "~/lib/getTokenActivity";
 import DesktopTokenActivity from "./desktop-token-activity";
 import MobileTokenActivity from "./mobile-token-activity";
+import useTokenActivity from "~/hooks/useTokenActivity";
 
 interface TokenActivityProps {
   contractAddress: string;
@@ -28,16 +26,7 @@ export default function TokenActivity({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["tokenActivity", contractAddress, tokenId],
-    refetchInterval: 10_000,
-    // getNextPageParam: (lastPage) => lastPage.next_page,
-    getNextPageParam: (lastPage?: TokenActivityApiResponse) =>
-      lastPage?.next_page,
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) =>
-      getTokenActivity({ contractAddress, tokenId, page: pageParam }),
-  });
+  } = useTokenActivity({ contractAddress, tokenId })
 
   const totalCount = infiniteData?.pages[0]?.count ?? 0;
   const tokenActivity = useMemo(

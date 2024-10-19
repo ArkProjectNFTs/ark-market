@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import {
@@ -20,8 +19,9 @@ import {
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
-import getCollection from "~/lib/getCollection";
 import CollectionHeaderStats from "./collection-header-stats";
+
+import useCollection from "~/hooks/useCollection";
 
 interface CollectionHeaderProps {
   collectionAddress: string;
@@ -34,12 +34,7 @@ export default function CollectionHeader({
 }: CollectionHeaderProps) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
-  const { data } = useQuery({
-    queryKey: ["collection", collectionAddress],
-    queryFn: () => getCollection({ collectionAddress }),
-    initialData: collection,
-    refetchInterval: 15_000,
-  });
+  const { data } = useCollection({ address:collectionAddress })
 
   if (!data) {
     return null;
