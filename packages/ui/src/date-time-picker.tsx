@@ -1,6 +1,5 @@
 "use client";
 
-import type { Locale } from "date-fns/locale";
 import * as React from "react";
 import { useImperativeHandle, useRef } from "react";
 import { add, format } from "date-fns";
@@ -9,7 +8,6 @@ import {
   Calendar as CalendarIcon,
   ChevronLeft,
   ChevronRight,
-  Clock,
 } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 
@@ -234,40 +232,18 @@ function display12HourValue(hours: number) {
   return `0${hours % 12}`;
 }
 
-function genMonths(locale: Locale) {
-  return Array.from({ length: 12 }, (_, i) => ({
-    value: i,
-    label: format(new Date(2021, i), "MMMM", { locale }),
-  }));
-}
-
-function genYears(locale: Locale, yearRange = 50) {
-  const today = new Date();
-  return Array.from({ length: yearRange * 2 + 1 }, (_, i) => ({
-    value: today.getFullYear() - yearRange + i,
-    label: (today.getFullYear() - yearRange + i).toString(),
-  }));
-}
-
 // ---------- utils end ----------
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  yearRange = 50,
   ...props
 }: CalendarProps & { yearRange?: number }) {
-  const MONTHS = React.useMemo(() => genMonths(props.locale ?? enUS), []);
-  const YEARS = React.useMemo(
-    () => genYears(props.locale ?? enUS, yearRange),
-    [],
-  );
-
   return (
     <DayPicker
-      fromMonth={new Date()}
-      disabled={{ before: new Date() }}
+      // fromMonth={new Date()}
+      // disabled={{ before: new Date() }}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
@@ -306,57 +282,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
-        CaptionLabel: ({ displayMonth }) => {
-          return (
-            <div className="inline-flex gap-2">
-              <Select
-                defaultValue={displayMonth.getMonth().toString()}
-                onValueChange={(value) => {
-                  const newDate = new Date(displayMonth);
-                  newDate.setMonth(parseInt(value, 10));
-                  props.onMonthChange?.(newDate);
-                }}
-              >
-                <SelectTrigger className="h-10 w-fit border-none px-1 py-0 focus:bg-accent focus:text-accent-foreground">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {MONTHS.map((month) => (
-                    <SelectItem
-                      key={month.value}
-                      value={month.value.toString()}
-                    >
-                      {month.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                defaultValue={displayMonth.getFullYear().toString()}
-                onValueChange={(value) => {
-                  const newDate = new Date(displayMonth);
-                  newDate.setFullYear(parseInt(value, 10));
-                  props.onMonthChange?.(newDate);
-                }}
-              >
-                <SelectTrigger className="h-10 w-fit border-none p-0 px-1 py-0 focus:bg-accent focus:text-accent-foreground">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {YEARS.map((year) => (
-                    <SelectItem key={year.value} value={year.value.toString()}>
-                      {year.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          );
-        },
+        IconLeft: () => <ChevronLeft className="h-4 w-4" />,
+        IconRight: () => <ChevronRight className="h-4 w-4" />,
       }}
       {...props}
     />
@@ -408,24 +335,22 @@ const TimePeriodSelect = React.forwardRef<
     };
 
     return (
-      <div className="flex h-10 items-center">
-        <Select
-          defaultValue={period}
-          onValueChange={(value: Period) => handleValueChange(value)}
+      <Select
+        defaultValue={period}
+        onValueChange={(value: Period) => handleValueChange(value)}
+      >
+        <SelectTrigger
+          ref={ref}
+          className="h-9 focus:bg-accent focus:text-accent-foreground"
+          onKeyDown={handleKeyDown}
         >
-          <SelectTrigger
-            ref={ref}
-            className="w-[65px] focus:bg-accent focus:text-accent-foreground"
-            onKeyDown={handleKeyDown}
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="AM">AM</SelectItem>
-            <SelectItem value="PM">PM</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="AM">AM</SelectItem>
+          <SelectItem value="PM">PM</SelectItem>
+        </SelectContent>
+      </Select>
     );
   },
 );
@@ -528,7 +453,7 @@ const TimePickerInput = React.forwardRef<
         id={id ?? picker}
         name={name ?? picker}
         className={cn(
-          "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+          "size-9 p-0 text-center text-xs tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
           className,
         )}
         value={value ?? calculatedValue}
@@ -589,18 +514,16 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
     );
 
     return (
-      <div className="flex items-center justify-center gap-2">
-        <label htmlFor="datetime-picker-hour-input" className="cursor-pointer">
-          <Clock className="mr-2 h-4 w-4" />
-        </label>
+      <div className="flex items-center gap-2">
         <TimePickerInput
+          id="datetime-picker-hour-input"
           picker={hourCycle === 24 ? "hours" : "12hours"}
           date={date}
-          id="datetime-picker-hour-input"
           onDateChange={onChange}
           ref={hourRef}
           period={period}
           onRightFocus={() => minuteRef.current?.focus()}
+          className="text-sm"
         />
         {(granularity === "minute" || granularity === "second") && (
           <>
@@ -629,23 +552,21 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
           </>
         )}
         {hourCycle === 12 && (
-          <div className="grid gap-1 text-center">
-            <TimePeriodSelect
-              period={period}
-              setPeriod={setPeriod}
-              date={date}
-              onDateChange={(date) => {
-                onChange?.(date);
-                if (date && date.getHours() >= 12) {
-                  setPeriod("PM");
-                } else {
-                  setPeriod("AM");
-                }
-              }}
-              ref={periodRef}
-              onLeftFocus={() => secondRef.current?.focus()}
-            />
-          </div>
+          <TimePeriodSelect
+            period={period}
+            setPeriod={setPeriod}
+            date={date}
+            onDateChange={(date) => {
+              onChange?.(date);
+              if (date && date.getHours() >= 12) {
+                setPeriod("PM");
+              } else {
+                setPeriod("AM");
+              }
+            }}
+            ref={periodRef}
+            onLeftFocus={() => secondRef.current?.focus()}
+          />
         )}
       </div>
     );
@@ -658,30 +579,14 @@ type Granularity = "day" | "hour" | "minute" | "second";
 type DateTimePickerProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
-  disabled?: boolean;
-  /** showing `AM/PM` or not. */
   hourCycle?: 12 | 24;
   placeholder?: string;
-  /**
-   * The year range will be: `This year + yearRange` and `this year - yearRange`.
-   * Default is 50.
-   * For example:
-   * This year is 2024, The year dropdown will be 1974 to 2024 which is generated by `2024 - 50 = 1974` and `2024 + 50 = 2074`.
-   * */
   yearRange?: number;
-  /**
-   * The format is derived from the `date-fns` documentation.
-   * @reference https://date-fns.org/v3.6.0/docs/format
-   **/
   displayFormat?: { hour24?: string; hour12?: string };
-  /**
-   * The granularity prop allows you to control the smallest unit that is displayed by DateTimePicker.
-   * By default, the value is `second` which shows all time inputs.
-   **/
   granularity?: Granularity;
 } & Pick<
   CalendarProps,
-  "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays"
+  "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays" | "disabled"
 >;
 
 type DateTimePickerRef = {
@@ -696,9 +601,8 @@ const DateTimePicker = React.forwardRef<DateTimePickerRef, DateTimePickerProps>(
       onChange,
       hourCycle = 24,
       yearRange = 50,
-      disabled = false,
       displayFormat,
-      granularity = "second",
+      granularity = "minute",
       placeholder = "Pick a date",
       ...props
     },
@@ -737,12 +641,11 @@ const DateTimePicker = React.forwardRef<DateTimePickerRef, DateTimePickerProps>(
     const initHourFormat = {
       hour24: displayFormat?.hour24 ?? "PPP HH:mm:ss",
       hour12: displayFormat?.hour12 ?? "PP hh:mm:ss aa",
-      // hour12: displayFormat?.hour12 ?? "Pp",
     };
 
     return (
       <Popover>
-        <PopoverTrigger asChild disabled={disabled}>
+        <PopoverTrigger asChild>
           <Button
             variant="outline"
             size="xl"

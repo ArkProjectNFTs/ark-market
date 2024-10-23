@@ -18,6 +18,10 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
+      disabled={{
+        before: new Date(),
+        after: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      }}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
