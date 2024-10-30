@@ -69,7 +69,7 @@ export async function getCollectionTokens({
     queryParams.push(`direction=${sortDirection}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x534e5f4d41494e/tokens?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/0x00000000000000000000000000000000000000000000000000534e5f4d41494e/tokens?${queryParams.join("&")}`;
   const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",

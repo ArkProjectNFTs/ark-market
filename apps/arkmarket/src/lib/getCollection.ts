@@ -10,7 +10,7 @@ export interface CollectionApiResponse {
   data: Collection;
 }
 
-const defaultChainId = "0x534e5f4d41494e";
+const defaultChainId = "0x00000000000000000000000000000000000000000000000000534e5f4d41494e";
 
 export default async function getCollection({
   collectionAddress,
