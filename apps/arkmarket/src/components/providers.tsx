@@ -17,7 +17,6 @@ export default function Providers({ children }: PropsWithChildren) {
         <ArkProvider
           config={{
             starknetNetwork: "mainnet",
-            arkchainNetwork: "mainnet",
           }}
         >
           <QueryClientProvider client={queryClient}>
