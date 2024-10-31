@@ -14,7 +14,7 @@ export default async function getToken({
   contractAddress,
   tokenId,
 }: GetCollectionTokenProps) {
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x00000000000000000000000000000000000000000000000000534e5f4d41494e/${tokenId}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}`;
   const response = await fetch(url);
 
   if (!response.ok) {

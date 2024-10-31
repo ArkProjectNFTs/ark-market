@@ -24,7 +24,7 @@ export async function getTokenOffers({
     queryParams.push(`page=${page}`);
   }
 
-  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x00000000000000000000000000000000000000000000000000534e5f4d41494e/${tokenId}/offers?${queryParams.join("&")}`;
+  const url = `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/tokens/${contractAddress}/0x534e5f4d41494e/${tokenId}/offers?${queryParams.join("&")}`;
   const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
