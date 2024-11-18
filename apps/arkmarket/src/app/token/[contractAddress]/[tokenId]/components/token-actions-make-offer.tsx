@@ -99,8 +99,8 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       startAmount: "",
-      duration: "719",
-      endDateTime: moment().add(1, "month").toDate(),
+      duration: "718",
+      endDateTime: moment().add(718, "hours").toDate(),
     },
   });
 
@@ -273,7 +273,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
                                 <SelectItem value="24">1 day</SelectItem>
                                 <SelectItem value="72">3 days</SelectItem>
                                 <SelectItem value="168">7 days</SelectItem>
-                                <SelectItem value="719">1 month</SelectItem>
+                                <SelectItem value="718">1 month</SelectItem>
                                 <SelectItem value="custom">Custom</SelectItem>
                               </SelectContent>
                             </Select>
