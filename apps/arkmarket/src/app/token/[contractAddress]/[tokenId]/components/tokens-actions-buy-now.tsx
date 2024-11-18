@@ -38,13 +38,22 @@ export default function TokenActionsBuyNow({
   small,
 }: TokenActionsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { fulfillListing, status } = useFulfillListing();
+  const { fulfillListingAsync, status } = useFulfillListing();
   const { address, account } = useAccount();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
   const { data } = useBalance({ address, token: ETH });
   const { toast } = useToast();
 
   const buy = async () => {
+    if (!account) {
+      toast({
+        variant: "canceled",
+        title: "Error",
+        description: "Please connect your wallet before creating a listing",
+      });
+      return;
+    }
+
     if (
       !data ||
       data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)
@@ -53,15 +62,20 @@ export default function TokenActionsBuyNow({
       return;
     }
 
+    if (!tokenMarketData.listing.start_amount) {
+      sonner.error("Token is not for sale");
+      return;
+    }
+
     setIsOpen(true);
 
-    await fulfillListing({
-      starknetAccount: account,
-      brokerId: env.NEXT_PUBLIC_BROKER_ID,
+    await fulfillListingAsync({
+      account: account,
+      brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
       tokenAddress: token.collection_address,
-      tokenId: token.token_id,
-      orderHash: tokenMarketData.listing.order_hash,
-      startAmount: tokenMarketData.listing.start_amount,
+      tokenId: BigInt(token.token_id),
+      orderHash: BigInt(tokenMarketData.listing.order_hash),
+      amount: BigInt(tokenMarketData.listing.start_amount),
     });
   };
 
@@ -176,7 +190,7 @@ export default function TokenActionsBuyNow({
       <Button
         className={cn(small ?? "relative w-full lg:max-w-[50%]")}
         size={small ? "xl" : "xxl"}
-        disabled={status === "loading"}
+        disabled={status === "pending"}
         onClick={(e) => {
           ensureConnect(e);
 

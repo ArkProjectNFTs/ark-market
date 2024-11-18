@@ -84,11 +84,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
         )}
       >
         <CustomFonts />
+        <SpeedInsights />
         <Providers>
           <div className="flex-col md:flex">
             <SiteHeader />
             {children}
-            <SpeedInsights />
           </div>
           {env.NEXT_PUBLIC_THEME === "unframed" ? (
             <UnframedFooter />

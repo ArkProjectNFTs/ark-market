@@ -30,7 +30,7 @@ export default function CollectionItemsBuyNow({
   token,
 }: CollectionItemsBuyNowProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { fulfillListing, status } = useFulfillListing();
+  const { fulfillListingAsync, status } = useFulfillListing();
   const { account, address } = useAccount();
   const { data } = useBalance({ address, token: ETH });
   const { toast } = useToast();
@@ -38,6 +38,14 @@ export default function CollectionItemsBuyNow({
   const queryClient = useQueryClient();
 
   const buy = async () => {
+    if (!account) {
+      toast({
+        variant: "canceled",
+        title: "Error",
+        description: "Please connect your wallet before Buying",
+      });
+      return;
+    }
     let tokenMarketData: TokenMarketData | undefined;
 
     try {
@@ -67,15 +75,20 @@ export default function CollectionItemsBuyNow({
       return;
     }
 
+    if (!tokenMarketData.listing.start_amount) {
+      sonner.error("Token is not for sale");
+      return;
+    }
+
     setIsOpen(true);
 
-    await fulfillListing({
-      starknetAccount: account,
-      brokerId: env.NEXT_PUBLIC_BROKER_ID,
+    await fulfillListingAsync({
+      account: account,
+      brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
       tokenAddress: token.collection_address,
-      tokenId: token.token_id,
-      orderHash: tokenMarketData.listing.order_hash,
-      startAmount: tokenMarketData.listing.start_amount,
+      tokenId: BigInt(token.token_id),
+      orderHash: BigInt(tokenMarketData.listing.order_hash),
+      amount: BigInt(tokenMarketData.listing.start_amount),
     });
   };
 
@@ -137,17 +150,14 @@ export default function CollectionItemsBuyNow({
         <Button
           className="h-10 w-full rounded-none opacity-0 transition-opacity focus-visible:opacity-100 group-hover:opacity-100"
           size="xl"
-          disabled={status === "loading"}
-          onClick={(e) => {
+          disabled={status === "pending"}
+          onClick={async (e) => {
             e.preventDefault();
             ensureConnect(e);
-
-            if (account) {
-              void buy();
-            }
+            await buy();
           }}
         >
-          {status === "loading" && (
+          {status === "pending" && (
             <LoaderCircle className="absolute left-4 animate-spin" size={20} />
           )}
           Buy now

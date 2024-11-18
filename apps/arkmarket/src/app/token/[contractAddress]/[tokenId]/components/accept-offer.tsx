@@ -51,8 +51,8 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { account } = useAccount();
-  const { fulfillOffer, status } = useFulfillOffer();
-  const { fulfill: fulfillAuction, status: statusAuction } =
+  const { fulfillOfferAsync, status } = useFulfillOffer();
+  const { fulfillAuctionAsync, status: statusAuction } =
     useFulfillAuction();
 
   const { toast } = useToast();
@@ -70,28 +70,36 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   }, [status]);
 
   const onConfirm = async () => {
+    if (!account) {
+      toast({
+        variant: "canceled", 
+        title: "Error",
+        description: "Please connect your wallet before accepting an offer",
+      });
+      return;
+    }
+
     if (isListed && listing.is_auction) {
-      await fulfillAuction({
-        brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        orderHash: listing.order_hash,
-        relatedOrderHash: offerOrderHash,
-        starknetAccount: account,
-        startAmount: offerPrice,
+      await fulfillAuctionAsync({
+        brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
+        orderHash: BigInt(listing.order_hash),
+        relatedOrderHash: BigInt(offerOrderHash),
+        account: account,
         tokenAddress: collectionAddress,
-        tokenId: tokenId,
+        tokenId: BigInt(tokenId),
       });
     } else {
-      await fulfillOffer({
-        brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        orderHash: offerOrderHash,
-        starknetAccount: account,
+      await fulfillOfferAsync({
+        brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
+        orderHash: BigInt(offerOrderHash),
+        account: account,
         tokenAddress: collectionAddress,
-        tokenId: tokenId,
+        tokenId: BigInt(tokenId),
       });
     }
   };
 
-  const isLoading = status === "loading" || statusAuction === "loading";
+  const isLoading = status === "pending" || statusAuction === "pending";
 
   useEffect(() => {
     if (status === "error" || statusAuction === "error") {

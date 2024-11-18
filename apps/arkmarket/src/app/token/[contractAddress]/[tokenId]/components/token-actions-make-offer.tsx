@@ -58,7 +58,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   const { account, address } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
-  const { createOffer, status } = useCreateOffer();
+  const { createOfferAsync, status } = useCreateOffer();
   const { toast } = useToast();
   const { data: ethBalance } = useBalance({ address, token: ETH });
   const { ensureConnect } = useConnectWallet({
@@ -145,27 +145,28 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {
+      toast({
+        variant: "canceled", 
+        title: "Error",
+        description: "Please connect your wallet before creating an offer"
+      });
       return;
     }
 
-    const processedValues = {
-      brokerId: env.NEXT_PUBLIC_BROKER_ID,
-      currencyAddress: config?.starknetCurrencyContract,
+    await createOfferAsync({
+      account: account,
+      brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
+      currencyAddress: config.starknetCurrencyContract,
       tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
-      startAmount: parseEther(values.startAmount),
+      amount: parseEther(values.startAmount),
       endDate: values.endDateTime
         ? moment(values.endDateTime).unix()
         : moment().add(values.duration, "hours").unix(),
-    };
-
-    await createOffer({
-      starknetAccount: account,
-      ...processedValues,
     });
   }
 
-  const isLoading = status === "loading";
+  const isLoading = status === "pending";
   const isDisabled =
     !form.formState.isValid || form.formState.isSubmitting || isLoading;
   const startAmount = form.watch("startAmount");

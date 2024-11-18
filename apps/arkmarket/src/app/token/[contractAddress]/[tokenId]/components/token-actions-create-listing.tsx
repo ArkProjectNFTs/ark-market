@@ -77,8 +77,8 @@ export function TokenActionsCreateListing({
       }),
     refetchInterval: 5_000,
   });
-  const { createListing, status } = useCreateListing();
-  const { create: createAuction, status: auctionStatus } = useCreateAuction();
+  const { createListingAsync, status } = useCreateListing();
+  const { createAuctionAsync, status: auctionStatus } = useCreateAuction();
   const { toast } = useToast();
   const { convertInUsd } = usePrices();
 
@@ -212,8 +212,11 @@ export function TokenActionsCreateListing({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!account) {
-      // TODO: Handle error with toast
-      console.error("Account is missing");
+      toast({
+        variant: "canceled", 
+        title: "Error",
+        description: "Please connect your wallet before creating a listing"
+      });
       return;
     }
 
@@ -230,9 +233,9 @@ export function TokenActionsCreateListing({
 
     try {
       if (isAuction) {
-        await createAuction({
-          starknetAccount: account,
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+        await createAuctionAsync({
+          account: account,
+          brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
           tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
@@ -240,13 +243,13 @@ export function TokenActionsCreateListing({
           endAmount: processedValues.endAmount,
         });
       } else {
-        await createListing({
-          starknetAccount: account,
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
+        await createListingAsync({
+          account: account,
+          brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
           tokenAddress: token.collection_address,
           tokenId: processedValues.tokenId,
           endDate: processedValues.endDate,
-          startAmount: processedValues.startAmount,
+          amount: processedValues.startAmount,
         });
       }
     } catch (error) {
@@ -261,11 +264,11 @@ export function TokenActionsCreateListing({
   const isDisabled =
     !form.formState.isValid ||
     form.formState.isSubmitting ||
-    status === "loading" ||
-    auctionStatus === "loading";
+    status === "pending" ||
+    auctionStatus === "pending";
 
   const startAmountInUsd = convertInUsd({ amount: parseEther(startAmount) });
-  const isLoading = status === "loading" || auctionStatus === "loading";
+  const isLoading = status === "pending" || auctionStatus === "pending";
   const isTriggerLoading = status === "success" || auctionStatus === "success";
   const isTriggerDisabled =
     isTriggerLoading || tokenMarketData?.buy_in_progress;

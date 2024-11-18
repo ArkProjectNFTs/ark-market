@@ -24,7 +24,7 @@ export default function TokenSummaryShareDropdown() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
           <ExternalLink
-            href={`https://x.com/intent/post?text=${window.location.href}`}
+            // href={`https://x.com/intent/post?text=${window.location.href}`}
             className="h-full w-full"
           >
             <div className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function TokenSummaryShareDropdown() {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <ExternalLink
-            href={`https://t.me/share/url?url=${window.location.href}`}
+            // href={`https://t.me/share/url?url=${window.location.href}`}
             className="h-full w-full"
           >
             <div className="flex items-center gap-2">

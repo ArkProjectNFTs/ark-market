@@ -43,7 +43,7 @@ export default function TokenSummaryMobileActions({
         </DropdownMenuItem>
         <DropdownMenuItem>
           <ExternalLink
-            href={`https://x.com/intent/post?text=${window.location.href}`}
+            // href={`https://x.com/intent/post?text=${window.location.href}`}
           >
             <div className="flex items-center gap-2">
               <XIcon className="size-4" />
@@ -53,7 +53,7 @@ export default function TokenSummaryMobileActions({
         </DropdownMenuItem>
         <DropdownMenuItem>
           <ExternalLink
-            href={`https://t.me/share/url?url=${window.location.href}`}
+            // href={`https://t.me/share/url?url=${window.location.href}`}
           >
             <div className="flex items-center gap-2">
               <Telegram className="size-4" />

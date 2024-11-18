@@ -26,7 +26,7 @@ export default function TokenActionsCancelListing({
   small,
 }: TokenActionsCancelListingProps) {
   const { account, address } = useAccount();
-  const { cancel, status } = useCancel();
+  const { cancelAsync, status } = useCancel();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
   const { toast } = useToast();
 
@@ -72,15 +72,15 @@ export default function TokenActionsCancelListing({
   }
 
   const handleClick = async () => {
-    await cancel({
-      starknetAccount: account,
+    await cancelAsync({
+      account: account,
       orderHash: BigInt(tokenMarketData.listing.order_hash),
       tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
     });
   };
 
-  const isLoading = status === "loading" || status === "success";
+  const isLoading = status === "pending" || status === "success";
   const isDisabled = isLoading || tokenMarketData.buy_in_progress;
 
   return (

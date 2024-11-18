@@ -33,7 +33,7 @@ const CancelOffer = ({
   tokenMetadata,
 }: CancelOfferProps) => {
   const { account } = useAccount();
-  const { cancel, status } = useCancel();
+  const { cancelAsync, status } = useCancel();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -72,11 +72,16 @@ const CancelOffer = ({
 
   const handleClick = async () => {
     if (!account) {
+      toast({
+        variant: "canceled", 
+        title: "Error",
+        description: "Please connect your wallet before canceling a listing"
+      });
       return;
     }
 
-    await cancel({
-      starknetAccount: account,
+    await cancelAsync({
+      account: account,
       tokenAddress: collectionAddress,
       tokenId: BigInt(tokenId),
       orderHash: BigInt(offerOrderHash),
@@ -87,7 +92,7 @@ const CancelOffer = ({
 
   return (
     <Button size="sm" onClick={handleClick} disabled={isLoading}>
-      {status === "loading" ? (
+      {status === "pending" ? (
         <ReloadIcon className="animate-spin" />
       ) : (
         "Cancel"

@@ -44,9 +44,8 @@ export default function TokenActionsAcceptBestOffer({
   small,
 }: TokenActionsAcceptBestOfferProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { fulfill: fulfillAuction, status: statusAuction } =
-    useFulfillAuction();
-  const { fulfillOffer, status } = useFulfillOffer();
+  const { fulfillAuctionAsync, status: statusAuction } = useFulfillAuction();
+  const { fulfillOfferAsync, status } = useFulfillOffer();
   const { address, account } = useAccount();
   const { toast } = useToast();
   const isOwner = areAddressesEqual(tokenMarketData.owner, address);
@@ -90,23 +89,31 @@ export default function TokenActionsAcceptBestOffer({
   }, [status, statusAuction]);
 
   const onConfirm = async () => {
+    if (!account) {
+      toast({
+        variant: "canceled", 
+        title: "Error",
+        description: "Please connect your wallet before accepting an offer"
+      });
+      return;
+    }
     try {
       if (isAuction) {
-        await fulfillAuction({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          relatedOrderHash: tokenMarketData.listing.order_hash,
-          starknetAccount: account,
+        await fulfillAuctionAsync({
+          brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
+          orderHash: BigInt(tokenMarketData.top_offer.order_hash),
+          relatedOrderHash: BigInt(tokenMarketData.listing.order_hash),
+          account: account,
           tokenAddress: token.collection_address,
-          tokenId: token.token_id,
+          tokenId: BigInt(token.token_id),
         });
       } else {
-        await fulfillOffer({
-          brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: tokenMarketData.top_offer.order_hash,
-          starknetAccount: account,
+        await fulfillOfferAsync({
+          brokerAddress: env.NEXT_PUBLIC_BROKER_ID,
+          orderHash: BigInt(tokenMarketData.top_offer.order_hash),
+          account: account,
           tokenAddress: token.collection_address,
-          tokenId: token.token_id,
+          tokenId: BigInt(token.token_id),
         });
       }
     } catch (error) {
@@ -118,7 +125,7 @@ export default function TokenActionsAcceptBestOffer({
     return null;
   }
 
-  const isLoading = status === "loading" || statusAuction === "loading";
+  const isLoading = status === "pending" || statusAuction === "pending";
   const isDisabled = isLoading || tokenMarketData.buy_in_progress;
 
   return (

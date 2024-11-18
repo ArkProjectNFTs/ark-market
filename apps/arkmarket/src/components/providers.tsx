@@ -1,28 +1,30 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import { ArkProvider } from "@ark-project/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ArkQueryClient, ArkQueryClientProvider, ArkProvider } from "@ark-project/react";
 
 import { ThemeProvider } from "@ark-market/ui/theme";
 
 import { StarknetProvider } from "./starknet-provider";
 
-export default function Providers({ children }: PropsWithChildren) {
-  const queryClient = new QueryClient();
+const queryClient = new ArkQueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 60 * 1000,
+    },
+  },
+});
 
+export default function Providers({ children }: PropsWithChildren) {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
       <StarknetProvider>
-        <ArkProvider
-          config={{
-            starknetNetwork: "mainnet",
-          }}
-        >
-          <QueryClientProvider client={queryClient}>
+        <ArkQueryClientProvider client={queryClient}>
+          <ArkProvider config={{ starknetNetwork: "mainnet" }}>
             {children}
-          </QueryClientProvider>
-        </ArkProvider>
+          </ArkProvider>
+        </ArkQueryClientProvider>
       </StarknetProvider>
     </ThemeProvider>
   );
