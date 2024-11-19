@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAccount, useStarkProfile } from "@starknet-react/core";
+import { useQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { cn, ellipsableStyles, shortAddress } from "@ark-market/ui";
@@ -21,7 +22,10 @@ import {
 } from "@ark-market/ui/icons";
 
 import type { Token } from "~/types";
+import CopyButton from "~/components/copy-button";
+import ExternalLink from "~/components/external-link";
 import Media from "~/components/media";
+import getCollection from "~/lib/getCollection";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenAboutProps {
@@ -40,6 +44,13 @@ export default function TokenAbout({
   const { address } = useAccount();
   const collectionShortenedAddress = shortAddress(contractAddress);
   const { data: starkProfile } = useStarkProfile({ address: token.owner });
+  const { data: collection } = useQuery({
+    queryKey: ["collection", address],
+    queryFn: () =>
+      getCollection({
+        collectionAddress: token.collection_address,
+      }),
+  });
 
   const ownerShortenedAddress =
     starkProfile?.name ??
@@ -78,34 +89,25 @@ export default function TokenAbout({
           <div>
             <h4 className="text-xl font-semibold">{token.collection_name}</h4>
             <p className="mt-2 hidden text-sm lg:block">
-              {`Everai is a pioneering web3 brand set to expand its universe powered
-          by the collective creativity of its artistic partners and vibrant
-          community. In the Everai Universe, the Everais stand as the mightiest
-          heroes of Shodai's civilization… Get yours now to join us in this
-          collaborative journey to shape the Everai Universe!`}
+              {collection?.description}
             </p>
           </div>
         </div>
 
-        <div className="mt-5 flex items-center gap-4 text-muted-foreground lg:mt-10">
-          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
-            <XIcon className="size-4" />
-          </Button>
-          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
-            <Discord className="size-4" />
-          </Button>
-          <Button variant="outline" size="icon-xl" className="w-full lg:w-12">
-            <Globe className="size-4" />
-          </Button>
+        <div className="mt-5 flex items-center gap-6 text-muted-foreground lg:mt-10">
+          <CopyButton textToCopy={collection?.address} />
+          <ExternalLink href={collection?.twitter}>
+            <XIcon className="h-6" />
+          </ExternalLink>
+          <ExternalLink href={collection?.discord}>
+            <Discord className="h-6" />
+          </ExternalLink>
+          <ExternalLink href={collection?.website}>
+            <Globe className="h-6" />
+          </ExternalLink>
         </div>
 
-        <p className="mt-6 text-sm lg:hidden">
-          {`Everai is a pioneering web3 brand set to expand its universe powered
-          by the collective creativity of its artistic partners and vibrant
-          community. In the Everai Universe, the Everais stand as the mightiest
-          heroes of Shodai's civilization… Get yours now to join us in this
-          collaborative journey to shape the Everai Universe!`}
-        </p>
+        <p className="mt-6 text-sm lg:hidden">{collection?.description}</p>
 
         <div className="mt-8 flex flex-col gap-4 pb-6">
           <div className="flex items-center justify-between">
@@ -139,7 +141,7 @@ export default function TokenAbout({
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Royalty</p>
-            <p className="text-muted-foreground">_%</p>
+            <p className="text-muted-foreground">-</p>
           </div>
           <div className="flex items-center justify-between">
             <p className="font-medium">Chain</p>

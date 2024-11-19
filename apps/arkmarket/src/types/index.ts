@@ -1,6 +1,9 @@
 export interface Collection {
   address: string;
+  description?: string;
+  discord?: string;
   floor?: string;
+  floor_7d_percentage: string;
   image?: string;
   is_verified: boolean;
   listed_items: number;
@@ -12,8 +15,9 @@ export interface Collection {
   token_count: number;
   total_sales: number;
   total_volume: number;
+  twitter?: string;
   volume_7d_eth: number;
-  floor_7d_percentage: string;
+  website?: string;
 }
 
 export type CollectionTrait = Record<string, number>;
