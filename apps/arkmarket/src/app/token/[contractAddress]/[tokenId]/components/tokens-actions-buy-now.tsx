@@ -182,7 +182,8 @@ export default function TokenActionsBuyNow({
       >
         <ActivityList />
         {"Buy now for "}
-        {formatEther(BigInt(tokenMarketData.listing.start_amount))} ETH
+        {formatEther(BigInt(tokenMarketData.listing.start_amount))}{" "}
+        {tokenMarketData.listing.currency.symbol}
       </Button>
     </>
   );
