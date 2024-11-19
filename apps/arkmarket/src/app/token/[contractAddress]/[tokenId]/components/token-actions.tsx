@@ -44,13 +44,7 @@ export default function TokenActions({
         isAuction={data.listing.is_auction}
         expiresAt={data.listing.end_date}
       />
-      <TokenActionsPrice
-        startAmount={data.listing.start_amount}
-        isListed={data.is_listed}
-        isAuction={data.listing.is_auction}
-        hasOffer={data.has_offer}
-        topOffer={data.top_offer}
-      />
+      <TokenActionsPrice tokenMarketData={data} />
       <TokenActionsButtons
         isListed={data.is_listed}
         isAuction={data.listing.is_auction}
