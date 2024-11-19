@@ -42,7 +42,7 @@ export default function DesktopTokenActivity({
           {tokenActivity.map((activity) => (
             <TableRow
               className="group h-[4.6875rem]"
-              key={`activity-${activity.time_stamp}`}
+              key={`activity-${activity.activity_type}-${activity.time_stamp}`}
             >
               <EventCell activity={activity} />
               <TableCell>
