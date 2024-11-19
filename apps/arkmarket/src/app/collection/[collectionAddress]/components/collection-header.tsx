@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import moment from "moment";
 
 import { cn, focusableStyles } from "@ark-market/ui";
 import {
@@ -104,7 +105,17 @@ export default function CollectionHeader({
           </div>
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-          <p className="mb-6 max-w-lg pt-4 text-sm">{collection.description}</p>
+          <p className="mb-2 max-w-lg pt-4 text-sm">{collection.description}</p>
+          <p className="flex items-center gap-2 text-sm">
+            Created
+            <span className="text-muted-foreground">
+              {collection.deployed_timestamp
+                ? moment.unix(collection.deployed_timestamp).format("MMM YYYY")
+                : "-"}
+            </span>
+            Creator earnings
+            <span className="text-muted-foreground"> 5%</span>
+          </p>
           <div className="block lg:hidden">
             <CollectionHeaderStats collection={data} />
           </div>
