@@ -110,7 +110,9 @@ export default function CollectionItemsDataGridView({
                           )}
                         >
                           {formatUnits(token.price, 18)}{" "}
-                          <span className="text-muted-foreground">ETH</span>
+                          <span className="text-muted-foreground">
+                            {token.listing.currency.symbol}
+                          </span>
                         </div>
                       ) : (
                         <div
@@ -129,7 +131,8 @@ export default function CollectionItemsDataGridView({
                     {token.last_price ? (
                       <>
                         Last {viewType === "large-grid" ? "sale" : ""}{" "}
-                        {formatUnits(token.last_price, 18)} ETH
+                        {formatUnits(token.last_price, 18)}{" "}
+                        {token.listing.currency.symbol}
                       </>
                     ) : null}
                   </p>

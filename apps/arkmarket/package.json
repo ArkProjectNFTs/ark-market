@@ -20,6 +20,7 @@
     "@ark-market/ui": "workspace:*",
     "@ark-project/core": "^2.1.1",
     "@ark-project/react": "^1.1.1",
+    "@avnu/avnu-sdk": "^2.1.1",
     "@hookform/error-message": "^2.0.1",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.0.0",

@@ -111,6 +111,7 @@ export interface CollectionToken {
   listed_at?: number;
   listing: {
     is_auction: boolean;
+    currency: Currency;
   };
   metadata?: TokenMetadata;
   owner: string;
@@ -200,18 +201,15 @@ export interface PortfolioOffers {
   is_listed: boolean;
   listing: {
     currency_address: string | null;
+    currency: Currency;
     end_amount: string | null;
     end_date: number | null;
     is_auction: boolean;
     order_hash: string;
-    start_amount: string | null;
+    start_amount: string;
     start_date: number | null;
   };
-  currency?: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency?: Currency | null;
 }
 
 export interface CollectionActivity {
@@ -254,6 +252,12 @@ export interface PortfolioStats {
   total_value: string | null;
 }
 
+export interface Currency {
+  contract: string;
+  decimals: number;
+  symbol: string;
+}
+
 export interface TokenMarketData {
   buy_in_progress: boolean;
   created_timestamp: number | null;
@@ -262,18 +266,20 @@ export interface TokenMarketData {
   is_listed: boolean;
   last_price: string | null;
   listing: {
+    currency: Currency;
     currency_address: string | null;
     end_amount: string | null;
     end_date: number | null;
     is_auction: boolean;
     order_hash: string;
-    start_amount: string | null;
+    start_amount: string;
     start_date: number | null;
   };
   owner: string;
   top_offer: {
     amount: string;
     currency_address: string;
+    currency: Currency;
     end_date: number;
     order_hash: string;
     start_date: number;

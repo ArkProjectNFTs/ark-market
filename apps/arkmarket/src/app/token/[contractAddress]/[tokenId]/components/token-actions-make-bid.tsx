@@ -102,9 +102,7 @@ export default function TokenActionsMakeBid({
     mode: "all",
     resolver: zodResolver(formSchema),
     defaultValues: {
-      startAmount: formatEther(
-        BigInt(tokenMarketData.listing.start_amount ?? 0),
-      ),
+      startAmount: formatEther(BigInt(tokenMarketData.listing.start_amount)),
       duration: "719",
       endDateTime: moment().add(1, "month").toDate(),
     },
@@ -122,7 +120,7 @@ export default function TokenActionsMakeBid({
         title: "Your bid could not be submitted",
         additionalContent: (
           <ToastRejectedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={startAmount}
             collectionName={token.collection_name}
             tokenId={token.token_id}
@@ -137,7 +135,7 @@ export default function TokenActionsMakeBid({
         title: "Your bid has been sucessfullly sent",
         additionalContent: (
           <ToastExecutedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={startAmount}
             collectionName={token.collection_name}
             tokenId={token.token_id}
@@ -176,7 +174,7 @@ export default function TokenActionsMakeBid({
     !form.formState.isValid || form.formState.isSubmitting || isLoading;
   const startAmount = form.watch("startAmount");
   const formattedStartAmount = formatAmount(startAmount);
-  const price = formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0));
+  const price = formatEther(BigInt(tokenMarketData.listing.start_amount));
   const reservePrice = formatEther(
     BigInt(tokenMarketData.listing.end_amount ?? 0),
   );
