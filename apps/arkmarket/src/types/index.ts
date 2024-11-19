@@ -111,6 +111,7 @@ export interface CollectionToken {
   listed_at?: number;
   listing: {
     is_auction: boolean;
+    currency: Currency;
   };
   metadata?: TokenMetadata;
   owner: string;
