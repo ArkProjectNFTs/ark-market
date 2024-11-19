@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import moment from "moment";
 
 import { cn } from "@ark-market/ui";
 import {
@@ -62,9 +63,15 @@ export default function MobileCollectionHeader({
           <div className="flex flex-col gap-3 px-5 pb-4">
             <p className="flex items-center gap-2 text-sm">
               Created
-              <span className="text-muted-foreground"> Feb 2000</span>
+              <span className="text-muted-foreground">
+                {collection.deployed_timestamp
+                  ? moment
+                      .unix(collection.deployed_timestamp)
+                      .format("MMM YYYY")
+                  : "-"}
+              </span>
               Creator earnings
-              <span className="text-muted-foreground"> 1000%</span>
+              <span className="text-muted-foreground"> 5%</span>
             </p>
             <div className="flex items-center gap-4 text-muted-foreground">
               <CopyButton textToCopy={collectionAddress} className="h-6" />

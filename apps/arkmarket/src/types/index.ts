@@ -1,6 +1,7 @@
 export interface Collection {
   address: string;
   description?: string;
+  deployed_timestamp?: number;
   discord?: string;
   floor?: string;
   floor_7d_percentage: string;
