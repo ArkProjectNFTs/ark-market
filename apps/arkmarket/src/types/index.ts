@@ -201,18 +201,15 @@ export interface PortfolioOffers {
   is_listed: boolean;
   listing: {
     currency_address: string | null;
+    currency: Currency;
     end_amount: string | null;
     end_date: number | null;
     is_auction: boolean;
     order_hash: string;
-    start_amount: string | null;
+    start_amount: string;
     start_date: number | null;
   };
-  currency?: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency?: Currency | null;
 }
 
 export interface CollectionActivity {

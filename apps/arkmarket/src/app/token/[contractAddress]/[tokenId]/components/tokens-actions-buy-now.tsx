@@ -45,10 +45,7 @@ export default function TokenActionsBuyNow({
   const { toast } = useToast();
 
   const buy = async () => {
-    if (
-      !data ||
-      data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)
-    ) {
+    if (!data || data.value < BigInt(tokenMarketData.listing.start_amount)) {
       sonner.error("Insufficient balance");
       return;
     }
@@ -80,9 +77,9 @@ export default function TokenActionsBuyNow({
         title: "Purchase canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={formatEther(
-              BigInt(tokenMarketData.listing.start_amount ?? 0),
+              BigInt(tokenMarketData.listing.start_amount),
             )}
             collectionName={token.collection_name}
             tokenId={token.token_id}
@@ -96,9 +93,9 @@ export default function TokenActionsBuyNow({
         title: "Your purchase is confirmed",
         additionalContent: (
           <ToastExecutedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={formatEther(
-              BigInt(tokenMarketData.listing.start_amount ?? 0),
+              BigInt(tokenMarketData.listing.start_amount),
             )}
             collectionName={token.collection_name}
             tokenId={token.token_id}
@@ -144,9 +141,7 @@ export default function TokenActionsBuyNow({
             </div>
             <TokenActionsTokenOverview
               token={token}
-              amount={formatEther(
-                BigInt(tokenMarketData.listing.start_amount ?? 0),
-              )}
+              amount={formatEther(BigInt(tokenMarketData.listing.start_amount))}
             />
             {isSuccess ? (
               <Button
@@ -187,7 +182,7 @@ export default function TokenActionsBuyNow({
       >
         <ActivityList />
         {"Buy now for "}
-        {formatEther(BigInt(tokenMarketData.listing.start_amount ?? 0))} ETH
+        {formatEther(BigInt(tokenMarketData.listing.start_amount))} ETH
       </Button>
     </>
   );

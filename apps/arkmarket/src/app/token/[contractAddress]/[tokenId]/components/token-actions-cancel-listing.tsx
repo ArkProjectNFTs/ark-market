@@ -37,9 +37,9 @@ export default function TokenActionsCancelListing({
         title: "The listing could not be canceled",
         additionalContent: (
           <ToastRejectedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={formatEther(
-              BigInt(tokenMarketData.listing.start_amount ?? 0),
+              BigInt(tokenMarketData.listing.start_amount),
             )}
             collectionName={token.collection_name}
             tokenId={token.token_id}
@@ -53,9 +53,9 @@ export default function TokenActionsCancelListing({
         title: "Your listing is successfully canceled",
         additionalContent: (
           <ToastExecutedTransactionContent
-            price={BigInt(tokenMarketData.listing.start_amount ?? 0)}
+            price={BigInt(tokenMarketData.listing.start_amount)}
             formattedPrice={formatEther(
-              BigInt(tokenMarketData.listing.start_amount ?? 0),
+              BigInt(tokenMarketData.listing.start_amount),
             )}
             collectionName={token.collection_name}
             tokenId={token.token_id}

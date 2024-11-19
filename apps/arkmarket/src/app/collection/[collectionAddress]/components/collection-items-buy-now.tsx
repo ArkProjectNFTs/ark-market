@@ -59,10 +59,7 @@ export default function CollectionItemsBuyNow({
       return;
     }
 
-    if (
-      !data ||
-      data.value < BigInt(tokenMarketData.listing.start_amount ?? 0)
-    ) {
+    if (!data || data.value < BigInt(tokenMarketData.listing.start_amount)) {
       sonner.error("Insufficient balance");
       return;
     }
