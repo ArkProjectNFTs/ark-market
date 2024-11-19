@@ -19,9 +19,8 @@ import {
 import type { Collection } from "~/types";
 import CopyButton from "~/components/copy-button";
 import ExternalLink from "~/components/external-link";
-import CollectionHeaderStats from "./collection-header-stats";
-
 import useCollection from "~/hooks/useCollection";
+import CollectionHeaderStats from "./collection-header-stats";
 
 interface CollectionHeaderProps {
   collectionAddress: string;
@@ -34,7 +33,7 @@ export default function CollectionHeader({
 }: CollectionHeaderProps) {
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
 
-  const { data } = useCollection({ address:collectionAddress })
+  const { data } = useCollection({ address: collectionAddress });
 
   if (!data) {
     return null;
@@ -71,30 +70,32 @@ export default function CollectionHeader({
               </div>
               <div className="mb-1 flex h-6 items-center gap-4 text-sm text-muted-foreground">
                 <CopyButton textToCopy={collectionAddress} />
-                <ExternalLink href="/">
+                <ExternalLink href={collection.twitter}>
                   <XIcon className="h-4" />
                 </ExternalLink>
-                <ExternalLink href="/">
+                <ExternalLink href={collection.discord}>
                   <Discord className="h-4" />
                 </ExternalLink>
-                <ExternalLink href="/">
+                <ExternalLink href={collection.website}>
                   <Globe className="h-4" />
                 </ExternalLink>
-                <CollapsibleTrigger asChild>
-                  <button
-                    className={cn(
-                      "ml-1 flex items-center gap-1 hover:text-foreground",
-                      focusableStyles,
-                    )}
-                  >
-                    <p className="flex items-center">
-                      {collapsibleOpen ? "Less Info" : "More Info"}
-                    </p>
-                    <p className="flex items-center text-xs">
-                      <ChevronDown size={16} />
-                    </p>
-                  </button>
-                </CollapsibleTrigger>
+                {collection.description && (
+                  <CollapsibleTrigger asChild>
+                    <button
+                      className={cn(
+                        "ml-1 flex items-center gap-1 hover:text-foreground",
+                        focusableStyles,
+                      )}
+                    >
+                      <p className="flex items-center">
+                        {collapsibleOpen ? "Less Info" : "More Info"}
+                      </p>
+                      <p className="flex items-center text-xs">
+                        <ChevronDown size={16} />
+                      </p>
+                    </button>
+                  </CollapsibleTrigger>
+                )}
               </div>
             </div>
           </div>
@@ -103,22 +104,7 @@ export default function CollectionHeader({
           </div>
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-          {/* <p className="flex items-center gap-2 pt-8"> */}
-          {/* Created
-            <span className="text-muted-foreground"> Feb 2000</span> */}
-          {/* <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
-              <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
-            </svg> */}
-          {/* Creator earnings
-            <span className="text-muted-foreground"> 1000%</span> */}
-          {/* </p> */}
-          <p className="mb-6 max-w-lg pt-4 text-sm">
-            Everai is a pioneering web3 brand set to expand its universe powered
-            by the collective creativity of its artistic partners and vibrant
-            community. In the Everai Universe, the Everais stand as the
-            mightiest heroes of Shodai&apos;s civilization… Get yours now to
-            join us in this collaborative journey to shape the Everai Universe!
-          </p>
+          <p className="mb-6 max-w-lg pt-4 text-sm">{collection.description}</p>
           <div className="block lg:hidden">
             <CollectionHeaderStats collection={data} />
           </div>

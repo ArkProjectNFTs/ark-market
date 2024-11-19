@@ -68,13 +68,13 @@ export default function MobileCollectionHeader({
             </p>
             <div className="flex items-center gap-4 text-muted-foreground">
               <CopyButton textToCopy={collectionAddress} className="h-6" />
-              <ExternalLink href="/">
+              <ExternalLink href={collection.twitter}>
                 <XIcon className="h-6 w-auto" />
               </ExternalLink>
-              <ExternalLink href="/">
+              <ExternalLink href={collection.discord}>
                 <Discord className="h-6 w-auto" />
               </ExternalLink>
-              <ExternalLink href="/">
+              <ExternalLink href={collection.website}>
                 <Globe className="h-6 w-auto" />
               </ExternalLink>
             </div>
