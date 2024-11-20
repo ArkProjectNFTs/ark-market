@@ -1,14 +1,16 @@
+import { formatUnits } from "viem";
+
 import type { PropsWithClassName } from ".";
-import { cn, ellipsableStyles, formatUnits } from ".";
+import { cn, ellipsableStyles } from ".";
 import { Ethereum, Starknet } from "./icons";
 
 interface PriceTagProps {
-  price: number | bigint | string;
-  currency?: {
+  price: string;
+  currency: {
     contract: string;
-    decimals: number;
     symbol: string;
-  } | null;
+    decimals: number;
+  };
 }
 
 function CurrencyIcon({ symbol }: { symbol: string }) {
@@ -27,11 +29,7 @@ export function PriceTag({
   price,
   currency,
 }: PropsWithClassName<PriceTagProps>) {
-  if (!price) {
-    return null;
-  }
-
-  const parsedPrice = parseFloat(formatUnits(price, 18));
+  const formattedPrice = formatUnits(BigInt(price), currency.decimals);
 
   return (
     <div
@@ -40,12 +38,10 @@ export function PriceTag({
         className,
       )}
     >
-      <CurrencyIcon symbol={currency?.symbol ?? "ETH"} />
+      <CurrencyIcon symbol={currency.symbol} />
       <p className={ellipsableStyles}>
-        {isNaN(parsedPrice)
-          ? formatUnits(price, currency?.decimals ?? 18)
-          : parsedPrice.toFixed(5)}
-        <span className="text-muted-foreground">{` ${currency?.symbol ?? "ETH"}`}</span>
+        {formattedPrice}{" "}
+        <span className="text-muted-foreground">{currency.symbol}</span>
       </p>
     </div>
   );

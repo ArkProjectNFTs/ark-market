@@ -10,7 +10,11 @@ interface OfferProps {
 export default function OfferPriceCell({ offer }: OfferProps) {
   return (
     <TableCell>
-      <PriceTag price={offer.price} className="max-w-full" />
+      <PriceTag
+        price={offer.price}
+        currency={offer.currency}
+        className="max-w-full"
+      />
     </TableCell>
   );
 }

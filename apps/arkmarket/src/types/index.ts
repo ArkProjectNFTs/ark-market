@@ -182,11 +182,7 @@ export interface PortfolioActivity {
   to: string;
   token_id: string;
   transaction_hash: string | null;
-  currency?: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency: Currency;
 }
 
 export interface PortfolioOffers {
@@ -214,7 +210,7 @@ export interface PortfolioOffers {
     start_amount: string;
     start_date: number | null;
   };
-  currency?: Currency | null;
+  currency: Currency;
 }
 
 export interface CollectionActivity {
@@ -229,11 +225,7 @@ export interface CollectionActivity {
   token_id: string;
   token_metadata: TokenMetadata | null;
   transaction_hash: string | null;
-  currency?: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency: Currency;
 }
 
 export interface TokenOffer {
@@ -243,6 +235,7 @@ export interface TokenOffer {
   offer_id: number;
   price: string;
   source: string;
+  currency: Currency;
 }
 
 export interface TokenApiResponse {
@@ -320,11 +313,7 @@ export interface TokenActivity {
   time_stamp: number;
   to: string | null;
   transaction_hash: string | null;
-  currency?: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency: Currency;
 }
 
 export interface Filters {
@@ -341,11 +330,7 @@ export interface LatestSales {
   timestamp: number;
   to: string;
   transaction_hash: string | null;
-  currency: {
-    contract: string;
-    decimals: number;
-    symbol: string;
-  } | null;
+  currency: Currency;
 }
 
 export interface TrendingNow {

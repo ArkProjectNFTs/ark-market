@@ -49,7 +49,11 @@ export default function TokenOffersListItem({
       <div className="mb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 overflow-hidden">
-            <PriceTag price={offer.price} className="h-7 text-xs" />
+            <PriceTag
+              price={offer.price}
+              currency={offer.currency}
+              className="h-7 text-xs"
+            />
             {offer.floor_difference ? (
               <p
                 className={cn(
