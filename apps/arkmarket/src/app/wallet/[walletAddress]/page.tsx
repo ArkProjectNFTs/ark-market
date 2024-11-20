@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
+
+import { env } from "~/env";
 import Portfolio from "./components/portfolio";
+
+const platform =
+  env.NEXT_PUBLIC_THEME === "unframed" ? "Unframed" : "Ark Market";
+
+export const metadata: Metadata = {
+  title: `Porfolio | ${platform}`,
+};
 
 interface WalletPageProps {
   params: {
