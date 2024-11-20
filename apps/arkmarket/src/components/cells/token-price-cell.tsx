@@ -17,7 +17,7 @@ export default function TokenPriceCell({ token }: PriceCellProps) {
           <LoaderCircle className="ml-4 size-4 animate-spin" />
         </div>
       ) : token.price ? (
-        <PriceTag price={token.price} />
+        <PriceTag price={token.price} currency={token.listing.currency} />
       ) : (
         "_"
       )}

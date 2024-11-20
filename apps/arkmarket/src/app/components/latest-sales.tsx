@@ -83,11 +83,10 @@ export default function LatestSales() {
             </TableRow>
           </TableHeader>
           <TableBody className="text-sm font-semibold">
-            {data.data.map((sale, index) => {
-              // TOOD @YohanTz: Proper key when real data
+            {data.data.map((sale) => {
               return (
                 <TableRow
-                  key={index}
+                  key={`ls-${sale.transaction_hash}`}
                   className="group h-[5.75rem] text-muted-foreground"
                 >
                   <TableCell className="text-foreground transition-colors group-hover:text-muted-foreground">
