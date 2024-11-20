@@ -5,8 +5,8 @@ import { cn, ellipsableStyles } from ".";
 import { Ethereum, Starknet } from "./icons";
 
 interface PriceTagProps {
-  price: string;
-  currency: {
+  price?: string;
+  currency?: {
     contract: string;
     symbol: string;
     decimals: number;
@@ -29,6 +29,10 @@ export function PriceTag({
   price,
   currency,
 }: PropsWithClassName<PriceTagProps>) {
+  if (!price || !currency) {
+    return null;
+  }
+
   const formattedPrice = formatUnits(BigInt(price), currency.decimals);
 
   return (
