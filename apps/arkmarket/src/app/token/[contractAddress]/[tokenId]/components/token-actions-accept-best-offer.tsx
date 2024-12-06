@@ -94,8 +94,8 @@ export default function TokenActionsAcceptBestOffer({
       if (isAuction) {
         await fulfillAuction({
           brokerId: env.NEXT_PUBLIC_BROKER_ID,
-          orderHash: BigInt(tokenMarketData.top_offer.order_hash),
-          relatedOrderHash: BigInt(tokenMarketData.listing.order_hash),
+          orderHash: BigInt(tokenMarketData.listing.order_hash),
+          relatedOrderHash: BigInt(tokenMarketData.top_offer.order_hash),
           starknetAccount: account,
           tokenAddress: token.collection_address,
           tokenId: token.token_id,
