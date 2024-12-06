@@ -73,8 +73,8 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
     if (isListed && listing.is_auction) {
       await fulfillAuction({
         brokerId: env.NEXT_PUBLIC_BROKER_ID,
-        orderHash: listing.order_hash,
-        relatedOrderHash: offerOrderHash,
+        orderHash: BigInt(listing.order_hash),
+        relatedOrderHash: BigInt(offerOrderHash),
         starknetAccount: account,
         startAmount: offerPrice,
         tokenAddress: collectionAddress,
