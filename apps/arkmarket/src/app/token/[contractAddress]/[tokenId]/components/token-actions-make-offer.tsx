@@ -55,7 +55,7 @@ interface TokenActionsMakeOfferProps {
 }
 
 function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
-  const { account, address } = useAccount();
+  const { account, address, isConnected } = useAccount();
   const [isOpen, setIsOpen] = useState(false);
   const config = useConfig();
   const { createOffer, status } = useCreateOffer();
@@ -100,7 +100,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
     defaultValues: {
       startAmount: "",
       duration: "168",
-      endDateTime: moment().add(1, "month").toDate(),
+      endDateTime: undefined,
     },
   });
 
@@ -148,15 +148,20 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
       return;
     }
 
+    const now = moment();
+    const endDate = values.endDateTime
+      ? moment(values.endDateTime).isBefore(now)
+        ? now.add(2, "minutes").unix()
+        : moment(values.endDateTime).unix()
+      : now.add(values.duration, "hours").unix();
+
     const processedValues = {
       brokerId: env.NEXT_PUBLIC_BROKER_ID,
       currencyAddress: config?.starknetCurrencyContract,
       tokenAddress: token.collection_address,
       tokenId: BigInt(token.token_id),
       startAmount: parseEther(values.startAmount),
-      endDate: values.endDateTime
-        ? moment(values.endDateTime).unix()
-        : moment().add(values.duration, "hours").unix(),
+      endDate,
     };
 
     await createOffer({
@@ -166,8 +171,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
   }
 
   const isLoading = status === "loading";
-  const isDisabled =
-    !form.formState.isValid || form.formState.isSubmitting || isLoading;
+  const isDisabled = !form.formState.isValid || isLoading;
   const startAmount = form.watch("startAmount");
   const formattedStartAmount = formatAmount(startAmount);
 
@@ -178,6 +182,7 @@ function TokenActionsMakeOffer({ token, small }: TokenActionsMakeOfferProps) {
           className={cn(small ?? "relative w-full lg:max-w-[50%]")}
           size={small ? "xl" : "xxl"}
           variant="secondary"
+          disabled={!isConnected}
           onClick={ensureConnect}
         >
           <ActivityOffer />
