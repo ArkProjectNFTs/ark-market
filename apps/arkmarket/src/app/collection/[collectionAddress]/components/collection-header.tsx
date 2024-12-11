@@ -100,9 +100,11 @@ export default function CollectionHeader({
               </div>
             </div>
           </div>
-          <div className="hidden lg:block">
-            <CollectionHeaderStats collection={collection} />
-          </div>
+          {collection.market_data_enabled && (
+            <div className="hidden lg:block">
+              <CollectionHeaderStats collection={collection} />
+            </div>
+          )}
         </div>
         <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
           <p className="mb-2 max-w-lg pt-4 text-sm">{collection.description}</p>
@@ -116,9 +118,11 @@ export default function CollectionHeader({
             Creator earnings
             <span className="text-muted-foreground"> 5%</span>
           </p>
-          <div className="block lg:hidden">
-            <CollectionHeaderStats collection={data} />
-          </div>
+          {collection.market_data_enabled && (
+            <div className="block lg:hidden">
+              <CollectionHeaderStats collection={data} />
+            </div>
+          )}
         </CollapsibleContent>
       </Collapsible>
     </div>

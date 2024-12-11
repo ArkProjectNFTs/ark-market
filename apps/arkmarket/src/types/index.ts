@@ -19,6 +19,7 @@ export interface Collection {
   twitter?: string;
   volume_7d_eth: number;
   website?: string;
+  market_data_enabled: boolean;
 }
 
 export type CollectionTrait = Record<string, number>;
