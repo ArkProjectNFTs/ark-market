@@ -85,7 +85,9 @@ export default function MobileCollectionHeader({
                 <Globe className="h-6 w-auto" />
               </ExternalLink>
             </div>
-            <CollectionHeaderStats collection={collection} />
+            {collection.market_data_enabled && (
+              <CollectionHeaderStats collection={collection} />
+            )}
           </div>
         </CollapsibleContent>
       </Collapsible>
