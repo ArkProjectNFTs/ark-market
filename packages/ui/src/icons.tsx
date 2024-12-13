@@ -47,6 +47,7 @@ import {
   ShoppingBag,
   Slash,
   X,
+  Undo2,
 } from "lucide-react";
 
 import type { PropsWithClassName } from ".";
@@ -71,6 +72,7 @@ export {
   ShoppingBag,
   Slash,
   X,
+  Undo2,
 };
 
 export const Congratulations =
