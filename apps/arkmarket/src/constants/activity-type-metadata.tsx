@@ -9,6 +9,7 @@ import {
   Gavel,
   ShoppingCart,
   TimerReset,
+  Undo2,
 } from "@ark-market/ui/icons";
 
 import type { ActivityType } from "~/types";
@@ -37,5 +38,5 @@ export default {
   OFFER: { icon: <ActivityOffer size={16} />, title: "Offer" },
   SALE: { icon: <ShoppingCart size={16} />, title: "Sale" },
   TRANSFER: { icon: <ArrowLeftRight size={16} />, title: "Transfer" },
-  ROLLBACK: { icon: <TimerReset size={16} />, title: "Rollback" },
+  ROLLBACK: { icon: <Undo2 size={16} />, title: "Rollback" },
 } as ActivityTypeMetadata;
