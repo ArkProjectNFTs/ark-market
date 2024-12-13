@@ -167,6 +167,7 @@ export const activityTypes = [
   "OFFER",
   "SALE",
   "TRANSFER",
+  "ROLLBACK",
 ] as const;
 
 export type ActivityType = (typeof activityTypes)[number];
