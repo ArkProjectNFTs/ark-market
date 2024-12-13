@@ -37,4 +37,5 @@ export default {
   OFFER: { icon: <ActivityOffer size={16} />, title: "Offer" },
   SALE: { icon: <ShoppingCart size={16} />, title: "Sale" },
   TRANSFER: { icon: <ArrowLeftRight size={16} />, title: "Transfer" },
+  ROLLBACK: { icon: <ArrowLeftRight size={16} />, title: "Rollback" },
 } as ActivityTypeMetadata;
