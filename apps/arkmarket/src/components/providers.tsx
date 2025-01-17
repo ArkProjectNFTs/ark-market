@@ -2,7 +2,7 @@
 
 import type { PropsWithChildren } from "react";
 import { ArkQueryClient, ArkQueryClientProvider, ArkProvider } from "@ark-project/react";
-
+import { env } from "~/env";
 import { ThemeProvider } from "@ark-market/ui/theme";
 
 import { StarknetProvider } from "./starknet-provider";
@@ -21,7 +21,7 @@ export default function Providers({ children }: PropsWithChildren) {
     <ThemeProvider attribute="class" defaultTheme="dark">
       <StarknetProvider>
         <ArkQueryClientProvider client={queryClient}>
-          <ArkProvider config={{ starknetNetwork: "mainnet" }}>
+          <ArkProvider config={{ starknetNetwork: "sepolia" }}>
             {children}
           </ArkProvider>
         </ArkQueryClientProvider>
