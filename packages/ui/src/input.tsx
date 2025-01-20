@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@ark-market/ui";
 
-interface InputStatus {
+export interface InputStatus {
   status?: "default" | "error";
 }
 
