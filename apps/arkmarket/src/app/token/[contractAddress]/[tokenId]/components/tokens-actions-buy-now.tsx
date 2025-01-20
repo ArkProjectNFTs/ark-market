@@ -76,6 +76,7 @@ export default function TokenActionsBuyNow({
       tokenId: BigInt(token.token_id),
       orderHash: BigInt(tokenMarketData.listing.order_hash),
       amount: BigInt(tokenMarketData.listing.start_amount),
+      quantity: BigInt(1),
     });
   };
 
