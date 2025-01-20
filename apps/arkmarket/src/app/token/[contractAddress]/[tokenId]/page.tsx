@@ -2,7 +2,6 @@
 
 import { notFound } from "next/navigation";
 
-import Providers from "~/components/providers";
 import type { Token, TokenMarketData } from "~/types";
 import getToken from "~/lib/getToken";
 import getTokenMarketData from "~/lib/getTokenMarketData";

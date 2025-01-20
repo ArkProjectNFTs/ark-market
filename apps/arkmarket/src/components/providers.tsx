@@ -1,8 +1,12 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import { ArkQueryClient, ArkQueryClientProvider, ArkProvider } from "@ark-project/react";
-import { env } from "~/env";
+import {
+  ArkProvider,
+  ArkQueryClient,
+  ArkQueryClientProvider,
+} from "@ark-project/react";
+
 import { ThemeProvider } from "@ark-market/ui/theme";
 
 import { StarknetProvider } from "./starknet-provider";
