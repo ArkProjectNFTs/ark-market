@@ -2,7 +2,7 @@
 
 import type { Connector } from "@starknet-react/core";
 import type { PropsWithChildren } from "react";
-import { sepolia } from "@starknet-react/chains";
+import { mainnet, sepolia } from "@starknet-react/chains";
 import {
   argent,
   braavos,
@@ -18,6 +18,7 @@ import getProvider from "~/lib/getProvider";
 
 export function StarknetProvider({ children }: PropsWithChildren) {
   const provider = getProvider();
+  const chain = env.NEXT_PUBLIC_NETWORK === "sepolia" ? sepolia : mainnet;
   const { connectors: injectedConnectors } = useInjectedConnectors({
     recommended: [argent(), braavos()],
     includeRecommended: "onlyIfNoConnectors",
@@ -37,7 +38,7 @@ export function StarknetProvider({ children }: PropsWithChildren) {
 
   return (
     <StarknetConfig
-      chains={[sepolia]}
+      chains={[chain]}
       provider={provider}
       connectors={connectors}
       explorer={voyager}
