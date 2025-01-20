@@ -91,9 +91,9 @@ export default function TokenActionsAcceptBestOffer({
   const onConfirm = async () => {
     if (!account) {
       toast({
-        variant: "canceled", 
+        variant: "canceled",
         title: "Error",
-        description: "Please connect your wallet before accepting an offer"
+        description: "Please connect your wallet before accepting an offer",
       });
       return;
     }
@@ -106,6 +106,7 @@ export default function TokenActionsAcceptBestOffer({
           account: account,
           tokenAddress: token.collection_address,
           tokenId: BigInt(token.token_id),
+          quantity: BigInt(1),
         });
       } else {
         await fulfillOfferAsync({
@@ -114,6 +115,7 @@ export default function TokenActionsAcceptBestOffer({
           account: account,
           tokenAddress: token.collection_address,
           tokenId: BigInt(token.token_id),
+          quantity: BigInt(1),
         });
       }
     } catch (error) {

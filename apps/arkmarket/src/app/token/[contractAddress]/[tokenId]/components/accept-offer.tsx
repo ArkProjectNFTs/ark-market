@@ -52,8 +52,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const { account } = useAccount();
   const { fulfillOfferAsync, status } = useFulfillOffer();
-  const { fulfillAuctionAsync, status: statusAuction } =
-    useFulfillAuction();
+  const { fulfillAuctionAsync, status: statusAuction } = useFulfillAuction();
 
   const { toast } = useToast();
   const formattedAmount = formatEther(BigInt(offerPrice));
@@ -72,7 +71,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
   const onConfirm = async () => {
     if (!account) {
       toast({
-        variant: "canceled", 
+        variant: "canceled",
         title: "Error",
         description: "Please connect your wallet before accepting an offer",
       });
@@ -87,6 +86,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         account: account,
         tokenAddress: collectionAddress,
         tokenId: BigInt(tokenId),
+        quantity: BigInt(1),
       });
     } else {
       await fulfillOfferAsync({
@@ -95,6 +95,7 @@ const AcceptOffer: React.FC<AcceptOfferProps> = ({
         account: account,
         tokenAddress: collectionAddress,
         tokenId: BigInt(tokenId),
+        quantity: BigInt(1),
       });
     }
   };

@@ -2,9 +2,8 @@
 
 import type { Connector } from "@starknet-react/core";
 import type { PropsWithChildren } from "react";
-import { mainnet } from "@starknet-react/chains";
+import { mainnet, sepolia } from "@starknet-react/chains";
 import {
-  alchemyProvider,
   argent,
   braavos,
   StarknetConfig,
@@ -15,11 +14,11 @@ import { ArgentMobileConnector } from "starknetkit/argentMobile";
 import { WebWalletConnector } from "starknetkit/webwallet";
 
 import { env } from "~/env";
+import getProvider from "~/lib/getProvider";
 
 export function StarknetProvider({ children }: PropsWithChildren) {
-  const provider = alchemyProvider({
-    apiKey: "ssydbI7745ocbNd_c-xULVsq9xXF947b",
-  });
+  const provider = getProvider();
+  const chain = env.NEXT_PUBLIC_NETWORK === "sepolia" ? sepolia : mainnet;
   const { connectors: injectedConnectors } = useInjectedConnectors({
     recommended: [argent(), braavos()],
     includeRecommended: "onlyIfNoConnectors",
@@ -39,7 +38,7 @@ export function StarknetProvider({ children }: PropsWithChildren) {
 
   return (
     <StarknetConfig
-      chains={[mainnet]}
+      chains={[chain]}
       provider={provider}
       connectors={connectors}
       explorer={voyager}
