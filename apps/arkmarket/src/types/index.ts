@@ -256,7 +256,6 @@ export interface PortfolioStats {
 
 export interface TokenMarketData {
   buy_in_progress: boolean;
-  created_timestamp: number | null;
   floor: string | null;
   has_offer: boolean;
   is_listed: boolean;
