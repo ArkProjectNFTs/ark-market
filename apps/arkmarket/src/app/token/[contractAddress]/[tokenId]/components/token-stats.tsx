@@ -21,39 +21,43 @@ interface TokenStatsProps {
 export default function TokenStats({
   className,
   token,
-  tokenMarketData,
+  tokenMarketData: initialTokenMarketData,
 }: PropsWithClassName<TokenStatsProps>) {
   const { address } = useAccount();
-  const { data, isError } = useTokenMarketdata({
+  const { data: tokenMarketData, isError } = useTokenMarketdata({
     collectionAddress: token.collection_address,
     tokenId: token.token_id,
-    initialData: tokenMarketData,
+    initialData: initialTokenMarketData,
   });
-  const { data: starkProfile } = useStarkProfile({ address: data?.owner });
+  const { data: starkProfile } = useStarkProfile({
+    address: tokenMarketData?.owner,
+  });
 
   if (isError) {
     return null;
   }
 
-  if (!data) {
+  if (!tokenMarketData) {
     return null;
   }
 
   const owner = starkProfile?.name
     ? starkProfile.name
-    : data.owner
+    : tokenMarketData.owner
       ? ownerOrShortAddress({
-          ownerAddress: data.owner,
+          ownerAddress: tokenMarketData.owner,
           address,
         })
       : "";
 
-  const floor = data.floor ? formatEther(BigInt(data.floor)) : "_";
-  const lastPrice = data.last_price
-    ? formatEther(BigInt(data.last_price))
+  const floor = tokenMarketData.floor
+    ? formatEther(BigInt(tokenMarketData.floor))
     : "_";
-  const topOffer = data.has_offer
-    ? formatEther(BigInt(data.top_offer.amount))
+  const lastPrice = tokenMarketData.last_price
+    ? formatEther(BigInt(tokenMarketData.last_price))
+    : "_";
+  const topOffer = tokenMarketData.has_offer
+    ? formatEther(BigInt(tokenMarketData.top_offer.amount))
     : "_";
 
   return (
@@ -90,11 +94,11 @@ export default function TokenStats({
         <p className="text-sm font-medium text-muted-foreground">Owner</p>
         <div className="font-numbers flex items-center gap-2 text-lg">
           <ProfilePicture
-            address={data.owner}
+            address={tokenMarketData.owner}
             className="size-6 flex-shrink-0 rounded-full"
           />
           <div className="min-w-0 flex-1">
-            <Link href={`/wallet/${data.owner}`} className="block">
+            <Link href={`/wallet/${tokenMarketData.owner}`} className="block">
               <p className="truncate font-medium transition-colors hover:text-primary">
                 {owner}
               </p>

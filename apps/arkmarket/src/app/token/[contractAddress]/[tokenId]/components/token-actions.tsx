@@ -1,13 +1,12 @@
 "use client";
 
 import { useAccount } from "@starknet-react/core";
-import { useQuery } from "@tanstack/react-query";
 
 import type { PropsWithClassName } from "@ark-market/ui";
 import { areAddressesEqual, cn } from "@ark-market/ui";
 
 import type { Token, TokenMarketData } from "~/types";
-import getTokenMarketData from "~/lib/getTokenMarketData";
+import useTokenMarketdata from "~/hooks/useTokenMarketData";
 import TokenActionsButtons from "./token-actions-buttons";
 import TokenActionsEmpty from "./token-actions-empty";
 import TokenActionsHeader from "./token-actions-header";
@@ -21,24 +20,22 @@ interface TokenActionsProps {
 
 export default function TokenActions({
   token,
-  tokenMarketData,
+  tokenMarketData: initialTokenMarketData,
   className,
 }: TokenActionsProps) {
   const { address } = useAccount();
-  const { data } = useQuery({
-    queryKey: ["tokenMarketData", token.collection_address, token.token_id],
-    queryFn: () =>
-      getTokenMarketData({
-        contractAddress: token.collection_address,
-        tokenId: token.token_id,
-      }),
-    refetchInterval: 5_000,
-    initialData: tokenMarketData,
+  const { data: tokenMarketData } = useTokenMarketdata({
+    collectionAddress: token.collection_address,
+    tokenId: token.token_id,
+    initialData: initialTokenMarketData,
   });
 
-  const isOwner = areAddressesEqual(address, data?.owner);
+  const isOwner = areAddressesEqual(address, tokenMarketData?.owner);
 
-  if (!data || (!data.has_offer && !data.is_listed)) {
+  if (
+    !tokenMarketData ||
+    (!tokenMarketData.has_offer && !tokenMarketData.is_listed)
+  ) {
     return <TokenActionsEmpty token={token} isOwner={isOwner} />;
   }
 
@@ -50,24 +47,24 @@ export default function TokenActions({
       )}
     >
       <TokenActionsHeader
-        isListed={data.is_listed}
-        isAuction={data.listing.is_auction}
-        expiresAt={data.listing.end_date}
+        isListed={tokenMarketData.is_listed}
+        isAuction={tokenMarketData.listing.is_auction}
+        expiresAt={tokenMarketData.listing.end_date}
       />
       <TokenActionsPrice
-        startAmount={data.listing.start_amount}
-        isListed={data.is_listed}
-        isAuction={data.listing.is_auction}
-        hasOffer={data.has_offer}
-        topOffer={data.top_offer}
+        startAmount={tokenMarketData.listing.start_amount}
+        isListed={tokenMarketData.is_listed}
+        isAuction={tokenMarketData.listing.is_auction}
+        hasOffer={tokenMarketData.has_offer}
+        topOffer={tokenMarketData.top_offer}
       />
       <TokenActionsButtons
-        isListed={data.is_listed}
-        isAuction={data.listing.is_auction}
-        hasOffers={data.has_offer}
+        isListed={tokenMarketData.is_listed}
+        isAuction={tokenMarketData.listing.is_auction}
+        hasOffers={tokenMarketData.has_offer}
         isOwner={isOwner}
         token={token}
-        tokenMarketData={data}
+        tokenMarketData={tokenMarketData}
       />
     </div>
   );
