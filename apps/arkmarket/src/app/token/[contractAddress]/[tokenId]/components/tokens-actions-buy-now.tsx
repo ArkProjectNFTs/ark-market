@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useConfig, useFulfillListing } from "@ark-project/react";
-import { useAccount, useNetwork } from "@starknet-react/core";
-import { constants } from "starknet";
+import { useFulfillListing } from "@ark-project/react";
+import { useAccount } from "@starknet-react/core";
 import { formatEther } from "viem";
 
 import { areAddressesEqual, cn } from "@ark-market/ui";
@@ -45,16 +44,7 @@ export default function TokenActionsBuyNow({
   const { data } = useBalance({ address, token: ETH });
   const { toast } = useToast();
 
-  const network = useNetwork();
-  const config = useConfig();
-
   const buy = async () => {
-    const chainId = await config.starknetProvider.getChainId();
-
-    console.log("chainId", chainId === constants.StarknetChainId.SN_SEPOLIA);
-    console.log("constants.StarknetChainId", constants.StarknetChainId);
-    console.log("TokenActionsBuyNow.render", chainId, network);
-
     if (!account) {
       toast({
         variant: "canceled",
