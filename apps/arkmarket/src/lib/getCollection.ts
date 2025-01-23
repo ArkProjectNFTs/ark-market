@@ -3,21 +3,17 @@ import { env } from "~/env";
 
 interface GetCollectionParams {
   collectionAddress: string;
-  chainId?: string;
 }
 
 export interface CollectionApiResponse {
   data: Collection;
 }
 
-const defaultChainId = "0x534e5f5345504f4c4941";
-
 export default async function getCollection({
   collectionAddress,
-  chainId = defaultChainId,
 }: GetCollectionParams) {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}/${chainId}`,
+    `${env.NEXT_PUBLIC_MARKETPLACE_API_URL}/collections/${collectionAddress}`,
     {
       headers: {
         "Content-Type": "application/json",
