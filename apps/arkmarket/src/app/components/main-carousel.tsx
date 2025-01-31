@@ -5,14 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { CarouselApi } from "@ark-market/ui/carousel";
-import { cn, formatNumber } from "@ark-market/ui";
+import { cn } from "@ark-market/ui";
 import { Button } from "@ark-market/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@ark-market/ui/carousel";
-import { Ethereum } from "@ark-market/ui/icons";
 
 import { homepageConfig } from "~/config/homepage";
 
@@ -114,7 +113,7 @@ export default function MainCarousel() {
                           <h1 className="font-display text-2xl font-extrabold sm:text-3xl md:text-5xl">
                             {carouselItem.name}
                           </h1>
-                          <div className="font-numbers flex items-center text-base font-medium">
+                          {/* <div className="font-numbers flex items-center text-base font-medium">
                             {carouselItem.itemsCount && (
                               <p className="mr-1">
                                 {formatNumber(carouselItem.itemsCount)}
@@ -138,7 +137,7 @@ export default function MainCarousel() {
                                 </p>
                               </>
                             )}
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <p className="text-base md:max-w-lg md:text-xl">
