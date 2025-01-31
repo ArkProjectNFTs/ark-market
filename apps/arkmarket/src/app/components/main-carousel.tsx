@@ -115,20 +115,29 @@ export default function MainCarousel() {
                             {carouselItem.name}
                           </h1>
                           <div className="font-numbers flex items-center text-base font-medium">
-                            <p className="mr-1">
-                              {formatNumber(carouselItem.itemsCount)}
-                            </p>
-                            <p className="mr-1 text-muted-foreground dark:text-muted-foreground md:text-white">
-                              ITEMS
-                            </p>{" "}
-                            |{" "}
-                            <p className="flex items-center justify-center text-[0.75rem]">
-                              <Ethereum className="size-4" />
-                            </p>
-                            <p className="mr-1">{carouselItem.floorPrice}</p>
-                            <p className="text-muted-foreground dark:text-muted-foreground md:text-white">
-                              ETH
-                            </p>
+                            {carouselItem.itemsCount && (
+                              <p className="mr-1">
+                                {formatNumber(carouselItem.itemsCount)}
+                              </p>
+                            )}
+
+                            {carouselItem.floorPrice && (
+                              <>
+                                <p className="mr-1 text-muted-foreground dark:text-muted-foreground md:text-white">
+                                  ITEMS
+                                </p>{" "}
+                                |{" "}
+                                <p className="flex items-center justify-center text-[0.75rem]">
+                                  <Ethereum className="size-4" />
+                                </p>
+                                <p className="mr-1">
+                                  {carouselItem.floorPrice}
+                                </p>
+                                <p className="text-muted-foreground dark:text-muted-foreground md:text-white">
+                                  ETH
+                                </p>
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>

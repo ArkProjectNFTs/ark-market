@@ -1,43 +1,52 @@
+import { env } from "~/env";
+
 export const homepageConfig = {
-  mainCarousel: [
-    {
-      bannerSrc: "/carousel_banner/everai.png",
-      collectionSrc: "/collections/everai.png",
-      name: "Everai",
-      description:
-        "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
-      address:
-        "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
-      itemsCount: 923,
-      floorPrice: 0.12,
-    },
-    {
-      nftSrc:
-        "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/1f82bcc2cd2640ce18e8c4932581489acf69cd42670c198860ffad6bcc637843.png",
-      collectionSrc:
-        "https://media.arkproject.dev/contracts/0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003/avatar.jpg",
-      name: "DucksEverywhere",
-      description:
-        "Ducks Everywhere is an NFT collection of handcrafted ducks made from briqs. Each duck is uniquely created and selected by the community, sold through auctions.",
-      address:
-        "0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003",
-      itemsCount: 726,
-      floorPrice: 0.0525,
-    },
-    {
-      nftSrc:
-        "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/2c91748f2dbcac64a83ec754fbb7770325ffcce8ec51653b8b669f850546a465.png",
-      collectionSrc:
-        "https://img.starkurabu.com/15576896767724894447561965312147459.png",
-      name: "Starkurabu",
-      description:
-        "Starkurabu is the first Generative art PFP collection on Starknet where you can customize every trait.",
-      address:
-        "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
-      itemsCount: 10_000,
-      floorPrice: 0.0075,
-    },
-  ],
+  mainCarousel:
+    env.NEXT_PUBLIC_NETWORK === "sepolia"
+      ? [
+          {
+            bannerSrc: "/carousel_banner/everai.png",
+            collectionSrc: "/collections/everai.png",
+            name: "ARKTEST",
+            description:
+              "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
+            address:
+              "0x00f885c056ee4a7c581db1eb2103faba8d20d556389c3b6abb50b2e8d7181a9e",
+          },
+        ]
+      : [
+          {
+            bannerSrc: "/carousel_banner/everai.png",
+            collectionSrc: "/collections/everai.png",
+            name: "Everai",
+            description:
+              "In the Everai Universe, the Everais stand as the mightiest heroes of Shodai's civilization… Get yours now to join us in this collaborative journey to shape the Everai Universe!",
+            address:
+              "0x02acee8c430f62333cf0e0e7a94b2347b5513b4c25f699461dd8d7b23c072478",
+          },
+          {
+            nftSrc:
+              "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/1f82bcc2cd2640ce18e8c4932581489acf69cd42670c198860ffad6bcc637843.png",
+            collectionSrc:
+              "https://media.arkproject.dev/contracts/0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003/avatar.jpg",
+            name: "DucksEverywhere",
+            description:
+              "Ducks Everywhere is an NFT collection of handcrafted ducks made from briqs. Each duck is uniquely created and selected by the community, sold through auctions.",
+            address:
+              "0x04fa864a706e3403fd17ac8df307f22eafa21b778b73353abf69a622e47a2003",
+          },
+          {
+            nftSrc:
+              "https://imgproxy.arkproject.dev/_/rs:fit:1000:1000/plain/https://media.arkproject.dev/2c91748f2dbcac64a83ec754fbb7770325ffcce8ec51653b8b669f850546a465.png",
+            collectionSrc:
+              "https://img.starkurabu.com/15576896767724894447561965312147459.png",
+            name: "Starkurabu",
+            description:
+              "Starkurabu is the first Generative art PFP collection on Starknet where you can customize every trait.",
+            address:
+              "0x03ab1124ef9ec3a2f2b1d9838f9066f9a894483d40b33390dda8d85c01a315a3",
+          },
+        ],
   exploreCategory: [
     { name: "Gaming", image: "/collection_categories/gaming.png" },
     { name: "Art", image: "/collection_categories/art.png" },
