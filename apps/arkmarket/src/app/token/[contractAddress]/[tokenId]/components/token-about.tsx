@@ -22,6 +22,7 @@ import {
 
 import type { Token } from "~/types";
 import Media from "~/components/media";
+import { env } from "~/env";
 import ownerOrShortAddress from "~/lib/ownerOrShortAddress";
 
 interface TokenAboutProps {
@@ -112,7 +113,7 @@ export default function TokenAbout({
             <p className="font-medium">Contract Address</p>
             <p className="text-muted-foreground transition-colors hover:text-primary">
               <Link
-                href={`https://starkscan.co/nft-contract/${contractAddress}`}
+                href={`https://${env.NEXT_PUBLIC_NETWORK === "sepolia" ? "sepolia." : ""}starkscan.co/nft-contract/${contractAddress}`}
                 target="_blank"
               >
                 {collectionShortenedAddress}
