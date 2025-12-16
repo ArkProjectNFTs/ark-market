@@ -4,49 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@tanstack/react-query':
-      specifier: ^5.53.3
-      version: 5.53.3
-    '@trpc/client':
-      specifier: ^11.0.0-rc.477
-      version: 11.0.0-rc.490
-    '@trpc/react-query':
-      specifier: ^11.0.0-rc.477
-      version: 11.0.0-rc.490
-    '@trpc/server':
-      specifier: ^11.0.0-rc.477
-      version: 11.0.0-rc.490
-    eslint:
-      specifier: ^9.9.0
-      version: 9.9.1
-    prettier:
-      specifier: ^3.3.3
-      version: 3.3.3
-    tailwindcss:
-      specifier: ^3.4.10
-      version: 3.4.10
-    typescript:
-      specifier: ^5.5.4
-      version: 5.5.4
-    zod:
-      specifier: ^3.23.8
-      version: 3.23.8
-  react18:
-    '@types/react':
-      specifier: ^18.3.3
-      version: 18.3.3
-    '@types/react-dom':
-      specifier: ^18.3.0
-      version: 18.3.0
-    react:
-      specifier: 18.3.1
-      version: 18.3.1
-    react-dom:
-      specifier: 18.3.1
-      version: 18.3.1
-
 importers:
 
   .:
@@ -5730,6 +5687,49 @@ packages:
         optional: true
       react:
         optional: true
+
+catalogs:
+  default:
+    '@tanstack/react-query':
+      specifier: ^5.53.3
+      version: 5.53.3
+    '@trpc/client':
+      specifier: ^11.0.0-rc.477
+      version: 11.0.0-rc.490
+    '@trpc/react-query':
+      specifier: ^11.0.0-rc.477
+      version: 11.0.0-rc.490
+    '@trpc/server':
+      specifier: ^11.0.0-rc.477
+      version: 11.0.0-rc.490
+    eslint:
+      specifier: ^9.9.0
+      version: 9.9.1
+    prettier:
+      specifier: ^3.3.3
+      version: 3.3.3
+    tailwindcss:
+      specifier: ^3.4.10
+      version: 3.4.10
+    typescript:
+      specifier: ^5.5.4
+      version: 5.5.4
+    zod:
+      specifier: ^3.23.8
+      version: 3.23.8
+  react18:
+    '@types/react':
+      specifier: ^18.3.3
+      version: 18.3.3
+    '@types/react-dom':
+      specifier: ^18.3.0
+      version: 18.3.0
+    react:
+      specifier: 18.3.1
+      version: 18.3.1
+    react-dom:
+      specifier: 18.3.1
+      version: 18.3.1
 
 snapshots:
 
